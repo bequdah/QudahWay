@@ -122,6 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="skiplist-print.html" class="nav-link">⏭️ 05. Skip Lists</a>
             <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
             <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
+            <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
+            <a href="exams.html" class="nav-link" style="color: #fb7185;">📝 Previous Exams</a>
         </div>
     `;
 
