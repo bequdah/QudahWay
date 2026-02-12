@@ -960,7 +960,95 @@
             </div>
 
             <div id="second" class="exam-section">
-                <div style="text-align: center; color: var(--text-muted); padding: 50px;">Exam 2 Coming Soon... ⏳</div>
+                <!-- Question 1: Log-Frequency Weight -->
+                <div class="question-card">
+                    <div class="q-header"><span class="q-number">Q 01 [1 Point]</span></div>
+                    <div class="q-text">
+                        <div
+                            style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:20px;">
+                            <strong style="color:var(--primary); font-size:1.2rem;">Given Data (المعطيات):</strong><br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Term</th>
+                                        <th>Document D1</th>
+                                        <th>Document D2</th>
+                                        <th>Document D3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>apple</td>
+                                        <td>1</td>
+                                        <td>4</td>
+                                        <td>10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <strong>Task:</strong> For documents <strong>D1</strong> and <strong>D2</strong>, write the
+                        <span class="star-highlight">log-frequency weight</span>. Don't calculate the log value—just
+                        substitute the expression in the following table.
+                    </div>
+
+                    <div class="interactive-area">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px;">Document</th>
+                                    <th>log-frequency weight for the term "apple"</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>D1</td>
+                                    <td><input type="text" class="exam-input" style="width: 90%;"
+                                            placeholder="Write the expression here..."></td>
+                                </tr>
+                                <tr>
+                                    <td>D2</td>
+                                    <td><input type="text" class="exam-input" style="width: 90%;"
+                                            placeholder="Write the expression here..."></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                    <div class="answer-section">
+                        <div class="correct-answer-box">
+                            <div style="direction:rtl; text-align:right">
+                                <h4 style="color:var(--success)">✅ قاعدة الوزن اللوغاريتمي (Log-frequency Weighting):
+                                </h4>
+                                <p>يتم حساب الوزن باستخدام الصيغة: $W = 1 + \log_{10}(tf)$ عندما يكون التكرار أكبر من
+                                    صفر.</p>
+                                <table style="direction:ltr; text-align:left; margin-top:15px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 150px;">Document</th>
+                                            <th>log-frequency weight for "apple"</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>D1</td>
+                                            <td style="color:var(--success); font-weight:700;">1 + log₁₀(1) = 1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>D2</td>
+                                            <td style="color:var(--success); font-weight:700;">1 + log₁₀(4) = 1.60</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
+                                    * ملاحظة: بما أن $\log_{10}(1) = 0$ فإن النتيجة لـ D1 هي 1 بالظبط. وبالنسبة لـ D2
+                                    فإن
+                                    التعويض المباشر هو المطلوب.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
