@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split("/").pop() || 'index.html';
+
+    // 0. EXIT if we are on index.html - No need for redundant menu on the home page cards
+    if (currentPage === 'index.html' || currentPage === '') {
+        return;
+    }
+
     // Force body to be a column to ensure footer-style nav stays at bottom
     if (window.getComputedStyle(document.body).display === 'flex') {
         document.body.style.flexDirection = 'column';
@@ -23,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             position: relative;
             z-index: 9999;
             box-sizing: border-box;
-            flex-shrink: 0; /* Prevents squeezing in flex layouts */
+            flex-shrink: 0;
         }
 
         #nav-toggle {
@@ -41,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             font-weight: 700;
             gap: 12px;
             font-family: 'Cairo', sans-serif;
-            white-space: nowrap; /* Prevents text wrapping */
+            white-space: nowrap;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.1);
         }
 
@@ -54,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         #nav-menu {
             position: absolute;
-            bottom: 120px; /* Space above the button */
+            bottom: 120px;
             left: 50%;
             transform: translateX(-50%) translateY(20px) scale(0.95);
             background: rgba(15, 23, 42, 0.98);
@@ -113,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
             transform: translateX(8px);
         }
 
-        /* Active highlight improvement */
         .nav-link.active-page {
             background: rgba(56, 189, 248, 0.15);
             color: #38bdf8;
@@ -165,7 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
         icon.textContent = menu.classList.contains('visible') ? '✕' : '☰';
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', function (event) {
         if (!navContainer.contains(event.target) && menu.classList.contains('visible')) {
             menu.classList.remove('visible');
@@ -174,8 +180,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 4. Highlight current page
-    const currentPath = window.location.pathname;
-    const currentPage = currentPath.split("/").pop() || 'index.html';
     const links = menu.querySelectorAll('.nav-link');
     links.forEach(link => {
         const href = link.getAttribute('href');
