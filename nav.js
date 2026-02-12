@@ -92,13 +92,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Top Home Button Styling */
         .top-home-nav {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
             border: 1px solid #334155;
             color: #94a3b8;
             padding: 8px 16px;
@@ -109,8 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
             font-size: 0.9rem;
             transition: all 0.3s ease;
             white-space: nowrap;
-            z-index: 100;
-            backdrop-filter: blur(5px);
+            z-index: 10000; /* Higher than menu if needed */
         }
 
         .top-home-nav:hover {
@@ -123,9 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         @media screen and (max-width: 600px) {
             .top-home-nav {
-                top: 10px;
-                right: 10px;
-                padding: 6px 10px;
+                top: 20px;
+                right: 20px;
+                padding: 10px;
                 font-size: 0.8rem;
             }
             .top-home-nav span {
