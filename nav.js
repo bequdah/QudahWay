@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
             font-size: 0.9rem;
             transition: all 0.3s ease;
             white-space: nowrap;
-            z-index: 10000; /* Higher than menu if needed */
+            z-index: 10000;
         }
 
         .top-home-nav:hover {
@@ -121,12 +121,31 @@ document.addEventListener("DOMContentLoaded", function () {
             box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
         }
 
-        @media screen and (max-width: 600px) {
-            .top-home-nav {
-                top: 20px;
+        /* Mobile Adjustments */
+        @media screen and (max-width: 768px) {
+            #nav-container {
+                top: auto;
+                bottom: 20px;
                 right: 20px;
-                padding: 10px;
-                font-size: 0.8rem;
+                left: auto;
+            }
+            #nav-menu {
+                top: auto;
+                bottom: 65px;
+                right: 0;
+                left: auto;
+                transform-origin: bottom right;
+            }
+            .top-home-nav {
+                top: auto;
+                bottom: 20px;
+                left: 20px;
+                right: auto;
+                padding: 12px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                justify-content: center;
             }
             .top-home-nav span {
                 display: none;
