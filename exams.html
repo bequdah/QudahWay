@@ -313,6 +313,11 @@
             direction: rtl;
             text-align: right;
         }
+
+        .star-highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -812,9 +817,11 @@
                 <div class="answer-section">
                     <div class="correct-answer-box">
                         <h4 style="color:var(--success)">✅ قاعدة تحسين الاستعلام (Query Optimization Rule):</h4>
-                        <p>القاعدة الأساسية في الـ Boolean Query هي معالجة الـ clauses التي تحتوي على **أقل عدد ممكن**
+                        <p>القاعدة الأساسية في الـ Boolean Query هي معالجة الـ clauses التي تحتوي على <span
+                                class="star-highlight">أقل عدد ممكن</span>
                             من المستندات أولاً لتقليل حجم القوائم المؤقتة (Intermediate Results).</p>
-                        <p>بما أننا نستخدم "OR" داخل الأقواس، فإن التكرار الناتج لكل قوس هو **مجموع تكرارات الكلمتين**:
+                        <p>بما أننا نستخدم "OR" داخل الأقواس، فإن التكرار الناتج لكل قوس هو <span
+                                class="star-highlight">مجموع تكرارات الكلمتين</span>:
                         </p>
                         <ul style="list-style:none; padding:0; margin: 10px 0;">
                             <li>• <strong>(kaleidoscope OR eyes):</strong> 87,009 + 213,312 = <span
@@ -926,7 +933,8 @@
                                 <h4 style="color:var(--success)">✅ Detailed Analysis (تحليل مفصل):</h4>
                                 <div style="display:grid; grid-template-columns: 1fr; gap: 15px;">
                                     <div>1. <strong style="color:var(--danger)">False:</strong> Proximity queries
-                                        require a **positional index** (or biword for 2-word distance). The "Extended
+                                        require a <span class="star-highlight">positional index</span> (or biword for
+                                        2-word distance). The "Extended
                                         Boolean" model usually refers to ranking weights/p-norms, not proximity.</div>
                                     <div>2. <strong style="color:var(--success)">True:</strong> Each '1' in the matrix
                                         indicates that a term exists in a document. The total sums up all term-document
@@ -937,7 +945,8 @@
                                         Lemmatization reduce words to their base roots to increase the hit rate
                                         (Recall).</div>
                                     <div>5. <strong style="color:var(--danger)">False:</strong> Calculate: 90,000 * 0.1%
-                                        = 90,000 * 0.001 = **90**. The statement said 900, which is a mathematical
+                                        = 90,000 * 0.001 = <span class="star-highlight">90</span>. The statement said
+                                        900, which is a mathematical
                                         error.</div>
                                     <div>6. <strong style="color:var(--success)">True:</strong> In Westlaw syntax, `/p`
                                         is for same paragraph/sentence, and `/s` is for same sentence (context
