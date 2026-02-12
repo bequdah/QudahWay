@@ -106,16 +106,17 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="icon">☰</span>
         </button>
         <div id="nav-menu">
-            <div class="nav-header">QudahWay IR</div>
+            <div class="nav-header">QudahWay IR Map</div>
             <a href="index.html" class="nav-link">🏠 Home</a>
-            <a href="boolean-retrieval-print.html" class="nav-link">🔍 Boolean Retrieval</a>
-            <a href="vector_space_model.html" class="nav-link">🚀 Vector Space Model</a>
-            <a href="Probabilistic_Model.html" class="nav-link">🎲 Probabilistic Model</a>
-            <a href="text-operations-print.html" class="nav-link">📝 Text Operations</a>
-            <a href="phrase_queries_print.html" class="nav-link">💬 Phrase Queries</a>
-            <a href="skiplist-print.html" class="nav-link">⏭️ Skip Lists</a>
-            <a href="text-retrieval-print.html" class="nav-link">📚 Text Retrieval</a>
-             <a href="index-print.html" class="nav-link">📑 Intro / Index</a>
+            <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
+            <a href="index-print.html" class="nav-link">📂 00. Intro & Definitions</a>
+            <a href="text-retrieval-print.html" class="nav-link">📚 01. Text Retrieval</a>
+            <a href="boolean-retrieval-print.html" class="nav-link">🔍 02. Boolean Retrieval</a>
+            <a href="text-operations-print.html" class="nav-link">📝 03. Text Operations</a>
+            <a href="phrase_queries_print.html" class="nav-link">💬 04. Phrase Queries</a>
+            <a href="skiplist-print.html" class="nav-link">⏭️ 05. Skip Lists</a>
+            <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
+            <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
         </div>
     `;
 
