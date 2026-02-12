@@ -122,15 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         @media screen and (max-width: 600px) {
-            #nav-container {
-                top: 15px;
-                left: 15px;
-            }
-            #nav-toggle {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
             .top-home-nav {
                 top: 10px;
                 right: 10px;
