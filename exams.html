@@ -340,7 +340,8 @@
             .container {
                 width: 100%;
                 max-width: 100vw;
-                padding: 10px 5px;
+                padding: 10px 0;
+                /* Remove side padding */
                 padding-top: 50px;
                 box-sizing: border-box;
             }
@@ -352,7 +353,7 @@
 
             .tabs {
                 gap: 5px;
-                padding: 0 5px;
+                padding: 0 10px;
                 margin-bottom: 20px;
             }
 
@@ -365,10 +366,10 @@
             }
 
             .question-card {
-                padding: 15px 10px;
+                padding: 15px 12px;
                 border-radius: 0;
-                margin: 0 -5px 15px -5px;
-                width: calc(100% + 10px);
+                margin: 0 0 15px 0;
+                width: 100%;
                 border-left: none;
                 border-right: none;
                 box-sizing: border-box;
@@ -376,26 +377,34 @@
 
             .q-text,
             .q-text-rtl {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 width: 100%;
             }
 
-            /* Make Given Data boxes fill card width */
+            /* Make tables more compact to fit more content */
+            .interactive-area table {
+                font-size: 0.8rem;
+            }
+
+            .interactive-area th,
+            .interactive-area td {
+                padding: 8px 4px !important;
+            }
+
+            /* Make Given Data boxes fill card width perfectly */
             .q-text div[style*="padding:15px"] {
-                padding: 12px 10px !important;
-                margin: 10px -10px 15px -10px !important;
-                width: calc(100% + 20px) !important;
+                padding: 12px !important;
+                margin: 10px -12px 15px -12px !important;
+                width: calc(100% + 24px) !important;
                 box-sizing: border-box !important;
                 border-radius: 0 !important;
                 border-left: none !important;
                 border-right: none !important;
-                border-top: 1px solid rgba(56, 189, 248, 0.2);
-                border-bottom: 1px solid rgba(56, 189, 248, 0.2);
             }
 
             .interactive-area {
-                margin: 15px -10px;
-                width: calc(100% + 20px);
+                margin: 15px -12px;
+                width: calc(100% + 24px);
                 overflow-x: auto;
                 background: rgba(15, 23, 42, 0.2);
                 border-top: 1px solid rgba(56, 189, 248, 0.1);
@@ -408,7 +417,7 @@
                 font-size: 0.7rem;
                 color: var(--primary);
                 text-align: center;
-                padding: 10px 0;
+                padding: 8px 0;
                 background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.05), transparent);
                 opacity: 0.8;
             }
@@ -421,9 +430,9 @@
             }
 
             .correct-answer-box {
-                padding: 15px 10px;
-                margin: 15px -10px 0 -10px;
-                width: calc(100% + 20px);
+                padding: 15px 12px;
+                margin: 15px -12px -15px -12px;
+                width: calc(100% + 24px);
                 border-radius: 0;
                 border-left: none;
                 border-right: none;
@@ -431,9 +440,10 @@
             }
 
             .toggle-btn {
-                font-size: 1rem;
-                padding: 12px;
+                font-size: 0.9rem;
+                padding: 10px;
                 border-radius: 8px;
+                width: 100%;
             }
         }
 
