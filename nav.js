@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
         /* Floating Nav Styles */
         #nav-container {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            top: 20px;
+            left: 20px;
             z-index: 9999;
             font-family: 'Inter', sans-serif;
             direction: ltr;
@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
             background: #38bdf8;
             color: #0f172a;
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
         }
 
         #nav-toggle:hover {
@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         #nav-menu {
             position: absolute;
-            bottom: 80px;
-            right: 0;
+            top: 65px;
+            left: 0;
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid #334155;
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             padding: 10px;
             width: 280px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            transform-origin: bottom right;
+            transform-origin: top left;
             transition: opacity 0.3s, transform 0.3s;
             display: flex;
             flex-direction: column;
@@ -123,12 +123,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         @media screen and (max-width: 600px) {
             #nav-container {
-                bottom: 20px;
-                right: 20px;
+                top: 15px;
+                left: 15px;
             }
             #nav-toggle {
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
             }
             .top-home-nav {
                 top: 10px;
