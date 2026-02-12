@@ -86,7 +86,6 @@
             margin-bottom: 25px;
             position: relative;
             overflow: visible;
-            /* To allow dropdowns to overflow if needed */
         }
 
         .q-header {
@@ -117,7 +116,6 @@
 
         .interactive-area {
             direction: ltr;
-            /* Force LTR for tables */
             overflow-x: auto;
         }
 
@@ -469,35 +467,67 @@
                     <span class="q-number">Q 02 [4 Points]</span>
                 </div>
                 <div class="q-text">
-                    <strong>Positional Index Query: "self driving car"</strong><br>
-                    Check documents for the consecutive phrase.
+                    <strong>Positional Index Query: <span style="color:var(--accent)">"self driving
+                            car"</span></strong><br>
+                    Given the following postings list, fill in the table to evaluate the phrase query.<br>
+                    <span class="hint-text">Select the correct positions list for each term in each document. Check for
+                        consecutive sequence (i, i+1, i+2).</span>
+
+                    <div style="margin: 15px 0; overflow-x: auto;">
+                        <table style="min-width: 500px; font-size: 0.8rem;">
+                            <tr>
+                                <th>Term</th>
+                                <th>Postings List (DocID: Positions)</th>
+                            </tr>
+                            <tr>
+                                <td>self</td>
+                                <td>{doc1: [2]} {doc2: [1, 5]} {doc3: [12]} {doc4: [5]}</td>
+                            </tr>
+                            <tr>
+                                <td>driving</td>
+                                <td>{doc1: [3]} {doc2: [6]} {doc3: [10, 13]} {doc4: [6]}</td>
+                            </tr>
+                            <tr>
+                                <td>car</td>
+                                <td>{doc1: [4]} {doc2: [8, 10]} {doc3: [8, 11, 14]} {doc4: [8]}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="interactive-area">
                     <table>
                         <thead>
                             <tr>
-                                <th>DocID</th>
-                                <th>"self" Pos</th>
-                                <th>"driving" Pos</th>
-                                <th>"car" Pos</th>
-                                <th>Match Found?</th>
+                                <th>Document Id</th>
+                                <th>"self" Positions</th>
+                                <th>"driving" Positions</th>
+                                <th>"car" Positions</th>
+                                <th>Match? Yes/No</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Using loop for Q2 as well to enforce consistency -->
                             <script>
-                                const docs = ["Doc 1", "Doc 2", "Doc 3", "Doc 4"];
-                                // Distractor options for positions
-                                const posOps = ["None", "1", "2", "3", "4", "5", "6", "1, 5", "8", "8, 10", "8, 11, 14", "10, 13", "12", "14, 15", "Match"];
+                                const q2Docs = ["doc1", "doc2", "doc3", "doc4"];
+                                // Mix of correct answers and distractors
+                                const posDistractors = [
+                                    "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[8]", "[12]",
+                                    "[1, 5]", "[2, 5]", "[6, 13]", "[8, 10]",
+                                    "[10, 13]", "[5, 15]", "[3, 7]",
+                                    "[8, 11, 14]", "[1, 2, 9]", "[8, 12, 14]",
+                                    "∅"
+                                ];
 
-                                docs.forEach(doc => {
+                                // Sort them loosely to look organized but confusing
+                                posDistractors.sort();
+
+                                q2Docs.forEach(doc => {
                                     document.write(`<tr>
-                                        <td>${doc}</td>
-                                        <td>${createSelect(posOps, '')}</td>
-                                        <td>${createSelect(posOps, '')}</td>
-                                        <td>${createSelect(posOps, '')}</td>
-                                        <td><select class="exam-input"><option>No</option><option>Yes</option></select></td>
+                                        <td style="font-weight:bold; color:var(--primary)">${doc}</td>
+                                        <td>${createSelect(posDistractors, '')}</td>
+                                        <td>${createSelect(posDistractors, '')}</td>
+                                        <td>${createSelect(posDistractors, '')}</td>
+                                        <td><select class="exam-input" style="width: auto; min-width: 80px;"><option>No</option><option>Yes</option></select></td>
                                      </tr>`);
                                 });
                             </script>
@@ -510,11 +540,64 @@
                 <div class="answer-section">
                     <div class="correct-answer-box">
                         <h4 style="margin-top:0; color:var(--success)">✅ Answer Key:</h4>
-                        Only <strong>Doc 1</strong> matches with positions sequence (2, 3, 4).
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>DocID</th>
+                                    <th>self</th>
+                                    <th>driving</th>
+                                    <th>car</th>
+                                    <th>Match?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>doc1</td>
+                                    <td>[2]</td>
+                                    <td>[3]</td>
+                                    <td>[4]</td>
+                                    <td>✅ Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>doc2</td>
+                                    <td>[1, 5]</td>
+                                    <td>[6]</td>
+                                    <td>[8, 10]</td>
+                                    <td>❌ No</td>
+                                </tr>
+                                <tr>
+                                    <td>doc3</td>
+                                    <td>[12]</td>
+                                    <td>[10, 13]</td>
+                                    <td>[8, 11, 14]</td>
+                                    <td>❌ No</td>
+                                </tr>
+                                <tr>
+                                    <td>doc4</td>
+                                    <td>[5]</td>
+                                    <td>[6]</td>
+                                    <td>[8]</td>
+                                    <td>❌ No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top:10px; font-size: 0.9rem;">
+                            <strong>Explanation:</strong><br>
+                            For <strong>doc1</strong>: self(2) -> driving(3) -> car(4). Sequence is continuous (2, 3,
+                            4).<br>
+                            Other documents do not form a sequence.
+                        </p>
                     </div>
                 </div>
             </div>
 
+        </div>
+
+        <!-- SECOND EXAM SECTION -->
+        <div id="second" class="exam-section">
+            <div style="text-align: center; color: var(--text-muted); padding: 50px;">
+                Exam 2 Coming Soon... ⏳
+            </div>
         </div>
 
     </div>
