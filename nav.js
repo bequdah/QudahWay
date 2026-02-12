@@ -1,79 +1,93 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Force body to be a column to ensure footer-style nav stays at bottom
+    if (window.getComputedStyle(document.body).display === 'flex') {
+        document.body.style.flexDirection = 'column';
+        document.body.style.alignItems = 'center';
+    }
+
     // 1. Create the styles
     const style = document.createElement('style');
     style.innerHTML = `
-        /* Footer Nav Styles */
+        /* Footer Nav Styles - Fixed for all layouts */
         #nav-container {
             width: 100%;
+            max-width: 100% !important;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 0;
-            margin-top: 20px;
+            padding: 60px 0 40px 0;
+            margin-top: 40px;
             border-top: 1px solid rgba(51, 65, 85, 0.3);
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.5));
+            background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.8));
             position: relative;
-            z-index: 1000;
+            z-index: 9999;
+            box-sizing: border-box;
+            flex-shrink: 0; /* Prevents squeezing in flex layouts */
         }
 
         #nav-toggle {
             background: rgba(56, 189, 248, 0.1);
             color: #38bdf8;
             border: 1px solid #38bdf8;
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 14px 40px;
+            border-radius: 40px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            gap: 10px;
+            gap: 12px;
             font-family: 'Cairo', sans-serif;
+            white-space: nowrap; /* Prevents text wrapping */
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.1);
         }
 
         #nav-toggle:hover {
             background: #38bdf8;
             color: #0f172a;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
         }
 
         #nav-menu {
             position: absolute;
-            bottom: 100px;
+            bottom: 120px; /* Space above the button */
             left: 50%;
-            transform: translateX(-50%) scale(0.9);
+            transform: translateX(-50%) translateY(20px) scale(0.95);
             background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(15px);
-            border: 1px solid #334155;
-            border-radius: 20px;
-            padding: 15px;
-            width: 300px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            border-radius: 24px;
+            padding: 18px;
+            width: 320px;
+            max-width: calc(100vw - 40px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             opacity: 0;
             pointer-events: none;
+            visibility: hidden;
         }
 
         #nav-menu.visible {
             opacity: 1;
-            transform: translateX(-50%) scale(1);
+            transform: translateX(-50%) translateY(0) scale(1);
             pointer-events: auto;
+            visibility: visible;
         }
 
         .nav-header {
             color: #facc15;
             font-weight: 900;
-            padding: 5px 10px 10px 10px;
-            border-bottom: 1px solid #334155;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
+            padding: 5px 10px 15px 10px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
             text-align: center;
             font-family: 'Satisfy', cursive;
         }
@@ -81,14 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .nav-link {
             color: #f1f5f9;
             text-decoration: none;
-            padding: 12px 18px;
-            border-radius: 12px;
+            padding: 14px 20px;
+            border-radius: 14px;
             transition: all 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             border: 1px solid transparent;
         }
 
@@ -96,19 +110,20 @@ document.addEventListener("DOMContentLoaded", function () {
             background: rgba(56, 189, 248, 0.1);
             color: #38bdf8;
             border-color: rgba(56, 189, 248, 0.2);
-            transform: translateX(5px);
+            transform: translateX(8px);
         }
 
-        @media screen and (max-width: 768px) {
-            #nav-menu {
-                width: 90%;
-                max-width: 320px;
-            }
+        /* Active highlight improvement */
+        .nav-link.active-page {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.4);
+            pointer-events: none;
         }
     `;
     document.head.appendChild(style);
 
-    // 2. Create the Footer Nav
+    // 2. Create the Footer Nav Container
     const navContainer = document.createElement('div');
     navContainer.id = 'nav-container';
 
@@ -130,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="skiplist-print.html" class="nav-link">⏭️ 05. Skip Lists</a>
             <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
             <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
-            <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
+            <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
             <a href="exams.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05);">
                 🎯 Previous Exams Bank
             </a>
@@ -139,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.appendChild(navContainer);
 
-    // 3. Add Functionality
+    // 3. Add Toggle Functionality
     const toggleBtn = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
     const icon = toggleBtn.querySelector('.icon');
@@ -159,13 +174,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 4. Highlight current page
-    const currentPage = window.location.pathname.split("/").pop();
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split("/").pop() || 'index.html';
     const links = menu.querySelectorAll('.nav-link');
     links.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-            link.style.background = 'rgba(56, 189, 248, 0.2)';
-            link.style.color = '#38bdf8';
-            link.style.borderColor = '#38bdf8';
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+            link.classList.add('active-page');
         }
     });
 });
