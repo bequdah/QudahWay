@@ -1,10 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const currentPath = window.location.pathname;
-    const currentPage = currentPath.split("/").pop() || 'index.html';
+    const currentPage = currentPath.split("/").pop();
 
-    // 0. EXIT if we are on index.html - No need for redundant menu on the home page cards
-    if (currentPage === 'index.html' || currentPage === '') {
-        return;
+    // 0. EXTRA BULLETPROOF EXIT for index.html
+    // Checks for: 'index.html', empty string (root), or if the path ends with /QudahWay/
+    const isHomePage = !currentPage || currentPage === 'index.html' || currentPath.endsWith('/') || currentPath.endsWith('/QudahWay');
+
+    if (isHomePage) {
+        return; // ABSOLUTELY DO NOT SHOW ON HOME PAGE
     }
 
     // Force body to be a column to ensure footer-style nav stays at bottom
@@ -144,6 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> Map
             </div>
             
+            <a href="index.html" class="nav-link" style="color: #facc15; background: rgba(250, 204, 21, 0.05); border-color: rgba(250, 204, 21, 0.2);">🏠 العودة للرئيسية</a>
+            <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
+
             <a href="index-print.html" class="nav-link">📂 00. Intro & Definitions</a>
             <a href="text-retrieval-print.html" class="nav-link">📚 01. Text Retrieval Basics</a>
             <a href="boolean-retrieval-print.html" class="nav-link">🔍 02. Boolean Retrieval</a>
