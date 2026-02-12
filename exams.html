@@ -11,6 +11,17 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Satisfy&display=swap"
         rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
         :root {
@@ -841,174 +852,266 @@
                         </p>
                     </div>
                 </div>
-                <!-- Question 5: True & False -->
-                <div class="question-card">
-                    <div class="q-header"><span class="q-number">Q 05 [6 Points]</span></div>
-                    <div class="q-text">
-                        <strong>True and False:</strong> Answer whether each of the following statements is
-                        <strong>True</strong> or <strong>False</strong>.
-                    </div>
+            </div>
+            <!-- Question 5: True & False -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 05 [6 Points]</span></div>
+                <div class="q-text">
+                    <strong>True and False:</strong> Answer whether each of the following statements is
+                    <strong>True</strong> or <strong>False</strong>.
+                </div>
 
-                    <div class="interactive-area" style="margin-top:20px;">
-                        <table style="direction:ltr; text-align:left;">
-                            <thead>
-                                <tr>
-                                    <th style="width:50px">#</th>
-                                    <th>Statement</th>
-                                    <th style="width:120px">Answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>In the extended Boolean retrieval model, both positional indexes and biword
-                                        indexes can be used for proximity queries.</td>
-                                    <td><select class="exam-input">
-                                            <option>Select...</option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>The total number of 1s in a term-document incidence matrix represents the total
-                                        number of occurrences of all terms in the document collection.</td>
-                                    <td><select class="exam-input">
-                                            <option>Select...</option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>In an IR system, a "collection of documents" refers to the total set of
-                                        documents being indexed and searched, which may include different document types
-                                        like scientific papers, news articles, and social media posts, emails, and HTML
-                                        files.</td>
-                                    <td><select class="exam-input">
-                                            <option>Select...</option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>In Information Retrieval systems, both stemming and/or lemmatization are
-                                        typically applied to improve query matching and document retrieval.</td>
-                                    <td><select class="exam-input">
-                                            <option>Select...</option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>If the term t1 has a term frequency of 0.1% in document D1, and the document
-                                        contains 90,000 terms, the number of positional postings for t1 in the
-                                        positional index would be 900.</td>
-                                    <td><select class="exam-input">
-                                            <option>Select...</option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>In Westlaw-style proximity queries, the operator /p ensures that the specified
-                                        terms must appear in the same sentence.</td>
-                                    <td><select class="exam-input">
-                                            <option>Select...</option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="interactive-area" style="margin-top:20px;">
+                    <table style="direction:ltr; text-align:left;">
+                        <thead>
+                            <tr>
+                                <th style="width:50px">#</th>
+                                <th>Statement</th>
+                                <th style="width:120px">Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>In the extended Boolean retrieval model, both positional indexes and biword
+                                    indexes can be used for proximity queries.</td>
+                                <td><select class="exam-input">
+                                        <option>Select...</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>The total number of 1s in a term-document incidence matrix represents the total
+                                    number of occurrences of all terms in the document collection.</td>
+                                <td><select class="exam-input">
+                                        <option>Select...</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>In an IR system, a "collection of documents" refers to the total set of
+                                    documents being indexed and searched, which may include different document types
+                                    like scientific papers, news articles, and social media posts, emails, and HTML
+                                    files.</td>
+                                <td><select class="exam-input">
+                                        <option>Select...</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>In Information Retrieval systems, both stemming and/or lemmatization are
+                                    typically applied to improve query matching and document retrieval.</td>
+                                <td><select class="exam-input">
+                                        <option>Select...</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>If the term t1 has a term frequency of 0.1% in document D1, and the document
+                                    contains 90,000 terms, the number of positional postings for t1 in the
+                                    positional index would be 900.</td>
+                                <td><select class="exam-input">
+                                        <option>Select...</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>In Westlaw-style proximity queries, the operator /p ensures that the specified
+                                    terms must appear in the same sentence.</td>
+                                <td><select class="exam-input">
+                                        <option>Select...</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
-                    <div class="answer-section">
-                        <div class="correct-answer-box">
-                            <div style="direction:rtl; text-align:right">
-                                <h4 style="color:var(--success)">✅ Detailed Analysis (تحليل مفصل):</h4>
-                                <div style="display:grid; grid-template-columns: 1fr; gap: 15px;">
-                                    <div>1. <strong style="color:var(--danger)">False:</strong> Proximity queries
-                                        require a <span class="star-highlight">positional index</span> (or biword for
-                                        2-word distance). The "Extended
-                                        Boolean" model usually refers to ranking weights/p-norms, not proximity.</div>
-                                    <div>2. <strong style="color:var(--success)">True:</strong> Each '1' in the matrix
-                                        indicates that a term exists in a document. The total sums up all term-document
-                                        pair occurrences.</div>
-                                    <div>3. <strong style="color:var(--success)">True:</strong> Information Retrieval
-                                        handles heterogeneous collections (PDFs, Emails, HTML, etc.).</div>
-                                    <div>4. <strong style="color:var(--success)">True:</strong> Stemming and
-                                        Lemmatization reduce words to their base roots to increase the hit rate
-                                        (Recall).</div>
-                                    <div>5. <strong style="color:var(--danger)">False:</strong> Calculate: 90,000 * 0.1%
-                                        = 90,000 * 0.001 = <span class="star-highlight">90</span>. The statement said
-                                        900, which is a mathematical
-                                        error.</div>
-                                    <div>6. <strong style="color:var(--success)">True:</strong> In Westlaw syntax, `/p`
-                                        is for same paragraph/sentence, and `/s` is for same sentence (context
-                                        dependent, but /p generally covers same unit).</div>
-                                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <div style="direction:rtl; text-align:right">
+                            <h4 style="color:var(--success)">✅ Detailed Analysis (تحليل مفصل):</h4>
+                            <div style="display:grid; grid-template-columns: 1fr; gap: 15px;">
+                                <div>1. <strong style="color:var(--danger)">False:</strong> Proximity queries
+                                    require a <span class="star-highlight">positional index</span> (or biword for
+                                    2-word distance). The "Extended
+                                    Boolean" model usually refers to ranking weights/p-norms, not proximity.</div>
+                                <div>2. <strong style="color:var(--success)">True:</strong> Each '1' in the matrix
+                                    indicates that a term exists in a document. The total sums up all term-document
+                                    pair occurrences.</div>
+                                <div>3. <strong style="color:var(--success)">True:</strong> Information Retrieval
+                                    handles heterogeneous collections (PDFs, Emails, HTML, etc.).</div>
+                                <div>4. <strong style="color:var(--success)">True:</strong> Stemming and
+                                    Lemmatization reduce words to their base roots to increase the hit rate
+                                    (Recall).</div>
+                                <div>5. <strong style="color:var(--danger)">False:</strong> Calculate: 90,000 * 0.1%
+                                    = 90,000 * 0.001 = <span class="star-highlight">90</span>. The statement said
+                                    900, which is a mathematical
+                                    error.</div>
+                                <div>6. <strong style="color:var(--success)">True:</strong> In Westlaw syntax, `/p`
+                                    is for same paragraph/sentence, and `/s` is for same sentence (context
+                                    dependent, but /p generally covers same unit).</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <div id="second" class="exam-section">
-                <!-- Question 1: Log-Frequency Weight -->
-                <div class="question-card">
-                    <div class="q-header"><span class="q-number">Q 01 [1 Point]</span></div>
-                    <div class="q-text">
-                        <div
-                            style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:20px;">
-                            <strong style="color:var(--primary); font-size:1.2rem;">Given Data (المعطيات):</strong><br>
-                            <table>
+        </div>
+
+        <div id="second" class="exam-section">
+            <!-- Question 1: Log-Frequency Weight -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 01 [1 Point]</span></div>
+                <div class="q-text">
+                    <div
+                        style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:20px;">
+                        <strong style="color:var(--primary); font-size:1.2rem;">Given Data (المعطيات):</strong><br>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Document D1</th>
+                                    <th>Document D2</th>
+                                    <th>Document D3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>apple</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <strong>Task:</strong> For documents <strong>D1</strong> and <strong>D2</strong>, write the
+                    <span class="star-highlight">log-frequency weight</span>. Don't calculate the log value—just
+                    substitute the expression in the following table.
+                </div>
+
+                <div class="interactive-area">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 150px;">Document</th>
+                                <th>log-frequency weight for the term "apple"</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>D1</td>
+                                <td><input type="text" class="exam-input" style="width: 90%;"
+                                        placeholder="Write the expression here..."></td>
+                            </tr>
+                            <tr>
+                                <td>D2</td>
+                                <td><input type="text" class="exam-input" style="width: 90%;"
+                                        placeholder="Write the expression here..."></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <div style="direction:rtl; text-align:right">
+                            <h4 style="color:var(--success)">✅ قاعدة الوزن اللوغاريتمي (Log-frequency Weighting):
+                            </h4>
+                            <p>يتم حساب الوزن باستخدام الصيغة الأساسية: <strong style="color:var(--primary)">W = 1 +
+                                    log<sub>10</sub>(tf)</strong> عندما يكون التكرار (tf) أكبر من صفر.</p>
+                            <table style="direction:ltr; text-align:left; margin-top:15px;">
                                 <thead>
                                     <tr>
-                                        <th>Term</th>
-                                        <th>Document D1</th>
-                                        <th>Document D2</th>
-                                        <th>Document D3</th>
+                                        <th style="width: 150px;">Document</th>
+                                        <th>log-frequency weight for "apple"</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>apple</td>
-                                        <td>1</td>
-                                        <td>4</td>
-                                        <td>10</td>
+                                        <td>D1</td>
+                                        <td style="color:var(--success); font-weight:700;">1 + log₁₀(1) = 1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>D2</td>
+                                        <td style="color:var(--success); font-weight:700;">1 + log₁₀(4) = 1.60</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
+                                * ملاحظة: بما أن <strong>log<sub>10</sub>(1) = 0</strong> فإن النتيجة لـ D1 هي 1 بالضبط.
+                                وبالنسبة لـ D2
+                                فإن
+                                التعويض المباشر هو المطلوب.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2: IDF Calculation -->
+                <div class="question-card">
+                    <div class="q-header"><span class="q-number">Q 02 [1 Point]</span></div>
+                    <div class="q-text">
+                        <div
+                            style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:20px;">
+                            <strong style="color:var(--primary); font-size:1.2rem;">Given Data (المعطيات):</strong><br>
+                            Collection size (N) = <span class="star-highlight">1,000</span> documents.<br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Term</th>
+                                        <th>Document Frequency (df)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Data</td>
+                                        <td>200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>science</td>
+                                        <td>30</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <strong>Task:</strong> For documents <strong>D1</strong> and <strong>D2</strong>, write the
-                        <span class="star-highlight">log-frequency weight</span>. Don't calculate the log value—just
-                        substitute the expression in the following table.
+                        <strong>Task:</strong> Fill in the below table the <span class="star-highlight">Inverse Document
+                            Frequency (IDF)</span> weights for each term. Don't calculate the log value—just substitute
+                        the expression.
                     </div>
 
                     <div class="interactive-area">
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="width: 150px;">Document</th>
-                                    <th>log-frequency weight for the term "apple"</th>
+                                    <th>Term</th>
+                                    <th>IDF formula filled</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>D1</td>
+                                    <td>Data</td>
                                     <td><input type="text" class="exam-input" style="width: 90%;"
-                                            placeholder="Write the expression here..."></td>
+                                            placeholder="Write log expression here..."></td>
                                 </tr>
                                 <tr>
-                                    <td>D2</td>
+                                    <td>science</td>
                                     <td><input type="text" class="exam-input" style="width: 90%;"
-                                            placeholder="Write the expression here..."></td>
+                                            placeholder="Write log expression here..."></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1018,60 +1121,759 @@
                     <div class="answer-section">
                         <div class="correct-answer-box">
                             <div style="direction:rtl; text-align:right">
-                                <h4 style="color:var(--success)">✅ قاعدة الوزن اللوغاريتمي (Log-frequency Weighting):
-                                </h4>
-                                <p>يتم حساب الوزن باستخدام الصيغة: $W = 1 + \log_{10}(tf)$ عندما يكون التكرار أكبر من
-                                    صفر.</p>
-                                <table style="direction:ltr; text-align:left; margin-top:15px;">
+                                <h4 style="color:var(--success)">✅ قاعدة التردد العكسي للمستندات (IDF Rule):</h4>
+                                <p>تُقاس "ندرة" المصطلح باستخدام القانون: <strong style="color:var(--primary)">IDF =
+                                        log<sub>10</sub>(N / df<sub>t</sub>)</strong></p>
+                                <ul style="list-style:none; padding:10px; direction:ltr; text-align:left;">
+                                    <li>• <strong>Data:</strong> log<sub>10</sub>(1000 / 200)</li>
+                                    <li>• <strong>science:</strong> log<sub>10</sub>(1000 / 30)</li>
+                                </ul>
+                                <p style="margin-top:10px; font-size:0.9rem; color:var(--text-muted);">
+                                    * ملاحظة: الهدف من هذا السؤال هو التأكد من معرفة تعويض القيم الصحيحة ($N$ في البسط و
+                                    $df$ في المقام).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 3: Cosine Similarity -->
+                <div class="question-card">
+                    <div class="q-header"><span class="q-number">Q 03 [3 Points]</span></div>
+                    <div class="q-text">
+                        <strong>Cosine Similarity with Vector Normalization.</strong> You are given the following TF-IDF
+                        weights for a query and a document:
+                        <div style="margin-top:20px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Term</th>
+                                        <th>Query Weight (qi)</th>
+                                        <th>Document Weight (di)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Machine</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Learning</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data</td>
+                                        <td>1</td>
+                                        <td>5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-top:20px;">
+                            <strong>Task:</strong> Compute the <span class="star-highlight">cosine similarity</span>
+                            between the query and the document. Show all the steps including normalizing the query and
+                            document vectors and computing the dot-product.
+                        </p>
+                    </div>
+
+                    <div class="interactive-area">
+                        <div
+                            style="background:rgba(15, 23, 42, 0.4); padding:20px; border-radius:12px; border:1px solid var(--border);">
+                            <div style="margin-bottom:15px;">
+                                <label class="q-label-arabic" style="text-align:left; direction:ltr;">1. Dot Product
+                                    (البسط):</label>
+                                <input type="text" class="exam-input" style="width:100%"
+                                    placeholder="(q1*d1) + (q2*d2) + ...">
+                            </div>
+                            <div style="margin-bottom:15px;">
+                                <label class="q-label-arabic" style="text-align:left; direction:ltr;">2. Query Length
+                                    |q|:</label>
+                                <input type="text" class="exam-input" style="width:100%"
+                                    placeholder="sqrt(q1^2 + q2^2 + ...)">
+                            </div>
+                            <div style="margin-bottom:15px;">
+                                <label class="q-label-arabic" style="text-align:left; direction:ltr;">3. Document Length
+                                    |d|:</label>
+                                <input type="text" class="exam-input" style="width:100%"
+                                    placeholder="sqrt(d1^2 + d2^2 + ...)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                    <div class="answer-section">
+                        <div class="correct-answer-box">
+                            <div style="direction:rtl; text-align:right">
+                                <h4 style="color:var(--success)">✅ خطوات حساب تشابه الجيب (Cosine Similarity):</h4>
+                                <p>القانون الأساسي: $$ \cos(\vec{q}, \vec{d}) = \frac{\sum q_i \cdot d_i}{\sqrt{\sum
+                                    q_i^2} \cdot \sqrt{\sum d_i^2}} $$</p>
+
+                                <div
+                                    style="margin-top:15px; background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; direction:ltr; text-align:left;">
+                                    <p><strong>1. Dot Product (حساب الضرب النقطي):</strong><br>
+                                        $(2 \times 3) + (3 \times 4) + (1 \times 5) = 6 + 12 + 5 = \mathbf{23}$</p>
+
+                                    <p><strong>2. Query Length (حساب طول الاستعلام):</strong><br>
+                                        $\sqrt{2^2 + 3^2 + 1^2} = \sqrt{4 + 9 + 1} = \mathbf{\sqrt{14}}$</p>
+
+                                    <p><strong>3. Document Length (حساب طول المستند):</strong><br>
+                                        $\sqrt{3^2 + 4^2 + 5^2} = \sqrt{9 + 16 + 25} = \mathbf{\sqrt{50}}$</p>
+
+                                    <p style="margin-top:10px; border-top:1px solid var(--border); padding-top:10px;">
+                                        <strong>Final Substitution (التعويض النهائي):</strong><br>
+                                        <span style="font-size:1.2rem; color:var(--primary);">
+                                            $\frac{23}{\sqrt{14} \cdot \sqrt{50}}$
+                                        </span>
+                                    </p>
+                                </div>
+                                <p style="margin-top:10px; font-size:0.9rem; color:var(--text-muted);">
+                                    * ملاحظة: في الامتحان لا يُطلب منك استخراج القيمة العشرية النهائية، فقط التعويض
+                                    الصحيح في القانون.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4: DCG & IDCG -->
+                <div class="question-card">
+                    <div class="q-header"><span class="q-number">Q 04 [4 Points]</span></div>
+                    <div class="q-text">
+                        <strong>Ranked Retrieval Evaluation.</strong> A search engine retrieved a ranked list of
+                        documents for a given query. Each document has a known relevance grade from a human assessor on
+                        a <strong>0–3 scale</strong> (0 = irrelevant, 3 = highly relevant). The top 5 retrieved
+                        documents and their relevance scores are shown in the table below:
+                        <div style="margin-top:20px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Retrieved Doc</th>
+                                        <th>Relevance Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>D2</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>D4</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>D3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>D1</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>D5</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-top:20px;">
+                            <strong>Task:</strong> Compute the <span class="star-highlight">DCG@5</span> and <span
+                                class="star-highlight">IDCG@5</span> for the retrieved documents' list. Write the
+                            equation and substitute the numbers (values).
+                        </p>
+                    </div>
+
+                    <div class="interactive-area">
+                        <div
+                            style="background:rgba(15, 23, 42, 0.4); padding:20px; border-radius:12px; border:1px solid var(--border);">
+                            <div style="margin-bottom:15px;">
+                                <label class="q-label-arabic" style="text-align:left; direction:ltr;">1. Compute
+                                    DCG@5:</label>
+                                <input type="text" class="exam-input" style="width:100%"
+                                    placeholder="Substitute values into DCG formula...">
+                            </div>
+                            <div style="margin-bottom:15px;">
+                                <label class="q-label-arabic" style="text-align:left; direction:ltr;">2. Compute
+                                    IDCG@5:</label>
+                                <input type="text" class="exam-input" style="width:100%"
+                                    placeholder="Sort grades & substitute into IDCG formula...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                    <div class="answer-section">
+                        <div class="correct-answer-box">
+                            <div style="direction:rtl; text-align:right">
+                                <h4 style="color:var(--success)">✅ تقييم القوائم المرتبة (DCG & IDCG Analysis):</h4>
+                                <p>يتم استخدام مقياس <strong>Discounted Cumulative Gain (DCG)</strong> لقياس كفاءة ترتيب
+                                    النتائج، حيث يتم تقليل قيمة المستند "بشكل لوغاريتمي" كلما ابتعد عن المركز الأول.</p>
+
+                                <div
+                                    style="margin-top:15px; background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; direction:ltr; text-align:left;">
+                                    <p><strong>1. calculation of DCG@5 (الترتيب الحالي):</strong><br>
+                                        الدراجات حسب الترتيب: (3, 2, 3, 0, 1)<br>
+                                        <span style="color:var(--primary); font-size:1.1rem;">
+                                            $3 + \frac{2}{\log_2 2} + \frac{3}{\log_2 3} + \frac{0}{\log_2 4} +
+                                            \frac{1}{\log_2 5}$
+                                        </span>
+                                    </p>
+
+                                    <p style="margin-top:20px;"><strong>2. calculation of IDCG@5 (الترتيب
+                                            المثالي):</strong><br>
+                                        للحصول على الترتيب المثالي، نرتب الدرجات تنازلياً: (3, 3, 2, 1, 0)<br>
+                                        <span style="color:var(--success); font-size:1.1rem;">
+                                            $3 + \frac{3}{\log_2 2} + \frac{2}{\log_2 3} + \frac{1}{\log_2 4} +
+                                            \frac{0}{\log_2 5}$
+                                        </span>
+                                    </p>
+                                </div>
+                                <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
+                                    * ملاحظة: <strong>IDCG</strong> يمثل أفضل ترتيب ممكن للنتائج التي تم العثور عليها،
+                                    ويستخدم كمرجع لحساب Normalized DCG لاحقاً.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 5: Evaluation Metrics -->
+                <div class="question-card">
+                    <div class="q-header"><span class="q-number">Q 05 [5 Points]</span></div>
+                    <div class="q-text">
+                        <strong>Evaluation Metrics (Vector Space Model).</strong> A search engine returned a ranked list
+                        of documents. Answer the following parts based on the retrieved results and known relevant
+                        documents.
+
+                        <div
+                            style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin:20px 0;">
+                            <strong style="color:var(--primary); font-size:1.1rem;">Given Data:</strong><br>
+                            • Relevant documents for Q1: <span class="star-highlight">D1, D2, D5, D7</span> (Total =
+                            4)<br>
+                            • Top 8 retrieved documents (Ranked 1-8): <span
+                                style="font-family:'JetBrains Mono', monospace; font-size:0.9rem;">D2, D3, D1, D8, D4,
+                                D5, D6, D7</span>
+                        </div>
+
+                        <p><strong>Part 1:</strong> Fill in the table the <span
+                                class="star-highlight">Precision@k</span> and <span
+                                class="star-highlight">Recall@k</span> values for k=1 to k=8.</p>
+                    </div>
+
+                    <div class="interactive-area">
+                        <table style="font-size:0.85rem;">
+                            <thead>
+                                <tr>
+                                    <th>K</th>
+                                    <th>Ranked Doc</th>
+                                    <th>Precision@K</th>
+                                    <th>Recall@K</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>D2</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>D3</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>D1</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>D8</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>D4</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>D5</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>D6</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>D7</td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                    <td><input type="text" class="exam-input" placeholder="..."></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                            <div>
+                                <label style="font-size:0.85rem;"><strong>Part 2:</strong> Average Precision
+                                    (AP):</label>
+                                <input type="text" class="exam-input" style="width:100%"
+                                    placeholder="Enter AP calculation...">
+                            </div>
+                            <div>
+                                <label style="font-size:0.85rem;"><strong>Part 3:</strong> Reciprocal Rank (RR):</label>
+                                <input type="text" class="exam-input" style="width:100%" placeholder="Enter RR rank...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                    <div class="answer-section">
+                        <div class="correct-answer-box">
+                            <div style="direction:rtl; text-align:right">
+                                <h4 style="color:var(--success)">✅ تحليل مقاييس الدقة والاستدعاء (Metric Analysis):</h4>
+
+                                <div style="margin-top:15px; direction:ltr; text-align:left;">
+                                    <table style="font-size:0.8rem;">
+                                        <thead>
+                                            <tr>
+                                                <th>K</th>
+                                                <th>Doc</th>
+                                                <th>Rel?</th>
+                                                <th>Precision@K</th>
+                                                <th>Recall@K</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>D2</td>
+                                                <td>✅</td>
+                                                <td>1/1 = <span style="color:var(--success)">1.0</span></td>
+                                                <td>1/4 = <span style="color:var(--success)">0.25</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>D3</td>
+                                                <td>❌</td>
+                                                <td>1/2 = 0.5</td>
+                                                <td>1/4 = 0.25</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>D1</td>
+                                                <td>✅</td>
+                                                <td>2/3 ≈ <span style="color:var(--success)">0.67</span></td>
+                                                <td>2/4 = <span style="color:var(--success)">0.50</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>D8</td>
+                                                <td>❌</td>
+                                                <td>2/4 = 0.5</td>
+                                                <td>2/4 = 0.50</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>D4</td>
+                                                <td>❌</td>
+                                                <td>2/5 = 0.4</td>
+                                                <td>2/4 = 0.50</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>D5</td>
+                                                <td>✅</td>
+                                                <td>3/6 = <span style="color:var(--success)">0.5</span></td>
+                                                <td>3/4 = <span style="color:var(--success)">0.75</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>D6</td>
+                                                <td>❌</td>
+                                                <td>3/7 ≈ 0.43</td>
+                                                <td>3/4 = 0.75</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>D7</td>
+                                                <td>✅</td>
+                                                <td>4/8 = <span style="color:var(--success)">0.5</span></td>
+                                                <td>4/4 = <span style="color:var(--success)">1.0</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:10px;">
+                                    <p><strong>• متوسط الدقة Average Precision (AP):</strong> نجمع الدقة عند كل مستند
+                                        "ذو صلة" فقط ونقسم على عددهم الكلي (4):<br>
+                                        <span
+                                            style="color:var(--primary); direction:ltr; display:block; text-align:left;">
+                                            $AP = \frac{1 + 0.67 + 0.5 + 0.5}{4} = \frac{2.67}{4} \approx \mathbf{0.67}$
+                                        </span>
+                                    </p>
+
+                                    <p style="margin-top:15px;"><strong>• مقلوب الرتبة Reciprocal Rank (RR):</strong> هو
+                                        مقلوب رتبة "أول" مستند ذو صلة تم العثور عليه:<br>
+                                        بما أن أول مستند صلة هو D2 في الرتبة 1، فإن:<br>
+                                        <span
+                                            style="color:var(--primary); direction:ltr; display:block; text-align:left;">
+                                            $RR = \frac{1}{1} = \mathbf{1.0}$
+                                        </span>
+                                    </p>
+                                </div>
+                                <p style="margin-top:10px; font-size:0.85rem; color:var(--text-muted);">
+                                    * ملاحظة: الـ Recall يزداد فقط عندما نجد مستنداً ذا صلة (Relevant)، بينما الـ
+                                    Precision تتغير مع كل رتبة بناءً على عدد المستندات التي ظهرت حتى الآن.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Question 06: Probabilistic Retrieval -->
+                    <div class="question-card">
+                        <div class="q-header"><span class="q-number">Q 06 [3 Points]</span></div>
+                        <div class="q-text">
+                            <strong>Probabilistic Retrieval Evaluation.</strong> The table below shows user-annotated
+                            relevance judgments for various documents (D) in response to different queries (Q). The
+                            relevance value (R) is binary:
+                            <ul style="margin:10px 0; padding-left:20px;">
+                                <li>• <strong>1</strong> indicates the document is relevant to the query.</li>
+                                <li>• <strong>0</strong> indicates it is not relevant.</li>
+                            </ul>
+
+                            <div
+                                style="margin-top:15px; background:rgba(255,255,255,0.02); padding:10px; border-radius:8px;">
+                                <table style="font-size:0.85rem;">
                                     <thead>
                                         <tr>
-                                            <th style="width: 150px;">Document</th>
-                                            <th>log-frequency weight for "apple"</th>
+                                            <th>Query (Q)</th>
+                                            <th>Document (D)</th>
+                                            <th>Relevancy (R)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>Q1</td>
                                             <td>D1</td>
-                                            <td style="color:var(--success); font-weight:700;">1 + log₁₀(1) = 1</td>
+                                            <td>1</td>
                                         </tr>
                                         <tr>
+                                            <td>Q1</td>
                                             <td>D2</td>
-                                            <td style="color:var(--success); font-weight:700;">1 + log₁₀(4) = 1.60</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>D2</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>D1</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>D2</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>D1</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>D3</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>D3</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>D5</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>D1</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>D2</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>D2</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>D3</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>D1</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>D2</td>
+                                            <td>0</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
-                                    * ملاحظة: بما أن $\log_{10}(1) = 0$ فإن النتيجة لـ D1 هي 1 بالظبط. وبالنسبة لـ D2
-                                    فإن
-                                    التعويض المباشر هو المطلوب.
-                                </p>
+                            </div>
+                            <p style="margin-top:20px;">
+                                <strong>Task:</strong> For each of the following probabilities, compute the probability
+                                that the document $D_i$ is <strong>relevant</strong> to the query $Q_i$. Show the
+                                <strong>substituted values</strong> used in the computation.
+                            </p>
+                        </div>
+
+                        <div class="interactive-area">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                                <div class="prob-box">
+                                    <label>$P(R=1 | Q1, D1)$:</label>
+                                    <input type="text" class="exam-input" style="width:100%" placeholder="Expr...">
+                                </div>
+                                <div class="prob-box">
+                                    <label>$P(R=1 | Q2, D2)$:</label>
+                                    <input type="text" class="exam-input" style="width:100%" placeholder="Expr...">
+                                </div>
+                                <div class="prob-box">
+                                    <label>$P(R=1 | Q1, D2)$:</label>
+                                    <input type="text" class="exam-input" style="width:100%" placeholder="Expr...">
+                                </div>
+                                <div class="prob-box">
+                                    <label>$P(R=1 | Q3, D3)$:</label>
+                                    <input type="text" class="exam-input" style="width:100%" placeholder="Expr...">
+                                </div>
+                                <div class="prob-box">
+                                    <label>$P(R=1 | Q2, D1)$:</label>
+                                    <input type="text" class="exam-input" style="width:100%" placeholder="Expr...">
+                                </div>
+                                <div class="prob-box">
+                                    <label>$P(R=1 | Q3, D5)$:</label>
+                                    <input type="text" class="exam-input" style="width:100%" placeholder="Expr...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution
+                                Model</span></button>
+                        <div class="answer-section">
+                            <div class="correct-answer-box">
+                                <div style="direction:rtl; text-align:right">
+                                    <h4 style="color:var(--success)">✅ حساب الاحتمالات الشرطية (Conditional
+                                        Probabilities):</h4>
+                                    <p>يتم الحساب عن طريق عد مرات ظهور الـ (Relevant R=1) بالنسبة لمجموع مرات ظهور نفس
+                                        الـ (Query & Document):</p>
+
+                                    <div
+                                        style="margin-top:15px; direction:ltr; text-align:left; display:grid; grid-template-columns:1fr 1fr; gap:15px; background:rgba(255,255,255,0.05); padding:15px; border-radius:8px;">
+                                        <div>1. $P(R=1|Q1, D1) = \mathbf{3/3 = 1}$</div>
+                                        <div>2. $P(R=1|Q2, D2) = \mathbf{1/3}$</div>
+                                        <div>3. $P(R=1|Q1, D2) = \mathbf{1/3}$</div>
+                                        <div>4. $P(R=1|Q3, D3) = \mathbf{2/3}$</div>
+                                        <div>5. $P(R=1|Q2, D1) = \mathbf{1/2}$</div>
+                                        <div>6. $P(R=1|Q3, D5) = \mathbf{1/1 = 1}$</div>
+                                    </div>
+                                    <p style="margin-top:10px; font-size:0.85rem; color:var(--text-muted);">
+                                        * ملاحظة: ركز على عدد مرات التكرار الكلي لكل زوج (Q, D) في المقام، وعدد مرات
+                                        كونه Relevant في البسط.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Question 07: Multiple Choice & True/False -->
+                        <div class="question-card">
+                            <div class="q-header"><span class="q-number">Q 07 [8 Points]</span></div>
+                            <div class="q-text">
+                                <strong>Multiple choice and True and False questions.</strong> Select the correct answer
+                                for each statement below:
+                            </div>
+
+                            <div class="interactive-area">
+                                <div class="mcq-container"
+                                    style="display:flex; flex-direction:column; gap:20px; font-size:0.9rem;">
+                                    <!-- MCQ 1 -->
+                                    <div class="mcq-item">
+                                        <p>1. In the <span class="star-highlight">bag-of-words</span> model used for
+                                            document representation:</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Choose Option --</option>
+                                            <option>A) Word order is preserved.</option>
+                                            <option>B) Only noun phrases are considered.</option>
+                                            <option>C) Documents are represented as sequences.</option>
+                                            <option>D) Word order is ignored and only term frequency matters.</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- MCQ 2 -->
+                                    <div class="mcq-item">
+                                        <p>2. Which of the following terms would have the <span
+                                                class="star-highlight">highest IDF score</span> in a collection of 1
+                                            million documents?</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Choose Option --</option>
+                                            <option>A) Term appearing in all documents.</option>
+                                            <option>B) Term appearing in 100,000 documents.</option>
+                                            <option>C) Term appearing in 10 documents.</option>
+                                            <option>D) Term appearing in 1,000 documents.</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- MCQ 3 -->
+                                    <div class="mcq-item">
+                                        <p>3. What is the effect of <span class="star-highlight">IDF</span> on ranking
+                                            when the query contains only one term?</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Choose Option --</option>
+                                            <option>A) It increases the ranking positions of documents with many terms.
+                                            </option>
+                                            <option>B) It changes the score based on document length.</option>
+                                            <option>C) It has no effect.</option>
+                                            <option>D) It reduces the ranking positions of documents with rare terms.
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- MCQ 4 -->
+                                    <div class="mcq-item">
+                                        <p>4. Why is <span class="star-highlight">Euclidean distance</span> not ideal
+                                            for comparing query and document vectors?</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Choose Option --</option>
+                                            <option>A) It requires sorting.</option>
+                                            <option>B) It increases for similar-length documents.</option>
+                                            <option>C) It penalizes long documents even when distributions match.
+                                            </option>
+                                            <option>D) It does not use term frequencies.</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- T/F 5 -->
+                                    <div class="mcq-item">
+                                        <p>5. In <span class="star-highlight">SMART notation</span>, the query always
+                                            uses the same weighting scheme as the document.</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Select True/False --</option>
+                                            <option>True</option>
+                                            <option>False</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- T/F 6 -->
+                                    <div class="mcq-item">
+                                        <p>6. In SMART notation for weighting, the <span
+                                                class="star-highlight">'t'</span> refers to Term frequency.</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Select True/False --</option>
+                                            <option>True</option>
+                                            <option>False</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- T/F 7 -->
+                                    <div class="mcq-item">
+                                        <p>7. In a <span class="star-highlight">unigram language model</span>, the word
+                                            order in a query affects its probability.</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Select True/False --</option>
+                                            <option>True</option>
+                                            <option>False</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- T/F 8 -->
+                                    <div class="mcq-item">
+                                        <p>8. The probability <span class="star-highlight">p(R=1|d,q)</span> is used
+                                            directly in the Query Likelihood Model.</p>
+                                        <select class="exam-input" style="width:100%; margin-top:5px;">
+                                            <option value="">-- Select True/False --</option>
+                                            <option>True</option>
+                                            <option>False</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution
+                                    Model</span></button>
+                            <div class="answer-section">
+                                <div class="correct-answer-box">
+                                    <div style="direction:rtl; text-align:right">
+                                        <h4 style="color:var(--success)">✅ حل الأسئلة الموضوعية (Correct Answers):</h4>
+                                        <ul style="list-style:none; padding:10px; line-height:1.8;">
+                                            <li>1. 💡 <span style="color:var(--success)"><b>D</b></span> (الترتيب غير
+                                                مهم في حقيبة الكلمات).</li>
+                                            <li>2. 💡 <span style="color:var(--success)"><b>C</b></span> (كلما قل تكرار
+                                                الكلمة في المستندات زاد الـ IDF).</li>
+                                            <li>3. 💡 <span style="color:var(--success)"><b>C</b></span> (إذا كان هناك
+                                                كلمة واحدة، الـ IDF ثابت لكل المستندات وما بغير الترتيب).</li>
+                                            <li>4. 💡 <span style="color:var(--success)"><b>C</b></span> (المسافات تتأثر
+                                                بطول المستند حتى لو المحتوى مشابه).</li>
+                                            <li>5. 💡 <span style="color:var(--success)"><b>False</b></span> (ممكن
+                                                نستخدم lnc للمستند و ltc للاستعلام مثلاً).</li>
+                                            <li>6. 💡 <span style="color:var(--success)"><b>False</b></span> (في SMART،
+                                                حرف t يرمز لـ IDF في المكان الثاني).</li>
+                                            <li>7. 💡 <span style="color:var(--success)"><b>False</b></span> (الـ
+                                                Unigram يفترض استقلالية الكلمات، الترتيب لا يهم).</li>
+                                            <li>8. 💡 <span style="color:var(--success)"><b>False</b></span> (الـ QLM
+                                                يستخدم p(q|d)، أما الـ p(R=1) للـ Probabilistic model).</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script>
-            function updateExcl(s) {
-                if (!s.classList.contains('res')) return;
-                const al = document.querySelectorAll('.res');
-                const vs = [];
-                al.forEach(x => { if (x.value && x.value !== '∅' && x.value !== 'End') vs.push(x.value); });
-                al.forEach(x => { x.querySelectorAll('option').forEach(o => { o.disabled = (vs.includes(o.value) && x.value !== o.value && o.value !== '∅' && o.value !== 'End'); }); });
-            }
-            function toggleAns(b) {
-                const d = b.nextElementSibling;
-                d.style.display = (d.style.display === "block") ? "none" : "block";
-                b.querySelector('span').textContent = (d.style.display === "block") ? "Hide Solution" : "👁️ Show Solution Model";
-            }
-            function switchTab(id) {
-                document.querySelectorAll('.exam-section').forEach(e => e.classList.remove('active'));
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.getElementById(id).classList.add('active');
-                event.target.classList.add('active');
-            }
-        </script>
+    <script>
+        function updateExcl(s) {
+            if (!s.classList.contains('res')) return;
+            const al = document.querySelectorAll('.res');
+            const vs = [];
+            al.forEach(x => { if (x.value && x.value !== '∅' && x.value !== 'End') vs.push(x.value); });
+            al.forEach(x => { x.querySelectorAll('option').forEach(o => { o.disabled = (vs.includes(o.value) && x.value !== o.value && o.value !== '∅' && o.value !== 'End'); }); });
+        }
+        function toggleAns(b) {
+            const d = b.nextElementSibling;
+            d.style.display = (d.style.display === "block") ? "none" : "block";
+            b.querySelector('span').textContent = (d.style.display === "block") ? "Hide Solution" : "👁️ Show Solution Model";
+        }
+        function switchTab(id) {
+            document.querySelectorAll('.exam-section').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 
 </html>
