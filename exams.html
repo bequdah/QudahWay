@@ -37,7 +37,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
         }
 
@@ -85,7 +85,8 @@
             padding: 25px;
             margin-bottom: 25px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            /* To allow dropdowns to overflow if needed */
         }
 
         .q-header {
@@ -114,19 +115,13 @@
             text-align: left;
         }
 
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-
         .interactive-area {
             direction: ltr;
+            /* Force LTR for tables */
+            overflow-x: auto;
         }
 
-        .correct-answer-box table {
-            direction: ltr;
-        }
-
-        /* Reformatted Tables */
+        /* Table Styling */
         table {
             width: 100%;
             border-collapse: separate;
@@ -138,14 +133,13 @@
             color: var(--text-light);
             border: 1px solid var(--border);
             border-radius: 8px;
-            overflow: hidden;
-            direction: ltr;
-            /* Force LTR for all tables in this file since questions are English */
+            background: rgba(15, 23, 42, 0.3);
+            min-width: 600px;
         }
 
         th,
         td {
-            padding: 12px;
+            padding: 10px;
             border-bottom: 1px solid var(--border);
             border-right: 1px solid var(--border);
         }
@@ -160,67 +154,37 @@
         }
 
         th {
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(56, 189, 248, 0.15);
             color: var(--primary);
             font-weight: 700;
             text-transform: uppercase;
             font-size: 0.8rem;
-            letter-spacing: 0.05em;
         }
 
-        /* Styled Select Dropdowns */
+        /* Select Styling */
         select.exam-input {
             width: 100%;
-            padding: 8px 12px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border);
+            padding: 8px;
+            background: #0f172a;
+            border: 1px solid #475569;
             border-radius: 6px;
             color: #e2e8f0;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 1em;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
-        select.exam-input:hover {
-            border-color: var(--primary);
-            background-color: rgba(15, 23, 42, 0.9);
-        }
-
         select.exam-input:focus {
-            outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.2);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.3);
         }
 
-        option {
-            background: var(--bg-dark);
-            color: #fff;
-            padding: 10px;
-        }
-
-        /* Reveal Answer Section */
-        .answer-section {
-            display: none;
-            margin-top: 25px;
-            border-top: 2px dashed var(--border);
-            padding-top: 25px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .correct-answer-box {
-            background: rgba(52, 211, 153, 0.05);
-            border: 1px solid var(--success);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            text-align: left;
-            direction: ltr;
+        select.exam-input option:disabled {
+            color: #475569;
+            background: #1e293b;
+            font-style: italic;
         }
 
         .toggle-btn {
@@ -239,16 +203,38 @@
             justify-content: center;
             gap: 10px;
             transition: all 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            margin-top: 15px;
         }
 
         .toggle-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            filter: brightness(1.1);
         }
 
-        .toggle-btn:active {
-            transform: translateY(0);
+        .answer-section {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .correct-answer-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            padding: 15px;
+            border-radius: 12px;
+            direction: ltr;
+        }
+
+        .correct-answer-box table {
+            margin: 0;
+            background: transparent;
+            border: none;
+        }
+
+        .correct-answer-box th {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
         }
 
         @keyframes fadeIn {
@@ -269,7 +255,13 @@
 
         .exam-section.active {
             display: block;
-            animation: fadeIn 0.3s ease;
+        }
+
+        .hint-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -280,8 +272,7 @@
 
         <div class="header-title">
             <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
-            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.2rem;">Mock Exams & Interactive Practice
-            </p>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.2rem;">Mock Exams Bank</p>
         </div>
 
         <div class="tabs">
@@ -299,25 +290,27 @@
                 </div>
                 <div class="q-text">
                     <strong>Merge Algorithm Execution:</strong><br>
-                    Given inverted lists:
+                    Given inverted lists sorted by DocID:
                     <ul
                         style="list-style: none; padding: 0; font-family: 'JetBrains Mono', monospace; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
                         <li>Term1: <span style="color:var(--primary)">1, 4, 5, 7, 9, 11, 13, 15</span></li>
                         <li>Term2: <span style="color:var(--accent)">3, 4, 6, 7, 10, 13, 14</span></li>
                     </ul>
-                    For query: <span style="color: #fff; border-bottom: 2px solid var(--section-color);">term1 AND
-                        term2</span>, select the correct step for each iteration.
+                    For query: <span style="color: #fff; border-bottom: 2px solid var(--accent);">term1 AND
+                        term2</span>, select step details.<br>
+                    <span class="hint-text">Note: "Result" options will disappear once used, except for Empty
+                        (∅).</span>
                 </div>
 
                 <div class="interactive-area">
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50px;">#</th>
+                                <th style="width: 40px;">#</th>
                                 <th>P1 (Term1)</th>
                                 <th>P2 (Term2)</th>
                                 <th>Compare Action</th>
-                                <th>Result</th>
+                                <th>Result Intersection</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -330,21 +323,38 @@
                                 <td>&empty;</td>
                             </tr>
 
-                            <!-- Rows with Selects -->
-                            <!-- Using JS loop-like structure for repetition would be cleaner, but hardcoding for clarity in this single file artifact -->
+                            <!-- Rows 2-11 generated via loops with smart logic -->
                             <script>
-                                const p1Options = `<option value="">Select...</option><option>1</option><option>4</option><option>5</option><option>7</option><option>9</option><option>11</option><option>13</option><option>15</option><option>End</option>`;
-                                const p2Options = `<option value="">Select...</option><option>3</option><option>4</option><option>6</option><option>7</option><option>10</option><option>13</option><option>14</option><option>End</option>`;
-                                const actionOptions = `<option value="">Select Action...</option><option>Move P1</option><option>Move P2</option><option>Match -> Add & Move</option><option>Stop</option>`;
-                                const resultOptions = `<option value="">-</option><option>Empty (∅)</option><option>Match: 4</option><option>Match: 7</option><option>Match: 13</option>`;
+                                // 1. Expanded Options (Distractors added)
+                                const p1Ops = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, "End"];
+                                const p2Ops = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, "End"];
+                                const actionOps = [
+                                    "Move P1", "Move P2", "Match -> Add",
+                                    "Move P1 & P2", "Skip P1", "Skip P2", "Stop"
+                                ];
+                                const resultOps = [
+                                    "Empty (∅)", "Match: 1", "Match: 2", "Match: 3", "Match: 4",
+                                    "Match: 5", "Match: 6", "Match: 7", "Match: 9",
+                                    "Match: 10", "Match: 11", "Match: 13", "Match: 14", "Match: 15", "End"
+                                ];
+
+                                function createSelect(options, className) {
+                                    let html = `<select class="exam-input ${className}" onchange="updateExclusions(this)">`;
+                                    html += `<option value="">Select...</option>`;
+                                    options.forEach(op => {
+                                        html += `<option value="${op}">${op}</option>`;
+                                    });
+                                    html += `</select>`;
+                                    return html;
+                                }
 
                                 for (let i = 2; i <= 11; i++) {
                                     document.write(`<tr>
                                         <td>${i}</td>
-                                        <td><select class="exam-input">${p1Options}</select></td>
-                                        <td><select class="exam-input">${p2Options}</select></td>
-                                        <td><select class="exam-input">${actionOptions}</select></td>
-                                        <td><select class="exam-input">${resultOptions}</select></td>
+                                        <td>${createSelect(p1Ops, '')}</td>
+                                        <td>${createSelect(p2Ops, '')}</td>
+                                        <td>${createSelect(actionOps, '')}</td>
+                                        <td>${createSelect(resultOps, 'result-select')}</td>
                                     </tr>`);
                                 }
                             </script>
@@ -353,14 +363,13 @@
                 </div>
 
                 <button class="toggle-btn" onclick="toggleAnswer(this)">
-                    <span>👁️ Check Correct Solution</span>
+                    <span>👁️ Show Solution Model</span>
                 </button>
 
                 <div class="answer-section">
                     <div class="correct-answer-box">
                         <h4 style="margin-top:0; color:var(--success)">✅ Correct Sequence:</h4>
-                        <!-- Static Correct Table for Reference -->
-                        <table style="font-size: 0.85rem;">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -390,7 +399,7 @@
                                     <td>4</td>
                                     <td>4</td>
                                     <td>Match -> Add</td>
-                                    <td>4</td>
+                                    <td>Match: 4</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
@@ -411,7 +420,7 @@
                                     <td>7</td>
                                     <td>7</td>
                                     <td>Match -> Add</td>
-                                    <td>7</td>
+                                    <td>Match: 7</td>
                                 </tr>
                                 <tr>
                                     <td>7</td>
@@ -439,13 +448,13 @@
                                     <td>13</td>
                                     <td>13</td>
                                     <td>Match -> Add</td>
-                                    <td>13</td>
+                                    <td>Match: 13</td>
                                 </tr>
                                 <tr>
                                     <td>11</td>
                                     <td>15</td>
                                     <td>14</td>
-                                    <td>Move P2 (End)</td>
+                                    <td>Move P2</td>
                                     <td>End</td>
                                 </tr>
                             </tbody>
@@ -461,7 +470,7 @@
                 </div>
                 <div class="q-text">
                     <strong>Positional Index Query: "self driving car"</strong><br>
-                    Check each document for the phrase. Positions must be consecutive (e.g., 2, 3, 4).
+                    Check documents for the consecutive phrase.
                 </div>
 
                 <div class="interactive-area">
@@ -476,110 +485,80 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Doc 1 -->
-                            <tr>
-                                <td>Doc 1</td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>2</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>3</option>
-                                        <option>5</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>4</option>
-                                        <option>8</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>No</option>
-                                        <option>Yes</option>
-                                    </select></td>
-                            </tr>
-                            <!-- Doc 2 -->
-                            <tr>
-                                <td>Doc 2</td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>1, 5</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>6</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>8, 10</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>No</option>
-                                        <option>Yes</option>
-                                    </select></td>
-                            </tr>
-                            <!-- Doc 3 -->
-                            <tr>
-                                <td>Doc 3</td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>12</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>10, 13</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Select...</option>
-                                        <option>8, 11, 14</option>
-                                        <option>None</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>No</option>
-                                        <option>Yes</option>
-                                    </select></td>
-                            </tr>
+                            <!-- Using loop for Q2 as well to enforce consistency -->
+                            <script>
+                                const docs = ["Doc 1", "Doc 2", "Doc 3", "Doc 4"];
+                                // Distractor options for positions
+                                const posOps = ["None", "1", "2", "3", "4", "5", "6", "1, 5", "8", "8, 10", "8, 11, 14", "10, 13", "12", "14, 15", "Match"];
+
+                                docs.forEach(doc => {
+                                    document.write(`<tr>
+                                        <td>${doc}</td>
+                                        <td>${createSelect(posOps, '')}</td>
+                                        <td>${createSelect(posOps, '')}</td>
+                                        <td>${createSelect(posOps, '')}</td>
+                                        <td><select class="exam-input"><option>No</option><option>Yes</option></select></td>
+                                     </tr>`);
+                                });
+                            </script>
                         </tbody>
                     </table>
                 </div>
                 <button class="toggle-btn" onclick="toggleAnswer(this)">
-                    <span>👁️ Check Correct Solution</span>
+                    <span>👁️ Show Solution Model</span>
                 </button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="margin-top:0; color:var(--success)">✅ Answer:</h4>
-                        Only <strong>Doc 1</strong> matches with positions (2, 3, 4).<br>
-                        All other documents fail the consecutive check.
+                        <h4 style="margin-top:0; color:var(--success)">✅ Answer Key:</h4>
+                        Only <strong>Doc 1</strong> matches with positions sequence (2, 3, 4).
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- SECOND EXAM SECTION -->
-        <div id="second" class="exam-section">
-            <div style="text-align: center; color: var(--text-muted); padding: 50px;">
-                Exam 2 Coming Soon...
-            </div>
-        </div>
-
     </div>
 
-    <!-- Scripts -->
+    <!-- Smart Logic Script -->
     <script>
+        // SMART EXCLUSION LOGIC
+        function updateExclusions(changedSelect) {
+            // Only apply this logic if the changed select is a "Result" column select
+            if (!changedSelect.classList.contains('result-select')) return;
+
+            const allResultSelects = document.querySelectorAll('.result-select');
+            const selectedValues = [];
+
+            // 1. Collect all currently selected values (ignoring Empty/End/Default)
+            allResultSelects.forEach(sel => {
+                if (sel.value && sel.value !== "Empty (∅)" && sel.value !== "End") {
+                    selectedValues.push(sel.value);
+                }
+            });
+
+            // 2. Iterate all selects and disable options that are selected elsewhere
+            allResultSelects.forEach(sel => {
+                const options = sel.querySelectorAll('option');
+                options.forEach(opt => {
+                    // Reset first
+                    opt.disabled = false;
+
+                    // Skip empty/default values
+                    if (!opt.value || opt.value === "Empty (∅)" || opt.value === "End") return;
+
+                    // If value is selected somewhere else AND it is not the currently selected value of THIS dropdown
+                    if (selectedValues.includes(opt.value) && sel.value !== opt.value) {
+                        opt.disabled = true;
+                    }
+                });
+            });
+        }
+
         function toggleAnswer(btn) {
             const answerDiv = btn.nextElementSibling;
             if (answerDiv.style.display === "block") {
                 answerDiv.style.display = "none";
-                btn.querySelector('span').textContent = "👁️ Check Correct Solution";
+                btn.querySelector('span').textContent = "👁️ Show Solution Model";
             } else {
                 answerDiv.style.display = "block";
                 btn.querySelector('span').textContent = "🙈 Hide Solution";
