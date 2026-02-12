@@ -146,27 +146,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 2. Create the Home Button in Header
     // Find a suitable header container
+    // 2. Create the Home Button (Bulletproof version)
     const currentPage = window.location.pathname.split("/").pop();
-    const header = document.querySelector('.page-header') || document.querySelector('.header-title');
-    if (header && currentPage !== 'index.html' && currentPage !== '') {
-        // Ensure the header has relative positioning for absolute child if needed
-        if (getComputedStyle(header).position === 'static') {
-            header.style.position = 'relative';
-        }
-
+    if (currentPage !== 'index.html' && currentPage !== '') {
         const homeBtn = document.createElement('a');
         homeBtn.href = 'index.html';
         homeBtn.className = 'top-home-nav';
         homeBtn.innerHTML = '🏠 <span>الرئيسية</span>';
-
-        // Append it as the first or last child depending on context
-        // In your layouts, titles are usually on the left/right, we want this on the other side
-        header.appendChild(homeBtn);
+        homeBtn.style.zIndex = '2147483647'; // Max z-index
+        document.body.appendChild(homeBtn);
     }
 
-    // 2. Create the HTML Elements for Floating Nav
+    // 3. Create the Floating Nav (Blue Menu Button)
     const navContainer = document.createElement('div');
     navContainer.id = 'nav-container';
+    navContainer.style.zIndex = '2147483646'; // Max z-index - 1
 
     navContainer.innerHTML = `
         <button id="nav-toggle" aria-label="Toggle Menu">
