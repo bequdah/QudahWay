@@ -92,20 +92,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Top Home Button Styling */
         .top-home-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid #334155;
             color: #94a3b8;
-            padding: 6px 14px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 12px;
             text-decoration: none;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
             font-size: 0.9rem;
             transition: all 0.3s ease;
             white-space: nowrap;
+            z-index: 100;
+            backdrop-filter: blur(5px);
         }
 
         .top-home-nav:hover {
@@ -113,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
             color: #0f172a;
             border-color: #38bdf8;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
         }
 
         @media screen and (max-width: 600px) {
@@ -124,11 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 width: 50px;
                 height: 50px;
             }
+            .top-home-nav {
+                top: 10px;
+                right: 10px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
             .top-home-nav span {
                 display: none;
-            }
-            .top-home-nav {
-                padding: 6px 10px;
             }
         }
         
