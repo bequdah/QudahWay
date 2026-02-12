@@ -333,89 +333,95 @@
         /* Mobile Responsiveness Improvements */
         @media screen and (max-width: 768px) {
             body {
-                padding: 5px;
-                /* Maximum possible width */
+                padding: 0;
+                overflow-x: hidden;
             }
 
             .container {
                 width: 100%;
-                max-width: 100%;
-                padding-top: 40px;
-                /* Space for the absolute Home button */
+                max-width: 100vw;
+                padding: 10px 5px;
+                padding-top: 50px;
+                box-sizing: border-box;
             }
 
             h1 {
                 font-size: 1.8rem;
+                margin-top: 5px;
             }
 
             .tabs {
                 gap: 5px;
                 padding: 0 5px;
+                margin-bottom: 20px;
             }
 
             .tab-btn {
-                padding: 8px 10px;
+                padding: 10px 5px;
                 font-size: 0.8rem;
                 flex: 1;
                 text-align: center;
-                border-radius: 10px;
+                border-radius: 8px;
             }
 
             .question-card {
                 padding: 15px 10px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-                margin-left: 0;
-                margin-right: 0;
-                width: auto;
-                /* Fill container */
+                border-radius: 0;
+                margin: 0 -5px 15px -5px;
+                width: calc(100% + 10px);
+                border-left: none;
+                border-right: none;
+                box-sizing: border-box;
             }
 
             .q-text,
             .q-text-rtl {
                 font-size: 0.95rem;
-                line-height: 1.5;
+                width: 100%;
             }
 
-            /* Expand internal blue info boxes to full card width */
+            /* Make Given Data boxes fill card width */
             .q-text div[style*="padding:15px"] {
-                padding: 10px !important;
-                margin: 0 -5px 15px -5px !important;
-                border-radius: 4px;
+                padding: 12px 10px !important;
+                margin: 10px -10px 15px -10px !important;
+                width: calc(100% + 20px) !important;
+                box-sizing: border-box !important;
+                border-radius: 0 !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-top: 1px solid rgba(56, 189, 248, 0.2);
+                border-bottom: 1px solid rgba(56, 189, 248, 0.2);
             }
 
             .interactive-area {
-                margin: 0 -5px;
-                padding: 0 5px 5px 5px;
-                -webkit-overflow-scrolling: touch;
+                margin: 0 -10px;
+                width: calc(100% + 20px);
+                overflow-x: auto;
             }
 
-            /* Tooltip for horizontal scroll */
             .interactive-area::after {
-                content: '⬅️ اسحب لليمين لمشاهدة باقي الجدول';
+                content: '⬅️ اسحب يميناً للتكملة';
                 display: block;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 color: var(--text-muted);
-                text-align: right;
-                margin-top: 5px;
-                direction: rtl;
-                opacity: 0.8;
-                font-weight: 600;
+                text-align: center;
+                margin: 8px 0;
+                opacity: 0.7;
             }
 
             .correct-answer-box {
                 padding: 10px;
-                font-size: 0.85rem;
-            }
-
-            .option-card {
-                padding: 10px;
-                font-size: 0.9rem;
+                margin: 10px -10px;
+                width: calc(100% + 20px);
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
             }
 
             .toggle-btn {
                 font-size: 1rem;
                 padding: 12px;
+                border-radius: 8px;
             }
         }
 
@@ -425,13 +431,12 @@
             }
 
             .header-title p {
-                font-size: 0.95rem !important;
+                font-size: 1rem !important;
                 margin-top: 5px !important;
             }
 
             .q-number {
                 font-size: 0.75rem;
-                padding: 2px 6px;
             }
         }
     </style>
