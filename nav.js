@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 10px;
-            width: 260px;
+            width: 280px; /* Slightly wider for numbered items */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transform-origin: bottom right;
             transition: opacity 0.3s, transform 0.3s;
@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             margin-bottom: 5px;
             font-size: 1.1rem;
             text-align: center;
+            font-family: 'Satisfy', cursive; /* Match brand font if desired */
         }
 
         .nav-link {
@@ -76,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             padding: 10px 15px;
             border-radius: 8px;
             transition: background 0.2s, color 0.2s;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const navContainer = document.createElement('div');
     navContainer.id = 'nav-container';
 
+    // NEW ORDER APPLIED HERE
     navContainer.innerHTML = `
         <button id="nav-toggle" aria-label="Toggle Menu">
             <span class="icon">☰</span>
@@ -109,8 +111,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="nav-header">QudahWay IR Map</div>
             <a href="index.html" class="nav-link">🏠 Home</a>
             <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
+            
             <a href="index-print.html" class="nav-link">📂 00. Intro & Definitions</a>
-            <a href="text-retrieval-print.html" class="nav-link">📚 01. Text Retrieval</a>
+            <a href="text-retrieval-print.html" class="nav-link">📚 01. Text Retrieval Basics</a>
             <a href="boolean-retrieval-print.html" class="nav-link">🔍 02. Boolean Retrieval</a>
             <a href="text-operations-print.html" class="nav-link">📝 03. Text Operations</a>
             <a href="phrase_queries_print.html" class="nav-link">💬 04. Phrase Queries</a>
@@ -137,6 +140,17 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!navContainer.contains(event.target) && menu.classList.contains('visible')) {
             menu.classList.remove('visible');
             icon.textContent = '☰';
+        }
+    });
+
+    // 4. Highlight current page
+    const currentPage = window.location.pathname.split("/").pop();
+    const links = menu.querySelectorAll('.nav-link');
+    links.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.style.background = 'rgba(56, 189, 248, 0.2)';
+            link.style.color = '#38bdf8';
+            link.style.border = '1px solid #38bdf8';
         }
     });
 });
