@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Space Model | Study Guide</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Satisfy&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+            --border: #334155;
+            --brand-red: #f97316;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* A4 Page Container */
+        .page {
+            width: 210mm;
+            height: auto;
+            margin: 20px auto;
+            background: var(--bg-dark);
+            padding: 15mm;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: visible;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Inter', 'Cairo', sans-serif;
+            font-weight: 800;
+        }
+
+        .page-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 19pt;
+            color: var(--primary);
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--card-dark);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-size: 13pt;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .en-text {
+            display: block;
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: 10pt;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-align: left;
+            direction: ltr;
+            background: rgba(250, 204, 21, 0.05);
+            padding: 8px 12px;
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+        }
+
+        .ar-text {
+            display: block;
+            color: #f1f5f9;
+            font-size: 10.5pt;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .page-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 9pt;
+        }
+
+        .signature-brand {
+            font-family: 'Satisfy', cursive;
+            font-size: 16pt;
+        }
+
+        .sig-name {
+            color: var(--primary);
+        }
+
+        .sig-way {
+            color: var(--accent);
+        }
+
+        @media print {
+            body {
+                background: var(--bg-dark) !important;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border: none;
+                min-height: auto;
+                height: auto;
+                width: 210mm;
+                page-break-after: always;
+                overflow: visible !important;
+                padding: 10mm;
+            }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= PAGE 01 ================= -->
+    <div class="page">
+        <!-- Notice Banner -->
+        <div
+            style="background: linear-gradient(135deg, #f97316 0%, #fb923c 100%); border: 3px solid #ea580c; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); text-align: center;">
+            <div
+                style="font-size: 24pt; font-weight: 900; color: white; margin-bottom: 10px; font-family: 'Inter', 'Cairo', sans-serif;">
+                ⚠️ تنبيه مهم | Important Notice
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 8px; padding: 15px; margin-bottom: 12px;">
+                <p
+                    style="font-size: 12pt; color: #0f172a; font-weight: 700; margin: 0; line-height: 1.8; font-family: 'Cairo', sans-serif;">
+                    المحتوى كامل، لكن قد تواجه مشاكل تقنية في الطباعة.<br>
+                    للحصول على أفضل تجربة والمحتوى التفاعلي الكامل، يرجى زيارة الموقع الإلكتروني:
+                </p>
+                <p
+                    style="font-size: 10pt; color: #475569; font-weight: 600; margin: 8px 0 0 0; font-family: 'Inter', sans-serif; direction: ltr;">
+                    Content is complete, but you may encounter technical printing issues.<br>
+                    For the best experience and full interactive content, please visit the website:
+                </p>
+            </div>
+            <a href="https://vectorspacemodel.netlify.app/"
+                style="display: inline-block; background: white; color: #f97316; padding: 12px 30px; border-radius: 8px; font-size: 13pt; font-weight: 900; text-decoration: none; font-family: 'Inter', sans-serif; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">
+                🌐 vectorspacemodel.netlify.app
+            </a>
+        </div>
+
+        <header class="page-header">
+            <h1 class="header-title">Vector Space Model</h1>
+        </header>
+
+        <!-- Kickoff Section: The Big Picture -->
+        <div class="section-card" style="border-right: 6px solid var(--primary); margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div style="flex: 1;">
+                    <h2 class="section-title"
+                        style="color: var(--primary); border: none; font-size: 16pt; margin-bottom: 5px; direction: ltr; text-align: left;">
+                        🚀 Scoring, Term Weighting & Vector Space
+                    </h2>
+                    <div
+                        style="font-family: 'Inter'; color: var(--text-muted); font-size: 9pt; margin-bottom: 15px; direction: ltr; text-align: left;">
+                        The "Great Upgrade" from Boolean to Ranked Retrieval
+                    </div>
+                </div>
+                <div style="font-size: 30pt; filter: drop-shadow(0 0 10px var(--primary));">📊</div>
+            </div>
+
+            <div class="ar-text"
+                style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 12px; border: 1px dashed var(--primary);">
+                انسّوا كل اللي فات! تذكروا الـ **Boolean Retrieval**؟ اللي كان يا "أبيض" يا "أسود"؟ يا الملف فيه الكلمة
+                يا ما فيه؟ هاض كان اسمه "المنطق الناشف".
+                <br><br>
+                اليوم رح نفوت بعالم الـ **Vector Space Model**، هون الدلع الحقيقي! هون ما بنسأل "هل الكلمة موجودة؟" بس..
+                بنسأل <span style="color: var(--accent); font-weight: 900;">"قديش موجودة؟"</span> و <span
+                    style="color: var(--accent); font-weight: 900;">"قديش مهمة؟"</span>.
+                <br><br>
+                تخيلوا كلماتكم صارت "إحداثيات" في الفضاء، وكل ملف هو "نقطة" أو "سهم" (Vector) طاير. رح نتعلم كيف "نوزن"
+                الكلمات بميزان الذهب (Weighting) ونعطي لكل ملف علامة (Scoring) عشان نرتبهم من "الأكثر صلة" لـ "الأقل
+                صلة".
+                <br><br>
+                <div style="text-align: center; color: var(--success); font-weight: bold; font-family: 'Cairo';">
+                    رح نحول اللغة لرياضيات، والملفات لخرائط! 🗺️📐
+                </div>
+            </div>
+        </div>
+
+        <!-- The Concept: Boolean vs Ranked -->
+        <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+            <div class="section-card" style="flex: 1; border-top: 4px solid var(--danger);">
+                <h3
+                    style="color: var(--danger); font-size: 11pt; margin-bottom: 10px; direction: ltr; text-align: left;">
+                    The Old Way: Boolean</h3>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    مثل شرطي الحدود: يا معك هوية (1) يا ما معك (0). ما عنده وسط!
+                </div>
+            </div>
+            <div class="section-card" style="flex: 1; border-top: 4px solid var(--success);">
+                <h3
+                    style="color: var(--success); font-size: 11pt; margin-bottom: 10px; direction: ltr; text-align: left;">
+                    The New Way: Scoring</h3>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    مثل الحكم في "The Voice": بيعطيك علامة من 10.. مش بس بقيمك، برتبك بين المنافسين!
+                </div>
+            </div>
+        </div>
+
+        <!-- The Chapter Roadmap: What's in the box? -->
+        <div class="section-card"
+            style="margin-top: 10px; background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border);">
+            <h3
+                style="color: var(--primary); font-size: 11pt; margin-bottom: 15px; direction: ltr; text-align: left; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 14pt;">📋</span> This Chapter: Our Learning Roadmap
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <!-- Column 1 -->
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                            Ranked Retrieval</div>
+                        <div class="ar-text" style="font-size: 8.5pt;">البحث بالترتيب (مش الكل أو لا شيء).</div>
+                    </div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                            Scoring Documents</div>
+                        <div class="ar-text" style="font-size: 8.5pt;">كيف نعطي "علامة" للملف بناءً على صلته.</div>
+                    </div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                            Term Frequency (TF)</div>
+                        <div class="ar-text" style="font-size: 8.5pt;">قديش تكررت الكلمة جوا نفس الملف.</div>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                            Collection Statistics</div>
+                        <div class="ar-text" style="font-size: 8.5pt;">إحصائيات الكلمة في كل "المكتبة" (DF).</div>
+                    </div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                            Weighting Schemes</div>
+                        <div class="ar-text" style="font-size: 8.5pt;">أنظمة "الأوزان" للكلمات (قوانين الميزان).</div>
+                    </div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                            Vector Space Scoring</div>
+                        <div class="ar-text" style="font-size: 8.5pt;">حساب العلامات النهائي في الفضاء.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 01</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 02: RANKED RETRIEVAL ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Ranked Retrieval Foundations</h1>
+        </header>
+
+        <!-- Slide Content: Ranked Retrieval -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🎯</span> 01. Ranked Retrieval (Detailed Breakdown)
+            </h2>
+
+            <!-- Point 1 -->
+            <div class="pair-box">
+                <div class="en-text">Thus far, our queries have all been Boolean.</div>
+                <div class="ar-text">
+                    لغاية اللحظة هاي، كل اللي درسناه كان بيعتمد على الـ **Boolean queries**؛ يعني إما (موجود) أو (غير
+                    موجود).
+                </div>
+            </div>
+
+            <!-- Point 2 -->
+            <div class="pair-box">
+                <div class="en-text">Documents either match or don’t.</div>
+                <div class="ar-text">
+                    هون ما في حل وسط؛ الملف يا بحقق الشرط كامل وبطلع بالنتائج، يا ما بحققه وبختفي.
+                </div>
+            </div>
+
+            <!-- Point 3 -->
+            <div class="pair-box">
+                <div class="en-text">Good for expert users with precise understanding of their needs and the collection.
+                </div>
+                <div class="ar-text">
+                    هاض الأسلوب ممتاز للناس الـ <span style="color: var(--primary); font-weight: bold;">Expert</span>
+                    (الخبراء)؛ اللي عارفين بالضبط شو الكلمات اللي بدهم إياها وعارفين كيف يركبوها مع بعض.
+                </div>
+            </div>
+
+            <!-- Point 4 -->
+            <div class="pair-box">
+                <div class="en-text">Also good for applications: Applications can easily consume 1000s of results.</div>
+                <div class="ar-text">
+                    كمان ممتاز للبرامج والتطبيقات؛ لأن الكمبيوتر ما عنده مشكلة يقرأ 1000 نتيجة ويحللهم بسرعة البرق.
+                </div>
+            </div>
+
+            <!-- Point 5 -->
+            <div class="pair-box" style="border-left: 4px solid var(--danger); background: rgba(251, 113, 133, 0.05);">
+                <div class="en-text" style="color: var(--danger);">Not good for the majority of users.</div>
+                <div class="ar-text">
+                    بس المشكلة الحقيقية وين؟ إنه هاد النظام <span
+                        style="color: var(--danger); font-weight: bold;">فاشل</span> مع أغلب المستخدمين العاديين.
+                </div>
+            </div>
+
+            <!-- Point 6 & 7 -->
+            <div class="pair-box">
+                <div class="en-text">Most users incapable of writing Boolean queries (or they think it’s too much work).
+                </div>
+                <div class="ar-text">
+                    أغلب الناس ما بيعرفوا يكتبوا `AND` و `OR` و `NOT` بتعقيد، وحتى لو بيعرفوا، بيحسوا إنه الموضوع "غلبة"
+                    وبدهم طريقة أسهل.
+                </div>
+            </div>
+
+            <div class="pair-box">
+                <div class="en-text">Most users don’t want to wade through 1000s of results (particularly true of web
+                    search).</div>
+                <div class="ar-text">
+                    ما في حدا فينا بدخل على جوجل وبقعد يقلب بـ 1000 صفحة؛ إحنا بدنا "الزبدة" تطلع بأول 5 نتائج.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Content: Feast or Famine -->
+        <div class="section-card" style="margin-top: 15px;">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--danger);">
+                <span>⛈️</span> 02. Problem with Boolean search: feast or famine
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Boolean queries often result in either too few (=0) or too many (1000s) results.
+                </div>
+                <div class="ar-text">
+                    هاي هي المشكلة الأشهر: يا بتطلع لك غابة من النتائج (Feast) وما بتلاقي حالك، يا بتطلع لك صحراء ناشفة
+                    (Famine) بصفر نتائج.
+                </div>
+            </div>
+
+            <!-- Examples Table -->
+            <div
+                style="background: black; padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 15px;">
+                <div
+                    style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 9pt; margin-bottom: 10px; direction: ltr; text-align: left;">
+                    [ EXAMPLE CASE STUDY ]</div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div
+                        style="font-family: 'JetBrains Mono'; color: white; direction: ltr; text-align: left; border-bottom: 1px solid #334155; padding-bottom: 5px;">
+                        Query 1: "standard user dlink 650" <span style="color: var(--primary);">➔ 200,000 hits</span>
+                    </div>
+                    <div style="font-family: 'JetBrains Mono'; color: white; direction: ltr; text-align: left;">
+                        Query 2: "standard user dlink 650 no card found" <span style="color: var(--danger);">➔ 0
+                            hits</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pair-box">
+                <div class="en-text">It takes a lot of skill to come up with a query that produces a manageable number
+                    of hits.</div>
+                <div class="ar-text">
+                    عشان تطلع "عدد معقول" من النتائج، لازم تكون فنان في صياغة الاستعلام، وهذا صعب على الكل.
+                </div>
+            </div>
+
+            <div class="pair-box" style="background: rgba(56, 189, 248, 0.1); border-radius: 8px; padding: 10px;">
+                <div class="en-text" style="color: var(--primary);">AND gives too few; OR gives too many.</div>
+                <div class="ar-text">
+                    قاعدة ذهبية: الـ <span style="color: var(--primary); font-weight: bold;">AND</span> بتصعّب الشروط
+                    فبطلع نتائج قليلة، والـ <span style="color: var(--accent); font-weight: bold;">OR</span> بتسهلها
+                    فبطلع نتائج مبالغ فيها.
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 02 & 03 CONSOLIDATED -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--primary);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>📈</span> 03. Ranked Retrieval Models & Solutions
+            </h2>
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🧠</span> 03. Ranked Retrieval Models
+            </h2>
+
+            <!-- Point 1 -->
+            <div class="pair-box">
+                <div class="en-text">Rather than a set of documents satisfying a query expression, in ranked retrieval,
+                    the system returns an ordering over the (top) documents in the collection for a query.</div>
+                <div class="ar-text">
+                    بدلاً من إرجاع "مجموعة" من الملفات اللي بس بتحقق الشرط (زي الـ Boolean)، نظام الـ **Ranked
+                    Retrieval** برجع لك "ترتيب" (Ordering) لأفضل الملفات في المكتبة بالنسبة لسؤالك.
+                </div>
+            </div>
+
+            <!-- Point 2 -->
+            <div class="pair-box" style="border-right: 4px solid var(--success); padding-right: 12px;">
+                <div class="en-text" style="color: var(--success);">Free text queries: Rather than a query language of
+                    operators and expressions, the user’s query is just one or more words in a human language.</div>
+                <div class="ar-text">
+                    **استعلامات النص الحر (Free Text):** هون المستخدم مش مضطر يتعلم لغة برمجة أو يحط `AND/OR`. كل اللي
+                    عليه يكتب كلمات عادية بلغة البشر (زي ما بتعمل بجوجل)، والسيستم بفهمها.
+                </div>
+            </div>
+
+            <!-- Point 3 -->
+            <div class="pair-box">
+                <div class="en-text">In principle, there are two separate choices here, but in practice, ranked
+                    retrieval has normally been associated with free text queries and vice versa.</div>
+                <div class="ar-text">
+                    من الناحية النظرية، "طريقة البحث" و "طريقة كتابة السؤال" شيئين منفصلين، بس فعلياً وبالتطبيق العملي،
+                    الـ **Ranked Retrieval** دايماً مرتبط بالـ **Free Text Queries**؛ يعني الاثنين صاروا وجهين لعملة
+                    واحدة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Content: Solving Feast or Famine -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--primary);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>🛡️</span> 04. Feast or Famine: NOT a problem here!
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">When a system produces a ranked result set, large result sets are not an issue.
+                </div>
+                <div class="ar-text">
+                    لما السيستم يعطيك نتائج "مرتبة"، بطلت كثرة النتائج مشكلة! ليش؟
+                </div>
+            </div>
+
+            <!-- Solution Details -->
+            <div style="padding-right: 20px; border-right: 2px solid var(--border); margin: 15px 0;">
+                <div class="pair-box">
+                    <div class="en-text" style="font-size: 9pt;">Indeed, the size of the result set is not an issue. We
+                        just show the top k (≈ 10) results.</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        الحجم مش مهم، إحنا بس بنعرض للمستخدم أول <span
+                            style="color: var(--accent); font-weight: bold;">k</span> نتيجة (مثلاً أفضل 10 نتائج)،
+                        والباقي بكون موجود بس مش طاوش المتصفح فيهن.
+                    </div>
+                </div>
+
+                <div class="pair-box">
+                    <div class="en-text" style="font-size: 9pt;">We don’t overwhelm the user.</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        هيك إحنا بنحمي المستخدم من إنه "ينعجق" أو يغرق بآلاف المعلومات غير المفيدة.
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Big Premise -->
+            <div
+                style="background: rgba(52, 211, 153, 0.1); border-radius: 8px; padding: 15px; border: 1px solid var(--success);">
+                <div class="en-text" style="color: var(--success); font-weight: 800;">Premise: the ranking algorithm
+                    works.</div>
+                <div class="ar-text" style="font-weight: bold;">
+                    **الافتراض الأساسي:** طبعاً كل هاض
+                    الحكي بفترض إن "خوارزمية الترتيب" شاطرة وعارفة فعلاً شو هي أفضل
+                    النتائج عشان تحطها فوق.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 03</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 04: SCORING & JACCARD ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Scoring & Jaccard Coefficient</h1>
+        </header>
+
+        <!-- Slide Content: Scoring Basis -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>⚖️</span> 05. Scoring: The Basis of Ranking
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">We wish to return in order the documents most likely to be useful to the searcher.
+                </div>
+                <div class="ar-text">
+                    هدفنا الأساسي هو ترتيب الملفات حسب "منفعتها" للمستخدم؛ يعني اللي بيفيده أكثر بطلع فوق.
+                </div>
+            </div>
+
+            <div class="pair-box">
+                <div class="en-text" style="color: var(--danger);">How can we rank-order the documents in the collection
+                    with respect to a query?</div>
+                <div class="ar-text">
+                    **السؤال الجوهري:** كيف ممكن أرتب آلاف الملفات بالنسبة لسؤال (Query) معين؟ كيف أعرف مين أهم من مين؟
+                </div>
+            </div>
+
+            <div class="pair-box">
+                <div class="en-text">Assign a score – say in [0, 1] – to each document. This score measures how well
+                    document and query "match".</div>
+                <div class="ar-text">
+                    **الحل:** نعطي "علامة" (Score) لكل ملف، غالباً بتكون بين <span
+                        style="color: var(--accent); font-weight: bold;">0 و 1</span>. هاي العلامة هي مقياس لقديش الملف
+                    والـ Query "متطابقين" أو راكبين على بعض.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Content: Jaccard Coefficient -->
+        <div class="section-card" style="margin-top: 15px; border-right: 4px solid var(--accent);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--accent);">
+                <span>📏</span> 06. Take 1: Jaccard Coefficient
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">A common measure of overlap of two sets A and B.</div>
+                <div class="ar-text">
+                    أول فكرة لحساب العلامة هي "معامل جاكارد" (Jaccard)؛ وهو ببساطة بقيس "التداخل" أو "التشابه" بين
+                    مجموعتين.
+                </div>
+            </div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 12px; border: 1px solid var(--accent); margin: 15px 0; text-align: center;">
+                <div
+                    style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 14pt; font-weight: bold; direction: ltr;">
+                    jaccard(A, B) = |A ∩ B| / |A ∪ B|
+                </div>
+                <div style="color: var(--text-muted); font-size: 9pt; margin-top: 10px; font-family: 'Cairo';">
+                    (التقاطع ÷ الاتحاد) = (المشترك ÷ كل العناصر بدون تكرار)
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div
+                    style="background: rgba(30, 41, 59, 0.5); padding: 10px; border-radius: 8px; font-size: 9pt; direction: ltr; text-align: left;">
+                    <span style="color: var(--success);">✔</span> jaccard(A, A) = 1 <span
+                        style="color: var(--text-muted);">(Match 100%)</span>
+                </div>
+                <div
+                    style="background: rgba(30, 41, 59, 0.5); padding: 10px; border-radius: 8px; font-size: 9pt; direction: ltr; text-align: left;">
+                    <span style="color: var(--danger);">✘</span> jaccard(A, B) = 0 if A ∩ B = 0
+                </div>
+            </div>
+
+            <div class="ar-text" style="font-size: 9.5pt; margin-top: 15px;">
+                <span style="color: var(--primary);">📍</span> ملاحظة: المجموعات مش شرط تكون بنفس الحجم، والنتيجة دايماً
+                بتطلع رقم بين 0 و 1.
+            </div>
+        </div>
+
+        <!-- Scoring Example -->
+        <div class="section-card" style="margin-top: 15px; background: rgba(56, 189, 248, 0.05);">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📝</span> Example: Computing Jaccard Score
+            </h2>
+
+            <div
+                style="font-family: 'JetBrains Mono'; font-size: 10pt; background: #000; padding: 15px; border-radius: 10px; margin-bottom: 15px; direction: ltr; text-align: left;">
+                <span style="color: var(--accent);">Query:</span> ides of march <br>
+                <span style="color: var(--primary);">Document 1:</span> caesar died in march <br>
+                <span style="color: var(--primary);">Document 2:</span> the long march
+            </div>
+
+            <div style="border-right: 4px solid var(--primary); padding-right: 15px;">
+                <div class="ar-text" style="font-weight: bold; color: var(--primary);">خلينا نحسبها مع بعض:</div>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    - **للملف الأول:** المشترك بس كلمة واحدة (march). المجموع الكلي للكلمات الفريدة هو (ides, of, march,
+                    caesar, died, in) يعني 6 كلمات.
+                    <br>النتيجة: <span style="color: var(--accent); font-weight: 800;">1 / 6 = 0.166</span>
+                    <br><br>
+                    - **للملف الثاني:** المشترك برضو بس (march). المجموع الكلي هو (ides, of, march, the, long) يعني 5
+                    كلمات.
+                    <br>النتيجة: <span style="color: var(--accent); font-weight: 800;">1 / 5 = 0.2</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--danger);">
+
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--danger);">
+                <span>⚠️</span> 07. Issues with Jaccard for scoring
+            </h2>
+
+            <!-- Problem 1 -->
+            <div class="pair-box">
+                <div class="en-text">It doesn’t consider term frequency (how many times a term occurs in a
+                    document).
+                </div>
+                <div class="ar-text">
+                    **مشكلة التكرار:** جاكارد ما بهمه قديش تكررت الكلمة؛ يعني لو ملف فيه كلمة "march" مرة واحدة،
+                    وملف
+                    ثاني فيه كلمة "march" مية مرة، جاكارد بعطيهن نفس الأهمية (لأنه بشوف بس هي موجودة أو لأ).
+                </div>
+            </div>
+
+            <!-- Problem 2 -->
+            <div class="pair-box">
+                <div class="en-text">Rare terms in a collection are more informative than frequent terms. Jaccard
+                    doesn’t consider this information.</div>
+                <div class="ar-text">
+                    **مشكلة الكلمات النادرة:** بالمنطق، الكلمة النادرة (زي "ides") بتدل على موضوع الملف أكثر من
+                    الكلمات
+                    العامة (زي "in"). جاكارد ما عنده "ميزان" يفرق بينهم؛ الكل عنده سواسية.
+                </div>
+            </div>
+
+            <!-- Problem 3 -->
+            <div class="pair-box">
+                <div class="en-text">We need a more sophisticated way of normalizing for length.</div>
+                <div class="ar-text">
+                    **مشكلة طول الملف:** إحنا محتاجين طريقة أذكى وأكثر تعقيداً عشان "نوازن" بين الملفات الطويلة
+                    والقصيرة
+                    (Normalizing for length)، مش بس قسمة بسيطة على الاتحاد.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Content: Query-document matching scores -->
+        <div class="section-card" style="margin-top: 20px; border-right: 4px solid var(--primary);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>🎯</span> 08. Towards better Scoring (One-term query)
+            </h2>
+
+            <div class="pair-box">
+                <div class="ar-text" style="font-weight: bold; margin-bottom: 10px;">
+                    لحتى نلاقي حل أحسن، خلينا نفكر ببحث بكلمة واحدة (One-term query) ونحدد شروطنا:
+                </div>
+            </div>
+
+            <!-- Rule 1 -->
+            <div
+                style="background: rgba(15, 23, 42, 0.5); padding: 15px; border-radius: 10px; border-left: 4px solid var(--border); margin-bottom: 15px;">
+                <div class="en-text"
+                    style="font-size: 9.5pt; direction: ltr; text-align: left; background: none; border: none; padding: 0;">
+                    1. If the query term does not occur in the document: <span style="color: var(--danger);">score
+                        should be 0</span>
+                </div>
+                <div class="ar-text" style="font-size: 9pt; color: var(--text-muted);">
+                    منطقياً، إذا الكلمة مش موجودة أبداً بالملف، علامته لازم تكون "صفر".
+                </div>
+            </div>
+
+            <!-- Rule 2 -->
+            <div
+                style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary); margin-bottom: 15px;">
+                <div class="en-text"
+                    style="font-size: 9.5pt; direction: ltr; text-align: left; background: none; border: none; padding: 0; color: var(--primary);">
+                    2. The more frequent the query term in the document, the higher the score (should be).
+                </div>
+                <div class="ar-text" style="font-size: 9pt;">
+                    كل ما تكررت الكلمة أكثر، لازم علامة الملف "ترتفع". هاد هو أساس الـ **Term Frequency** اللي رح
+                    ندرسه.
+                </div>
+            </div>
+
+            <div class="pair-box" style="margin-top: 10px;">
+                <div class="en-text">We will look at a number of alternatives for this.</div>
+                <div class="ar-text">
+                    عشان نحقق هاي الشروط، رح ندرس كذا طريقة بديلة عن جاكارد تكون أعدل وأدق.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 05</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 06: INCIDENCE vs COUNT MATRICES ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">From Binary to Counts</h1>
+        </header>
+
+        <!-- Recall Section: Binary Matrix -->
+        <div class="section-card"
+            style="border-right: 4px solid var(--text-muted); background: rgba(148, 163, 184, 0.05);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--text-muted);">
+                <span>🔄</span> Recall: Binary Term-Document Matrix
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Each document is represented by a binary vector ∈ {0, 1}^|V|</div>
+                <div class="ar-text">
+                    تذكروا من الشباتر الماضية، كنا نمثل كل ملف كـ **Binary Vector** (سهم من الأصفار والوحدات). يا
+                    الكلمة
+                    موجودة (1) يا مش موجودة (0).
+                </div>
+            </div>
+
+            <!-- Binary Table -->
+            <div style="overflow-x: auto; margin: 15px 0;">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 8pt; text-align: center;">
+                    <thead>
+                        <tr style="color: var(--primary); border-bottom: 2px solid var(--border);">
+                            <th style="text-align: left; padding: 8px;">Term</th>
+                            <th>Antony & Cleo</th>
+                            <th>Julius Caesar</th>
+                            <th>The Tempest</th>
+                            <th>Hamlet</th>
+                            <th>Othello</th>
+                            <th>Macbeth</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Antony</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Brutus</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Caesar</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Calpurnia</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Cleopatra</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">mercy</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">worser</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- New Section: Count Matrices -->
+        <div class="section-card" style="margin-top: 20px; border-top: 4px solid var(--success);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--success);">
+                <span>📊</span> Evolution: Term-Document Count Matrices
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Consider the number of occurrences of a term in a document. Each document is a
+                    count vector.</div>
+                <div class="ar-text">
+                    التطور الجديد: بدل ما نسجل بس "موجود أو لأ"، صرنا نسجل **عدد تكرارات** الكلمة (Count). هيك الملف
+                    بصير عبارة عن **Count Vector**.
+                </div>
+            </div>
+
+            <!-- Count Table -->
+            <div style="overflow-x: auto; margin: 15px 0;">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 8.5pt; text-align: center;">
+                    <thead>
+                        <tr style="color: var(--primary); border-bottom: 2px solid var(--border);">
+                            <th style="text-align: left; padding: 8px;">Term</th>
+                            <th>Antony & Cleo</th>
+                            <th
+                                style="background: rgba(56, 189, 248, 0.1); border: 2px solid var(--primary); border-bottom: none;">
+                                Julius Caesar</th>
+                            <th>The Tempest</th>
+                            <th>Hamlet</th>
+                            <th>Othello</th>
+                            <th>Macbeth</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Antony</td>
+                            <td>157</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                73</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Brutus</td>
+                            <td>4</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                157</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Caesar</td>
+                            <td>232</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                227</td>
+                            <td>0</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Calpurnia</td>
+                            <td>0</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                10</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">Cleopatra</td>
+                            <td>57</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">mercy</td>
+                            <td>2</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                0</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>1</td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid var(--primary);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">worser</td>
+                            <td>2</td>
+                            <td
+                                style="background: rgba(56, 189, 248, 0.05); border-left: 2px solid var(--primary); border-right: 2px solid var(--primary);">
+                                0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ar-text"
+                style="font-size: 10pt; background: rgba(52, 211, 153, 0.05); padding: 12px; border-radius: 8px; border-right: 4px solid var(--success);">
+                هون بلشنا الجد! الملف بطل مجرد "وحدات وأصفار"، صار اله **شخصية** بناءً على تكرار كل كلمة فيه.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 06</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 07: BAG OF WORDS & LOG WEIGHTING ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Bag of Words & weighting</h1>
+        </header>
+
+        <!-- Bag of Words Model -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>👜</span> 09. Bag of words model
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Vector representation doesn’t consider the ordering of words in a document.
+                </div>
+                <div class="ar-text">
+                    بنموذج الـ **Vectors**، إحنا ما بنهتم بترتيب الكلمات بالملف. الملف بالنسبة إلنا "كيس" كلمات!
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(251, 113, 133, 0.05); padding: 15px; border-radius: 10px; border: 1px solid var(--danger); margin: 15px 0;">
+                <div class="en-text"
+                    style="font-family: 'JetBrains Mono'; color: white; font-size: 9pt; direction: ltr; text-align: left; margin-bottom: 8px;">
+                    "John is quicker than Mary" <br>
+                    "Mary is quicker than John"
+                </div>
+                <div class="ar-text" style="font-size: 9.5pt; color: var(--danger); font-weight: bold;">
+                    الجملتين هذول الهن نفس الـ Vector بالظبط!
+                </div>
+                <div class="ar-text" style="font-size: 9pt; color: var(--text-muted); margin-top: 5px;">
+                    لأن الكلمات المكررة هي نفسها، وبما إننا أهملنا الترتيب، السيستم بشوفهم توأم.
+                </div>
+            </div>
+
+            <div class="pair-box" style="border-right: 4px solid var(--accent); padding-right: 15px;">
+                <div class="en-text" style="font-size: 9pt;">This is a step back: The positional index was able to
+                    distinguish these two documents.</div>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    **ملاحظة ذكية:** هاي تعتبر "خطوة لورا"؛ لأن الـ **Positional Index** اللي درسناه زمان كان بقدر
+                    يفرق
+                    بينهم، بس هون خسرنا هاي الميزة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Term Frequency -->
+        <div class="section-card" style="margin-top: 15px;">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>🔢</span> 10. Term frequency (tf)
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">The term frequency tf_{t,d} of term t in document d is defined as the number of
+                    times that t occurs in d.</div>
+                <div class="ar-text">
+                    الـ **tf** هو ببساطة عدد مرات ظهور كلمة (t) في ملف (d).
+                    <br><small style="color: var(--accent);">(بمجال الـ IR، كلمة Frequency معناها Count - يعني
+                        "عدَد" مش
+                        "تردّد").</small>
+                </div>
+            </div>
+
+            <div style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 12px; margin-top: 10px;">
+                <div class="en-text" style="font-weight: bold; color: var(--primary);">Raw term frequency is not
+                    what we
+                    want:</div>
+                <div class="ar-text" style="font-size: 10pt; margin-top: 5px;">
+                    العدد الخام (Raw count) مش دايماً بكون عادل.
+                    <br>• ملف فيه الكلمة 10 مرات **أهم** من ملف فيه الكلمة مرة وحدة.
+                    <br>• بس هل هو أهم بـ **10 أضعاف**؟ <span style="color: var(--danger); font-weight: bold;">أكيد
+                        لأ!</span>
+                </div>
+                <div class="ar-text" style="font-weight: bold; margin-top: 10px; color: var(--accent);">
+                    Relevance does not increase proportionally with tf.
+                </div>
+            </div>
+        </div>
+
+        <!-- Log-frequency Weighting -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--success);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--success);">
+                <span>📈</span> 11. Log-frequency weighting
+            </h2>
+
+            <div class="ar-text" style="margin-bottom: 15px; font-weight: bold;">
+                عشان نحل مشكلة الزيادة الكبيرة، بنستخدم الـ **Log** عشان "نهدّي" الأرقام:
+            </div>
+
+            <!-- Formula -->
+            <div
+                style="background: black; padding: 20px; border-radius: 15px; border: 1px solid var(--success); text-align: center; margin-bottom: 15px;">
+                <div style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 16pt; direction: ltr;">
+                    w<sub>t,d</sub> = 1 + log<sub>10</sub> tf<sub>t,d</sub> <span
+                        style="color: var(--text-muted); font-size: 10pt;">(if tf > 0)</span>
+                </div>
+            </div>
+
+            <!-- Scaling Example -->
+            <div
+                style="display: flex; justify-content: space-around; font-family: 'JetBrains Mono'; font-size: 10pt; color: var(--accent); direction: ltr; margin-top: 10px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px;">
+                <span style="direction: ltr;">tf=1 ➔ w=1</span>
+                <span style="direction: ltr;">tf=2 ➔ w=1.3</span>
+                <span style="direction: ltr;">tf=10 ➔ w=2</span>
+                <span style="direction: ltr;">tf=1000 ➔ w=4</span>
+            </div>
+
+            <!-- Scoring Summation -->
+            <div style="margin-top: 20px; border-right: 4px solid var(--primary); padding-right: 15px;">
+                <div class="en-text" style="font-weight: 800; color: var(--primary);">Score = ∑_{t∈q∩d} (1 + log
+                    tf_{t,d})</div>
+                <div class="ar-text" style="font-size: 9.5pt; margin-top: 5px;">
+                    العلامة النهائية للملف هي **مجموع** أوزان الكلمات المشتركة بينه وبين السؤال.
+                    <br><span style="color: var(--danger);">*</span> إذا ما في ولا كلمة مشتركة، العلامة بتخلص بـ
+                    **صفر**.
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 07 & 08 CONSOLIDATED -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--primary);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                📊 Rare Terms & idf weighting (Continued)
+            </h2>
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>💎</span> 12. Rare terms are more informative
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Rare terms are more informative than frequent terms.</div>
+                <div class="ar-text">
+                    الكلمات النادرة دايماً بتعطي معلومة أدق عن محتوى الملف. تذكروا الـ **Stop words** (زي "the",
+                    "a")؛
+                    هاي موجودة بكل مكان وما بتفيدنا بالتمييز.
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(139, 92, 246, 0.05); padding: 15px; border-radius: 12px; border-left: 4px solid #8b5cf6; margin: 15px 0;">
+                <div class="en-text" style="font-style: italic; color: #a78bfa; direction: ltr; text-align: left;">
+                    "Consider a term like **arachnocentric**..."
+                </div>
+                <div class="ar-text" style="font-size: 10pt; margin-top: 5px;">
+                    لو دورت على كلمة غريبة زي "arachnocentric" (اللي بتخص العناكب)، ولقيتها في ملف، فبنسبة **100%**
+                    هاد
+                    الملف اله علاقة بموضوعك.
+                </div>
+                <div class="ar-text" style="font-weight: bold; margin-top: 10px; color: var(--accent);">
+                    We want a high weight for rare terms.
+                </div>
+            </div>
+        </div>
+
+        <!-- Collection vs Document Frequency -->
+        <div class="section-card" style="margin-top: 15px;">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>📊</span> 13. Collection vs. Document frequency
+            </h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                <div
+                    style="background: rgba(15, 23, 42, 0.5); padding: 12px; border-radius: 10px; border-bottom: 3px solid var(--accent);">
+                    <div
+                        style="color: var(--accent); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                        Collection Frequency (cf)</div>
+                    <div class="ar-text" style="font-size: 9pt; margin-top: 5px;">مجموع تكرار الكلمة في كل المكتبة
+                        (ظهورها الإجمالي).</div>
+                </div>
+                <div
+                    style="background: rgba(15, 23, 42, 0.5); padding: 12px; border-radius: 10px; border-bottom: 3px solid var(--success);">
+                    <div
+                        style="color: var(--success); font-weight: bold; font-size: 9pt; direction: ltr; text-align: left;">
+                        Document Frequency (df)</div>
+                    <div class="ar-text" style="font-size: 9pt; margin-top: 5px;">عدد الملفات اللي ظهرت فيها الكلمة
+                        (لو
+                        مرة وحدة).</div>
+                </div>
+            </div>
+
+            <!-- Frequency Table -->
+            <div style="overflow-x: auto; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; text-align: center; font-size: 9pt;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border); color: var(--primary);">
+                            <th style="text-align: left; padding: 10px;">Word</th>
+                            <th>Collection freq (cf)</th>
+                            <th>Document freq (df)</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 10px; font-style: italic;">insurance</td>
+                            <td>10440</td>
+                            <td style="color: var(--accent); font-weight: 800;">3997</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 10px; font-style: italic;">try</td>
+                            <td>10422</td>
+                            <td style="color: var(--danger);">8760</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ar-text"
+                style="margin-top: 15px; font-size: 10pt; background: rgba(56, 189, 248, 0.05); padding: 10px; border-radius: 8px;">
+                <span style="color: var(--primary);">🤔</span> **مين أحسن للبحث؟** كلمة (insurance) مجموعها زي (try)
+                تقريباً، بس هي موجودة بملفات **أقل** (df أصغر)، يعني هي نادرة أكثر وبتعطي وزن أعلى!
+            </div>
+        </div>
+
+        <!-- IDF Weight -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--success);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--success);">
+                <span>⚖️</span> 14. idf weight (The Inverse Logic)
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">df_t is an inverse measure of the informativeness of t.</div>
+                <div class="ar-text">
+                    الـ **df** هو مقياس عكسي للأهمية؛ كل ما قل عدد الملفات اللي فيها الكلمة، زادت أهميتها.
+                </div>
+            </div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: black; padding: 25px; border-radius: 15px; border: 1px solid var(--success); text-align: center; margin: 15px 0;">
+                <div style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 18pt; direction: ltr;">
+                    idf<sub>t</sub> = log<sub>10</sub>(N / df<sub>t</sub>)
+                </div>
+                <div style="color: var(--text-muted); font-size: 9pt; margin-top: 10px;">
+                    N = Total number of documents in collection
+                </div>
+            </div>
+
+            <div class="pair-box" style="border-right: 4px solid var(--accent); padding-right: 15px;">
+                <div class="en-text">We use log(N/df_t) instead of N/df_t to “dampen” the effect of idf.</div>
+                <div class="ar-text">
+                    ليش استخدمنا **log**؟ عشان "نهدّي" (Dampen) التأثير الناتج عن القسمة، وما يعطي وزن "انفجاري"
+                    للكلمات
+                    شديدة الندرة.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 08</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 09: IDF EXAMPLE & TF-IDF ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">IDF in Action & TF-IDF</h1>
+        </header>
+
+        <!-- IDF Example Table -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🔢</span> 15. idf example (Suppose N = 1,000,000)
+            </h2>
+
+            <div class="ar-text" style="margin-bottom: 15px;">
+                لو افترضنا إن مكتبتنا فيها **مليون ملف** (N = 10<sup>6</sup>)، شوف كيف الـ **idf** بيتغير حسب ندرة
+                الكلمة:
+            </div>
+
+            <div
+                style="overflow-x: auto; background: rgba(15, 23, 42, 0.4); border-radius: 12px; padding: 10px; border: 1px solid var(--border);">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 9pt;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--primary); color: var(--primary);">
+                            <th style="text-align: left; padding: 12px;">Term</th>
+                            <th>df<sub>t</sub></th>
+                            <th>idf<sub>t</sub></th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 10px; color: var(--accent);">calpurnia</td>
+                            <td>1</td>
+                            <td style="color: var(--success); font-weight: bold;">6</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 10px; color: var(--accent);">animal</td>
+                            <td>100</td>
+                            <td style="color: var(--success); font-weight: bold;">4</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 10px; color: var(--accent);">sunday</td>
+                            <td>1,000</td>
+                            <td style="color: var(--success); font-weight: bold;">3</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 10px; color: var(--accent);">fly</td>
+                            <td>10,000</td>
+                            <td style="color: var(--success); font-weight: bold;">2</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 10px; color: var(--accent);">under</td>
+                            <td>100,000</td>
+                            <td style="color: var(--success); font-weight: bold;">1</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 10px; color: var(--accent);">the</td>
+                            <td>1,000,000</td>
+                            <td style="color: var(--danger); font-weight: bold;">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ar-text" style="font-size: 9.5pt; margin-top: 15px; color: var(--text-muted);">
+                <span style="color: var(--success);">✔</span> لاحظ: كلمة "the" موجودة بكل الملفات، فصار الـ **idf**
+                تبعها صفر (يعني ما الها قيمة بالتمييز).
+            </div>
+        </div>
+
+        <!-- Effect of IDF on Ranking -->
+        <div class="section-card" style="margin-top: 15px; border-left: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>🎯</span> 16. Effect of idf on ranking
+            </h2>
+
+            <!-- Scenario 1 -->
+            <div style="background: rgba(251, 113, 133, 0.05); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                <div class="en-text" style="font-weight: bold; color: var(--danger);">One-term queries (e.g.,
+                    "iPhone")
+                </div>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    الـ **idf** ما بياثر على ترتيب النتائج لو كنت بتبحث عن **كلمة واحدة**. ليش؟ لأن العلامة رح تنضرب
+                    بنفس الرقم لكل الملفات، فالتريب بضل زي ما هو.
+                </div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div style="background: rgba(52, 211, 153, 0.05); padding: 12px; border-radius: 8px;">
+                <div class="en-text" style="font-weight: bold; color: var(--success);">Multi-term queries (e.g.,
+                    "capricious person")</div>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    هون الـ **idf** بطل الدوري! كلمة "capricious" نادرة جداً مقارنة بكلمة "person".
+                    <br>السيستم رح يعطي وزن "مرعب" لكلمة **capricious** وبخليها هي المتحكمة بالترتيب، لأنها هي اللي
+                    بتميز الملف فعلاً.
+                </div>
+            </div>
+        </div>
+
+        <!-- TF-IDF Weighting -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--accent);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--accent);">
+                <span>🚀</span> 17. The Legendary: tf-idf weighting
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">The tf-idf weight of a term is the product of its tf weight and its idf weight.
+                </div>
+                <div class="ar-text">
+                    وصلنا لأشهر نظام أوزان في تاريخ البحث: هو ببساطة حاصل **ضرب** وزن الـ **tf** في وزن الـ **idf**.
+                </div>
+            </div>
+
+            <!-- Global Formula -->
+            <div
+                style="background: black; padding: 25px; border-radius: 15px; border: 2px solid var(--accent); text-align: center; margin: 15px 0;">
+                <div style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 16pt; direction: ltr;">
+                    w<sub>t,d</sub> = (1 + log tf<sub>t,d</sub>) × log<sub>10</sub>(N / df<sub>t</sub>)
+                </div>
+            </div>
+
+            <div class="ar-text"
+                style="font-size: 10pt; background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 8px;">
+                <span style="color: var(--primary);">⭐</span> **ليش هو الأفضل؟**
+                <br>1. بزيد كل ما زاد تكرار الكلمة في الملف (tf).
+                <br>2. بزيد كل ما كانت الكلمة "نادرة" في كل المكتبة (idf).
+            </div>
+        </div>
+
+        <!-- PAGE 09 & 10 CONSOLIDATED -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--accent);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--accent);">
+                📈 Scoring & Weight Matrices (Continued)
+            </h2>
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🎯</span> 18. Score for a document given a query
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Score(q,d) is the sum over terms t in both q and d.</div>
+                <div class="ar-text">
+                    العلامة النهائية للملف (d) مقارنة بالسؤال (q) هي حاصل **مجموع** أوزان الـ tf-idf لكل الكلمات
+                    المشتركة بينهم.
+                </div>
+            </div>
+
+            <!-- Summation Formula -->
+            <div
+                style="background: black; padding: 25px; border-radius: 15px; border: 1px solid var(--success); text-align: center; margin: 15px 0;">
+                <div style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 20pt; direction: ltr;">
+                    Score(q,d) = ∑<sub>t∈q∩d</sub> tf.idf<sub>t,d</sub>
+                </div>
+            </div>
+
+            <div class="ar-text"
+                style="font-size: 9.5pt; border-right: 4px solid var(--accent); padding-right: 12px; margin-top: 15px;">
+                <span style="font-weight: bold; color: var(--accent);">ملاحظة:</span> هناك أنواع (Variants) كثيرة
+                لحساب
+                الـ tf-idf، بتعتمد على:
+                <br>• هل استخدمنا الـ **Log** في حساب الـ tf؟
+                <br>• هل أعطينا أوزان للكلمات اللي في السؤال (Query) نفسه؟
+            </div>
+        </div>
+
+        <!-- Weight Matrix -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--primary);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>🧱</span> 19. Binary ➔ Count ➔ Weight Matrix
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Each document is now represented by a real-valued vector of tf-idf weights ∈
+                    R^|V|.
+                </div>
+                <div class="ar-text">
+                    هون وصلنا للمرحلة النهائية في تمثيل البيانات: بطلت مصفوفة أصفار ووحدات، وصارت مصفوفة **أرقام
+                    حقيقية
+                    (Weights)** بتعبر عن قوة كل كلمة في كل ملف.
+                </div>
+            </div>
+
+            <!-- Weight Table -->
+            <div
+                style="overflow-x: auto; margin: 15px 0; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px;">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 8pt; text-align: center;">
+                    <thead>
+                        <tr style="color: var(--primary); border-bottom: 2px solid var(--border);">
+                            <th style="padding: 10px; text-align: left;">Term</th>
+                            <th>Antony & Cleo</th>
+                            <th>Julius Caesar</th>
+                            <th>The Tempest</th>
+                            <th>Hamlet</th>
+                            <th>Othello</th>
+                            <th>Macbeth</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                Antony
+                            </td>
+                            <td>5.25</td>
+                            <td>3.18</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0.35</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                Brutus
+                            </td>
+                            <td>1.21</td>
+                            <td>6.1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                Caesar
+                            </td>
+                            <td>8.59</td>
+                            <td>2.54</td>
+                            <td>0</td>
+                            <td>1.51</td>
+                            <td>0.25</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                Calpurnia</td>
+                            <td>0</td>
+                            <td>1.54</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                Cleopatra</td>
+                            <td>2.85</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                mercy
+                            </td>
+                            <td>1.51</td>
+                            <td>0</td>
+                            <td>1.9</td>
+                            <td>0.12</td>
+                            <td>5.25</td>
+                            <td>0.88</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 8px; color: var(--accent); font-weight: bold;">
+                                worser
+                            </td>
+                            <td>1.37</td>
+                            <td>0</td>
+                            <td>0.11</td>
+                            <td>4.15</td>
+                            <td>0.25</td>
+                            <td>1.95</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ar-text"
+                style="background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 10pt;">
+                <span style="color: var(--primary);">💡</span> **الزبدة:** كل ملف صار عبارة عن سهم (Vector) من
+                الأرقام
+                الحقيقية في فضاء كبير جداً (R<sup>|V|</sup>). هاي هي نواة الـ **Vector Space Model**.
+            </div>
+        </div>
+
+        <!-- CONSOLIDATED SECTION: VECTORS & GEOMETRY -->
+        <h2 class="section-title"
+            style="direction: ltr; text-align: left; color: var(--primary); margin-top: 20px; border-top: 2px solid var(--border); padding-top: 15px;">
+            📐 Documents & Queries as Vectors
+        </h2>
+
+        <!-- Documents as Vectors -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🚀</span> 20. Documents as vectors
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">Standard representation: |V|-dimensional vector space. Terms are axes of the
+                    space.
+                </div>
+                <div class="ar-text">
+                    تخيل معي إن كل كلمة في اللغة هي **محور (Axis)** في فضاء ضخم جداً. الملف هون بصير عبارة عن **سهم
+                    أو
+                    نقطة** في هاض الفضاء.
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <div
+                    style="flex: 1; background: rgba(251, 113, 133, 0.05); padding: 12px; border-radius: 10px; border-bottom: 3px solid var(--danger);">
+                    <div style="color: var(--danger); font-weight: bold; font-size: 9pt;">High-dimensional</div>
+                    <div class="ar-text" style="font-size: 9pt; margin-top: 5px;">أبعاد خيالية! بمحركات البحث مثل
+                        Google، بنحكي عن **ملايين الأبعاد** (بعدد الكلمات).</div>
+                </div>
+                <div
+                    style="flex: 1; background: rgba(52, 211, 153, 0.05); padding: 12px; border-radius: 10px; border-bottom: 3px solid var(--success);">
+                    <div style="color: var(--success); font-weight: bold; font-size: 9pt;">Very Sparse</div>
+                    <div class="ar-text" style="font-size: 9pt; margin-top: 5px;">المتجهات "فاضية" (**Sparse**)؛ لأن
+                        الملف الواحد فيه كلمات معدودة مقارنة بملايين الكلمات باللغة.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Queries as Vectors -->
+        <div class="section-card"
+            style="margin-top: 20px; border: 2px solid var(--primary); background: rgba(56, 189, 248, 0.02);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>🔍</span> 21. Queries as vectors
+            </h2>
+
+            <!-- Key Idea 1 -->
+            <div class="pair-box"
+                style="background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                <div class="en-text" style="font-weight: bold; color: var(--primary);">Key idea 1: Do the same for
+                    queries: represent them as vectors in the space.</div>
+                <div class="ar-text" style="font-size: 10pt;">
+                    **الفكرة الجوهرية الأولى:** ليش ما نعامل "السؤال" زي ما بنعامل "الملف"؟
+                    <br>بنمثل السؤال بـ **Vector** (سهم) في نفس الفضاء اللي فيه الملفات. هيك بصير السؤال "نقطة"
+                    والمطالبة "نقطة" ثانية.
+                </div>
+            </div>
+
+            <!-- Key Idea 2 -->
+            <div class="pair-box"
+                style="background: rgba(52, 211, 153, 0.05); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                <div class="en-text" style="font-weight: bold; color: var(--success);">Key idea 2: Rank documents
+                    according to their proximity to the query in this space.</div>
+                <div class="ar-text" style="font-size: 10pt;">
+                    **الفكرة الجوهرية الثانية:** ترتيب الملفات (Ranking) بصير حسب **قربها** من سهم السؤال.
+                    <br>الملف اللي "سهمه" قريب من "سهم" سؤالك، هو اللي بطلعلك أول واحد.
+                </div>
+            </div>
+
+            <!-- Proximity Definitions -->
+            <div
+                style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 12px; border-right: 4px solid var(--accent);">
+                <div class="pair-box"
+                    style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
+                    <div class="en-text" style="font-family: 'JetBrains Mono'; color: var(--accent);">proximity =
+                        similarity of vectors</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">الـ **Proximity** (القرب) هون هو نفسه الـ
+                        **Similarity** (التشابه) بين المتجهات.</div>
+                </div>
+                <div class="pair-box">
+                    <div class="en-text" style="font-family: 'JetBrains Mono'; color: var(--accent);">proximity ≈
+                        inverse of distance</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">قاعدة عامة: القرب هو "عكس" المسافة؛ كل ما زاد
+                        القرب،
+                        قلّت المسافة والعكس صحيح.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONSOLIDATED SECTION: DISTANCE -->
+        <h2 class="section-title"
+            style="direction: ltr; text-align: left; color: var(--danger); margin-top: 20px; border-top: 2px solid var(--border); padding-top: 15px;">
+            📏 Proximity & Distance Problems
+        </h2>
+
+        <!-- Formalizing Proximity -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📏</span> 22. Formalizing vector space proximity
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">First cut: Euclidean distance?</div>
+                <div class="ar-text">
+                    لأول وهلة، شو أسهل طريقة نقيس فيها القرب؟ إننا نحسب **المسافة الإقليدية (Euclidean Distance)**
+                    بين
+                    رؤوس الأسهم.
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(251, 113, 133, 0.05); border: 2px solid var(--danger); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <div
+                    style="color: var(--danger); font-size: 14pt; font-weight: 800; text-align: center; margin-bottom: 15px;">
+                    Why Euclidean Distance is a BAD Idea?</div>
+
+                <!-- SVG Illustration -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 12px; margin: 15px 0; display: flex; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                    <svg width="320" height="280" viewBox="0 0 320 280">
+                        <!-- Grid Lines -->
+                        <line x1="40" y1="40" x2="40" y2="240" stroke="#334155" stroke-width="1" />
+                        <line x1="40" y1="240" x2="240" y2="240" stroke="#334155" stroke-width="1" />
+                        <line x1="240" y1="40" x2="240" y2="240" stroke="#334155" stroke-width="1" />
+                        <line x1="40" y1="40" x2="240" y2="40" stroke="#334155" stroke-width="1" />
+
+                        <!-- Axes Labels -->
+                        <text x="5" y="30" fill="var(--text-muted)" font-family="Inter" font-size="12">GOSSIP</text>
+                        <text x="245" y="255" fill="var(--text-muted)" font-family="Inter" font-size="12">JEALOUS</text>
+
+                        <!-- Vector d1 -->
+                        <line x1="40" y1="240" x2="60" y2="60" stroke="#94a3b8" stroke-width="2"
+                            stroke-dasharray="2,2" />
+                        <polygon points="60,60 55,70 65,70" fill="#94a3b8" />
+                        <text x="65" y="60" fill="#94a3b8" font-family="Inter" font-size="12">d1</text>
+
+                        <!-- Vector d3 -->
+                        <line x1="40" y1="240" x2="220" y2="230" stroke="#94a3b8" stroke-width="2"
+                            stroke-dasharray="2,2" />
+                        <polygon points="220,230 210,235 210,225" fill="#94a3b8" />
+                        <text x="225" y="235" fill="#94a3b8" font-family="Inter" font-size="12">d3</text>
+
+                        <!-- Vector q -->
+                        <line x1="40" y1="240" x2="160" y2="120" stroke="var(--primary)" stroke-width="3" />
+                        <polygon points="160,120 150,125 155,115" fill="var(--primary)" />
+                        <text x="165" y="115" fill="var(--primary)" font-family="Inter" font-weight="bold"
+                            font-size="14">q</text>
+
+                        <!-- Vector d2 -->
+                        <line x1="40" y1="240" x2="280" y2="60" stroke="var(--success)" stroke-width="3" />
+                        <polygon points="280,60 270,68 275,55" fill="var(--success)" />
+                        <text x="285" y="55" fill="var(--success)" font-family="Inter" font-weight="bold"
+                            font-size="14">d2</text>
+
+                        <!-- Distance Indication -->
+                        <path d="M160,120 L280,60" fill="none" stroke="var(--danger)" stroke-width="2"
+                            stroke-dasharray="4,4" />
+                        <text x="180" y="80" fill="var(--danger)" font-family="Inter" font-size="10"
+                            transform="rotate(-25, 180, 80)">Large Distance!</text>
+
+                        <!-- Origin 0 -->
+                        <text x="25" y="255" fill="var(--text-muted)" font-family="Inter" font-size="12">0</text>
+                    </svg>
+                </div>
+
+                <div class="pair-box" style="margin-bottom: 15px;">
+                    <div class="en-text" style="font-weight: bold; color: white;">The case of Query (q) and Document
+                        (d2):</div>
+                    <div class="ar-text" style="font-size: 10pt;">
+                        تخيل لو كان عندنا سؤال (**q**) وملف (**d2**) بيحكوا عن نفس المواضيع بالظبط (مثلاً العناكب).
+                    </div>
+                </div>
+
+                <div
+                    style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; border-right: 4px solid var(--accent); margin-bottom: 15px;">
+                    <div class="en-text" style="font-size: 9.5pt; line-height: 1.4;">
+                        The Euclidean distance between <span style="color: var(--primary);">q</span> and <span
+                            style="color: var(--success);">d<sub>2</sub></span> is **large**, even though the
+                        distribution of terms in the query <span style="color: var(--primary);">q</span> and the
+                        distribution of terms in the document <span style="color: var(--success);">d<sub>2</sub></span>
+                        are **very similar**.
+                    </div>
+                </div>
+
+                <div class="ar-text" style="font-size: 10pt; line-height: 1.6;">
+                    <span style="color: var(--danger); font-weight: bold;">المشكلة:</span>
+                    لأن الملف (**d2**) طويل جداً (فيه تكرار كبير للكلمات)، سهمه بكون "طويل كثير" وطالع لبره.
+                    بينما السؤال (**q**) بكون سهمه "قصير".
+                    <br>النتيجة؟ المسافة بين "راس" سهم q و "راس" سهم d2 رح تطلع **كبيرة جداً**، والسيستم رح يحكيلك
+                    "هذول
+                    ما الهم دخل ببعض" مع إنهم توأم في المحتوى!
+                </div>
+            </div>
+
+            <!-- Summary Note -->
+            <div
+                style="margin-top: 20px; border: 1px dashed var(--primary); padding: 15px; border-radius: 10px; background: rgba(56, 189, 248, 0.02);">
+                <div class="ar-text" style="font-size: 10pt;">
+                    <span style="color: var(--primary); font-weight: bold;">📢 الزبدة من السلايد:</span>
+                    المسافة الإقليدية بتعتمد على **طول المتجه** (كمية الكلمات)، وإحنا بدنا شي يعتمد على **اتجاه
+                    المتجه**
+                    (محتوى الكلمات). لهيك الـ Euclidean هون "Bad Idea".
+                </div>
+            </div>
+        </div>
+
+        <!-- CONSOLIDATED SECTION: ANGLES -->
+        <h2 class="section-title"
+            style="direction: ltr; text-align: left; color: var(--accent); margin-top: 20px; border-top: 2px solid var(--border); padding-top: 15px;">
+            🧭 Angles & Cosine Similarity Introduction
+        </h2>
+
+        <!-- Use Angle instead of Distance -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📐</span> 23. Use angle instead of distance
+            </h2>
+
+            <div
+                style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 12px; border-right: 4px solid var(--primary); margin-bottom: 20px;">
+                <div class="en-text" style="font-weight: 800; color: var(--primary); margin-bottom: 10px;">
+                    Thought experiment: take a document d and append it to itself. Call this document d'.
+                </div>
+                <div class="ar-text" style="font-size: 10pt;">
+                    **تجربة فكرية:** لو جبنا ملف (d) وكررناه مرتين (لزقناه بنفسه) وسميناه (d').
+                </div>
+            </div>
+
+            <div class="pair-box" style="margin-bottom: 12px;">
+                <div class="en-text">"Semantically" d and d' have the same content.</div>
+                <div class="ar-text">من حيث "المعنى"، الملفين d و d' بيحكوا عن نفس المحتوى 100%.</div>
+            </div>
+
+            <div class="pair-box" style="margin-bottom: 12px; color: var(--danger);">
+                <div class="en-text">The Euclidean distance between the two documents can be quite large.</div>
+                <div class="ar-text">بس المسافة الإقليدية (Euclidean) بينهم رح تطلع **كبيرة جداً** (بسبب زيادة
+                    الطول).
+                </div>
+            </div>
+
+            <div class="pair-box" style="margin-bottom: 12px; color: var(--success); font-weight: bold;">
+                <div class="en-text">The angle between the two documents is 0, corresponding to maximal similarity.
+                </div>
+                <div class="ar-text">لكن **الزاوية** بينهم هي **صفر**، وهذا بعطيك "أقصى درجات التشابه" (Maximal
+                    Similarity).</div>
+            </div>
+
+            <div class="pair-box"
+                style="border: 2px solid var(--primary); background: rgba(56, 189, 248, 0.02); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                <div class="en-text" style="font-weight: bold; color: var(--primary);">Key idea: Rank documents
+                    according to angle with query.</div>
+                <div class="ar-text" style="font-size: 10pt;">
+                    **الخلاصة:** خلينا نرتب النتائج حسب **الزاوية** مع السؤال بدل المسافة.
+                </div>
+            </div>
+        </div>
+
+        <!-- From Angles to Cosines -->
+        <div class="section-card" style="margin-top: 10px; border-left: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--accent);">
+                <span>📈</span> 24. From angles to cosines
+            </h2>
+
+            <div class="pair-box" style="margin-bottom: 10px;">
+                <div class="en-text" style="font-weight: bold;">The following two notions are equivalent:</div>
+                <div class="ar-text">المفهومين هذول متكافئين تماماً في الترتيب:</div>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+                <div class="en-text" style="font-size: 9.5pt; color: var(--text-light); margin-bottom: 8px;">
+                    1. Rank documents in <span
+                        style="text-decoration: underline; color: var(--danger);">decreasing</span> order of the
+                    angle
+                    between query and document.
+                </div>
+                <div class="en-text" style="font-size: 9.5pt; color: var(--text-light);">
+                    2. Rank documents in <span
+                        style="text-decoration: underline; color: var(--success);">increasing</span> order of
+                    cosine(query,document).
+                </div>
+            </div>
+
+            <div class="pair-box"
+                style="border-right: 4px solid var(--accent); padding-right: 15px; margin-bottom: 15px;">
+                <div class="en-text">Cosine is a monotonically decreasing function for the interval [0º, 180º].
+                </div>
+                <div class="ar-text">دالة الكوساين هي "دالة تناقصية" (بتقل قيمتها كل ما زادت الزاوية) في المدى من 0
+                    لـ
+                    180 درجة.</div>
+            </div>
+
+            <!-- Cosine Plot SVG -->
+            <div
+                style="background: black; padding: 15px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(255,255,255,0.1);">
+                <svg width="260" height="140" viewBox="0 0 260 140">
+                    <!-- Axes -->
+                    <line x1="20" y1="70" x2="240" y2="70" stroke="#475569" stroke-width="1" />
+                    <line x1="20" y1="10" x2="20" y2="130" stroke="#475569" stroke-width="1" />
+                    <!-- Curve (approximate cosine) -->
+                    <path d="M20,20 Q80,20 130,70 T240,120" fill="none" stroke="var(--danger)" stroke-width="2" />
+                    <!-- Labels -->
+                    <text x="5" y="25" fill="var(--text-muted)" font-size="10">1</text>
+                    <text x="5" y="75" fill="var(--text-muted)" font-size="10">0</text>
+                    <text x="5" y="125" fill="var(--text-muted)" font-size="10">-1</text>
+                    <text x="130" y="85" fill="var(--text-muted)" font-size="10">90°</text>
+                    <text x="230" y="85" fill="var(--text-muted)" font-size="10">180°</text>
+                </svg>
+                <div class="en-text" style="font-size: 8pt; color: var(--danger); margin-top: 5px;">θ ➔ cos(θ)</div>
+            </div>
+
+            <div class="ar-text"
+                style="font-size: 9pt; margin-top: 15px; color: var(--text-muted); text-align: center;">
+                <span style="color: var(--accent);">❓</span> **But how should we be computing cosines?**
+                <br>كيف ممكن نحسب الكوساين برمجياً وبسرعة؟ (هذا اللي رح نعرفه بالسلايد الجاي)
+            </div>
+        </div>
+
+        <!-- CONSOLIDATED SECTION: NORMALIZATION -->
+        <h2 class="section-title"
+            style="direction: ltr; text-align: left; color: var(--success); margin-top: 20px; border-top: 2px solid var(--border); padding-top: 15px;">
+            📏 Length Normalization
+        </h2>
+
+        <!-- L2 Norm Definition -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📏</span> 25. Length normalization
+            </h2>
+
+            <div class="pair-box"
+                style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                <div class="en-text" style="color: var(--text-light); line-height: 1.5;">
+                    A vector can be (length-) normalized by dividing each of its components by its length – for this
+                    we
+                    use the L<sub>2</sub> norm:
+                </div>
+                <div class="ar-text" style="font-size: 10pt; margin-top: 10px;">
+                    عشان نوحّد المقاييس وما يظلمنا طول الملف، بنعمل إشي اسمه **Length Normalization**. العملية بتتم
+                    بتقسيم كل رقم في المتجه على "طول المتجه" نفسه، واللي بنسميه **L<sub>2</sub> norm**.
+                </div>
+            </div>
+
+            <!-- L2 Formula -->
+            <div
+                style="background: black; padding: 25px; border-radius: 15px; border: 1px solid var(--accent); text-align: center; margin: 20px 0;">
+                <div
+                    style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 18pt; display: flex; align-items: center; justify-content: center; gap: 10px; direction: ltr;">
+                    <span>||x||<sub>2</sub> =</span>
+                    <span style="display: flex; align-items: center;">
+                        <span style="font-size: 24pt; margin-top: -4px;">√</span>
+                        <span
+                            style="border-top: 2px solid var(--accent); padding-top: 2px; margin-left: -2px;">Σ<sub>i</sub>
+                            x<sub>i</sub><sup>2</sup></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="pair-box"
+                style="border-left: 4px solid var(--success); padding-left: 15px; margin-bottom: 15px;">
+                <div class="en-text" style="font-weight: bold; color: var(--success);">Dividing a vector by its
+                    L<sub>2</sub> norm makes it a unit (length) vector (on surface of unit hypersphere)</div>
+                <div class="ar-text">لما تقسم السهم على طوله، بصير طوله إجباري (1)، وهيك بصير السهم "عضو" على سطح
+                    كرة
+                    وهمية بنسميها الـ **Unit Hypersphere**.</div>
+            </div>
+        </div>
+
+        <!-- The Solution for d and d' -->
+        <div class="section-card"
+            style="margin-top: 15px; border: 2px solid var(--primary); background: rgba(56, 189, 248, 0.02);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+                <span>✨</span> 26. The Perfect Equality
+            </h2>
+
+            <div class="pair-box" style="margin-bottom: 15px;">
+                <div class="en-text">Effect on the two documents d and d' (d appended to itself) from earlier slide:
+                    they have identical vectors after length-normalization.</div>
+                <div class="ar-text">**تذكّر ملف d و d'؟** بعد عملية الـ normalization، السهمين رح يصيروا **مطابقين
+                    تماماً** فوق بعض، لأنه اتجاههم واحد!</div>
+            </div>
+
+            <div
+                style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 8px; border-right: 4px solid var(--primary);">
+                <div class="en-text" style="font-weight: 800; color: white;">Long and short documents now have
+                    comparable weights.</div>
+                <div class="ar-text" style="font-size: 10pt; font-weight: bold;">هات من الأخر: بطل فيه فرق بين ملف
+                    طويل
+                    وملف قصير، الأوزان صارت قابلة للمقارنة والعدل رجع للسيستم!</div>
+            </div>
+        </div>
+
+        <!-- CONSOLIDATED SECTION: FORMULA -->
+        <h2 class="section-title"
+            style="direction: ltr; text-align: left; color: var(--accent); margin-top: 20px; border-top: 2px solid var(--border); padding-top: 15px;">
+            🧪 The Cosine Calculation & Formula
+        </h2>
+
+        <!-- Main Formula -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🧮</span> 27. cosine(query,document)
+            </h2>
+
+            <!-- Main Formula (Refined) -->
+            <div
+                style="background: #000; padding: 30px; border-radius: 15px; margin: 15px 0; border: 1px solid var(--success); overflow-x: auto;">
+                <div
+                    style="color: white; font-family: 'JetBrains Mono'; font-size: 11pt; direction: ltr; min-width: 450px; display: flex; align-items: center; justify-content: center; gap: 15px;">
+                    <!-- Left Side -->
+                    <span>cos(q,d) =</span>
+
+                    <!-- Fraction 1 -->
+                    <div
+                        style="display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle;">
+                        <span style="border-bottom: 1px solid white; padding: 0 5px;">q • d</span>
+                        <span style="padding: 0 5px;">|q| |d|</span>
+                    </div>
+
+                    <span>=</span>
+
+                    <!-- Fraction 2 -->
+                    <div
+                        style="display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle;">
+                        <span style="border-bottom: 1px solid white; padding: 0 5px;">
+                            <span style="font-size: 1.2em;">Σ</span><sub>i=1</sub><sup>|V|</sup>
+                            q<sub>i</sub>d<sub>i</sub>
+                        </span>
+                        <span style="display: flex; align-items: center; padding-top: 5px; gap: 10px;">
+                            <span style="display: flex; align-items: center;">
+                                <span style="font-size: 1.4em;">√</span>
+                                <span style="border-top: 1px solid white; padding-top: 2px; margin-left: -2px;">Σ
+                                    q<sub>i</sub><sup>2</sup></span>
+                            </span>
+                            <span style="display: flex; align-items: center;">
+                                <span style="font-size: 1.4em;">√</span>
+                                <span style="border-top: 1px solid white; padding-top: 2px; margin-left: -2px;">Σ
+                                    d<sub>i</sub><sup>2</sup></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pair-box"
+                style="background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 8px; margin-top: 20px;">
+                <div class="en-text" style="font-size: 9.5pt;">
+                    • <b>q<sub>i</sub></b> is the weight of term <i>i</i> in the query<br>
+                    • <b>d<sub>i</sub></b> is the weight of term <i>i</i> in the document
+                </div>
+                <div class="ar-text" style="font-size: 9.5pt; margin-top: 8px;">
+                    • **q<sub>i</sub>**: هو وزن الكلمة رقم (i) في السؤال.<br>
+                    • **d<sub>i</sub>**: هو وزن الكلمة رقم (i) في الملف.
+                </div>
+            </div>
+
+            <div class="pair-box" style="margin-top: 15px; border-right: 4px solid var(--accent); padding-right: 15px;">
+                <div class="en-text">cos(q,d) is the cosine similarity of q and d... or, equivalently, the cosine of
+                    the
+                    angle between q and d.</div>
+                <div class="ar-text">النتيجة هي "تشابه الكوساين"، وبالمعنى الهندسي هي جيب تمام الزاوية المحصورة بين
+                    سهم
+                    السؤال وسهم الملف.</div>
+            </div>
+        </div>
+
+        <!-- Length-Normalized Case -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--danger);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--danger);">
+                <span>⚡</span> 28. Cosine for length-normalized vectors
+            </h2>
+
+            <div class="pair-box">
+                <div class="en-text">For length-normalized vectors, cosine similarity is simply the dot product (or
+                    scalar product):</div>
+                <div class="ar-text">لو كنا أصلاً عاملين **normalization** للمتجهات (يعني طولهم 1)، القانون بصير
+                    تافه
+                    وبسيط: هو مجرد **الضرب النقطي**!</div>
+            </div>
+
+            <!-- Scalar Product Formula -->
+            <div
+                style="background: black; padding: 25px; border-radius: 15px; border: 2px solid var(--danger); text-align: center; margin: 15px 0;">
+                <div style="color: var(--danger); font-family: 'JetBrains Mono'; font-size: 16pt; direction: ltr;">
+                    cos(q,d) = q • d = Σ q<sub>i</sub>d<sub>i</sub>
+                </div>
+            </div>
+
+            <div class="ar-text"
+                style="font-size: 10pt; background: rgba(239, 68, 68, 0.05); padding: 12px; border-radius: 8px; text-align: center;">
+                <span style="color: var(--danger); font-weight: bold;">💡 الزبدة:</span> إذا كان كل واحد طوله (1)،
+                اضرب
+                كل رقم باللي قباله واجمع، وهيك خلصنا!
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 15</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 16: WORKED EXAMPLE (PART 1) ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Worked Example: 3 Novels</h1>
+        </header>
+
+        <!-- The Scenario -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📚</span> 29. The Data (Term Frequencies)
+            </h2>
+
+            <div class="pair-box" style="margin-bottom: 20px;">
+                <div class="en-text">Sense and Sensibility (SaS), Pride and Prejudice (PaP), Wuthering Heights (WH).
+                </div>
+                <div class="ar-text">
+                    بدنا نقيس التشابه بين 3 روايات عالمية باستخدام الكلمات: (affection, jealous, gossip, wuthering).
+                </div>
+            </div>
+
+            <!-- Table 1: Raw Counts -->
+            <div
+                style="overflow-x: auto; background: rgba(15, 23, 42, 0.4); border-radius: 12px; padding: 10px; border: 1px solid var(--border);">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono'; text-align: center; font-size: 8.5pt;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--primary); color: var(--primary);">
+                            <th style="text-align: left; padding: 10px;">term</th>
+                            <th>SaS</th>
+                            <th>PaP</th>
+                            <th>WH</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">affection</td>
+                            <td>115</td>
+                            <td>58</td>
+                            <td>20</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">jealous</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>11</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">gossip</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 8px; color: var(--accent);">wuthering</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>38</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ar-text" style="font-size: 9pt; margin-top: 10px; color: var(--text-muted);">
+                <span style="color: var(--primary);">📎</span> **ملاحظة:** للتبسيط، في هاض المثال مش رح نستخدم الـ
+                **idf**، بس رح نعتمد على التكرار.
+            </div>
+        </div>
+
+        <!-- Step 1: Log Frequency -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--accent);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--accent);">
+                <span>🔢</span> 30. Step 1: Log-frequency weighting
+            </h2>
+
+            <div class="ar-text" style="font-size: 10pt; margin-bottom: 15px;">
+                أول خطوة: بنحوّل التكرارات الخام لأوزان باستخدام القانون: <span
+                    style="color: var(--accent); font-family: 'JetBrains Mono'; font-weight: bold;">w = 1 +
+                    log<sub>10</sub>(tf)</span>.
+                <br>
+                <div
+                    style="background: black; padding: 15px; border-radius: 10px; border: 1px solid var(--success); text-align: center; margin: 15px 0;">
+                    <div style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 13pt; direction: ltr;">
+                        w = 1 + log<sub>10</sub>(115) ≈ 1 + 2.06 = 3.06
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table 2: Log Weights -->
+            <div
+                style="overflow-x: auto; background: rgba(30, 41, 59, 0.4); border-radius: 12px; padding: 10px; border: 1px solid var(--accent);">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono'; text-align: center; font-size: 8.5pt;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--accent); color: var(--accent);">
+                            <th style="text-align: left; padding: 10px;">term</th>
+                            <th>SaS</th>
+                            <th>PaP</th>
+                            <th>WH</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px;">affection</td>
+                            <td>3.06</td>
+                            <td>2.76</td>
+                            <td>2.30</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px;">jealous</td>
+                            <td>2.00</td>
+                            <td>1.85</td>
+                            <td>2.04</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px;">gossip</td>
+                            <td>1.30</td>
+                            <td>0</td>
+                            <td>1.78</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 8px;">wuthering</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>2.58</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 16</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 17: WORKED EXAMPLE (PART 2) ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Normalization & Final Scores</h1>
+        </header>
+
+        <!-- Step 2: Normalization -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>⚖️</span> 31. Step 2: After length normalization
+            </h2>
+
+            <div class="ar-text" style="font-size: 10pt; margin-bottom: 15px;">
+                ثاني خطوة: بنخلّي طول كل "سهم" رواية يساوي **1**. كيف؟ بنحسب الـ L2 Norm ونقسم عليه.
+                <div
+                    style="background: black; padding: 15px; border-radius: 10px; border: 1px solid var(--primary); text-align: center; margin: 15px 0;">
+                    <div
+                        style="color: var(--primary); font-family: 'JetBrains Mono'; font-size: 11pt; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+                        <span>L<sub>2</sub> Norm (SaS) =</span>
+                        <span style="display: flex; align-items: center;">
+                            <span style="font-size: 20pt; margin-top: -4px;">√</span>
+                            <span
+                                style="border-top: 1px solid var(--primary); padding-top: 2px; margin-left: -2px;">(3.06²
+                                + 2.00² + 1.30² + 0²)</span>
+                        </span>
+                        <span>≈</span>
+                        <span style="display: flex; align-items: center;">
+                            <span style="font-size: 20pt; margin-top: -4px;">√</span>
+                            <span
+                                style="border-top: 1px solid var(--primary); padding-top: 2px; margin-left: -2px;">15.05</span>
+                        </span>
+                        <span>≈</span>
+                        <span style="color: var(--success); font-weight: bold;">3.88</span>
+                    </div>
+                </div>
+                <div class="ar-text" style="font-size: 10pt; margin-top: 20px;">
+                    هسا بنقسم كل وزن في عمود SaS على قيمة الـ Norm اللي طلعناها (3.88):
+                </div>
+                <div
+                    style="background: black; padding: 15px; border-radius: 10px; border: 1px dashed var(--success); text-align: center; margin: 10px 0;">
+                    <div style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 12pt; direction: ltr;">
+                        Normalized Weight = 3.06 / 3.88 ≈ 0.789
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table 3: Normalized Weights -->
+            <div
+                style="overflow-x: auto; background: rgba(56, 189, 248, 0.05); border-radius: 12px; padding: 10px; border: 1px solid var(--primary);">
+                <table
+                    style="width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono'; text-align: center; font-size: 8.5pt;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--primary); color: var(--primary);">
+                            <th style="text-align: left; padding: 10px;">term</th>
+                            <th>SaS</th>
+                            <th>PaP</th>
+                            <th>WH</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-light);">
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px;">affection</td>
+                            <td>0.789</td>
+                            <td>0.832</td>
+                            <td>0.524</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px;">jealous</td>
+                            <td>0.515</td>
+                            <td>0.555</td>
+                            <td>0.465</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #334155;">
+                            <td style="text-align: left; padding: 8px;">gossip</td>
+                            <td>0.335</td>
+                            <td>0</td>
+                            <td>0.405</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding: 8px;">wuthering</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0.588</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Step 3: Final Results -->
+        <div class="section-card" style="margin-top: 15px; border-top: 4px solid var(--success);">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--success);">
+                <span>🎯</span> 32. Step 3: Final Cosine Similarity
+            </h2>
+
+            <div class="ar-text" style="font-size: 10pt; margin-bottom: 15px;">
+                آخر خطوة: بنضرب كل رقم باللي قباله (Dot Product) للأعمدة الـ **Normalized**:
+                <br>لتشابه روايتي **SaS** و **PaP**:
+            </div>
+
+            <div
+                style="background: black; padding: 20px; border-radius: 12px; border: 2px solid var(--success); text-align: center; margin: 15px 0;">
+                <div
+                    style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 11pt; direction: ltr; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                    <div style="border-bottom: 1px solid rgba(16, 185, 129, 0.3); padding-bottom: 10px;">
+                        cos(SaS, PaP) = (0.789 × 0.832) + (0.515 × 0.555) + (0.335 × 0) + (0 × 0)
+                    </div>
+                    <div style="font-size: 14pt; font-weight: bold;">
+                        ≈ 0.656 + 0.286 + 0 + 0 = <span style="font-size: 18pt;">0.94</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <!-- Comparison -->
+                <div
+                    style="background: rgba(239, 68, 68, 0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <div style="color: var(--danger); font-weight: bold; font-size: 9pt; margin-bottom: 8px;">
+                        Breakdown
+                        of Dot Products (Log Weights):</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 7.5pt; color: var(--text-light); line-height: 1.4;">
+                        <span style="color: var(--danger);">• dot(SaS, PaP) ≈ 12.1</span>
+                        <br>&nbsp;&nbsp;(3.06×2.76) + (2.00×1.85) + (1.30×0) + (0×0)
+
+                        <div style="margin-top: 8px;">
+                            <span style="color: var(--danger);">• dot(SaS, WH) ≈ 13.4</span>
+                            <br>&nbsp;&nbsp;(3.06×2.30) + (2.00×2.04) + (1.30×1.78) + (0×2.58)
+                        </div>
+                    </div>
+                    <div class="ar-text"
+                        style="font-size: 8pt; margin-top: 10px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 5px;">
+                        *هنا بنضرب أوزان الـ Log (الجدول 2) ببعضها قبل ما نحولها لأطوال (1).
+                    </div>
+                </div>
+                <!-- Final Cosines -->
+                <div
+                    style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 12px; border: 1px solid var(--success);">
+                    <div style="color: var(--success); font-weight: bold; font-size: 9pt; margin-bottom: 10px;">
+                        Final
+                        Cosine Scores:</div>
+                    <ul
+                        style="color: white; font-size: 9pt; font-family: 'JetBrains Mono'; list-style: none; padding: 0;">
+                        <li>• <b>cos(SaS, PaP) ≈ 0.94</b></li>
+                        <li>• <b>cos(SaS, WH) ≈ 0.79</b></li>
+                        <li>• <b>cos(PaP, WH) ≈ 0.69</b></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ar-text"
+                style="background: black; padding: 12px; border-radius: 8px; border-right: 4px solid var(--primary); margin-top: 15px; font-size: 10pt;">
+                <span style="color: var(--primary);">📢</span> **الزبدة:** رواية SaS و PaP تقريباً **تطابق تام
+                (0.94)**؛
+                لأنهم بيحكوا عن نفس الحب والمشاعر. بينما WH هي الأبعد عنهم (0.69).
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 17</div>
+        </div>
+    </div>
+
+
+    <!-- ================= PAGE 18: COMPUTING COSINE SCORES ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Computing Cosine Scores</h1>
+        </header>
+
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>⚙️</span> 33. The CosineScore(q) Algorithm
+            </h2>
+
+            <div class="ar-text" style="font-size: 10pt; margin-bottom: 12px;">
+                هذا الـ **Pseudocode** بيوصف الخطوات اللي السيستم بيعملها عشان يحسب الـ Scores لكل الملفات:
+            </div>
+
+            <div
+                style="background: #0f172a; padding: 22px; border-radius: 12px; border: 1px solid var(--primary); font-family: 'JetBrains Mono'; font-size: 8.5pt; line-height: 1.6; color: #cbd5e1; direction: ltr; position: relative; margin-bottom: 10px;">
+                <div
+                    style="position: absolute; top: 10px; right: 15px; color: var(--primary); font-family: 'Inter'; font-size: 7pt; opacity: 0.6; font-weight: 800;">
+                    ALGORITHM V6.3</div>
+                <div
+                    style="color: var(--primary); font-weight: bold; margin-bottom: 12px; font-size: 11pt; border-bottom: 1px solid rgba(56, 189, 248, 0.2); padding-bottom: 8px;">
+                    COSINESCORE(q)</div>
+                <div style="display: flex; gap: 15px;">
+                    <div
+                        style="color: var(--text-muted); text-align: right; min-width: 18px; user-select: none; border-right: 1px solid rgba(255,255,255,0.05); padding-right: 10px;">
+                        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</div>
+                    <div>
+                        float <span style="color: var(--accent);">Scores</span>[N] = 0<br>
+                        float <span style="color: var(--accent);">Length</span>[N]<br>
+                        <span style="color: var(--primary); font-weight: bold;">for each</span> query term <span
+                            style="color: #f87171;">t</span><br>
+                        &nbsp;&nbsp;<span style="color: var(--primary); font-weight: bold;">do</span> calculate
+                        <span style="color: var(--success);">w<sub>t,q</sub></span> and fetch postings list for
+                        <span style="color: #f87171;">t</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--primary); font-weight: bold;">for
+                            each</span>
+                        pair(<span style="color: #fca5a5;">d</span>, <span
+                            style="color: #fca5a5;">tf<sub>t,d</sub></span>) in postings list<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                            style="color: var(--primary); font-weight: bold;">do</span> Scores[d] += <span
+                            style="color: var(--success);">w<sub>t,d</sub></span> &times; <span
+                            style="color: var(--success);">w<sub>t,q</sub></span><br>
+                        Read the array <span style="color: var(--accent);">Length</span><br>
+                        <span style="color: var(--primary); font-weight: bold;">for each</span> d<br>
+                        &nbsp;&nbsp;<span style="color: var(--primary); font-weight: bold;">do</span> Scores[d] =
+                        Scores[d] / Length[d]<br>
+                        <span style="color: var(--primary); font-weight: bold;">return</span> Top K components of
+                        Scores[]
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-text"
+                style="font-size: 9.5pt; margin-top: 15px; background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 8px; border-right: 4px solid var(--primary);">
+                <span style="color: var(--primary); font-weight: bold;">💡 الفكرة ببساطة:</span> السيستم بيمشي على
+                كل
+                كلمة في السؤال، وبجمع الأوزان من الملفات اللي فيها هاي الكلمات (Postings). وبالآخر بنقسم النتيجة على
+                طول
+                الملف عشان الـ **Normalization**، وبنعطي الـ **Top K**.
+            </div>
+        </div>
+
+        <!-- Implementation Details Group -->
+        <div class="section-card" style="margin-top: 15px; border-top: 3px solid var(--accent); padding-top: 20px;">
+            <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--accent);">
+                <span>🛠️</span> 34. Implementation & Optimization
+            </h2>
+
+            <!-- TAAT vs DAAT -->
+            <div style="margin-bottom: 25px;">
+                <div
+                    style="color: var(--accent); font-weight: 800; font-size: 10pt; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="background: var(--accent); color: black; padding: 2px 6px; border-radius: 4px; font-size: 8pt;">1</span>
+                    Scoring Strategies
+                </div>
+                <div class="pair-box">
+                    <div class="en-text" style="font-size: 9.5pt;">Previous algorithm scores **Term-At-A-Time
+                        (TAAT)**.
+                        Can be adapted to **Document-At-A-Time (DAAT)**.</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        الخوارزمية أعلاه بتمشي **كلمة بكلمة (TAAT)**؛ بنخلص كل شغل أول كلمة قبل ما ننتقل للثانية. بس
+                        في
+                        أنظمة تانية بتمشي **ملف بملف (DAAT)**.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storing Weights -->
+            <div
+                style="margin-bottom: 25px; background: rgba(239, 68, 68, 0.03); padding: 15px; border-radius: 12px; border: 1px dashed rgba(239, 68, 68, 0.2);">
+                <div
+                    style="color: var(--danger); font-weight: 800; font-size: 10pt; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="background: var(--danger); color: white; padding: 2px 6px; border-radius: 4px; font-size: 8pt;">2</span>
+                    Efficiency: Storing Weights
+                </div>
+                <div class="pair-box" style="margin-bottom: 12px;">
+                    <div class="en-text" style="font-size: 9pt;">Storing w<sub>t,d</sub> in each posting is
+                        expensive
+                        (floating point).</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        تخزين الأوزان جاهزة (كسور عشرية) في الـ Postings بيستهلك مساحة عملاقة ومكلفة.
+                    </div>
+                </div>
+                <div class="ar-text"
+                    style="background: rgba(239, 68, 68, 0.08); padding: 10px; border-radius: 8px; font-size: 9.5pt; border-right: 4px solid var(--danger);">
+                    <span style="color: var(--danger); font-weight: bold;">✅ الحل:</span> بنخزن الـ
+                    **tf<sub>t,d</sub>**
+                    في الـ Posting، وبنخزن الـ **idf<sub>t</sub>** مرة وحدة في رأس القائمة (Head).
+                </div>
+            </div>
+
+            <!-- Top K -->
+            <div>
+                <div
+                    style="color: var(--success); font-weight: 800; font-size: 10pt; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="background: var(--success); color: black; padding: 2px 6px; border-radius: 4px; font-size: 8pt;">3</span>
+                    Top K Results
+                </div>
+                <div class="pair-box">
+                    <div class="en-text" style="font-size: 9pt;">Extract the top K items using a **Priority Queue**
+                        (e.g., a **Heap**).</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        عشان نطلع أعلى **K** نتائج بدون ما نرتب كل الملفات الضخمة، بنستخدم **Priority Queue** أو
+                        **Heap** عشان السرعة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 18</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 19: SMART WEIGHTING VARIANTS ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">SMART Weighting Variants</h1>
+        </header>
+
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📊</span> 37. SMART Weighting Table
+            </h2>
+            <div class="ar-text"
+                style="font-size: 10pt; margin-bottom: 12px; border-right: 3px solid var(--primary); padding-right: 10px;">
+                الـ **tf-idf** إله أنواع وأشكال كثير، وكل نوع بنعطيه "حرف" عشان نميزه. هاد الجدول بيلخصهم:
+            </div>
+
+            <style>
+                .smart-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 8pt;
+                    color: var(--text-light);
+                    background: rgba(15, 23, 42, 0.4);
+                    border: 1px solid var(--border);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }
+
+                .smart-table th {
+                    background: rgba(56, 189, 248, 0.1);
+                    color: var(--primary);
+                    padding: 10px 8px;
+                    text-align: center;
+                    border: 1px solid #334155;
+                    font-weight: 800;
+                }
+
+                .smart-table td {
+                    padding: 8px 8px;
+                    border: 1px solid #334155;
+                    text-align: center;
+                }
+
+                .smart-table b {
+                    color: var(--accent);
+                    font-family: 'JetBrains Mono';
+                    font-size: 10pt;
+                }
+
+                .formula-sub {
+                    vertical-align: sub;
+                    font-size: 0.7em;
+                }
+            </style>
+
+            <div style="overflow-x: auto;">
+                <table class="smart-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 33.3%;">Normalization</th>
+                            <th style="width: 33.3%;">Document Frequency (idf)</th>
+                            <th style="width: 33.3%;">Term Frequency (tf)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>n</b> (none): 1</td>
+                            <td><b>n</b> (no): 1</td>
+                            <td><b>n</b> (natural): tf<span class="formula-sub">t,d</span></td>
+                        </tr>
+                        <tr style="background: rgba(255, 255, 255, 0.02);">
+                            <td><span style="color: var(--danger);"><b>c</b> (cosine):</span> 1 /
+                                &radic;&Sigma;w&sup2;
+                            </td>
+                            <td><span style="color: var(--danger);"><b>t</b> (idf):</span> log(N/df<span
+                                    class="formula-sub">t</span>)</td>
+                            <td><span style="color: var(--danger);"><b>l</b> (logarithm):</span> 1 + log(tf<span
+                                    class="formula-sub">t,d</span>)</td>
+                        </tr>
+                        <tr>
+                            <td><b>u</b> (pivoted unique): 1/u</td>
+                            <td><b>p</b> (prob idf): log((N-df)/df)</td>
+                            <td><b>a</b> (augmented): 0.5 + ...</td>
+                        </tr>
+                        <tr style="background: rgba(255, 255, 255, 0.02);">
+                            <td><b>b</b> (byte size): 1/ChLen<sup>&alpha;</sup></td>
+                            <td></td>
+                            <td><b>b</b> (boolean): 1 if tf &gt; 0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><b>L</b> (log ave): complex log</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-card" style="margin-top: 15px;">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>🏷️</span> 38. The SMART Notation Breakdown (ddd.qqq)
+            </h2>
+
+            <div
+                style="background: rgba(15, 23, 42, 0.6); padding: 25px; border-radius: 15px; border: 2px solid var(--accent); margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-around; align-items: center;">
+                    <div style="text-align: center;">
+                        <div
+                            style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 28pt; font-weight: 800; letter-spacing: 5px;">
+                            ddd</div>
+                        <div style="color: var(--text-muted); font-size: 9pt; margin-top: 5px;">Document
+                            Weighting<br><span class="ar-text" style="color: white;">(وزن الملفات)</span></div>
+                    </div>
+                    <div style="color: var(--primary); font-size: 25pt; font-weight: 200;">&bull;</div>
+                    <div style="text-align: center;">
+                        <div
+                            style="color: var(--primary); font-family: 'JetBrains Mono'; font-size: 28pt; font-weight: 800; letter-spacing: 5px;">
+                            qqq</div>
+                        <div style="color: var(--text-muted); font-size: 9pt; margin-top: 5px;">Query
+                            Weighting<br><span class="ar-text" style="color: white;">(وزن السؤال)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                <!-- Formulas: Document -->
+                <div
+                    style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                    <div
+                        style="color: var(--accent); font-weight: 800; font-size: 10pt; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">
+                        Document (lnc)</div>
+                    <ul style="list-style: none; padding: 0; font-size: 8.5pt; color: #cbd5e1; line-height: 1.8;">
+                        <li>• <b style="color: var(--accent);">l:</b> wf = 1 + log<sub>10</sub>(tf)</li>
+                        <li>• <b style="color: var(--accent);">n:</b> weight = wf <span
+                                style="color: var(--text-muted);">(No idf)</span></li>
+                        <li>• <b style="color: var(--accent);">c:</b> Norm = w / &radic;&Sigma;w&sup2;</li>
+                    </ul>
+                </div>
+                <!-- Formulas: Query -->
+                <div
+                    style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                    <div
+                        style="color: var(--primary); font-weight: 800; font-size: 10pt; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">
+                        Query (ltc)</div>
+                    <ul style="list-style: none; padding: 0; font-size: 8.5pt; color: #cbd5e1; line-height: 1.8;">
+                        <li>• <b style="color: var(--primary);">l:</b> wf = 1 + log<sub>10</sub>(tf)</li>
+                        <li>• <b style="color: var(--primary);">t:</b> weight = wf &times; idf</li>
+                        <li>• <b style="color: var(--primary);">c:</b> Norm = w / &radic;&Sigma;w&sup2;</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Example Table -->
+            <div
+                style="background: rgba(255,255,255,0.02); border: 1px solid #334155; border-radius: 12px; padding: 15px; margin-bottom: 5px;">
+                <h3
+                    style="color: var(--success); font-size: 10pt; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <span>🧪</span> Walkthrough: lnc.ltc Example
+                </h3>
+                <style>
+                    .small-calc {
+                        width: 100%;
+                        border-collapse: collapse;
+                        font-family: 'Inter';
+                        font-size: 7.5pt;
+                        text-align: center;
+                        color: white;
+                    }
+
+                    .small-calc th {
+                        background: #1e293b;
+                        color: var(--primary);
+                        padding: 5px;
+                        border: 1px solid #334155;
+                    }
+
+                    .small-calc td {
+                        padding: 5px;
+                        border: 1px solid #334155;
+                    }
+                </style>
+                <table class="small-calc">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="background: var(--primary); color: black;">Product</th>
+                            <th colspan="3">Doc (lnc)</th>
+                            <th colspan="3">Query (ltc)</th>
+                            <th rowspan="2">Term</th>
+                        </tr>
+                        <tr>
+                            <th>n'lize</th>
+                            <th>tf-wt</th>
+                            <th>tf-raw</th>
+                            <th>n'lize</th>
+                            <th>idf</th>
+                            <th>tf-wt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>0.52</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>2.3</td>
+                            <td>0</td>
+                            <td>auto</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0.34</td>
+                            <td>1.3</td>
+                            <td>1</td>
+                            <td>best</td>
+                        </tr>
+                        <tr>
+                            <td>0.27</td>
+                            <td>0.52</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0.52</td>
+                            <td>2.0</td>
+                            <td>1</td>
+                            <td>car</td>
+                        </tr>
+                        <tr>
+                            <td>0.53</td>
+                            <td>0.68</td>
+                            <td>1.3</td>
+                            <td>2</td>
+                            <td>0.78</td>
+                            <td>3.0</td>
+                            <td>1</td>
+                            <td>insurance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr style="border: 0; border-top: 2px dashed var(--border); margin: 30px 0;">
+        <h2 class="section-title" style="direction: ltr; text-align: left; color: var(--primary);">
+            ⚖️ lnc.ltc: Formal Laws & Scenarios
+        </h2>
+
+        <div class="section-card">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>⚖️</span> 39. The Mathematical Law (Algorithm)
+            </h2>
+            <div class="ar-text"
+                style="font-size: 10pt; margin-bottom: 20px; border-right: 4px solid var(--primary); padding-right: 12px;">
+                الآن رح نحول "الشرح" لقوانين رياضية واضحة، عشان تعرف السيستم كيف بشتغل برمجياً:
+            </div>
+
+            <!-- Law Boxes -->
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="background: #0f172a; border: 1px solid var(--accent); padding: 15px; border-radius: 12px;">
+                    <div style="color: var(--accent); font-weight: 800; font-size: 9pt; margin-bottom: 10px;">1.
+                        الأوزان
+                        الأساسية (Raw Weights)</div>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 9pt;">
+                        &bull; Query (ltc): <span style="color: var(--primary);">w<sub>q</sub> = (1 + log
+                            tf<sub>q</sub>) &times; idf</span>
+                        <br>&bull; Doc (lnc): <span style="color: var(--accent);">w<sub>d</sub> = 1 + log
+                            tf<sub>d</sub></span>
+                    </div>
+                </div>
+
+                <div style="background: #0f172a; border: 1px solid var(--primary); padding: 15px; border-radius: 12px;">
+                    <div style="color: var(--primary); font-weight: 800; font-size: 9pt; margin-bottom: 10px;">2.
+                        التوحيد (Normalization)</div>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 10pt; text-align: center;">
+                        V<sub>norm</sub> = w / &radic;(&Sigma; w&sup2;)
+                    </div>
+                </div>
+
+                <div style="background: #0f172a; border: 1px solid var(--success); padding: 15px; border-radius: 12px;">
+                    <div style="color: var(--success); font-weight: 800; font-size: 9pt; margin-bottom: 10px;">3.
+                        النتيجة النهائية (The Score)</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 11pt; text-align: center; color: var(--success);">
+                        Final Score = &Sigma; (V<sub>norm,q</sub> &times; V<sub>norm,d</sub>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card" style="margin-top: 15px;">
+            <h2 class="section-title" style="direction: ltr; text-align: left;">
+                <span>📝</span> 40. Detailed Solution Walkthroughs
+            </h2>
+            <div class="ar-text"
+                style="font-size: 9.5pt; margin-bottom: 20px; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                الآن رح نطبق القوانين الثلاثة (الوزن، التوحيد، النتيجة) على 3 حالات مختلفة عشان تضمن العلامة كاملة:
+            </div>
+
+            <!-- SCENARIO 1: THE MASTER SLIDE EXAMPLE -->
+            <div
+                style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary); margin-bottom: 25px;">
+                <div
+                    style="color: var(--primary); font-weight: 800; font-size: 11pt; margin-bottom: 10px; display: flex; justify-content: space-between;">
+                    <span>📍 Scenario 1: The Slide Example (Complex)</span>
+                    <span
+                        style="font-size: 8pt; background: var(--primary); color: black; padding: 2px 8px; border-radius: 4px;">Most
+                        Important</span>
+                </div>
+                <div class="en-text" style="font-size: 9pt; color: white; margin-bottom: 10px;">
+                    <b>Setting:</b> Q: "best car insurance", D: "car insurance auto insurance"
+                    <br><b>Given IDFs:</b> best=1.3, car=2.0, insurance=3.0 (auto is ignored as it's not in Q)
+                </div>
+                <div class="ar-text" style="font-size: 8.5pt; line-height: 1.6; color: #cbd5e1;">
+                    <!-- Step 1 Explicit -->
+                    <b style="color: var(--success); font-size: 9pt;">الخطوة 1: حساب الأوزان الخام (Raw Weights)</b>
+                    <br>&bull; <b style="color: white;">للسؤال (ltc):</b>
+                    <br>&nbsp;&nbsp;&nbsp;- <i style="color: var(--primary);">insurance:</i> <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">(1+log
+                        1) &times; 3.0 = 3.0</span>
+                    <br>&nbsp;&nbsp;&nbsp;- <i style="color: var(--primary);">car:</i> <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">(1+log
+                        1) &times; 2.0 = 2.0</span>
+                    <br>&bull; <b style="color: white;">للـملف (lnc):</b>
+                    <br>&nbsp;&nbsp;&nbsp;- <i style="color: var(--accent);">insurance:</i> <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">1
+                        + log 2 = 1.3</span>
+                    <br>&nbsp;&nbsp;&nbsp;- <i style="color: var(--accent);">car:</i> <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">1
+                        + log 1 = 1.0</span>
+
+                    <!-- Step 2 Explicit -->
+                    <br><b style="color: var(--success); font-size: 9pt; margin-top: 5px; display: block;">الخطوة 2:
+                        حساب التوحيد (Normalize)</b>
+                    <div style="background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; margin: 5px 0;">
+                        &bull; طول متجه السؤال: <span
+                            style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">&radic;(1.3&sup2;+2&sup2;+3&sup2;)
+                            &approx; 3.83</span>
+                        <br>&bull; طول متجه الملف: <span
+                            style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">&radic;(1&sup2;+1&sup2;+1.3&sup2;)
+                            &approx; 1.92</span>
+                    </div>
+                    &bull; <b style="color: white;">للسؤال:</b> <i style="color: var(--primary);">insur</i> = <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">3.0
+                        / 3.83 = 0.78</span> | <i style="color: var(--primary);">car</i> = <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">2.0
+                        / 3.83 = 0.52</span>
+                    <br>&bull; <b style="color: white;">للـملف:</b> <i style="color: var(--accent);">insur</i> =
+                    <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">1.3
+                        / 1.92 = 0.68</span> | <i style="color: var(--accent);">car</i> = <span
+                        style="font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">1.0
+                        / 1.92 = 0.52</span>
+
+                    <!-- Step 3 Labelled -->
+                    <br><b style="color: var(--success); font-size: 9pt; margin-top: 5px; display: block;">الخطوة 3:
+                        ضرب
+                        القيم المتشابهة (Dot Product)</b>
+                    <div
+                        style="font-family: 'JetBrains Mono'; color: white; direction: ltr; unicode-bidi: isolate; display: inline-block; background: #0f172a; padding: 10px; border-radius: 6px; width: 100%; border: 1px solid rgba(255,255,255,0.05);">
+                        Score = (0.52 &times; 0.52)<sub>car</sub> + (0.78 &times; 0.68)<sub>insur</sub> = 0.27 +
+                        0.53 =
+                        <b style="color: var(--success);">0.80</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCENARIO 2: DUPLICATION EFFECT -->
+            <div
+                style="background: rgba(168, 85, 247, 0.05); padding: 20px; border-radius: 12px; border-left: 5px solid var(--accent); margin-bottom: 25px;">
+                <div style="color: var(--accent); font-weight: 800; font-size: 11pt; margin-bottom: 10px;">📍
+                    Scenario
+                    2: Duplication & Identical Matching</div>
+                <div class="ar-text" style="font-size: 9pt; line-height: 1.8; color: #cbd5e1;">
+                    <b>السؤال:</b> شو بصير لو الملف عبارة عن كلمة مكررة 100 مرة؟
+                    <br><b>المثال:</b> Q: "car", D: "car car car ... (100 times)"
+                    <br><b style="color: var(--success);">القاعدة الذهبية:</b> الـ **Cosine Normalization** وظيفته
+                    الأساسية إلغاء أثر تكرار الكلمات وطول الملف.
+                    <br>1. وزن "car" برقم كبير جداً قبل التوحيد.
+                    <br>2. في التوحيد، رح تقسم الوزن على طول المتجه (نفسه في حالتنا).
+                    <br>3. النتيجة دائماً هي <b
+                        style="color: var(--success); font-family: 'JetBrains Mono'; direction: ltr; unicode-bidi: isolate; display: inline-block;">1.0</b>.
+                </div>
+            </div>
+
+            <!-- SCENARIO 3: PARTIAL MATCH (MISSING TERMS) -->
+            <div
+                style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; border-left: 5px solid #94a3b8;">
+                <div style="color: #94a3b8; font-weight: 800; font-size: 11pt; margin-bottom: 10px;">📍 Scenario 3:
+                    Partial Match (The Vector Length)</div>
+                <div class="ar-text" style="font-size: 9pt; line-height: 1.8; color: #cbd5e1;">
+                    <b>المسألة:</b> Q: "fast car", D: "fast", idf: fast=2, car=3
+                    <br>1. طول متجه السؤال كامل: <span
+                        style="font-family: 'JetBrains Mono'; color: white; direction: ltr; unicode-bidi: isolate; display: inline-block;">&radic;(2&sup2;
+                        + 3&sup2;) = 3.61</span>.
+                    <br>2. وزن fast الموحد بالسؤال: <span
+                        style="font-family: 'JetBrains Mono'; color: white; direction: ltr; unicode-bidi: isolate; display: inline-block;">2
+                        / 3.61 = 0.55</span>.
+                    <br>3. وزن fast الموحد بالملف: <span
+                        style="font-family: 'JetBrains Mono'; color: white; direction: ltr; unicode-bidi: isolate; display: inline-block;">1.0</span>.
+                    <br><b style="color: var(--success); text-shadow: 0 0 10px var(--success);">Final Score: 0.55
+                        &times; 1.0 = 0.55</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 20</div>
+        </div>
+    </div>
+</body>
+
+</html>

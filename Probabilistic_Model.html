@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilistic Model | Study Guide</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Satisfy&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+            --border: #334155;
+            --brand-red: #f97316;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: auto;
+            margin: 20px auto;
+            background: var(--bg-dark);
+            padding: 15mm;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: visible;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Inter', 'Cairo', sans-serif;
+            font-weight: 800;
+        }
+
+        .page-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 19pt;
+            color: var(--primary);
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .section-card {
+            background: var(--card-dark);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-size: 13pt;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .en-text {
+            display: block;
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: 10pt;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-align: left;
+            direction: ltr;
+            background: rgba(250, 204, 21, 0.05);
+            padding: 8px 12px;
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+        }
+
+        .ar-text {
+            display: block;
+            color: #f1f5f9;
+            font-size: 10.5pt;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .ar-text b {
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .page-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 9pt;
+        }
+
+        .signature-brand {
+            font-family: 'Satisfy', cursive;
+            font-size: 16pt;
+        }
+
+        .sig-name {
+            color: var(--primary);
+        }
+
+        .sig-way {
+            color: var(--accent);
+        }
+
+        .formula-box {
+            background: #000;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            text-align: center;
+            margin: 10px 0;
+            direction: ltr;
+        }
+
+        @media print {
+            body {
+                background: var(--bg-dark) !important;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border: none;
+                min-height: auto;
+                height: auto;
+                width: 210mm;
+                page-break-after: always;
+                overflow: visible !important;
+                padding: 10mm;
+            }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= PAGE 01 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Language Models & Probabilistic IR</h1>
+        </header>
+
+        <!-- Funny Intro: The Fortune Teller Analogy -->
+        <div class="section-card" style="border-right: 6px solid var(--primary); margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div style="flex: 1;">
+                    <h2 class="section-title"
+                        style="color: var(--primary); border: none; font-size: 16pt; margin-bottom: 5px; direction: rtl; text-align: right;">
+                        🔮 القهوة، البصيرة، والـ Information Retrieval
+                    </h2>
+                    <div
+                        style="font-family: 'Inter'; color: var(--text-muted); font-size: 9pt; margin-bottom: 15px; direction: ltr; text-align: left;">
+                        The "Genius Waiter" Story - Why Probability Matters
+                    </div>
+                </div>
+                <div style="font-size: 30pt; filter: drop-shadow(0 0 10px var(--primary));">☕</div>
+            </div>
+
+            <div class="ar-text"
+                style="background: rgba(56, 189, 248, 0.05); padding: 20px; border-radius: 12px; border: 1px dashed var(--primary); text-align: right;">
+                تخيل حالك قاعد بمطعم "أبو العبد" ، وأبو العبد مجرد ما شاف خلقتك، راح جابلك <span class="highlight">سندويشة
+                شاورما</span>.
+                أنت انصدمت: "كيف عرفت يا أبو العبد؟ أنا لسه ما حكيت!".
+                <br><br>
+                أبو العبد بضحك وبقولك: "يا خالي، الاحتمالات! أنت لابس بلوزة الجامعة، اليوم الخميس، ووجهك جيعان..
+                <span class="highlight">احتمال (Probability)</span> إنك تطلب شاورما اليوم هو 99%".
+                <br><br>
+                هاض بالضبط اللي رح نعلمه للكمبيوتر اليوم. الكمبيوتر رح يصير زي "أبو العبد"، رح يحاول يتوقع شو بدك (الـ
+                Query) بناءً على الكلام اللي شافه بالملفات (الـ Document).
+                <br><br>
+                <div style="text-align: center; color: var(--success); font-weight: bold; font-family: 'Cairo';">
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap -->
+        <div class="section-card" style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border);">
+            <h3
+                style="color: var(--primary); font-size: 11pt; margin-bottom: 15px; direction: rtl; text-align: right; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 14pt;">🗺️</span> Roadmap: What's on the Menu?
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent); text-align: right;">
+                        <div style="color: var(--accent); font-weight: bold; font-size: 9pt;">Section 1: Language Models
+                        </div>
+                        <div class="ar-text" style="font-size: 8pt;">مقدمة في نمذجة اللغة والـ Unigram.</div>
+                    </div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent); text-align: right;">
+                        <div style="color: var(--accent); font-weight: bold; font-size: 9pt;">Section 2: Probabilistic
+                            Retrieval</div>
+                        <div class="ar-text" style="font-size: 8pt;">كيف نحسب احتمال الـ Relevance.</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent); text-align: right;">
+                        <div style="color: var(--accent); font-weight: bold; font-size: 9pt;">Section 3: Query
+                            Likelihood</div>
+                        <div class="ar-text" style="font-size: 8pt;">حساب p(q|d) ومشكلة الصفر.</div>
+                    </div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.6); padding: 10px; border-radius: 8px; border-left: 3px solid var(--accent); text-align: right;">
+                        <div style="color: var(--accent); font-weight: bold; font-size: 9pt;">Section 4: Smoothing
+                            Methods</div>
+                        <div class="ar-text" style="font-size: 8pt;">طرق التنعيم (JM & Dirichlet).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 01</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 02 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Section 1: Statistical Language Models</h1>
+        </header>
+
+        <!-- What is a Statistical LM? -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>📚</span> 01. شو هو الـ Statistical Language Model؟
+            </h2>
+
+            <div class="en-text">A probability distribution over word sequences</div>
+            <div class="ar-text">
+                يا خالي، الـ <span class="highlight">Language Model (LM)</span> هو ببساطة عبارة عن "توزيع احتمالي" (Probability Distribution) على
+                سلاسل الكلمات. يعني هو نظام وظيفته يعطي "علامة" أو "احتمالية" لكل جملة ممكنة في اللغة.
+            </div>
+
+            <!-- Example Box -->
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin: 15px 0;">
+                <div
+                    style="color: var(--accent); font-family: 'Cairo'; font-weight: 800; font-size: 11pt; margin-bottom: 10px; direction: rtl; text-align: right;">
+                    📌 أمثلة على احتمالية الجمل (ركزوا بالأرقام):
+                </div>
+                <div
+                    style="display: flex; flex-direction: column; gap: 10px; font-family: 'JetBrains Mono'; font-size: 10pt; direction: ltr; text-align: left;">
+                    <div style="color: var(--success);">p("Today is Wednesday") ≈ 0.001</div>
+                    <div style="color: var(--danger);">p("Today Wednesday is") ≈ 0.0000000000001</div>
+                    <div style="color: var(--primary);">p("The eigenvalue is positive") ≈ 0.00001</div>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>لاحظوا الفرق:</b> الجملة اللي ترتيبها صح ومعناها مفهوم (زي "Today is Wednesday") بتاخد احتمالية
+                عالية. أما الجملة اللي ترتيبها "معجق" (زي "Today Wednesday is")، السيستم بعطيها احتمالية <span class="highlight">شبه صفر</span>
+                لأنه "لغة البشر" ما بتمشي هيك. هاض الكلام كله بوضحه <span class="highlight">صورة حجر النرد</span> اللي تحت، اللي بتفرجينا كيف
+                الكمبيوتر "بختار" الجملة الصح من بين ملايين الاحتمالات.
+            </div>
+
+            <div class="pair-box" style="margin-top: 15px; border-right: 4px solid var(--accent); padding-right: 15px;">
+                <div class="en-text" style="background: none; border: none; padding: 0;">Context-dependent!</div>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    الموضوع بيعتمد عالـ <span class="highlight">Context</span> (السياق). يعني احتمالية كلمة معينة بتفرق حسب الكلمات اللي قـبلها.
+                </div>
+            </div>
+
+            <div class="pair-box"
+                style="margin-top: 15px; background: rgba(56, 189, 248, 0.1); border-radius: 8px; padding: 15px;">
+                <div class="en-text" style="background: none; border: none; padding: 0; color: var(--primary);">
+                    "Generative" model mechanism</div>
+                <div class="ar-text" style="font-weight: bold;">
+                    الـ LM بنعتبره <span class="highlight">Generative Model</span>؛ لأنه فعلياً "بولّد" أو "بنتج" (Generating) نصوص. كأنك بتزت "حجر
+                    نرد" (Dice) والكمبيوتر بطلعلك جملة بناءً على الاحتمالات اللي عنده.
+                </div>
+                <!-- Image Insertion -->
+                <div style="text-align: center; margin: 15px 0;">
+                    <img src="img/6.png" alt="Generative Model Dice"
+                        style="max-width: 80%; border: 2px solid var(--primary); border-radius: 15px; box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);">
+                    <div style="color: var(--text-muted); font-size: 8.5pt; margin-top: 5px; font-family: 'Inter';">
+                        Illustration: The Generative "Dice" Process</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why is LM Useful? -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🤔</span> 02. ليش الـ LM مفيد أصلاً؟
+            </h2>
+
+            <div class="en-text">Quantify the uncertainties in natural language</div>
+            <div class="ar-text">
+                لأن لغتنا كبشر فيها "شك" و "غموض" (Uncertainties)، الـ LM بيجي عشان "يبرمج" هاض الشك ويحوله لأرقام نقدر
+                نتعامل معها.
+            </div>
+
+            <div class="ar-text" style="margin-top: 15px; font-weight: bold; color: var(--primary);">بجاوبنا على أسئلة
+                زي:</div>
+
+            <!-- Use Cases Grid -->
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+
+                <!-- Use Case 1 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.5); padding: 12px; border-radius: 10px; border-left: 4px solid var(--success);">
+                    <div class="en-text" style="background: none; border: none; padding: 0; font-size: 9pt;">Speech
+                        Recognition</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        إذا سمعنا "John" و "feels"، شو الكلمة الجاي؟ <span class="highlight">happy</span> ولا <span class="highlight">habit</span>؟ الـ LM بعرف إن "happy"
+                        احتماليته أعلى بمليون مرة بهاض السياق.
+                    </div>
+                </div>
+
+                <!-- Use Case 2 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.5); padding: 12px; border-radius: 10px; border-left: 4px solid var(--primary);">
+                    <div class="en-text" style="background: none; border: none; padding: 0; font-size: 9pt;">Information
+                        Retrieval & Text Categorization</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        إذا شفنا كلمة "baseball" تكررت 3 مرات وكلمة "game" مرة.. شو احتمال يكون المقال عن الـ
+                        <span class="highlight">Sports</span>؟ أكيد عالي جداً!
+                    </div>
+                </div>
+
+                <!-- Use Case 3 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.5); padding: 12px; border-radius: 10px; border-left: 4px solid var(--accent);">
+                    <div class="en-text" style="background: none; border: none; padding: 0; font-size: 9pt;">Information
+                        Retrieval (Query Prediction)</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">
+                        لو المستخدم مهتم بأخبار الرياضة، قديش احتمال إنه يكتب كلمة "baseball" بالسؤال تبعه؟ الـ LM
+                        بساعدنا نتوقع "اهتمامات" المستخدم.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 02</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 03 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">The Simplest Model: Unigram LM</h1>
+        </header>
+
+        <!-- Unigram LM Core Concepts -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>1️⃣</span> 03. أبسط موديل: الـ Unigram LM
+            </h2>
+
+            <div class="en-text">Generate text by generating each word INDEPENDENTLY</div>
+            <div class="ar-text">
+                يا خالي، الـ <span class="highlight">Unigram Model</span> هو "أبسط" طريقة لنتعامل مع اللغة. فكرته قائمة على "الاستقلالية التامة"؛
+                يعني بفترض إنه كل كلمة بتطلع من السيستم مالهاش أي دخل بالكلمة اللي قبلها ولا اللي بعدها.
+            </div>
+
+            <!-- Mathematical Formula -->
+            <div class="formula-box">
+                p(w₁ w₂ ... wₙ) = p(w₁)p(w₂) ... p(wₙ)
+            </div>
+
+            <div class="ar-text">
+                <b>القانون بحكي:</b> احتمالية جملة كاملة هي ببساطة <span class="highlight">حاصل ضرب</span> احتمالية كل كلمة فيها لحالها. كأننا بنزت
+                حجر نرد لكل كلمة وبنضرب النتائج ببعض.
+            </div>
+        </div>
+
+        <!-- Parameters & Word Distribution -->
+        <div class="section-card" style="border-right: 4px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>📊</span> 04. الـ Parameters وتوزيع الكلمات
+            </h2>
+
+            <div class="en-text">Parameters: {p(wᵢ)} where Σ p(wᵢ) = 1 (N is voc. size)</div>
+            <div class="ar-text">
+                الموديل هاض عنده "ميزان" (Parameters) لكل كلمة في القاموس تبعه. مجموع احتمالات كل الكلمات لازم يساوي
+                <span class="highlight">1</span> (يعني 100%).
+            </div>
+
+            <div class="pair-box"
+                style="margin-top: 15px; background: rgba(250, 204, 21, 0.05); border-radius: 8px; padding: 15px; border-right: 4px solid var(--accent);">
+                <div class="en-text" style="background: none; border: none; padding: 0;">Text = sample drawn according
+                    to this word distribution</div>
+                <div class="ar-text">
+                    النص اللي بنشوفه هو عبارة عن "عينة" (Sample) تم سحبها بناءً على هاض التوزيع التكراري للكلمات.
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative Illustration with img/7.png -->
+        <div class="section-card" style="border-top: 4px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>🎲</span> 05. كيف الموديل "بولّد" الجملة؟ (مثال النرد)
+            </h2>
+
+            <div class="ar-text" style="margin-bottom: 15px;">
+                شوفوا هالصورة الفخمة، بتوضح كيف السيستم بحسب احتمالية جملة <span class="highlight">"today is Wed"</span>:
+            </div>
+
+            <!-- Image Center Container -->
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="img/7.png" alt="Unigram LM Dice Example"
+                    style="max-width: 90%; border: 2px solid var(--primary); border-radius: 15px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);">
+                <div
+                    style="color: var(--text-muted); font-size: 8.5pt; margin-top: 10px; font-family: 'Inter'; font-style: italic;">
+                    Fig 7: Generative Process for Unigram LM</div>
+            </div>
+
+            <!-- Calculation Breakdown -->
+            <div
+                style="background: #000; padding: 15px; border-radius: 10px; border: 1px solid var(--success); margin-top: 15px;">
+                <div
+                    style="color: var(--success); font-family: 'JetBrains Mono'; font-size: 10pt; direction: ltr; text-align: left;">
+                    p("today is Wed") <br>
+                    = p("today") * p("is") * p("Wed") <br>
+                    = 0.0002 * 0.001 * 0.000015
+                </div>
+            </div>
+
+            <div class="ar-text" style="margin-top: 10px;">
+                <b>السر هون:</b> زي ما بتشوفوا بالصورة، النرد هو اللي بقرر الكلمة الجاي، وإحنا بس بنضرب الاحتمالات ببعض
+                عشان نطلع بـ "الرقم النهائي" للجملة كاملة.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 03</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 04 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Text Generation & Topic Representation</h1>
+        </header>
+
+        <!-- Diagram 1: Text Generation with Unigram LM -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🎯</span> 06. كيف بتطلع الورقة البحثية من الـ LM؟
+            </h2>
+            <div class="ar-text" style="margin-bottom: 20px;">
+                عملية توليد النص (Text Generation) بتعتمد على "موضوع" كل ملف. لو عندنا موضوعين مختلفين، توزيع الكلمات في
+                النرد رح يختلف تماماً:
+            </div>
+
+            <!-- CSS Diagram: Sampling -->
+            <div
+                style="display: flex; flex-direction: column; gap: 20px; align-items: center; background: rgba(15, 23, 42, 0.4); padding: 20px; border-radius: 15px; border: 1px solid var(--border);">
+
+                <!-- Topic 1 -->
+                <div style="display: flex; align-items: center; gap: 30px; width: 100%; direction: ltr;">
+                    <!-- Probability Distribution (Source) -->
+                    <div
+                        style="flex: 1; background: var(--card-dark); padding: 10px; border: 1px solid #3b82f6; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 8.5pt;">
+                        <div
+                            style="color: #3b82f6; border-bottom: 1px solid #3b82f6; margin-bottom: 5px; font-weight: bold;">
+                            Topic 1: Text Mining</div>
+                        text: 0.2 <br> mining: 0.1 <br> association: 0.01 <br> <span style="color: var(--danger);">food:
+                            0.00001</span>
+                    </div>
+                    <!-- Sampling Arrow -->
+                    <div style="display: flex; flex-direction: column; align-items: center; color: var(--primary);">
+                        <span style="font-size: 8pt; font-weight: bold;">Sampling</span>
+                        <div style="font-size: 20pt;">➔</div>
+                    </div>
+                    <!-- Resulting Document (Output) -->
+                    <div
+                        style="flex: 1; background: #2563eb; color: white; padding: 15px; border-radius: 5px; text-align: center; font-weight: bold; position: relative; box-shadow: 4px 4px 0px #1d4ed8;">
+                        Text Mining Paper
+                        <div
+                            style="position: absolute; top: 0; right: 0; width: 15px; height: 15px; background: #1e293b; clip-path: polygon(100% 0, 0 0, 100% 100%);">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topic 2 -->
+                <div style="display: flex; align-items: center; gap: 30px; width: 100%; direction: ltr;">
+                    <!-- Probability Distribution (Source) -->
+                    <div
+                        style="flex: 1; background: var(--card-dark); padding: 10px; border: 1px solid #f97316; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 8.5pt;">
+                        <div
+                            style="color: #f97316; border-bottom: 1px solid #f97316; margin-bottom: 5px; font-weight: bold;">
+                            Topic 2: Health</div>
+                        food: 0.25 <br> nutrition: 0.1 <br> healthy: 0.05 <br> <span
+                            style="color: var(--primary);">text: 0.0001</span>
+                    </div>
+                    <!-- Sampling Arrow -->
+                    <div style="display: flex; flex-direction: column; align-items: center; color: #f97316;">
+                        <span style="font-size: 8pt; font-weight: bold;">Sampling</span>
+                        <div style="font-size: 20pt;">➔</div>
+                    </div>
+                    <!-- Resulting Document (Output) -->
+                    <div
+                        style="flex: 1; background: #ea580c; color: white; padding: 15px; border-radius: 5px; text-align: center; font-weight: bold; position: relative; box-shadow: 4px 4px 0px #c2410c;">
+                        Food Nutrition Paper
+                        <div
+                            style="position: absolute; top: 0; right: 0; width: 15px; height: 15px; background: #1e293b; clip-path: polygon(100% 0, 0 0, 100% 100%);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-text" style="margin-top: 15px;">
+                <b>الفكرة:</b> إذا كان الملف عن الـ (Text Mining)، احتمال تطلع كلمة "text" عالي جداً (0.2). بينما لو
+                الملف عن الصحة (Health)، احتمال كلمة "food" هو اللي بكسر الدنيا. هاض اللي بنسميه <span class="highlight">Sampling</span>.
+            </div>
+        </div>
+
+        <!-- Diagram 2: LMs for Topic Representation -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>🏢</span> 07. الفرق بين الـ Background والـ Collection والـ Document
+            </h2>
+            <div class="ar-text" style="margin-bottom: 15px;">
+                ركز هون، هاد أهم جدول بكل الشابتر! التمييز بين الثلاث أنواع هو اللي بحدد كيف رح نحسب الـ Relevance:
+            </div>
+
+            <!-- Comparison Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 25px 0; direction: ltr;">
+
+                <!-- Background LM -->
+                <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; position: relative;">
+                    <div
+                        style="position: absolute; right: -15px; top: 10px; font-weight: 900; color: #94a3b8; font-size: 14pt;">
+                        B</div>
+                    <!-- Database Cylinder Icon -->
+                    <div
+                        style="width: 80px; height: 50px; border: 2px solid #94a3b8; border-radius: 50% / 20%; background: rgba(148, 163, 184, 0.1); position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                        <div style="font-size: 6pt; color: #94a3b8; line-height: 1;">General Background<br>English Text
+                        </div>
+                        <div
+                            style="position: absolute; top: -1px; left: -1px; right: -1px; height: 15px; border: 2px solid #94a3b8; border-radius: 50%; background: #1e293b;">
+                        </div>
+                    </div>
+                    <div style="color: #94a3b8; font-size: 15pt;">↓</div>
+                    <div
+                        style="background: #000; padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 7.5pt; color: #94a3b8; border: 1px solid #94a3b8; width: 100%;">
+                        the: 0.03 <br> a: 0.02 <br> is: 0.015 <br> we: 0.01 <br> ... <br> <span
+                            style="color: #ef4444;">food: 0.003</span> <br> computer: 0.00001 <br> text: 0.000006
+                    </div>
+                    <div style="font-weight: bold; font-size: 8pt; color: #94a3b8; margin-top: 5px;">Background LM:
+                        p(w|B)</div>
+                </div>
+
+                <!-- Collection LM -->
+                <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; position: relative;">
+                    <div
+                        style="position: absolute; right: -15px; top: 10px; font-weight: 900; color: var(--primary); font-size: 14pt;">
+                        C</div>
+                    <!-- Database Cylinder Icon -->
+                    <div
+                        style="width: 80px; height: 50px; border: 2px solid var(--primary); border-radius: 50% / 20%; background: rgba(56, 189, 248, 0.1); position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                        <div style="font-size: 6pt; color: var(--primary); line-height: 1;">Computer Science<br>Papers
+                        </div>
+                        <div
+                            style="position: absolute; top: -1px; left: -1px; right: -1px; height: 15px; border: 2px solid var(--primary); border-radius: 50%; background: #1e293b;">
+                        </div>
+                    </div>
+                    <div style="color: var(--primary); font-size: 15pt;">↓</div>
+                    <div
+                        style="background: #000; padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 7.5pt; color: var(--primary); border: 1px solid var(--primary); width: 100%;">
+                        the: 0.032 <br> a: 0.019 <br> is: 0.014 <br> we: 0.011 <br> ... <br> <span
+                            style="color: #60a5fa; font-weight: bold;">computer: 0.004</span> <br> software: 0.0001 <br>
+                        text: 0.000006
+                    </div>
+                    <div style="font-weight: bold; font-size: 8pt; color: var(--primary); margin-top: 5px;">Collection
+                        LM: p(w|C)</div>
+                </div>
+
+                <!-- Document LM -->
+                <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; position: relative;">
+                    <div
+                        style="position: absolute; right: -15px; top: 10px; font-weight: 900; color: var(--success); font-size: 14pt;">
+                        d</div>
+                    <!-- Paper Icon -->
+                    <div
+                        style="width: 70px; height: 45px; background: #f1f5f9; color: #0f172a; padding: 5px; border-radius: 2px; text-align: center; font-weight: bold; font-size: 7pt; position: relative; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+                        Text mining paper
+                        <div
+                            style="position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; background: #94a3b8; clip-path: polygon(100% 100%, 0 100%, 100% 0);">
+                        </div>
+                    </div>
+                    <div style="color: var(--success); font-size: 15pt;">↓</div>
+                    <div
+                        style="background: #000; padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 7.5pt; color: var(--success); border: 1px solid var(--success); width: 100%;">
+                        the: 0.031 <br> ... <br> <span style="color: #fbbf24; font-weight: bold;">text: 0.04</span> <br>
+                        mining: 0.035 <br> association: 0.03 <br> clustering: 0.005 <br> <span
+                            style="color: #3b82f6;">computer: 0.0009</span> <br> <span style="color: #ef4444;">food:
+                            0.000001</span>
+                    </div>
+                    <div style="font-weight: bold; font-size: 8pt; color: var(--success); margin-top: 5px;">Document LM:
+                        p(w|D)</div>
+                </div>
+
+            </div>
+
+            <div class="ar-text">
+                - <b>Background:</b> بمثل "اللغة العامة" (أو، في، من..)، الكلمات المشهورة بكل مكان.
+                <br>
+                - <b>Collection:</b> بمثل "المجال" (CS مثلاً). احتمالية كلمة "computer" رح تزيد شوي.
+                <br>
+                - <b>Document:</b> بمثل "الملف نفسه". هون كلمة "text" و "mining" رح يطيروا للسما لأنه الملف بحكي عنهم.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 04</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 05 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">LMs for Association Analysis</h1>
+        </header>
+
+        <!-- Use Case: Semantic Relations -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🔗</span> 11. كيف بنلاقي الكلمات المرتبطة؟ (Semantic Relations)
+            </h2>
+            <div class="ar-text">
+                يا خالي، الـ <span class="highlight">Language Models</span> مش بس للترتيب، هي كمان بتعرف شو الكلمات "اللي بحبوا بعض".
+                تخيل بدك تعرف شو الكلمات المرتبطة بكلمة <span class="highlight">"computer"</span>. لو رحت على الملفات اللي فيها هاي الكلمة، رح
+                تلاقي كلمة "the" موجودة كتير.. بس هل "the" مرتبطة بـ "computer"؟ أكيد لأ!
+            </div>
+
+            <!-- CSS Diagram: Normalization Flow -->
+            <div
+                style="background: rgba(15, 23, 42, 0.4); padding: 25px; border-radius: 15px; border: 1px solid var(--border); margin: 20px 0; direction: ltr;">
+                <div style="display: grid; grid-template-columns: 1.2fr 0.3fr 1fr; gap: 20px; align-items: center;">
+
+                    <!-- Left Column: Inputs -->
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Topic LM -->
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div
+                                style="width: 70px; height: 45px; border: 2px solid #3b82f6; border-radius: 50% / 20%; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 5pt; background: rgba(59, 130, 246, 0.1);">
+                                <div
+                                    style="position: absolute; top: -1px; left: -1px; right: -1px; height: 12px; border: 2px solid #3b82f6; border-radius: 50%; background: #1e293b;">
+                                </div>
+                                <span style="margin-top: 8px;">Docs with<br>"computer"</span>
+                            </div>
+                            <div
+                                style="flex: 1; background: #000; padding: 10px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 7.5pt; color: #3b82f6; border: 1px solid #3b82f6;">
+                                <b>Topic LM: p(w|comp)</b><br>
+                                the: 0.032 <br> computer: 0.004 <br> software: 0.0001
+                            </div>
+                        </div>
+
+                        <!-- Background LM -->
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div
+                                style="width: 70px; height: 45px; border: 2px solid #94a3b8; border-radius: 50% / 20%; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 5pt; background: rgba(148, 163, 184, 0.1);">
+                                <div
+                                    style="position: absolute; top: -1px; left: -1px; right: -1px; height: 12px; border: 2px solid #94a3b8; border-radius: 50%; background: #1e293b;">
+                                </div>
+                                <span style="margin-top: 8px;">Background<br>English</span>
+                            </div>
+                            <div
+                                style="flex: 1; background: #000; padding: 10px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 7.5pt; color: #94a3b8; border: 1px solid #94a3b8;">
+                                <b>Background: p(w|B)</b><br>
+                                the: 0.03 <br> computer: 0.00001
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow Column -->
+                    <div
+                        style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 25pt; color: var(--accent);">
+                        <div>➦</div>
+                        <div style="font-size: 10pt; font-weight: bold;">Ratio</div>
+                        <div>➥</div>
+                    </div>
+
+                    <!-- Right Column: Result -->
+                    <div
+                        style="background: rgba(250, 204, 21, 0.05); padding: 15px; border-radius: 12px; border: 2px solid var(--accent);">
+                        <div
+                            style="color: var(--accent); font-weight: bold; font-size: 8pt; margin-bottom: 10px; text-align: center; border-bottom: 1px solid var(--accent);">
+                            Normalized Topic LM: p(w|comp)/p(w|B)</div>
+                        <div
+                            style="font-family: 'JetBrains Mono'; font-size: 9pt; display: flex; flex-direction: column; gap: 5px;">
+                            <div
+                                style="display: flex; justify-content: space-between; color: var(--success); font-weight: bold;">
+                                <span>computer:</span> <span>400</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; color: var(--primary);">
+                                <span>software:</span> <span>150</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; color: var(--primary);">
+                                <span>program:</span> <span>104</span>
+                            </div>
+                            <div style="border-top: 1px dotted var(--border); margin: 5px 0;"></div>
+                            <div
+                                style="display: flex; justify-content: space-between; color: var(--text-muted); opacity: 0.7;">
+                                <span>the:</span> <span>1.1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>الحل الذكي: الـ Normalization (التطبيع)!</b>
+                بدل ما نسأل "شو أكتر كلمات موجودة؟" (وهاض غلط لأنه الـ noisy words رح يفوزوا)، بنسأل:
+                <span style="color: var(--accent); font-weight: bold;">"شو الكلمات اللي ظهورها هون غريب ومميز مقارنة
+                    باللغة الطبيعية؟"</span>
+                <br><br>
+                <b>ليش بنقسم على الـ Background؟</b>
+                <ul style="margin-right: 20px; list-style-type: circle;">
+                    <li>كلمة <b>"the"</b>: احتمالها عالي بكل مكان. لما نقسم رقم عالي (Topic) على رقم عالي (Background)،
+                        النسبة بتطلع <b>1</b> (يعني وجودها "عادي" ومش مميز).</li>
+                    <li>كلمة <b>"computer"</b>: احتمالها في موضوعنا عالي، بس في اللغة العامة "نادر". لما نقسم رقم عالي
+                        على رقم صغير جداً، النسبة "بتنفجر" وبتوصل لـ <b>400</b>!</li>
+                </ul>
+                <br>
+                هيك السيستم بيفهم إنه <b>"computer"</b> هي الهوية الحقيقية لهذا الموضوع، وبقدر يستخدمها عشان يقترح لك
+                كلمات بحث تانية (Query Expansion) أو يفهم المواضيع المرتبطة ببعض.
+            </div>
+
+            <!-- Pro Tip Box -->
+            <div
+                style="margin-top: 20px; background: rgba(52, 211, 153, 0.05); border: 1px dashed var(--success); padding: 15px; border-radius: 10px;">
+                <div
+                    style="color: var(--success); font-weight: 800; font-size: 10pt; margin-bottom: 5px; direction: rtl; text-align: right;">
+                    💡 زبدة الكلام (The Takeaway):</div>
+                <div class="ar-text" style="font-size: 9.5pt;">
+                    الـ <span class="highlight">Language Model</span> مش بس "عدّاد كلمات"، هو "محلل شخصيات". التقسيم على الـ Background هو اللي
+                    بفلتر "الضجيج" وبخلينا نشوف "الإشارة" (The Signal) اللي بتميز كل موضوع عن غيره.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 05</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 06 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Section 2: Probabilistic Retrieval</h1>
+        </header>
+
+        <!-- Basic Idea -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🎯</span> 12. الفكرة الأساسية: كيف نرتب بالاحتمالات؟
+            </h2>
+            <div class="ar-text">
+                يا جماعة، الهدف من الـ <span class="highlight">Probabilistic Models</span> بسيط جداً: بدنا نرتب الملفات حسب احتمال إنها تكون
+                "مفيدة" (Relevant).
+                الدالة اللي بنستخدمها للترتيب هي:
+            </div>
+
+            <div class="formula-box" style="margin: 15px 0;">
+                f(q, d) = p(R=1 | d, q)
+            </div>
+
+            <div class="ar-text">
+                يعني إحنا بنحاول نحسب احتمال إنه الـ Document اللي اسمه (d) يكون Relevant (الـ R=1) بالنسبة للـ
+                Query اللي اسمها (q).
+            </div>
+        </div>
+
+        <!-- Data Example -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>📊</span> 13. كيف بنحسب الاحتمال من "البيانات"؟
+            </h2>
+            <div class="ar-text">
+                تخيّل لو كان عندنا تاريخ طويل من بحث الطلاب (Query Logs)، وكل ما طالب يبحث عن شي، كنا بنسجل هل كبس
+                على الملف ولا لأ.
+            </div>
+
+            <!-- CSS Table / Data Representation -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; margin: 15px 0;">
+                <!-- Left: The Data Log -->
+                <div style="background: #000; padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                    <div
+                        style="color: var(--text-muted); font-size: 8pt; margin-bottom: 10px; font-family: 'Inter'; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 5px;">
+                        📜 Historical Search Log</div>
+                    <table
+                        style="width: 100%; color: #f1f5f9; font-family: 'JetBrains Mono'; font-size: 8.5pt; text-align: left; direction: ltr; border-collapse: collapse;">
+                        <thead>
+                            <tr style="color: var(--accent); border-bottom: 1px solid var(--border);">
+                                <th style="padding: 5px;">Query</th>
+                                <th style="padding: 5px;">Doc</th>
+                                <th style="padding: 5px;">Rel (R)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 5px;">q1</td>
+                                <td style="padding: 5px;">d1</td>
+                                <td style="padding: 5px; color: var(--success);">1</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px;">q1</td>
+                                <td style="padding: 5px;">d2</td>
+                                <td style="padding: 5px; color: var(--success);">1</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px;">q1</td>
+                                <td style="padding: 5px;">d3</td>
+                                <td style="padding: 5px; color: var(--danger);">0</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px;">q1</td>
+                                <td style="padding: 5px;">d1</td>
+                                <td style="padding: 5px; color: var(--danger);">0</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px;">q1</td>
+                                <td style="padding: 5px;">d2</td>
+                                <td style="padding: 5px; color: var(--success);">1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right: Calculations -->
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div class="en-text"
+                        style="background: rgba(250, 204, 21, 0.1); border-left-color: var(--accent); font-size: 8.5pt;">
+                        p(R=1|q,d) = count(q, d, R=1) / count(q, d)
+                    </div>
+                    <div
+                        style="background: rgba(15, 23, 42, 0.8); padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 9pt; border: 1px solid var(--border); direction: ltr;">
+                        <div style="color: var(--success);">p(R=1|q1, d1) = 1 / 2 = 0.5</div>
+                        <div style="color: var(--success);">p(R=1|q1, d2) = 2 / 2 = 1.0</div>
+                        <div style="color: var(--danger);">p(R=1|q1, d3) = 0 / 2 = 0.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                يا ساتر! هل شفتوا كيف الـ d2 "فاز" وصار احتماله 100%؟ لأنه كل ما حدا بحث عن q1، الكل راح عموثق d2.
+                أما d1 فكان "نص نص".
+            </div>
+        </div>
+
+
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 06</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 07 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">The "Imaginary" Relevant Document</h1>
+        </header>
+
+        <!-- The Assumption -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🧠</span> 15. الافتراض العبقري: "الموثق المتخيّل"
+            </h2>
+            <div class="ar-text">
+                عشان نحل مشكلة البيانات الناقصة، العلماء حكوا: "انسوا العد المباشر، خلينا نفكر بطريقة تانية".
+                تخيل إنه الطالب قبل ما يكتب الـ Query، بكون في بباله <span class="highlight">"موثق مثالي" (Imaginary Relevant Document)</span>، وهو
+                قاعد بكتب كلمات البحث بناءً على هاض الموثق اللي بباله.
+            </div>
+
+            <div class="formula-box" style="margin: 15px 0; border-color: var(--primary); color: var(--primary);">
+                p(R=1 | d, q) &approx; p(q | d, R=1)
+            </div>
+
+            <div class="ar-text">
+                <b>شو يعني هاض الكلام؟</b>
+                يعني إحنا رح نسأل حالنا: "لو افترضنا إن الملف (d) هو الملف المثالي اللي بدور عليه المستخدم (R=1)، شو
+                احتمال إنه المستخدم يكتب هاي الكلمات بالذات (q)؟".
+            </div>
+        </div>
+
+        <!-- Generative Example -->
+        <div class="section-card" style="border-right: 6px solid var(--success);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--success);">
+                <span>🔎</span> 16. مثال عملي: مين الملف "الأقرب" للخيال؟
+            </h2>
+            <div class="ar-text">
+                البحث هو: <span style="color: var(--danger); font-weight: bold; font-family: 'Inter';">"news about
+                    presidential campaign"</span>
+            </div>
+
+            <!-- CSS Document Matching Box -->
+            <div style="display: flex; flex-direction: column; gap: 12px; margin: 15px 0;">
+
+                <!-- d1 -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-family: 'JetBrains Mono'; font-weight: bold; color: var(--accent); width: 25px;">d1
+                    </div>
+                    <div
+                        style="flex: 1; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-family: 'Inter'; font-size: 9pt;">
+                        ... <span style="color: var(--danger); font-weight: bold;">news about</span> ...
+                    </div>
+                    <div style="font-size: 8pt; color: var(--text-muted);">p(q|d1) is <b>Low</b></div>
+                </div>
+
+                <!-- d2 -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-family: 'JetBrains Mono'; font-weight: bold; color: var(--accent); width: 25px;">d2
+                    </div>
+                    <div
+                        style="flex: 1; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-family: 'Inter'; font-size: 9pt;">
+                        ... <span style="color: var(--danger); font-weight: bold;">news about</span> organic food <span
+                            style="color: var(--danger); font-weight: bold;">campaign</span> ...
+                    </div>
+                    <div style="font-size: 8pt; color: var(--text-muted);">p(q|d2) is <b>Medium</b></div>
+                </div>
+
+                <!-- d4 (The Winner) -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-family: 'JetBrains Mono'; font-weight: bold; color: var(--success); width: 25px;">
+                        d4</div>
+                    <div
+                        style="flex: 1; background: rgba(52, 211, 153, 0.1); border: 1px solid var(--success); padding: 8px 12px; border-radius: 6px; font-family: 'Inter'; font-size: 9pt; position: relative;">
+                        <span style="color: var(--danger); font-weight: 800;">news of presidential campaign</span> ...
+                        presidential candidate ...
+                        <div style="position: absolute; right: -5px; top: -10px; font-size: 15pt;">🏆</div>
+                    </div>
+                    <div style="font-size: 8pt; color: var(--success); font-weight: bold;">High p(q|d4)</div>
+                </div>
+
+                <!-- d5 -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-family: 'JetBrains Mono'; font-weight: bold; color: var(--accent); width: 25px;">d5
+                    </div>
+                    <div
+                        style="flex: 1; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-family: 'Inter'; font-size: 9pt;">
+                        ... <span style="color: var(--danger); font-weight: bold;">news</span> of organic food <span
+                            style="color: var(--danger); font-weight: bold;">campaign</span> ... <span
+                            style="color: var(--danger); font-weight: bold;">campaign...campaign</span>
+                    </div>
+                    <div style="font-size: 8pt; color: var(--text-muted);">Repeated but irrelevant</div>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>ليش d4 هو الفائز؟</b>
+                لأنه بيحتوي على أهم الكلمات بنفس السياق اللي المستخدم "ممكن" يكون فكر فيه. لهيك احتمالية إن مستخدم "بدو
+                d4" يكتب الـ Query تبعنا هي أعلى احتمالية.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 07</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 08 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Summary: Section 2</h1>
+        </header>
+
+        <!-- The Big Picture Summary -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>📝</span> 17. الخلاصة: الرحلة من الـ Relevance للـ LM
+            </h2>
+            <div class="ar-text">
+                يا خالي، خلينا نلم القصة كلها في ثلاث نقاط، هدول هم "زبدة" السكشن الثاني واللي لازم يكونوا محفورين في
+                مخك:
+            </div>
+
+            <!-- Summary List -->
+            <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
+                <!-- Step 1 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.6); padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent);">
+                    <div style="color: var(--accent); font-weight: 800; font-size: 10pt; margin-bottom: 5px;">1. الهدف
+                        الأساسي (The Goal)</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">ترتيب الملفات حسب احتمال ارتباطها بالبحث: <code
+                            style="color: var(--accent);">p(R=1 | q, d)</code></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.6); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary);">
+                    <div style="color: var(--primary); font-weight: 800; font-size: 10pt; margin-bottom: 5px;">2. التحول
+                        للـ Query Likelihood</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">عشان نحسب الـ Relevance بطريقة عملية، بنفترض إن
+                        المستخدم "بقلد" الملف المثالي: <code style="color: var(--primary);">f(q,d) = p(q | d)</code>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.6); padding: 15px; border-radius: 10px; border-left: 4px solid var(--success);">
+                    <div style="color: var(--success); font-weight: 800; font-size: 10pt; margin-bottom: 5px;">3. الأداة
+                        السحرية (The Tool)</div>
+                    <div class="ar-text" style="font-size: 9.5pt;">كيف بنحسب احتمال نص معين (q) بناءً على ملف (d)؟ هون
+                        بيجي دور الـ <span class="highlight">Language Model</span>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Bridge to Section 3 -->
+        <div class="section-card" style="background: rgba(56, 189, 248, 0.05); border: 1px dashed var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; border: none;">
+                <span>🌉</span> الجسر للقسم القادم
+            </h2>
+            <div class="ar-text">
+                الآن صرت فاهم ليش إحنا ميتين على شي اسمه <span class="highlight">Language Models</span>.
+                بدون الـ LM، ما بنقدر نحسب الـ <span class="highlight">Query Likelihood</span>.
+                <br><br>
+                في القسم الجاي، رح نتعلم كيف الـ LM بيقدر يحول ملف كبير لـ "أرقام واحتماليات" عشان نقدر نحسب:
+            </div>
+            <div class="formula-box" style="font-size: 14pt; background: #000;">
+                p( <span style="color: var(--danger);">"presidential campaign"</span> | <span
+                    style="color: var(--success);">d</span> ) = ?
+            </div>
+            <div class="ar-text" style="text-align: center; color: var(--text-muted); font-size: 9pt;">
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 08</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 09 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Section 3: Query Likelihood Model</h1>
+        </header>
+
+        <!-- Statistical LM in IR -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🏗️</span> 18. ما هو الـ Statistical Language Model؟
+            </h2>
+
+            <div class="en-text">A language model is a probabilistic model that predicts the likelihood of generating a
+                sequence of words (like a query or a document).</div>
+            <div class="ar-text">
+                يا خالي، الـ <span class="highlight">Language Model</span> هو ببساطة "ماكينة احتمالات" بتعرف شو احتمالية ظهور جملة أو تسلسل كلمات
+                معين. بعطيك رقم بقلك قديه هاد النص منطقي ومحتمل الحدوث في هاي اللغة.
+            </div>
+
+            <div class="en-text">In IR, we build a language model for each document and rank documents based on the
+                probability that their model generates the user's query.</div>
+            <div class="ar-text">
+                <b>في مجال الـ IR:</b> الفكرة غير! إحنا بنمسك كل ملف (Document) وبنبني له موديل احتمالي خاص فيه. وبعدين
+                بنرتب الملفات حسب: "أي موديل احتمالية إنه يولّد كلمات الـ Query تبع المستخدم أعلى؟".
+            </div>
+
+            <!-- Simple Words Summary -->
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin: 15px 0;">
+                <div
+                    style="color: var(--accent); font-weight: 800; font-size: 11pt; margin-bottom: 10px; direction: rtl; text-align: right;">
+                    📌 المبدأ المختصر (In Simple Words):</div>
+                <div class="ar-text" style="font-size: 10pt;">
+                    - <b>Each document = a small model</b> that tells you how likely it is to generate words.
+                    <br>
+                    - <b>A good matching document</b> = a document whose language model likely produces the query words.
+                </div>
+            </div>
+        </div>
+
+        <!-- The Query Likelihood Model Idea -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>🧮</span> 19. ما هو الـ Query Likelihood Model؟
+            </h2>
+            <div class="en-text">Estimate the probability that the document's language model would generate the query.
+                Then, we rank documents by that probability.</div>
+
+            <div class="ar-text">
+                يا خالي، ركز معي لأنه هاي هي "الخطة" تبعت السيستم كله:
+                بدنا نغير طريقة تفكيرنا من "هل الكلمات موجودة؟" لـ <span class="highlight">"قديه احتمالية توليد هاي الكلمات؟"</span>.
+                <br><br>
+                <b>تخيل المبدأ كالتالي:</b>
+                لو اعتبرنا إن كل ملف (Document) هو شخص قاعد بيكتب جمل عشوائية طول اليوم، وإنت جيت سألت:
+                <span style="color: var(--accent);">"مين أكثر واحد فيهم احتمال إنه يكتب جملة البحث تبعتي؟"</span>.
+                <br><br>
+                الشخص اللي تخصصه "رياضيات" رح يكتب كلمات رياضيات كتير، فـ احتمال إنه يكتب Query عن الخوارزميات عالي
+                جداً.. بينما الشخص اللي تخصصه "طبخ" احتماله شبه صفر.
+            </div>
+
+            <!-- Math Box -->
+            <div
+                style="background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); margin: 20px 0;">
+                <div
+                    style="text-align: center; color: var(--primary); font-family: 'JetBrains Mono'; font-size: 14pt; margin-bottom: 5px;">
+                    Score(D, Q) = P(Q | D)
+                </div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 9pt; font-family: 'Inter';">
+                    <b>P(Q|D)</b>: Probability that query Q is generated by document D.
+                </div>
+            </div>
+
+            <div class="ar-text"
+                style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary);">
+                <b>📌 ليش بنرتب حسب هاي الاحتمالية؟</b>
+                لأننا بنفترض إن المستخدم لما كتب الـ Query، كان في بباله "موضوع" معين. الملف اللي بملك أعلى <span class="highlight">P(Q|D)</span>
+                هو الملف اللي "بِحكي" في هاد الموضوع أكثر شي، فـ هو الأحق بالمركز الأول!
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 09</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 10 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">The Unigram Language Model</h1>
+        </header>
+
+        <!-- Definition & Assumptions -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🎯</span> 20. ما هو الـ Unigram Language Model؟
+            </h2>
+
+            <div class="en-text">A unigram model is the simplest type of language model.</div>
+            <div class="ar-text">
+                يا بطل، الـ <span class="highlight">Unigram Model</span> هو أسهل وأبسط نوع "موديل لغوي" ممكن تتعامل معه. ليش؟ لأنه بختصر الدنيا
+                كلها بكلمتين: "عدّ واقسم".
+            </div>
+
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin: 15px 0;">
+                <div
+                    style="color: var(--accent); font-weight: 800; font-size: 10pt; margin-bottom: 10px; direction: rtl; text-align: right;">
+                    📌 الافتراضات الأساسية (Assumptions):</div>
+                <ul style="direction: rtl; text-align: right; list-style-type: none; padding-right: 10px;">
+                    <li style="margin-bottom: 8px;">🔹 <b>Generation independently:</b> بيفترض إن كل كلمة بتطلع "لحالها"
+                        وما الها دخل بالكلمة اللي قبلها أو بعدها.</li>
+                    <li style="margin-bottom: 8px;">🔹 <b>No word order matters:</b> ترتيب الكلمات مش مهم (Bag of
+                        Words). "أكل الولد التفاحة" هي نفسها "التفاحة الولد أكل" بالنسبة لهاد الموديل.</li>
+                    <li>🔹 <b>Simplifying assumption:</b> هو افتراض "قوي جداً" وببسط الدنيا، بس بخلي الحسابات سهلة
+                        وسريعة.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- The Math of Unigram -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>🧮</span> 21. الرياضيات وراء الـ Unigram
+            </h2>
+
+            <div class="en-text">Under a unigram model, the probability of a query is: Just multiply the individual
+                probabilities of each query word w.</div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); margin: 20px 0;">
+                <div
+                    style="text-align: center; color: var(--primary); font-family: 'JetBrains Mono'; font-size: 14pt; margin-bottom: 5px;">
+                    P(Q) = &prod;<sub>w &in; Q</sub> P(w)
+                </div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 8.5pt; font-family: 'Inter';">
+                    (Multiply the probability of each word in the query)
+                </div>
+            </div>
+
+            <div class="en-text">In IR, specifically: Multiply the probability of each query term according to document
+                D's language model.</div>
+
+            <!-- Formula Box IR -->
+            <div
+                style="background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); margin: 20px 0;">
+                <div
+                    style="text-align: center; color: var(--primary); font-family: 'JetBrains Mono'; font-size: 14pt; margin-bottom: 5px;">
+                    P(Q|D) = &prod;<sub>w &in; Q</sub> P(w|D)
+                </div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 8.5pt; font-family: 'Inter';">
+                    The ranking function based on query likelihood.
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>شو يعني الـ (&prod;)؟</b>
+                جماعة، هاي علامة الضرب المتسلسل (Product). يعني لو عندك Query فيها 3 كلمات، بطلع احتمال الكلمة الأولى من
+                الملف، والكلمة الثانية، والثالثة.. <span class="highlight">وبتضربهم كلهم ببعض</span>.
+                <br><br>
+                <div style="color: var(--accent); font-weight: bold; text-align: center; font-family: 'Cairo';">
+                    "الـ Score النهائي للملف هو حاصل ضرب احتمالات كلماته!" 💥
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 10</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 11 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Sampling & Query Generation</h1>
+        </header>
+
+        <!-- The Generative Process Image -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🎯</span> 22. كيف بتتم عملية توليد الـ Query؟ (Sampling)
+            </h2>
+
+            <div class="en-text">Query Generation by Sampling Words from Doc</div>
+
+            <!-- Image Container -->
+            <div
+                style="text-align: center; margin: 20px 0; background: #fff; padding: 15px; border-radius: 12px; border: 2px solid var(--border);">
+                <img src="img/8.png" alt="Query Generation Illustration"
+                    style="max-width: 100%; height: auto; border-radius: 4px;">
+                <div
+                    style="color: var(--bg-dark); font-family: 'Inter'; font-size: 8pt; margin-top: 10px; font-weight: 600;">
+                    Visualizing: p(q | d) as a word sampling process
+                </div>
+            </div>
+
+            <div class="en-text">If the user is thinking of this doc, how likely would she pose this query?</div>
+
+            <div class="ar-text">
+                يا خالي، هاي الصورة هي "الجوهر" تبع <b>عملية سحب العينات (Sampling)</b>.
+                العملية ببساطة هي كأنك بتنقي كلمات من سحابة كلمات الملف (Word Cloud) عشان تعمل الـ Query تبعك.
+                <br><br>
+                <b>المنطق هون بيقول:</b>
+                لو المستخدم قاعد بيفكر في هاض الملف بالذات (الملف اللي بيحكي عن حملة رئاسية)، شو احتمال إنه ينقي كلمات
+                مثل <span style="color: var(--danger); font-weight: bold;">"presidential"</span> و <span
+                    style="color: var(--danger); font-weight: bold;">"campaign"</span>؟
+                <br><br>
+                كل ما كانت هاي الكلمات "مشهورة" وموجودة بكثرة في هاض الملف، كل ما زاد احتمال إنه المستخدم "يسحبها"
+                ويحطها في الـ Query تبعه. لهيك بنحكي إنه الـ <b>Sampling</b> هو حجر الأساس في حساب الاحتمالات.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 11</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 12 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Unigram Calculation & Comparison</h1>
+        </header>
+
+        <!-- The Formula Breakdown -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🔢</span> 23. كيف بنفك قِفل المعادلة؟ (The Breakdown)
+            </h2>
+
+            <div class="en-text">Assumption: Each query word is generated independently</div>
+
+            <div class="ar-text">
+                يا خالي، بعد ما عرفنا إننا رح "نضرب" الاحتمالات ببعض، خلينا نشوف كيف بنحسب احتمال الكلمة الواحدة داخل
+                الملف:
+            </div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); margin: 20px 0;">
+                <div
+                    style="text-align: center; color: var(--primary); font-family: 'JetBrains Mono'; font-size: 11pt; line-height: 2;">
+                    p(q= "presidential campaign" | d) <br>
+                    = p("presidential" | d) * p("campaign" | d) <br>
+                    <div style="border-top: 1px solid var(--border); margin: 10px 0; padding-top: 10px;">
+                        = <span style="display: inline-block; text-align: center; vertical-align: middle;">
+                            <div style="border-bottom: 1px solid var(--primary);">c("presidential", d)</div>
+                            <div>|d|</div>
+                        </span>
+                        *
+                        <span style="display: inline-block; text-align: center; vertical-align: middle;">
+                            <div style="border-bottom: 1px solid var(--primary);">c("campaign", d)</div>
+                            <div>|d|</div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>شو يعني c(w, d)؟</b> هو عدّة مرات ظهور الكلمة في الملف.
+                <br>
+                <b>شو يعني |d|؟</b> هو طول الملف الكلي (عدد الكلمات الكلي فيه).
+                ببساطة: بنقسم عدد مرات ظهور الكلمة على طول الملف.
+            </div>
+        </div>
+
+        <!-- Comparative Example -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>⚖️</span> 24. هل هذا الكلام منطقي؟ (Comparison)
+            </h2>
+
+            <div class="en-text">Does Query Likelihood Make Sense? Let's compare d2, d3, and d4.</div>
+
+            <div
+                style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0; font-family: 'JetBrains Mono'; font-size: 9pt;">
+                <!-- d4 -->
+                <div
+                    style="background: rgba(52, 211, 153, 0.1); border: 1px solid var(--success); padding: 12px; border-radius: 8px; direction: ltr;">
+                    <span style="color: var(--success); font-weight: bold;">p(q|d4):</span> (2/|d4|) * (1/|d4|)
+                    <span style="color: var(--text-muted); margin-left: 10px;">→ كسبان (High Score)</span>
+                </div>
+
+                <!-- d3 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border); padding: 12px; border-radius: 8px; direction: ltr;">
+                    <span style="color: var(--primary); font-weight: bold;">p(q|d3):</span> (1/|d3|) * (1/|d3|)
+                    <span style="color: var(--text-muted); margin-left: 10px;">→ متوسط (Medium Score)</span>
+                </div>
+
+                <!-- d2 -->
+                <div
+                    style="background: rgba(251, 113, 129, 0.1); border: 1px solid var(--danger); padding: 12px; border-radius: 8px; direction: ltr;">
+                    <span style="color: var(--danger); font-weight: bold;">p(q|d2):</span> (0/|d2|) * (1/|d2|) = <b
+                        style="font-size: 11pt;">0</b>
+                    <span style="color: var(--text-muted); margin-left: 10px;">→ خسارة (Zero Score)</span>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>النتيجة: d4 > d3 > d2</b>
+                <br>
+                وهاض
+                بالضبط اللي كنا حاسينه من البداية!
+                - <span class="highlight">d4</span> هو الأفضل لأنه حكى عن الموضوع مرتين.
+                - <span class="highlight">d2</span> طلع احتماله صفر لأنه ما جاب سيرة الكلمة الأولى نهائياً.
+                <br>
+                <div style="text-align: center; color: var(--accent); font-weight: bold; margin-top: 10px;">
+                    "الرياضيات أثبتت إحساسنا بالـ Relevance!" 🎯✨
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 12</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 13 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">The Zero Probability Problem</h1>
+        </header>
+
+        <!-- New Scenario -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🛑</span> 25. الكارثة: لو ضفنا كلمة مش موجودة!
+            </h2>
+
+            <div class="en-text">Try a Different Query? q = "presidential campaign <span
+                    style='color: #38bdf8;'>update</span>"</div>
+
+            <div class="ar-text">
+                يا خالي، ركز هون لأنه السيستم "انفجر" حرفياً!
+                كل شغلنا اللي عملناه قبل شوي انضرب بصفر بمجرد ما المستخدم ضاف كلمة بسيطة مش موجودة بالملفات: كلمة <span
+                    style="color: #38bdf8; font-weight: bold;">"update"</span>.
+            </div>
+
+            <!-- Disappointment Box -->
+            <div
+                style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0; font-family: 'JetBrains Mono'; font-size: 9pt;">
+                <!-- d4 -->
+                <div
+                    style="background: rgba(251, 113, 129, 0.05); border: 1px dashed var(--danger); padding: 12px; border-radius: 8px; direction: ltr;">
+                    <span style="color: var(--text-muted);">p(q|d4):</span> (2/|d4|) * (1/|d4|) * <span
+                        style="color: var(--danger); font-weight: 800;">(0/|d4|)</span> = <b
+                        style="font-size: 12pt; color: var(--danger);">0 !</b>
+                </div>
+
+                <!-- d3 -->
+                <div
+                    style="background: rgba(251, 113, 129, 0.05); border: 1px dashed var(--danger); padding: 12px; border-radius: 8px; direction: ltr;">
+                    <span style="color: var(--text-muted);">p(q|d3):</span> (1/|d3|) * (1/|d3|) * <span
+                        style="color: var(--danger); font-weight: 800;">(0/|d3|)</span> = <b
+                        style="font-size: 12pt; color: var(--danger);">0 !</b>
+                </div>
+
+                <!-- d2 -->
+                <div
+                    style="background: rgba(251, 113, 129, 0.05); border: 1px dashed var(--danger); padding: 12px; border-radius: 8px; direction: ltr;">
+                    <span style="color: var(--text-muted);">p(q|d2):</span> (0/|d2|) * (1/|d2|) * <span
+                        style="color: var(--danger); font-weight: 800;">(0/|d2|)</span> = <b
+                        style="font-size: 12pt; color: var(--danger);">0</b>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Why & How -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>🤔</span> 26. ليش هيك صار معنا؟ وكيف الحل؟
+            </h2>
+
+            <div class="en-text">What assumption has caused this problem? How do we fix it?</div>
+
+            <div class="ar-text">
+                <b>شو اللي خرب الطبخة؟</b>
+                السبب هو علامة الضرب المتسلسل (∏). إحنا بنفترض إن الكلمات مستقلة وبنضرب احتمالاتها ببعض.. وفي الرياضيات،
+                أي شيء بتضربه بـ <span class="highlight">صفر</span>، النتيجة النهائية بتطلع <span class="highlight">صفر كبيييير</span>.
+                <br><br>
+                <b>ليش هاض ظلم؟</b>
+                لأن الملف <span class="highlight">d4</span> لسا ملف ممتاز وبيحكي عن الموضوع بكثافة، حرام "أعدمه" وأعطيه صفر بس عشان كلمة وحدة
+                ناقصة!
+            </div>
+
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin: 15px 0;">
+                <div
+                    style="color: var(--accent); font-weight: 800; font-size: 11pt; margin-bottom: 10px; direction: rtl; text-align: right;">
+                    🚀 السؤال القوي:</div>
+                <div class="ar-text" style="text-align: center; color: var(--text);">
+                    هل معقول نترك الملفات "تموت" عشان كلمة؟
+                    <br>
+                    أكيد لأ.. والحل بكلمة وحدة: <span
+                        style="color: var(--primary); font-weight: bold; font-size: 14pt;">Smoothing</span>.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 13</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 14 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Improved Model: Smooth Sampling</h1>
+        </header>
+
+        <!-- The Improved Idea -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🛠️</span> 27. الحل السحري: موديل الملف "المطوّر"
+            </h2>
+
+            <div class="en-text">Improved Model: Sampling Words from a Doc Model</div>
+
+            <!-- Image Container -->
+            <div
+                style="text-align: center; margin: 20px 0; background: #fff; padding: 15px; border-radius: 12px; border: 2px solid var(--border);">
+                <img src="img/9.png" alt="Improved Model with Smoothing"
+                    style="max-width: 100%; height: auto; border-radius: 4px;">
+                <div
+                    style="color: var(--bg-dark); font-family: 'Inter'; font-size: 8pt; margin-top: 10px; font-weight: 600;">
+                    Visualizing: Assigning non-zero probabilities to all terms
+                </div>
+            </div>
+
+            <div class="en-text">How likely would we observe this query from this doc model?</div>
+
+            <div class="ar-text">
+                يا خالي، ركز معي في البوكس الأزرق اللي في الصورة.. هاض هو "السر" اللي رح ينقذنا من كارثة الصفر.
+                <br><br>
+                <b>شو اللي تغير؟</b>
+                بدل ما نعتبر إن الملف هو "بس الكلمات اللي مكتوبة فيه"، صار الملف الآن عبارة عن <span class="highlight">Language Model</span> كامل،
+                بيعطي احتمالية لكل كلمات اللغة، حتى اللي مش موجودة فيه!
+                <br><br>
+                <div
+                    style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 10px; border: 1px solid var(--primary);">
+                    📌 <b>مثال "update":</b>
+                    في الموديل القديم، كانت نسبة ظهورها <span class="highlight">صفر</span>.
+                    أما في الموديل المطور، أعطيناها نسبة صغيرة جداً (مثلاً <span
+                        style="color: var(--accent); font-weight: bold;">0.00001</span>).
+                </div>
+                <br>
+                <b>النتيجة العظيمة:</b>
+                لما نيجي نضرب الاحتمالات ببعض، بطلنا نضرب بصفر. النتيجة رح تطلع رقم صغير جداً، بس <span class="highlight">مش صفر</span>. وهيك بنقدر
+                نرتب الملفات حتى لو كان فيها كلمات ناقصة.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 14</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 15 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Example: Calculating Query Likelihood</h1>
+        </header>
+
+        <!-- The Computation Example -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>📊</span> 28. مثال عملي: الحساب المتسلسل للـ Score
+            </h2>
+
+            <div class="en-text">Computation of Query Likelihood: Comparing d1 and d2</div>
+
+            <!-- Image Container -->
+            <div
+                style="text-align: center; margin: 20px 0; background: #fff; padding: 15px; border-radius: 12px; border: 2px solid var(--border);">
+                <img src="img/10.png" alt="Compute Query Likelihood Example"
+                    style="max-width: 100%; height: auto; border-radius: 4px;">
+            </div>
+
+            <div class="en-text">Query q = "data mining algorithms"</div>
+
+            <div class="ar-text">
+                يا خالي، تعا نتفرج على هاي الرسمة اللي بتلخص كل القصة:
+                <br><br>
+                1️⃣ <span class="highlight">التحويل لـ Models:</span> لاحظ كيف الملفات (d1, d2) تحولت لـ بوكسات احتمالات (Language Models). كل بوكس
+                فيه "قائمة أسعار" احتمالية لكل الكلمات.
+                <br><br>
+                2️⃣ <span class="highlight">الملف الأول (d1):</span> هاض ملف عن الـ "Text Mining". الموديل تبعه بيعطي أرقام عالية لكلمات مثل
+                `mining` و `text`.. وحتى كلمات مثل `food` أعطاها رقم صغير جداً (Smoothing).
+                <br><br>
+                3️⃣ <span class="highlight">الملف الثاني (d2):</span> هاض ملف عن الـ "Food Nutrition". الموديل تبعه "كريم" في كلمات التغذية، وبخيل
+                جداً في كلمات الـ `data mining`.
+            </div>
+
+            <!-- Analysis Box -->
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin: 20px 0;">
+                <div
+                    style="color: var(--accent); font-weight: 800; font-size: 11pt; margin-bottom: 10px; direction: rtl; text-align: right;">
+                    🚀 مين الفائز (The Winner)?</div>
+                <div class="ar-text" style="font-size: 10pt;">
+                    لما نضرب الاحتمالات لـ Query "data mining alg":
+                    <br>
+                    - <span class="highlight">d1</span> رح يضرب أرقام كبيرة (زي 0.2 و 0.1) فـ النتيجة رح تكون عالية.
+                    <br>
+                    - <span class="highlight">d2</span> رح يضرب أرقام صغيرة جداً (زي 0.00001) فـ النتيجة رح تندفن وتكون واطية.
+                </div>
+                <div style="text-align: center; color: var(--success); font-weight: bold; margin-top: 10px;">
+                    النتيجة: d1 بظهر للمستخدم أول واحد! 🏆
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 15</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 16 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Summary: Ranking based on Query Likelihood</h1>
+        </header>
+
+        <!-- Product to Log Transition -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>📈</span> 29. ليش بنحول الضرب لـ "جَمِع"؟ (The Log Trick)
+            </h2>
+
+            <div class="en-text">Ranking Function: f(q,d) = log p(q|d) = &sum; log p(w<sub>i</sub>|d)</div>
+
+            <div class="ar-text">
+                يا خالي، بالرياضيات والبرمجة، لما نضرب أرقام صغيرة كتير (احتمالات) ببعض، النتيجة بتصير "مجهرية"
+                والكمبيوتر بضيع (Underflow).
+                <br>
+                <b>الحل الذكي:</b> نستخدم الـ <span class="highlight">Logarithm</span>.
+            </div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: #000; padding: 20px; border-top: 4px solid var(--primary); border-radius: 12px; margin: 20px 0;">
+                <div
+                    style="text-align: center; color: var(--primary); font-family: 'JetBrains Mono'; font-size: 11pt; line-height: 1.8;">
+                    log p(q | d) = &sum;<sub>w &in; q</sub> c(w, q) log p(w | d)
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>شو استفدنا؟</b>
+                بدل ما نضل نضرب أرقام صعبة، صرنا <span class="highlight">نجمع</span> قيم الـ Log. الجمع أسرع للكمبيوتر وأضمن للحسابات.
+            </div>
+        </div>
+
+        <!-- The Core Conclusion -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>⚖️</span> 30. زبدة الموضوع (The Big Picture)
+            </h2>
+
+            <!-- Slide Box Content -->
+            <div
+                style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin: 15px 0;">
+                <div
+                    style="font-family: 'Inter'; font-size: 10pt; color: var(--accent); margin-bottom: 15px; text-align: center; font-weight: 800;">
+                    Retrieval problem &rarr; Estimation of p(w|d)
+                </div>
+                <div style="font-family: 'Inter'; font-size: 9pt; color: var(--text-muted); text-align: center;">
+                    Different estimation methods &rarr; different ranking functions
+                </div>
+            </div>
+
+            <div class="ar-text">
+                يا بطل، هيك إحنا لخصنا كل علم الـ IR في هاي النقطة:
+                <br><br>
+                - <span class="highlight">مشكلة البحث (Retrieval Problem):</span> هي أصلاً مشكلة "تقدير" للاحتمالية (Estimation).
+                - إذا قدرت تحسب <span class="highlight">p(w|d)</span> صح، رح تطلع نتائج بحث صح.
+                - <span class="highlight">الضربة القوية:</span> كل الفرق بين موديلات الـ IR بيجي من "كيف بنحسب هاي الـ p".
+            </div>
+
+            <!-- Pro Tip -->
+            <div
+                style="margin-top: 15px; background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 8px; border: 1px dashed var(--primary); direction: rtl;">
+                💡 <b>قاعدة قدساوية:</b>انسى كل التعقيد.. المهم هو كيف نقدر احتمال ظهور الكلمة بناءً على الملف. وهاض
+                اللي رح يقودنا للسكشن الجاي: الـ <span class="highlight">Smoothing</span>.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 16</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 17 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Section 4: Smoothing of Language Models</h1>
+        </header>
+
+        <!-- The Estimation Problem -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>📈</span> 31. كيف بنحسب الـ p(w|d) فعلياً؟
+            </h2>
+
+            <div class="en-text">How to Estimate p(w|d): MLE vs. Smoothing</div>
+
+            <!-- Image Container -->
+            <div
+                style="text-align: center; margin: 20px 0; background: #fff; padding: 15px; border-radius: 12px; border: 2px solid var(--border);">
+                <img src="img/11.png" alt="MLE vs Smoothing Graph"
+                    style="max-width: 100%; height: auto; border-radius: 4px;">
+                <div
+                    style="color: var(--bg-dark); font-family: 'Inter'; font-size: 8pt; margin-top: 10px; font-weight: 600;">
+                    Visualization: The "Staircase" (MLE) vs. The "Smooth Curve" (Smoothing)
+                </div>
+            </div>
+
+            <div class="ar-text">
+                يا خالي، ركز في هاي الرسمة لأنها بتلخص صراع مدرستين في علم الإحصاء والـ IR:
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+                <!-- MLE -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--border);">
+                    <div style="color: var(--primary); font-weight: 800; font-size: 10pt; margin-bottom: 8px;">1. Max.
+                        Likelihood (MLE)</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 8.5pt; color: var(--accent); margin-bottom: 10px;">
+                        P<sub>ML</sub>(w|d) = c(w,d) / |d|
+                    </div>
+                    <div class="ar-text" style="font-size: 9pt;">
+                        هي الطريقة "الناشفة". إذا الكلمة مش موجودة، بعطيها <span class="highlight">صفر</span> فوراً. (لاحظ الخط الأسود المدرج كيف
+                        بينزل فجأة).
+                    </div>
+                </div>
+
+                <!-- Smoothed -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--accent);">
+                    <div style="color: var(--accent); font-weight: 800; font-size: 10pt; margin-bottom: 8px;">2.
+                        Smoothed LM</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 8.5pt; color: var(--primary); margin-bottom: 10px;">
+                        P(w|d) > 0 even if c(w,d)=0
+                    </div>
+                    <div class="ar-text" style="font-size: 9pt;">
+                        هي الطريقة "الكريمة". بتوزع شوية احتمالات على كل الكلمات، عشان <span class="highlight">مستحيل</span> تطلع صفر. (لاحظ الخط
+                        الأحمر المنقط كيف بيمتد).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Intuition -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>💡</span> 32. الزبدة من الرسمة
+            </h2>
+            <div class="ar-text">
+                ليش بنوجع راسنا بالمنحنى الأحمر (Smoothing)؟
+                <br><br>
+                لأنه المنحنى الأسود (MLE) بيفترض إنه إذا الكلمة ما ظهرت بالملف، يعني احتمال ظهورها "مستحيل".. وهذا غلط!
+                الكلمة ممكن تكون موجودة بس النص اللي بين إيدينا صغير.
+                <br><br>
+                <div style="text-align: center; color: var(--accent); font-weight: bold;">
+                    "الـ Smoothing هو عملية إعادة توزيع الاحتمالات بعدالة!" ⚖️✨
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 17</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 18 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">How to Smooth a Language Model</h1>
+        </header>
+
+        <!-- Key Question -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>❓</span> 33. السؤال الجوهري: كم "فكة" نعطي للكلمة المختفية؟
+            </h2>
+
+            <div class="en-text">Key Question: What probability should be assigned to an unseen word?</div>
+            <div class="ar-text">
+                يا خالي، إحنا اتفقنا إنه الكلمة اللي مش موجودة مستحيل تأخذ صفر.. بس كمان مش معقول نعطيها رقم عشوائي
+                وخلاص! لازم يكون في "منطق" لهذا الاحتمال.
+            </div>
+
+            <div class="en-text">Let the probability of an unseen word be proportional to its probability given by a
+                reference LM (e.g., Collection LM).</div>
+            <div class="ar-text">
+                <b>القاعدة القدساوية:</b> "إذا ما لقيت الخبر بالبيت، اسأل عنه بالحارة".
+                <br>
+                يعني الكلمة اللي مش موجودة بالملف، بنروح نشوف قديه احتمالية ظهورها في <span class="highlight">كل الملفات</span> (Collection).
+                الكلمة المشهورة أصلاً بالحارة، رح تأخذ احتمالية "تصدّق" أحسن من الكلمة النادرة.
+            </div>
+        </div>
+
+        <!-- The Piecewise Formula -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>🧮</span> 34. المعادلة التشعيبية (The Formula)
+            </h2>
+
+            <!-- Formula Box -->
+            <div
+                style="background: #000; padding: 25px; border-radius: 12px; border: 1px solid var(--primary); margin: 20px 0; font-family: 'JetBrains Mono'; color: var(--text);">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                    <div style="font-size: 14pt;">p(w | d) = </div>
+                    <div style="font-size: 24pt; color: var(--primary); font-weight: 200;">{</div>
+                    <div style="text-align: left; font-size: 11pt;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="color: var(--accent);">P<sub>Seen</sub>(w | d)</span>
+                            <span style="color: var(--text-muted); font-size: 8pt; margin-left: 10px;">if w is seen in
+                                d</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--primary);">&alpha;<sub>d</sub> p(w | C)</span>
+                            <span style="color: var(--text-muted); font-size: 8pt; margin-left: 10px;">otherwise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-text">
+
+                هي المعادلة مقسومة نصين:
+                <ul
+                    style="direction: rtl; text-align: right; list-style-type: none; padding-right: 10px; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✅ <b>لو الكلمة موجودة (Seen):</b> بنستخدم نسخة "مخصومة" شوي من
+                        الاحتمال الأصلي (<span class="highlight">Discounted ML</span>). ليش الخصم؟ عشان نوفر "فكة" للكلمات التانية.</li>
+                    <li>❌ <b>لو الكلمة مش موجودة (Otherwise):</b> بنروح لموديل الـ <b>Collection (C)</b>، وبنضرب
+                        احتمالية الكلمة هناك في معامل صغير (&alpha;).</li>
+                </ul>
+            </div>
+
+            <!-- Pro Tip -->
+            <div
+                style="margin-top: 20px; background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); direction: rtl;">
+                <b>الخلاصة:</b> إحنا بنسرق شوية احتمالية من الكلمات الموجودة، وبنعطيها للكلمات المختفية بناءً على سمعتها
+                في الـ Collection. 🚀✨
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 18</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 19 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Rewriting the Ranking Function</h1>
+        </header>
+
+        <!-- The Derivation -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🧠</span> 35. كيف فرطنا الـ "بعبع" الرياضي؟ (The Derivation)
+            </h2>
+
+            <div class="en-text">Rewriting the Ranking Function with Smoothing</div>
+
+            <!-- Image Container -->
+            <div
+                style="text-align: center; margin: 20px 0; background: #fff; padding: 15px; border-radius: 12px; border: 2px solid var(--border);">
+                <img src="img/12.png" alt="Mathematical Derivation of Smoothing"
+                    style="max-width: 100%; height: auto; border-radius: 4px;">
+                <div
+                    style="color: var(--bg-dark); font-family: 'Inter'; font-size: 8pt; margin-top: 10px; font-weight: 600;">
+                    Visualizing: Splitting matched and unmatched words
+                </div>
+            </div>
+
+            <div class="ar-text">
+                هاي السلايد هي اللي بتخوف الطلاب، بس الفكرة فيها أبسط من ما بتبين.
+                المعادلة اللي تحت هي مجرد إعادة ترتيب عشان الكمبيوتر يقدر يحسب الـ <span class="highlight">Score</span> بسرعة.
+            </div>
+        </div>
+
+        <!-- Breakdown the Parts -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>🧱</span> 36. تحليل أجزاء المعادلة النهائية
+            </h2>
+
+            <div class="ar-text">
+                بعد كل "التعقيد" اللي بالرسمة، طلع معنا 3 أجزاء بيهمونا:
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
+                <!-- Part 1 -->
+                <div
+                    style="background: rgba(56, 189, 248, 0.1); border: 1px solid var(--primary); padding: 12px; border-radius: 8px; direction: rtl;">
+                    <b style="color: var(--primary);">1. جزء الـ Matched Words:</b>
+                    علاقة الكلمات اللي فعلياً موجودة بالملف. هاض الجزء هو <span class="highlight">الأهم</span> لأنه بيتغير من ملف لملف.
+                </div>
+
+                <!-- Part 2 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border); padding: 12px; border-radius: 8px; direction: rtl;">
+                    <b style="color: var(--text);">2. جزء الـ Query Length (|q| log &alpha;):</b>
+                    هاض ثابت لكل الملفات لنفس الـ Query.. يعني ما "بيحابي" ملف على حساب ملف ثاني.
+                </div>
+
+                <!-- Part 3 -->
+                <div
+                    style="background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border); padding: 12px; border-radius: 8px; direction: rtl;">
+                    <b style="color: var(--text);">3. جزء الـ Collection Score:</b>
+                    برضه ثابت لكل الملفات (للمقارنة بين المستندات لنفس الـ Query).
+                </div>
+            </div>
+
+            <!-- Pro Tip -->
+            <div
+                style="margin-top: 20px; background: rgba(14, 165, 233, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); direction: rtl;">
+                ⚠️ <b>زبدة الموضوع:</b> الجزء الأول اللي فيه (P<sub>Seen</sub> / &alpha; p(w|C)) هو اللي بحدد مين الملف
+                اللي رح يطلع الأول. الباقي "تحصيل حاصل" بالحسابات.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 19</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 20 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Benefit of Rewriting</h1>
+        </header>
+
+        <!-- The Marriage with TF-IDF -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🤝</span> 37. المفاجأة الكبرى: السموثنق هو نفسه الـ TF-IDF!
+            </h2>
+
+            <div class="en-text">Smoothing with p(w|C) &rArr; TF-IDF weighting + length norm.</div>
+
+            <!-- Image Container -->
+            <div
+                style="text-align: center; margin: 20px 0; background: #fff; padding: 15px; border-radius: 12px; border: 2px solid var(--border);">
+                <img src="img/13.png" alt="Benefit of Rewriting Formula"
+                    style="max-width: 100%; height: auto; border-radius: 4px;">
+                <div
+                    style="color: var(--bg-dark); font-family: 'Inter'; font-size: 8pt; margin-top: 10px; font-weight: 600;">
+                    Visualizing: Connecting Probabilistic Model with Vector Space Model
+                </div>
+            </div>
+
+            <div class="ar-text">
+                هاي السلايد هي "لحظة التنوير" في المادة.
+                ليش غلبنا حالنا بكل هاي الرياضيات؟ عشان نكتشف إنه الـ <span class="highlight">Probabilistic Model</span> لما نعمله سموثنق، بيتحول
+                لشي بنعرفه وبنحبه: <span class="highlight">TF-IDF</span>.
+            </div>
+        </div>
+
+        <!-- Breakdown the Connection -->
+        <div class="section-card" style="border-right: 6px solid var(--primary);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--primary);">
+                <span>🔍</span> 38. كيف صارت المعجزة؟ (Formula Breakdown)
+            </h2>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin: 15px 0;">
+                <!-- TF -->
+                <div
+                    style="background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 8px; border-left: 4px solid var(--primary); direction: rtl;">
+                    <b>1. الـ TF Weighting:</b> متمثل في <span
+                        style="color: var(--primary);">P<sub>Seen</sub>(w|d)</span>. كل ما زاد تكرار الكلمة بالملف، زاد
+                    السكور.
+                </div>
+
+                <!-- IDF -->
+                <div
+                    style="background: rgba(168, 85, 247, 0.05); padding: 12px; border-radius: 8px; border-left: 4px solid var(--accent); direction: rtl;">
+                    <b>2. الـ IDF Weighting:</b> متمثل في <span style="color: var(--accent);">1 / p(w|C)</span>. الكلمات
+                    المشهورة بالحارة (Collection) بنقلل حظها، والكلمات النادرة بنرفع حظها.
+                </div>
+
+                <!-- Length Norm -->
+                <div
+                    style="background: rgba(52, 211, 153, 0.05); padding: 12px; border-radius: 8px; border-left: 4px solid var(--success); direction: rtl;">
+                    <b>3. الـ Length Normalization:</b> متمثل في <span
+                        style="color: var(--success); font-family: 'JetBrains Mono';">log &alpha;<sub>d</sub></span>.
+                    هاض المعامل بضمن إنه الملفات الطويلة ما "تفتري" على الملفات القصيرة بمجرد طولها.
+                </div>
+            </div>
+
+            <div class="ar-text">
+                <b>ليش في أجزاء بالرسمة مكتوب عليها "Ignore for ranking"؟</b>
+                لأنها قيم ثابتة لكل الملفات في نفس عملية البحث، فما بتأثر مين الأول ومين الثاني.. لهيك بنشيلها عشان
+                "نسهل الحسابات" ونخلي البرمجية سريعة (Efficient Computation).
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 20</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 21 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Summary of the Smoothing Idea</h1>
+        </header>
+
+        <!-- The Big Recap -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>📝</span> 39. ملخص فكرة السموثنق (The Smoothing Recap)
+            </h2>
+
+            <div class="ar-text">
+                قبل ما ندخل في "الطرق البرمجية" للسموثنق، خلينا نلخص اللي فهمناه لحد الآن:
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
+                <!-- Necessity -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--border); direction: rtl;">
+                    <b style="color: var(--primary);">1. ليش السموثنق ضروري؟</b>
+                    لولا السموثنق، كان أي كلمة ناقصة بالملف رح تعطيه سكور <span class="highlight">صفر</span> وتعدمه تماماً من نتائج البحث.. وهاد مش
+                    منطق!
+                </div>
+
+                <!-- Collection LM -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--border); direction: rtl;">
+                    <b style="color: var(--primary);">2. شو المرجع تبعنا؟</b>
+                    فكرة السموثنق العامة بتعتمد على الـ <b>Collection LM (p(w|C))</b>. يعني الكلمة المختفية بنعطيها سكور
+                    بناءً على سمعتها وشهرتها في "الحارة" (كل الداتا سيت).
+                </div>
+
+                <!-- Result -->
+                <div
+                    style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 10px; border: 1px solid var(--primary); direction: rtl;">
+                    <b style="color: var(--primary);">3. شو النتيجة النهائية؟</b>
+                    السموثنق حول لنا الموديل الاحتمالي لمعادلة بتعمل 3 شغلات مع بعض:
+                    <ul style="list-style-type: '⚡ '; padding-right: 20px; margin-top: 10px;">
+                        <li>بتحسب تكرار الكلمة (TF).</li>
+                        <li>بتحسب ندرة الكلمة في الكوليكشن (IDF).</li>
+                        <li>بتعمل "نورمالايزيشن" لطول الملف (Length Normalization).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="en-text" style="text-align: center; border-top: 1px dashed var(--border); padding-top: 15px;">
+                Scoring is primarily based on the sum of weights on matched query terms.
+            </div>
+        </div>
+
+        <!-- The Big Transition -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>🤔</span> 40. السؤال القادم: شو هي "الطرق" الفعلية؟
+            </h2>
+
+            <div class="en-text">However, how exactly should we smooth?</div>
+
+            <div class="ar-text">
+                يا خالي، عرفنا "إنه" لازم نعمل سموثنق.. بس "كيف" بالزبط؟
+                الرياضيات ما بتفهم كلام، بتفهم أرقام وقوانين. السلايدات الجاية رح تفرجينا أشهر طريقتين بيستخدموهم في
+                البحث:
+                <br><br>
+                1️⃣ <b>Jelinek-Mercer Smoothing</b> (Linear Interpolation).
+                <br>
+                2️⃣ <b>Dirichlet Smoothing</b> (Bayesian Smoothing).
+            </div>
+
+            <div style="text-align: center; color: var(--accent); font-weight: bold; margin-top: 15px;">
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 21</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 22 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">The Two Smoothing Methods</h1>
+        </header>
+
+        <!-- JM Smoothing -->
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>1️⃣</span> Jelinek-Mercer (JM) Smoothing
+            </h2>
+            <div class="en-text">Fixed coefficient linear interpolation</div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: #000; padding: 15px; border-radius: 12px; border: 1px solid var(--primary); margin: 15px 0;">
+                <div style="text-align: center; color: var(--primary); font-family: 'JetBrains Mono'; font-size: 10pt;">
+                    p<sub>&lambda;</sub>(w|d) = (1 - &lambda;) p<sub>ML</sub>(w|d) + &lambda; p(w|C)
+                </div>
+            </div>
+
+            <div class="ar-text">
+                هاي الطريقة جداً "دبلوماسية".
+                بتحكي: "بدي آخد شوية من الملف وشوية من الحارة بنسب ثابتة".
+                <br>
+                - <span class="highlight">&lambda; (Lambda):</span> هو المعامل الثابت اللي بحدد قديه نعتمد على الحارة.
+                <br>
+                - <span class="highlight">المبدأ:</span> خلط خطي (Linear Interpolation) بين الموديلين.
+            </div>
+        </div>
+
+        <!-- Dirichlet Smoothing -->
+        <div class="section-card" style="border-right: 6px solid var(--accent);">
+            <h2 class="section-title" style="direction: rtl; text-align: right; color: var(--accent);">
+                <span>2️⃣</span> Dirichlet Prior Smoothing
+            </h2>
+            <div class="en-text">Adding pseudo counts; adaptive interpolation</div>
+
+            <!-- Formula Box -->
+            <div
+                style="background: #000; padding: 15px; border-radius: 12px; border: 1px solid var(--accent); margin: 15px 0;">
+                <div style="text-align: center; color: var(--accent); font-family: 'JetBrains Mono'; font-size: 10pt;">
+                    p<sub>&mu;</sub>(w|d) = <span
+                        style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <div style="border-bottom: 1px solid var(--accent);">c(w,d) + &mu; p(w|c)</div>
+                        <div>|d| + &mu;</div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="ar-text">
+                هاي الطريقة "ذكية" ومرنة (Adaptive).
+                بدل ما تجمع بنسب ثابتة، هي بتضيف "كلمات وهمية" (Pseudo counts) للملف.
+                <br>
+                - <span class="highlight">&mu; (Mu):</span> هو المعامل اللي بحدد قوة السموثنق.
+                <br>
+                - <span class="highlight">الميزة:</span> النسِبة هون بتتغير حسب <span class="highlight">طول الملف (|d|)</span>.. يعني السموثنق "بفهم" حجم الملف اللي بيتعامل
+                معه.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 22</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 23 ================= -->
+    <div class="page">
+        <header class="page-header">
+            <h1 class="header-title">Final Summary: Query Likelihood</h1>
+        </header>
+
+        <div class="section-card">
+            <h2 class="section-title" style="direction: rtl; text-align: right;">
+                <span>🎓</span> الخلاصة النهائية للموديل (The Big Recap)
+            </h2>
+
+            <div class="en-text">Effective ranking functions obtained using pure probabilistic modeling.</div>
+
+            <div style="display: flex; flex-direction: column; gap: 15px; margin: 25px 0;">
+                <!-- Assumption 1 -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--border); direction: rtl;">
+                    <b style="color: var(--primary);">الافتراض الأول:</b> ترتيب الملفات بناءً على "احتمالية إنتاج الملف
+                    للـ Query" هو نفسه الترتيب حسب العلاقة (Relevance).
+                </div>
+
+                <!-- Assumption 2 -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--border); direction: rtl;">
+                    <b style="color: var(--primary);">الافتراض الثاني:</b> الكلمات في الـ Query بتطلع بشكل مستقل عن بعض
+                    (Unigram Model).
+                </div>
+
+                <!-- Assumption 3 -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border: 1px solid var(--border); direction: rtl;">
+                    <b style="color: var(--primary);">الافتراض الثالث:</b> لازم نستخدم الـ <b>Collection LM</b> عشان
+                    نعمل سموثنق ونمنع الـ Zero Score.
+                </div>
+
+                <!-- Assumption 4 -->
+                <div
+                    style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 10px; border: 1px solid var(--primary); direction: rtl;">
+                    <b style="color: var(--primary);">الافتراض الرابع:</b> بنستخدم إما <b>JM</b> (ثابت) أو
+                    <b>Dirichlet</b> (مرن) عشان نطلع السكور النهائي.
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 30px; padding: 20px; border: 2px solid var(--accent); border-radius: 15px; background: rgba(245, 158, 11, 0.05);">
+                <div style="color: var(--accent); font-weight: 800; font-size: 14pt; margin-bottom: 10px;">
+                </div>
+                <div class="ar-text" style="font-size: 11pt;">
+                    خلصنا شابتر الـ <span class="highlight">Probabilistic Model</span> بالكامل.
+                    صرت الآن فاهم ليش جوجل والسيستمز العالمية بترتب النتائج بهي الطريقة المعقدة والذكية.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
+            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 23</div>
+        </div>
+    </div>
+</body>
+
+</html>

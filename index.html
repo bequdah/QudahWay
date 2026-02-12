@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | IR Study Guide</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
+            background: var(--card-dark);
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #334155;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>QudahWay</h1>
+        <p class="subtitle">Information Retrieval Study Guide Collection</p>
+
+        <div class="links-grid">
+            <a href="boolean-retrieval-print.html" class="link-card">
+                <span class="card-title">Boolean Retrieval Model</span>
+                <span class="card-icon">🔍</span>
+            </a>
+
+            <a href="vector_space_model.html" class="link-card">
+                <span class="card-title">Vector Space Model</span>
+                <span class="card-icon">🚀</span>
+            </a>
+
+            <a href="Probabilistic_Model.html" class="link-card">
+                <span class="card-title">Probabilistic Model</span>
+                <span class="card-icon">🎲</span>
+            </a>
+
+            <a href="text-operations-print.html" class="link-card">
+                <span class="card-title">Text Operations</span>
+                <span class="card-icon">📝</span>
+            </a>
+
+            <a href="phrase_queries_print.html" class="link-card">
+                <span class="card-title">Phrase Queries</span>
+                <span class="card-icon">💬</span>
+            </a>
+
+            <a href="skiplist-print.html" class="link-card">
+                <span class="card-title">Skip Lists</span>
+                <span class="card-icon">⏭️</span>
+            </a>
+
+            <a href="text-retrieval-print.html" class="link-card">
+                <span class="card-title">Text Retrieval</span>
+                <span class="card-icon">📚</span>
+            </a>
+
+            <a href="index-print.html" class="link-card">
+                <span class="card-title">Introduction / Index</span>
+                <span class="card-icon">📑</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
