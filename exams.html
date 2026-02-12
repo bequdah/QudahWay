@@ -250,6 +250,144 @@
             margin-top: 5px;
             font-style: italic;
         }
+
+        /* Q3 Specific Styles */
+        .skip-container {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 50px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin: 30px 0;
+            direction: ltr;
+            overflow-x: auto;
+        }
+
+        .list-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 80px;
+            position: relative;
+            min-width: 650px;
+        }
+
+        .list-row:last-child {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            width: 50px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .p1-color {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .p2-color {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+        }
+
+        .nodes-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .node-box {
+            width: 42px;
+            height: 42px;
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .node-box.active-primary {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .node-box.active-accent {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+        }
+
+        .node-box.dim {
+            opacity: 0.2;
+            border-style: dashed;
+        }
+
+        .path-arrow {
+            color: #475569;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0 2px;
+        }
+
+        .skip-curve {
+            position: absolute;
+            top: -35px;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            pointer-events: none;
+        }
+
+        .skip-curve.normal {
+            stroke: #475569;
+            stroke-dasharray: 4;
+            opacity: 0.5;
+        }
+
+        .skip-curve.success-p1 {
+            stroke: var(--primary);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        .skip-curve.success-p2 {
+            stroke: var(--accent);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 8px var(--accent));
+        }
+
+        .skip-label {
+            position: absolute;
+            top: -65px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+        }
+
+        .mcq-group {
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .q-label {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1.05rem;
+        }
     </style>
 </head>
 
@@ -325,10 +463,6 @@
                                     options.forEach(op => html += `<option value="${op}">${op}</option>`);
                                     html += `</select>`;
                                     return html;
-                                }
-
-                                function updateExclusions(sel) {
-                                    // Exclusion logic is defined below in the footer
                                 }
 
                                 for (let i = 2; i <= 11; i++) {
@@ -546,8 +680,8 @@
                                 <tr>
                                     <td>doc3</td>
                                     <td>[12]</td>
-                                    <td>[13]</td>
-                                    <td>[14]</td>
+                                    <td>[10, 13]</td>
+                                    <td>[8, 11, 14]</td>
                                     <td>✅ Yes</td>
                                 </tr>
                                 <tr>
@@ -600,226 +734,160 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Q3: Skip Pointers -->
-        <div class="question-card">
-            <div class="q-header">
-                <span class="q-number">Q 03 [4 Points]</span>
-            </div>
-            <div class="q-text">
-                <strong>Skip Pointers Optimization:</strong><br>
-                Given the following two postings lists for terms <span style="color:var(--primary)">t1</span> and <span
-                    style="color:var(--accent)">t2</span>, each with skip pointers to optimize merging.
+            <!-- Q3: Skip Pointers Upgrade -->
+            <div class="question-card">
+                <div class="q-header">
+                    <span class="q-number">Q 03 [4 Points]</span>
+                </div>
+                <div class="q-text">
+                    <strong>Skip Pointers Optimization:</strong><br>
+                    Given the following two postings lists for terms <span style="color:var(--primary)">t1</span> and
+                    <span style="color:var(--accent)">t2</span>, use skip pointers to optimize merging.
 
-                <div class="skip-diagram"
-                    style="margin: 30px 0; direction: ltr; font-family: 'JetBrains Mono', monospace;">
-                    <!-- P1 Row -->
-                    <div style="display: flex; align-items: center; margin-bottom: 40px; position: relative;">
-                        <div style="width: 40px; font-weight: bold; color: var(--primary);">P1:</div>
-                        <div style="display: flex; gap: 10px;">
-                            <div class="node" id="p1-2">2</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">5</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">8</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node" id="p1-12">12</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node dimmed">17</div>
-                            <div class="arrow dimmed">&rarr;</div>
-                            <div class="node dimmed">18</div>
-                            <div class="arrow dimmed">&rarr;</div>
-                            <div class="node" id="p1-19">19</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">35</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">40</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">45</div>
+                    <!-- THE PREMIUM DIAGRAM -->
+                    <div class="skip-container">
+                        <!-- P1 Row -->
+                        <div class="list-row">
+                            <div class="label p1-color">P1</div>
+                            <div class="nodes-wrapper">
+                                <div class="node-box active-primary">2</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">5</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">8</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box active-primary">12</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box dim">17</div>
+                                <div class="path-arrow dim">→</div>
+                                <div class="node-box dim">18</div>
+                                <div class="path-arrow dim">→</div>
+                                <div class="node-box active-primary">19</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">35</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">40</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">45</div>
+                            </div>
+                            <!-- P1 Skips -->
+                            <svg class="skip-curve normal" style="left: 62px; width: 154px; height: 40px;">
+                                <path d="M 10 35 Q 77 0 144 35" />
+                            </svg>
+                            <svg class="skip-curve success-p1" style="left: 212px; width: 162px; height: 45px;">
+                                <path d="M 10 40 Q 81 -5 152 40" />
+                            </svg>
+                            <div class="skip-label p1-color" style="left: 260px;">Successful Skip (A)</div>
+                            <svg class="skip-curve normal" style="left: 374px; width: 161px; height: 40px;">
+                                <path d="M 10 35 Q 80 0 150 35" />
+                            </svg>
                         </div>
-                        <!-- Skip 2-12 -->
-                        <svg
-                            style="position: absolute; top: -25px; left: 65px; width: 140px; height: 30px; fill:none; stroke:var(--text-muted); stroke-width:1.5;">
-                            <path d="M 0 25 Q 70 -5 140 25" marker-end="url(#arrowhead)" />
-                        </svg>
-                        <!-- Skip 12-19 (Successful) -->
-                        <svg
-                            style="position: absolute; top: -25px; left: 215px; width: 155px; height: 30px; fill:none; stroke:var(--primary); stroke-width:2.5;">
-                            <path d="M 0 25 Q 75 -10 150 25" />
-                            <text x="70" y="5" fill="var(--primary)" style="font-size:12px; font-weight:bold;">SKIP
-                                1</text>
-                        </svg>
-                        <!-- Skip 19-45 -->
-                        <svg
-                            style="position: absolute; top: -25px; left: 380px; width: 165px; height: 30px; fill:none; stroke:var(--text-muted); stroke-width:1.5;">
-                            <path d="M 0 25 Q 80 -5 160 25" marker-end="url(#arrowhead)" />
-                        </svg>
-                    </div>
 
-                    <!-- P2 Row -->
-                    <div style="display: flex; align-items: center; position: relative;">
-                        <div style="width: 40px; font-weight: bold; color: var(--accent);">P2:</div>
-                        <div style="display: flex; gap: 10px;">
-                            <div class="node">1</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">2</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">7</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node" id="p2-20">20</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node dimmed">22</div>
-                            <div class="arrow dimmed">&rarr;</div>
-                            <div class="node dimmed">25</div>
-                            <div class="arrow dimmed">&rarr;</div>
-                            <div class="node" id="p2-30">30</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">40</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">50</div>
-                            <div class="arrow">&rarr;</div>
-                            <div class="node">60</div>
+                        <!-- P2 Row -->
+                        <div class="list-row">
+                            <div class="label p2-color">P2</div>
+                            <div class="nodes-wrapper">
+                                <div class="node-box">1</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box active-accent">2</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">7</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box active-accent">20</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box dim">22</div>
+                                <div class="path-arrow dim">→</div>
+                                <div class="node-box dim">25</div>
+                                <div class="path-arrow dim">→</div>
+                                <div class="node-box active-accent">30</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">40</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">50</div>
+                                <div class="path-arrow">→</div>
+                                <div class="node-box">60</div>
+                            </div>
+                            <!-- P2 Skips -->
+                            <svg class="skip-curve normal" style="left: 62px; width: 154px; height: 40px;">
+                                <path d="M 10 35 Q 77 0 144 35" />
+                            </svg>
+                            <svg class="skip-curve success-p2" style="left: 212px; width: 162px; height: 45px;">
+                                <path d="M 10 40 Q 81 -5 152 40" />
+                            </svg>
+                            <div class="skip-label p2-color" style="left: 260px;">Successful Skip (B)</div>
+                            <svg class="skip-curve normal" style="left: 374px; width: 161px; height: 40px;">
+                                <path d="M 10 35 Q 80 0 150 35" />
+                            </svg>
                         </div>
-                        <!-- Skip 1-20 -->
-                        <svg
-                            style="position: absolute; top: -25px; left: 65px; width: 140px; height: 30px; fill:none; stroke:var(--text-muted); stroke-width:1.5;">
-                            <path d="M 0 25 Q 70 -5 140 25" marker-end="url(#arrowhead)" />
-                        </svg>
-                        <!-- Skip 20-30 (Successful) -->
-                        <svg
-                            style="position: absolute; top: -25px; left: 215px; width: 155px; height: 30px; fill:none; stroke:var(--accent); stroke-width:2.5;">
-                            <path d="M 0 25 Q 75 -10 150 25" />
-                            <text x="70" y="5" fill="var(--accent)" style="font-size:12px; font-weight:bold;">SKIP
-                                2</text>
-                        </svg>
-                        <!-- Skip 30-60 -->
-                        <svg
-                            style="position: absolute; top: -25px; left: 380px; width: 165px; height: 30px; fill:none; stroke:var(--text-muted); stroke-width:1.5;">
-                            <path d="M 0 25 Q 80 -5 160 25" marker-end="url(#arrowhead)" />
-                        </svg>
+                    </div>
+
+                    <div class="mcq-area" style="direction: rtl; text-align: right; margin-top: 30px;">
+                        <div class="mcq-group">
+                            <span class="q-label">1. ما هو ناتج العملية (t1 AND t2)؟</span>
+                            <select class="exam-input" style="width: auto; min-width: 250px;">
+                                <option value="">اختر الإجابة...</option>
+                                <option>[2, 12, 40]</option>
+                                <option>[2, 40]</option>
+                                <option>[1, 2, 40, 45]</option>
+                                <option>[2, 7, 40]</option>
+                            </select>
+                        </div>
+
+                        <div class="mcq-group">
+                            <span class="q-label">2. ما هي مسارات الـ Successful Skips التي تم استخدامها؟</span>
+                            <select class="exam-input" style="width: auto; min-width: 250px;">
+                                <option value="">اختر الإجابة...</option>
+                                <option>فقط المسار من 12 إلى 19</option>
+                                <option>المسارات: (12 &rarr; 19) و (20 &rarr; 30)</option>
+                                <option>جميع مسارات القفز المتاحة</option>
+                                <option>لا يوجد أي قفز ناجح في هذه الحالة</option>
+                            </select>
+                        </div>
+
+                        <div class="mcq-group">
+                            <span class="q-label">3. ما هي أرقام الـ Documents التي تم تجاوزها (Skipped)؟</span>
+                            <select class="exam-input" style="width: auto; min-width: 250px;">
+                                <option value="">اختر الإجابة...</option>
+                                <option>[17, 18]</option>
+                                <option>[22, 25]</option>
+                                <option>[17, 18, 22, 25]</option>
+                                <option>[5, 8, 17, 18]</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <style>
-                    .node {
-                        width: 35px;
-                        height: 35px;
-                        background: var(--card-dark);
-                        border: 1.5px solid var(--border);
-                        border-radius: 6px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 0.85rem;
-                    }
+                <button class="toggle-btn" onclick="toggleAnswer(this)">
+                    <span>👁️ Show Solution Model</span>
+                </button>
 
-                    .dimmed {
-                        opacity: 0.3;
-                        border-style: dashed;
-                    }
-
-                    .arrow {
-                        color: var(--text-muted);
-                        display: flex;
-                        align-items: center;
-                    }
-
-                    .mcq-group {
-                        margin-bottom: 20px;
-                        background: rgba(0, 0, 0, 0.15);
-                        padding: 15px;
-                        border-radius: 10px;
-                        border: 1px solid var(--border);
-                    }
-
-                    .option-label {
-                        display: block;
-                        margin: 8px 0;
-                        cursor: pointer;
-                        padding: 8px;
-                        border-radius: 6px;
-                        transition: 0.2s;
-                    }
-
-                    .option-label:hover {
-                        background: rgba(56, 189, 248, 0.1);
-                    }
-
-                    .q-label {
-                        font-weight: bold;
-                        color: var(--primary);
-                        margin-bottom: 10px;
-                        display: block;
-                    }
-                </style>
-
-                <div class="mcq-area" style="direction: rtl; text-align: right; margin-top: 30px;">
-                    <div class="mcq-group">
-                        <span class="q-label">1. ما هو ناتج العملية (t1 AND t2)؟</span>
-                        <select class="exam-input" style="width: auto; min-width: 200px;">
-                            <option value="">اختر الإجابة...</option>
-                            <option>[2, 12, 40]</option>
-                            <option>[2, 40]</option>
-                            <option>[1, 2, 40, 45]</option>
-                            <option>[2, 7, 40]</option>
-                        </select>
-                    </div>
-
-                    <div class="mcq-group">
-                        <span class="q-label">2. كم عدد الـ Successful Skips التي تمت وما هي؟</span>
-                        <select class="exam-input" style="width: auto; min-width: 200px;">
-                            <option value="">اختر الإجابة...</option>
-                            <option>1 skip (from 12 to 19)</option>
-                            <option>2 skips (from 12&rarr;19 and from 20&rarr;30)</option>
-                            <option>3 skips (all available pointers)</option>
-                            <option>No successful skips</option>
-                        </select>
-                    </div>
-
-                    <div class="mcq-group">
-                        <span class="q-label">3. ما هي أرقام الـ Documents التي تم تجاوزها (Skipped)؟</span>
-                        <select class="exam-input" style="width: auto; min-width: 200px;">
-                            <option value="">اختر الإجابة...</option>
-                            <option>[17, 18]</option>
-                            <option>[22, 25]</option>
-                            <option>[17, 18, 22, 25]</option>
-                            <option>[5, 8, 17, 18]</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="toggle-btn" onclick="toggleAnswer(this)">
-                <span>👁️ Show Solution Model</span>
-            </button>
-
-            <div class="answer-section">
-                <div class="correct-answer-box">
-                    <h4 style="margin-top:0; color:var(--success); font-family: 'Cairo';">✅ الإجابة النموذجية للسؤال
-                        الثالث:</h4>
-                    <div style="direction: rtl; text-align: right;">
-                        <p><strong>1. ناتج التقاطع:</strong> <span style="color:var(--accent)">[2, 40]</span></p>
-                        <p><strong>2. الـ Skips الناجحة:</strong> يوجد <span style="color:var(--accent)">2</span>
-                            كالتالي:</p>
-                        <ul style="margin-right: 20px;">
-                            <li>من 12 إلى 19 (في P1)</li>
-                            <li>من 20 إلى 30 (في P2)</li>
-                        </ul>
-                        <p><strong>3. المستندات التي تم تجاوزها:</strong> <span style="color:var(--accent)">[17, 18, 22,
-                                25]</span></p>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <h4 style="margin-top:0; color:var(--success); font-family: 'Cairo';">✅ الإجابة النموذجية للسؤال
+                            الثالث:</h4>
+                        <div style="direction: rtl; text-align: right;">
+                            <p><strong>1. ناتج التقاطع:</strong> <span style="color:var(--accent)">[2, 40]</span></p>
+                            <p><strong>2. الـ Skips الناجحة:</strong> تم استخدام قفزتين ناجحتين:</p>
+                            <ul style="margin-right: 25px; margin-top: 5px;">
+                                <li>في P1: القفز من 12 مباشرة إلى 19.</li>
+                                <li>في P2: القفز من 20 مباشرة إلى 30.</li>
+                            </ul>
+                            <p><strong>3. المستندات المتجاوزة:</strong> تم تخطي المستندات <span
+                                    style="color:var(--accent)">[17, 18]</span> في القائمة الأولى، و <span
+                                    style="color:var(--accent)">[22, 25]</span> في القائمة الثانية.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- SECOND EXAM SECTION -->
-    <div id="second" class="exam-section">
-        <div style="text-align: center; color: var(--text-muted); padding: 50px;">
-            Exam 2 Coming Soon... ⏳
+        <!-- SECOND EXAM SECTION -->
+        <div id="second" class="exam-section">
+            <div style="text-align: center; color: var(--text-muted); padding: 50px;">
+                Exam 2 Coming Soon... ⏳
+            </div>
         </div>
-    </div>
 
     </div>
 
