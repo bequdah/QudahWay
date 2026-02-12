@@ -108,7 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="icon">☰</span>
         </button>
         <div id="nav-menu">
-            <div class="nav-header">QudahWay IR Map</div>
+            <div class="nav-header">
+                <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> IR Map
+            </div>
             <a href="index.html" class="nav-link">🏠 Home</a>
             <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
             
