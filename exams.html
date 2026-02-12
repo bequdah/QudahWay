@@ -333,44 +333,60 @@
         /* Mobile Responsiveness Improvements */
         @media screen and (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 5px;
+                /* Maximum possible width */
             }
 
             .container {
                 width: 100%;
-                padding-top: 15px;
-                /* Add space for the top home button */
+                max-width: 100%;
+                padding-top: 40px;
+                /* Space for the absolute Home button */
             }
 
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
 
             .tabs {
-                gap: 8px;
+                gap: 5px;
                 padding: 0 5px;
             }
 
             .tab-btn {
-                padding: 10px 15px;
-                font-size: 0.85rem;
+                padding: 8px 10px;
+                font-size: 0.8rem;
                 flex: 1;
                 text-align: center;
+                border-radius: 10px;
             }
 
             .question-card {
-                padding: 18px 15px;
-                border-radius: 12px;
+                padding: 15px 10px;
+                border-radius: 8px;
+                margin-bottom: 15px;
+                margin-left: 0;
+                margin-right: 0;
+                width: auto;
+                /* Fill container */
             }
 
             .q-text,
             .q-text-rtl {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            /* Expand internal blue info boxes to full card width */
+            .q-text div[style*="padding:15px"] {
+                padding: 10px !important;
+                margin: 0 -5px 15px -5px !important;
+                border-radius: 4px;
             }
 
             .interactive-area {
                 margin: 0 -5px;
-                padding-bottom: 5px;
+                padding: 0 5px 5px 5px;
                 -webkit-overflow-scrolling: touch;
             }
 
@@ -381,34 +397,41 @@
                 font-size: 0.75rem;
                 color: var(--text-muted);
                 text-align: right;
-                margin-top: 8px;
-                padding-right: 10px;
+                margin-top: 5px;
                 direction: rtl;
                 opacity: 0.8;
                 font-weight: 600;
             }
 
             .correct-answer-box {
-                padding: 15px 10px;
+                padding: 10px;
+                font-size: 0.85rem;
             }
 
             .option-card {
-                padding: 12px 15px;
+                padding: 10px;
                 font-size: 0.9rem;
+            }
+
+            .toggle-btn {
+                font-size: 1rem;
+                padding: 12px;
             }
         }
 
         @media screen and (max-width: 480px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .header-title p {
-                font-size: 1rem !important;
+                font-size: 0.95rem !important;
+                margin-top: 5px !important;
             }
 
             .q-number {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                padding: 2px 6px;
             }
         }
     </style>
