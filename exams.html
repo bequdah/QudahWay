@@ -469,78 +469,10 @@
                 <div class="q-text"><strong>Skip Pointers Optimization:</strong> Use skip pointers to optimize the merge
                     of t1 and t2 as shown in the exam.</div>
 
-                <div class="skip-container">
-                    <!-- P1 Row -->
-                    <div class="list-row">
-                        <div class="label p1-color">P1</div>
-                        <div class="nodes-wrapper">
-                            <div class="node-box active-primary">2</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">5</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">8</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box active-primary">12</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box dim">17</div>
-                            <div class="path-arrow dim">→</div>
-                            <div class="node-box dim">18</div>
-                            <div class="path-arrow dim">→</div>
-                            <div class="node-box active-primary">19</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">35</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">40</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">45</div>
-                        </div>
-                        <!-- P1 SVGs -->
-                        <svg class="svg-overlay">
-                            <!-- Skip 1: 2 to 12 (Index 0 to 3) Center to Center = 3 * 72px = 216px -->
-                            <path class="curve normal" d="M 22 45 Q 130 0 238 45" />
-                            <!-- Skip 2: 12 to 19 (Index 3 to 6) SUCCESS -->
-                            <path class="curve highlight p1-highlight" d="M 238 45 Q 346 0 454 45" />
-                            <!-- Skip 3: 19 to 45 (Index 6 to 9) -->
-                            <path class="curve normal" d="M 454 45 Q 562 0 670 45" />
-                        </svg>
-                        <div class="curve-tag p1-color" style="left: 398px;">1</div>
-                    </div>
-
-                    <!-- P2 Row -->
-                    <div class="list-row">
-                        <div class="label p2-color">P2</div>
-                        <div class="nodes-wrapper">
-                            <div class="node-box">1</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box active-accent">2</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">7</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box active-accent">20</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box dim">22</div>
-                            <div class="path-arrow dim">→</div>
-                            <div class="node-box dim">25</div>
-                            <div class="path-arrow dim">→</div>
-                            <div class="node-box active-accent">30</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">40</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">50</div>
-                            <div class="path-arrow">→</div>
-                            <div class="node-box">60</div>
-                        </div>
-                        <!-- P2 SVGs -->
-                        <svg class="svg-overlay">
-                            <!-- Skip 1: 1 to 20 (Index 0 to 3) -->
-                            <path class="curve normal" d="M 22 45 Q 130 0 238 45" />
-                            <!-- Skip 2: 20 to 30 (Index 3 to 6) SUCCESS -->
-                            <path class="curve highlight p2-highlight" d="M 238 45 Q 346 0 454 45" />
-                            <!-- Skip 3: 30 to 60 (Index 6 to 9) -->
-                            <path class="curve normal" d="M 454 45 Q 562 0 670 45" />
-                        </svg>
-                        <div class="curve-tag p2-color" style="left: 398px;">2</div>
-                    </div>
+                <div class="skip-image-container"
+                    style="margin: 30px 0; text-align: center; background: rgba(15, 23, 42, 0.4); padding: 20px; border-radius: 20px; border: 1px solid var(--border);">
+                    <img src="output.png" alt="Skip Pointers Diagram"
+                        style="max-width: 100%; height: auto; border-radius: 10px;">
                 </div>
 
                 <div class="mcq-group" style="padding:0; background:none; border:none;">
@@ -593,7 +525,8 @@
                         <div style="direction:rtl; text-align:right">
                             <p>1. ناتج التقاطع المستخرج: <strong>[2, 40]</strong></p>
                             <p>2. مسارات القفز الناجحة بناءً على الرسم: <strong>12&rarr;19</strong> و
-                                <strong>20&rarr;30</strong>.</p>
+                                <strong>20&rarr;30</strong>.
+                            </p>
                             <p>3. المستندات المتجاوزة: <strong>[17, 18, 22, 25]</strong>.</p>
                         </div>
                     </div>
