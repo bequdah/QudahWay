@@ -327,6 +327,10 @@
                                     return html;
                                 }
 
+                                function updateExclusions(sel) {
+                                    // Exclusion logic is defined below in the footer
+                                }
+
                                 for (let i = 2; i <= 11; i++) {
                                     document.write(`<tr>
                                         <td>${i}</td>
@@ -511,8 +515,54 @@
 
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="margin-top:0; color:var(--success); font-family: 'Cairo';">🔍 تحليل الإجابة (Answer
-                            Analysis):</h4>
+                        <h4 style="margin-top:0; color:var(--success); font-family: 'Cairo';">✅ جدول الحل النموذجي
+                            (Solution Table):</h4>
+
+                        <table style="margin-bottom: 25px; background: rgba(0,0,0,0.2);">
+                            <thead>
+                                <tr>
+                                    <th>DocID</th>
+                                    <th>self</th>
+                                    <th>driving</th>
+                                    <th>car</th>
+                                    <th>Match?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>doc1</td>
+                                    <td>[2]</td>
+                                    <td>[3]</td>
+                                    <td>[4]</td>
+                                    <td>✅ Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>doc2</td>
+                                    <td>[1, 5]</td>
+                                    <td>[6]</td>
+                                    <td>[8, 10]</td>
+                                    <td>❌ No</td>
+                                </tr>
+                                <tr>
+                                    <td>doc3</td>
+                                    <td>[12]</td>
+                                    <td>[13]</td>
+                                    <td>[14]</td>
+                                    <td>✅ Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>doc4</td>
+                                    <td>[5]</td>
+                                    <td>[6]</td>
+                                    <td>[8]</td>
+                                    <td>❌ No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4
+                            style="color:var(--primary); font-family: 'Cairo'; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                            🔍 الشرح التفصيلي (Detailed Breakdown):</h4>
 
                         <div
                             style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
