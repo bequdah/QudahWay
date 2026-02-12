@@ -217,22 +217,11 @@
         }
 
         .correct-answer-box {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--success);
-            padding: 15px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            padding: 20px;
             border-radius: 12px;
             direction: ltr;
-        }
-
-        .correct-answer-box table {
-            margin: 0;
-            background: transparent;
-            border: none;
-        }
-
-        .correct-answer-box th {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
         }
 
         @keyframes fadeIn {
@@ -321,27 +310,19 @@
                                 <td>&empty;</td>
                             </tr>
 
-                            <!-- Rows 2-11 generated via loops with smart logic -->
                             <script>
-                                // 1. Expanded Options (Distractors added)
-                                const p1Ops = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, "End"];
-                                const p2Ops = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, "End"];
-                                const actionOps = [
-                                    "Move P1", "Move P2", "Match -> Add",
-                                    "Move P1 & P2", "Skip P1", "Skip P2", "Stop"
-                                ];
                                 const resultOps = [
                                     "Empty (∅)", "Match: 1", "Match: 2", "Match: 3", "Match: 4",
                                     "Match: 5", "Match: 6", "Match: 7", "Match: 9",
                                     "Match: 10", "Match: 11", "Match: 13", "Match: 14", "Match: 15", "End"
                                 ];
+                                const pOps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, "End"];
+                                const actionOps = ["Move P1", "Move P2", "Match -> Add", "Stop"];
 
                                 function createSelect(options, className) {
                                     let html = `<select class="exam-input ${className}" onchange="updateExclusions(this)">`;
                                     html += `<option value="">Select...</option>`;
-                                    options.forEach(op => {
-                                        html += `<option value="${op}">${op}</option>`;
-                                    });
+                                    options.forEach(op => html += `<option value="${op}">${op}</option>`);
                                     html += `</select>`;
                                     return html;
                                 }
@@ -349,8 +330,8 @@
                                 for (let i = 2; i <= 11; i++) {
                                     document.write(`<tr>
                                         <td>${i}</td>
-                                        <td>${createSelect(p1Ops, '')}</td>
-                                        <td>${createSelect(p2Ops, '')}</td>
+                                        <td>${createSelect(pOps, '')}</td>
+                                        <td>${createSelect(pOps, '')}</td>
                                         <td>${createSelect(actionOps, '')}</td>
                                         <td>${createSelect(resultOps, 'result-select')}</td>
                                     </tr>`);
@@ -469,9 +450,7 @@
                 <div class="q-text">
                     <strong>Positional Index Query: <span style="color:var(--accent)">"self driving
                             car"</span></strong><br>
-                    Given the following postings list, fill in the table to evaluate the phrase query.<br>
-                    <span class="hint-text">Select the correct positions list for each term in each document. Check for
-                        consecutive sequence (i, i+1, i+2).</span>
+                    Given the following postings list, fill in the table to evaluate the phrase query.
 
                     <div style="margin: 15px 0; overflow-x: auto;">
                         <table style="min-width: 500px; font-size: 0.8rem;">
@@ -491,14 +470,6 @@
                                 <td>car</td>
                                 <td>{doc1: [4]} {doc2: [8, 10]} {doc3: [8, 11, 14]} {doc4: [8]}</td>
                             </tr>
-                            <tr>
-                                <td>is</td>
-                                <td>{doc1: [5]} {doc2: [3]} {doc3: [5, 15]} {doc4: [1, 2, 9]}</td>
-                            </tr>
-                            <tr>
-                                <td>research</td>
-                                <td>{doc1: [6]} {doc2: [13]} {doc3: [7]} {doc4: [3, 7]}</td>
-                            </tr>
                         </table>
                     </div>
                 </div>
@@ -517,16 +488,7 @@
                         <tbody>
                             <script>
                                 const q2Docs = ["doc1", "doc2", "doc3", "doc4"];
-                                // Mix of correct answers and distractors
-                                const posDistractors = [
-                                    "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[8]", "[12]",
-                                    "[1, 5]", "[2, 5]", "[6, 13]", "[8, 10]",
-                                    "[10, 13]", "[5, 15]", "[3, 7]",
-                                    "[8, 11, 14]", "[1, 2, 9]", "[8, 12, 14]",
-                                    "∅"
-                                ];
-
-                                // Sort them loosely to look organized but confusing
+                                const posDistractors = ["[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[8]", "[12]", "[1, 5]", "[6, 13]", "[8, 10]", "[10, 13]", "[8, 11, 14]", "∅"];
                                 posDistractors.sort();
 
                                 q2Docs.forEach(doc => {
@@ -542,63 +504,52 @@
                         </tbody>
                     </table>
                 </div>
+
                 <button class="toggle-btn" onclick="toggleAnswer(this)">
                     <span>👁️ Show Solution Model</span>
                 </button>
+
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="margin-top:0; color:var(--success)">✅ Answer Key:</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>DocID</th>
-                                    <th>self</th>
-                                    <th>driving</th>
-                                    <th>car</th>
-                                    <th>Match?</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>doc1</td>
-                                    <td>[2]</td>
-                                    <td>[3]</td>
-                                    <td>[4]</td>
-                                    <td>✅ Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>doc2</td>
-                                    <td>[1, 5]</td>
-                                    <td>[6]</td>
-                                    <td>[8, 10]</td>
-                                    <td>❌ No</td>
-                                </tr>
-                                <tr>
-                                    <td>doc3</td>
-                                    <td>[12]</td>
-                                    <td>[10, 13]</td>
-                                    <td>[8, 11, 14]</td>
-                                    <td>❌ No</td>
-                                </tr>
-                                <tr>
-                                    <td>doc4</td>
-                                    <td>[5]</td>
-                                    <td>[6]</td>
-                                    <td>[8]</td>
-                                    <td>❌ No</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p style="margin-top:10px; font-size: 0.9rem;">
-                            <strong>Explanation:</strong><br>
-                            For <strong>doc1</strong>: self(2) -> driving(3) -> car(4). Sequence is continuous (2, 3,
-                            4).<br>
-                            Other documents do not form a sequence.
-                        </p>
+                        <h4 style="margin-top:0; color:var(--success); font-family: 'Cairo';">🔍 تحليل الإجابة (Answer
+                            Analysis):</h4>
+
+                        <div
+                            style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                            <strong style="color:var(--primary)">doc1:</strong><br>
+                            &bull; self = 2 &rarr; نحتاج driving = 3 (<span style="color:var(--success)">موجود</span>)
+                            &rarr; نحتاج car = 4 (<span style="color:var(--success)">موجود</span>)<br>
+                            <strong>Match = Yes</strong> ✅
+                        </div>
+
+                        <div
+                            style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                            <strong style="color:var(--primary)">doc2:</strong><br>
+                            &bull; self = 1 &rarr; نحتاج driving = 2 (<span style="color:var(--danger)">غير
+                                موجود</span>)<br>
+                            &bull; self = 5 &rarr; نحتاج driving = 6 (<span style="color:var(--success)">موجود</span>)
+                            &rarr; نحتاج car = 7 (<span style="color:var(--danger)">غير موجود</span>)<br>
+                            <strong>Match = No</strong> ❌
+                        </div>
+
+                        <div
+                            style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                            <strong style="color:var(--primary)">doc3:</strong><br>
+                            &bull; self = 12 &rarr; نحتاج driving = 13 (<span style="color:var(--success)">موجود</span>)
+                            &rarr; نحتاج car = 14 (<span style="color:var(--success)">موجود</span>) - (العبارة موجودة في
+                            المواضع 12, 13, 14)<br>
+                            <strong>Match = Yes</strong> ✅
+                        </div>
+
+                        <div>
+                            <strong style="color:var(--primary)">doc4:</strong><br>
+                            &bull; self = 5 &rarr; نحتاج driving = 6 (<span style="color:var(--success)">موجود</span>)
+                            &rarr; نحتاج car = 7 (<span style="color:var(--danger)">غير موجود</span>)<br>
+                            <strong>Match = No</strong> ❌
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- SECOND EXAM SECTION -->
@@ -612,35 +563,18 @@
 
     <!-- Smart Logic Script -->
     <script>
-        // SMART EXCLUSION LOGIC
         function updateExclusions(changedSelect) {
-            // Only apply this logic if the changed select is a "Result" column select
             if (!changedSelect.classList.contains('result-select')) return;
-
             const allResultSelects = document.querySelectorAll('.result-select');
             const selectedValues = [];
-
-            // 1. Collect all currently selected values (ignoring Empty/End/Default)
             allResultSelects.forEach(sel => {
-                if (sel.value && sel.value !== "Empty (∅)" && sel.value !== "End") {
-                    selectedValues.push(sel.value);
-                }
+                if (sel.value && sel.value !== "Empty (∅)" && sel.value !== "End") selectedValues.push(sel.value);
             });
-
-            // 2. Iterate all selects and disable options that are selected elsewhere
             allResultSelects.forEach(sel => {
-                const options = sel.querySelectorAll('option');
-                options.forEach(opt => {
-                    // Reset first
+                sel.querySelectorAll('option').forEach(opt => {
                     opt.disabled = false;
-
-                    // Skip empty/default values
                     if (!opt.value || opt.value === "Empty (∅)" || opt.value === "End") return;
-
-                    // If value is selected somewhere else AND it is not the currently selected value of THIS dropdown
-                    if (selectedValues.includes(opt.value) && sel.value !== opt.value) {
-                        opt.disabled = true;
-                    }
+                    if (selectedValues.includes(opt.value) && sel.value !== opt.value) opt.disabled = true;
                 });
             });
         }
@@ -664,7 +598,6 @@
         }
     </script>
     <script src="nav.js"></script>
-
 </body>
 
 </html>
