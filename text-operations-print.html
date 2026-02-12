@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -321,46 +321,46 @@
         <!-- Pipeline Diagram -->
         <div class="section-card" style="border-right: 6px solid var(--primary);">
             <div class="en-text" style="font-size: 14pt; margin-bottom: 20px; text-align: center;">
-                Documents to be indexed âž” Tokenizer âž” Linguistic Modules âž” Indexer âž” Inverted Index
+                Documents to be indexed ➔ Tokenizer ➔ Linguistic Modules ➔ Indexer ➔ Inverted Index
             </div>
 
             <div class="ar-text" style="font-size: 11pt; margin-bottom: 20px;">
-                Ù‡Ø§Ø¶ Ù‡Ùˆ "Ø®Ø· Ø§Ù„Ø¥Ù†ØªØ§Ø¬" Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ Ù„Ø£ÙŠ Ù…Ø­Ø±Ùƒ Ø¨Ø­Ø«. Ø¨ÙŠØ¨Ø¯Ø£ Ø¨Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„Ø®Ø§Ù… ÙˆÙ‡ÙŠ Ø§Ù„Ù€ <span
-                    class="highlight-span">Documents</span>ØŒ Ø¨Ø¹Ø¯ÙŠÙ† Ø¨ØªÙ…Ø± Ø¹Ù„Ù‰ Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„ØªØ§Ù„ÙŠØ©:
+                هاض هو "خط الإنتاج" الأساسي لأي محرك بحث. بيبدأ بالمواد الخام وهي الـ <span
+                    class="highlight-span">Documents</span>، بعدين بتمر على العمليات التالية:
             </div>
 
             <!-- Steps -->
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 25px; border-right: 4px solid var(--accent); padding-right: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Tokenizer:</span> "Ø§Ù„Ù…Ø´Ø±Ø·" Ø§Ù„Ù„ÙŠ Ø¨Ù‚Ø·Ø¹
-                        Ø§Ù„Ø¬Ù…Ù„ Ù„ÙƒÙ„Ù…Ø§Øª (Tokens).
+                        <span style="color: var(--primary); font-weight: 800;">• Tokenizer:</span> "المشرط" اللي بقطع
+                        الجمل لكلمات (Tokens).
                     </div>
                     <div class="example-box">
-                        Friends, Romans, countrymen. âž” <span style="color: var(--primary);">Friends, Romans,
+                        Friends, Romans, countrymen. ➔ <span style="color: var(--primary);">Friends, Romans,
                             countrymen</span>
                     </div>
                 </li>
 
                 <li style="margin-bottom: 25px; border-right: 4px solid var(--accent); padding-right: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Linguistic modules:</span> Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ù„ÙŠ
-                        Ø¨ØªØ¹Ø¯Ù„ Ø´ÙƒÙ„ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ù„Ø£ØµÙˆÙ„Ù‡Ø§ (Modified tokens).
+                        <span style="color: var(--primary); font-weight: 800;">• Linguistic modules:</span> المرحلة اللي
+                        بتعدل شكل الكلمات لأصولها (Modified tokens).
                     </div>
                     <div class="example-box">
-                        Friends, Romans, countrymen âž” <span style="color: var(--primary);">friend, roman,
+                        Friends, Romans, countrymen ➔ <span style="color: var(--primary);">friend, roman,
                             countryman</span>
                     </div>
                 </li>
 
                 <li style="margin-bottom: 25px; border-right: 4px solid var(--accent); padding-right: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Indexer:</span> Ø§Ù„Ù„ÙŠ Ø¨Ø±ØªØ¨ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª ÙÙŠ
-                        Ø§Ù„Ù€ <span class="highlight-span">Inverted Index</span> Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ (Ø§Ù„ÙƒÙ„Ù…Ø© ÙˆÙ…ÙƒØ§Ù† Ø¸Ù‡ÙˆØ±Ù‡Ø§ ÙÙŠ
-                        Ø§Ù„Ù…Ø³ØªÙ†Ø¯Ø§Øª).
+                        <span style="color: var(--primary); font-weight: 800;">• Indexer:</span> اللي برتب المعلومات في
+                        الـ <span class="highlight-span">Inverted Index</span> النهائي (الكلمة ومكان ظهورها في
+                        المستندات).
                     </div>
                     <div class="example-box" style="font-family: 'JetBrains Mono', monospace;">
-                        friend âž” <span class="doc-id">2, 4</span>
+                        friend ➔ <span class="doc-id">2, 4</span>
                     </div>
                 </li>
             </ul>
@@ -380,72 +380,72 @@
 
         <!-- Parsing Section -->
         <div class="section-card" style="border-left: 6px solid var(--primary);">
-            <h2 class="section-title"><span>ðŸ“‚</span> Parsing: What is a Document?</h2>
+            <h2 class="section-title"><span>📂</span> Parsing: What is a Document?</h2>
 
             <div class="en-text" style="margin-bottom: 10px;">
                 Need to step back and ask: What format? What language? What character set?
             </div>
 
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ù‚Ø¨Ù„ Ù…Ø§ Ù†Ø¨Ø¯Ø£ØŒ Ù„Ø§Ø²Ù… Ù†Ø³Ø£Ù„ 3 Ø£Ø³Ø¦Ù„Ø© Ø¬ÙˆÙ‡Ø±ÙŠØ© Ø¹Ù† Ø§Ù„Ù…Ø³ØªÙ†Ø¯:
+                قبل ما نبدأ، لازم نسأل 3 أسئلة جوهرية عن المستند:
             </div>
 
             <ul style="list-style: none; padding: 0; margin-right: 20px;">
-                <li class="ar-text" style="margin-bottom: 10px;">â€¢ <span style="color: var(--primary);">What
+                <li class="ar-text" style="margin-bottom: 10px;">• <span style="color: var(--primary);">What
                         format?</span> (pdf, word, excel, html?)</li>
-                <li class="ar-text" style="margin-bottom: 10px;">â€¢ <span style="color: var(--primary);">What
-                        language?</span> (Ø£ÙŠ Ù„ØºØ© Ù…ÙƒØªÙˆØ¨ ÙÙŠÙ‡Ø§ØŸ)</li>
-                <li class="ar-text" style="margin-bottom: 10px;">â€¢ <span style="color: var(--primary);">What character
+                <li class="ar-text" style="margin-bottom: 10px;">• <span style="color: var(--primary);">What
+                        language?</span> (أي لغة مكتوب فيها؟)</li>
+                <li class="ar-text" style="margin-bottom: 10px;">• <span style="color: var(--primary);">What character
                         set?</span> (CP1252, UTF-8, ...)</li>
             </ul>
 
             <div class="ar-text"
                 style="background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 6px; border-right: 3px solid var(--primary); margin-top: 15px;">
-                ØªØ­Ø¯ÙŠØ¯ Ù‡Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ù‡Ùˆ <span class="highlight-span">Classification problem</span> (Ù…Ø´ÙƒÙ„Ø© ØªØµÙ†ÙŠÙ)Ø› Ø§Ù„Ø³ÙŠØ³ØªÙ…
-                Ù„Ø§Ø²Ù… ÙŠØ­Ø²Ø± Ø§Ù„Ù†ÙˆØ¹ Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ "Ø¨ØµÙ…Ø§Øª" Ø§Ù„Ù…Ù„Ù.
+                تحديد هالمعلومات هو <span class="highlight-span">Classification problem</span> (مشكلة تصنيف)؛ السيستم
+                لازم يحزر النوع بناءً على "بصمات" الملف.
             </div>
         </div>
 
         <!-- Complications Box -->
         <div class="section-card" style="border: 2px dashed var(--accent); background: rgba(250, 204, 21, 0.03);">
-            <h3 class="section-title" style="color: var(--accent); font-size: 13pt;"><span>âš ï¸</span> Complications:
+            <h3 class="section-title" style="color: var(--accent); font-size: 13pt;"><span>⚠️</span> Complications:
                 Format/language</h3>
 
-            <div class="ar-text" style="margin-bottom: 12px;">Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ Ù…Ø´ Ø¯Ø§ÙŠÙ…Ø§Ù‹ Ø³Ù‡Ù„ØŒ ÙÙŠÙ‡ ØªØ¹Ù‚ÙŠØ¯Ø§Øª Ø²ÙŠ:</div>
+            <div class="ar-text" style="margin-bottom: 12px;">الموضوع مش دايماً سهل، فيه تعقيدات زي:</div>
 
             <ul style="list-style: none; padding: 0; font-size: 10pt;">
-                <li class="ar-text" style="margin-bottom: 8px;">â€¢ <span style="color: var(--accent);">Multi-language
-                        single index:</span> Ø§Ù„ÙÙ‡Ø±Ø³ Ø§Ù„ÙˆØ§Ø­Ø¯ Ù…Ù…ÙƒÙ† ÙŠØ­ØªÙˆÙŠ ÙƒÙ„Ù…Ø§Øª Ù…Ù† Ù„ØºØ§Øª ÙƒØ«ÙŠØ±Ø©.</li>
-                <li class="ar-text" style="margin-bottom: 8px;">â€¢ <span style="color: var(--accent);">Mixed
-                        content:</span> Ø¥ÙŠÙ…ÙŠÙ„ ÙØ±Ù†Ø³ÙŠ ÙˆÙ…Ø¹Ù‡ Ù…Ø±ÙÙ‚ Ø£Ù„Ù…Ø§Ù†ÙŠ (German pdf attachment).</li>
-                <li class="ar-text" style="margin-bottom: 8px;">â€¢ <span style="color: var(--accent);">Quoted
-                        content:</span> Ø¥ÙŠÙ…ÙŠÙ„ ÙØ±Ù†Ø³ÙŠ Ø¨Ù‚ØªØ¨Ø³ ÙÙ‚Ø±Ø§Øª Ù…Ù† Ø¹Ù‚Ø¯ Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ.</li>
+                <li class="ar-text" style="margin-bottom: 8px;">• <span style="color: var(--accent);">Multi-language
+                        single index:</span> الفهرس الواحد ممكن يحتوي كلمات من لغات كثيرة.</li>
+                <li class="ar-text" style="margin-bottom: 8px;">• <span style="color: var(--accent);">Mixed
+                        content:</span> إيميل فرنسي ومعه مرفق ألماني (German pdf attachment).</li>
+                <li class="ar-text" style="margin-bottom: 8px;">• <span style="color: var(--accent);">Quoted
+                        content:</span> إيميل فرنسي بقتبس فقرات من عقد إنجليزي.</li>
             </ul>
 
             <div class="ar-text" style="margin-top: 12px; font-weight: bold; color: var(--success);">
-                Ø¹Ø´Ø§Ù† Ù‡ÙŠÙƒ ÙÙŠÙ‡ <span class="highlight-span">Commercial and open source libraries</span> Ù‡ÙŠ Ø§Ù„Ù„ÙŠ Ø¨ØªØªØ¹Ø§Ù…Ù„ Ù…Ø¹
-                Ù‡Ø§Ø¶ Ø§Ù„Ø¹Ø¬Ù‚Ø© ÙˆØ¨ØªØ­Ù„ Ø§Ù„Ù…Ø´Ø§ÙƒÙ„.
+                عشان هيك فيه <span class="highlight-span">Commercial and open source libraries</span> هي اللي بتتعامل مع
+                هاض العجقة وبتحل المشاكل.
             </div>
         </div>
 
         <!-- Grain Size Section -->
         <div class="section-card" style="border-right: 6px solid var(--brand-red);">
-            <h2 class="section-title" style="color: var(--brand-red);"><span>âš–ï¸</span> Grain size: Unit document</h2>
+            <h2 class="section-title" style="color: var(--brand-red);"><span>⚖️</span> Grain size: Unit document</h2>
 
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ù„Ø§Ø²Ù… Ù†Ø­Ø¯Ø¯ Ø§Ù„Ù€ <span class="highlight-span">Unit document</span> (ÙˆØ­Ø¯Ø© Ø§Ù„Ù…Ø³ØªÙ†Ø¯)Ø› Ù‡Ø§Ø¶ Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ Ø¨Ù†Ø³Ù…ÙŠÙ‡ <span
-                    class="highlight-span">Grain size</span> (Ø­Ø¬Ù… Ø§Ù„Ø­Ø¨Ø©)ØŒ ÙˆÙ‡Ùˆ Ø¬Ø¯Ø§Ù‹ Ù…Ù‡Ù… Ù„Ø£Ù†Ù‡ Ø¨Ø­Ø¯Ø¯ Ø¯Ù‚Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬.
+                لازم نحدد الـ <span class="highlight-span">Unit document</span> (وحدة المستند)؛ هاض الموضوع بنسميه <span
+                    class="highlight-span">Grain size</span> (حجم الحبة)، وهو جداً مهم لأنه بحدد دقة النتائج.
             </div>
 
             <ul style="list-style: none; padding: 0; margin-right: 20px;">
-                <li class="ar-text" style="margin-bottom: 12px;">â€¢ <span style="color: var(--brand-red);">A file?</span>
-                    (Ù‡Ù„ Ù‡Ùˆ Ù…Ø¬Ø±Ø¯ Ù…Ù„ÙØŸ)</li>
-                <li class="ar-text" style="margin-bottom: 12px;">â€¢ <span style="color: var(--brand-red);">An
-                        email?</span> (Ù…Ù…ÙƒÙ† Ø¥ÙŠÙ…ÙŠÙ„ ÙˆØ§Ø­Ø¯ Ù…Ù† Ø¶Ù…Ù† Ù…Ù„Ù mbox ÙƒØ¨ÙŠØ±).</li>
-                <li class="ar-text" style="margin-bottom: 12px;">â€¢ <span style="color: var(--brand-red);">Email with 5
-                        attachments?</span> (Ù…Ø³ØªÙ†Ø¯ ÙˆØ§Ø­Ø¯ ÙˆÙ„Ø§ ÙƒÙ„ Ù…Ø±ÙÙ‚ Ù„Ø­Ø§Ù„ØŸ)</li>
-                <li class="ar-text">â€¢ <span style="color: var(--brand-red);">A group of files?</span> (Ø²ÙŠ Ù…Ù„ÙØ§Øª PPT Ø£Ùˆ
-                    LaTeX Ø§Ù„Ù…Ù‚Ø³Ù…Ø©).</li>
+                <li class="ar-text" style="margin-bottom: 12px;">• <span style="color: var(--brand-red);">A file?</span>
+                    (هل هو مجرد ملف؟)</li>
+                <li class="ar-text" style="margin-bottom: 12px;">• <span style="color: var(--brand-red);">An
+                        email?</span> (ممكن إيميل واحد من ضمن ملف mbox كبير).</li>
+                <li class="ar-text" style="margin-bottom: 12px;">• <span style="color: var(--brand-red);">Email with 5
+                        attachments?</span> (مستند واحد ولا كل مرفق لحال؟)</li>
+                <li class="ar-text">• <span style="color: var(--brand-red);">A group of files?</span> (زي ملفات PPT أو
+                    LaTeX المقسمة).</li>
             </ul>
         </div>
 
@@ -464,13 +464,13 @@
         <!-- Definition & Example -->
         <div class="section-card" style="border-right: 6px solid var(--primary);">
             <div class="en-text" style="font-size: 11pt; margin-bottom: 15px;">
-                Input: "Friends, Romans and Countrymen" âž” Output: Tokens (Friends, Romans, Countrymen)
+                Input: "Friends, Romans and Countrymen" ➔ Output: Tokens (Friends, Romans, Countrymen)
             </div>
 
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ø§Ù„Ù€ <span class="highlight-span">Token</span> Ù‡Ùˆ "Ù…Ø«ÙŠÙ„ Ù„Ø³Ù„Ø³Ù„Ø© Ù…Ù† Ø§Ù„Ø­Ø±ÙˆÙ" (Instance of a sequence of
-                characters). ÙƒÙ„ Token Ø¨Ø·Ù„Ø¹ Ù…Ù† Ù‡Ø°Ù‡ Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø¨ØµÙŠØ± <span class="highlight-span">Candidate</span> (Ù…Ø±Ø´Ø­)
-                Ù„ÙŠØ¯Ø®Ù„ ÙÙŠ Ø§Ù„ÙÙ‡Ø±Ø³ ÙƒÙ€ EntryØŒ Ø¨Ø³ Ø·Ø¨Ø¹Ø§Ù‹ Ø¨Ø¹Ø¯ Ù…Ø±Ø§Ø­Ù„ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø«Ø§Ù†ÙŠØ© (Further processing).
+                الـ <span class="highlight-span">Token</span> هو "مثيل لسلسلة من الحروف" (Instance of a sequence of
+                characters). كل Token بطلع من هذه المرحلة بصير <span class="highlight-span">Candidate</span> (مرشح)
+                ليدخل في الفهرس كـ Entry، بس طبعاً بعد مراحل معالجة ثانية (Further processing).
             </div>
 
             <div class="en-text" style="color: var(--accent); margin-top: 15px;">
@@ -480,33 +480,33 @@
 
         <!-- Issues Section -->
         <div class="section-card" style="margin-top: 20px;">
-            <h2 class="section-title"><span>ðŸ¤”</span> Issues in tokenization</h2>
+            <h2 class="section-title"><span>🤔</span> Issues in tokenization</h2>
 
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ù‡ÙˆÙ† Ø¨ØªØ¨Ø¯Ø£ Ø§Ù„Ù…Ø´Ø§ÙƒÙ„Ø› Ø·Ù„Ø¹ Ø¹Ù„Ù‰ Ù‡Ø§Ù„Ø£Ù…Ø«Ù„Ø© Ø§Ù„Ù„ÙŠ Ø¨Ø§Ù„Ø³Ù„Ø§ÙŠØ¯Ø§Øª:
+                هون بتبدأ المشاكل؛ طلع على هالأمثلة اللي بالسلايدات:
             </div>
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 15px; border-right: 3px solid var(--accent); padding-right: 10px;">
                     <div class="en-text" style="background: transparent; padding: 0; margin: 0;">Finland's capital</div>
                     <div class="ar-text">
-                        Ù‡Ù„ Ù†ÙØµÙ„Ù‡Ø§ Ù„Ù€ <span class="code-tag">Finland</span> Ùˆ <span class="code-tag">s</span> ØŸ ÙˆÙ„Ø§ <span
-                            class="code-tag">Finlands</span> ØŸ ÙˆÙ„Ø§ Ù†ØªØ±ÙƒÙ‡Ø§ <span class="code-tag">Finland's</span> ØŸ
+                        هل نفصلها لـ <span class="code-tag">Finland</span> و <span class="code-tag">s</span> ؟ ولا <span
+                            class="code-tag">Finlands</span> ؟ ولا نتركها <span class="code-tag">Finland's</span> ؟
                     </div>
                 </li>
 
                 <li style="margin-bottom: 15px; border-right: 3px solid var(--accent); padding-right: 10px;">
                     <div class="en-text" style="background: transparent; padding: 0; margin: 0;">Hewlett-Packard</div>
-                    <div class="ar-text">Ù‡Ù„ Ù†Ø¹ØªØ¨Ø±Ù‡Ø§ Token ÙˆØ§Ø­Ø¯ ÙˆÙ„Ø§ Ø«Ù†ÙŠÙ†ØŸ Ù‡Ù„ Ù†ÙƒØ³Ø± Ø§Ù„Ø´Ø­Ø·Ø§Øª Ø§Ù„Ù„ÙŠ Ø¨ÙŠÙ†Ù‡Ù…ØŸ</div>
+                    <div class="ar-text">هل نعتبرها Token واحد ولا ثنين؟ هل نكسر الشحطات اللي بينهم؟</div>
                     <div class="ar-text" style="font-size: 9pt; color: var(--text-muted); margin-right: 15px;">
-                        (Ø²ÙŠ state-of-the-art, co-education, lowercase vs lower-case)
+                        (زي state-of-the-art, co-education, lowercase vs lower-case)
                     </div>
                 </li>
 
                 <li style="margin-bottom: 15px; border-right: 3px solid var(--accent); padding-right: 10px;">
                     <div class="en-text" style="background: transparent; padding: 0; margin: 0;">San Francisco</div>
                     <div class="ar-text">
-                        Ù…Ø³ØªÙ†Ø¯ ÙˆØ§Ø­Ø¯ ÙˆÙ„Ø§ Ø«Ù†ÙŠÙ†ØŸ (One token or two). Ù‚Ø±Ø§Ø±Ùƒ Ø¨Ø­Ø¯Ø¯ Ø¯Ù‚Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬.
+                        مستند واحد ولا ثنين؟ (One token or two). قرارك بحدد دقة النتائج.
                     </div>
                 </li>
             </ul>
@@ -532,32 +532,32 @@
             </div>
 
             <div class="ar-text" style="margin-bottom: 20px;">
-                Ø§Ù„Ø£Ø±Ù‚Ø§Ù… ÙˆØ§Ù„ØªÙˆØ§Ø±ÙŠØ® Ø¨ÙƒÙ„ Ø£Ø´ÙƒØ§Ù„Ù‡Ø§ Ø¨ØªÙ…Ø«Ù„ ØªØ­Ø¯ÙŠØ› Ø§Ù„Ø¯ÙƒØªÙˆØ± Ø­Ø· Ø£Ù…Ø«Ù„Ø© Ù…ØªÙ†ÙˆØ¹Ø© Ø²ÙŠ Ø§Ù„ØªÙˆØ§Ø±ÙŠØ® Ø§Ù„Ù…Ø®ØªØµØ±Ø© ÙˆØ§Ù„Ø·ÙˆÙŠÙ„Ø©ØŒ ÙˆØ­ØªÙ‰
-                Ø§Ù„Ù€ <span class="highlight-span">PGP keys</span> Ø§Ù„Ù…Ø¹Ù‚Ø¯Ø© Ø²ÙŠ <span
+                الأرقام والتواريخ بكل أشكالها بتمثل تحدي؛ الدكتور حط أمثلة متنوعة زي التواريخ المختصرة والطويلة، وحتى
+                الـ <span class="highlight-span">PGP keys</span> المعقدة زي <span
                     style="font-family: monospace;">324a3df234cb23e</span>.
             </div>
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Often have embedded spaces:</span>
-                        Ø£Ø±Ù‚Ø§Ù… Ø§Ù„ØªÙ„ÙÙˆÙ†Ø§Øª ØºØ§Ù„Ø¨Ø§Ù‹ ÙÙŠÙ‡Ø§ ÙØ±Ø§ØºØ§Øª Ø¨ØªÙ„Ø®Ø¨Ø· Ø§Ù„Ù€ Tokenizer.
+                        <span style="color: var(--primary); font-weight: 800;">• Often have embedded spaces:</span>
+                        أرقام التلفونات غالباً فيها فراغات بتلخبط الـ Tokenizer.
                     </div>
                 </li>
 
                 <li style="margin-bottom: 20px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Older IR systems:</span>
-                        Ø§Ù„Ù…Ø­Ø±ÙƒØ§Øª Ø§Ù„Ù‚Ø¯ÙŠÙ…Ø© ÙƒØ§Ù†Øª ØªØ·Ù†Ø´ Ø§Ù„Ø£Ø±Ù‚Ø§Ù…ØŒ Ø¨Ø³ Ø§Ù„ÙŠÙˆÙ… Ù‡ÙŠ <span class="highlight-span">Very useful</span>
-                        (Ø¬Ø¯Ø§Ù‹ Ù…ÙÙŠØ¯Ø©)Ø› Ø²ÙŠ Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† "Ø£ÙƒÙˆØ§Ø¯ Ø§Ù„Ø£Ø®Ø·Ø§Ø¡" (Error codes) Ø£Ùˆ Ø§Ù„Ù€ Stacktraces Ø¹Ù„Ù‰ Ø§Ù„ÙˆÙŠØ¨.
+                        <span style="color: var(--primary); font-weight: 800;">• Older IR systems:</span>
+                        المحركات القديمة كانت تطنش الأرقام، بس اليوم هي <span class="highlight-span">Very useful</span>
+                        (جداً مفيدة)؛ زي البحث عن "أكواد الأخطاء" (Error codes) أو الـ Stacktraces على الويب.
                     </div>
                 </li>
 
                 <li style="margin-bottom: 20px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Meta-data:</span>
-                        Ø§Ù„Ø£Ø±Ù‚Ø§Ù… ØºØ§Ù„Ø¨Ø§Ù‹ Ø¨ØªØªØ­ÙˆÙ„ Ù„Ù€ <span class="highlight-span">Meta-data</span> Ù…Ù†ÙØµÙ„Ø©ØŒ Ø²ÙŠ "ØªØ§Ø±ÙŠØ®
-                        Ø§Ù„Ø¥Ù†Ø´Ø§Ø¡" (Creation date) Ø£Ùˆ "ØªÙ†Ø³ÙŠÙ‚ Ø§Ù„Ù…Ù„Ù" (Format).
+                        <span style="color: var(--primary); font-weight: 800;">• Meta-data:</span>
+                        الأرقام غالباً بتتحول لـ <span class="highlight-span">Meta-data</span> منفصلة، زي "تاريخ
+                        الإنشاء" (Creation date) أو "تنسيق الملف" (Format).
                     </div>
                 </li>
             </ul>
@@ -578,52 +578,52 @@
 
         <!-- Chinese & Japanese -->
         <div class="section-card" style="border-right: 6px solid var(--primary);">
-            <h2 class="section-title"><span>ðŸŒ</span> Chinese and Japanese: No spaces</h2>
+            <h2 class="section-title"><span>🌏</span> Chinese and Japanese: No spaces</h2>
             <div class="ar-text" style="margin-bottom: 15px;">
-                ÙÙŠ Ø§Ù„ØµÙŠÙ†ÙŠØ© ÙˆØ§Ù„ÙŠØ§Ø¨Ø§Ù†ÙŠØ©ØŒ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ù…Ù„Ø²Ù‚Ø© Ø¨Ø¨Ø¹Ø¶ ÙˆÙ…Ø§ ÙÙŠÙ‡ ÙØ±Ø§ØºØ§Øª (No spaces):
+                في الصينية واليابانية، الكلمات ملزقة ببعض وما فيه فراغات (No spaces):
             </div>
             <div class="en-text"
                 style="font-family: 'SimSun', 'Noto Sans SC', sans-serif; font-size: 11pt; margin-bottom: 15px; background: transparent; padding: 0; color: var(--text-light);">
-                èŽŽæ‹‰æ³¢å¨ƒçŽ°åœ¨å±…ä½åœ¨ç¾Žå›½ä¸œå—éƒ¨çš„ä½›ç½—é‡Œè¾¾ã€‚
+                莎拉波娃现在居住在美国东南部的佛罗里达。
             </div>
             <div class="ar-text">
-                Ù‡Ø§Ø¶ Ø§Ù„Ø§Ø´ÙŠ Ù…Ø¹Ù†Ø§Ù‡ Ø¥Ù†Ù‡ <span class="highlight-span">Not always guaranteed a unique tokenization</span> (Ù…Ø´
-                Ø¯Ø§ÙŠÙ…Ø§Ù‹ Ø§Ù„ØªÙ‚Ø·ÙŠØ¹ Ø¨ÙƒÙˆÙ† ÙˆØ­ÙŠØ¯ Ø£Ùˆ Ù…Ø¤ÙƒØ¯)ØŒ Ù…Ù…ÙƒÙ† ÙƒÙ„Ù…Ø© ØªÙ†ÙÙ‡Ù… Ø¨Ø·Ø±ÙŠÙ‚ØªÙŠÙ† Ù…Ø®ØªÙ„ÙØªÙŠÙ† ØªÙ…Ø§Ù…Ø§Ù‹.
+                هاض الاشي معناه إنه <span class="highlight-span">Not always guaranteed a unique tokenization</span> (مش
+                دايماً التقطيع بكون وحيد أو مؤكد)، ممكن كلمة تنفهم بطريقتين مختلفتين تماماً.
             </div>
         </div>
 
         <!-- Arabic Issues -->
         <div class="section-card" style="margin-top: 20px; border-left: 6px solid var(--primary);">
-            <h2 class="section-title"><span>ðŸ•Œ</span> Arabic Issues: Bi-directional & Ligatures</h2>
+            <h2 class="section-title"><span>🕌</span> Arabic Issues: Bi-directional & Ligatures</h2>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ù„ØºØªÙ†Ø§ Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© ÙÙŠÙ‡Ø§ "Ø£ÙÙ„Ø§Ù…" Ø®Ø§ØµØ© ÙÙŠÙ‡Ø§ Ø°ÙƒØ±Ù‡Ø§ Ø§Ù„Ø¯ÙƒØªÙˆØ±:
+                لغتنا العربية فيها "أفلام" خاصة فيها ذكرها الدكتور:
             </div>
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Bi-directional (BiDi):</span>
-                        Ø§Ù„Ø¹Ø±Ø¨ÙŠ Ø¨Ø¨Ø¯Ø£ Ù…Ù† Ø§Ù„ÙŠÙ…ÙŠÙ† Ù„Ù„ÙŠØ³Ø§Ø±ØŒ Ø¨Ø³ Ù„Ù…Ø§ ÙŠØ¯Ø®Ù„ Ø±Ù‚Ù… (Ø²ÙŠ 1962) Ø¨Ù‚Ù„Ø¨ Ø§Ù„ØªØ±ØªÙŠØ¨ Ù…Ù† Ø§Ù„ÙŠØ³Ø§Ø± Ù„Ù„ÙŠÙ…ÙŠÙ†.
+                        <span style="color: var(--primary); font-weight: 800;">• Bi-directional (BiDi):</span>
+                        العربي ببدأ من اليمين لليسار، بس لما يدخل رقم (زي 1962) بقلب الترتيب من اليسار لليمين.
                     </div>
                 </li>
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Complex Ligatures:</span>
-                        Ø§Ù„Ø­Ø±ÙˆÙ Ø¹Ù†Ø¯Ù†Ø§ Ø¨ØªØºÙŠØ± Ø´ÙƒÙ„Ù‡Ø§ ÙˆØ¨ØªØ´Ø¨Ùƒ Ø¨Ø¨Ø¹Ø¶ (ØªØ´Ø¨ÙŠÙƒ Ø§Ù„Ø­Ø±ÙˆÙ)ØŒ ÙˆÙ‡Ø§Ø¯ Ø¨Ø¹Ù…Ù„ ØªØ¹Ù‚ÙŠØ¯ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø´ÙƒÙ„ Ø§Ù„ÙƒÙ„Ù…Ø©.
+                        <span style="color: var(--primary); font-weight: 800;">• Complex Ligatures:</span>
+                        الحروف عندنا بتغير شكلها وبتشبك ببعض (تشبيك الحروف)، وهاد بعمل تعقيد في معالجة شكل الكلمة.
                     </div>
                 </li>
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Unicode vs Stored form:</span>
-                        Ø¨Ø§Ù„Ø±ØºÙ… Ù…Ù† Ø¥Ù† Ø§Ù„Ø¹Ø±Ø¶ Ø¹Ù„Ù‰ Ø§Ù„Ø´Ø§Ø´Ø© (Surface presentation) Ù…Ø¹Ù‚Ø¯ Ø¨Ø³Ø¨Ø¨ Ø§Ù„Ù€ UnicodeØŒ Ø¥Ù„Ø§ Ø¥Ù† Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„ØªØ®Ø²ÙŠÙ†
-                        ÙÙŠ Ø§Ù„Ø³ÙŠØ±ÙØ±Ø§Øª (Stored form) Ø¨ØªÙƒÙˆÙ† <span class="highlight-span">Straightforward</span> (Ø¨Ø³ÙŠØ·Ø©
-                        ÙˆÙ…Ø¨Ø§Ø´Ø±Ø©).
+                        <span style="color: var(--primary); font-weight: 800;">• Unicode vs Stored form:</span>
+                        بالرغم من إن العرض على الشاشة (Surface presentation) معقد بسبب الـ Unicode، إلا إن طريقة التخزين
+                        في السيرفرات (Stored form) بتكون <span class="highlight-span">Straightforward</span> (بسيطة
+                        ومباشرة).
                     </div>
                 </li>
             </ul>
             <div class="example-box" style="margin-top: 15px; text-align: right;">
                 <div style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 5px;">Slide Example:</div>
-                <div class="ar-text" style="margin-bottom: 5px;">.Ø§Ø³ØªÙ‚Ù„Øª Ø§Ù„Ø¬Ø²Ø§Ø¦Ø± ÙÙŠ Ø³Ù†Ø© 1962 Ø¨Ø¹Ø¯ 132 Ø¹Ø§Ù…Ø§Ù‹ Ù…Ù† Ø§Ù„Ø§Ø­ØªÙ„Ø§Ù„
-                    Ø§Ù„ÙØ±Ù†Ø³ÙŠ</div>
+                <div class="ar-text" style="margin-bottom: 5px;">.استقلت الجزائر في سنة 1962 بعد 132 عاماً من الاحتلال
+                    الفرنسي</div>
                 <div class="en-text"
                     style="font-style: italic; color: var(--accent); padding: 0; background: transparent; border: none;">
                     'Algeria achieved its independence in 1962 after 132 years of French occupation.'</div>
@@ -644,46 +644,46 @@
         </header>
 
         <div class="section-card">
-            <h2 class="section-title"><span>ðŸš«</span> With a stop list, you exclude...</h2>
+            <h2 class="section-title"><span>🚫</span> With a stop list, you exclude...</h2>
             <div class="ar-text" style="margin-bottom: 15px;">
-                ÙÙƒØ±ØªÙ‡Ø§ Ø¥Ù†Ùƒ ØªØ­Ø°Ù Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ø´Ø§Ø¦Ø¹Ø© Ø¬Ø¯Ø§Ù‹ Ù…Ù† Ø§Ù„Ù‚Ø§Ù…ÙˆØ³ Ù†Ù‡Ø§Ø¦ÙŠØ§Ù‹. ÙˆØ§Ù„Ø³Ø¨Ø¨ (Intuition):
+                فكرتها إنك تحذف الكلمات الشائعة جداً من القاموس نهائياً. والسبب (Intuition):
             </div>
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ They have little semantic
+                        <span style="color: var(--primary); font-weight: 800;">• They have little semantic
                             content:</span>
-                        ÙƒÙ„Ù…Ø§Øª Ø²ÙŠ <span class="code-tag"
+                        كلمات زي <span class="code-tag"
                             style="position: static; font-size: 9pt; background: var(--bg-dark); border: 1px solid var(--border);">the,
-                            a, and, to, be</span> Ù…Ø§ Ø¨ØªØ¹Ø·ÙŠ Ù…Ø¹Ù†Ù‰ ÙØ±ÙŠØ¯ Ù„Ù„Ù…Ø³ØªÙ†Ø¯.
+                            a, and, to, be</span> ما بتعطي معنى فريد للمستند.
                     </div>
                 </li>
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ There are a lot of them:</span>
-                        Ù‡Ø¯ÙˆÙ„ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø¨ÙŠØ§Ø®Ø¯ÙˆØ§ Ù…Ø³Ø§Ø­Ø© Ø®Ø±Ø§ÙÙŠØ©Ø› ØªÙ‚Ø±ÙŠØ¨Ø§Ù‹ <span class="highlight-span">~30% of postings</span>
-                        Ù„Ø£ÙˆÙ„ 30 ÙƒÙ„Ù…Ø© Ø´Ø§Ø¦Ø¹Ø©!
+                        <span style="color: var(--primary); font-weight: 800;">• There are a lot of them:</span>
+                        هدول الكلمات بياخدوا مساحة خرافية؛ تقريباً <span class="highlight-span">~30% of postings</span>
+                        لأول 30 كلمة شائعة!
                     </div>
                 </li>
             </ul>
         </div>
 
         <div class="section-card" style="margin-top: 20px;">
-            <h2 class="section-title"><span>ðŸ“‰</span> But the trend is away from doing this:</h2>
+            <h2 class="section-title"><span>📉</span> But the trend is away from doing this:</h2>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ø§Ù„ÙŠÙˆÙ…ØŒ Ø§Ù„ØªÙˆØ¬Ù‡ Ù‡Ùˆ "Ø§Ù„Ø§Ø¨ØªØ¹Ø§Ø¯" Ø¹Ù† Ø­Ø°Ù ÙƒÙ„Ù…Ø§Øª Ø§Ù„ÙˆÙ‚ÙØŒ ÙˆØ§Ù„Ø³Ø¨Ø¨ Ù‡Ùˆ ØªØ·ÙˆØ± Ø§Ù„ØªÙ‚Ù†ÙŠØ§Øª:
+                اليوم، التوجه هو "الابتعاد" عن حذف كلمات الوقف، والسبب هو تطور التقنيات:
             </div>
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--accent);">â€¢ Good compression techniques:</span> Ø·Ø±Ù‚ Ø§Ù„Ø¶ØºØ· Ø§Ù„Ø­Ø¯ÙŠØ«Ø©
-                        Ø¨ØªØ®Ù„ÙŠ Ù…Ø³Ø§Ø­Ø© ØªØ®Ø²ÙŠÙ†Ù‡Ù… Ø´Ø¨Ù‡ Ù…Ø¹Ø¯ÙˆÙ…Ø©.
+                        <span style="color: var(--accent);">• Good compression techniques:</span> طرق الضغط الحديثة
+                        بتخلي مساحة تخزينهم شبه معدومة.
                     </div>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--accent);">â€¢ Good query optimization:</span> Ø§Ù„Ø³ÙŠØ³ØªÙ… ØµØ§Ø± Ø³Ø±ÙŠØ¹ ÙƒÙØ§ÙŠØ© Ø¥Ù†Ù‡
-                        Ù…Ø§ ÙŠØªØ£Ø«Ø± Ø¨ÙˆØ¬ÙˆØ¯Ù‡Ù… ÙˆÙ‚Øª Ø§Ù„Ø¨Ø­Ø«.
+                        <span style="color: var(--accent);">• Good query optimization:</span> السيستم صار سريع كفاية إنه
+                        ما يتأثر بوجودهم وقت البحث.
                     </div>
                 </li>
             </ul>
@@ -691,22 +691,22 @@
 
         <div class="section-card"
             style="border: 2px dashed var(--accent); background: rgba(250, 204, 21, 0.03); margin-top: 20px;">
-            <h3 class="section-title" style="color: var(--accent);"><span>âš ï¸</span> You need them for:</h3>
+            <h3 class="section-title" style="color: var(--accent);"><span>⚠️</span> You need them for:</h3>
             <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
                 <li class="ar-text">
-                    <span style="color: var(--primary); font-weight: 800;">â€¢ Phrase queries:</span>
-                    Ø²ÙŠ <span class="code-tag" style="position: static; font-size: 9pt;">"King of Denmark"</span>ØŒ Ù„Ùˆ
-                    Ø­Ø°ÙØª Ø§Ù„Ù€ "of" Ø¨Ø¶ÙŠØ¹ Ø§Ù„Ù…Ø¹Ù†Ù‰.
+                    <span style="color: var(--primary); font-weight: 800;">• Phrase queries:</span>
+                    زي <span class="code-tag" style="position: static; font-size: 9pt;">"King of Denmark"</span>، لو
+                    حذفت الـ "of" بضيع المعنى.
                 </li>
                 <li class="ar-text">
-                    <span style="color: var(--primary); font-weight: 800;">â€¢ Various song titles:</span>
-                    Ø£ØºØ§Ù†ÙŠ Ø²ÙŠ <span class="code-tag" style="position: static; font-size: 9pt;">"Let it be"</span> Ø£Ùˆ
+                    <span style="color: var(--primary); font-weight: 800;">• Various song titles:</span>
+                    أغاني زي <span class="code-tag" style="position: static; font-size: 9pt;">"Let it be"</span> أو
                     <span class="code-tag" style="position: static; font-size: 9pt;">"To be or not to be"</span>.
                 </li>
                 <li class="ar-text">
-                    <span style="color: var(--primary); font-weight: 800;">â€¢ "Relational" queries:</span>
-                    Ø²ÙŠ <span class="code-tag" style="position: static; font-size: 9pt;">"flights to London"</span>ØŒ Ø­Ø±Ù
-                    Ø§Ù„Ù€ "to" Ù‡ÙˆÙ† Ø¬ÙˆÙ‡Ø±ÙŠ.
+                    <span style="color: var(--primary); font-weight: 800;">• "Relational" queries:</span>
+                    زي <span class="code-tag" style="position: static; font-size: 9pt;">"flights to London"</span>، حرف
+                    الـ "to" هون جوهري.
                 </li>
             </ul>
         </div>
@@ -728,10 +728,10 @@
                 We may need to "normalize" words in indexed text as well as query words into the same form.
             </div>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ù„Ø§Ø²Ù… Ù†ÙˆØ­Ø¯ Ø´ÙƒÙ„ Ø§Ù„ÙƒÙ„Ù…Ø© (Normalization) Ø³ÙˆØ§Ø¡ ÙƒØ§Ù†Øª ÙÙŠ Ø§Ù„Ù…Ù„ÙØ§Øª Ø£Ùˆ ÙÙŠ ÙƒÙ„Ù…Ø© Ø§Ù„Ø¨Ø­Ø«ØŒ Ø¹Ø´Ø§Ù† Ù†Ù‚Ø¯Ø± Ù†Ø¹Ù…Ù„ <span
-                    class="highlight-span">Match</span> ØµØ­. Ù…Ø«Ø§Ù„: Ø¨Ø¯Ù†Ø§ <span class="code-tag"
-                    style="position: static;">U.S.A</span> ÙˆØ§Ù„Ù€ <span class="code-tag"
-                    style="position: static;">USA</span> ÙŠØªØ·Ø§Ø¨Ù‚ÙˆØ§.
+                لازم نوحد شكل الكلمة (Normalization) سواء كانت في الملفات أو في كلمة البحث، عشان نقدر نعمل <span
+                    class="highlight-span">Match</span> صح. مثال: بدنا <span class="code-tag"
+                    style="position: static;">U.S.A</span> والـ <span class="code-tag"
+                    style="position: static;">USA</span> يتطابقوا.
             </div>
         </div>
 
@@ -740,8 +740,8 @@
                 Result is terms: a term is a (normalized) word type, which is an entry in our IR system dictionary.
             </div>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ø§Ù„Ù€ <span class="highlight-span">Term</span> Ù‡Ùˆ Ø§Ù„Ù†ØªÙŠØ¬Ø© Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠØ© Ø¨Ø¹Ø¯ Ø§Ù„ØªÙˆØ­ÙŠØ¯ØŒ ÙˆÙ‡Ùˆ Ø§Ù„Ù„ÙŠ Ø¨Ù†Ø®Ø²Ù†Ù‡ ÙØ¹Ù„ÙŠØ§Ù‹ ÙÙŠ
-                "Ù‚Ø§Ù…ÙˆØ³" Ù†Ø¸Ø§Ù… Ø§Ù„Ø§Ø³ØªØ±Ø¬Ø§Ø¹.
+                الـ <span class="highlight-span">Term</span> هو النتيجة النهائية بعد التوحيد، وهو اللي بنخزنه فعلياً في
+                "قاموس" نظام الاسترجاع.
             </div>
         </div>
 
@@ -752,20 +752,20 @@
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Deleting periods to form a term:</span>
-                        Ø­Ø°Ù Ø§Ù„Ù†Ù‚Ø§Ø·.
+                        <span style="color: var(--primary); font-weight: 800;">• Deleting periods to form a term:</span>
+                        حذف النقاط.
                     </div>
                     <div class="example-box" style="text-align: right; direction: ltr;">
-                        U.S.A., USA âž” <span class="code-tag" style="position: static;">USA</span>
+                        U.S.A., USA ➔ <span class="code-tag" style="position: static;">USA</span>
                     </div>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Deleting hyphens to form a term:</span>
-                        Ø­Ø°Ù Ø§Ù„Ø´Ø­Ø·Ø§Øª.
+                        <span style="color: var(--primary); font-weight: 800;">• Deleting hyphens to form a term:</span>
+                        حذف الشحطات.
                     </div>
                     <div class="example-box" style="text-align: right; direction: ltr;">
-                        anti-discriminatory, antidiscriminatory âž” <span class="code-tag"
+                        anti-discriminatory, antidiscriminatory ➔ <span class="code-tag"
                             style="position: static;">antidiscriminatory</span>
                     </div>
                 </li>
@@ -785,22 +785,22 @@
         </header>
 
         <div class="section-card" style="border-right: 6px solid var(--primary);">
-            <h2 class="section-title"><span>ðŸ”¡</span> Reduce all letters to lower case</h2>
+            <h2 class="section-title"><span>🔡</span> Reduce all letters to lower case</h2>
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Exception: upper case in
+                        <span style="color: var(--primary); font-weight: 800;">• Exception: upper case in
                             mid-sentence?</span>
-                        Ø²ÙŠ <span class="code-tag" style="position: static;">General Motors</span> : Ù„Ù…Ø§ Ø§Ù„Ø­Ø±ÙˆÙ Ø§Ù„ÙƒØ¨ÙŠØ±Ø©
-                        ØªÙŠØ¬ÙŠ Ø¨Ù†Øµ Ø§Ù„Ø¬Ù…Ù„Ø©ØŒ Ù‡Ø§Ø¶ Ø¯Ù„ÙŠÙ„ Ø¥Ù†Ù‡Ø§ Ø§Ø³Ù… Ø¹Ù„Ù….
+                        زي <span class="code-tag" style="position: static;">General Motors</span> : لما الحروف الكبيرة
+                        تيجي بنص الجملة، هاض دليل إنها اسم علم.
                     </div>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Policy:</span>
-                        Ø§Ù„Ø£ÙØ¶Ù„ ØªØ­ÙˆÙ„ ÙƒÙ„ Ø´ÙŠ Ù„Ù€ lowercase Ù„Ø£Ù† Ø§Ù„ÙŠÙˆØ²Ø±Ø² ØºØ§Ù„Ø¨Ø§Ù‹ Ø¨ÙƒØªØ¨ÙˆØ§ Ø¨Ø­Ø«Ù‡Ù… Ø¨Ø§Ù„Ù€ small Ø¨ØºØ¶ Ø§Ù„Ù†Ø¸Ø± Ø¹Ù† Ø§Ù„Ù‚ÙˆØ§Ø¹Ø¯
-                        Ø§Ù„ØµØ­ÙŠØ­Ø©.
+                        <span style="color: var(--primary); font-weight: 800;">• Policy:</span>
+                        الأفضل تحول كل شي لـ lowercase لأن اليوزرز غالباً بكتبوا بحثهم بالـ small بغض النظر عن القواعد
+                        الصحيحة.
                     </div>
                 </li>
             </ul>
@@ -816,8 +816,8 @@
             </div>
 
             <div class="ar-text" style="text-align: center;">
-                Ù‡Ø§Ø¶ Ø§Ù„Ù…Ø«Ø§Ù„ Ø¨ÙˆØ¬ÙŠÙƒ ÙƒÙŠÙ Ø§Ù„ØªÙˆØ­ÙŠØ¯ Ø§Ù„Ø¹Ù†ÙŠÙ ÙÙŠ Ø¬ÙˆØ¬Ù„ Ø®Ù„Ù‰ Ø§Ù„Ø³ÙŠØ³ØªÙ… ÙŠØºÙ„Ø· ÙˆÙŠÙÙ‡Ù… Ø¥Ù†Ùƒ Ø¨ØªØ¨Ø­Ø« Ø¹Ù† "Ø¨Ø³Ù‡" ÙˆØ¥Ù†Øª Ù‚Ø§ØµØ¯ Ø´Ø±ÙƒØ©
-                Ø§Ù„Ù…Ø¹Ø¯Ø§Øª Ø§Ù„Ø´Ù‡ÙŠØ±Ø©.
+                هاض المثال بوجيك كيف التوحيد العنيف في جوجل خلى السيستم يغلط ويفهم إنك بتبحث عن "بسه" وإنت قاصد شركة
+                المعدات الشهيرة.
             </div>
         </div>
 
@@ -838,8 +838,8 @@
                 An alternative to equivalence classing is to do expansion
             </div>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ø¨Ø¯Ù„ Ù…Ø§ Ù†ÙˆØ­Ø¯ Ø§Ù„ÙƒÙ„Ù…Ø§Øª ÙˆÙ‚Øª Ø§Ù„ØªØ®Ø²ÙŠÙ†ØŒ Ù…Ù…ÙƒÙ† Ù†Ø¹Ù…Ù„ <span class="highlight-span">Expansion</span> (ØªÙˆØ³Ø¹Ø©) ÙˆÙ‚Øª
-                Ø§Ù„Ø¨Ø­Ø«. ÙŠØ¹Ù†ÙŠ Ø§Ù„Ø³ÙŠØ³ØªÙ… Ø¨Ø¨Ø­Ø« Ø¹Ù† Ø§Ù„ÙƒÙ„Ù…Ø© ÙˆÙƒÙ„ "Ù‚Ø±Ø§ÙŠØ¨Ù‡Ø§" ÙÙŠ Ù†ÙØ³ Ø§Ù„ÙˆÙ‚Øª.
+                بدل ما نوحد الكلمات وقت التخزين، ممكن نعمل <span class="highlight-span">Expansion</span> (توسعة) وقت
+                البحث. يعني السيستم ببحث عن الكلمة وكل "قرايبها" في نفس الوقت.
             </div>
         </div>
 
@@ -851,15 +851,15 @@
 
             <div class="ar-text" style="text-align: center; direction: ltr; font-family: 'JetBrains Mono', monospace;">
                 <div style="margin-bottom: 10px;">
-                    Enter: <span style="color: var(--primary);">window</span> âž” Search: <span class="code-tag"
+                    Enter: <span style="color: var(--primary);">window</span> ➔ Search: <span class="code-tag"
                         style="position: static; background: var(--bg-dark);">window, windows</span>
                 </div>
                 <div style="margin-bottom: 10px;">
-                    Enter: <span style="color: var(--primary);">windows</span> âž” Search: <span class="code-tag"
+                    Enter: <span style="color: var(--primary);">windows</span> ➔ Search: <span class="code-tag"
                         style="position: static; background: var(--bg-dark);">Windows, windows, window</span>
                 </div>
                 <div>
-                    Enter: <span style="color: var(--primary);">Windows</span> âž” Search: <span class="code-tag"
+                    Enter: <span style="color: var(--primary);">Windows</span> ➔ Search: <span class="code-tag"
                         style="position: static; background: var(--bg-dark);">Windows</span>
                 </div>
             </div>
@@ -870,9 +870,9 @@
                 Potentially more powerful, but less efficient
             </div>
             <div class="ar-text">
-                Ù‡Ø§Ø¯ Ø§Ù„Ø£Ø³Ù„ÙˆØ¨ <span class="highlight-span">More powerful</span> Ù„Ø£Ù†Ù‡ Ø£Ø¯Ù‚ ÙˆØ¨ÙÙ‡Ù… Ù†ÙŠØ© Ø§Ù„ÙŠÙˆØ²Ø± (Ø²ÙŠ Ù…Ø«Ø§Ù„ ÙˆÙŠÙ†Ø¯ÙˆØ²
-                Ù†Ø¸Ø§Ù… Ø§Ù„ØªØ´ØºÙŠÙ„)ØŒ Ø¨Ø³ Ù‡Ùˆ <span class="highlight-span">Less efficient</span> Ù„Ø£Ù†Ù‡ Ø¨Ø®Ù„ÙŠ Ø§Ù„Ø³ÙŠØ³ØªÙ… ÙŠÙ†ÙØ° Ø¹Ù…Ù„ÙŠØ§Øª
-                Ø¨Ø­Ø« Ø£ÙƒØ«Ø± ÙÙŠ Ù†ÙØ³ Ø§Ù„Ù„Ø­Ø¸Ø©.
+                هاد الأسلوب <span class="highlight-span">More powerful</span> لأنه أدق وبفهم نية اليوزر (زي مثال ويندوز
+                نظام التشغيل)، بس هو <span class="highlight-span">Less efficient</span> لأنه بخلي السيستم ينفذ عمليات
+                بحث أكثر في نفس اللحظة.
             </div>
         </div>
 
@@ -893,7 +893,7 @@
                 Do we handle synonyms and homonyms?
             </div>
             <div class="ar-text" style="margin-bottom: 15px;">
-                ÙƒÙŠÙ Ø§Ù„Ø³ÙŠØ³ØªÙ… Ø¨ØªØ¹Ø§Ù…Ù„ Ù…Ø¹ Ø§Ù„Ù…ØªØ±Ø§Ø¯ÙØ§ØªØŸ Ù…Ø«Ù„Ø§Ù‹ Ø¨Ø§Ù„Ø§Ø¹ØªÙ…Ø§Ø¯ Ø¹Ù„Ù‰ <span class="highlight-span">Hand-constructed
+                كيف السيستم بتعامل مع المترادفات؟ مثلاً بالاعتماد على <span class="highlight-span">Hand-constructed
                     equivalence classes</span>:
             </div>
             <div class="example-box" style="text-align: center; direction: ltr;">
@@ -910,17 +910,17 @@
                     <div class="ar-text">
                         <span style="color: var(--primary); font-weight: 800;">1. Rewrite to form equivalence-class
                             terms:</span>
-                        Ø§Ù„ØªÙˆØ­ÙŠØ¯ ÙˆÙ‚Øª Ø§Ù„ØªØ®Ø²ÙŠÙ†Ø› Ù„Ùˆ Ø§Ù„Ø¬Ù‡Ø§Ø² Ù„Ù‚Ù‰ <span class="code-tag"
-                            style="position: static;">automobile</span>ØŒ Ø¨Ø®Ø²Ù†Ù‡Ø§ Ø¨Ø§Ù„ÙÙ‡Ø±Ø³ ØªØ­Øª Ø§Ù„Ù…ØµØ·Ù„Ø­ Ø§Ù„Ù…Ø´ØªØ±Ùƒ <span
+                        التوحيد وقت التخزين؛ لو الجهاز لقى <span class="code-tag"
+                            style="position: static;">automobile</span>، بخزنها بالفهرس تحت المصطلح المشترك <span
                             class="code-tag" style="position: static;">-car-</span>.
                     </div>
                 </li>
                 <li>
                     <div class="ar-text">
                         <span style="color: var(--primary); font-weight: 800;">2. Or we can expand a query:</span>
-                        Ø§Ù„ØªÙˆØ­ÙŠØ¯ ÙˆÙ‚Øª Ø§Ù„Ø¨Ø­Ø«Ø› Ù„Ùˆ Ø§Ù„ÙŠÙˆØ²Ø± ÙƒØªØ¨ <span class="code-tag"
-                            style="position: static;">automobile</span>ØŒ Ø§Ù„Ø³ÙŠØ³ØªÙ… Ø¨Ø¨Ø­Ø« ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø¹Ù† <span class="code-tag"
-                            style="position: static;">car</span> ÙƒÙ…Ø§Ù†.
+                        التوحيد وقت البحث؛ لو اليوزر كتب <span class="code-tag"
+                            style="position: static;">automobile</span>، السيستم ببحث تلقائياً عن <span class="code-tag"
+                            style="position: static;">car</span> كمان.
                     </div>
                 </li>
             </ul>
@@ -943,18 +943,18 @@
                 Reduce inflectional/variant forms to base form
             </div>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ø§Ù„Ù‡Ø¯Ù Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ Ù…Ù† Ø§Ù„Ù€ <span class="highlight-span">Lemmatization</span> Ù‡Ùˆ ØªÙ‚Ù„ÙŠÙ„ Ø§Ù„ØªØµØ±ÙŠÙØ§Øª ÙˆØ§Ù„Ø£Ø´ÙƒØ§Ù„
-                Ø§Ù„Ù…Ø®ØªÙ„ÙØ© Ù„Ù„ÙƒÙ„Ù…Ø© (Inflectional forms) ÙˆØªØ±Ø¬ÙŠØ¹Ù‡Ø§ Ù„Ø´ÙƒÙ„Ù‡Ø§ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ.
+                الهدف الأساسي من الـ <span class="highlight-span">Lemmatization</span> هو تقليل التصريفات والأشكال
+                المختلفة للكلمة (Inflectional forms) وترجيعها لشكلها الأساسي.
             </div>
 
             <ul style="list-style: none; padding: 0; margin-top: 20px;">
                 <li style="margin-bottom: 15px; text-align: right; direction: ltr;">
-                    <span class="code-tag" style="position: static;">am, are, is âž” be</span> â€¢
+                    <span class="code-tag" style="position: static;">am, are, is ➔ be</span> •
                 </li>
                 <li style="margin-bottom: 15px; text-align: right; direction: ltr;">
-                    <span class="code-tag" style="position: static;">car, cars, car's, cars' âž” car</span> â€¢
-                    <span class="ar-text" style="display:inline; margin-left:10px;">(ØªÙˆØ­ÙŠØ¯ Ø§Ù„Ù…ÙØ±Ø¯ ÙˆØ§Ù„Ø¬Ù…Ø¹
-                        ÙˆØ§Ù„Ù…Ù„ÙƒÙŠØ©)</span>
+                    <span class="code-tag" style="position: static;">car, cars, car's, cars' ➔ car</span> •
+                    <span class="ar-text" style="display:inline; margin-left:10px;">(توحيد المفرد والجمع
+                        والملكية)</span>
                 </li>
             </ul>
         </div>
@@ -965,11 +965,11 @@
                 style="font-family: 'JetBrains Mono', monospace; font-size: 10pt; margin: 15px 0; padding: 15px; background: rgba(15, 23, 42, 0.6); border-radius: 8px; direction: ltr;">
                 <div style="color: var(--text-muted); margin-bottom: 10px;">Original: the boy's cars are different
                     colors</div>
-                <div style="color: var(--accent);">Normalized: the boy car be different color âž”</div>
+                <div style="color: var(--accent);">Normalized: the boy car be different color ➔</div>
             </div>
             <div class="ar-text">
-                Ù‡Ø§Ø¶ Ø§Ù„Ù…Ø«Ø§Ù„ Ø¨ÙˆØ¬ÙŠÙƒ ÙƒÙŠÙ Ø§Ù„Ø¬Ù…Ù„Ø© ØµØ§Ø±Øª "Ù…ÙÙƒÙƒØ©" Ù„Ø£ØµÙˆÙ„Ù‡Ø§Ø› Ø§Ù„Ù€ Lemmatizer Ø¨Ø´ØªØºÙ„ "ØµØ­" ÙˆØ¨Ø±Ø¬Ø¹ Ø§Ù„ÙƒÙ„Ù…Ø© Ù„Ø´ÙƒÙ„Ù‡Ø§ Ø§Ù„Ù„ÙŠ ÙÙŠ
-                Ø§Ù„Ù‚Ø§Ù…ÙˆØ³ (Dictionary headword form) Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ ØªØ­Ù„ÙŠÙ„ Ù„ØºÙˆÙŠ Ø¯Ù‚ÙŠÙ‚.
+                هاض المثال بوجيك كيف الجملة صارت "مفككة" لأصولها؛ الـ Lemmatizer بشتغل "صح" وبرجع الكلمة لشكلها اللي في
+                القاموس (Dictionary headword form) بناءً على تحليل لغوي دقيق.
             </div>
         </div>
 
@@ -978,7 +978,7 @@
                 Lemmatization implies doing "proper" reduction to dictionary headword form
             </div>
             <div class="ar-text">
-                Ø§Ù„Ù€ Lemmatization Ø¨ØªØ¹Ù†ÙŠ Ø¥Ù†Ùƒ ØªØ¹Ù…Ù„ ØªÙ‚Ù„ÙŠÙ„ "ØµØ­ÙŠØ­" (Proper reduction) Ù„Ù„ÙƒÙ„Ù…Ø© Ø¹Ø´Ø§Ù† ØªØ±Ø¬Ø¹Ù‡Ø§ Ù„Ø£ØµÙ„Ù‡Ø§ Ø§Ù„Ù…Ø¹Ø¬Ù…ÙŠ
+                الـ Lemmatization بتعني إنك تعمل تقليل "صحيح" (Proper reduction) للكلمة عشان ترجعها لأصلها المعجمي
                 (Dictionary headword).
             </div>
         </div>
@@ -1000,7 +1000,7 @@
                 Reduce terms to their "roots" before indexing
             </div>
             <div class="ar-text" style="margin-bottom: 15px;">
-                Ø§Ù„Ù€ <span class="highlight-span">Stemming</span> Ù‡Ùˆ ØªØ®ÙÙŠÙ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ù„Ø¬Ø°ÙˆØ±Ù‡Ø§ (Roots) Ù‚Ø¨Ù„ Ù…Ø§ Ù†ÙÙ‡Ø±Ø³Ù‡Ø§.
+                الـ <span class="highlight-span">Stemming</span> هو تخفيف الكلمات لجذورها (Roots) قبل ما نفهرسها.
             </div>
         </div>
 
@@ -1011,19 +1011,19 @@
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ language dependent:</span> Ø¨ÙŠØ¹ØªÙ…Ø¯
-                        Ø¹Ø§Ù„Ù„ØºØ©.
+                        <span style="color: var(--primary); font-weight: 800;">• language dependent:</span> بيعتمد
+                        عاللغة.
                     </div>
                 </li>
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ e.g., automate(s), automatic,
+                        <span style="color: var(--primary); font-weight: 800;">• e.g., automate(s), automatic,
                             automation all reduced to automat.</span>
                     </div>
                 </li>
             </ul>
             <div class="ar-text" style="margin-top: 10px;">
-                ÙƒÙ„Ù…Ø© Stemming Ø¨ØªÙˆØ­ÙŠ Ø¨Ø§Ù„Ù‚Øµ "Ø§Ù„Ø®Ø´Ù†" (Crude affix chopping) Ù„Ù„Ø²ÙˆØ§Ø¦Ø¯.
+                كلمة Stemming بتوحي بالقص "الخشن" (Crude affix chopping) للزوائد.
             </div>
         </div>
 
@@ -1033,7 +1033,7 @@
                 style="flex: 1; background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 8px; font-size: 9pt; border: 1px solid var(--border);">
                 for example <b>compressed</b> and <b>compression</b> are both accepted as equivalent to <b>compress</b>.
             </div>
-            <div style="color: var(--accent); font-size: 20pt; display: flex; align-items: center;">âž”</div>
+            <div style="color: var(--accent); font-size: 20pt; display: flex; align-items: center;">➔</div>
             <div
                 style="flex: 1; background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 8px; font-size: 9pt; font-style: italic; color: var(--text-muted); border: 1px solid var(--border);">
                 for exampl <b>compress</b> and <b>compress</b> ar both accept as equival to <b>compress</b>
@@ -1059,14 +1059,14 @@
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Results suggest it's at least as good
+                        <span style="color: var(--primary); font-weight: 800;">• Results suggest it's at least as good
                             as other stemming options.</span>
                     </div>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        Ø®ÙˆØ§Ø±Ø²Ù…ÙŠØ© <span class="highlight-span">Porter</span> Ù‡ÙŠ Ø§Ù„Ø£ÙƒØ«Ø± Ø´ÙŠÙˆØ¹Ø§Ù‹ Ù„Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØŒ ÙˆÙ†ØªØ§Ø¦Ø¬Ù‡Ø§ Ø¨ØªÙ‚ÙˆÙ„
-                        Ø¥Ù†Ù‡Ø§ "Ø¹Ù„Ù‰ Ø§Ù„Ø£Ù‚Ù„" Ø¨Ø¬ÙˆØ¯Ø© Ø§Ù„Ø®ÙŠØ§Ø±Ø§Øª Ø§Ù„Ø«Ø§Ù†ÙŠØ©.
+                        خوارزمية <span class="highlight-span">Porter</span> هي الأكثر شيوعاً للإنجليزي، ونتائجها بتقول
+                        إنها "على الأقل" بجودة الخيارات الثانية.
                     </div>
                 </li>
             </ul>
@@ -1079,14 +1079,14 @@
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ phases applied sequentially:</span>
-                        Ø§Ù„Ù…Ø±Ø§Ø­Ù„ Ø¨ØªØ·Ø¨Ù‚ ÙˆØ±Ø§ Ø¨Ø¹Ø¶ Ø¨Ø§Ù„ØªØ±ØªÙŠØ¨.
+                        <span style="color: var(--primary); font-weight: 800;">• phases applied sequentially:</span>
+                        المراحل بتطبق ورا بعض بالترتيب.
                     </div>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ each phase consists of a set of
-                            commands:</span> ÙƒÙ„ Ù…Ø±Ø­Ù„Ø© ÙÙŠÙ‡Ø§ Ù…Ø¬Ù…ÙˆØ¹Ø© Ø£ÙˆØ§Ù…Ø±.
+                        <span style="color: var(--primary); font-weight: 800;">• each phase consists of a set of
+                            commands:</span> كل مرحلة فيها مجموعة أوامر.
                     </div>
                 </li>
             </ul>
@@ -1098,10 +1098,10 @@
                 Typical rules in Porter:
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end; direction: ltr;">
-                <span class="code-tag" style="position: static; font-size: 10pt;">sses âž” ss</span>
-                <span class="code-tag" style="position: static; font-size: 10pt;">ies âž” i</span>
-                <span class="code-tag" style="position: static; font-size: 10pt;">ational âž” ate</span>
-                <span class="code-tag" style="position: static; font-size: 10pt;">tional âž” tion</span>
+                <span class="code-tag" style="position: static; font-size: 10pt;">sses ➔ ss</span>
+                <span class="code-tag" style="position: static; font-size: 10pt;">ies ➔ i</span>
+                <span class="code-tag" style="position: static; font-size: 10pt;">ational ➔ ate</span>
+                <span class="code-tag" style="position: static; font-size: 10pt;">tional ➔ tion</span>
             </div>
         </div>
 
@@ -1110,13 +1110,13 @@
                 Weight of word sensitive rules
             </div>
             <div style="text-align: right; margin-bottom: 10px;">
-                <span class="code-tag" style="position: static; font-size: 9pt;">replacement âž” replac</span>
+                <span class="code-tag" style="position: static; font-size: 9pt;">replacement ➔ replac</span>
                 <br>
-                <span class="code-tag" style="position: static; font-size: 9pt;">cement âž” cement</span>
+                <span class="code-tag" style="position: static; font-size: 9pt;">cement ➔ cement</span>
             </div>
             <div class="ar-text">
-                Ø§Ù„ÙˆØ²Ù† (Weight) Ø¨ÙŠÙØ±Ù‚Ø› ÙƒÙ„Ù…Ø© <span class="highlight-span">Replacement</span> Ø·ÙˆÙŠÙ„Ø© ÙØ§Ø®ØªØµØ±Ù‡Ø§ØŒ Ø¨Ø³ <span
-                    class="highlight-span">cement</span> Ù‚ØµÙŠØ±Ø© Ø®Ù„Ø§Ù‡Ø§ Ø²ÙŠ Ù…Ø§ Ù‡ÙŠ.
+                الوزن (Weight) بيفرق؛ كلمة <span class="highlight-span">Replacement</span> طويلة فاختصرها، بس <span
+                    class="highlight-span">cement</span> قصيرة خلاها زي ما هي.
             </div>
         </div>
 
@@ -1139,7 +1139,7 @@
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px;">
                     <div class="ar-text" style="margin-bottom: 5px;">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Lovins stemmer</span>
+                        <span style="color: var(--primary); font-weight: 800;">• Lovins stemmer</span>
                     </div>
                     <div class="ar-text" style="font-size: 9pt; color: var(--text-muted);">
                         http://www.comp.lancs.ac.uk/computing/research/stemming/general/lovins.htm
@@ -1150,12 +1150,12 @@
                 </li>
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Paice/Husk stemmer</span>
+                        <span style="color: var(--primary); font-weight: 800;">• Paice/Husk stemmer</span>
                     </div>
                 </li>
                 <li style="margin-bottom: 15px;">
                     <div class="ar-text">
-                        <span style="color: var(--primary); font-weight: 800;">â€¢ Snowball</span>
+                        <span style="color: var(--primary); font-weight: 800;">• Snowball</span>
                     </div>
                 </li>
             </ul>
@@ -1178,23 +1178,23 @@
                 English: very mixed results. Helps recall for some queries but harms precision on others
             </div>
             <div class="ar-text">
-                ÙÙŠ Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØŒ Ø§Ù„Ù†ØªØ§Ø¦Ø¬ <span class="highlight-span">Mixed</span> (Ù…Ø®ØªÙ„Ø·Ø©)Ø› Ø§Ù„Ù€ Stemming Ø¨Ø±ÙØ¹ Ø§Ù„Ù€ <span
-                    class="highlight-span">Recall</span> (Ø¨Ø®Ù„ÙŠÙƒ ØªÙ„Ø§Ù‚ÙŠ Ù…Ù„ÙØ§Øª Ø£ÙƒØ«Ø±) Ø¨Ø³ Ù…Ù…ÙƒÙ† ÙŠØ¶Ø±Ø¨ Ø§Ù„Ù€ <span
-                    class="highlight-span">Precision</span> (Ø§Ù„Ø¯Ù‚Ø© Ø¨ØªÙ‚Ù„).
+                في الإنجليزي، النتائج <span class="highlight-span">Mixed</span> (مختلطة)؛ الـ Stemming برفع الـ <span
+                    class="highlight-span">Recall</span> (بخليك تلاقي ملفات أكثر) بس ممكن يضرب الـ <span
+                    class="highlight-span">Precision</span> (الدقة بتقل).
             </div>
         </div>
 
         <div class="section-card"
             style="margin-top: 20px; border: 1px solid var(--danger); background: rgba(251, 113, 133, 0.05);">
             <div class="en-text" style="color: var(--danger); margin-bottom: 15px;">
-                E.g., operative (dentistry) âž” oper
+                E.g., operative (dentistry) ➔ oper
             </div>
             <div class="ar-text">
-                Ù…Ø«Ù„Ø§Ù‹ Ù„Ùˆ Ø¨Ø­Ø«Øª Ø¹Ù† ÙƒÙ„Ù…Ø© <span class="code-tag"
-                    style="position: static; background: var(--card-dark);">operative</span> (Ø¨Ù…Ø¹Ù†Ù‰ Ø¹Ù…Ù„ÙŠØ© Ø£Ø³Ù†Ø§Ù†)ØŒ
-                ÙˆØ§Ù„Ø³ÙŠØ³ØªÙ… Ø¹Ù…Ù„Ù‡Ø§ Stemming Ù„Ù€ <span class="code-tag"
-                    style="position: static; background: var(--card-dark);">oper</span> ØŒ Ù…Ù…ÙƒÙ† ØªØ·Ù„Ø¹Ù„Ùƒ Ù†ØªØ§Ø¦Ø¬ Ø¹Ù† "Ø¹Ù…Ù„ÙŠØ§Øª
-                Ø¬Ø±Ø§Ø­ÙŠØ©" Ø¹Ø§Ù…Ø©ØŒ ÙˆÙ‡ÙŠÙƒ Ø§Ù„Ø¯Ù‚Ø© Ø¨ØªØ¶ÙŠØ¹ (Precision harms).
+                مثلاً لو بحثت عن كلمة <span class="code-tag"
+                    style="position: static; background: var(--card-dark);">operative</span> (بمعنى عملية أسنان)،
+                والسيستم عملها Stemming لـ <span class="code-tag"
+                    style="position: static; background: var(--card-dark);">oper</span> ، ممكن تطلعلك نتائج عن "عمليات
+                جراحية" عامة، وهيك الدقة بتضيع (Precision harms).
             </div>
         </div>
 
@@ -1203,9 +1203,9 @@
                 Definitely useful for Spanish, German, ...
             </div>
             <div class="ar-text">
-                Ø¨Ø³ ÙÙŠ Ù„ØºØ§Øª Ø«Ø§Ù†ÙŠØ© Ø²ÙŠ Ø§Ù„Ø¥Ø³Ø¨Ø§Ù†ÙŠØ© Ø£Ùˆ Ø§Ù„Ø£Ù„Ù…Ø§Ù†ÙŠØ©ØŒ Ø§Ù„Ù€ Stemming Ù‡Ùˆ Ø¥Ø´ÙŠ <span
-                    class="highlight-span">Essential</span> (Ø¶Ø±ÙˆØ±ÙŠ Ø¬Ø¯Ø§Ù‹) ÙˆÙ…ÙÙŠØ¯ Ø¨Ø¯ÙˆÙ† Ù†Ù‚Ø§Ø´ Ø¨Ø³Ø¨Ø¨ ØªØ¹Ù‚ÙŠØ¯ ØªØµØ±ÙŠÙØ§Øª Ø§Ù„ÙƒÙ„Ù…Ø§Øª
-                Ø¹Ù†Ø¯Ù‡Ù….
+                بس في لغات ثانية زي الإسبانية أو الألمانية، الـ Stemming هو إشي <span
+                    class="highlight-span">Essential</span> (ضروري جداً) ومفيد بدون نقاش بسبب تعقيد تصريفات الكلمات
+                عندهم.
             </div>
         </div>
 
@@ -1226,10 +1226,10 @@
                 The above methods embody transformations that are: Language-specific, and often Application-specific
             </div>
             <div class="ar-text">
-                ÙƒÙ„ Ø§Ù„Ø·Ø±Ù‚ Ø§Ù„Ù„ÙŠ Ø­ÙƒÙŠÙ†Ø§ Ø¹Ù†Ù‡Ø§ (Tokenization, Normalization, Stemming) Ù‡ÙŠ Ø¹Ù…Ù„ÙŠØ§Øª <span
-                    class="highlight-span">Language-specific</span> (Ø¨ØªØ¹ØªÙ…Ø¯ Ø¹Ù„Ù‰ Ø§Ù„Ù„ØºØ©)Ø› ÙŠØ¹Ù†ÙŠ Ø§Ù„Ù„ÙŠ Ø¨Ø¶Ø¨Ø· Ù„Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ Ù…Ø§ Ø¨Ø¶Ø¨Ø·
-                Ù„Ù„Ø¹Ø±Ø¨ÙŠ. ÙˆØ­ØªÙ‰ Ø£Ø­ÙŠØ§Ù†Ø§Ù‹ Ø¨ØªÙƒÙˆÙ† <span class="highlight-span">Application-specific</span> (Ø¨ØªØ¹ØªÙ…Ø¯ Ø¹Ù„Ù‰ Ù†ÙˆØ¹
-                Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø£Ùˆ Ø§Ù„Ù…Ø¬Ø§Ù„ Ø§Ù„Ù„ÙŠ Ø¨ØªØ´ØªØºÙ„ ÙÙŠÙ‡).
+                كل الطرق اللي حكينا عنها (Tokenization, Normalization, Stemming) هي عمليات <span
+                    class="highlight-span">Language-specific</span> (بتعتمد على اللغة)؛ يعني اللي بضبط للإنجليزي ما بضبط
+                للعربي. وحتى أحياناً بتكون <span class="highlight-span">Application-specific</span> (بتعتمد على نوع
+                التطبيق أو المجال اللي بتشتغل فيه).
             </div>
         </div>
 
@@ -1238,10 +1238,10 @@
                 Both open source and commercial plug-ins are available for handling these
             </div>
             <div class="ar-text">
-                Ø¹Ø´Ø§Ù† ØªØ±ÙŠØ­ Ø±Ø§Ø³ÙƒØŒ ÙÙŠÙ‡ <span class="highlight-span">Plug-ins</span> (Ø¥Ø¶Ø§ÙØ§Øª) Ø¬Ø§Ù‡Ø²Ø©Ø› Ù…Ù†Ù‡Ø§ <span
-                    class="highlight-span">Open source</span> (Ù…ÙØªÙˆØ­ Ø§Ù„Ù…ØµØ¯Ø±) ÙˆÙ…Ù†Ù‡Ø§ <span
-                    class="highlight-span">Commercial</span> (ØªØ¬Ø§Ø±ÙŠØ© Ø¨ÙÙ„ÙˆØ³)ØŒ Ø¨ØªØªØ¹Ø§Ù…Ù„ Ù…Ø¹ Ù‡Ø§ÙŠ Ø§Ù„ØªØ¹Ù‚ÙŠØ¯Ø§Øª ÙˆØ¨ØªØ¹Ø·ÙŠÙƒ Ø§Ù„Ù€
-                Stemming ÙˆØ§Ù„ØªÙˆØ­ÙŠØ¯ Ø§Ù„Ù…Ù†Ø§Ø³Ø¨ Ù„ÙƒÙ„ Ù„ØºØ©.
+                عشان تريح راسك، فيه <span class="highlight-span">Plug-ins</span> (إضافات) جاهزة؛ منها <span
+                    class="highlight-span">Open source</span> (مفتوح المصدر) ومنها <span
+                    class="highlight-span">Commercial</span> (تجارية بفلوس)، بتتعامل مع هاي التعقيدات وبتعطيك الـ
+                Stemming والتوحيد المناسب لكل لغة.
             </div>
         </div>
 
@@ -1249,11 +1249,11 @@
         <div class="section-card"
             style="margin-top: 40px; text-align: center; border: 2px dashed var(--success); background: rgba(52, 211, 153, 0.05);">
             <h2 class="section-title" style="justify-content: center; color: var(--success); border: none;">
-                <span>âœ…</span> End of Text Operations
+                <span>✅</span> End of Text Operations
             </h2>
             <p class="ar-text" style="text-align: center;">
-                Ø®Ù„ØµÙ†Ø§ Ø´Ø±Ø­ Ø¹Ù…Ù„ÙŠØ§Øª Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ù†ØµÙˆØµ. Ø§Ù„Ù‚Ø³Ù… Ø§Ù„Ø¬Ø§ÙŠ Ø±Ø­ Ù†Ø­ÙƒÙŠ Ø¹Ù† ÙƒÙŠÙÙŠØ© Ø¨Ù†Ø§Ø¡ Ø§Ù„Ù€ <span
-                    class="highlight-span">Inverted Index</span> Ø¨Ø§Ù„ØªÙØµÙŠÙ„.
+                خلصنا شرح عمليات معالجة النصوص. القسم الجاي رح نحكي عن كيفية بناء الـ <span
+                    class="highlight-span">Inverted Index</span> بالتفصيل.
             </p>
         </div>
 
@@ -1264,7 +1264,8 @@
     </div>
 
 
-<script src='nav.js'></script>
+    <!-- Navigation Script -->
+    <script src="nav.js"></script>
 </body>
 
 </html>
