@@ -106,33 +106,57 @@
         }
 
         .q-text {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             line-height: 1.7;
             margin-bottom: 20px;
             color: #fff;
-        }
-
-        .options-grid {
-            display: grid;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .option {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 12px 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.2s;
-            font-family: 'Inter', sans-serif;
-            /* English options */
             direction: ltr;
+            /* Most IR questions are in English */
             text-align: left;
         }
 
-        .option:hover {
+        /* TABLE STYLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--text-light);
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Input styling within tables */
+        .exam-input {
+            width: 90%;
+            padding: 5px;
             background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: #fff;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .exam-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
         }
 
         /* Reveal Answer Section */
@@ -146,22 +170,13 @@
         }
 
         .correct-answer-box {
-            background: rgba(52, 211, 153, 0.1);
+            background: rgba(52, 211, 153, 0.05);
             border: 1px solid var(--success);
-            color: var(--success);
             padding: 15px;
             border-radius: 10px;
-            font-weight: bold;
             margin-bottom: 10px;
-            direction: ltr;
-            /* English Answer */
             text-align: left;
-        }
-
-        .explanation {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            direction: ltr;
         }
 
         .toggle-btn {
@@ -228,47 +243,355 @@
         <!-- FIRST EXAM SECTION -->
         <div id="first" class="exam-section active">
 
-            <!-- Question 1 Template -->
+            <!-- Question 1: Merge Algorithm -->
             <div class="question-card">
                 <div class="q-header">
-                    <span class="q-number">Q 01</span>
+                    <span class="q-number">Q 01 [4 Points]</span>
                 </div>
                 <div class="q-text">
-                    Which of the following is NOT a step in the Information Retrieval process?
+                    <strong>Consider the following postings lists from an inverted index:</strong>
+
+                    <table>
+                        <tr>
+                            <th>Term</th>
+                            <th>Postings List (Sorted Document IDs)</th>
+                        </tr>
+                        <tr>
+                            <td>term1</td>
+                            <td>1, 4, 5, 7, 9, 11, 13, 15</td>
+                        </tr>
+                        <tr>
+                            <td>term2</td>
+                            <td>3, 4, 6, 7, 10, 13, 14</td>
+                        </tr>
+                    </table>
+
+                    <p style="margin-top: 15px;">Using the <strong>Merge Algorithm</strong>, evaluate: <span
+                            style="color: var(--accent);">term1 AND term2</span>.<br>
+                        Fill in the steps below:</p>
                 </div>
 
-                <div class="options-grid">
-                    <div class="option">A. Indexing</div>
-                    <div class="option">B. Query Processing</div>
-                    <div class="option">C. Data Encryption</div>
-                    <div class="option">D. Ranking</div>
+                <!-- Interactive Input Table -->
+                <div class="interactive-area">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Iter</th>
+                                <th>Pointer1 (term1)</th>
+                                <th>Pointer2 (term2)</th>
+                                <th>Comparison / Action</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iteration 1 (Given) -->
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>1 &lt; 3 &rarr; Move P1</td>
+                                <td>&empty;</td>
+                            </tr>
+                            <!-- User Inputs (10 rows) -->
+                            <tr>
+                                <td>2</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <button class="toggle-btn" onclick="toggleAnswer(this)">
-                    <span>👁️ إظهار الإجابة</span>
+                    <span>👁️ Show Solution Model</span>
                 </button>
 
                 <div class="answer-section">
-                    <div class="correct-answer-box">✅ Correct Answer: C. Data Encryption</div>
-                    <div class="explanation">
-                        <strong style="color: var(--accent)">الشرح:</strong><br>
-                        عملية الـ IR تتضمن الـ Indexing والـ Query والـ Ranking، بس التشفير (Encryption) مش جزء أساسي من
-                        عملية الاسترجاع نفسها.
+                    <div class="correct-answer-box">
+                        <h4 style="margin:0 0 10px 0; color:var(--success);">✅ Typical Solution:</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Iter</th>
+                                    <th>P1</th>
+                                    <th>P2</th>
+                                    <th>Comparison</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>1 &lt; 3 &rarr; Move P1</td>
+                                    <td>&empty;</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>3 &lt; 4 &rarr; Move P2</td>
+                                    <td>&empty;</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>Match &rarr; Add 4, Move P1, P2</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>5 &lt; 6 &rarr; Move P1</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>7</td>
+                                    <td>6</td>
+                                    <td>6 &lt; 7 &rarr; Move P2</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>7</td>
+                                    <td>Match &rarr; Add 7, Move P1, P2</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>9 &lt; 10 &rarr; Move P1</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>11</td>
+                                    <td>10</td>
+                                    <td>10 &lt; 11 &rarr; Move P2</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>11</td>
+                                    <td>13</td>
+                                    <td>11 &lt; 13 &rarr; Move P1</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>13</td>
+                                    <td>13</td>
+                                    <td>Match &rarr; Add 13, Move P1, P2</td>
+                                    <td>13</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>15</td>
+                                    <td>14</td>
+                                    <td>14 &lt; 15 &rarr; Move P2</td>
+                                    <td>End</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Question 2 Template - Place your questions here -->
+            <!-- Question 2: Positional Index -->
             <div class="question-card">
                 <div class="q-header">
-                    <span class="q-number">Q 02</span>
+                    <span class="q-number">Q 02 [4 Points]</span>
                 </div>
                 <div class="q-text">
-                    (مثال: ضع سؤالك هنا...)
+                    <strong>Given the following positional index:</strong>
+                    <br>
+                    <table>
+                        <tr>
+                            <th>Term</th>
+                            <th>Postings List (DocID: Positions)</th>
+                        </tr>
+                        <tr>
+                            <td>self</td>
+                            <td>{doc1: [2]}, {doc2: [1, 5]}, {doc3: [12]}, {doc4: [5]}</td>
+                        </tr>
+                        <tr>
+                            <td>driving</td>
+                            <td>{doc1: [3]}, {doc2: [6]}, {doc3: [10, 13]}, {doc4: [6]}</td>
+                        </tr>
+                        <tr>
+                            <td>car</td>
+                            <td>{doc1: [4]}, {doc2: [8, 10]}, {doc3: [8, 11, 14]}, {doc4: [8]}</td>
+                        </tr>
+                    </table>
+
+                    <p style="margin-top: 15px;">Evaluate phrase query: <span style="color: var(--accent);">"self
+                            driving car"</span></p>
                 </div>
-                <button class="toggle-btn" onclick="toggleAnswer(this)"><span>👁️ إظهار الإجابة</span></button>
+
+                <div class="interactive-area">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Doc Id</th>
+                                <th>"self" Pos</th>
+                                <th>"driving" Pos</th>
+                                <th>"car" Pos</th>
+                                <th>Match?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>doc1</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>doc2</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>doc3</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>doc4</td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                                <td><input class="exam-input" type="text"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleAnswer(this)"><span>👁️ Show Solution Model</span></button>
                 <div class="answer-section">
-                    <div class="correct-answer-box">✅ Correct Answer: ...</div>
+                    <div class="correct-answer-box">
+                        <h4 style="margin:0 0 10px 0; color:var(--success);">✅ Typical Solution:</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Doc Id</th>
+                                    <th>"self"</th>
+                                    <th>"driving"</th>
+                                    <th>"car"</th>
+                                    <th>Match? (Yes/No)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>doc1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>✅ Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>doc2</td>
+                                    <td>1, 5</td>
+                                    <td>6</td>
+                                    <td>8, 10</td>
+                                    <td>❌ No</td>
+                                </tr>
+                                <tr>
+                                    <td>doc3</td>
+                                    <td>12</td>
+                                    <td>10, 13</td>
+                                    <td>8, 11, 14</td>
+                                    <td>❌ No</td>
+                                </tr>
+                                <tr>
+                                    <td>doc4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>❌ No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top:10px; color: var(--text-muted); font-size: 0.9rem;">
+                            <strong>Note:</strong> Positions must be consecutive (e.g., 2, 3, 4). Only Doc1 matches.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -289,10 +612,10 @@
             const answerDiv = btn.nextElementSibling;
             if (answerDiv.style.display === "block") {
                 answerDiv.style.display = "none";
-                btn.innerHTML = "<span>👁️ إظهار الإجابة</span>";
+                btn.innerHTML = "<span>👁️ Show Solution Model</span>";
             } else {
                 answerDiv.style.display = "block";
-                btn.innerHTML = "<span>🙈 إخفاء الإجابة</span>";
+                btn.innerHTML = "<span>🙈 Hide Solution Model</span>";
             }
         }
 
@@ -304,8 +627,8 @@
 
             // Show selected
             document.getElementById(examId).classList.add('active');
-            // Highlight button (simple logic for 2 tabs)
-            event.target.classList.add('active');
+            // Highlight button
+            if (event) event.target.classList.add('active');
         }
     </script>
 
