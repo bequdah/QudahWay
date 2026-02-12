@@ -329,6 +329,52 @@
             color: var(--accent);
             font-weight: 700;
         }
+
+        /* Back Home Button Styling */
+        .back-home-btn {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+
+        .back-home-btn .icon {
+            font-size: 1.2rem;
+        }
+
+        .back-home-btn:hover {
+            background: var(--primary);
+            color: #0f172a;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transform: translateY(-50%) translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .back-home-btn {
+                position: relative;
+                top: 0;
+                right: 0;
+                transform: none !important;
+                margin-bottom: 20px;
+                display: inline-flex;
+            }
+        }
     </style>
 </head>
 
@@ -336,7 +382,11 @@
 
     <div class="container">
 
-        <div class="header-title">
+        <div class="header-title" style="position: relative;">
+            <a href="index.html" class="back-home-btn">
+                <span>الرئيسية</span>
+                <span class="icon">🏠</span>
+            </a>
             <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
             <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.2rem;">Exams Bank</p>
         </div>
