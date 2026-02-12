@@ -7,13 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            z-index: 9999; /* High z-index to be on top of everything */
+            z-index: 9999;
             font-family: 'Inter', sans-serif;
-            direction: ltr; /* Ensure menu is LTR */
+            direction: ltr;
         }
 
         #nav-toggle {
-            background: #38bdf8; /* var(--primary) */
+            background: #38bdf8;
             color: #0f172a;
             border: none;
             width: 60px;
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 10px;
-            width: 280px; /* Slightly wider for numbered items */
+            width: 280px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transform-origin: bottom right;
             transition: opacity 0.3s, transform 0.3s;
@@ -61,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         .nav-header {
-            color: #facc15; /* var(--accent) */
+            color: #facc15;
             font-weight: 900;
             padding: 5px 10px 10px 10px;
             border-bottom: 1px solid #334155;
             margin-bottom: 5px;
             font-size: 1.1rem;
             text-align: center;
-            font-family: 'Satisfy', cursive; /* Match brand font if desired */
+            font-family: 'Satisfy', cursive;
         }
 
         .nav-link {
@@ -89,20 +89,84 @@ document.addEventListener("DOMContentLoaded", function () {
             color: #38bdf8;
             transform: translateX(5px);
         }
+
+        /* Top Home Button Styling */
+        .top-home-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 6px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .top-home-nav:hover {
+            background: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+        }
+
+        @media screen and (max-width: 600px) {
+            #nav-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            #nav-toggle {
+                width: 50px;
+                height: 50px;
+            }
+            .top-home-nav span {
+                display: none;
+            }
+            .top-home-nav {
+                padding: 6px 10px;
+            }
+        }
         
         @media print {
             #nav-container {
+                display: none !important;
+            }
+            .top-home-nav {
                 display: none !important;
             }
         }
     `;
     document.head.appendChild(style);
 
-    // 2. Create the HTML Elements
+    // 2. Create the Home Button in Header
+    // Find a suitable header container
+    const currentPage = window.location.pathname.split("/").pop();
+    const header = document.querySelector('.page-header') || document.querySelector('.header-title');
+    if (header && currentPage !== 'index.html' && currentPage !== '') {
+        // Ensure the header has relative positioning for absolute child if needed
+        if (getComputedStyle(header).position === 'static') {
+            header.style.position = 'relative';
+        }
+
+        const homeBtn = document.createElement('a');
+        homeBtn.href = 'index.html';
+        homeBtn.className = 'top-home-nav';
+        homeBtn.innerHTML = '🏠 <span>الرئيسية</span>';
+
+        // Append it as the first or last child depending on context
+        // In your layouts, titles are usually on the left/right, we want this on the other side
+        header.appendChild(homeBtn);
+    }
+
+    // 2. Create the HTML Elements for Floating Nav
     const navContainer = document.createElement('div');
     navContainer.id = 'nav-container';
 
-    // NEW ORDER APPLIED HERE
     navContainer.innerHTML = `
         <button id="nav-toggle" aria-label="Toggle Menu">
             <span class="icon">☰</span>
@@ -124,6 +188,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
             <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
             <a href="exams.html" class="nav-link" style="color: #fb7185;">📝 Previous Exams</a>
+            <button id="hide-nav-btn" class="nav-link" style="width: 100%; background: none; border: none; cursor: pointer; color: #94a3b8; font-size: 0.8rem; justify-content: center; margin-top: 5px;">
+                ❌ إخفاء هذا الزر
+            </button>
         </div>
     `;
 
@@ -133,6 +200,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const toggleBtn = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
     const icon = toggleBtn.querySelector('.icon');
+    const hideBtn = document.getElementById('hide-nav-btn');
+
+    hideBtn.addEventListener('click', function () {
+        navContainer.style.display = 'none';
+        // Optional: Save to localStorage if you want it to persist
+        // localStorage.setItem('navHidden', 'true');
+    });
 
     toggleBtn.addEventListener('click', function () {
         menu.classList.toggle('visible');
@@ -148,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 4. Highlight current page
-    const currentPage = window.location.pathname.split("/").pop();
     const links = menu.querySelectorAll('.nav-link');
     links.forEach(link => {
         if (link.getAttribute('href') === currentPage) {
