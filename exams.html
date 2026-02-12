@@ -159,7 +159,6 @@
             font-size: 0.8rem;
         }
 
-        /* Select Styling */
         select.exam-input {
             width: 100%;
             padding: 8px;
@@ -171,12 +170,6 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
             transition: all 0.2s;
-        }
-
-        select.exam-input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.3);
         }
 
         .toggle-btn {
@@ -233,18 +226,11 @@
             display: block;
         }
 
-        .hint-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        /* MCQ Premium Card Styles */
+        /* MCQ Styles */
         .mcq-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             margin-top: 15px;
         }
 
@@ -262,12 +248,12 @@
         .option-card {
             display: flex;
             align-items: center;
-            padding: 15px 20px;
+            padding: 14px 18px;
             background: rgba(30, 41, 59, 0.5);
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             font-size: 0.95rem;
             color: var(--text-light);
             direction: ltr;
@@ -275,24 +261,22 @@
         }
 
         .mcq-option:hover .option-card {
-            background: rgba(56, 189, 248, 0.05);
             border-color: rgba(56, 189, 248, 0.4);
         }
 
         .mcq-option input:checked+.option-card {
             background: rgba(56, 189, 248, 0.1);
             border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
 
         .dot {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border: 2px solid #475569;
             border-radius: 50%;
-            margin-right: 15px;
-            position: relative;
+            margin-right: 12px;
             flex-shrink: 0;
+            position: relative;
         }
 
         .mcq-option input:checked+.option-card .dot {
@@ -302,8 +286,8 @@
         .mcq-option input:checked+.option-card .dot::after {
             content: '';
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: var(--primary);
             border-radius: 50%;
             top: 50%;
@@ -312,34 +296,34 @@
         }
 
         .q-label-arabic {
+            display: block;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 10px;
-            display: block;
-            font-size: 1.05rem;
+            margin-bottom: 8px;
             direction: rtl;
             text-align: right;
         }
 
-        /* Q3 Specific Styles */
+        /* Q3 FIXED Styles */
         .skip-container {
             background: rgba(15, 23, 42, 0.4);
-            padding: 50px 20px;
+            padding: 50px 30px;
             border-radius: 20px;
             border: 1px solid var(--border);
             margin: 30px 0;
-            direction: ltr;
+            direction: ltr !important;
             overflow-x: auto;
+            white-space: nowrap;
         }
 
         .list-row {
-            display: flex;
+            display: flex !important;
+            flex-direction: row !important;
             align-items: center;
-            gap: 0;
             margin-bottom: 80px;
             position: relative;
-            min-width: 650px;
+            width: fit-content;
         }
 
         .list-row:last-child {
@@ -350,7 +334,23 @@
             width: 50px;
             font-weight: 900;
             font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
+            flex-shrink: 0;
+        }
+
+        .p1-color {
+            color: var(--primary);
+        }
+
+        .p2-color {
+            color: var(--accent);
+        }
+
+        .nodes-wrapper {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .node-box {
@@ -363,19 +363,19 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            z-index: 2;
+            font-family: 'JetBrains Mono';
+            font-size: 0.9rem;
+            z-index: 5;
         }
 
         .node-box.active-primary {
             border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
         .node-box.active-accent {
             border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
         }
 
         .node-box.dim {
@@ -385,7 +385,6 @@
 
         .path-arrow {
             color: #475569;
-            font-size: 1.1rem;
             font-weight: bold;
             padding: 0 2px;
         }
@@ -394,7 +393,6 @@
             position: absolute;
             top: -35px;
             fill: none;
-            stroke-linecap: round;
             pointer-events: none;
         }
 
@@ -408,22 +406,21 @@
         .skip-curve.success-p1 {
             stroke: var(--primary);
             stroke-width: 3;
-            filter: drop-shadow(0 0 8px var(--primary));
+            filter: drop-shadow(0 0 5px var(--primary));
         }
 
         .skip-curve.success-p2 {
             stroke: var(--accent);
             stroke-width: 3;
-            filter: drop-shadow(0 0 8px var(--accent));
+            filter: drop-shadow(0 0 5px var(--accent));
         }
 
-        .skip-label-tag {
+        .skip-tag {
             position: absolute;
             top: -65px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
             white-space: nowrap;
         }
     </style>
@@ -443,26 +440,16 @@
             <div class="tab-btn" onclick="switchTab('second')">Second Exam</div>
         </div>
 
-        <!-- FIRST EXAM SECTION -->
         <div id="first" class="exam-section active">
 
-            <!-- Q1: Merge Algorithm -->
+            <!-- Question 1: Merge -->
             <div class="question-card">
-                <div class="q-header">
-                    <span class="q-number">Q 01 [4 Points]</span>
-                </div>
+                <div class="q-header"><span class="q-number">Q 01 [4 Points]</span></div>
                 <div class="q-text">
                     <strong>Merge Algorithm Execution:</strong><br>
-                    Given inverted lists sorted by DocID:
-                    <ul
-                        style="list-style: none; padding: 0; font-family: 'JetBrains Mono', monospace; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
-                        <li>Term1: <span style="color:var(--primary)">1, 4, 5, 7, 9, 11, 13, 15</span></li>
-                        <li>Term2: <span style="color:var(--accent)">3, 4, 6, 7, 10, 13, 14</span></li>
-                    </ul>
-                    For query: <span style="color: #fff; border-bottom: 2px solid var(--accent);">term1 AND
-                        term2</span>, select step details.
+                    Term1: [1, 4, 5, 7, 9, 11, 13, 15] | Term2: [3, 4, 6, 7, 10, 13, 14]<br>
+                    Query: <strong>term1 AND term2</strong>
                 </div>
-
                 <div class="interactive-area">
                     <table>
                         <thead>
@@ -470,164 +457,47 @@
                                 <th>#</th>
                                 <th>P1</th>
                                 <th>P2</th>
-                                <th>Compare Action</th>
+                                <th>Action</th>
                                 <th>Result</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><span style="color:var(--primary)">1</span></td>
-                                <td><span style="color:var(--accent)">3</span></td>
-                                <td>1 &lt; 3 &rarr; Move P1</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>Move P1</td>
                                 <td>&empty;</td>
                             </tr>
                             <script>
-                                const resultOps = ["Empty (∅)", "Match: 4", "Match: 7", "Match: 13", "End"];
-                                const pOps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, "End"];
-                                const actionOps = ["Move P1", "Move P2", "Match -> Add", "Stop"];
-                                function createSelect(options, className) {
-                                    let html = `<select class="exam-input ${className}" onchange="updateExclusions(this)">`;
-                                    html += `<option value="">Select...</option>`;
-                                    options.forEach(op => html += `<option value="${op}">${op}</option>`);
-                                    html += `</select>`;
-                                    return html;
+                                function createSelect(options, cls) {
+                                    let h = `<select class="exam-input ${cls}" onchange="updateExcl(this)"><option value="">Select...</option>`;
+                                    options.forEach(o => h += `<option value="${o}">${o}</option>`);
+                                    return h + `</select>`;
                                 }
+                                const opts = ["Empty (∅)", "Match: 4", "Match: 7", "Match: 13", "End"];
                                 for (let i = 2; i <= 11; i++) {
-                                    document.write(`<tr><td>${i}</td><td>${createSelect(pOps, '')}</td><td>${createSelect(pOps, '')}</td><td>${createSelect(actionOps, '')}</td><td>${createSelect(resultOps, 'result-select')}</td></tr>`);
+                                    document.write(`<tr><td>${i}</td><td>${createSelect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 'End'], '')}</td><td>${createSelect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 'End'], '')}</td><td>${createSelect(['Move P1', 'Move P2', 'Match -> Add', 'Stop'], '')}</td><td>${createSelect(opts, 'res-sel')}</td></tr>`);
                                 }
                             </script>
                         </tbody>
                     </table>
                 </div>
-
-                <button class="toggle-btn" onclick="toggleAnswer(this)"><span>👁️ Show Solution Model</span></button>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="margin-top:0; color:var(--success)">✅ Correct Sequence:</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>P1</th>
-                                    <th>P2</th>
-                                    <th>Action</th>
-                                    <th>Result</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>Move P1</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>3</td>
-                                    <td>Move P2</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>Match -> Add</td>
-                                    <td>Match: 4</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>Move P1</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>7</td>
-                                    <td>6</td>
-                                    <td>Move P2</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                    <td>Match -> Add</td>
-                                    <td>Match: 7</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>9</td>
-                                    <td>10</td>
-                                    <td>Move P1</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>11</td>
-                                    <td>10</td>
-                                    <td>Move P2</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>11</td>
-                                    <td>13</td>
-                                    <td>Move P1</td>
-                                    <td>∅</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>13</td>
-                                    <td>13</td>
-                                    <td>Match -> Add</td>
-                                    <td>Match: 13</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>15</td>
-                                    <td>14</td>
-                                    <td>Move P2</td>
-                                    <td>End</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h4 style="color:var(--success)">✅ Solution:</h4>
+                        <p style="font-size: 0.85rem">Iter 1: 1<3 (P1) | Iter 2: 4>3 (P2) | Iter 3: 4=4 (Match) | Iter
+                                4: 5<6 (P1) | Iter 5: 7>6 (P2) | Iter 6: 7=7 (Match) | Iter 7: 9<10 (P1) | Iter 8: 11>10
+                                        (P2) | Iter 9: 11<13 (P1) | Iter 10: 13=13 (Match) | Iter 11: 15>14 (End)</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Q2: Positional Index -->
+            <!-- Question 2: Positional -->
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 02 [4 Points]</span></div>
-                <div class="q-text">
-                    <strong>Positional Index Query: <span style="color:var(--accent)">"self driving
-                            car"</span></strong><br>
-                    Fill in the table to evaluate the phrase query.
-                    <div style="margin: 15px 0;">
-                        <table style="min-width: 500px; font-size: 0.8rem;">
-                            <tr>
-                                <th>Term</th>
-                                <th>Postings List</th>
-                            </tr>
-                            <tr>
-                                <td>self</td>
-                                <td>{doc1: [2]} {doc2: [1, 5]} {doc3: [12]} {doc4: [5]}</td>
-                            </tr>
-                            <tr>
-                                <td>driving</td>
-                                <td>{doc1: [3]} {doc2: [6]} {doc3: [10, 13]} {doc4: [6]}</td>
-                            </tr>
-                            <tr>
-                                <td>car</td>
-                                <td>{doc1: [4]} {doc2: [8, 10]} {doc3: [8, 11, 14]} {doc4: [8]}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
+                <div class="q-text"><strong>Positional Index: "self driving car"</strong></div>
                 <div class="interactive-area">
                     <table>
                         <thead>
@@ -641,275 +511,192 @@
                         </thead>
                         <tbody>
                             <script>
-                                const q2Docs = ["doc1", "doc2", "doc3", "doc4"];
-                                const posDist = ["[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[8]", "[12]", "[1, 5]", "[6, 13]", "[8, 10]", "[10, 13]", "∅"];
-                                q2Docs.forEach(doc => {
-                                    document.write(`<tr><td style="font-weight:bold; color:var(--primary)">${doc}</td><td>${createSelect(posDist, '')}</td><td>${createSelect(posDist, '')}</td><td>${createSelect(posDist, '')}</td><td><select class="exam-input" style="width: auto;"><option>No</option><option>Yes</option></select></td></tr>`);
+                                ["doc1", "doc2", "doc3", "doc4"].forEach(d => {
+                                    document.write(`<tr><td style="color:var(--primary)">${d}</td><td>${createSelect(['[2]', '[1, 5]', '[12]', '[5]', '∅'], '')}</td><td>${createSelect(['[3]', '[6]', '[10, 13]', '∅'], '')}</td><td>${createSelect(['[4]', '[8, 10]', '[8, 11, 14]', '[8]', '∅'], '')}</td><td><select class="exam-input" style="width:70px"><option>No</option><option>Yes</option></select></td></tr>`);
                                 });
                             </script>
                         </tbody>
                     </table>
                 </div>
-
-                <button class="toggle-btn" onclick="toggleAnswer(this)"><span>👁️ Show Solution Model</span></button>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="color:var(--success); font-family: 'Cairo';">✅ الحل النموذجي:</h4>
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>DocID</th>
-                                    <th>self</th>
-                                    <th>driving</th>
-                                    <th>car</th>
-                                    <th>Match?</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>doc1</td>
-                                    <td>[2]</td>
-                                    <td>[3]</td>
-                                    <td>[4]</td>
-                                    <td>✅ Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>doc2</td>
-                                    <td>[1, 5]</td>
-                                    <td>[6]</td>
-                                    <td>[8, 10]</td>
-                                    <td>❌ No</td>
-                                </tr>
-                                <tr>
-                                    <td>doc3</td>
-                                    <td>[12]</td>
-                                    <td>[13]</td>
-                                    <td>[14]</td>
-                                    <td>✅ Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>doc4</td>
-                                    <td>[5]</td>
-                                    <td>[6]</td>
-                                    <td>[8]</td>
-                                    <td>❌ No</td>
-                                </tr>
-                            </tbody>
+                            <tr>
+                                <th>Doc</th>
+                                <th>self</th>
+                                <th>driving</th>
+                                <th>car</th>
+                                <th>Match?</th>
+                            </tr>
+                            <tr>
+                                <td>doc1</td>
+                                <td>[2]</td>
+                                <td>[3]</td>
+                                <td>[4]</td>
+                                <td>✅ Yes</td>
+                            </tr>
+                            <tr>
+                                <td>doc2</td>
+                                <td>[1, 5]</td>
+                                <td>[6]</td>
+                                <td>[8, 10]</td>
+                                <td>❌ No</td>
+                            </tr>
+                            <tr>
+                                <td>doc3</td>
+                                <td>[12]</td>
+                                <td>[13]</td>
+                                <td>[14]</td>
+                                <td>✅ Yes</td>
+                            </tr>
+                            <tr>
+                                <td>doc4</td>
+                                <td>[5]</td>
+                                <td>[6]</td>
+                                <td>[8]</td>
+                                <td>❌ No</td>
+                            </tr>
                         </table>
-                        <div
-                            style="direction: rtl; text-align: right; margin-top:20px; border-top:1px solid #334155; padding-top:15px;">
-                            <p><strong>الشرح:</strong></p>
-                            <p>• doc1: (2) -> (3) -> (4) متتابعة. <strong>نعم</strong></p>
-                            <p>• doc2: (5) -> (6) -> نحتاج 7 وهي غير موجودة. <strong>لا</strong></p>
-                            <p>• doc3: (12) -> (13) -> (14) متتابعة. <strong>نعم</strong></p>
-                            <p>• doc4: (5) -> (6) -> نحتاج 7 وهي غير موجودة. <strong>لا</strong></p>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Q3: Skip Pointers -->
+            <!-- Question 3: Skip Pointers (FIXED) -->
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 03 [4 Points]</span></div>
-                <div class="q-text">
-                    <strong>Skip Pointers Optimization:</strong>
+                <div class="q-text"><strong>Skip Pointers Optimization:</strong></div>
 
-                    <div class="skip-container">
-                        <div class="list-row">
-                            <div class="label p1-color">P1</div>
-                            <div class="nodes-wrapper">
-                                <div class="node-box active-primary">2</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">5</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">8</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box active-primary">12</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box dim">17</div>
-                                <div class="path-arrow dim">→</div>
-                                <div class="node-box dim">18</div>
-                                <div class="path-arrow dim">→</div>
-                                <div class="node-box active-primary">19</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">35</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">40</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">45</div>
-                            </div>
-                            <svg class="skip-curve normal" style="left: 62px; width: 154px; height: 40px;">
-                                <path d="M 10 35 Q 77 0 144 35" />
-                            </svg>
-                            <svg class="skip-curve success-p1" style="left: 212px; width: 162px; height: 45px;">
-                                <path d="M 10 40 Q 81 -5 152 40" />
-                            </svg>
-                            <div class="skip-label-tag p1-color" style="left: 260px;">Successful Skip (A)</div>
-                            <svg class="skip-curve normal" style="left: 374px; width: 161px; height: 40px;">
-                                <path d="M 10 35 Q 80 0 150 35" />
-                            </svg>
+                <div class="skip-container">
+                    <div class="list-row">
+                        <div class="label p1-color">P1</div>
+                        <div class="nodes-wrapper">
+                            <div class="node-box active-primary">2</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">5</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">8</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box active-primary">12</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box dim">17</div>
+                            <div class="path-arrow dim">→</div>
+                            <div class="node-box dim">18</div>
+                            <div class="path-arrow dim">→</div>
+                            <div class="node-box active-primary">19</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">35</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">40</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">45</div>
                         </div>
-                        <div class="list-row">
-                            <div class="label p2-color">P2</div>
-                            <div class="nodes-wrapper">
-                                <div class="node-box">1</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box active-accent">2</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">7</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box active-accent">20</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box dim">22</div>
-                                <div class="path-arrow dim">→</div>
-                                <div class="node-box dim">25</div>
-                                <div class="path-arrow dim">→</div>
-                                <div class="node-box active-accent">30</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">40</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">50</div>
-                                <div class="path-arrow">→</div>
-                                <div class="node-box">60</div>
-                            </div>
-                            <svg class="skip-curve normal" style="left: 62px; width: 154px; height: 40px;">
-                                <path d="M 10 35 Q 77 0 144 35" />
-                            </svg>
-                            <svg class="skip-curve success-p2" style="left: 212px; width: 162px; height: 45px;">
-                                <path d="M 10 40 Q 81 -5 152 40" />
-                            </svg>
-                            <div class="skip-label-tag p2-color" style="left: 260px;">Successful Skip (B)</div>
-                            <svg class="skip-curve normal" style="left: 374px; width: 161px; height: 40px;">
-                                <path d="M 10 35 Q 80 0 150 35" />
-                            </svg>
-                        </div>
+                        <svg class="skip-curve normal" style="left:58px; width:155px; height:45px;">
+                            <path d="M 10 40 Q 77 10 145 40" />
+                        </svg>
+                        <svg class="skip-curve success-p1" style="left:210px; width:160px; height:50px;">
+                            <path d="M 10 45 Q 80 0 150 45" />
+                        </svg>
+                        <div class="skip-tag p1-color" style="left:260px;">Successful Skip</div>
+                        <svg class="skip-curve normal" style="left:370px; width:160px; height:45px;">
+                            <path d="M 10 40 Q 80 10 150 40" />
+                        </svg>
                     </div>
-
-                    <div class="mcq-group" style="margin-top:20px; background:none; border:none; padding:0;">
-                        <span class="q-label-arabic">1. ما هو ناتج العملية (t1 AND t2)؟</span>
-                        <div class="mcq-container">
-                            <label class="mcq-option"><input type="radio" name="q3_1">
-                                <div class="option-card">
-                                    <div class="dot"></div>[2, 12, 40]
-                                </div>
-                            </label>
-                            <label class="mcq-option"><input type="radio" name="q3_1">
-                                <div class="option-card">
-                                    <div class="dot"></div>[2, 40]
-                                </div>
-                            </label>
-                            <label class="mcq-option"><input type="radio" name="q3_1">
-                                <div class="option-card">
-                                    <div class="dot"></div>[1, 2, 40, 45]
-                                </div>
-                            </label>
+                    <div class="list-row">
+                        <div class="label p2-color">P2</div>
+                        <div class="nodes-wrapper">
+                            <div class="node-box">1</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box active-accent">2</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">7</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box active-accent">20</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box dim">22</div>
+                            <div class="path-arrow dim">→</div>
+                            <div class="node-box dim">25</div>
+                            <div class="path-arrow dim">→</div>
+                            <div class="node-box active-accent">30</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">40</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">50</div>
+                            <div class="path-arrow">→</div>
+                            <div class="node-box">60</div>
                         </div>
-                    </div>
-
-                    <div class="mcq-group" style="margin-top:35px; background:none; border:none; padding:0;">
-                        <span class="q-label-arabic">2. ما هي مسارات القفز الناجحة (Successful Skips) التي ظهرت؟</span>
-                        <div class="mcq-container">
-                            <label class="mcq-option"><input type="radio" name="q3_2">
-                                <div class="option-card">
-                                    <div class="dot"></div>(12 &rarr; 19) only
-                                </div>
-                            </label>
-                            <label class="mcq-option"><input type="radio" name="q3_2">
-                                <div class="option-card">
-                                    <div class="dot"></div>(12 &rarr; 19) and (20 &rarr; 30)
-                                </div>
-                            </label>
-                            <label class="mcq-option"><input type="radio" name="q3_2">
-                                <div class="option-card">
-                                    <div class="dot"></div>(2 &rarr; 12) and (1 &rarr; 20)
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="mcq-group" style="margin-top:35px; background:none; border:none; padding:0;">
-                        <span class="q-label-arabic">3. ما هي المستندات التي تم تجاوزها (Skipped)؟</span>
-                        <div class="mcq-container">
-                            <label class="mcq-option"><input type="radio" name="q3_3">
-                                <div class="option-card">
-                                    <div class="dot"></div>[17, 18, 22, 25]
-                                </div>
-                            </label>
-                            <label class="mcq-option"><input type="radio" name="q3_3">
-                                <div class="option-card">
-                                    <div class="dot"></div>[5, 8, 22, 25]
-                                </div>
-                            </label>
-                            <label class="mcq-option"><input type="radio" name="q3_3">
-                                <div class="option-card">
-                                    <div class="dot"></div>[17, 18, 30, 40]
-                                </div>
-                            </label>
-                        </div>
+                        <svg class="skip-curve normal" style="left:58px; width:155px; height:45px;">
+                            <path d="M 10 40 Q 77 10 145 40" />
+                        </svg>
+                        <svg class="skip-curve success-p2" style="left:210px; width:160px; height:50px;">
+                            <path d="M 10 45 Q 80 0 150 45" />
+                        </svg>
+                        <div class="skip-tag p2-color" style="left:260px;">Successful Skip</div>
                     </div>
                 </div>
 
-                <button class="toggle-btn" onclick="toggleAnswer(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="mcq-group" style="padding:0; background:none; border:none;">
+                    <span class="q-label-arabic">1. ما ناتج t1 AND t2؟</span>
+                    <div class="mcq-container">
+                        <label class="mcq-option"><input type="radio" name="q31">
+                            <div class="option-card">
+                                <div class="dot"></div>[2, 12, 40]
+                            </div>
+                        </label>
+                        <label class="mcq-option"><input type="radio" name="q31">
+                            <div class="option-card">
+                                <div class="dot"></div>[2, 40]
+                            </div>
+                        </label>
+                    </div>
+                    <span class="q-label-arabic" style="margin-top:20px">2. ما المسارات الناجحة؟</span>
+                    <div class="mcq-container">
+                        <label class="mcq-option"><input type="radio" name="q32">
+                            <div class="option-card">
+                                <div class="dot"></div>(12&rarr;19) and (20&rarr;30)
+                            </div>
+                        </label>
+                        <label class="mcq-option"><input type="radio" name="q32">
+                            <div class="option-card">
+                                <div class="dot"></div>All skips
+                            </div>
+                        </label>
+                    </div>
+                    <span class="q-label-arabic" style="margin-top:20px">3. ما المستندات التي تم تخطيها؟</span>
+                    <div class="mcq-container">
+                        <label class="mcq-option"><input type="radio" name="q33">
+                            <div class="option-card">
+                                <div class="dot"></div>[17, 18, 22, 25]
+                            </div>
+                        </label>
+                        <label class="mcq-option"><input type="radio" name="q33">
+                            <div class="option-card">
+                                <div class="dot"></div>[5, 8, 22, 25]
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="color:var(--success); font-family: 'Cairo';">✅ الحل النموذجي للسؤال الثالث:</h4>
-                        <div style="direction: rtl; text-align: right;">
+                        <div style="direction:rtl; text-align:right">
                             <p>1. الناتج: <strong>[2, 40]</strong></p>
-                            <p>2. القفزات الناجحة: <strong>(12 &rarr; 19)</strong> و <strong>(20 &rarr; 30)</strong>.
-                            </p>
-                            <p>3. المستندات المتجاوزة: <strong>[17, 18, 22, 25]</strong>.</p>
+                            <p>2. المسارات: <strong>(12&rarr;19) و (20&rarr;30)</strong></p>
+                            <p>3. المتجاوزة: <strong>[17, 18, 22, 25]</strong></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Q4: Query Optimization -->
+            <!-- Question 4: Optimization -->
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 04 [2 Points]</span></div>
-                <div class="q-text">
-                    <strong>Query Optimization (Boolean Processing):</strong><br>
-                    Determine the optimal processing order for: <br>
-                    <span style="color:var(--accent); font-family: 'JetBrains Mono';">(tangerine OR trees) AND
-                        (marmalade OR skies) AND (kaleidoscope OR eyes)</span>
-                    <div style="margin: 15px 0;">
-                        <table style="min-width: 400px; font-size: 0.85rem;">
-                            <tr>
-                                <th>Term</th>
-                                <th>Frequency</th>
-                                <th>Term</th>
-                                <th>Frequency</th>
-                            </tr>
-                            <tr>
-                                <td>eyes</td>
-                                <td>213,312</td>
-                                <td>skies</td>
-                                <td>271,658</td>
-                            </tr>
-                            <tr>
-                                <td>kaleidoscope</td>
-                                <td>87,009</td>
-                                <td>tangerine</td>
-                                <td>46,653</td>
-                            </tr>
-                            <tr>
-                                <td>marmalade</td>
-                                <td>107,913</td>
-                                <td>trees</td>
-                                <td>316,812</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="mcq-group" style="background:none; border:none; padding:0;">
-                    <span class="q-label-arabic">ما هو الترتيب الذي يقلل من وقت تنفيذ الاستعلام؟</span>
+                <div class="q-text"><strong>Query Optimization:</strong> (tangerine OR trees) AND (marmalade OR skies)
+                    AND (kaleidoscope OR eyes)</div>
+                <div class="mcq-group" style="padding:0; background:none; border:none;">
+                    <span class="q-label-arabic">ما هو الترتيب الأمثل؟</span>
                     <div class="mcq-container">
-                        <label class="mcq-option"><input type="radio" name="q4">
-                            <div class="option-card">
-                                <div class="dot"></div>(tangerine OR trees) &rarr; (marmalade OR skies) &rarr;
-                                (kaleidoscope OR eyes)
-                            </div>
-                        </label>
                         <label class="mcq-option"><input type="radio" name="q4">
                             <div class="option-card">
                                 <div class="dot"></div>(kaleidoscope OR eyes) &rarr; (tangerine OR trees) &rarr;
@@ -924,22 +711,17 @@
                         </label>
                     </div>
                 </div>
-
-                <button class="toggle-btn" onclick="toggleAnswer(this)"><span>👁️ Show Solution Model</span></button>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <h4 style="color:var(--success); font-family: 'Cairo';">✅ الترتيب الأمثل:</h4>
-                        <div style="direction: rtl; text-align: right;">
-                            <p>بـما أن العملية هي <strong>AND</strong>، نبدأ بالمجموعة التي تملك أصغر ناتج تقريبي:</p>
-                            <p>• (tangerine OR trees) &approx; 363k</p>
-                            <p>• (marmalade OR skies) &approx; 379k</p>
-                            <p>• <strong>(kaleidoscope OR eyes) &approx; 300k (الأصغر)</strong></p>
-                            <p>الترتيب: <strong>(kaleidoscope OR eyes) &rarr; (tangerine OR trees) &rarr; (marmalade OR
-                                    skies)</strong></p>
+                        <div style="direction:rtl; text-align:right">
+                            <p>نبدأ بالأصغر (AND): (kaleidoscope+eyes) ≈ 300k | (tangerine+trees) ≈ 363k |
+                                (marmalade+skies) ≈ 379k</p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div id="second" class="exam-section">
@@ -948,17 +730,17 @@
     </div>
 
     <script>
-        function updateExclusions(sel) {
-            if (!sel.classList.contains('result-select')) return;
-            const all = document.querySelectorAll('.result-select');
-            const vals = [];
-            all.forEach(s => { if (s.value && s.value !== "Empty (∅)" && s.value !== "End") vals.push(s.value); });
-            all.forEach(s => { s.querySelectorAll('option').forEach(o => { o.disabled = (vals.includes(o.value) && s.value !== o.value && o.value !== "Empty (∅)" && o.value !== "End"); }); });
+        function updateExcl(s) {
+            if (!s.classList.contains('res-sel')) return;
+            const al = document.querySelectorAll('.res-sel');
+            const vs = [];
+            al.forEach(x => { if (x.value && x.value !== 'Empty (∅)' && x.value !== 'End') vs.push(x.value); });
+            al.forEach(x => { x.querySelectorAll('option').forEach(o => { o.disabled = (vs.includes(o.value) && x.value !== o.value && o.value !== 'Empty (∅)' && o.value !== 'End'); }); });
         }
-        function toggleAnswer(btn) {
-            const div = btn.nextElementSibling;
-            div.style.display = (div.style.display === "block") ? "none" : "block";
-            btn.querySelector('span').textContent = (div.style.display === "block") ? "🙈 Hide Solution" : "👁️ Show Solution Model";
+        function toggleAns(b) {
+            const d = b.nextElementSibling;
+            d.style.display = (d.style.display === "block") ? "none" : "block";
+            b.querySelector('span').textContent = (d.style.display === "block") ? "🙈 Hide Solution" : "👁️ Show Solution Model";
         }
         function switchTab(id) {
             document.querySelectorAll('.exam-section').forEach(e => e.classList.remove('active'));
