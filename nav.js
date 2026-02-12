@@ -2,61 +2,68 @@ document.addEventListener("DOMContentLoaded", function () {
     // 1. Create the styles
     const style = document.createElement('style');
     style.innerHTML = `
-        /* Floating Nav Styles */
+        /* Footer Nav Styles */
         #nav-container {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+            margin-top: 20px;
+            border-top: 1px solid rgba(51, 65, 85, 0.3);
             font-family: 'Inter', sans-serif;
-            direction: ltr;
+            background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.5));
+            position: relative;
+            z-index: 1000;
         }
 
         #nav-toggle {
-            background: #38bdf8;
-            color: #0f172a;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            padding: 12px 30px;
+            border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-            transition: transform 0.3s, background 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
         }
 
         #nav-toggle:hover {
-            transform: scale(1.1);
-            background: #fff;
+            background: #38bdf8;
+            color: #0f172a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
         }
 
         #nav-menu {
             position: absolute;
-            top: 65px;
-            left: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(15px);
             border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 10px;
-            width: 280px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            transform-origin: top left;
-            transition: opacity 0.3s, transform 0.3s;
+            border-radius: 20px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
             opacity: 0;
-            transform: scale(0.8);
             pointer-events: none;
         }
 
         #nav-menu.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: translateX(-50%) scale(1);
             pointer-events: auto;
         }
 
@@ -74,123 +81,46 @@ document.addEventListener("DOMContentLoaded", function () {
         .nav-link {
             color: #f1f5f9;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: background 0.2s, color 0.2s;
+            padding: 12px 18px;
+            border-radius: 12px;
+            transition: all 0.2s;
             font-size: 0.9rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            border: 1px solid transparent;
         }
 
         .nav-link:hover {
             background: rgba(56, 189, 248, 0.1);
             color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.2);
             transform: translateX(5px);
         }
 
-        /* Top Home Button Styling */
-        .top-home-nav {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid #334155;
-            color: #94a3b8;
-            padding: 8px 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            z-index: 10000;
-        }
-
-        .top-home-nav:hover {
-            background: #38bdf8;
-            color: #0f172a;
-            border-color: #38bdf8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
-        }
-
-        /* Mobile Adjustments */
         @media screen and (max-width: 768px) {
-            #nav-container {
-                top: auto;
-                bottom: 20px;
-                right: 20px;
-                left: auto;
-            }
             #nav-menu {
-                top: auto;
-                bottom: 65px;
-                right: 0;
-                left: auto;
-                transform-origin: bottom right;
-            }
-            .top-home-nav {
-                top: auto;
-                bottom: 20px;
-                left: 20px;
-                right: auto;
-                padding: 12px;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                justify-content: center;
-            }
-            .top-home-nav span {
-                display: none;
-            }
-        }
-        
-        @media print {
-            #nav-container {
-                display: none !important;
-            }
-            .top-home-nav {
-                display: none !important;
+                width: 90%;
+                max-width: 320px;
             }
         }
     `;
     document.head.appendChild(style);
 
-    // 2. Create the Home Button in Header
-    // Find a suitable header container
-    // 2. Create the Home Button (Bulletproof version)
-    const currentPage = window.location.pathname.split("/").pop();
-    if (currentPage !== 'index.html' && currentPage !== '') {
-        const homeBtn = document.createElement('a');
-        homeBtn.href = 'index.html';
-        homeBtn.className = 'top-home-nav';
-        homeBtn.innerHTML = '🏠 <span>الرئيسية</span>';
-        homeBtn.style.zIndex = '2147483647'; // Max z-index
-        document.body.appendChild(homeBtn);
-    }
-
-    // 3. Create the Floating Nav (Blue Menu Button)
+    // 2. Create the Footer Nav
     const navContainer = document.createElement('div');
     navContainer.id = 'nav-container';
-    navContainer.style.zIndex = '2147483646'; // Max z-index - 1
 
     navContainer.innerHTML = `
         <button id="nav-toggle" aria-label="Toggle Menu">
             <span class="icon">☰</span>
+            <span>تصفح خريطة المساق</span>
         </button>
         <div id="nav-menu">
             <div class="nav-header">
-                <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> IR Map
+                <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> Map
             </div>
-            <a href="index.html" class="nav-link">🏠 Home</a>
-            <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
             
             <a href="index-print.html" class="nav-link">📂 00. Intro & Definitions</a>
             <a href="text-retrieval-print.html" class="nav-link">📚 01. Text Retrieval Basics</a>
@@ -201,10 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
             <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
             <div style="height: 1px; background: #334155; margin: 5px 10px;"></div>
-            <a href="exams.html" class="nav-link" style="color: #fb7185;">📝 Previous Exams</a>
-            <button id="hide-nav-btn" class="nav-link" style="width: 100%; background: none; border: none; cursor: pointer; color: #94a3b8; font-size: 0.8rem; justify-content: center; margin-top: 5px;">
-                ❌ إخفاء هذا الزر
-            </button>
+            <a href="exams.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05);">
+                🎯 Previous Exams Bank
+            </a>
         </div>
     `;
 
@@ -214,15 +143,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const toggleBtn = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
     const icon = toggleBtn.querySelector('.icon');
-    const hideBtn = document.getElementById('hide-nav-btn');
 
-    hideBtn.addEventListener('click', function () {
-        navContainer.style.display = 'none';
-        // Optional: Save to localStorage if you want it to persist
-        // localStorage.setItem('navHidden', 'true');
-    });
-
-    toggleBtn.addEventListener('click', function () {
+    toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
         menu.classList.toggle('visible');
         icon.textContent = menu.classList.contains('visible') ? '✕' : '☰';
     });
@@ -236,12 +159,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 4. Highlight current page
+    const currentPage = window.location.pathname.split("/").pop();
     const links = menu.querySelectorAll('.nav-link');
     links.forEach(link => {
         if (link.getAttribute('href') === currentPage) {
             link.style.background = 'rgba(56, 189, 248, 0.2)';
             link.style.color = '#38bdf8';
-            link.style.border = '1px solid #38bdf8';
+            link.style.borderColor = '#38bdf8';
         }
     });
 });
