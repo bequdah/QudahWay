@@ -53,10 +53,10 @@
             min-height: 100vh;
         }
 
-        /* Essential Container */
+        /* Essential Container - FULL WIDTH for exams */
         .container {
             width: 100%;
-            max-width: 900px;
+            /* No max-width - use full page width */
             padding: 20px;
         }
 
@@ -107,6 +107,10 @@
             padding: 25px;
             border-radius: 16px;
             position: relative;
+            max-width: 1400px;
+            /* Wider than before but not too wide */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .q-header {
@@ -154,8 +158,8 @@
             width: 100%;
             border-collapse: collapse;
             font-family: 'Inter', sans-serif;
-            min-width: 600px;
-            /* Base width before responsive kicks in */
+            min-width: 800px;
+            /* Reduced from 600px for better fit */
         }
 
         th,
