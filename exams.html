@@ -403,13 +403,39 @@
                 border-right: none !important;
             }
 
+            /* MOBILE: make big tables fit as much as possible */
+            /* خلي منطقة الجدول قابلة للسحب إذا اضطرينا */
             .interactive-area {
                 margin: 15px -12px;
                 width: calc(100% + 24px);
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
                 background: rgba(15, 23, 42, 0.2);
                 border-top: 1px solid rgba(56, 189, 248, 0.1);
                 border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+            }
+
+            /* أهم نقطة: الغِ min-width: 600px على الموبايل */
+            .interactive-area table {
+                min-width: 0 !important;
+                width: 100% !important;
+                table-layout: fixed;
+                /* يخلي الأعمدة تلتزم بعرض الشاشة */
+                font-size: 0.75rem;
+            }
+
+            /* خلي النص يلف بدل ما يوسع الجدول */
+            .interactive-area th,
+            .interactive-area td {
+                white-space: normal !important;
+                word-break: break-word;
+                overflow-wrap: anywhere;
+                padding: 6px 4px !important;
+            }
+
+            /* صغّر شوي الخط عشان يزيد احتمال “الجدول يركب” */
+            .interactive-area th {
+                font-size: 0.7rem;
             }
 
             .interactive-area::after {
@@ -504,11 +530,10 @@
         <div class="tabs">
             <div class="tab-btn active" onclick="switchTab(this, 'first')">First Exam</div>
             <div class="tab-btn" onclick="switchTab(this, 'second')">Second Exam</div>
-            <div class="tab-btn" onclick="switchTab(this, 'midterm')">Midterm Exam</div>
         </div>
 
         <div id="first" class="exam-section active">
-            <!-- Question 1: Merge Algorithm (REVERTED) -->
+            <!-- Question 1: Merge Algorithm -->
             <div class="question-card" style="border-right: 5px solid #ff4d4d;">
                 <div class="q-header"><span class="q-number">Q 01: Merge Algorithm [4 Points]</span></div>
                 <div class="q-text">
@@ -551,15 +576,8 @@
                 <div class="answer-section">
                     <div class="correct-answer-box">
                         <div style="direction:ltr; text-align:center">
-                            <h4 style="color:var(--success); direction:rtl; text-align:right">✅ Solution Key (شرح
-                                الحل):
+                            <h4 style="color:var(--success); direction:rtl; text-align:right">✅ Solution Key (شرح الحل):
                             </h4>
-                            <div
-                                style="direction:rtl; text-align:right; margin-bottom:15px; font-size:0.9rem; color:var(--text-muted);">
-                                يتم تتبع الخوارزمية بمقارنة المؤشرين. إذا تساويا نضيف النتيجة، وإذا اختلفا نحرك
-                                المؤشر
-                                الذي يشير للقيمة الأصغر.
-                            </div>
                             <div class="interactive-area">
                                 <table>
                                     <thead>
@@ -656,8 +674,6 @@
                     </div>
                 </div>
             </div>
-
-
 
             <!-- Question 2: Positional Index -->
             <div class="question-card">
@@ -2026,15 +2042,7 @@
                     </div>
                 </div>
             </div>
-            <div id="midterm" class="exam-section">
-                <!-- TEST MESSAGE -->
-                <div
-                    style="background:var(--success); color:#000; padding:20px; border-radius:10px; margin-bottom:20px; text-align:center; font-weight:bold; font-size:1.5rem;">
-                    🚀 قسم الميدترم (قيد النقل والاختبار)
-                </div>
-                <p style="text-align:center; color:var(--text-muted);">سيتم نقل الأسئلة إلى هنا بمجرد التأكد من عمل
-                    النظام لديك.</p>
-            </div>
+
         </div>
 
         <!-- Navigation Script -->
