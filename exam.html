@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exams (A4 Layout) | QudahWay</title>
+    <title>Exam Bank | QudahWay</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -333,7 +333,7 @@
     <div class="container">
         <div class="header-title">
             <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
-            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1rem;">A4 Exam Layout</p>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1rem;">Exam Bank</p>
         </div>
 
         <div class="tabs">
@@ -357,7 +357,7 @@
                     </div>
                     <strong>Task:</strong> Trace the merge algorithm for the two postings lists above.
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" style="direction: ltr;">
                     <table>
                         <thead>
                             <tr>
@@ -611,12 +611,12 @@
                         <div class="dot"></div>[2, 12, 40]
                     </label>
                     <label class="option-card"><input type="radio" name="q31">
-                        <div class="dot"></div>[2, 40] ✅
+                        <div class="dot"></div>[2, 40]
                     </label>
 
                     <p style="margin:15px 0 5px;">2. ما هي مسارات القفز المثلى؟</p>
                     <label class="option-card"><input type="radio" name="q32">
-                        <div class="dot"></div>(12→19) في P1 و (20→30) في P2 ✅
+                        <div class="dot"></div>(12→19) في P1 و (20→30) في P2
                     </label>
                     <label class="option-card"><input type="radio" name="q32">
                         <div class="dot"></div>جميع مسارات القفز
@@ -624,7 +624,7 @@
 
                     <p style="margin:15px 0 5px;">3. ما هي المستندات التي تم تخطيها؟</p>
                     <label class="option-card"><input type="radio" name="q33">
-                        <div class="dot"></div>[17, 18, 22, 25] ✅
+                        <div class="dot"></div>[17, 18, 22, 25]
                     </label>
                     <label class="option-card"><input type="radio" name="q33">
                         <div class="dot"></div>[5, 8, 22, 25]
@@ -655,7 +655,7 @@
                         <div class="dot"></div>A) Start with (tangerine OR trees)
                     </label>
                     <label class="option-card"><input type="radio" name="q4">
-                        <div class="dot"></div>B) Start with (kaleidoscope OR eyes) ✅
+                        <div class="dot"></div>B) Start with (kaleidoscope OR eyes)
                     </label>
                     <label class="option-card"><input type="radio" name="q4">
                         <div class="dot"></div>C) Start with (marmalade OR skies)
@@ -753,15 +753,37 @@
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 01 [1 Point]</span></div>
                 <div class="q-text">
-                    <strong>Task:</strong> Find log-frequency weight $w = 1 + \log_{10}(tf)$ for term "apple".<br>
-                    D1: tf=1, D2: tf=4.
+                    Given the following term frequencies in 3 documents:
+                    <div class="table-responsive" style="margin: 10px 0;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Document D1</th>
+                                    <th>Document D2</th>
+                                    <th>Document D3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>apple</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    For documents <strong>D1</strong> and <strong>D2</strong>, write the log-frequency weight.
+                    <strong>Don't calculate the log value—just substitute the expression in the following
+                        table.</strong>
                 </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
                                 <th>Document</th>
-                                <th>log-frequency weight</th>
+                                <th>log-frequency weight for the term "apple"</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -779,7 +801,7 @@
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p>D1: 1 + log(1) = 1<br>D2: 1 + log(4) ≈ 1.60</p>
+                        <p>D1: $1 + \log_{10}(1) = 1$<br>D2: $1 + \log_{10}(4) \approx 1.60$</p>
                     </div>
                 </div>
             </div>
@@ -788,15 +810,37 @@
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 02 [1 Point]</span></div>
                 <div class="q-text">
-                    <strong>Task:</strong> Calculate IDF. Collection N=1000.<br>
-                    Data: df=200. Science: df=30.
+                    Given a collection of <u>1,000 documents</u>, and the following <u>document frequencies</u> for some
+                    terms:
+                    <div class="table-responsive" style="margin: 10px 0;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Document Frequency (df)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Data</td>
+                                    <td>200</td>
+                                </tr>
+                                <tr>
+                                    <td>science</td>
+                                    <td>30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    Fill in the below table the Inverse Document Frequency (IDF) weights for each term. <strong>Don't
+                        calculate the log value—just substitute the expression in the following table.</strong>
                 </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
                                 <th>Term</th>
-                                <th>IDF Formula</th>
+                                <th>IDF formula filled</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -814,7 +858,8 @@
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p>Data: log(1000/200) = log(5) ≈ 0.7<br>Science: log(1000/30) ≈ 1.52</p>
+                        <p>Data: $\log_{10}(\frac{1000}{200}) = \log_{10}(5) \approx 0.7$<br>Science:
+                            $\log_{10}(\frac{1000}{30}) \approx 1.52$</p>
                     </div>
                 </div>
             </div>
@@ -823,22 +868,55 @@
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 03 [3 Points]</span></div>
                 <div class="q-text">
-                    <strong>Cosine Similarity:</strong> Calculate similarity between Query and Doc.<br>
-                    Query vectors: [2, 3, 1], Document vectors: [3, 4, 5].
+                    <strong>Cosine Similarity with Vector Normalization.</strong> You are given the following TF-IDF
+                    weights for a query and a document:
+                    <div class="table-responsive" style="margin: 10px 0;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Query Weight (qi)</th>
+                                    <th>Document Weight (di)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Machine</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>Learning</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>Data</td>
+                                    <td>1</td>
+                                    <td>5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    Compute the cosine similarity between the query and the document. Show all the steps including
+                    normalizing the query and document vectors and computing the dot-product. <strong>You are not
+                        required to compute the final answer, but you must substitute the values in the cosine
+                        similarity formula correctly.</strong>
                 </div>
                 <div class="interactive-area" style="padding:15px; border-radius:8px; background:rgba(15,23,42,0.4);">
-                    <label>1. Dot Product:</label> <input type="text" class="exam-input"
-                        style="margin-bottom:10px;"><br>
-                    <label>2. |Query|:</label> <input type="text" class="exam-input" style="margin-bottom:10px;"><br>
-                    <label>3. |Doc|:</label> <input type="text" class="exam-input" style="margin-bottom:10px;">
+                    <textarea class="exam-input"
+                        style="width:100%; height:120px; font-family:'JetBrains Mono', monospace;"
+                        placeholder="Write your steps here... e.g. Cos(q,d) = ..."></textarea>
                 </div>
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p>Dot: 2*3 + 3*4 + 1*5 = 6+12+5 = 23<br>
-                            |Q|: sqrt(4+9+1) = sqrt(14)<br>
-                            |D|: sqrt(9+16+25) = sqrt(50)<br>
-                            Sim = 23 / (sqrt(14)*sqrt(50))</p>
+                        <p style="font-family:'JetBrains Mono', monospace; line-height:1.8;">
+                            $Cos(q,d) = \frac{(2 \times 3) + (3 \times 4) + (2 \times 5)}{\sqrt{2^2 + 3^2 + 1^2} \times
+                            \sqrt{3^2 + 4^2 + 5^2}}$<br>
+                            $= \frac{6 + 12 + 5}{\sqrt{14} \times \sqrt{50}}$<br>
+                            $= \frac{23}{\sqrt{14} \times \sqrt{50}}$
+                        </p>
                     </div>
                 </div>
             </div>
@@ -847,18 +925,69 @@
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 04 [4 Points]</span></div>
                 <div class="q-text">
-                    <strong>DCG & IDCG @ 5.</strong><br>
-                    Ranked Results: D2(3), D4(2), D3(3), D1(0), D5(1).
+                    A search engine retrieved a ranked list of documents for a given query. Each document has a known
+                    relevance grade from a human assessor on a 0–3 scale (0 = irrelevant, 3 = highly relevant). The top
+                    5 retrieved documents and their relevance scores are shown in the table below.
+                    <div class="table-responsive" style="margin: 10px 0;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Retrieved Doc</th>
+                                    <th>Relevance Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>D2</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>D4</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>D3</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>D1</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>D5</td>
+                                    <td>1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    Compute the <strong>DCG@5</strong> and <strong>IDCG@5</strong> for the retrieved documents' list
+                    that is shown in the table. Write the equation and substitute the numbers (values).
                 </div>
                 <div class="interactive-area" style="padding:15px; border-radius:8px; background:rgba(15,23,42,0.4);">
-                    <label>DCG@5:</label> <input type="text" class="exam-input" style="margin-bottom:10px;"><br>
-                    <label>IDCG@5:</label> <input type="text" class="exam-input">
+                    <label>Compute the DCG@5:</label>
+                    <textarea class="exam-input"
+                        style="width:100%; height:60px; font-family:'JetBrains Mono', monospace; margin-bottom:15px;"
+                        placeholder="Equation..."></textarea>
+
+                    <label>Compute the IDCG@5:</label>
+                    <textarea class="exam-input"
+                        style="width:100%; height:60px; font-family:'JetBrains Mono', monospace;"
+                        placeholder="Equation..."></textarea>
                 </div>
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p><strong>DCG:</strong> 3 + 2/log(2) + 3/log(3) + 0 + 1/log(5)<br>
-                            <strong>IDCG (Ideal: 3,3,2,1,0):</strong> 3 + 3/log(2) + 2/log(3) + 1/log(4) + 0
+                        <p style="font-family:'JetBrains Mono', monospace; line-height:1.8;">
+                            <strong>DCG@5:</strong> $3 + \frac{2}{\log_2 2} + \frac{3}{\log_2 3} + \frac{0}{\log_2 4} +
+                            \frac{1}{\log_2 5}$<br>
+                            <strong>IDCG@5:</strong> (Ideal ranking: 3, 3, 2, 1, 0)<br>
+                            $3 + \frac{3}{\log_2 2} + \frac{2}{\log_2 3} + \frac{1}{\log_2 4} + \frac{0}{\log_2 5}$
                         </p>
                     </div>
                 </div>
@@ -868,16 +997,30 @@
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 05 [5 Points]</span></div>
                 <div class="q-text">
-                    <strong>Precision & Recall @ K.</strong><br>
-                    Relevant: D1, D2, D5, D7 (Total 4).<br>
-                    Retrieved: D2, D3, D1, D8, D4, D5, D6, D7.
+                    A search engine based on the <u>Vector Space Model</u> was used to retrieve documents for a query
+                    Q1.
+                    The system returns ranked document lists based on estimated relevance. Answer the following parts
+                    based on the retrieved results and known relevant documents.
+
+                    <div
+                        style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin: 15px 0;">
+                        <ul style="margin:0; padding-left:20px;">
+                            <li>The <strong>relevant documents</strong> for <u>Q1</u> are: <strong>D1, D2, D5,
+                                    D7</strong>.</li>
+                            <li>The top 8 retrieved documents for Q1, ranked <u>from most to least relevant</u> by the
+                                search engine, are listed in the table below.</li>
+                        </ul>
+                    </div>
+
+                    <strong>Part 1:</strong> Fill in the table the <strong>Precision@k</strong> and
+                    <strong>Recall@k</strong> values for k=1 to k=8:
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" style="direction: ltr;">
                     <table>
                         <thead>
                             <tr>
                                 <th>K</th>
-                                <th>Ranked Doc</th>
+                                <th>Ranked list for Q1</th>
                                 <th>Precision@K</th>
                                 <th>Recall@K</th>
                             </tr>
@@ -934,16 +1077,91 @@
                         </tbody>
                     </table>
                 </div>
-                <div style="margin-top:10px;">
-                    <label>Average Precision (AP):</label> <input type="text" class="exam-input"><br>
-                    <label>Reciprocal Rank (RR):</label> <input type="text" class="exam-input" style="margin-top:5px;">
+
+                <div class="q-text" style="font-size: 0.95rem; margin-top: 20px;">
+                    <strong>Part 2:</strong> compute the <u>Average Precision</u> for the ranked list of Q1:
                 </div>
+                <div class="interactive-area" style="padding:10px; border-radius:8px; background:rgba(15,23,42,0.4);">
+                    <input type="text" class="exam-input" placeholder="Expression...">
+                </div>
+
+                <div class="q-text" style="font-size: 0.95rem; margin-top: 20px;">
+                    <strong>Part 3:</strong> compute the <u>Reciprocal Rank score (RR)</u> for the ranked list of Q1:
+                </div>
+                <div class="interactive-area" style="padding:10px; border-radius:8px; background:rgba(15,23,42,0.4);">
+                    <input type="text" class="exam-input" placeholder="Value...">
+                </div>
+
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p><strong>AP:</strong> (1 + 0.67 + 0.5 + 0.5) / 4 ≈ 0.67<br>
-                            <strong>RR:</strong> First relevant is at rank 1, so 1/1 = 1.
-                        </p>
+                        <div class="table-responsive" style="direction: ltr; margin-bottom: 15px;">
+                            <table style="width:100%; text-align:center; font-size: 0.85rem;">
+                                <thead>
+                                    <tr style="background:rgba(52, 211, 153, 0.1); color:var(--success);">
+                                        <th>K</th>
+                                        <th>Doc</th>
+                                        <th>Precision@K</th>
+                                        <th>Recall@K</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td style="color:var(--success); font-weight:bold;">D2</td>
+                                        <td>1/1 = 1.0</td>
+                                        <td>1/4 = 0.25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>D3</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td style="color:var(--success); font-weight:bold;">D1</td>
+                                        <td>2/3 ≈ 0.67</td>
+                                        <td>2/4 = 0.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>D8</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>D4</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td style="color:var(--success); font-weight:bold;">D5</td>
+                                        <td>3/6 = 0.50</td>
+                                        <td>3/4 = 0.75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>D6</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td style="color:var(--success); font-weight:bold;">D7</td>
+                                        <td>4/8 = 0.50</td>
+                                        <td>4/4 = 1.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><strong>Part 2 (Average Precision):</strong><br>
+                            Relevant at ranks: 1, 3, 6, 8.<br>
+                            $AP = \frac{1 + 0.7 + 0.5 + 0.5}{4} = \frac{2.7}{4}$</p>
+                        <p><strong>Part 3 (RR):</strong> First relevant doc (D2) is at rank 1.<br> $RR = \frac{1}{1} =
+                            1$</p>
                     </div>
                 </div>
             </div>
@@ -952,33 +1170,161 @@
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 06 [3 Points]</span></div>
                 <div class="q-text">
-                    <strong>Probabilistic Retrieval Evaluation.</strong><br>
-                    Based on table of (Query, Doc, Relevance).
+                    <strong>Probabilistic Retrieval.</strong> The table below shows user-annotated relevance judgments
+                    for various documents (D) in response to different queries (Q). The relevance value (R) is binary:
+                    <ul style="margin-top:5px; margin-bottom:15px;">
+                        <li><strong>1</strong> indicates the document is relevant to the query.</li>
+                        <li><strong>0</strong> indicates it is not relevant.</li>
+                    </ul>
+
+                    <div class="table-responsive" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
+                        <table style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>Query (Q)</th>
+                                    <th>Document (D)</th>
+                                    <th>Relevancy (R)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>D1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>D2</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>D2</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>D1</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>D2</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>D1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q3</td>
+                                    <td>D3</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q3</td>
+                                    <td>D3</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q3</td>
+                                    <td>D5</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>D1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>D2</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>D2</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q3</td>
+                                    <td>D3</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>D1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>D2</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    For each of the following probabilities, compute the probability that the document
+                    <strong>Di</strong> is relevant to the query <strong>Qi</strong>. For each probability, <u>show the
+                        substituted values used in the computation</u> and not just the final answer.
                 </div>
+
                 <div class="table-responsive">
-                    <table>
+                    <table style="text-align: left;">
                         <thead>
                             <tr>
-                                <th>Prob</th>
-                                <th>Value</th>
+                                <th style="width: 30%;">Probability</th>
+                                <th style="width: 70%;">Show Calculation & Answer</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>P(R=1|Q1, D1)</td>
+                                <td>P(R=1 | Q1, D1) =</td>
+                                <td><input type="text" class="exam-input" placeholder="e.g. 3/3 = 1"></td>
+                            </tr>
+                            <tr>
+                                <td>P(R=1 | Q1, D2) =</td>
+                                <td><input type="text" class="exam-input" placeholder="e.g. 1/3"></td>
+                            </tr>
+                            <tr>
+                                <td>P(R=1 | Q2, D1) =</td>
                                 <td><input type="text" class="exam-input"></td>
                             </tr>
                             <tr>
-                                <td>P(R=1|Q2, D2)</td>
+                                <td>P(R=1 | Q2, D2) =</td>
+                                <td><input type="text" class="exam-input"></td>
+                            </tr>
+                            <tr>
+                                <td>P(R=1 | Q3, D3) =</td>
+                                <td><input type="text" class="exam-input"></td>
+                            </tr>
+                            <tr>
+                                <td>P(R=1 | Q3, D5) =</td>
                                 <td><input type="text" class="exam-input"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p>P(R=1|Q1, D1) = 3/3 = 1<br>P(R=1|Q2, D2) = 1/3</p>
+                        <ul style="line-height: 2;">
+                            <li><strong>P(R=1 | Q1, D1):</strong> Rows=(1,1,1) ⇒ Total=3, Rel=3. Answer: $\frac{3}{3} =
+                                1$</li>
+                            <li><strong>P(R=1 | Q1, D2):</strong> Rows=(0,1,0) ⇒ Total=3, Rel=1. Answer: $\frac{1}{3}
+                                \approx 0.33$</li>
+                            <li><strong>P(R=1 | Q2, D1):</strong> Rows=(0,1) ⇒ Total=2, Rel=1. Answer: $\frac{1}{2} =
+                                0.5$</li>
+                            <li><strong>P(R=1 | Q2, D2):</strong> Rows=(0,1,0) ⇒ Total=3, Rel=1. Answer: $\frac{1}{3}
+                                \approx 0.33$</li>
+                            <li><strong>P(R=1 | Q3, D3):</strong> Rows=(1,1,0) ⇒ Total=3, Rel=2. Answer: $\frac{2}{3}
+                                \approx 0.67$</li>
+                            <li><strong>P(R=1 | Q3, D5):</strong> Rows=(1) ⇒ Total=1, Rel=1. Answer: $\frac{1}{1} = 1$
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -986,21 +1332,98 @@
             <!-- Q7 -->
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 07 [8 Points]</span></div>
-                <div class="q-text"><strong>Multiple Choice:</strong></div>
+                <div class="q-text"><strong>Multiple Choice and True/False Questions.</strong> Choose the
+                    correct answer.</div>
                 <div class="mcq-container">
-                    <p>1. Bag-of-words model:</p>
-                    <label class="option-card"><input type="radio" name="q71"> Word order is ignored. ✅</label>
-                    <p>2. Highest IDF score?</p>
-                    <label class="option-card"><input type="radio" name="q72"> Term appearing in 10 documents. ✅</label>
+                    <!-- Q7.1 -->
+                    <p><strong>1. In the bag-of-words model used for document representation:</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_1"> A) Word order is
+                        preserved.</label>
+                    <label class="option-card"><input type="radio" name="q7_1"> B) Only noun phrases are
+                        considered.</label>
+                    <label class="option-card"><input type="radio" name="q7_1"> C) Documents are represented
+                        as sequences.</label>
+                    <label class="option-card"><input type="radio" name="q7_1"> D) Word order is ignored and
+                        only term frequency matters.</label>
+
+                    <!-- Q7.2 -->
+                    <p style="margin-top:15px;"><strong>2. Which of the following terms would have the
+                            <u>highest IDF score</u> in a collection of <u>1 million documents</u>?</strong>
+                    </p>
+                    <label class="option-card"><input type="radio" name="q7_2"> A) Term appearing in all
+                        documents.</label>
+                    <label class="option-card"><input type="radio" name="q7_2"> B) Term appearing in 100,000
+                        documents.</label>
+                    <label class="option-card"><input type="radio" name="q7_2"> C) Term appearing in 10
+                        documents.</label>
+                    <label class="option-card"><input type="radio" name="q7_2"> D) Term appearing in 1,000
+                        documents.</label>
+
+                    <!-- Q7.3 -->
+                    <p style="margin-top:15px;"><strong>3. What is the <u>effect of IDF</u> on ranking when
+                            the query contains <u>only one term</u>?</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_3"> A) It increases the ranking
+                        positions of documents with many terms.</label>
+                    <label class="option-card"><input type="radio" name="q7_3"> B) It changes the score
+                        based on document length.</label>
+                    <label class="option-card"><input type="radio" name="q7_3"> C) It has no effect.</label>
+                    <label class="option-card"><input type="radio" name="q7_3"> D) It reduces the ranking
+                        positions of documents with rare terms.</label>
+
+                    <!-- Q7.4 -->
+                    <p style="margin-top:15px;"><strong>4. Why is Euclidean distance <u>not ideal</u> for
+                            comparing query and document vectors?</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_4"> A) It requires
+                        sorting.</label>
+                    <label class="option-card"><input type="radio" name="q7_4"> B) It increases for
+                        similar-length documents.</label>
+                    <label class="option-card"><input type="radio" name="q7_4"> C) It penalizes long
+                        documents even when distributions match.</label>
+                    <label class="option-card"><input type="radio" name="q7_4"> D) It does not use term
+                        frequencies.</label>
+
+                    <!-- Q7.5 -->
+                    <p style="margin-top:15px;"><strong>5. In SMART notation, the query always uses the same
+                            weighting scheme as the document.</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_5"> A) True</label>
+                    <label class="option-card"><input type="radio" name="q7_5"> B) False</label>
+
+                    <!-- Q7.6 -->
+                    <p style="margin-top:15px;"><strong>6. In SMART notation for weighting, the 't' refers
+                            to Term frequency.</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_6"> A) True</label>
+                    <label class="option-card"><input type="radio" name="q7_6"> B) False</label>
+
+                    <!-- Q7.7 -->
+                    <p style="margin-top:15px;"><strong>7. In a unigram language model, the word order in a
+                            query affects its probability.</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_7"> A) True</label>
+                    <label class="option-card"><input type="radio" name="q7_7"> B) False</label>
+
+                    <!-- Q7.8 -->
+                    <p style="margin-top:15px;"><strong>8. The probability p(R=1|d,q) is used directly in
+                            the Query Likelihood Model.</strong></p>
+                    <label class="option-card"><input type="radio" name="q7_8"> A) True</label>
+                    <label class="option-card"><input type="radio" name="q7_8"> B) False</label>
                 </div>
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p>1. Word order ignored.<br>2. Rare terms have highest IDF.</p>
+                        <p>1. <strong>D</strong> (Word order ignored)<br>
+                            2. <strong>C</strong> (Rare terms have highest IDF)<br>
+                            3. <strong>C</strong> (Constant factor for all docs)<br>
+                            4. <strong>C</strong> (Penalizes long docs)<br>
+                            5. <strong>B (False)</strong> (Can be different, e.g. lnc.ltc)<br>
+                            6. <strong>B (False)</strong> ('t' usually refers to IDF in weighting triple, or
+                            is not a standard letter for TF)<br>
+                            7. <strong>B (False)</strong> (Unigram ignores order)<br>
+                            8. <strong>B (False)</strong> (QLM uses P(q|d))</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
 
     </div>
 

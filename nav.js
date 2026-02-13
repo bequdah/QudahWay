@@ -130,6 +130,36 @@ document.addEventListener("DOMContentLoaded", function () {
             border-color: rgba(56, 189, 248, 0.4);
             pointer-events: none;
         }
+
+        /* Fixed Home Button */
+        #fixed-home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        #fixed-home-btn:hover {
+            transform: scale(1.1);
+            background: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        }
     `;
     document.head.appendChild(style);
 
@@ -159,16 +189,21 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
             <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
             <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
-            <a href="exams.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05);">
+            <a href="exam.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05);">
                 🎯 Previous Exams Bank
-            </a>
-            <a href="exam.html" class="nav-link" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.2); background: rgba(56, 189, 248, 0.05);">
-                📄 Previous Exams (A4 Layout)
             </a>
         </div>
     `;
 
     document.body.appendChild(navContainer);
+
+    // Create and Append Fixed Home Button
+    const homeBtn = document.createElement('a');
+    homeBtn.id = 'fixed-home-btn';
+    homeBtn.href = 'index.html';
+    homeBtn.innerHTML = '🏠';
+    homeBtn.title = 'Back to Home';
+    document.body.appendChild(homeBtn);
 
     // 3. Add Toggle Functionality
     const toggleBtn = document.getElementById('nav-toggle');
