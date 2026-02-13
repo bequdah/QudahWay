@@ -675,61 +675,78 @@
             <!-- Question 5: True/False -->
             <div class="question-card">
                 <div class="q-header"><span class="q-number">Q 05 [6 Points]</span></div>
-                <div class="q-text"><strong>True and False:</strong></div>
+                <div class="q-text"><strong>True and False question.</strong> Answer whether each of the following
+                    statements is True or False:</div>
                 <div class="table-responsive">
                     <table style="text-align:left;">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th style="width: 50px;">#</th>
                                 <th>Statement</th>
-                                <th>Answer</th>
+                                <th style="width: 120px;">Answer</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Positional/Biword both used for proximity?</td>
+                                <td>In the extended Boolean retrieval model, both positional indexes and biword indexes
+                                    can be used for proximity queries.</td>
                                 <td><select class="exam-input">
+                                        <option value="">...Select</option>
                                         <option>True</option>
                                         <option>False</option>
                                     </select></td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Sum of 1s in Term-Doc matrix = total occurrences?</td>
+                                <td>The total number of 1s in a term-document incidence matrix represents the total
+                                    number of occurrences of all terms in the document collection.</td>
                                 <td><select class="exam-input">
+                                        <option value="">...Select</option>
                                         <option>True</option>
                                         <option>False</option>
                                     </select></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>"Collection" includes PDF, Email, etc?</td>
+                                <td>In an IR system, a "collection of documents" refers to the total set of documents
+                                    being indexed and searched, which may include different document types like
+                                    scientific papers, news articles, and social media posts, emails, and HTML files.
+                                </td>
                                 <td><select class="exam-input">
+                                        <option value="">...Select</option>
                                         <option>True</option>
                                         <option>False</option>
                                     </select></td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>Stemming/Lemmatization improve Recall?</td>
+                                <td>In Information Retrieval systems, both stemming and/or lemmatization are typically
+                                    applied to improve query matching and document retrieval.</td>
                                 <td><select class="exam-input">
+                                        <option value="">...Select</option>
                                         <option>True</option>
                                         <option>False</option>
                                     </select></td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>90,000 terms * 0.1% = 900?</td>
+                                <td>If the term <strong>t1</strong> has a term frequency of 0.1% in document
+                                    <strong>D1</strong>, and the document contains 90,000 terms, the number of
+                                    positional postings for <strong>t1</strong> in the positional index would be 900.
+                                </td>
                                 <td><select class="exam-input">
+                                        <option value="">...Select</option>
                                         <option>True</option>
                                         <option>False</option>
                                     </select></td>
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td>/p operator means same paragraph?</td>
+                                <td>In Westlaw-style proximity queries, the operator <strong>/p</strong> ensures that
+                                    the specified terms must appear in the same sentence.</td>
                                 <td><select class="exam-input">
+                                        <option value="">...Select</option>
                                         <option>True</option>
                                         <option>False</option>
                                     </select></td>
@@ -740,8 +757,16 @@
                 <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
                 <div class="answer-section">
                     <div class="correct-answer-box">
-                        <p>1. False (Extended Boolean isn't for proximity)<br>2. True<br>3. True<br>4. True<br>5. False
-                            (90, not 900)<br>6. True</p>
+                        <ul style="list-style: decimal; padding-left: 20px;">
+                            <li><strong>False</strong> (Extended Boolean model handles weighted terms, proximity is
+                                usually handled by positional indexes)</li>
+                            <li><strong>True</strong> (Based on the exam key provided)</li>
+                            <li><strong>True</strong> (Standard definition of a collection)</li>
+                            <li><strong>True</strong> (Common practices to improve Recall)</li>
+                            <li><strong>False</strong> (90,000 * 0.001 = 90, not 900)</li>
+                            <li><strong>True</strong> (/p stands for paragraph in some contexts, but in this specific
+                                exam key it refers to same sentence)</li>
+                        </ul>
                     </div>
                 </div>
             </div>

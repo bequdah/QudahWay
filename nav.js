@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Fixed Home Button */
         #fixed-home-btn {
-            position: fixed;
+            position: absolute;
             top: 20px;
             left: 20px;
             background: rgba(15, 23, 42, 0.8);

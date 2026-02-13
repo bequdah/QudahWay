@@ -530,6 +530,8 @@
         <div class="tabs">
             <div class="tab-btn active" onclick="switchTab(this, 'first')">First Exam</div>
             <div class="tab-btn" onclick="switchTab(this, 'second')">Second Exam</div>
+            <div class="tab-btn" onclick="switchTab(this, 'experimental')" style="border: 1px dashed var(--primary);">🧪
+                Experimental Area</div>
         </div>
 
         <div id="first" class="exam-section active">
@@ -2043,6 +2045,17 @@
                 </div>
             </div>
 
+        </div>
+
+        <div id="experimental" class="exam-section">
+            <!-- Section for testing the new layout method -->
+            <div class="experimental-container" style="padding: 10px;">
+                <h2 style="text-align: center; color: var(--primary);">Experimental Layout Test</h2>
+                <p style="text-align: center; color: var(--text-muted);">This section will use a different construction
+                    method to optimize mobile view.</p>
+
+                <!-- We will add questions here using the new method -->
+            </div>
         </div>
 
         <!-- Navigation Script -->
