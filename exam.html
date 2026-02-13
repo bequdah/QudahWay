@@ -277,52 +277,157 @@
 
         <div id="sample" class="exam-section">
             <!-- Space for questions -->
-            <div class="question-card" style="border-right: 4px solid var(--primary);">
+            <div class="question-card" style="border-right: 5px solid var(--danger);">
                 <div class="q-header">
-                    <span class="q-number">Q1: Responsive Layout Test</span>
+                    <span class="q-number">Q1: Merge Algorithm - Mobile Test [7 Columns]</span>
                 </div>
                 <div class="q-text">
-                    This is a preview of the new construction method.
-                    Notice how the card fills the entire width on mobile devices to prevent wasting space.
+                    <div
+                        style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:20px;">
+                        <strong style="color:var(--primary); font-size:1.1rem;">Given Data:</strong><br>
+                        <span style="color:var(--accent)">Term 1:</span> [1, 4, 5, 7, 9, 11, 13, 15]<br>
+                        <span style="color:var(--accent)">Term 2:</span> [3, 4, 6, 7, 10, 13, 14]<br>
+                        <span style="color:var(--text-light)">Query:</span> term1 AND term2
+                    </div>
+                    <strong>Task:</strong> Trace the merge algorithm. This table has <strong
+                        style="color:var(--accent)">7 columns</strong> to test mobile scrolling behavior.
                 </div>
 
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Metric</th>
-                                <th>Value A</th>
-                                <th>Value B</th>
+                                <th>#</th>
+                                <th>P1 Value</th>
+                                <th>P2 Value</th>
+                                <th>Comparison</th>
+                                <th>Action</th>
                                 <th>Result</th>
+                                <th>Notes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Precision</td>
-                                <td>0.85</td>
-                                <td>0.90</td>
+                                <td>1</td>
                                 <td><select class="exam-input">
-                                        <option>Select...</option>
+                                        <option>1</option>
+                                        <option>4</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>P1 < P2</option>
                                         <option>Match</option>
                                     </select></td>
+                                <td><select class="exam-input">
+                                        <option>Move P1</option>
+                                        <option>Move P2</option>
+                                    </select></td>
+                                <td><input type="text" class="exam-input" placeholder="Result..."></td>
+                                <td><input type="text" class="exam-input" placeholder="Notes..."></td>
                             </tr>
                             <tr>
-                                <td>Recall</td>
-                                <td>0.70</td>
-                                <td>0.75</td>
+                                <td>2</td>
                                 <td><select class="exam-input">
-                                        <option>Select...</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>P1 > P2</option>
                                         <option>Match</option>
                                     </select></td>
+                                <td><select class="exam-input">
+                                        <option>Move P1</option>
+                                        <option>Move P2</option>
+                                    </select></td>
+                                <td><input type="text" class="exam-input" placeholder="Result..."></td>
+                                <td><input type="text" class="exam-input" placeholder="Notes..."></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><select class="exam-input">
+                                        <option>4</option>
+                                        <option>7</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>4</option>
+                                        <option>6</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>Match</option>
+                                        <option>P1 < P2</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>Add & Move Both</option>
+                                    </select></td>
+                                <td><input type="text" class="exam-input" value="4"></td>
+                                <td><input type="text" class="exam-input" placeholder="Notes..."></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><select class="exam-input">
+                                        <option>5</option>
+                                        <option>7</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>6</option>
+                                        <option>7</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>P1 < P2</option>
+                                        <option>Match</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>Move P1</option>
+                                        <option>Move P2</option>
+                                    </select></td>
+                                <td><input type="text" class="exam-input" placeholder="Result..."></td>
+                                <td><input type="text" class="exam-input" placeholder="Notes..."></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><select class="exam-input">
+                                        <option>7</option>
+                                        <option>9</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>7</option>
+                                        <option>10</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>Match</option>
+                                        <option>P1 > P2</option>
+                                    </select></td>
+                                <td><select class="exam-input">
+                                        <option>Add & Move Both</option>
+                                    </select></td>
+                                <td><input type="text" class="exam-input" value="7"></td>
+                                <td><input type="text" class="exam-input" placeholder="Notes..."></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution Key</button>
                 <div class="answer-section">
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
-                        The solution will appear here...
+                    <div
+                        style="background: rgba(15, 23, 42, 0.6); padding: 20px; border-radius: 12px; border: 1px solid var(--success);">
+                        <h4 style="color:var(--success); margin-top:0;">✅ Solution:</h4>
+                        <p>The matches (intersection) are: <strong style="color:var(--accent);">[4, 7, 13]</strong></p>
+                        <p
+                            style="font-size:0.9rem; color:var(--text-muted); margin-top:15px; border-top:1px dashed var(--border); padding-top:15px;">
+                            <strong>📱 Mobile Test Notes:</strong><br>
+                            • This table has <strong>7 columns</strong> to stress-test the layout<br>
+                            • On mobile, you should be able to scroll horizontally smoothly<br>
+                            • The card should fill edge-to-edge with no wasted space<br>
+                            • The hint "⬅️ Scroll to see all" should appear at the bottom of the table
+                        </p>
                     </div>
                 </div>
             </div>
