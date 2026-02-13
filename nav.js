@@ -162,6 +162,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="exams.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05);">
                 🎯 Previous Exams Bank
             </a>
+            <a href="exam.html" class="nav-link" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.2); background: rgba(56, 189, 248, 0.05);">
+                📄 Previous Exams (A4 Layout)
+            </a>
         </div>
     `;
 

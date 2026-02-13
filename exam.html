@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Section | QudahWay</title>
+    <title>Exams (A4 Layout) | QudahWay</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Satisfy&display=swap"
         rel="stylesheet">
 
-    <!-- MathJax for Formulas -->
+    <!-- MathJax -->
     <script>
         window.MathJax = {
             tex: {
@@ -139,6 +139,9 @@
         }
 
         .q-text-rtl {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
             direction: rtl;
             text-align: right;
         }
@@ -166,15 +169,6 @@
             border-bottom: 1px solid var(--border);
             border-right: 1px solid var(--border);
             text-align: center;
-        }
-
-        th:last-child,
-        td:last-child {
-            border-right: none;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
         }
 
         th {
@@ -217,6 +211,42 @@
             border-top: 1px dashed var(--border);
         }
 
+        .exam-section {
+            display: none;
+        }
+
+        .correct-answer-box {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--success);
+        }
+
+        .mcq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
         @media print {
             body {
                 background: white;
@@ -229,8 +259,19 @@
                 padding: 15mm;
             }
 
-            .tab-btn {
+            .tab-btn,
+            .toggle-btn {
                 display: none;
+            }
+
+            .answer-section {
+                display: block !important;
+            }
+
+            .question-card,
+            .table-responsive,
+            .correct-answer-box {
+                page-break-inside: avoid;
             }
         }
 
@@ -254,6 +295,7 @@
             .question-card {
                 padding: 15px;
                 border-radius: 0;
+                margin: 0 -15px 15px -15px;
                 border-left: none;
                 border-right: none;
             }
@@ -268,35 +310,53 @@
             }
         }
     </style>
+
+    <script>
+        // Use document.write ONLY for initial render.
+        function cs(ops, cls) {
+            let h = `<select class="exam-input ${cls}" onchange="updateExcl(this)"><option value="">Select...</option>`;
+            ops.forEach(o => h += `<option value="${o}">${o}</option>`);
+            return h + `</select>`;
+        }
+
+        function updateExcl(s) {
+            if (!s.classList.contains('res')) return;
+            const al = document.querySelectorAll('.res');
+            const vs = [];
+            al.forEach(x => { if (x.value && x.value !== '∅' && x.value !== 'End') vs.push(x.value); });
+            al.forEach(x => { x.querySelectorAll('option').forEach(o => { o.disabled = (vs.includes(o.value) && x.value !== o.value && o.value !== '∅' && o.value !== 'End'); }); });
+        }
+    </script>
 </head>
 
 <body>
     <div class="container">
         <div class="header-title">
             <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
-            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1rem;">A4 Print Layout</p>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1rem;">A4 Exam Layout</p>
         </div>
 
         <div class="tabs">
-            <div class="tab-btn active" onclick="switchTab(this, 'sample')">Sample View</div>
+            <div class="tab-btn active" onclick="switchTab(this, 'first')">First Exam</div>
+            <div class="tab-btn" onclick="switchTab(this, 'second')">Second Exam</div>
         </div>
 
-        <div id="sample" class="exam-section">
-            <div class="question-card" style="border-right: 5px solid var(--danger);">
-                <div class="q-header">
-                    <span class="q-number">Q1: Merge Algorithm - A4 Test [7 Columns]</span>
-                </div>
+        <!-- FIRST EXAM SECTION -->
+        <div id="first" class="exam-section" style="display: block;">
+
+            <!-- Question 1: Merge Algorithm -->
+            <div class="question-card" style="border-right: 5px solid #ff4d4d;">
+                <div class="q-header"><span class="q-number">Q 01: Merge Algorithm [4 Points]</span></div>
                 <div class="q-text">
                     <div
-                        style="background:rgba(56, 189, 248, 0.05); padding:12px; border-radius:8px; border-left:3px solid var(--primary); margin-bottom:15px;">
-                        <strong style="color:var(--primary); font-size:1rem;">Given Data:</strong><br>
+                        style="background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:20px;">
+                        <strong style="color:var(--primary); font-size:1.2rem;">Given Data (المعطيات):</strong><br>
                         <span style="color:var(--accent)">Term 1:</span> [1, 4, 5, 7, 9, 11, 13, 15]<br>
                         <span style="color:var(--accent)">Term 2:</span> [3, 4, 6, 7, 10, 13, 14]<br>
                         <span style="color:var(--text-light)">Query:</span> term1 AND term2
                     </div>
-                    <strong>Task:</strong> Trace the merge algorithm within A4 page boundaries.
+                    <strong>Task:</strong> Trace the merge algorithm for the two postings lists above.
                 </div>
-
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -304,97 +364,647 @@
                                 <th>#</th>
                                 <th>P1</th>
                                 <th>P2</th>
-                                <th>Compare</th>
-                                <th>Action</th>
-                                <th>Result</th>
-                                <th>Notes</th>
+                                <th>ACTION</th>
+                                <th>RESULT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <script>
+                                for (let i = 1; i <= 11; i++) {
+                                    document.write(`<tr>
+                                            <td>${i}</td>
+                                            <td>${cs([1, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 'End'], '')}</td>
+                                            <td>${cs([1, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 'End'], '')}</td>
+                                            <td>${cs(['Move P1', 'Move P2', 'Match -> Add', 'End'], '')}</td>
+                                            <td>${cs(['∅', 'Match: 4', 'Match: 7', 'Match: 13', 'End'], 'res')}</td>
+                                        </tr>`);
+                                }
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <div style="direction:ltr; text-align:center">
+                            <h4 style="color:var(--success); direction:rtl; text-align:right">✅ Solution Key (شرح الحل):
+                            </h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>P1</th>
+                                            <th>P2</th>
+                                            <th>ACTION</th>
+                                            <th>RESULT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>3</td>
+                                            <td>Move P1 (1 < 3)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>Move P2 (4 > 3)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>Match -> Add</td>
+                                            <td>Match: 4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>Move P1 (5 < 6)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>7</td>
+                                            <td>6</td>
+                                            <td>Move P2 (7 > 6)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td>7</td>
+                                            <td>Match -> Add</td>
+                                            <td>Match: 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>9</td>
+                                            <td>10</td>
+                                            <td>Move P1 (9 < 10)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>11</td>
+                                            <td>10</td>
+                                            <td>Move P2 (11 > 10)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>11</td>
+                                            <td>13</td>
+                                            <td>Move P1 (11 < 13)</td>
+                                            <td>∅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>13</td>
+                                            <td>13</td>
+                                            <td>Match -> Add</td>
+                                            <td>Match: 13</td>
+                                        </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td>15</td>
+                                            <td>14</td>
+                                            <td>End</td>
+                                            <td>End</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2: Positional Index -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 02 [4 Points]</span></div>
+                <div class="q-text-rtl">
+                    <strong>البيانات المعطاة:</strong> نظام الـ Positional Index للمصطلحات التالية:
+                    <div class="table-responsive">
+                        <table style="direction:ltr; margin: 15px 0; background: rgba(15, 23, 42, 0.4);">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Postings List (DocID: Positions)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>self</td>
+                                    <td>{doc1: [2]} {doc2: [1, 5]} {doc3: [12]} {doc4: [5]}</td>
+                                </tr>
+                                <tr>
+                                    <td>driving</td>
+                                    <td>{doc1: [3]} {doc2: [6]} {doc3: [10, 13]} {doc4: [6]}</td>
+                                </tr>
+                                <tr>
+                                    <td>car</td>
+                                    <td>{doc1: [4]} {doc2: [8, 10]} {doc3: [8, 11, 14]} {doc4: [8]}</td>
+                                </tr>
+                                <tr>
+                                    <td>is</td>
+                                    <td>{doc1: [5]} {doc2: [3]} {doc3: [5, 15]} {doc4: [1, 2, 9]}</td>
+                                </tr>
+                                <tr>
+                                    <td>research</td>
+                                    <td>{doc1: [6]} {doc2: [13]} {doc3: [7]} {doc4: [3, 7]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <strong>المطلوب:</strong> تتبع البحث الموقعي (Positional Search) للاستعلام: <strong>"self driving
+                        car"</strong>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DocID</th>
+                                <th>self</th>
+                                <th>driving</th>
+                                <th>car</th>
+                                <th>Match?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <script>
+                                ["doc1", "doc2", "doc3", "doc4"].forEach(d => {
+                                    document.write(`<tr>
+                                        <td style="color:var(--primary); font-weight:700;">${d}</td>
+                                        <td>${cs(['[2]', '[1, 5]', '[12]', '[5]', '∅'], '')}</td>
+                                        <td>${cs(['[3]', '[6]', '[10, 13]', '∅'], '')}</td>
+                                        <td>${cs(['[4]', '[8, 10]', '[8, 11, 14]', '[8]', '∅'], '')}</td>
+                                        <td><select class="exam-input" style="width:80px"><option>No</option><option>Yes</option></select></td>
+                                    </tr>`);
+                                });
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <div style="direction:ltr; text-align:center">
+                            <h4 style="color:var(--success); direction:rtl; text-align:right">✅ Solution Key:</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>DocID</th>
+                                            <th>Sequence</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="color:var(--success)">doc1</td>
+                                            <td>2, 3, 4</td>
+                                            <td style="color:var(--success)">YES</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:var(--danger)">doc2</td>
+                                            <td>5, 6, 8</td>
+                                            <td style="color:var(--danger)">NO</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:var(--success)">doc3</td>
+                                            <td>12, 13, 14</td>
+                                            <td style="color:var(--success)">YES</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:var(--danger)">doc4</td>
+                                            <td>5, 6, 8</td>
+                                            <td style="color:var(--danger)">NO</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3: Skip Pointers -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 03 [4 Points]</span></div>
+                <div class="q-text-rtl"><strong>Skip Pointers Optimization:</strong> استخدم الـ Skip Pointers لتحسين
+                    عملية الـ Merge بناءً على الرسم المرفق.</div>
+                <div
+                    style="margin: 20px 0; text-align: center; background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 10px;">
+                    <img src="output.png" alt="Skip Pointers Diagram"
+                        style="max-width: 100%; height: auto; border-radius: 8px;">
+                </div>
+                <div class="mcq-container">
+                    <p style="margin:5px 0;">1. ما هو ناتج العملية (t1 AND t2)؟</p>
+                    <label class="option-card"><input type="radio" name="q31">
+                        <div class="dot"></div>[2, 12, 40]
+                    </label>
+                    <label class="option-card"><input type="radio" name="q31">
+                        <div class="dot"></div>[2, 40] ✅
+                    </label>
+
+                    <p style="margin:15px 0 5px;">2. ما هي مسارات القفز المثلى؟</p>
+                    <label class="option-card"><input type="radio" name="q32">
+                        <div class="dot"></div>(12→19) في P1 و (20→30) في P2 ✅
+                    </label>
+                    <label class="option-card"><input type="radio" name="q32">
+                        <div class="dot"></div>جميع مسارات القفز
+                    </label>
+
+                    <p style="margin:15px 0 5px;">3. ما هي المستندات التي تم تخطيها؟</p>
+                    <label class="option-card"><input type="radio" name="q33">
+                        <div class="dot"></div>[17, 18, 22, 25] ✅
+                    </label>
+                    <label class="option-card"><input type="radio" name="q33">
+                        <div class="dot"></div>[5, 8, 22, 25]
+                    </label>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>Matches: [2, 40].<br>Skips: P1(12->19) skips [17, 18], P2(20->30) skips [22, 25].</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4: Query Optimization -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 04 [2 Points]</span></div>
+                <div class="q-text">
+                    Determine optimal query processing order for:
+                    <div
+                        style="margin: 10px 0; color: var(--primary); font-family: 'JetBrains Mono'; font-weight: 700;">
+                        (tangerine OR trees) AND (marmalade OR skies) AND (kaleidoscope OR eyes)
+                    </div>
+                    Given Doc Frequencies: eyes(213k), kaleidoscope(87k), marmalade(107k), skies(271k), tangerine(46k),
+                    trees(316k).
+                </div>
+                <div class="mcq-container">
+                    <label class="option-card"><input type="radio" name="q4">
+                        <div class="dot"></div>A) Start with (tangerine OR trees)
+                    </label>
+                    <label class="option-card"><input type="radio" name="q4">
+                        <div class="dot"></div>B) Start with (kaleidoscope OR eyes) ✅
+                    </label>
+                    <label class="option-card"><input type="radio" name="q4">
+                        <div class="dot"></div>C) Start with (marmalade OR skies)
+                    </label>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p><strong>Correct: B</strong>. Start with the smallest estimated size.<br>
+                            (kaleidoscope OR eyes) = 87k + 213k = 300k (Smallest)<br>
+                            (tangerine OR trees) = 46k + 316k = 363k<br>
+                            (marmalade OR skies) = 107k + 271k = 379k</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5: True/False -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 05 [6 Points]</span></div>
+                <div class="q-text"><strong>True and False:</strong></div>
+                <div class="table-responsive">
+                    <table style="text-align:left;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Statement</th>
+                                <th>Answer</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
+                                <td>Positional/Biword both used for proximity?</td>
                                 <td><select class="exam-input">
-                                        <option>1</option>
-                                        <option>4</option>
+                                        <option>True</option>
+                                        <option>False</option>
                                     </select></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Sum of 1s in Term-Doc matrix = total occurrences?</td>
                                 <td><select class="exam-input">
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option>True</option>
+                                        <option>False</option>
                                     </select></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>"Collection" includes PDF, Email, etc?</td>
                                 <td><select class="exam-input">
-                                        <option>P1 < P2</option>
-                                        <option>Match</option>
+                                        <option>True</option>
+                                        <option>False</option>
                                     </select></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Stemming/Lemmatization improve Recall?</td>
                                 <td><select class="exam-input">
-                                        <option>Move P1</option>
-                                        <option>Move P2</option>
+                                        <option>True</option>
+                                        <option>False</option>
                                     </select></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>90,000 terms * 0.1% = 900?</td>
+                                <td><select class="exam-input">
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>/p operator means same paragraph?</td>
+                                <td><select class="exam-input">
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)"><span>👁️ Show Solution Model</span></button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>1. False (Extended Boolean isn't for proximity)<br>2. True<br>3. True<br>4. True<br>5. False
+                            (90, not 900)<br>6. True</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECOND EXAM -->
+        <div id="second" class="exam-section">
+            <!-- Q1 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 01 [1 Point]</span></div>
+                <div class="q-text">
+                    <strong>Task:</strong> Find log-frequency weight $w = 1 + \log_{10}(tf)$ for term "apple".<br>
+                    D1: tf=1, D2: tf=4.
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Document</th>
+                                <th>log-frequency weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>D1</td>
+                                <td><input type="text" class="exam-input" placeholder="Expression..."></td>
+                            </tr>
+                            <tr>
+                                <td>D2</td>
+                                <td><input type="text" class="exam-input" placeholder="Expression..."></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>D1: 1 + log(1) = 1<br>D2: 1 + log(4) ≈ 1.60</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 02 [1 Point]</span></div>
+                <div class="q-text">
+                    <strong>Task:</strong> Calculate IDF. Collection N=1000.<br>
+                    Data: df=200. Science: df=30.
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th>IDF Formula</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Data</td>
+                                <td><input type="text" class="exam-input" placeholder="Expression..."></td>
+                            </tr>
+                            <tr>
+                                <td>science</td>
+                                <td><input type="text" class="exam-input" placeholder="Expression..."></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>Data: log(1000/200) = log(5) ≈ 0.7<br>Science: log(1000/30) ≈ 1.52</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 03 [3 Points]</span></div>
+                <div class="q-text">
+                    <strong>Cosine Similarity:</strong> Calculate similarity between Query and Doc.<br>
+                    Query vectors: [2, 3, 1], Document vectors: [3, 4, 5].
+                </div>
+                <div class="interactive-area" style="padding:15px; border-radius:8px; background:rgba(15,23,42,0.4);">
+                    <label>1. Dot Product:</label> <input type="text" class="exam-input"
+                        style="margin-bottom:10px;"><br>
+                    <label>2. |Query|:</label> <input type="text" class="exam-input" style="margin-bottom:10px;"><br>
+                    <label>3. |Doc|:</label> <input type="text" class="exam-input" style="margin-bottom:10px;">
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>Dot: 2*3 + 3*4 + 1*5 = 6+12+5 = 23<br>
+                            |Q|: sqrt(4+9+1) = sqrt(14)<br>
+                            |D|: sqrt(9+16+25) = sqrt(50)<br>
+                            Sim = 23 / (sqrt(14)*sqrt(50))</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 04 [4 Points]</span></div>
+                <div class="q-text">
+                    <strong>DCG & IDCG @ 5.</strong><br>
+                    Ranked Results: D2(3), D4(2), D3(3), D1(0), D5(1).
+                </div>
+                <div class="interactive-area" style="padding:15px; border-radius:8px; background:rgba(15,23,42,0.4);">
+                    <label>DCG@5:</label> <input type="text" class="exam-input" style="margin-bottom:10px;"><br>
+                    <label>IDCG@5:</label> <input type="text" class="exam-input">
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p><strong>DCG:</strong> 3 + 2/log(2) + 3/log(3) + 0 + 1/log(5)<br>
+                            <strong>IDCG (Ideal: 3,3,2,1,0):</strong> 3 + 3/log(2) + 2/log(3) + 1/log(4) + 0
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 05 [5 Points]</span></div>
+                <div class="q-text">
+                    <strong>Precision & Recall @ K.</strong><br>
+                    Relevant: D1, D2, D5, D7 (Total 4).<br>
+                    Retrieved: D2, D3, D1, D8, D4, D5, D6, D7.
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>K</th>
+                                <th>Ranked Doc</th>
+                                <th>Precision@K</th>
+                                <th>Recall@K</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>D2</td>
                                 <td><input type="text" class="exam-input" placeholder="..."></td>
                                 <td><input type="text" class="exam-input" placeholder="..."></td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><select class="exam-input">
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>P1 > P2</option>
-                                        <option>Match</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Move P1</option>
-                                        <option>Move P2</option>
-                                    </select></td>
+                                <td>D3</td>
                                 <td><input type="text" class="exam-input" placeholder="..."></td>
                                 <td><input type="text" class="exam-input" placeholder="..."></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><select class="exam-input">
-                                        <option>4</option>
-                                        <option>7</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>4</option>
-                                        <option>6</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Match</option>
-                                    </select></td>
-                                <td><select class="exam-input">
-                                        <option>Add & Move</option>
-                                    </select></td>
-                                <td><input type="text" class="exam-input" value="4"></td>
+                                <td>D1</td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>D8</td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>D4</td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>D5</td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>D6</td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>D7</td>
+                                <td><input type="text" class="exam-input" placeholder="..."></td>
                                 <td><input type="text" class="exam-input" placeholder="..."></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
+                <div style="margin-top:10px;">
+                    <label>Average Precision (AP):</label> <input type="text" class="exam-input"><br>
+                    <label>Reciprocal Rank (RR):</label> <input type="text" class="exam-input" style="margin-top:5px;">
+                </div>
                 <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
                 <div class="answer-section">
-                    <div
-                        style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 8px; border: 1px solid var(--success);">
-                        <h4 style="color:var(--success); margin-top:0; font-size:1rem;">✅ Solution:</h4>
-                        <p style="font-size:0.9rem;">Matches: <strong style="color:var(--accent);">[4, 7, 13]</strong>
-                        </p>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:10px;">
-                            📄 <strong>A4 Layout Notes:</strong><br>
-                            • Content is contained within 210mm × 297mm page<br>
-                            • Visible page boundaries with shadow effect<br>
-                            • Optimized font sizes for print readability
+                    <div class="correct-answer-box">
+                        <p><strong>AP:</strong> (1 + 0.67 + 0.5 + 0.5) / 4 ≈ 0.67<br>
+                            <strong>RR:</strong> First relevant is at rank 1, so 1/1 = 1.
                         </p>
                     </div>
                 </div>
             </div>
+
+            <!-- Q6 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 06 [3 Points]</span></div>
+                <div class="q-text">
+                    <strong>Probabilistic Retrieval Evaluation.</strong><br>
+                    Based on table of (Query, Doc, Relevance).
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prob</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P(R=1|Q1, D1)</td>
+                                <td><input type="text" class="exam-input"></td>
+                            </tr>
+                            <tr>
+                                <td>P(R=1|Q2, D2)</td>
+                                <td><input type="text" class="exam-input"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>P(R=1|Q1, D1) = 3/3 = 1<br>P(R=1|Q2, D2) = 1/3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-card">
+                <div class="q-header"><span class="q-number">Q 07 [8 Points]</span></div>
+                <div class="q-text"><strong>Multiple Choice:</strong></div>
+                <div class="mcq-container">
+                    <p>1. Bag-of-words model:</p>
+                    <label class="option-card"><input type="radio" name="q71"> Word order is ignored. ✅</label>
+                    <p>2. Highest IDF score?</p>
+                    <label class="option-card"><input type="radio" name="q72"> Term appearing in 10 documents. ✅</label>
+                </div>
+                <button class="toggle-btn" onclick="toggleAns(this)">👁️ Show Solution</button>
+                <div class="answer-section">
+                    <div class="correct-answer-box">
+                        <p>1. Word order ignored.<br>2. Rare terms have highest IDF.</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
+    <script src="nav.js"></script>
     <script>
         function toggleAns(btn) {
             const section = btn.nextElementSibling;
@@ -407,12 +1017,8 @@
             document.querySelectorAll('.exam-section').forEach(s => s.style.display = 'none');
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(id).style.display = 'block';
-            btn.classList.add('active');
+            if (btn) btn.classList.add('active');
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('sample').style.display = 'block';
-        });
     </script>
 </body>
 
