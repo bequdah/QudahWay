@@ -131,32 +131,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         #fixed-home-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(15, 23, 42, 0.8);
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            background: rgba(15, 23, 42, 0.9) !important;
             backdrop-filter: blur(10px);
-            border: 1px solid #38bdf8;
-            color: #38bdf8;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 2px solid #38bdf8 !important;
+            color: #38bdf8 !important;
+            width: 55px !important;
+            height: 55px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            z-index: 1000000 !important;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5) !important;
             transition: all 0.3s ease;
-            text-decoration: none;
-            font-size: 1.4rem;
+            text-decoration: none !important;
+            font-size: 1.6rem !important;
         }
 
         #fixed-home-btn:hover {
             transform: scale(1.1);
-            background: #38bdf8;
-            color: #0f172a;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+            background: #38bdf8 !important;
+            color: #0f172a !important;
+        }
+
+        /* Mobile specific adjustments to ensure it stays fixed and doesn't interfere */
+        @media (max-width: 600px) {
+            #fixed-home-btn {
+                top: 15px !important;
+                right: 15px !important;
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1.4rem !important;
+            }
         }
     `;
     document.head.appendChild(style);
@@ -164,6 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // CLEANUP: Remove any existing hardcoded home buttons to prevent duplicates
     const oldBtns = document.querySelectorAll('#floating-home, #fixed-back-btn, [title="العودة للرئيسية"], [title="Back to Home"]');
     oldBtns.forEach(btn => btn.remove());
+
+    // 2. Build the dynamic menu content
+    // ... (rest of the code below in nav.js)
 
     // 2. Build the dynamic menu content
     let menuHTML = `
@@ -209,14 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     document.body.appendChild(navContainer);
-
-    // Fixed Home Button (Always on the RIGHT as per agreement/standard)
-    const homeBtn = document.createElement('a');
-    homeBtn.id = 'fixed-home-btn';
-    homeBtn.href = (currentPage === 'index.html' || currentPage === '') ? '../index.html' : 'index.html';
-    homeBtn.innerHTML = '🏠';
-    homeBtn.title = 'Back to Home';
-    document.body.appendChild(homeBtn);
 
     // Toggle logic
     const toggleBtn = document.getElementById('nav-toggle');
