@@ -1,28 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
     const currentPath = window.location.pathname;
-    const currentPage = currentPath.split("/").pop();
+    const pathParts = currentPath.split("/");
+    const currentPage = pathParts.pop();
+    const folder = pathParts.pop();
 
     // 0. EXTRA BULLETPROOF EXIT for index.html
-    // Checks for: 'index.html', empty string (root), or if the path ends with /QudahWay/
-    const isHomePage = !currentPage || currentPage === 'index.html' || currentPath.endsWith('/') || currentPath.endsWith('/QudahWay');
+    const isHomePage = !currentPage || (currentPage === 'index.html' && folder === 'QudahWay') || currentPath.endsWith('/') || currentPath.endsWith('/QudahWay');
 
     if (isHomePage) {
-        return; // ABSOLUTELY DO NOT SHOW ON HOME PAGE
+        return;
     }
 
-    // Force body to be a column to ensure footer-style nav stays at bottom
-    if (window.getComputedStyle(document.body).display === 'flex') {
-        document.body.style.flexDirection = 'column';
-        document.body.style.alignItems = 'center';
-    }
+    // Identify Subject
+    const isIR = currentPath.includes('/ir/');
+    const isCV = currentPath.includes('/cv/');
 
     // 1. Create the styles
     const style = document.createElement('style');
     style.innerHTML = `
-        /* Footer Nav Styles - Fixed for all layouts */
         #nav-container {
             width: 100%;
-            max-width: 100% !important;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -34,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
             position: relative;
             z-index: 9999;
             box-sizing: border-box;
-            flex-shrink: 0;
         }
 
         #nav-toggle {
@@ -52,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
             font-weight: 700;
             gap: 12px;
             font-family: 'Cairo', sans-serif;
-            white-space: nowrap;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.1);
         }
 
@@ -79,10 +74,12 @@ document.addEventListener("DOMContentLoaded", function () {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             opacity: 0;
             pointer-events: none;
             visibility: hidden;
+            text-align: right;
+            direction: rtl;
         }
 
         #nav-menu.visible {
@@ -100,28 +97,30 @@ document.addEventListener("DOMContentLoaded", function () {
             margin-bottom: 8px;
             font-size: 1.2rem;
             text-align: center;
-            font-family: 'Satisfy', cursive;
+            font-family: 'Cairo', sans-serif;
         }
 
         .nav-link {
             color: #f1f5f9;
             text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
             transition: all 0.2s;
             font-size: 0.95rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 14px;
+            justify-content: flex-start;
+            gap: 12px;
             border: 1px solid transparent;
+            font-family: 'Cairo', sans-serif;
         }
 
         .nav-link:hover {
             background: rgba(56, 189, 248, 0.1);
             color: #38bdf8;
             border-color: rgba(56, 189, 248, 0.2);
-            transform: translateX(8px);
+            transform: translateX(-5px);
         }
 
         .nav-link.active-page {
@@ -131,17 +130,16 @@ document.addEventListener("DOMContentLoaded", function () {
             pointer-events: none;
         }
 
-        /* Fixed Home Button */
         #fixed-home-btn {
-            position: absolute;
+            position: fixed;
             top: 20px;
-            left: 20px;
+            right: 20px;
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid #38bdf8;
             color: #38bdf8;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -151,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
 
         #fixed-home-btn:hover {
@@ -163,49 +161,64 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     document.head.appendChild(style);
 
-    // 2. Create the Footer Nav Container
+    // CLEANUP: Remove any existing hardcoded home buttons to prevent duplicates
+    const oldBtns = document.querySelectorAll('#floating-home, #fixed-back-btn, [title="العودة للرئيسية"], [title="Back to Home"]');
+    oldBtns.forEach(btn => btn.remove());
+
+    // 2. Build the dynamic menu content
+    let menuHTML = `
+        <div class="nav-header">
+            <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> Map
+        </div>
+        <a href="../index.html" class="nav-link" style="color: #facc15; background: rgba(250, 204, 21, 0.05); border-color: rgba(250, 204, 21, 0.2); justify-content: center; text-align: center;">🏠 الرئيسية (الأكاديمية)</a>
+        <a href="index.html" class="nav-link" style="color: #38bdf8; background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.2); justify-content: center; text-align: center;">📋 لوحة التحكم</a>
+        <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
+    `;
+
+    if (isIR) {
+        menuHTML += `
+            <div class="nav-header" style="font-size: 1rem; color: #38bdf8;">Information Retrieval</div>
+            <a href="intro.html" class="nav-link">📂 00. Intro & Definitions</a>
+            <a href="text-retrieval.html" class="nav-link">📚 01. Text Retrieval Basics</a>
+            <a href="boolean-retrieval.html" class="nav-link">🔍 02. Boolean Retrieval</a>
+            <a href="text-operations.html" class="nav-link">📝 03. Text Operations</a>
+            <a href="phrase-queries.html" class="nav-link">💬 04. Phrase Queries</a>
+            <a href="skiplist.html" class="nav-link">⏭️ 05. Skip Lists</a>
+            <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
+            <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
+            <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
+            <a href="exam.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05); justify-content: center;">
+                🎯 IR Exams Bank
+            </a>
+        `;
+    } else if (isCV) {
+        menuHTML += `
+            <div class="nav-header" style="font-size: 1.1rem; color: #34d399;">Computer Vision</div>
+            <a href="cv-introduction.html" class="nav-link">👁️ 01. CV Introduction</a>
+        `;
+    }
+
     const navContainer = document.createElement('div');
     navContainer.id = 'nav-container';
-
     navContainer.innerHTML = `
         <button id="nav-toggle" aria-label="Toggle Menu">
             <span class="icon">☰</span>
             <span>تصفح خريطة المساق</span>
         </button>
-        <div id="nav-menu">
-            <div class="nav-header">
-                <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> Map
-            </div>
-            
-            <a href="index.html" class="nav-link" style="color: #facc15; background: rgba(250, 204, 21, 0.05); border-color: rgba(250, 204, 21, 0.2);">🏠 العودة للرئيسية</a>
-            <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
-
-            <a href="index-print.html" class="nav-link">📂 00. Intro & Definitions</a>
-            <a href="text-retrieval-print.html" class="nav-link">📚 01. Text Retrieval Basics</a>
-            <a href="boolean-retrieval-print.html" class="nav-link">🔍 02. Boolean Retrieval</a>
-            <a href="text-operations-print.html" class="nav-link">📝 03. Text Operations</a>
-            <a href="phrase_queries_print.html" class="nav-link">💬 04. Phrase Queries</a>
-            <a href="skiplist-print.html" class="nav-link">⏭️ 05. Skip Lists</a>
-            <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
-            <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
-            <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
-            <a href="exam.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05);">
-                🎯 Previous Exams Bank
-            </a>
-        </div>
+        <div id="nav-menu">${menuHTML}</div>
     `;
 
     document.body.appendChild(navContainer);
 
-    // Create and Append Fixed Home Button
+    // Fixed Home Button (Always on the RIGHT as per agreement/standard)
     const homeBtn = document.createElement('a');
     homeBtn.id = 'fixed-home-btn';
-    homeBtn.href = 'index.html';
+    homeBtn.href = (currentPage === 'index.html' || currentPage === '') ? '../index.html' : 'index.html';
     homeBtn.innerHTML = '🏠';
     homeBtn.title = 'Back to Home';
     document.body.appendChild(homeBtn);
 
-    // 3. Add Toggle Functionality
+    // Toggle logic
     const toggleBtn = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
     const icon = toggleBtn.querySelector('.icon');
@@ -223,11 +236,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 4. Highlight current page
+    // Highlight current page
     const links = menu.querySelectorAll('.nav-link');
     links.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPage) {
+        if (href === currentPage || currentPath.endsWith(href)) {
             link.classList.add('active-page');
         }
     });

@@ -83,72 +83,61 @@
         .card-icon {
             font-size: 1.5rem;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem !important;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .link-card {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
-        <p class="subtitle">Information Retrieval by <span
-                style="font-family: 'Satisfy', cursive; font-size: 1.4rem;"><span
-                    style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></span></p>
+        <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> <span
+                style="color: var(--text-muted); font-family: 'Cairo'; font-size: 1.5rem; font-weight: 400;">Academy</span>
+        </h1>
+
+        <h2 style="text-align: right; color: var(--accent); margin-bottom: 20px; font-size: 1.5rem;">المساقات:
+        </h2>
 
         <div class="links-grid">
-            <!-- 00. Intro -->
-            <a href="index-print.html" class="link-card">
-                <span class="card-title">00. Intro & Definitions</span>
-                <span class="card-icon">📂</span>
-            </a>
-
-            <!-- 01. Text Retrieval -->
-            <a href="text-retrieval-print.html" class="link-card">
-                <span class="card-title">01. Text Retrieval Basics</span>
-                <span class="card-icon">📚</span>
-            </a>
-
-            <!-- 02. Boolean Retrieval -->
-            <a href="boolean-retrieval-print.html" class="link-card">
-                <span class="card-title">02. Boolean Retrieval Model</span>
+            <!-- Course 1: IR -->
+            <a href="ir/index.html" class="link-card" style="border-left: 4px solid var(--primary);">
+                <div style="text-align: right;">
+                    <span class="card-title">Information Retrieval (IR)</span>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-muted);">استرجاع المعلومات والبحث
+                        الذكي</p>
+                </div>
                 <span class="card-icon">🔍</span>
             </a>
 
-            <!-- 03. Text Operations -->
-            <a href="text-operations-print.html" class="link-card">
-                <span class="card-title">03. Text Operations</span>
-                <span class="card-icon">📝</span>
+            <!-- Course Course 2: CV -->
+            <a href="cv/index.html" class="link-card"
+                style="border-left: 4px solid var(--success); background: rgba(52, 211, 153, 0.05);">
+                <div style="text-align: right;">
+                    <span class="card-title">Computer Vision (CV)</span>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-muted);">تحليل الصور والرؤية
+                        الحاسوبية</p>
+                </div>
+                <span class="card-icon">👁️</span>
             </a>
 
-            <!-- 04. Phrase Queries -->
-            <a href="phrase_queries_print.html" class="link-card">
-                <span class="card-title">04. Phrase Queries & Positional</span>
-                <span class="card-icon">💬</span>
-            </a>
 
-            <!-- 05. Skip Lists -->
-            <a href="skiplist-print.html" class="link-card">
-                <span class="card-title">05. Skip Lists Optimization</span>
-                <span class="card-icon">⏭️</span>
-            </a>
-
-            <!-- 06. Vector Space -->
-            <a href="vector_space_model.html" class="link-card">
-                <span class="card-title">06. Vector Space Model</span>
-                <span class="card-icon">🚀</span>
-            </a>
-
-            <!-- 07. Probabilistic -->
-            <a href="Probabilistic_Model.html" class="link-card">
-                <span class="card-title">07. Probabilistic Model</span>
-                <span class="card-icon">🎲</span>
-            </a>
-
-            <!-- EXAMS -->
-            <a href="exam.html" class="link-card"
-                style="border-color: var(--danger); background: rgba(251, 113, 133, 0.1);">
-                <span class="card-title" style="color: var(--danger);">📝 Previous Exams Bank</span>
-                <span class="card-icon">🎯</span>
-            </a>
         </div>
     </div>
 

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Computer Vision Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+            --border: #334155;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
+            background: var(--card-dark);
+            padding: 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--success);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-content {
+            text-align: right;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            display: block;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-left: 20px;
+        }
+
+        .section-tag {
+            grid-column: 1 / -1;
+            text-align: right;
+            color: var(--success);
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(52, 211, 153, 0.2);
+            padding-bottom: 5px;
+        }
+
+        #fixed-back-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+
+        #fixed-back-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .header p {
+                font-size: 1.1rem !important;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .link-card {
+                padding: 18px;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .card-icon {
+                font-size: 1.6rem;
+                margin-left: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div class="header">
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
+            <p
+                style="font-family: 'Cairo', sans-serif; font-size: 1.35rem; color: var(--text-light); margin: 15px 0; font-weight: 600;">
+                Computer Vision <span
+                    style="font-size: 1.1rem; opacity: 0.7; margin: 0 5px; font-weight: 400;">By</span>
+                <span
+                    style="color: var(--primary); font-family: 'Satisfy', cursive; font-size: 1.6rem; font-weight: normal;">Mohammad</span>
+                <span
+                    style="color: var(--accent); font-family: 'Satisfy', cursive; font-size: 1.6rem; font-weight: normal;">Qudah</span>
+            </p>
+        </div>
+
+        <div class="links-grid">
+            <div class="section-tag">أساسيات الرؤية الحاسوبية</div>
+
+            <a href="cv-introduction.html" class="link-card" style="border-right: 4px solid var(--success);">
+                <div class="card-content">
+                    <span class="card-title">CV: Introduction</span>
+                    <span class="card-desc">مقدمة في علم الرؤية الحاسوبية وأهم تطبيقاتها</span>
+                </div>
+                <span class="card-icon">👁️</span>
+            </a>
+
+
+        </div>
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Computer Vision Comprehensive</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        /* Slide Card System - Comprehensive Style */
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .detail-item {
+            margin-bottom: 20px;
+            padding-right: 15px;
+            border-right: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-title {
+            color: var(--primary);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Highlighting */
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        #floating-home {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: var(--card-dark);
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.6rem;
+            z-index: 1000;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+                margin-bottom: 40px;
+            }
+
+            .story-title {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+
+            .story-content {
+                font-size: 1.1rem;
+                line-height: 1.7;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+
+            .explanation-header {
+                font-size: 1.2rem;
+                padding-right: 10px;
+            }
+
+            .explanation-content {
+                font-size: 1.1rem;
+            }
+
+            .slide-title-bar {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div class="header">
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> CV</h1>
+            <p class="subtitle">Computer Vision | المصدر الشامل والاحترافي للتميز</p>
+        </div>
+
+        <div class="story-section">
+            <div class="story-title">القصة وكيف بلش السحر:</div>
+            <div class="story-content">
+                ركز معي هون عشان تفهم الحكاية من أولها.. بسنة 1966، كان في بروفيسور بـ <span class="eng-term">MIT</span>
+                اسمه <span class="highlight-b">Seymour Papert</span>، قرر يعطي طلابه "مشروع صيفي" صغير.
+                <br><br>
+                السؤال كان بسيط: <span class="highlight-y">"اشبكوا كاميرا بالكمبيوتر وخلوه يوصف لنا شو شايف
+                    بالصورة!"</span>. الطلاب فكروا إنهم رح يخلصوا الموضوع بشهرين ويروحوا يعطلوا.. بس الصدمة إنهم اكتشفوا
+                إن عين البشر مش مجرد "عدسة"، هي مرتبطة بدماغ بخزن خبرة سنين وتطور ملايين السنين.
+                <br><br>
+                هااض المشروع الصيفي "البسيط" استمر <span class="highlight-b">50 سنة</span> من البحث والمحاولات الفاشلة،
+                لغاية ما وصلنا اليوم إن الكمبيوتر صار "يشوف" ويحلل أحسن من البشر بكثير بمجالات معينة. إحنا بهاي المادة،
+                رح نمشي بنفس الطريق اللي مشوه، ونعرف كيف حولنا "الغلبة" هاي لذكاء اصطناعي جبار.
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Teaching Machines to See</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0003.jpg" alt="Slide 3">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">جوهر المادة (الرؤية كـ عين للذكاء):</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="detail-title">📍 ليش الـ CV هو "العين"؟</span>
+                        الذكاء الاصطناعي <span class="eng-term">AI</span> بدون رؤية بكون كأنه عقل مفصول عن العالم
+                        الخارجي.. الـ <span class="eng-term">CV</span> هو اللي بعطي هااض العقل القدرة إنه "يدرك" البيئة،
+                        يحلل الأشكال، ويفهم المسافات.
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-title">📍 الهدف الأساسي:</span>
+                        الهدف مش بس إنه الكمبيوتر "يصور"، الهدف إنه <span class="highlight-y">يفهم</span> شو بالصورة
+                        (Interpret and Understand). إحنا "بنعلّمه" يشوف زينا، يعني يفرق بين الحجر والشجر وبين البني آدم
+                        والسيارة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Intro to Computer Vision (Main Pillars)</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0004.jpg" alt="Slide 4">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تطبيقات بتغيّر العالم:</div>
+                <div class="explanation-content">
+                    هااض السلايد بجمع أهم 4 مجالات حالياً:
+                    <ul>
+                        <li><span class="highlight-b">Mars Rover:</span> الروبوت اللي بيمشي على المريخ، بيستخدم الـ
+                            <span class="eng-term">Vision</span> عشان يكتشف الصخور ويميز الحفر، وإلا كان خبط من أول
+                            ثانية!
+                        </li>
+                        <li><span class="highlight-y">Object Detection:</span> زي الصورة اللي فيها اللابتوب والكأس..
+                            الجهاز هون بحدد (Bounding Boxes) حول كل غرض وبعرف شو هو.</li>
+                        <li><span class="highlight-b">Augmented Reality (AR):</span> دمج عناصر افتراضية بالواقع بناءً
+                            على فهم الأبعاد.</li>
+                        <li><span class="highlight-y">Self-Driving:</span> السيارات اللي بتشوف كل شي حولها عشان تتحرك
+                            بأمان وتعرف مسار الشارع.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Imagine Your Smartphone</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0005.jpg" alt="Slide 5">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التلفون.. صيدلية CV:</div>
+                <div class="explanation-content">
+                    تلفونك بطل مجرد وسيلة اتصال، صار "خبير رؤية". من الـ <span class="eng-term">Face ID</span> اللي بفتح
+                    بلمحة وجه، للسيرش الذكي بالصور، وحتى الفلاتر اللي بتغير ملامحك بالثانية.. كله هذا بفضل خوارزميات
+                    الـ <span class="eng-term">CV</span> اللي شغالة بالخلفية.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Everyday AI in Action</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0006.jpg" alt="Slide 6">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الذكاء بمحيطك اليومي:</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Computer Vision</span> حواليك بكل مكان:
+                    <ul>
+                        <li><span class="highlight-y">Self-driving cars:</span> السيارات اللي بتمشي لحالها.</li>
+                        <li><span class="highlight-b">Robot vacuums:</span> المكانس الروبوت اللي بتبني خريطة لبيتك عشان
+                            ما تخبط بالحيط.</li>
+                        <li><span class="highlight-y">Match tracking:</span> بالملعب، في أنظمة بتحلل حركة اللاعبين
+                            والكرة بالثانية عشان تعطي إحصائيات دقيقة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why Computer Vision Matters</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0007.jpg" alt="Slide 7">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش الـ CV مهم لهالدرجة؟</div>
+                <div class="explanation-content">
+                    لإنه "عين الذكاء الاصطناعي".. وبدونه الآلات بتضل عمياء. شوف الأثر في:
+                    <ul>
+                        <li><span class="highlight-b">Healthcare:</span> كشف الأمراض والأورام من صور الأشعة.</li>
+                        <li><span class="highlight-y">Agriculture:</span> مراقبة صحة المحاصيل وكشف الآفات.</li>
+                        <li><span class="highlight-b">Smart Cities:</span> إدارة زحمة السير ومراقبة الحشود.</li>
+                        <li><span class="highlight-y">Security:</span> بصمة الوجه وأنظمة الحماية البايومترية.</li>
+                        <li><span class="highlight-b">Entertainment:</span> الفلاتر الرهيبة (<span class="eng-term">AR
+                                Filters</span>) والكاميرات الذكية اللي بتخلي الصور تطلع خرافية.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What You Will Learn</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0008.jpg" alt="Slide 8">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">رحلتنا بهاي المادة:</div>
+                <div class="explanation-content">
+                    رح نمشي سوا من الأساسيات للقمة:
+                    <ul>
+                        <li>الأساليب الكلاسيكية (<span class="eng-term">Classical methods</span>).</li>
+                        <li>قواعد الـ <span class="eng-term">Deep Learning</span>.</li>
+                        <li>تحديد الأغراض وتقسيم الصور (<span class="eng-term">Object Detection & Segmentation</span>).
+                        </li>
+                        <li>الـ <span class="eng-term">Vision Transformers</span> والنماذج التوليدية (<span
+                                class="eng-term">Generative Models</span>).</li>
+                        <li>المشاريع الواقعية (<span class="eng-term">Real-World Projects</span>) اللي رح نطبقها عملياً.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Hands-On Experience</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0009.jpg" alt="Slide 9">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تطبيق عملي (مش بس نظري):</div>
+                <div class="explanation-content">
+                    التركيز الأساسي هون هو على <span class="highlight-b">التطبيق العملي</span> (Hands-on)، لإنك رح تبني
+                    وتجرب بنفسك:
+                    <ul>
+                        <li>استخدام لغة <span class="eng-term">Python</span> ومكتبة <span
+                                class="eng-term">PyTorch</span> لبناء نماذج الذكاء الاصطناعي.</li>
+                        <li>التدريب على <span class="eng-term">Datasets</span> حقيقية ومعروفة زي <span
+                                class="eng-term">ImageNet</span>، <span class="eng-term">BSDS500</span>، و <span
+                                class="eng-term">NYUD</span>.</li>
+                        <li>إنجاز مشاريع برمجية (<span class="eng-term">Coding projects</span>) وكتابة تقارير تقنية
+                            بتلخص شغلك.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">The Vision for Future</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0010.jpg" alt="Slide 10">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الرؤية للمستقبل:</div>
+                <div class="explanation-content">
+                    <span class="highlight-y">"رؤية الكمبيوتر مش بس عشان نعلم الآلات تشوف.. هي عشان نشكل
+                        المستقبل."</span>
+                    هااض هو الاختراع اللي رح يغير طريقة تفاعلنا مع كل شي حولنا.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Technical Tasks in CV</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0011.jpg" alt="Slide 11">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهام التقنية اللي رح نبدع فيها:</div>
+                <div class="explanation-content">
+                    عشان نوصل للذكاء الكامل، لازم نمشي بهاي المهام التقنية الأساسية:
+                    <ul>
+                        <li><span class="highlight-y">Face Detection:</span> تحديد أماكن الوجوه في الصورة (زي ما بتشوف
+                            بالمربع الأخضر حول الوجوه).</li>
+                        <li><span class="highlight-b">OCR:</span> تحويل الكلمات المكتوبة في الصور لنصوص حقيقية نقدر نعدل
+                            عليها.</li>
+                        <li><span class="highlight-y">Image Classification:</span> تصنيف الصورة كاملة (يعني يقولك هاذ
+                            طير، سيارة، أو كلب).</li>
+                        <li><span class="highlight-b">Panorama Stitching:</span> دمج الصور المتداخلة مع بعض عشان نطلع
+                            بصورة وحدة واسعة وعريضة.</li>
+                        <li><span class="highlight-y">Surveillance:</span> أنظمة المراقبة اللي بتتبع الحركة وبتحدد
+                            الأماكن (زي مواقف السيارات).</li>
+                        <li><span class="highlight-b">Semantic Segmentation:</span> أدق أنواع التقسيم، اللي بيلون كل
+                            بكسل حسب صنفه (شارع، رصيف، شجر).</li>
+                    </ul>
+                    <div style="margin-top: 15px; color: #f87171; font-weight: 700; text-align: center;">
+                        "رؤية الكمبيوتر أكبر بكثير من مجرد تصنيف ومعالجة صور.. هي فهم كامل للمشهد."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Computer Vision? (3D)</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0012.jpg" alt="Slide 12">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">فهم العالم الـ 3D من صور 2D:</div>
+                <div class="explanation-content">
+                    هاذ أهم تحدي.. كيف تخلي الكاميرا تفهم العمق (<span class="eng-term">Depth
+                        Estimation</span>) وتبني نموذج ثلاثي الأبعاد للأشياء أو حتى لحركة البشر (<span
+                        class="eng-term">Human Pose Estimation</span>).
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Human vs Computer Perception</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0013.jpg" alt="Slide 13">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">البشر vs الكمبيوتر:</div>
+                <div class="explanation-content">
+                    هل الكمبيوتر ممكن يجاريك؟ اه ولأ.. الكمبيوتر صار أحسن بالمهام "السهلة" والتكرارية، بس لسا
+                    البشر أشطر بالمهام "الصعبة" اللي بدها فهم عميق للسياق. بس مع الـ <span class="eng-term">Deep
+                        Learning</span>، الفجوة قاعده تصغر يوم عن يوم.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Goal: 3D Shape of the World</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0014.jpg" alt="Slide 14">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">إعادة بناء العالم بالـ 3D:</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="detail-title">📍 ليش الـ 3D مهم؟</span>
+                        الكمبيوتر لو شاف الصورة بس كـ "بكسلات" مسطحة، ما رح يقدر يمشي بممر أو يمسك غرض. هااض
+                        السلايد
+                        بيورجينا كيف الكاميرات المتطورة (زي الـ <span class="eng-term">ZED 2i</span>) بتقدر تحول
+                        الصورة
+                        لـ <span class="eng-term">Point Cloud</span> (مجموعة نقاط بتمثل الأبعاد الحقيقية).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Recognize Objects & People</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0015.jpg" alt="Slide 15">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التعرف الذكي (Terminator Style):</div>
+                <div class="explanation-content">
+                    بطل الموضوع خيال علمي.. أنظمة الـ <span class="eng-term">Object Recognition</span> صارت تقدر
+                    تحدد كل
+                    شي حول الروبوت بدقة خرافية، وهذا اللي بخلي الروبوتات تفهم وين هي ومع مين بتتعامل.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Complex Scene Understanding</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0016.jpg" alt="Slide 16">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">فهم المشاهد المعقدة:</div>
+                <div class="explanation-content">
+                    تحدي الـ <span class="eng-term">Scene Parsing</span> هو إنك تفصل كل غرض عن الثاني في صورة
+                    مليانة
+                    تفاصيل (ناس، سيارات، مباني). هاذ بيتطلب ذكاء اصطناعي يقدر يربط السياق ببعضه.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Image Enhancement</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0017.jpg" alt="Slide 17">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تحسين الصور (Enhancement):</div>
+                <div class="explanation-content">
+                    تغيير جودة الصور الضعيفة وتوضيحها (<span class="eng-term">Super Resolution</span>) صار
+                    حقيقة. بنقدر
+                    نشيل "الغبشة" ونضيف تفاصيل ما كانت موجودة أصلاً بفضل التدريب العميق.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18-20 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CV in Forensics</span>
+                <span class="slide-number">Slide 18-20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0018.jpg" alt="Slide 18">
+                <img src="CV-img/1-Introduction_page-0019.jpg" alt="Slide 19">
+                <img src="CV-img/1-Introduction_page-0020.jpg" alt="Slide 20">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">العيون كمرايا للواقع:</div>
+                <div class="explanation-content">
+                    تقنيات <span class="eng-term">Forensics</span> بتسمح لنا نحلل انعكاس الضوء في بؤبؤ العين
+                    عشان نعرف
+                    مين كان واقف قدام الشخص أو شو كانت الإضاءة بالغرفة. هاض إعجاز تقني بساعد بالتحقيقات.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Computational Photography</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0021.jpg" alt="Slide 21">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التصوير الحسابي:</div>
+                <div class="explanation-content">
+                    الهدف هون هو تحسين الصور باستخدام التقنيات الحسابية (<span class="eng-term">Computational
+                        Photography</span>)، وشوفوا هالسحر شو بعمل:
+                    <ul>
+                        <li><span class="highlight-b">Super-resolution:</span> توضيح الصور اللي دقتها ضعيفة.. شوفوا كيف
+                            صورة نمرة السيارة تحولت لبيانات واضحة نقدر نقرأها.</li>
+                        <li><span class="highlight-y">Low-light photography:</span> التصوير في الإضاءة الخافتة..
+                            الكاميرا بتعالج النويز وبتحسن الألوان عشان تطلع صورة واضحة جداً حتى لو المكان عتمة.</li>
+                        <li><span class="highlight-b">Inpainting:</span> ميزة "الممحاة السحرية".. بتمسح أي غرض من الصورة
+                            والـ <span class="eng-term">AI</span> بكمّل مكانها الخلفية بدقة خرافية ولا كأنه كان في شي.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why Study CV?</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0022.jpg" alt="Slide 22">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الطلب العالمي:</div>
+                <div class="explanation-content">
+                    كمية الصور والفيديوهات اللي بتترفع كل ثانية مهولة.. المستحيل بشرياً تحليلها، لهيك الـ <span
+                        class="eng-term">Computer Vision</span> هو أسرع مجال نمواً في سوق العمل حالياً.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Digitizing the World (OCR)</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0023.jpg" alt="Slide 23">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">رقمنة النصوص:</div>
+                <div class="explanation-content">
+                    من قراءة أرقام الشيكات لنمر السيارات، الـ <span class="eng-term">OCR</span> بختصر وقت وجهد
+                    بشري ضخم
+                    وبحول الورق لبيانات رقمية قابلة للبحث.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24-25 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Face Analysis</span>
+                <span class="slide-number">Slide 24-25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0024.jpg" alt="Slide 24">
+                <img src="CV-img/1-Introduction_page-0025.jpg" alt="Slide 25">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تحليل الوجوه والمشاعر:</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">AI</span> هسا بيقدر يتوقع عمرك، جنسك، وحتى إذا إنت مبسوط أو زعلان
+                    من
+                    ملامح وجهك بس.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26-27 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Biometrics</span>
+                <span class="slide-number">Slide 26-27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0026.jpg" alt="Slide 26">
+                <img src="CV-img/1-Introduction_page-0027.jpg" alt="Slide 27">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">سحر قزحية العين (القصة الحقيقية):</div>
+                <div class="explanation-content">
+                    قصة "شربات جولا" (الفتاة الأفغانية) هي وحدة من أقوى الأمثلة على قوة الـ <span
+                        class="eng-term">CV</span>.. بسنة 1984، تصورت صورة تاريخية بعيونها الخضراء الحادة. بعد 17 سنة من
+                    التعب والزمن اللي غيّر ملامح وجهها بالكامل، رجعوا يدوروا عليها.
+                    <br><br>
+                    لا ملامح وجهها ظلت زي ما هي، ولا حدا كان متأكد.. بس اللي ما خذلها هو الـ <span class="eng-term">Iris
+                        Scan</span>. بصمة قزحية عينها ظلت "بصمة سرية" للأبد، ولما الكمبيوتر قارن قزحية عينها بالصورة
+                    القديمة، أكد إنها هي نفسها بنسبة <span class="highlight-y">100%</span>.
+                    <br><br>
+                    <span class="highlight-b">الخلاصة:</span> وجهك ممكن يتغير مع السنين، بس عيونك بتضل الحقيقة الوحيدة
+                    اللي الكمبيوتر ما بخطئ فيها!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">FaceID</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0028.jpg" alt="Slide 28">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الدخول بدون كلمة سر (Biometric Login):</div>
+                <div class="explanation-content">
+                    التطور وصل لمرحلة إنك ما بتحتاج تحفظ كلمات سر صعبة، السلايد بيورجينا أهم طريقتين للأمان الحيوي:
+                    <ul>
+                        <li><span class="highlight-b">بصمة الإصبع (Fingerprint Scanners):</span> التقنية اللي صارت
+                            متوفرة بكل الموبايلات والأجهزة الحديثة، وبتحلل تعرجات إصبعك الفريدة عشان تفتح الجهاز بثانية.
+                        </li>
+                        <li><span class="highlight-y">بصمة الوجه (Face Unlock):</span> اللي تميزت فيها أبل بـ <span
+                                class="eng-term">iPhone X</span>، وهون الـ <span class="eng-term">FaceID</span> بيسقط 30
+                            ألف نقطة غير مرئية على وجهك عشان يبني خريطة 3D دقيقة، ويتأكد إنك الشخص الحقيقي مش مجرد صورة
+                            أو قناع.</li>
+                    </ul>
+                    <span class="highlight-b">الفكرة:</span> جسمك هو "كلمة السر" الجديدة اللي مستحيل حدا يسرقها أو
+                    يقلدها!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Nature Identification</span>
+                <span class="slide-number">Slide 29</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0029.jpg" alt="Slide 29">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">استكشاف الطبيعة:</div>
+                <div class="explanation-content">
+                    تطبيقات زي <span class="eng-term">Merlin</span> بتعرف نوع أي عصفور من صورته بس، وهذا بيتطلب
+                    دقة
+                    عالية جداً لتمييز الأنواع المتشابهة بالريش.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30-31 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Medical AI</span>
+                <span class="slide-number">Slide 30-31</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0030.jpg" alt="Slide 30">
+                <img src="CV-img/1-Introduction_page-0031.jpg" alt="Slide 31">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ثورة الطب:</div>
+                <div class="explanation-content">
+                    تحليل الأنسجة المسرطنة وتحديد أماكن الأمراض بصور الأشعة صار أدق وأسرع، والـ <span
+                        class="eng-term">AI</span> صار رفيق أساسي لأي دكتور أشعة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">State of the Art (SOTA)</span>
+                <span class="slide-number">Slide 32</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0032.jpg" alt="Slide 32">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مستوى العلم اليوم (State of the Art):</div>
+                <div class="explanation-content">
+                    كل اللي شفناه من أمثلة وتقنيات، أغلبها ما صارله 5 سنين طالع! المجال هاض بفور فوران وعم يتغير
+                    بسرعة الصاروخ، وشوفوا شو الوضع حالياً:
+                    <ul>
+                        <li><span class="highlight-y">سرعة النمو:</span> اللي بنشوفه اليوم هو مجرد البداية، والـ 5 سنين
+                            الجايين رح يشهدوا انفجار في التطبيقات الجديدة.</li>
+                        <li><span class="highlight-b">Deep Learning:</span> هو المحرك اللي معطي هاي "الذكاء" الخارق لكل
+                            أنظمة الرؤية الحديثة.</li>
+                        <li><span class="highlight-y">سوق العمل والـ Startups:</span> مئات الشركات الناشئة عم تطلع
+                            يومياً في مجالات خرافية زي:
+                            <ul>
+                                <li>الروبوتات والسيارات ذاتية القيادة (<span class="eng-term">Autonomous
+                                        Vehicles</span>).</li>
+                                <li>التشخيص الطبي وتطبيقات الـ <span class="eng-term">Medical Imaging</span>.</li>
+                                <li>فحص جودة التصنيع والواقع الافتراضي (<span class="eng-term">VR/AR</span>).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span class="highlight-b">الخلاصة:</span> إنت حرفياً عم تدرس تخصص المستقبل، والفرص فيه "ما إلها
+                    حدود"!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 33-34 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why it's Difficult?</span>
+                <span class="slide-number">Slide 33-34</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0033.jpg" alt="Slide 33">
+                <img src="CV-img/1-Introduction_page-0034.jpg" alt="Slide 34">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-content">
+                    لو سألت حالك ليش الـ <span class="eng-term">CV</span> صعب؟ الجواب هو إن الكمبيوتر بشوف بس "أرقام
+                    بكسلات".. وشوف هالعوامل كيف بتغير هاي الأرقام تماماً:
+                    <ul>
+                        <li><span class="highlight-y">Viewpoint variation:</span> زاوية التصوير بتغير شكل الغرض..
+                            السيارة من قدام غير من الجنب غير من ورا، ومع هيك لازم الـ <span class="eng-term">AI</span>
+                            يعرف إنها نفس السيارة.</li>
+                        <li><span class="highlight-b">Illumination:</span> الإضاءة بتلعب دور كبير.. الشخص نفسه بملامحه
+                            ممكن يظهر بشكل مختلف تماماً لو الإضاءة كانت جانبية أو قوية أو خافتة.</li>
+                        <li><span class="highlight-y">Scale:</span> الحجم والبعد.. الشجر أو الناس ممكن يظهروا كبار لو
+                            قريبين، أو مجرد نقط صغيرة لو بعاد، والكمبيوتر لازم يفهم هاض الفرق.</li>
+                    </ul>
+                    <span class="highlight-b">الخلاصة:</span> دماغنا البشري خارق في معالجة هاي التغيرات بالفطرة، والهدف
+                    إننا نصمم خوارزميات عندها نفس هاي القدرة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35-36 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Classical CV</span>
+                <span class="slide-number">Slide 35-36</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0035.jpg" alt="Slide 35">
+                <img src="CV-img/1-Introduction_page-0036.jpg" alt="Slide 36">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">العصر الكلاسيكي (Classical Methods):</div>
+                <div class="explanation-content">
+                    قبل ما تسيطر الـ <span class="eng-term">Deep Learning</span>، كان العلم بيعتمد على ميزات احنا
+                    بنصممها يدوياً (<span class="eng-term">Hand-crafted features</span>). شوفوا كيف كنا نشتغل:
+                    <ul>
+                        <li><span class="highlight-y">استخراج الميزات:</span> كنا ندور على الحواف (<span
+                                class="eng-term">Edges</span>) والزوايا (<span class="eng-term">Corners</span>) باستخدام
+                            خوارزميات زي <span class="eng-term">Sobel</span> و <span class="eng-term">Canny</span>.</li>
+                        <li><span class="highlight-b">خوارزمية SIFT:</span> ثورة بـ 1999، لإنها خلت الكمبيوتر يميز
+                            الأغراض حتى لو تغير حجمها أو دارت.</li>
+                        <li><span class="highlight-y">أهم التطبيقات:</span>
+                            <ul>
+                                <li><span class="eng-term">Viola-Jones (2001):</span> أول نظام حقيقي كشف الوجوه بسرعة
+                                    البرق.</li>
+                                <li><span class="eng-term">Image Stitching:</span> الطريقة الليكنا نجمع فيها الصور عشان
+                                    نطلع البانوراما.</li>
+                                <li>أنظمة الـ <span class="eng-term">OCR</span> البدائية.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span class="highlight-b">الفرق:</span> زمان كنا "نجبر" الكمبيوتر يشوف إشي معين، اليوم بالـ <span
+                        class="eng-term">AI</span> هو بيتعلم يشوف لحاله!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 37-38 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CNN Revolution</span>
+                <span class="slide-number">Slide 37-38</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="CV-img/1-Introduction_page-0037.jpg" alt="Slide 37">
+                <img src="CV-img/1-Introduction_page-0038.jpg" alt="Slide 38">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ثورة الـ CNN: البداية الحقيقية للذكاء:</div>
+                <div class="explanation-content">
+                    سنة 2012 كانت "نقطة التحول" في تاريخ البشرية والكمبيوتر.. هون بلشت ثورة الـ <span
+                        class="eng-term">Convolutional Neural Networks</span> اللي غيرت كل قواعد اللعبة:
+                    <ul>
+                        <li><span class="highlight-y">شو اللي تغير؟</span>
+                            <ul>
+                                <li>بطلنا "نهندس" الميزات يدويًا (<span class="eng-term">No more manual
+                                        engineering</span>).. الـ <span class="eng-term">CNN</span> صارت تتعلم لحالها من
+                                    البكسلات الخام.</li>
+                                <li>التسلسل الهرمي الذكي: الشبكة بتبلش تفهم الحواف البسيطة، بعدين الأشكال المتوسطة، وفي
+                                    النهاية بتعرف "الغرض" كامل (سيارة، وجه، أو كلب).</li>
+                            </ul>
+                        </li>
+                        <li><span class="highlight-b">قفزة الدقة (2012):</span>
+                            في تحدي <span class="eng-term">ImageNet</span>، الطرق الكلاسيكية كانت بتغلط بنسبة 30%، بس
+                            لما إجا <span class="eng-term">AlexNet</span>، نزل نسبة الخطأ لـ <span
+                                class="highlight-y">15%</span>! هالصدمة خلت كل العلماء يتركوا الطرق القديمة ويحولوا للـ
+                            <span class="eng-term">Deep Learning</span>.
+                        </li>
+                        <li><span class="highlight-y">انفجار التطبيقات:</span> بفضل الـ <span
+                                class="eng-term">CNN</span>، صار عندنا تطبيقات ما كنا نحلم فيها:
+                            <ul>
+                                <li><span class="eng-term">YOLO / Faster R-CNN:</span> تمييز عدة أغراض بنفس اللحظة
+                                    وبسرعة البرق.</li>
+                                <li><span class="eng-term">Autonomous driving:</span> السيارات اللي بتمشي لحالها وبتميز
+                                    المشاة والسيارات والمسارب.</li>
+                                <li><span class="eng-term">Medical AI:</span> تشخيص السرطان من صور الأشعة بدقة بتفوق
+                                    دكاترة الأشعة أحياناً.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span class="highlight-b">الخلاصة:</span> الـ <span class="eng-term">CNN</span> هي "العقل" اللي خلى
+                    الكمبيوتر مش بس يشوف، بل "يفهم" ويحلل زي البشر وأحسن!
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="../nav.js"></script>
+</body>
+
+</html>
