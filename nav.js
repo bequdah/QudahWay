@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
         menuHTML += `
             <div class="nav-header" style="font-size: 1.1rem; color: #34d399;">Computer Vision</div>
             <a href="cv-introduction.html" class="nav-link">👁️ 01. CV Introduction</a>
+            <a href="overview-image-processing.html" class="nav-link">🖼️ 02. Image Processing</a>
         `;
     }
 
