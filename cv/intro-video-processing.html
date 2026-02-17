@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Video Processing - QudahWay</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.8;
+            padding: 20px;
+            padding-bottom: 120px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(52, 211, 153, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .header h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 .qudah {
+            color: var(--primary);
+        }
+
+        .header h1 .way {
+            color: var(--accent);
+        }
+
+        .chapter-title {
+            font-size: 2rem;
+            color: var(--success);
+            margin-top: 20px;
+            font-weight: 700;
+        }
+
+        .chapter-subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+            margin-bottom: 40px;
+        }
+
+        .story-header {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-content {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        /* Slide Section */
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .slide-title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            margin-bottom: 25px;
+        }
+
+        .slide-title-bar span:first-child {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .slide-number {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .slide-image-box {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 25px;
+            border-radius: 12px;
+            border-right: 3px solid var(--success);
+        }
+
+        .explanation-header {
+            color: var(--success);
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .explanation-content {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 2;
+        }
+
+        /* Highlighting */
+        .eng-term {
+            color: var(--primary);
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-r {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        /* Detail Items */
+        .detail-item {
+            background: rgba(56, 189, 248, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-right: 3px solid var(--primary);
+        }
+
+        .detail-title {
+            color: var(--accent);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .chapter-title {
+                font-size: 1.5rem;
+            }
+
+            .slide-title-bar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .slide-title-bar span:first-child {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 15px 0; border-bottom: 1px solid rgba(51, 65, 85, 0.3);">
+            <a href="index.html"
+                style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                🏠 العودة للرئيسية
+            </a>
+            <div style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--text-muted);">
+                <a href="../index.html"
+                    style="color: var(--primary); text-decoration: none; transition: color 0.3s;">QudahWay</a>
+                <span style="margin: 0 8px; color: var(--text-muted);">/</span>
+                <a href="index.html"
+                    style="color: var(--success); text-decoration: none; transition: color 0.3s;">CV</a>
+                <span style="margin: 0 8px; color: var(--text-muted);">/</span>
+                <span style="color: var(--text-light); font-weight: 600;">Video Processing</span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <span class="qudah">Qudah</span><span class="way">Way</span>
+            </h1>
+            <div class="chapter-title">Introduction to Video Processing</div>
+            <div class="chapter-subtitle">مقدمة في معالجة الفيديو 🎬</div>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-header">
+                🎬 القصة: خداعة الحركة ("Flipbook")
+            </div>
+            <div class="story-content">
+                بتتذكروا دفتر الرسومات الصغير اللي كنا نرسم على زواياه رسمة بتمشي خطوة خطوة، ولما نفرّه بسرعة الرسمة
+                بتتحرك؟
+                <br><br>
+                هاي هي باختصار فكرة <span class="highlight-y">الفيديو الرقمي</span>!
+                <br>
+                الفيديو ما هو إلا مجموعة صور (Frames) ثابتة بتنعرض ورا بعض بسرعة، ودماغنا بتخدع ويفكرها حركة متصلة.
+                <br><br>
+                وعشان هيك، بمعالجة الفيديو (Video Processing)، إحنا فعلياً بنتعامل مع <span class="highlight-b">بعد
+                    جديد</span> انضاف
+                على الصور: <span class="eng-term">الزمن (Time)</span>. ⏳
+            </div>
+        </div>
+
+        <!-- Slides Container -->
+        <div class="slides-container">
+
+            <!-- Slide 2: What is Video? -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">What is Video? (The 3D Tensor)</span>
+                    <span class="slide-number">Slide 02</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0002.jpg" alt="What is Video Definition">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو هو الفيديو بعيون الكمبيوتر؟</div>
+                    <div class="explanation-content">
+                        الكمبيوتر ما بشوف "مشهد" بتحرك، هو بشوف <span class="highlight-y">مصفوفة ثلاثية الأبعاد</span>
+                        (3D Tensor).
+                        <br><br>
+                        <span class="highlight-b">المعادلة بسيطة:</span>
+                        <div class="detail-item">
+                            <span class="detail-title">📸 الصورة العادية (Image):</span>
+                            الارتفاع × العرض (Height × Width) ← 2D
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-title">🎥 الفيديو (Video):</span>
+                            الزمن × الارتفاع × العرض (Time × Height × Width) ← <span class="eng-term">3D or 4D
+                                Tensor</span>
+                        </div>
+                        <br>
+                        يعني كل فيديو عبارة عن <span class="eng-term">Sequence of Images</span> (سلسلة صور) الها ترتيب
+                        معين.
+                        كل صورة بهالسلسلة بنسميها <span class="highlight-b">Frame</span>، وكل ما زادت، زادت مدة الفيديو.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Frames & FPS -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Frame Rate & The Illusion of Motion</span>
+                    <span class="slide-number">Slide 03</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0003.jpg" alt="Frames and FPS">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">سرعة "الكذبة": الـ FPS</div>
+                    <div class="explanation-content">
+                        عشان دماغنا يصدق إنها حركة مش صور مقطعة، لازم نعرض الصور بسرعة معينة. ومصطلح السرعة هاذ هو:
+                        <span class="eng-term">Frame Rate (FPS)</span>.
+                        <br><br>
+                        <span class="highlight-y">🔢 شو يعني FPS؟</span><br>
+                        يعني <span class="eng-term">Frames Per Second</span> (كم صورة بتنعرض بالثانية الواحدة).
+                        <br><br>
+                        <span class="highlight-b">أمثلة من حياتنا:</span>
+                        <ul>
+                            <li>🎬 <span class="eng-term">24 fps</span>: سرعة أفلام السينما (عشان تعطي إحساس درامي).
+                            </li>
+                            <li>📺 <span class="eng-term">30 fps</span>: البرامج التلفزيونية والأخبار.</li>
+                            <li>🎮 <span class="eng-term">60 fps</span>: الألعاب والفيديوهات السريعة (SmoothMotion).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Relation to Images -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Video vs. Image Processing</span>
+                    <span class="slide-number">Slide 04</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0004.jpg"
+                        alt="Relation between Image and Video">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنعالج الفيديو؟</div>
+                    <div class="explanation-content">
+                        بما إنه الفيديو هو "مجموعة صور"، فإحنا بنقدر نطبق عليه كل شي تعلمناه في الـ Image Processing!
+                        <br><br>
+                        <span class="highlight-y">🛠️ طريقتين للمعالجة:</span>
+                        <br>
+                        <div class="detail-item">
+                            <span class="detail-title">1. المعالجة المكانية (Spatial):</span>
+                            بنعالج كل Frame لحاله كأنه صورة منفصلة (مثلاً نعمل Edge Detection لكل صورة بالفيديو).
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-title">2. المعالجة الزمانية (Temporal):</span>
+                            بندرس التغييرات بين الـ Frames (عشان نكشف <span class="highlight-b">الحركة/Motion</span>).
+                            بنشوف شو تغير بين الصورة الحالية والصورة اللي قبلها.
+                        </div>
+                        <br>
+                        <span class="highlight-b">الخلاصة:</span> الفيديو بضيف علينا بُعد <span class="eng-term">الزمن
+                            (t)</span>، وهاد البعد هو اللي بخلينا نفهم "الحركة" وتغير الإضاءة مع الوقت.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Slide 5: Video Structure -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Video Structure Components</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_3/Introduction to Video Processing_page-0005.jpg" alt="Video Structure Diagram">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مما يتكون الفيديو الرقمي؟</div>
+                <div class="explanation-content">
+                    عشان نفهم الفيديو صح، لازم نحلله لمكوناته الأساسية. أي ملف فيديو (مثل MP4) بتكون من:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="detail-title">🎞️ الإطارات (Frames):</span>
+                        هي الصور الفردية اللي بتكون الفيديو. كل وحدة لحالها هي Just an Image.
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-title">⏱️ معدل الإطارات (Frame Rate - fps):</span>
+                        هو "عداد السرعة" للفيديو. بحدد كم frame بنعرض بالثانية. كل ما زاد، صارت الحركة أنعم (Smoother).
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-title">📐 الدقة (Resolution):</span>
+                        أبعاد الصورة (الطول × العرض). مثلاً <span class="eng-term">1920×1080 (Full HD)</span>.
+                        كل ما زادت، زادت التفاصيل ووضوح الصورة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-title">⏳ المدة (Duration):</span>
+                        طول الفيديو بالوقت. بنحسبها ببساطة:
+                        <br>
+                        <span class="highlight-b">Duration = Total Frames ÷ fps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Why Video Processing Matters? -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Applications & Importance</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_3/Introduction to Video Processing_page-0006.jpg" alt="Video Processing Applications">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش مهتمين بمعالجة الفيديو؟</div>
+                <div class="explanation-content">
+                    الفيديو بعطينا شي الصور الثابتة ما بتقدر تعطيه: <span class="highlight-y">فهم الحركة والنشاط
+                        (Activity Understanding)</span>.
+                    <br><br>
+                    <span class="highlight-b">تطبيقات غيرت حياتنا:</span>
+                    <ul>
+                        <li>👮‍♂️ <span class="eng-term">Surveillance & Security:</span> كاميرات المراقبة الذكية اللي
+                            بتكشف الحرامي لحالها.</li>
+                        <li>⚽ <span class="eng-term">Sports Analytics:</span> تحليل حركة اللاعبين، التسلل (VAR)،
+                            وإحصائيات المباريات.</li>
+                        <li>🚗 <span class="eng-term">Self-driving Cars:</span> السيارة بتشوف الطريق "فيديو" عشان تعرف
+                            السيارات اللي بتمشي وتوقف.</li>
+                        <li>🏥 <span class="eng-term">Medical Analysis:</span> مناظير العمليات وتحليل حركة القلب.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Temporal Dimension -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">The Temporal Dimension (Time)</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_3/Introduction to Video Processing_page-0007.jpg" alt="Temporal Dimension and Motion">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بنكشف الحركة؟ (Motion Detection)</div>
+                <div class="explanation-content">
+                    أبسط طريقة عشان الكمبيوتر يعرف "في حركة ولا لأ" هي إنه يراقب <span class="highlight-y">التغير بالزمن
+                        (Temporal Change)</span>.
+                    <br><br>
+                    <span class="eng-term">الفكرة العبقرية البسيطة:</span>
+                    <br>
+                    إذا صورتين ورا بعض (Frame t و Frame t+1) ولقتهم <span class="highlight-b">نفس الشي بالضبط</span>،
+                    معناها فش حركة "سكون".
+                    <br>
+                    بس إذا <span class="highlight-r">طرحت</span> الصورة الجديدة من القديمة وطلع فيه فرق، معناها في شي
+                    تحرك!
+                    <br><br>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid var(--primary); direction: ltr;">
+                        <span class="eng-term" style="font-size: 1.3rem; font-family: 'Inter', sans-serif;">D(x,y) = |
+                            I(x,y, t+1) - I(x,y, t) |</span>
+                        <br><br>
+                        <span style="font-size: 0.95rem; color: var(--text-muted); direction: rtl; display: block;">
+                            المناطق المضيئة (Bright Areas) في ناتج الطرح (D) بتعني وجود <span
+                                class="highlight-y">حركة</span>.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Frame Differencing -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Frame Differencing</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_3/Introduction to Video Processing_page-0008.jpg" alt="Frame Differencing Example">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو بكشف الفرق بين صورتين؟</div>
+                <div class="explanation-content">
+                    لما نطرح صورتين من بعض (Frame Differencing)، بنعرف <span class="highlight-y">"إيش اللي تغير"</span>
+                    بس ما بنعرف:
+                    <br><br>
+                    <ul>
+                        <li>❌ <span class="highlight-r">اتجاه الحركة (Direction):</span> ما بنعرف إذا السيارة رايحة يمين
+                            ولا يسار.</li>
+                        <li>❌ <span class="highlight-r">سرعة الحركة (Speed):</span> ما بنعرف قديش هي سريعة.</li>
+                    </ul>
+                    Mask</span> (أبيض وأسود) بحدد أماكن الحركة فقط، بس بدون تفاصيل.
+
+                    <!-- Interactive Demo -->
+                    <div
+                        style="margin-top: 30px; background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.3);">
+                        <div
+                            style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 20px; direction: ltr;">
+
+                            <!-- 1. Original Frame (Current) -->
+                            <div style="text-align: center;">
+                                <div
+                                    style="margin-bottom: 5px; color: var(--primary); font-weight: bold; font-size: 0.9rem;">
+                                    1. Current Frame (t)</div>
+                                <canvas id="canvasOriginal" width="180" height="120"
+                                    style="border: 2px solid var(--primary); border-radius: 8px; background: #333;"></canvas>
+                            </div>
+
+                            <!-- Minus -->
+                            <div style="color: var(--danger); font-size: 2rem; font-weight: bold;">
+                                -</div>
+
+                            <!-- 2. Previous Frame -->
+                            <div style="text-align: center;">
+                                <div style="margin-bottom: 5px; color: var(--text-muted); font-size: 0.9rem;">2.
+                                    Previous Frame (t-1)</div>
+                                <canvas id="canvasPrev" width="180" height="120"
+                                    style="border: 2px solid var(--text-muted); border-radius: 8px; background: #333;"></canvas>
+                            </div>
+
+                            <!-- Equals -->
+                            <div style="color: var(--success); font-size: 2rem; font-weight: bold;">
+                                =</div>
+
+                            <!-- 3. Difference Result -->
+                            <div style="text-align: center;">
+                                <div
+                                    style="margin-bottom: 5px; color: var(--success); font-weight: bold; font-size: 0.9rem;">
+                                    3. Motion Mask</div>
+                                <canvas id="canvasDiff" width="180" height="120"
+                                    style="border: 2px dashed var(--success); border-radius: 8px; background: #000;"></canvas>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <p
+                                style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px;">
+                                <span style="font-size: 1.2rem;">💡 تحليل النتيجة:</span><br>
+                                <span style="color: var(--success); font-weight: bold;">المربع الأبيض:</span> هو المنطقة
+                                اللي تغيرت فيها البكسلات (الحركة).<br>
+                                <span style="color: #555; font-weight: bold;">اللون الأسود:</span> هو الخلفية الثابتة
+                                (الشارع) اللي ما تغيرت.
+                            </p>
+                            <button onclick="toggleSimulation()" id="simBtn"
+                                style="background: var(--primary); color: #000; border: none; padding: 10px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: transform 0.2s;"
+                                onmouseover="this.style.transform='scale(1.05)'"
+                                onmouseout="this.style.transform='scale(1)'">
+                                ▶️ شغل المحاكاة
+                            </button>
+                        </div>
+                    </div>
+
+                    <script>
+                        let isRunning = false;
+                        let carX = 20;
+                        let prevCarX = 20; // Track previous position explicitly
+                        let animationId;
+
+                        function toggleSimulation() {
+                            const btn = document.getElementById('simBtn');
+                            if (isRunning) {
+                                isRunning = false;
+                                cancelAnimationFrame(animationId);
+                                btn.innerHTML = "▶️ شغل المحاكاة";
+                                btn.style.background = "var(--primary)";
+                            } else {
+                                isRunning = true;
+                                carX = 20; // Reset car position when starting
+                                prevCarX = 20; // Reset previous car position
+                                animate();
+                                btn.innerHTML = "⏸️ وقف المحاكاة";
+                                btn.style.background = "var(--danger)";
+                            }
+                        }
+
+                        function drawScene(ctx, x, isPrev) {
+                            // Clear
+                            ctx.fillStyle = "#333";
+                            ctx.fillRect(0, 0, 180, 120);
+
+                            // Road Lines (Static)
+                            ctx.fillStyle = "#fff";
+                            for (let i = 10; i < 180; i += 40) {
+                                ctx.fillRect(i, 60, 20, 4);
+                            }
+
+                            // Car
+                            if (isPrev) {
+                                ctx.fillStyle = "rgba(239, 68, 68, 0.5)"; // Faded Red
+                            } else {
+                                ctx.fillStyle = "#ef4444"; // Bright Red
+                            }
+
+                            ctx.fillRect(x, 45, 40, 30);
+                        }
+
+                        function animate() {
+                            if (!isRunning) return;
+
+                            const canvasOrig = document.getElementById('canvasOriginal');
+                            const ctxOrig = canvasOrig.getContext('2d');
+                            const canvasPrev = document.getElementById('canvasPrev');
+                            const ctxPrev = canvasPrev.getContext('2d');
+                            const canvasDiff = document.getElementById('canvasDiff');
+                            const ctxDiff = canvasDiff.getContext('2d');
+
+                            // 1. Draw Previous Frame (Car at old position)
+                            drawScene(ctxPrev, prevCarX, true);
+
+                            // 2. Draw Current Frame (Car at new position)
+                            drawScene(ctxOrig, carX, false);
+
+                            // 3. Get Data for Difference
+                            const frame1 = ctxOrig.getImageData(0, 0, 180, 120);
+                            const frame2 = ctxPrev.getImageData(0, 0, 180, 120);
+                            const diff = ctxDiff.createImageData(180, 120);
+
+                            for (let i = 0; i < frame1.data.length; i += 4) {
+                                // Simple grayscale difference
+                                let r = Math.abs(frame1.data[i] - frame2.data[i]);
+                                let g = Math.abs(frame1.data[i + 1] - frame2.data[i + 1]);
+                                let b = Math.abs(frame1.data[i + 2] - frame2.data[i + 2]);
+
+                                let totalDiff = r + g + b;
+
+                                // Make it purely black/white for clarity
+                                let val = totalDiff > 30 ? 255 : 0;
+
+                                diff.data[i] = val;
+                                diff.data[i + 1] = val;
+                                diff.data[i + 2] = val;
+                                diff.data[i + 3] = 255;
+                            }
+
+                            ctxDiff.putImageData(diff, 0, 0);
+
+                            // Update positions for next loop
+                            prevCarX = carX; // Store current as previous
+
+                            // Increase speed significantly to show clear difference (was 2)
+                            carX += 25;      // Move current forward faster!
+
+                            if (carX > 200) {
+                                carX = -40;
+                                prevCarX = -65; // Adjust previous off-screen too
+                            }
+
+                            // Slow down animation loop slightly so it's not too fast to see
+                            setTimeout(() => {
+                                animationId = requestAnimationFrame(animate);
+                            }, 500); // 2 frames per second (slow motion feeling)
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Ways to Represent Motion</span>
+                    <span class="slide-number">Slide 09</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0009.jpg" alt="Motion Representation Types">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنمثل الحركة بالكمبيوتر؟</div>
+                    <div class="explanation-content">
+                        عشان الكمبيوتر يفهم الحركة ويخزنها، بنستخدم عدة طرق:
+                        <br><br>
+                        <div class="detail-item">
+                            <span class="detail-title">1. Binary Masks (أقنعة ثنائية):</span>
+                            صورة فيها بس (أبيض وأسود) زي ما شفنا قبل شوي. بتجاوب بس: "في حركة هون ولا لأ".
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-title">2. Vectors (متجهات):</span>
+                            (أهم وحدة) لكل بكسل، بنحدد <span class="highlight-y">اتجاه</span> و <span
+                                class="highlight-b">مقدار</span> الحركة.
+                            زي الأسهم اللي بالصورة (Optical Flow). ↗️
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-title">3. Trajectories (مسارات):</span>
+                            رسم خط بيمثل "رحلة" الجسم من بداية الفيديو لنهايته. مفيد في تتبع اللاعبين أو السيارات
+                            (Tracking).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Motion Estimation -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Motion Estimation (Block Matching)</span>
+                    <span class="slide-number">Slide 10</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0010.jpg"
+                        alt="Motion Estimation Block Matching">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنعرف "وين راحت" السيارة؟</div>
+                    <div class="explanation-content">
+                        عملية <span class="eng-term">Motion Estimation</span> هي محاولة لإيجاد "نسخة" من جزء معين
+                        بالصورة
+                        القديمة، داخل الصورة الجديدة.
+                        <br><br>
+                        <span class="highlight-y">أشهر طريقة: Block Matching</span>
+                        <br>
+                        بدل ما ندور بكسل بكسل (كثير بطيء)، بنقسم الصورة لمربعات (Blocks).
+                        <br>
+                        مثلاً، بناخد مربع فيه "سيارة حمراء" بالصورة الأولى، وبندور عليه بالصورة الثانية بمنطقة قريبة.
+                        <br><br>
+                        المسافة اللي تحركها المربع بتعطينا <span class="eng-term">Motion Vector</span> (متجه الحركة).
+                        📏📍
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Motion Estimation (Visual) -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Motion Estimation in Action</span>
+                    <span class="slide-number">Slide 11</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0011.jpg"
+                        alt="Motion Estimation Drone Example">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مثال عملي (Drone)</div>
+                    <div class="explanation-content">
+                        هاذ مثال حقيقي لعملية Motion Estimation.
+                        الدرون (Drone) بتتحرك، والكاميرا بتصور. الكمبيوتر بحاول يلاحق الجسم المتحرك (الدرون) من فريم
+                        لفريم.
+                        <br><br>
+                        <span class="highlight-b">لاحظ:</span> الخلفية كمان ممكن تتحرك إذا الكاميرا نفسها بتتحرك! عشان
+                        هيك
+                        الموضوع بكون أصعب من مجرد طرح صورتين.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: What is a Motion Vector? -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">What is a Motion Vector?</span>
+                    <span class="slide-number">Slide 12</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0012.jpg" alt="Motion Vector Definition">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو هو "متجه الحركة" (MV)؟</div>
+                    <div class="explanation-content">
+                        ببساطة، هو سهم بحكيلك: "هاض المربع من الصورة وين راح؟".
+                        <br><br>
+                        <span class="eng-term">Motion Vector (MV)</span> = الإزاحة (Displacement) لمربع من البكسل
+                        (Block) بين فريم وفريم.
+                        <br><br>
+                        <div
+                            style="background: rgba(56, 189, 248, 0.1); padding: 10px; border-radius: 8px; border: 1px dashed var(--primary); direction: ltr; text-align: center;">
+                            <span class="eng-term" style="font-weight: bold;">Example:</span><br>
+                            إذا المربع تحرك <span class="highlight-b">5 خطوات يمين</span> و <span class="highlight-y">3
+                                خطوات تحت</span>.<br>
+                            <span class="eng-term" style="font-size: 1.2rem;">MV = (Δx, Δy) = (5, 3)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Motion Vector Properties -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Motion Vector Properties</span>
+                    <span class="slide-number">Slide 13</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0013.jpg" alt="Motion Vector Computation">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنحسبه؟</div>
+                    <div class="explanation-content">
+                        <ul>
+                            <li>🧱 <span class="highlight-y">بلكات (Blocks):</span> بنحسبه لكل مربع (مثلاً 16x16 بكسل)
+                                مش لكل نقطة عشان يكون أسرع.</li>
+                            <li>🚗 <span class="highlight-b">حركة محلية (Local Motion):</span> بيمثل حركة أجزاء محددة
+                                (سيارة، إيد بتلوح 👋).</li>
+                            <li>📦 <span class="highlight-r">مهم للضغط (Compression):</span> بدل ما نبعث الصورة الجديدة
+                                كاملة، بنبعث بس الـ MV + الفروقات الصغيرة. (هيك Netflix بيشتغل!).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Global Motion Vector -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Global Motion Vector (GMV)</span>
+                    <span class="slide-number">Slide 14</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0014.jpg" alt="Global Motion Vector">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">حركة الكاميرا vs حركة الأجسام </div>
+                    <div class="explanation-content">
+                        في نوعين من الحركة بالفيديو:
+                        <br><br>
+                        <ol>
+                            <li>🚗 <span class="highlight-y">Local Motion:</span> جسم لحاله بتحرك (سيارة، لاعب).</li>
+                            <li>🌍 <span class="highlight-r">Global Motion (GMV):</span> <strong>كل المشهد
+                                    بتحرك</strong> لأن الكاميرا نفسها تحركت!</li>
+                        </ol>
+                        <br>
+                        <span class="eng-term">Global Motion Vector (GMV)</span>
+                        هو المتجه اللي بيمثل حركة الكاميرا، والكل بكون بيلحقوا:
+                        <ul>
+                            <li><span class="highlight-b">Pan:</span> الكاميرا بتلف يمين/يسار (الكل بتحرك عكس الاتجاه).
+                            </li>
+                            <li><span class="highlight-b">Tilt:</span> الكاميرا بتطلع فوق/تحت.</li>
+                            <li><span class="highlight-b">Zoom:</span> الكاميرا بتقرب/بتبعد (الكل بكبر أو بصغر).</li>
+                        </ul>
+                        <div style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">
+                            💡 <strong>NOTE:</strong> عشان نكشف الحركة "الحقيقية" لأي جسم، لازم أول شي <span
+                                class="highlight-r">نطرح (Subtract)</span> حركة الكاميرا (GMV) من المشهد.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Why Estimate Motion? -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Why Estimate Motion?</span>
+                    <span class="slide-number">Slide 15</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0015.jpg" alt="Why Estimate Motion">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش وجعة الراس هاي كلها؟</div>
+                    <div class="explanation-content">
+                        مش بس عشان نلحق حرامي! معرفة الحركة بتفيدنا بـ:
+                        <br><br>
+                        <ol>
+                            <li>🕵️‍♂️ <span class="highlight-y">تحليل السلوك (Behavior):</span> فهم شو قاعد بصير
+                                بالفيديو
+                                (شخص بركض، سيارة بتخالف).</li>
+                            <li>🔮 <span class="highlight-b">التوقع (Prediction):</span> معرفة وين الجسم رح يكون بالفريم
+                                الجاي (مهم للسيارات الذكية).</li>
+                            <li>💾 <span class="highlight-r">الضغط (Compression):</span> أهم اشي! توفير حجم الفيديو بشكل
+                                خرافي عن طريق تسجيل الحركة بدل الصور الكاملة.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16: Efficient Video Compression -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Efficient Video Compression</span>
+                    <span class="slide-number">Slide 16</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0016.jpg" alt="Video Compression">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف نضغط الفيديو؟</div>
+                    <div class="explanation-content">
+                        ملفات الفيديو ضخمة جداً! تخيل لو بدنا نخزن كل فريم كصورة كاملة، الهارد ديسك بتعبى بدقايق.
+                        <br><br>
+                        <span class="eng-term">Motion Estimation</span> هو الحل السحري المستخدم في <span
+                            class="highlight-y">MPEG, H.264, HEVC</span>.
+                        <br><br>
+                        <span class="highlight-b">كيف بشتغل؟</span>
+                        <ul>
+                            <li>بدل ما نخزن كل فريم كامل، بنخزن <span class="eng-term">Keyframes</span> (فريمات رئيسية
+                                كاملة).</li>
+                            <li>للفريمات اللي بينهم، بنخزن بس <span class="eng-term">Motion Difference / Delta
+                                    Frames</span> (الاختلافات والحركة).</li>
+                        </ul>
+                        <div style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">
+                            💡 يعني: "الفريم الجاي هو زي الفريم الماضي بس حرك السيارة لليمين شوي". هيك وفرنا داتا كثير!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 17: Object Tracking and Activity Recognition -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Object Tracking & Activity Recognition</span>
+                    <span class="slide-number">Slide 17</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0017.jpg" alt="Object Tracking">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ملاحقة الأجسام والأنشطة 🏃‍♂️</div>
+                    <div class="explanation-content">
+                        من خلال تقدير الحركة، بنقدر نتبع حركة الأشخاص، السيارات، أو أي شي بتحرك عبر الفريمات.
+                        <br><br>
+                        <span class="highlight-b">تطبيقات مهمة:</span>
+                        <ul>
+                            <li>📹 <span class="highlight-y">أنظمة المراقبة (Surveillance):</span> كشف المتسللين أو تتبع
+                                شخص مشبوه.</li>
+                            <li>⚽ <span class="highlight-r">تحليل الرياضة (Sports Analytics):</span> تتبع اللاعبين
+                                والكرة لتحليل الأداء والخطط.</li>
+                            <li> <span class="highlight-b">المدن الذكية (Smart Cities):</span> مراقبة حركة المرور
+                                والازدحام.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 18: Understanding Human Actions -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Understanding Human Actions</span>
+                    <span class="slide-number">Slide 18</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0018.jpg" alt="Human Actions">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">فهم الحركات البشرية 🙌</div>
+                    <div class="explanation-content">
+                        الصور الثابتة ما بتعطينا القصة كاملة. الحركة هي اللي بتفهمنا "شو قاعد بصير".
+                        <br><br>
+                        <span class="highlight-b">أمثلة:</span>
+                        <ul>
+                            <li>🗣️ <span class="highlight-y">لغة الإشارة (Sign Language):</span> ترجمة حركات اليد
+                                لكلام.</li>
+                            <li>🚑 <span class="highlight-r">كشف السقوط (Fall Detection):</span> مهم جداً لكبار السن،
+                                النظام بنبه إذا اكتشف حركة سقوط مفاجئة.</li>
+                            <li>🎮 <span class="highlight-b">AR/VR Control:</span> التحكم بالألعاب والواقع الافتراضي
+                                بحركة الجسم.</li>
+                        </ul>
+                        <div style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">
+                            "بدون حركة، السيستم بشوف صور منفصلة. مع الحركة، بفهم النية (Intent)."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 19: Autonomous Driving and Robotics -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Autonomous Driving & Robotics</span>
+                    <span class="slide-number">Slide 19</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0019.jpg" alt="Autonomous Driving">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">السيارات ذاتية القيادة 🚗🤖</div>
+                    <div class="explanation-content">
+                        السيارة لازم تفهم محيطها عشان ما تعمل حوادث. تقدير الحركة أساسي لـ:
+                        <br><br>
+                        <ul>
+                            <li>🚶‍♂️ <span class="highlight-y">توقع المشاة (Pedestrian Prediction):</span> "هاض الشخص
+                                رح يقطع الشارع ولا واقف؟".</li>
+                            <li>🚙 <span class="highlight-b">تتبع المركبات (Vehicle Tracking):</span> معرفة سرعة واتجاه
+                                السيارات اللي حواليها.</li>
+                            <li>🌊 <span class="highlight-r">فهم تدفق المشهد (Scene Flow):</span> فهم كيف العالم بتحرك
+                                بالنسبة للسيارة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 20: Other Applications -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Other Applications</span>
+                    <span class="slide-number">Slide 20</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0020.jpg" alt="Other Applications">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تطبيقات أخرى 🌍✨</div>
+                    <div class="explanation-content">
+                        الموضوع ما بخلص هون! في مجالات ثانية بتعتمد عالحركة:
+                        <br><br>
+                        <ul>
+                            <li>🏥 <span class="highlight-y">التصوير الطبي (Medical Imaging):</span> تحليل حركة القلب أو
+                                تدفق الدم.</li>
+                            <li>🎬 <span class="highlight-b">المؤثرات البصرية (VFX/AR):</span> دمج شخصيات خيالية بفيديو
+                                حقيقي بشكل واقعي.</li>
+                            <li>🏗️ <span class="highlight-r">إعادة بناء 3D (3D Reconstruction):</span> بناء مجسمات
+                                ثلاثية الأبعاد من فيديو.</li>
+                            <li>📷 <span class="highlight-b">تثبيت الفيديو (Stabilization):</span> إلغاء الاهتزاز من
+                                تصوير التلفون.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 21: Motion Estimation Techniques -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Motion Estimation Techniques</span>
+                    <span class="slide-number">Slide 21</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0021.jpg" alt="Motion Estimation Techniques">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنحسب الحركة؟ 📏</div>
+                    <div class="explanation-content">
+                        في طريقتين رئيسيات لتقدير الحركة:
+                        <br><br>
+                        <ol>
+                            <li>🔎 <span class="highlight-b">Pixel-based (Optical Flow):</span>
+                                <br>بتحسب متجه حركة لكل <span class="eng-term">نقطة (Pixel)</span> بالفريم.
+                                <br><span class="highlight-g">الميزة:</span> دقيقة جداً. <span
+                                    class="highlight-r">العيب:</span> بطيئة جداً وحساباتها معقدة.
+                            </li>
+                            <br>
+                            <li>🧱 <span class="highlight-y">Block-based (Block Matching):</span>
+                                <br>بتقسم الصورة لمربعات (Blocks) وبتحسب متجه واحد لكل مربع.
+                                <br><span class="highlight-g">الميزة:</span> أسرع بكثير ومستخدمة في كل برامج ضغط
+                                الفيديو.
+                            </li>
+                        </ol>
+                        <div
+                            style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                            📌 <strong>NOTE:</strong> تقنيات <span class="eng-term">Block Matching</span> هي الأكثر
+                            استخداماً، وأقدم وأبسط خوارزمية منها هي <span class="highlight-r">Exhaustive Block Matching
+                                (EBM)</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 22: Exhaustive Block Matching (EBM) -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Exhaustive Block Matching (EBM)</span>
+                    <span class="slide-number">Slide 22</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0022.jpg" alt="Exhaustive Block Matching">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">البحث الشامل (Full Search / EBM) 🕵️‍♂️</div>
+                    <div class="explanation-content">
+                        هاي الطريقة بتعتمد مبدأ <span class="eng-term">Full Search</span> أو Brute Force.
+                        <br><br>
+                        <span class="highlight-b">الآلية:</span>
+                        بناخد الـ Block من الفريم الحالي، وبنقارنه مع <span class="highlight-r">كل بلوك ممكن</span> داخل
+                        منطقة البحث (Search Window) في الفريم السابق.
+                        <br><br>
+                        <span class="highlight-y">النتيجة:</span>
+                        <ul>
+                            <li>✅ <span class="highlight-g">الدقة (Accuracy):</span> بتعطينا <span class="eng-term">Best
+                                    Match</span> 100% لأننا جربنا كل الاحتمالات.</li>
+                            <li>❌ <span class="highlight-r">السرعة (Computation):</span> مكلفة جداً وبطيئة
+                                (Computationally Expensive)، وما بتنفع للتطبيقات المباشرة (Real-time).</li>
+                        </ul>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                            💡 <strong>ملاحظة:</strong> بنستخدم معادلة <span class="eng-term">SAD (Sum of Absolute
+                                Differences)</span> عشان نقيس الفرق بين البلوكات ونختار الأقل فرقاً.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 23: Fast Search Algorithms -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Fast Search Algorithms</span>
+                    <span class="slide-number">Slide 23</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0023.jpg" alt="Fast Search Algorithms">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الحل الذكي: البحث السريع ⚡</div>
+                    <div class="explanation-content">
+                        بدل ما ندور في كل نقطة، خلينا ندور في نقاط محددة ونخمن وين الحركة راحت.
+                        <br><br>
+                        <span class="eng-term">Fast Search</span> بستخدم عدد قليل من النقاط (مثل الرسمة) عشان يوصل للحل
+                        بسرعة.
+                        <br><br>
+                        <span class="highlight-b">الفكرة:</span>
+                        <br>
+                        افحص المركز وحواليه -> شوف وين أفضل تطابق -> انتقل لغاد وافحص كمان مرة. (زي لعبة "حامي بارد").
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 24: Challenges of Fast Search -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Challenges of Fast Search</span>
+                    <span class="slide-number">Slide 24</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0024.jpg" alt="Challenges">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مشاكل البحث السريع ⚠️</div>
+                    <div class="explanation-content">
+                        السرعة إلها ثمن! 💸
+                        <br><br>
+                        <ol>
+                            <li>📉 <span class="highlight-r">دقة أقل (Local Minima):</span> ممكن يخدعنا ويلاقي تطابق
+                                "مليح" بس مش "الأفضل" لأنه ما فحص كل مكان.</li>
+                            <li>💡 <span class="highlight-y">تغير الإضاءة (Luminance Change):</span> هاض أكبر كابوس!
+                                <br>
+                                إذا الإضاءة تغيرت بالفيديو، قيم البكسلات رح تتغير، فالخوارزمية رح تفكر إنه "الجسم اختلف"
+                                وما رح تلاقيه، حتى لو هو نفسه!
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 25: The Solution -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">The Solution?</span>
+                    <span class="slide-number">Slide 25</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0025.jpg" alt="Solution">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو الحل لمشكلة الإضاءة؟ 💡🛠️</div>
+                    <div class="explanation-content">
+                        عشان نحل مشكلة تغير الإضاءة والبحث السريع، لازم ما نعتمد بس على "لون البكسل".
+                        <br><br>
+                        <span class="highlight-b">الحل المقترح:</span>
+                        <br>
+                        لازم نلاقي <span class="eng-term">Feature (ميزة)</span> ثابتة ما بتتغير لما تتغير الإضاءة.
+                        <br>
+                        (يعني بدل ما أقول "دور على مربع لونه أحمر"، بقول "دور على مربع فيه زاوية حادة"، لأن الزاوية بتضل
+                        زاوية حتى لو الدنيا ليل!).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 26: Use Edges as Features -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Use Edges as Features</span>
+                    <span class="slide-number">Slide 26</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0026.jpg" alt="Edges as Features">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش "الحواف" (Edges) هي الحل؟</div>
+                    <div class="explanation-content">
+                        الحواف (Edges) هي الملامح الهيكلية للصورة، وهي أقوى بكثير من الألوان.
+                        <br><br>
+                        <span class="highlight-b">السحر في الحواف:</span>
+                        <ul>
+                            <li>🛡️ <span class="highlight-y">مش حساسة للإضاءة:</span> حافة الطاولة بتضل "خط مستقيم"
+                                سواء في ضوء قوي أو عتمة.</li>
+                            <li>🏗️ <span class="highlight-g">ثابتة هندسياً:</span> بتعطينا شكل الجسم الحقيقي.</li>
+                        </ul>
+                        <br>
+                        لهيك، بدل ما نقارن ألوان، بنقارن <span class="eng-term">Edge Maps</span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 27: Finding the Matched Block -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Finding the Matched Block</span>
+                    <span class="slide-number">Slide 27</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0027.jpg" alt="Matching Blocks">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تحليل الصورة: 0 vs 1 🔢</div>
+                    <div class="explanation-content">
+                        هاي الصورة بتشرح كيف الخوارزمية "بتفكر" لما تستخدم الحواف:
+                        <br><br>
+                        <ul>
+                            <li>⬜ <span class="highlight-b">الرقم 1 (الأبيض):</span> بيمثل الحواف (Edges) اللي رسمت
+                                <span class="highlight-y">الشكل الهندسي</span>.
+                            </li>
+                            <li>⬛ <span class="highlight-b">الرقم 0 (الأسود):</span> الخلفية اللي ما بتهمنا.</li>
+                        </ul>
+                        <br>
+                        <span class="highlight-r">شو قصة المربعات الحمراء؟ 🟥</span>
+                        <br>
+                        هاي "أخطاء" أو بكسلات مفقودة في الفريم الثاني. لو بنقارن ألوان، كان فشل التطابق!
+                        بس لأننا بنقارن <span class="eng-term">Structure (هيكل)</span>، الخوارزمية لسا شايفة "الشكل"
+                        بوضوح، فبتعطينا <strong>Match ناجح!</strong> ✅
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 28: Discarding Black Blocks -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Discarding Black Blocks</span>
+                    <span class="slide-number">Slide 28</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0028.jpg" alt="Optimization">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">إرمي اللي ما بيلزمك! �️</div>
+                    <div class="explanation-content">
+                        الفكرة بسيطة: ليش أضيع وقت المعالج في مقارنة مربعات "سوداء" (فارغة)؟
+                        <br><br>
+                        <span class="highlight-b">الفرق بين الصورتين:</span>
+                        <ul>
+                            <li>⬛ <span class="highlight-r">صورة (a):</span> بلوك شبه فارغ (كله أسود 0). هاض ما فيه أي
+                                "Feature" مميزة، فبنعمله <span class="eng-term">Discard (إهمال)</span> فوراً.</li>
+                            <li>⬜ <span class="highlight-g">صورة (b):</span> بلوك مليان تفاصيل وحواف (1s). هاض بنحتفظ
+                                فيه وبستخدمه للبحث عن الحركة.</li>
+                        </ul>
+                        <div style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">
+                            💡 <strong>الخلاصة:</strong> "اذا ما فيه حواف، ما فيه داعي نتعب حالنا بالبحث عنه!"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 29: Video Stabilization -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Video Stabilization</span>
+                    <span class="slide-number">Slide 29</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_3/Introduction to Video Processing_page-0029.jpg" alt="Video Stabilization">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ختامها مسك: تثبيت الفيديو (Video Stabilization) </div>
+                    <div class="explanation-content">
+                        كيف تلفونك بحول فيديو "مهزوز" لفيديو "ناعم" وثابت (Smooth & Steady)؟
+                        <br><br>
+                        السر كله في <span class="eng-term">Global Motion Vectors (GMVs)</span>.
+                        <br>
+                        بما إن الـ GMV بقيس حركة الكاميرا نفسها (الاهتزاز)، الخوارزمية بتعمل خطوتين:
+                        <ol>
+                            <li>🕵️‍♂️ <strong>كشف الحركة:</strong> بتحسب الـ GMV (كم بكسل تحركت الكاميرا وبأي اتجاه؟).
+                            </li>
+                            <li>🛠️ <strong>تعويض الحركة (Motion Compensation):</strong> بتحرك الفريم <span
+                                    class="highlight-r">عكس</span> اتجاه الاهتزاز بالضبط.</li>
+                        </ol>
+                        <br>
+                        <div
+                            style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 10px; border-right: 4px solid var(--accent-color);">
+                            📝 <span class="highlight-y">مثال عملي:</span>
+                            <br>
+                            تخيل إنك بتصور وانت بتركض 🏃‍♂️، وايدك رجفت وزاحت الكاميرا لليمين <span class="eng-term">➡️
+                                10px</span>.
+                            <br>
+                            البرنامج فوراً بمسك الفريم وبزيحه لليسار <span class="eng-term">⬅️ 10px</span>.
+                            <br>
+                            <strong>النتيجة:</strong> <span dir="ltr">+10</span> <span
+                                style="font-weight: bold; color: var(--accent-color);">AND</span> <span
+                                dir="ltr">-10</span> بيلغوا
+                            بعض، والمشهد بضل ثابت بمكانه.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="../nav.js"></script>
+</body>
+
+</html>
