@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Semantic Segmentation</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <!-- MathJax for Formula Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            /* Light Blue */
+            --accent: #facc15;
+            /* Yellow */
+            --success: #34d399;
+            /* Green */
+            --danger: #fb7185;
+            /* Red */
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        /* Slide Card System */
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-r {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-g {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Quiz & Lab Styles */
+        .quiz-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .quiz-header {
+            color: var(--success);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-button {
+            background: var(--success);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .quiz-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.3);
+        }
+
+        .answer-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(56, 189, 248, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(56, 189, 248, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(56, 189, 248, 0.08)'; this.style.transform='translateY(0)'">
+                    🏠 العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.9rem;">
+                    QudahWay / CV / Semantic Segmentation
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> CV</h1>
+            <p class="subtitle">Semantic Segmentation | التجزئة الدلالية</p>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-title">🎬 القصة: كيف الكمبيوتر بفهم "كل بكسل" لمين برجع؟</div>
+            <div class="story-content">
+                تخيل حالك بتطلع على صورة شارع.. أنت مش بس شايف "سيارة" و "شجر" و "رصيف"، أنت قاعد بتشوف حدود كل إشي
+                بالظبط.
+                <br><br>
+                في الـ <span class="eng-term">Semantic Segmentation</span>، إحنا ما بنكتفي بوضع صندوق (Box) حول الصورة،
+                إحنا بنسأل كل بكسل: <span class="highlight-y">صاحبي، أنت لمين تابع؟</span>
+            </div>
+        </div>
+
+        <!-- Section 1: Task Comparison -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 02</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">CV Tasks Comparison</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_5/Semantic Segmentation_page-0002.jpg" alt="CV Tasks Comparison">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مقارنة بين مهام رؤية الحاسوب</div>
+                <div class="explanation-content">
+                    عشان نفهم الـ <span class="eng-term">Semantic Segmentation</span> صح، لازم نشوف شو بفرق عن غيره:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">Classification:</span> بس بحكيلك شو في بالصورة (مثلاً: "في بقرة").
+                        </li>
+                        <li><span class="highlight-b">Semantic Segmentation:</span> بلون كل بكسل حسب صنفه، بس ما بفرق
+                            بين بقرة وبقرة ثانية (كلهم بعتبرهم "بقر").</li>
+                        <li><span class="highlight-y">Object Detection:</span> برسم مربع حول كل بقرة وبميزهم عن بعض بـ
+                            <span class="eng-term">Bounding Box</span>.
+                        </li>
+                        <li><span class="highlight-b">Instance Segmentation:</span> هاض الأقوى؛ بلون كل بكسل وبميز كل
+                            "جسم" لحاله (بقرة رقم 1 غير عن بقرة رقم 2).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Definition -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 03</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Definition</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_5/Semantic Segmentation_page-0003.jpg" alt="Semantic Segmentation Definition">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني تجزئة دلالية؟</div>
+                <div class="explanation-content">
+                    ببساطة، إحنا بدنا نعطي <span class="highlight-y">تصنيف لكل بكسل</span> في الصورة. المخرج تبعنا بكون
+                    صورة بنفس حجم المدخل، بس كل بكسل فيها اله قيمة بتمثل الصنف تبعه (شجر، طريق، سماء، إلخ).
+                    <br><br>
+                    <span class="highlight-r">ملاحظة مهمة:</span> إحنا ما بنهتم بـ "عدد" الأشياء، بنهتم بس بـ "نوع"
+                    المادة أو الجسم اللي بمثله البكسل.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Sliding Window -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 04 - 06</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">The Naive Approach</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_5/Semantic Segmentation_page-0004.jpg" alt="Sliding Window">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المحاولة الأولى: فكرة الـ Sliding Window</div>
+                <div class="explanation-content">
+                    فكروا زمان إنهم يحلوا المشكلة بطريقة بدائية:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li>بنمشي على الصورة <span class="highlight-b">مربع صغير (Patch)</span> ورا الثاني.</li>
+                        <li>بندخل هاض المربع على شبكة تصنيف عادية عشان نعرف شو الصنف تبع "البكسل اللي بالنص".</li>
+                    </ul>
+                    <br>
+                    <span class="highlight-r">ليش هاي الطريقة فاشلة؟</span>
+                    لأنها <span class="highlight-y">بطيئة جداً</span>! تخيل تقعد تعيد الـ <span
+                        class="eng-term">Convolution</span> لكل بكسل في الصورة.. الحسابات رح تكون هائلة وغير منطقية.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: FCN -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 09</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Fully Convolutional Networks (FCN)</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0009.jpg" alt="FCN Architecture and Problems">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الثورة: Fully Convolutional Networks (FCNs)</div>
+                <div class="explanation-content">
+                    بدل ما نقصقص الصورة لمربعات صغيرة (Patches) ونتغلب ببطء الـ Sliding Window، إجا الحل العبقري: <span
+                        class="highlight-g">ليش ما نصمم شبكة كاملة من طبقات الـ Convolution بس؟</span>
+                    <br><br>
+                    هيك بنقدر ندخل الصورة كاملة، ونطلع التوقعات لكل البكسلات بضربة وحدة (<span class="eng-term">Forward
+                        Pass</span> واحد). بس يا فرحة ما تمت، هاض المبدأ واجه <span class="highlight-r">مشكلتين
+                        جوهريات</span>:
+
+                    <div
+                        style="margin-top: 20px; padding: 15px; background: rgba(251, 113, 133, 0.05); border-right: 4px solid var(--danger); border-radius: 10px;">
+                        <h4 style="color: var(--danger); margin-top: 0;">1. مشكلة الـ Receptive Field (مساحة الرؤية)
+                        </h4>
+                        عشان البكسل الواحد في المخرج "يفهم" شو اللي حوله، لازم يكون "شايف" مساحة كافية من الصورة
+                        الأصلية. في الـ Conv العادي، هاي المساحة بتكبر ببطء شديد مع كل طبقة زيادة (المعادلة بتبين إنها
+                        $1+2L$). يعني عشان البكسل يشوف مساحة كبيرة، بدك عدد هائل من الطبقات!
+                    </div>
+
+                    <div
+                        style="margin-top: 15px; padding: 15px; background: rgba(251, 113, 133, 0.05); border-right: 4px solid var(--danger); border-radius: 10px;">
+                        <h4 style="color: var(--danger); margin-top: 0;">2. الحسابات مكلفة جداً (Expensive Computations)
+                        </h4>
+                        لما تعمل <span class="eng-term">Convolution</span> على صورة بدقة عالية (<span
+                            class="eng-term">High Res</span>) وتضل تحافظ على نفس حجم الصورة طول الشبكة، الذاكرة والمعالج
+                        رح ينفجروا من كثر الحسابات.
+                        <br>
+                        <span class="highlight-y">تذكر:</span> معظم الشبكات القوية (زي ResNet) بتبلش بتصغير حجم الصورة
+                        بسرعة عشان تخفف الضغط الحسابي، هون إحنا لسا مش عارفين كيف نصغر ونرجع نكبر!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Upsampling -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 10 - 12</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">In-Network Upsampling</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_5/Semantic Segmentation_page-0010.jpg" alt="In-Network Upsampling">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الفكرة: صغّر.. بعدين كبّر! (Upsampling)</div>
+                <div class="explanation-content">
+                    عشان نحل مشكلة التكلفة، بنعمل إشي اسمه <span class="eng-term">In-Network Upsampling</span>:
+                    <ol dir="rtl" style="margin-top: 15px;">
+                        <li>بنصغر الصورة بالتدريج (عن طريق <span class="eng-term">Stride Conv</span> أو <span
+                                class="eng-term">Pooling</span>) عشان نقلل الحسابات.</li>
+                        <li>بنرجع نكبرها مرة ثانية في نهاية الشبكة عشان نطلع مخرج بنفس حجم المدخل.</li>
+                    </ol>
+                    <br>
+                    <span class="highlight-y">السؤال هو: كيف بنكبر الصورة مرة ثانية؟</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Unpooling Methods -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 13</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Unpooling (Bed of Nails & Nearest
+                    Neighbor)</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_5/Semantic Segmentation_page-0013.jpg" alt="Unpooling Methods">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">طرق التكبير: Bed of Nails & Nearest Neighbor</div>
+                <div class="explanation-content">
+                    هاي أبسط الطرق عشان نرجع نكبر الـ <span class="eng-term">Feature Map</span>:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">Bed of Nails:</span> بنحط قيمة البكسل في مكان واحد وبنخلي الباقي
+                            أصفار. تخيلها زي مسامير مثبتة في لوح، والباقي فاضي.</li>
+                        <li><span class="highlight-y">Nearest Neighbor:</span> بنكرر قيمة البكسل في كل الفراغات اللي
+                            حوله. يعني البكسل الواحد بصير مجموعة بكسلات بنفس القيمة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6.1: Bilinear Interpolation -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 14</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Bilinear Interpolation</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0014.jpg" alt="Bilinear Interpolation">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الطريقة الأنعم: Bilinear Interpolation</div>
+                <div class="explanation-content">
+                    بدل ما نكرر نفس القيمة، بنستخدم <span class="highlight-b">أقرب جارين إلك</span> (في محور $x$ ومحور
+                    $y$) عشان نحسب قيم وسيطة بين البكسلات.
+                    <br><br>
+                    <span class="highlight-y">النتيجة:</span> انتقالات ناعمة (<span class="eng-term">Smooth
+                        Transitions</span>) بين البكسلات، وبتبطل الصورة مبكسلة بشكل حاد. زي ما بتشوف بالمربع اللي على
+                    اليمين بالصورة، القيم بتتغير بالتدريج (1.25, 1.50, إلخ).
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6.2: Bicubic Interpolation -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 15</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Bicubic Interpolation</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0015.jpg" alt="Bicubic Interpolation">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المستوى الأعلى: Bicubic Interpolation</div>
+                <div class="explanation-content">
+                    هون بنرفع المستوى وبنستخدم <span class="highlight-b">أقرب 3 جيران</span> لكل بكسل، وبدل المعادلة
+                    الخطية البسيطة بنستخدم معادلة <span class="eng-term">Cubic</span> (تكعيبية).
+                    <br><br>
+                    <span class="highlight-g">من باب العلم:</span> هاي هي الطريقة اللي بيستخدمها الكمبيوتر والمتصفح عندك
+                    بالوضع الطبيعي لما تيجي تعمل <span class="eng-term">Resize</span> لأي صورة. هي الأفضل من ناحية
+                    الجودة في الطرق "الثابتة".
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: Transposed Convolution -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 17 - 21</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Recall: Normal Convolution</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0017.jpg" alt="Normal Convolution Recall">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تذكير: كيف بشتغل الـ Convolution العادي؟</div>
+                <div class="explanation-content">
+                    عشان نفهم الـ <span class="eng-term">Transposed</span>، لازم نتذكر العادي:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li>إحنا بنمشي بـ <span class="highlight-b">فلتر (Kernel)</span> فوق الصورة.</li>
+                        <li>بكل خطوة، بنعمل <span class="eng-term">Dot Product</span> بين الفلتر والجزء اللي تحته من
+                            الصورة عشان نطلع <span class="highlight-y">بكسل واحد</span> في المخرج.</li>
+                        <li>إذا كان الـ <span class="eng-term">Stride > 1</span>، فإحنا قاعدين نختصر الحجم، وهاض بنسميه
+                            <span class="highlight-r">Learnable Downsampling</span>.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 22 - 25</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Transposed Convolution Mechanism</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0023.jpg" alt="Transposed Convolution Mechanism">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">القلبة: الـ Transposed Convolution</div>
+                <div class="explanation-content">
+                    هون إحنا بنعمل العكس تماماً! بدل ما نجمع منطقة ونطلع بكسل، بناخد <span class="highlight-y">بكسل
+                        واحد</span> ونفرشه على <span class="highlight-b">منطقة كاملة</span>:
+                    <br><br>
+                    <span class="highlight-g">المبدأ (Weighting):</span>
+                    بناخد قيمة البكسل من المدخل الصغير، وبنضربها بـ <span class="eng-term">كل خلايا الفلتر</span>.
+                    الناتج بكون مصفوفة بنفس حجم الفلتر بنحطها في المخرج الكبير.
+                    <br><br>
+                    <span class="highlight-y">شو الـ Stride هون؟</span>
+                    في الـ <span class="eng-term">Transposed Conv</span>، الـ <span class="eng-term">Stride</span> بحدد
+                    قديش الفلتر "بمشي" في <span class="highlight-b">المخرج</span> مش في المدخل. إذا الـ <span
+                        class="eng-term">Stride = 2</span>، فإحنا بنبعد المخرجات عن بعضها بـ 2 بكسل.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 25</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Handling Overlaps</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0025.jpg" alt="Handling Overlaps">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو بصير بالمناطق المشتركة (Overlap)؟</div>
+                <div class="explanation-content">
+                    لما نفرش الفتحات جنب بعضها، أكيد رح يكون في <span class="highlight-r">تداخل</span> بين المناطق. الحل
+                    بسيط وذكي:
+                    <br><br>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.1); padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary);">
+                        بكل بساطة، إحنا <span class="highlight-b">بنجمع (Sum)</span>قيم البكسلات في مناطق التداخل. هاض
+                        الجمع بساعد الشبكة إنها تتعلم <span class="highlight-g">انتقالات ناعمة</span> وما يكون في تقطيع
+                        بالصورة.
+                    </div>
+                    <br>
+                    <span class="highlight-y">ليش اسمه "قابل للتعلم" (Learnable)؟</span>
+                    لأن قيم الفلتر نفسه مش ثابتة زي ما كنا بنعمل بالـ <span class="eng-term">Bilinear
+                        Interpolation</span>. هون، الشبكة هي اللي بتتعلم شو أحسن أرقام تكون بالفلتر عشان تكبّر الصورة
+                    بأدق شكل ممكن خلال الـ <span class="eng-term">Training</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8: Detailed Numeric Example Walkthrough -->
+        <div class="slide-section" id="numeric-example">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 30 - 33</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Step-by-Step Numeric Walkthrough</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0033.jpg" alt="Transposed Conv Step 3">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">نمشي حبة حبة: مثال بالأرقام</div>
+                <div class="explanation-content">
+                    عشان نثبت الفكرة، خلينا نمشي مع المثال اللي بالصورة (مدخل $2 \times 2$ وفلتر $3 \times 3$ بـ $Stride
+                    = 1$):
+                    <ol dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-b">الخطوة الأولى:</span> قيمة أول بكسل بالمدخل (مثلاً 1).. بنضربها
+                            بالفلتر كامل ($1 \times \text{Filter}$) وبننسخ النتيجة في الزاوية فوق يسار بالمخرج.</li>
+                        <li><span class="highlight-b">الخطوة الثانية:</span> بنمشي بكسل واحد بالمدخل، وبنضرب قيمته
+                            (مثلاً 2) بالفلتر كامل. القيمة الناتجة بنعملها <span class="highlight-y">Paste</span> في
+                            المخرج بس بنزيح خطوة وحدة (حسب الـ Stride).</li>
+                        <li><span class="highlight-b">الخطوة الثالثة (المهمة):</span> في بكسلات رح "تركب فوق بعضها"
+                            (Overlap). هون إحنا <span class="highlight-r">ما بنختار وحدة، بنجمعهم مع بعض!</span>هاض
+                            الجمع هو اللي بخلي الصورة تطلع "منسجمة" مش جزر معزولة.</li>
+                    </ol>
+                    <br>
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border-right: 4px solid var(--primary);">
+                        <span class="highlight-g">تطبيق القانون عالمثال:</span>
+                        <div dir="ltr" style="text-align: center; margin: 15px 0;">
+                            $O = (2 - 1) \times 1 - 2(0) + 3 = 4$
+                        </div>
+                        هاض معناه إن المخرج رح يكون <span class="highlight-accent" style="color: var(--accent);">$4
+                            \times 4$</span>، وهيك كبرنا الصورة من $2 \times 2$ لـ $4 \times 4$ بذكاء!
+                    </div>
+
+                    <!-- Practice Challenge -->
+                    <div class="quiz-box">
+                        <div class="quiz-header">
+                        </div>
+                        <div class="explanation-content" style="font-size: 1.1rem;">
+                            إذا كان عندك مدخل حجمه <span class="highlight-b">$4 \times 4$</span>، واستخدمت <span
+                                class="eng-term">Transposed Conv</span> بـ <span class="highlight-y">Stride = 2</span>،
+                            و <span class="highlight-r">Padding = 1</span>، وفلتر حجمه <span class="highlight-g">$3
+                                \times 3$</span>..
+                            <br>
+                            <span class="highlight-y">كم بطلع حجم المخرج (H2 & W2)؟</span>
+                        </div>
+                        <button class="quiz-button" onclick="toggleAnswer('q1')">إظهار الحل</button>
+                        <div id="q1" class="answer-content">
+                            <div
+                                style="background: rgba(52, 211, 153, 0.1); padding: 15px; border-radius: 10px; border-right: 4px solid var(--success);">
+                                <span class="highlight-g">الحل الخطوة بخطوة:</span>
+                                <ol dir="ltr" style="text-align: left; margin-top: 10px;">
+                                    <li>$I = 4, S = 2, P = 1, K = 3$</li>
+                                    <li>$O = (4 - 1) \times 2 - 2(1) + 3$</li>
+                                    <li>$O = (3) \times 2 - 2 + 3$</li>
+                                    <li>$O = 6 - 2 + 3 = 7$</li>
+                                </ol>
+                                <span class="highlight-b">النتيجة النهائية:</span> المخرج هو <span
+                                    class="highlight-accent" style="color: var(--accent); font-weight: 800;">$7 \times
+                                    7$</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 9: Training & Backpropagation -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 34 - 36</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Training and Backpropagation</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0036.jpg" alt="FCN Training">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بتتعلم الشبكة؟ (Backpropagation)</div>
+                <div class="explanation-content">
+                    الآن بعد ما خلصنا الـ <span class="eng-term">Forward Pass</span> وطلعنا صورة مصنفة لكل بكسل، كيف
+                    الشبكة بتعدل نفسها؟
+                    <br><br>
+                    <ul dir="rtl">
+                        <li><span class="highlight-y">Loss Calculation:</span> بنقارن الصورة اللي طلعت من الشبكة مع
+                            الصورة الحقيقية (<span class="eng-term">Ground Truth</span>). بنستخدم اشي اسمه <span
+                                class="eng-term">Cross-Entropy Loss</span> بس "لكل بكسل" لحاله.</li>
+                        <li><span class="highlight-b">Shared Loss, Individual Updates:</span> ركز هون! إحنا بنحسب <span
+                                class="highlight-r">خسارة وحدة كلية (Scalar Value)</span> بتمثل كل الصورة، بس لما نرجع
+                            بالـ <span class="eng-term">Backprop</span>، كل "وزن" في الشبكة (سواء كان في الـ Conv أو الـ
+                            Transposed Conv) رح يتعدل حسب قديش هو شارك بخطأ المخرج.</li>
+                        <li><span class="highlight-g">End-to-End:</span> هاض المصطلح معناه إننا بنقدر ندرب الشبكة كلها
+                            من أول بكسل في المدخل لآخر بكسل في المخرج بضربة وحدة، بدون ما نحتاج تدخل بشري في النص.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 10: Limitations -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 35 - 37</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Limitations</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_5/Semantic Segmentation_page-0036.jpg" alt="FCN Limitation">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المشكلة الكبرى: ضياع التفاصيل!</div>
+                <div class="explanation-content">
+                    أكبر مشكلة في الـ FCN هي إننا لما نصغر الصورة (<span class="eng-term">Downsampling</span>)، إحنا
+                    بنفقد <span class="highlight-r">المعلومات المكانية الدقيقة</span>. حواف الأشياء بتصير مغبشة لأن الـ
+                    <span class="eng-term">Decoder</span> ما عنده علم "وين بالضبط" كانت الحواف الأصلية.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 11: The Problem & U-Net Intro -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 38 - 40</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Problem Statement & Solution</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0038.jpg" alt="FCN Problems">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش الـ FCN لحالها ما بتكفي؟</div>
+                <div class="explanation-content">
+                    شفنا إن الـ <span class="eng-term">Transposed Conv</span> بتكبر الصورة، بس المشكلة إنها "بتخمن"
+                    التفاصيل تخمين.
+                    <br><br>
+                    <span class="highlight-r">المعضلة (The Trade-off):</span>
+                    <ul dir="rtl">
+                        <li>لما ندخل جوا الـ <span class="eng-term">Encoder</span>، الشبكة بتفهم "شو" الأجسام الموجودة
+                            بذكاء عالي (<span class="highlight-g">Semantic Richness</span>).</li>
+                        <li>بس بنفس الوقت، بسبب الـ <span class="eng-term">Pooling</span>، بنخسر "وين" مكانهم بالضبط
+                            (<span class="highlight-r">Spatial Resolution</span>).</li>
+                    </ul>
+                    <br>
+                    <span class="highlight-y">الحل العبقري:</span> شبكة الـ <span class="eng-term">U-Net</span> اللي
+                    بتستخدم الـ <span class="highlight-b">Skip Connections</span> عشان ترجع هاي التفاصيل الضايعة.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 41 - 42</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">The U-Net Architecture</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0040.jpg" alt="U-Net Architecture Detail">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">هيكل الـ U-Net: الجسر العجيب</div>
+                <div class="explanation-content">
+                    ليش اسمها <span class="eng-term">U-Net</span>؟ لأن شكلها زي حرف <span class="highlight-b">U</span>:
+                    <br><br>
+                    <ul dir="rtl">
+                        <li><span class="highlight-y">الجهة اليسار (Encoder):</span> مهمتها تضغط الصورة وتفهم المعنى.
+                            بكل مرحلة، المساحة بتصغر بس عدد الفلاتر (العمق) بيزيد.</li>
+                        <li><span class="highlight-g">الجهة اليمين (Decoder):</span> مهمتها ترجع تكبّر الصورة. هون
+                            بنستخدم الـ <span class="eng-term">Transposed Conv</span>.</li>
+                        <li><span class="highlight-b">الـ Skip Connections:</span> هي الجسور الأفقية اللي بالصورة. بناخد
+                            المخرجات من الـ <span class="eng-term">Encoder</span> وبنلزقها لزق مع اللي بقابلها في الـ
+                            <span class="eng-term">Decoder</span>.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 43 - 45</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Skip Connections Mechanism</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0043.jpg" alt="Skip Connections mechanism">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف الـ Skip Connections بتغير اللعبة؟</div>
+                <div class="explanation-content">
+                    الفكرة مش بس "ربط"، الفكرة هي <span class="eng-term">Concatenation</span> (التوصيل المتوازي):
+                    <br><br>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.1); padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary);">
+                        الـ <span class="eng-term">Decoder</span> الآن صار عنده <span class="highlight-g">نوعين من
+                            المعلومات</span> بكل طبقة:
+                        <br>
+                        1. <span class="highlight-y">معلومات عميقة:</span> جاية من الطبقة اللي تحت (بتقوله شو الجسم).
+                        <br>
+                        2. <span class="highlight-b">تفاصيل حادة:</span> جاية من الجسر (بتقوله وين الحواف والحدود
+                        بالضبط).
+                    </div>
+                    <br>
+                    هاذ الدمج بخلي الشبكة تطلع <span class="highlight-g">Segmentation Mask</span> دقيق جداً، حوافه حادة،
+                    حتى للأجسام الصغيرة جداً اللي كانت الـ FCN العادية بتنساها.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 46</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Summary of U-Net</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_5/Semantic Segmentation_page-0046.jpg" alt="U-Net Summary">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخلاصة: شو بتستفيد الـ U-Net؟</div>
+                <div class="explanation-content">
+                    في النهاية، الـ <span class="eng-term">U-Net</span> هي المعيار الذهبي حالياً في التصوير الطبي وغيره
+                    لأنها:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li>بتحافظ على <span class="highlight-b">Spatial Information</span> (المعلومات المكانية).</li>
+                        <li>بتحل مشكلة <span class="highlight-r">العتمة والغبش (Blurriness)</span> في المخرجات.</li>
+                        <li>بتتعلم كيف توازن بين "شو الجسم" و "وين مكانه" بضربة وحدة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Analogy Section -->
+        <div class="story-section" style="border-color: var(--primary); box-shadow: 0 0 40px rgba(56, 189, 248, 0.25);">
+            <div class="story-title" style="color: var(--primary);">مثال واقعي: عملية جراحية بالدماغ </div>
+            <div class="story-content">
+                تخيل إنك دكتور وبدك تحدد مكان <span class="highlight-r">ورم خبيث</span> في صورة رنين مغناطيسي باستخدام
+                الـ <span class="eng-term">U-Net</span>:
+                <br><br>
+                1. <span class="highlight-y">الـ Encoder (شوف الشاشة):</span> الشبكة بتشوف الصورة كاملة وبتحكي "يا
+                دكتور، أنا متأكدة إنه في ورم بالجهة اليمين". بس لأنها صغرت الصورة لتفهمها، بطلت تعرف حدوده بالضبط.
+                <br><br>
+                2. <span class="highlight-b">الـ Skip Connections (جسر الإنقاذ):</span> الشبكة بتفتح "خط
+                ساخن" مع الطبقات الأولى اللي لسا عندها <span class="highlight-g">الصورة بجودة عالية</span>. بتقولها:
+                "اعطيني مكان الحواف بالضبط".
+                <br><br>
+                3. <span class="highlight-g">النتيجة النهائية:</span> الـ <span class="eng-term">Decoder</span> باخد
+                المعنى (فيه ورم) مع الحواف الدقيقة (وين حدوده)، وبيرسم لك خريطة بكسل بكسل. هيك الدكتور بقدر يشيل الورم
+                بدون ما يلمس الأنسجة السليمة.
+                <br><br>
+                <div
+                    style="background: rgba(56, 189, 248, 0.05); padding: 25px; border-radius: 16px; border: 2px solid var(--primary); text-align: center; margin-top: 30px;">
+                    <span class="highlight-y" style="font-size: 1.4rem;">الخلاصة الجوهرية:</span>
+                    <br>
+                    الـ <span class="eng-term">U-Net</span> دمجت بين خبرة <span class="highlight-b">"الدكتور
+                        الشاطر"</span> اللي بعرف شو العلة (المعنى)، وبين دقة <span class="highlight-g">"الروبوت
+                        الذكي"</span> اللي بحدد المكان بالملي بكسل.
+                    <br>
+                    <span class="highlight-accent"
+                        style="color: var(--accent); font-weight: 900; font-size: 1.5rem; display: block; margin-top: 10px;">عشان
+                        هيك هي ملكة الـ Segmentation بلا منازع! </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="../nav.js"></script>
+    <script>
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            const button = event.target;
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                button.innerText = "إظهار الحل";
+            } else {
+                answer.style.display = "block";
+                button.innerText = "إخفاء الحل";
+            }
+        }
+    </script>
+</body>
+
+</html>
