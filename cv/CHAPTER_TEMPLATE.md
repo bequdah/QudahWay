@@ -2,6 +2,28 @@
 
 This guide documents the standard HTML structure and CSS styling for QudahWay Computer Vision chapters. Use this template when creating new chapter files to ensure consistency.
 
+## 0. The QudahWay Teaching Style (Essence) 🧠
+Before you write a single line of code, remember the philosophy:
+- **Jordanian Soul:** Use the friendly Jordanian dialect (`هاض`, `هاي`, `ركز معي خالي`) to break the ice and make the material accessible.
+- **The Hook (Storytelling):** Every chapter must start with a story. Why does this matter? How did it start? Connect the history to the tech.
+- **Visual Hierarchy:**
+    - `highlight-y` (Yellow): Core concepts, "Aha!" moments, and critical facts.
+    - `highlight-b` (Blue): Technical details, secondary emphasis, or list labels.
+    - `eng-term` (Badge): Mandatory for all English terms to ensure they look professional and stand out.
+- **Relatability:** Always link theory to real-world examples (Smartphones, Self-driving cars, Forensics, etc.).
+- **Conciseness:** Explain the "Why" behind the "How" without being wordy.
+
+## 0.1 Workflow: Creating a New Chapter 🚀
+To ensure every new chapter is fully integrated into the QudahWay ecosystem, follow these exact steps:
+
+1.  **Create File:** Create a new `.html` file in the `cv/` directory (e.g., `convolution.html`) and paste the template structure from this guide.
+2.  **Add to Dashboard:** Open `cv/index.html` and add a new `<a class="link-card">` entry in the `links-grid` section. Use the correct number and icon.
+3.  **Update Navigation:** Open `nav.js`. Find the `isCV` section and add a new `<a>` link with the appropriate number and emoji. **CRITICAL:** This ensures the "Course Map" button works everywhere.
+4.  **Verify Links:** Open the new file in a browser and test both the "Back" button and the "Course Map" toggle to ensure everything is connected.
+5.  **Write Content:** Start with the "Story Section", then build the "Slide Sections" one by one.
+
+
+
 ## 1. Basic HTML Structure & Head
 Every chapter file must start with this structure. It includes the required fonts (Cairo, Inter, Satisfy) and the core CSS variables.
 

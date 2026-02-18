@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Convolution</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <!-- MathJax for Formula Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            /* Light Blue */
+            --accent: #facc15;
+            /* Yellow */
+            --success: #34d399;
+            /* Green */
+            --danger: #fb7185;
+            /* Red */
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        /* Slide Card System */
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-r {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-g {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(56, 189, 248, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(56, 189, 248, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(56, 189, 248, 0.08)'; this.style.transform='translateY(0)'">
+                    🏠 العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.9rem;">
+                    QudahWay / CV / Convolution
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> CV</h1>
+            <p class="subtitle">Convolution</p>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-title">🎬 القصة: كيف الكمبيوتر "بفرز" اللي شايفه؟</div>
+            <div class="story-content">
+                تخيل إنك واقف قدام لوحة فنية ضخمة، وبدك تطلع منها بس "الخطوط العريضة". مش رح تقدر تشوف كل التفاصيل
+                مرة وحدة، رح تضطر تمشي "عدسة مكبرة" على كل شبر باللوحة وتركز..
+                <br><br>
+                هاض بالظبط هو الـ <span class="eng-term">Convolution</span>. هو الفلتر اللي بمشي على الصورة "بكسل بكسل"،
+                وبقرر هاض الجزء مهم ولا لأ. بدون هالعملية، الكمبيوتر بظل شايف الصورة "عجقة" أرقام، بس مع الـ <span
+                    class="highlight-y">Convolution</span>، ببلش يفهم وين الحواف، وين الزوايا، وكيف بميز وجهك عن رغيف
+                الخبز!
+            </div>
+        </div>
+
+
+        <!-- Slide 02 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Signals</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0002.jpg" alt="Slide 2">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كل شي حولنا هو "إشارة":</div>
+                <div class="explanation-content">
+                    كلمة <span class="eng-term">Signal</span> معناها تمثيل للمعلومات كدالة بتتغير مع الزمن أو المكان أو
+                    التردد.
+                    <ul>
+                        <li><span class="highlight-b">Analog Signal:</span> إشارة مستمرة (زي الموجات الصوتية في
+                            الطبيعة).</li>
+                        <li><span class="highlight-y">Digital Signal:</span> إشارة رقمية، بنحصل عليها لما نعمل <span
+                                class="eng-term">Sampling</span> للإشارة الأصلية عشان يفهمها الكمبيوتر.</li>
+                    </ul>
+                    الإشارات ممكن تكون:
+                    <ul>
+                        <li><span class="highlight-b">1-D:</span> زي الصوت (Audio) ونبضات القلب.</li>
+                        <li><span class="highlight-y">2-D:</span> زي الصور الرمادية (<span
+                                class="eng-term">Grayscale</span>).</li>
+                        <li><span class="highlight-g">3-D:</span> زي الصور الملونة (<span class="eng-term">RGB</span>).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 03 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Digital Images</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0003.jpg" alt="Slide 3">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تشريح الصورة الرقمية:</div>
+                <div class="explanation-content">
+                    الكمبيوتر بشوف الصور بطريقتين حسب النوع:
+                    <ul>
+                        <li><span class="highlight-b">Gray-scale image (2D):</span> قناة وحدة، وكل بكسل فيه رقم بيعبر عن
+                            شدة الإضاءة (من 0 لـ 255).</li>
+                        <li><span class="highlight-y">RGB image (3D):</span> ثلاث قنوات (أحمر، أخضر، أزرق)، بنعامل كل
+                            وحدة فيهم كأنها صورة رمادية لحالها.</li>
+                    </ul>
+                    <div
+                        style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 12px; margin-top: 15px; border-right: 4px solid var(--primary);">
+                        📍 <span class="highlight-b">قاعدة الحساب:</span> عشان نعرف مساحة التخزين (Bits)، بنستخدم
+                        المعادلة:
+                        <br>
+                        <center><span class="eng-term">b = M × N × k × C</span></center>
+                        حيث <span class="eng-term">M, N</span> الأبعاد، <span class="eng-term">k</span> عدد البتات، و
+                        <span class="eng-term">C</span> عدد القنوات.
+                        <br><br>
+                        <div
+                            style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 12px; border: 1px dashed var(--primary); font-size: 1.1rem;">
+                            💡 <span class="highlight-y">مثال بالأرقام:</span> تخيل لو عندنا صورة ملونة (<span
+                                class="eng-term">RGB</span>) حجمها <span class="highlight-b">100x100</span> بكسل،
+                            وبنستخدم <span class="highlight-b">8 بت</span> لكل بكسل في كل قناة:
+                            <br>
+                            الحسبة بتصير: <span class="eng-term">100 (H) × 100 (W) × 8 (k) × 3 (C) = 240,000
+                                Bits</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 04 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Applications of Convolution</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0004.jpg" alt="Slide 4">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وين بنستخدم الـ Convolution؟</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Convolution</span> مش بس للصور، هي عملية رياضية بتدخل في أغلب مجالات
+                    التكنولوجيا الحديثة:
+                    <br><br>
+                    <ol>
+                        <li><span class="highlight-b">Signal Processing:</span> هي الأساس في معالجة الإشارات بكل أنواعها
+                            (Audio, Radar, Sonar). بتساعدنا نعمل <span class="eng-term">Filtering</span> للموجات ونشيل
+                            الـ <span class="eng-term">Noise</span> (التشويش) ونطلع الميزات المهمة من الإشارة.</li>
+
+                        <li><span class="highlight-y">Natural Language Processing (NLP):</span> في معالجة اللغات،
+                            بنستخدم الـ <span class="eng-term">1D Convolutions</span> فوق النصوص والكلمات عشان مهام مثل
+                            <span class="eng-term">Sentiment Analysis</span> (فهم شعور الكاتب) وتصنيف النصوص.
+                        </li>
+
+                        <li><span class="highlight-b">Speech Recognition:</span> أنظمة التعرف على الكلام بتعتمد على الـ
+                            <span class="eng-term">CNNs</span> عشان تسحب ميزات الصوت وتحلل الترتيب الزمني للكلمات بدقة.
+                        </li>
+
+                        <li><span class="highlight-g">Image Processing:</span> هون بنعمل العمليات اللي بنشوف نتائجها
+                            بالعين، زي كشف الحواف (<span class="eng-term">Edge Detection</span>)، زيادة الحدة (<span
+                                class="eng-term">Sharpening</span>)، أو تنعيم الصورة (<span
+                                class="eng-term">Blurring</span>).</li>
+
+                        <li><span class="highlight-y">Computer Vision:</span> الملك في هاض المجال! الـ <span
+                                class="eng-term">Convolution</span> هي العملية الأساسية في كل شبكات الـ <span
+                                class="eng-term">CNNs</span> اللي بتخلي الكمبيوتر يقدر يعمل <span
+                                class="eng-term">Object Detection</span> (تحديد الأجسام) و <span
+                                class="eng-term">Tracking</span> (تتبع الحركة).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 06 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">The Convolution Operation: 2D</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0006.jpg" alt="Slide 6">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المعادلة الرياضية (لا تخاف منها):</div>
+                <div class="explanation-content">
+                    هون بنبلش الجد! الصورة صارت <span class="highlight-b">2D Input</span>، والفلتر صار <span
+                        class="highlight-y">2D Filter</span> بحجم <span class="eng-term">m x n</span>.
+                    <br><br>
+                    المعادلة اللي شايفينها بتشرح كيف بنجمع حاصل ضرب البكسلات بالجيران. في نوعين من الجيران:
+                    <ul>
+                        <li><span class="highlight-r">Preceding neighbours:</span> الجيران اللي "قبل" البكسل الأساسي.
+                        </li>
+                        <li><span class="highlight-g">Succeeding neighbours:</span> الجيران اللي "بعد" البكسل الأساسي
+                            (وهاد هو المستعمل عملياً).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Merged Slides 07-12: The Toy Example Animation -->
+        <div class="slide-section" style="border: 2px solid var(--accent);">
+            <div class="slide-title-bar" style="background: rgba(250, 204, 21, 0.1);">
+                <span style="font-weight: 700; color: var(--accent);">🎬 عرض بصري: كيف تتحرك العدسة؟</span>
+                <span class="slide-number" style="background: var(--accent);">Slides 07-12</span>
+            </div>
+
+            <!-- Simple CSS Slider Emulator -->
+            <div style="padding: 20px; background: #000; text-align: center;">
+                <div style="display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; scroll-behavior: smooth;"
+                    id="steps-container">
+                    <img src="cv_4/Convolution_page-0007.jpg"
+                        style="height: 300px; border-radius: 8px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0008.jpg"
+                        style="height: 300px; border-radius: 8px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0009.jpg"
+                        style="height: 300px; border-radius: 8px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0010.jpg"
+                        style="height: 300px; border-radius: 8px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0011.jpg"
+                        style="height: 300px; border-radius: 8px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0012.jpg"
+                        style="height: 300px; border-radius: 8px; border: 2px solid var(--border);">
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">👈 اسحب لليسار لتشوف خطوات
+                    التحرك (Step-by-Step) 👉</p>
+            </div>
+
+            <div class="explanation-box">
+                <div class="explanation-header">تتبع العملية (Toy Example):</div>
+                <div class="explanation-content">
+                    بدل ما نضيع وقتنا، شوفوا كيف الـ <span class="eng-term">Kernel</span> بمشي بكسل بكسل:
+                    <br><br>
+                    - بالبداية بضرب <span class="highlight-b">(aw+bx+ey+fz)</span> عشان يطلع أول بكسل في الناتج.
+                    <br>
+                    - بعدين "بزحلق" خطوة لليحمين وبكرر نفس العملية.
+                    <br>
+                    - بخلص الصف الأول، وبنزل للصف اللي تحته.. وهكذا لحد ما يخلص الصورة كاملة.
+                    <br><br>
+                    <span class="highlight-y">الخلاصة:</span> كل قيمة في الـ <span class="eng-term">Output</span> هي
+                    نتيجة "تفاعل" الفلتر مع منطقة معينة في الصورة الأصلية.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Centered Kernel Approach</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0013.jpg" alt="Slide 13">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ Kernel في المركز:</div>
+                <div class="explanation-content">
+                    في أغلب الحالات، بنفترض إن الـ <span class="eng-term">Kernel</span> "مركزي" (<span
+                        class="highlight-y">Centered</span>) فوق البكسل اللي بنهتم فيه.
+                    <br><br>
+                    بهاي الطريقة، المعادلة بتخلينا نتطلع على الجيران اللي <span class="highlight-b">قبل</span> واللي
+                    <span class="highlight-b">بعد</span> في نفس الوقت، وهاذ بيعطينا دقة أكثر في استخراج الميزات وتحديد
+                    الحواف.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">2D Convolution: Blurring</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0014.jpg" alt="Slide 14">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">فلتر التنعيم (Blurring):</div>
+                <div class="explanation-content">
+                    شوفوا كيف الأرقام بتغير كل شي! هون استخدمنا مصفوفة كلها <span class="highlight-y">1</span>.
+                    <br><br>
+                    ببساطة، الفلتر هون بجمع كل البكسلات اللي حول البكسل وبطلع الـ <span class="eng-term">Average</span>
+                    تبعهم. النتيجة؟ الصورة بتصير
+                    ناعمة ومغبشة (<span class="eng-term">Blurs the image</span>). هاض بنستخدمه عشان نشيل الـ <span
+                        class="eng-term">Noise</span> أو التفاصيل المزعجة الصغيرة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">2D Convolution: Sharpening</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0015.jpg" alt="Slide 15">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">فلتر التوضيح (Sharpening):</div>
+                <div class="explanation-content">
+                    عكس اللي قبله تماماً! هون بنركز على البكسل اللي بالنص وبنعطيه قيمة عالية (<span
+                        class="highlight-y">5</span>) وبنطرح القيم اللي حوله.
+                    <br><br>
+                    الحركة هاي بتخلي الفروقات بين البكسلات تزيد، فبتطلع الصورة أوضح والحدود بارزة أكثر (<span
+                        class="eng-term">Sharpens the image</span>). ممتاز لتحسين جودة الصور الباهتة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">2D Convolution: Edge Detection</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0016.jpg" alt="Slide 16">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">صياد الحواف (Edge Detection):</div>
+                <div class="explanation-content">
+                    هون بنستخدم فلتر مصمم عشان "يطفي" أي منطقة لونها ثابت، وما يشتغل إلا لما يشوف
+                    "تغيير مفاجئ" بالأرقام (يعني حافة).
+                    <br><br>
+                    النتيجة زي ما إنتو شايفين بصورة تاج محل، الصورة صارت سوداء وما بين غير <span
+                        class="highlight-y">الخيوط العريضة</span> والحواف (<span class="eng-term">Detects the
+                        edges</span>). هاض هو الأساس اللي بتبني عليه السيارة اللي بتمشي لحالها عشان تميز الرصيف والشارع.
+                </div>
+            </div>
+        </div>
+
+        <!-- Merged Slides 18-38: Building the Feature Map -->
+        <div class="slide-section" style="border-left: 5px solid var(--accent);">
+            <div class="slide-title-bar" style="background: rgba(255, 152, 0, 0.1);">
+                <span style="font-weight: 700; color: var(--accent);">الحالة الواقعية: كيف بنبني الـ Feature
+                    Map؟</span>
+                <span class="slide-number">Slides 18-38</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; background: #000;">
+                <div style="text-align: center;">
+                    <img src="cv_4/Convolution_page-0019.jpg"
+                        style="width: 100%; border-radius: 8px; border: 2px solid var(--border);">
+                    <p style="color: var(--text-muted); margin-top: 5px;">بداية المسح (أول بكسل)</p>
+                </div>
+                <div style="text-align: center;">
+                    <img src="cv_4/Convolution_page-0037.jpg"
+                        style="width: 100%; border-radius: 8px; border: 2px solid var(--border);">
+                    <p style="color: var(--text-muted); margin-top: 5px;">اكتمال المسح (آخر بكسل)</p>
+                </div>
+            </div>
+
+            <div class="explanation-box">
+                <div class="explanation-header">شو اللي صار فعلياً؟</div>
+                <div class="explanation-content">
+                    تخيل الفلتر زي "الماسح الضوئي" اللي بمشي على كل زاوية بصورة تاج محل:
+                    <br><br>
+                    <ul>
+                        <li><span class="highlight-b">Process:</span> الفلتر بزحف بكسل بكسل (<span
+                                class="eng-term">Sliding</span>)، وكل ما يوقف بمكان، بيعمل عمليته الرياضية وبيطلع
+                            "رقم واحد" بحطه في شبكة المخرجات.</li>
+                        <li><span class="highlight-y">Feature Map:</span> النتيجة النهائية اللي بنحصل عليها (الشبكة
+                            اللي تعبت نقاط) هي اللي بنسميها <span class="eng-term">Feature Map</span>.</li>
+                        <li><span class="highlight-g">Multi-Filters:</span> في الـ <span class="eng-term">Deep
+                                Learning</span>، إحنا ما بنستخدم فلتر واحد؛ بنستخدم عشرات الفلاتر في نفس الوقت عشان
+                            كل واحد فيهم يصيد ميزة شكل (واحد للحواف الطولية، واحد للعرضية، واحد للمنحنيات).</li>
+                    </ul>
+
+                    <div
+                        style="background: rgba(234, 179, 8, 0.1); padding: 15px; border-radius: 12px; margin-top: 15px; border: 1px solid var(--accent);">
+                        <span class="highlight-y"> </span> الـ <span class="eng-term">Convolution
+                            Layer</span> مش وظيفتها تعطينا صورة جديدة، وظيفتها تعطينا "خريطة ميزات" بتفهم الكمبيوتر
+                        شو الأشكال المهمة الموجودة بالصورة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Merged Slides 39-52: The Bridge to 3D -->
+        <div class="slide-section"
+            style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 2px dashed var(--primary);">
+            <div class="slide-title-bar" style="background: rgba(56, 189, 248, 0.1);">
+                <span style="font-weight: 700; color: var(--primary);">🧠 تحدي ذكاء: الخطوة المتوقعة</span>
+                <span class="slide-number">Slides 39-52</span>
+            </div>
+
+            <div style="padding: 40px; text-align: center;">
+                <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <!-- 1D Section -->
+                    <div
+                        style="background: #fff; padding: 15px; border-radius: 20px; border: 2px solid var(--accent); width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <img src="cv_4/Convolution_page-0040.jpg"
+                            style="width: 100%; border-radius: 12px; margin-bottom: 15px;">
+                        <p style="color: #1e293b; font-weight: 800; font-size: 1.3rem;">في الـ 1D:</p>
+                        <p style="color: #64748b; font-weight: 600;">بنتحرك على خط مستقيم (خيط)</p>
+                    </div>
+
+                    <!-- 2D Section -->
+                    <div
+                        style="background: #fff; padding: 15px; border-radius: 20px; border: 2px solid var(--accent); width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <img src="cv_4/Convolution_page-0046.jpg"
+                            style="width: 100%; border-radius: 12px; margin-bottom: 15px;">
+                        <p style="color: #1e293b; font-weight: 800; font-size: 1.3rem;">في الـ 2D:</p>
+                        <p style="color: #64748b; font-weight: 600;">بنتحرك على مساحة (ورقة)</p>
+                    </div>
+                </div>
+
+                <div
+                    style="max-width: 650px; margin: 50px auto 0; background: rgba(255, 255, 255, 0.05); padding: 35px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h2
+                        style="color: var(--highlight-y); margin-bottom: 20px; font-size: 2rem; font-family: 'Inter', sans-serif;">
+                        ?What would happen in the 3D case</h2>
+                    <p style="font-size: 1.3rem; line-height: 1.8; color: #cbd5e1;">
+                        إذا كانت الصورة الملونة (<span class="eng-term">RGB</span>) بتعني 3 طبقات فوق بعض..
+                        <br>
+                        كيف رح يتصرف الفلتر؟ هل بيمشي على وجه واحد، ولا بيخترق العمق كله؟
+                    </p>
+                </div>
+            </div>
+
+            <div class="explanation-box" style="background: rgba(56, 189, 248, 0.05);">
+                <div class="explanation-header">تمهيد للعمق (Depth):</div>
+                <div class="explanation-content">
+                    الأسئلة اللي شفناها بالسلايدات بتنبهنا لشغلة مهمة: العالم الحقيقي مش "مسطح".
+                    <br><br>
+                    <ul>
+                        <li><span class="highlight-b">1D Filter:</span> بيمشي على "خيط".</li>
+                        <li><span class="highlight-y">2D Filter:</span> بيمشي على "ورقة".</li>
+                        <li><span class="highlight-g">3D Filter:</span> بيتعامل مع "مكعب" من البيانات (زي الصور الملونة
+                            أو الفيديو).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 53: The Big Reveal -->
+        <div class="slide-section" style="margin-top: 100px; border: 3px solid var(--primary);">
+            <div class="slide-title-bar" style="background: var(--primary); color: var(--bg-dark);">
+                <span style="font-weight: 900; font-size: 1.5rem;">The convolution operation: 3D</span>
+                <span class="slide-number" style="background: var(--bg-dark); color: var(--primary);">Slide 53</span>
+            </div>
+            <div class="slide-image-box" style="min-height: 200px; background: #fff;">
+                <img src="cv_4/Convolution_page-0053.jpg" alt="Slide 53" style="max-width: 80%;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مرحلة الوحش: الـ 3D بدأت!</div>
+                <div class="explanation-content">
+                    اربطوا الأحزمة، هسا رح ننتقل من "المساحات" لـ "الأحجام". رح نعرف كيف الـ <span
+                        class="eng-term">Convolution</span> بتقدر تعالج الألوان والعمق في نفس اللحظة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 54-55: The 3D Filter -->
+        <div class="slide-section" style="border-left: 5px solid var(--primary);">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">The 3D Filter: Volume</span>
+                <span class="slide-number">Slide 54-55</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0054.jpg" alt="3D Filter Volume">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الفلتر صار "مكعب":</div>
+                <div class="explanation-content">
+                    بما إن الصورة صارت RGB (يعني 3 طبقات)، الفلتر بطل مجرد مربع مسطح.. صار <span
+                        class="highlight-y">Volume</span> (حجم).
+                    <br><br>
+                    <span class="highlight-b">قاعدة ذهبية:</span> عمق الفلتر دايماً بكون نفس عمق الصورة اللي بشتغل
+                    عليها. إذا الصورة RGB، الفلتر عمقه 3.
+                </div>
+            </div>
+        </div>
+
+        <!-- Merged Slides 60-66: The 3D Sliding Process -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">3D Convolution in Action</span>
+                <span class="slide-number">Slides 60-66</span>
+            </div>
+            <div style="background: #000; padding: 20px; text-align: center;">
+                <div style="display: flex; overflow-x: auto; gap: 15px; padding-bottom: 20px;" class="custom-scrollbar">
+                    <img src="cv_4/Convolution_page-0060.jpg"
+                        style="height: 250px; border-radius: 12px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0063.jpg"
+                        style="height: 250px; border-radius: 12px; border: 2px solid var(--border);">
+                    <img src="cv_4/Convolution_page-0066.jpg"
+                        style="height: 250px; border-radius: 12px; border: 2px solid var(--border);">
+                </div>
+                <p style="color: var(--accent); font-size: 1rem; margin-top: 10px; font-weight: 700;">👈 المكعب بيمسح
+                    الطبقات كلها في كل وقفة 👉</p>
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بتم الحركة؟</div>
+                <div class="explanation-content">
+                    المكعب بيعمل <span class="eng-term">Sliding</span> يمين وتحت، بس <span class="highlight-y">ما بمشي
+                        للداخل</span> (العمق). هو أصلاً بغطي كل الطبقات RGB مرة وحدة.
+                    <br><br>
+                    كل ما يوقف في مكان، بضرب كل أرقامه في أرقام الصورة اللي تحته وبجمعهم، والنتيجة بتطلع لنا <span
+                        class="highlight-b">رقم واحد بس</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 67-68: The Output -->
+        <div class="slide-section" style="border-right: 5px solid var(--highlight-y);">
+            <div class="slide-title-bar" style="background: rgba(234, 179, 8, 0.1);">
+                <span style="font-weight: 700; color: var(--highlight-y);">النتيجة النهائية: 2D Feature Map</span>
+                <span class="slide-number">Slide 67-68</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_4/Convolution_page-0068.jpg" alt="2D Feature Map Output" style="max-width: 80%;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">قوانين المخرجات بالـ 3D:</div>
+                <div class="explanation-content">
+                    ركزوا هون لأنها نقطة جوهرية:
+                    <br><br>
+                    <ul>
+                        <li><span class="highlight-r">الناتج دايماً 2D:</span> مع إننا استخدمنا فلتر 3D على صورة 3D،
+                            الناتج بطلع صفحة وحدة مسطحة (لأن كل بقعة بتعطينا رقم واحد فقط).</li>
+                        <li><span class="highlight-y">تعدد الفلاتر:</span> إذا بدنا الطبقة الجاية تكون 3D، بنستخدم <span
+                                class="highlight-b">أكثر من فلتر</span>. كل فلتر بطلع لنا "صفحة" (Feature Map)، وبنجمعهم
+                            فوق بعض عشان يصيروا Volume جديد.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 69: New Chapter Intro -->
+        <div class="slide-section"
+            style="background: var(--primary); color: var(--bg-dark); padding: 30px; text-align: center; border-radius: 20px; margin-top: 60px;">
+            <h1 style="font-weight: 900; font-size: 2.2rem; margin: 0;">📏 أبعاد اللعبة: المدخلات والمخرجات</h1>
+            <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.9;">The relationship between input, kernel, and
+                output size</p>
+        </div>
+
+        <!-- Merged Slides 70-79: Terminology & Dimensions -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">قاموس الـ Convolution: المصطلحات الأساسية</span>
+                <span class="slide-number">Slides 70-79</span>
+            </div>
+
+            <div class="slide-image-box" style="background: #fff; padding: 20px;">
+                <img src="cv_4/Convolution_page-0079.jpg" alt="Convolution Dimensions Diagram" style="max-width: 90%;">
+            </div>
+
+            <div class="explanation-box">
+                <div class="explanation-header">شو لازم نعرف قبل ما نحسب؟</div>
+                <div class="explanation-content">
+                    عشان نصير "مهندسين" رؤية حاسوبية صح، لازم نعرف نسمي الأشياء بمسمياتها. هاي هي الكميات اللي رح
+                    نستخدمها في كل المعادلات الجاية:
+                </div>
+            </div>
+
+            <!-- Dimensions Grid -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px;">
+                <!-- Input Dimensions -->
+                <div
+                    style="background: rgba(34, 197, 94, 0.05); border: 1px solid var(--border); padding: 20px; border-radius: 15px;">
+                    <h3 style="color: var(--highlight-g); margin-bottom: 15px;">1. أبعاد المدخلات (<span
+                            class="eng-term">Input</span>)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">🏷️ <span class="highlight-g" dir="ltr">\(W_1\)</span>: العرض
+                            (<span class="eng-term">Width</span>)</li>
+                        <li style="margin-bottom: 10px;">🏷️ <span class="highlight-g" dir="ltr">\(H_1\)</span>:
+                            الارتفاع (<span class="eng-term">Height</span>)</li>
+                        <li style="margin-bottom: 10px;">🏷️ <span class="highlight-g" dir="ltr">\(D_1\)</span>: العمق
+                            (<span class="eng-term">Depth</span>)</li>
+                        <li style="margin-bottom: 10px;">🚀 <span class="highlight-g" dir="ltr">\(S\)</span>: مقدار
+                            القفزة (<span class="eng-term">Stride</span>)</li>
+                    </ul>
+                </div>
+
+                <!-- Filter Dimensions -->
+                <div
+                    style="background: rgba(56, 189, 248, 0.05); border: 1px solid var(--border); padding: 20px; border-radius: 15px;">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">2. أبعاد الفلتر (<span
+                            class="eng-term">Filter</span>)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">🏷️ <span class="highlight-b" dir="ltr">\(K\)</span>: عدد
+                            الفلاتر المستخدمة</li>
+                        <li style="margin-bottom: 10px;">📐 <span class="highlight-b" dir="ltr">\(F\)</span>: مساحة
+                            الفلتر المكانية (<span class="eng-term">Spatial Extent</span>)</li>
+                        <li
+                            style="background: rgba(56, 189, 248, 0.1); padding: 10px; border-radius: 8px; font-size: 0.9rem; border-left: 3px solid var(--primary);">
+                            💡 <b style="color: var(--primary);">تذكير:</b> عمق الفلتر دايماً بساوي عمق المدخلات (<span
+                                class="highlight-b">\(D_1\)</span>).
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Output Dimensions -->
+                <div
+                    style="background: rgba(234, 179, 8, 0.05); border: 1px solid var(--border); padding: 20px; border-radius: 15px;">
+                    <h3 style="color: var(--highlight-y); margin-bottom: 15px;">3. أبعاد المخرجات (<span
+                            class="eng-term">Output</span>)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">📦 <span class="highlight-y" dir="ltr">\(W_2\)</span>: عرض
+                            المخرجات</li>
+                        <li style="margin-bottom: 10px;">📦 <span class="highlight-y" dir="ltr">\(H_2\)</span>: ارتفاع
+                            المخرجات</li>
+                        <li style="margin-bottom: 10px;">📦 <span class="highlight-y" dir="ltr">\(D_2\)</span>: عمق
+                            المخرجات (ويساوي <span class="highlight-y">\(K\)</span>)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                style="background: var(--bg-dark); margin: 20px; padding: 20px; border-radius: 15px; border: 1px dashed var(--accent);">
+                <p style="text-align: center; font-size: 1.1rem; margin: 0;">
+                    <span style="color: var(--highlight-y);">سؤال:</span> ليش عمق المخرجات (<span
+                        class="highlight-y">\(D_2\)</span>) بساوي عدد الفلاتر (<span class="highlight-b">\(K\)</span>)؟
+                    الجواب: لأن كل فلتر بيعمل "مسحة" كاملة وبطلع لنا صفحة وحدة بس!
+                </p>
+            </div>
+        </div>
+
+        <!-- Act 1: The Shrinkage Problem (Slides 80-94) -->
+        <div class="slide-section" style="border-top: 4px solid var(--accent);">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">المشكلة: ليش مخرجاتنا دايماً أصغر؟</span>
+                <span class="slide-number">Slides 80-94</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff; padding: 20px; border-radius: 12px;">
+                <img src="cv_4/Convolution_page-0091.jpg" alt="Shrinking Output visualization" style="max-width: 70%;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ظاهرة تقلص الصور:</div>
+                <div class="explanation-content">
+                    لاحظتوا إنه كل ما نطبق فلتر، الـ <span class="eng-term">Feature Map</span> بتطلع أصغر من الصورة
+                    الأصلية؟
+                    <br><br>
+                    <span class="highlight-r">السبب:</span> الفلتر اله "حجم"، وعشان يشتغل لازم يكون "جوا" حدود الصورة.
+                    الزوايا والأطراف ما بنقدر نمركز الفلتر عليها لأنه رح "يطلع برا". هيك بنخسر بكسلات من الأطراف في كل
+                    طبقة، وبنخسر معلومات مهمة!
+                </div>
+            </div>
+        </div>
+
+        <!-- Act 2: Padding (Slides 95-104) -->
+        <div class="slide-section" style="border-left: 5px solid var(--highlight-g);">
+            <div class="slide-title-bar" style="background: rgba(34, 197, 94, 0.1);">
+                <span style="font-weight: 700; color: var(--highlight-g);">الحل: الـ Zero Padding</span>
+                <span class="slide-number">Slides 95-104</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff; padding: 20px; border-radius: 12px;">
+                <img src="cv_4/Convolution_page-0096.jpg" alt="Zero Padding Visualization" style="max-width: 70%;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بنحمي أطراف الصورة؟</div>
+                <div class="explanation-content">
+                    عشان نحل مشكلة الزوايا، بنعمل إشي اسمه <span class="eng-term">Padding</span>.
+                    ببساطة، بنحاوط الصورة بـ "إطار" من الأصفار. هاض الإطار بخلي الفلتر يقدر يوقف على البكسلات الأصلية
+                    اللي كانت عالطرف بدون ما يطلع برا "المنطقة الجديدة".
+                    <br><br>
+                    ✅ <span class="highlight-g">النتيجة:</span> بنحافظ على حجم الصورة، وبنكسب معلومات الأطراف.
+                </div>
+            </div>
+        </div>
+
+        <!-- Act 3: Stride (Slides 105-114) -->
+        <div class="slide-section" style="border-left: 5px solid var(--primary);">
+            <div class="slide-title-bar" style="background: rgba(56, 189, 248, 0.1);">
+                <span style="font-weight: 700; color: var(--primary);">التحكم بالسرعة: الـ Stride</span>
+                <span class="slide-number">Slides 105-114</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff; padding: 20px; border-radius: 12px;">
+                <img src="cv_4/Convolution_page-0106.jpg" alt="Stride Visualization" style="max-width: 70%;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مش دايما بدنا نمشي خطوة خطوة:</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Stride</span> ويرمز له بـ <span class="highlight-b" dir="ltr">S</span> هو
+                    "مقدار القفزة".
+                    <br><br>
+                    - إذا كان <span class="highlight-b" dir="ltr">S = 1</span>: بنمشي بكسل بكسل (تفاصيل دقيقة).
+                    <br>
+                    - إذا كان <span class="highlight-b" dir="ltr">S = 2</span>: بنط بكسل وبمر بغيره.. وهيك بنصغر حجم
+                    المخرجات للنص تقريباً!
+                    <br><br>
+                    🚀 <span class="highlight-b">الفائدة:</span> تقليل الحسابات وتصغير حجم الداتا لما نكون بدنا نشوف
+                    "الصورة الكبيرة" مش التفاصيل الصغيرة.
+                </div>
+            </div>
+        </div>
+
+        <!-- The Master Formula (Slides 115-116) -->
+        <div class="slide-section"
+            style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 3px solid var(--highlight-y); padding: 40px; margin-top: 50px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: var(--highlight-y); font-size: 2.5rem; font-weight: 900; text-transform: uppercase;">
+                    The Master Formula</h2>
+                <p style="color: var(--text-muted); font-size: 1.2rem;">المعادلة اللي بتلخص كل القصة:</p>
+            </div>
+
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 30px; position: relative; overflow: hidden; border: 1px solid rgba(254, 240, 138, 0.2);">
+                <!-- Formula Presentation -->
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 40px;" dir="ltr">
+                    <div
+                        style="font-size: 2.2rem; color: #fff; font-family: 'Cambria', serif; background: rgba(0,0,0,0.3); padding: 20px 40px; border-radius: 20px;">
+                        $$W_2 = \frac{W_1 - F + 2P}{S} + 1$$
+                    </div>
+                    <div
+                        style="font-size: 2.2rem; color: #fff; font-family: 'Cambria', serif; background: rgba(0,0,0,0.3); padding: 20px 40px; border-radius: 20px;">
+                        $$H_2 = \frac{H_1 - F + 2P}{S} + 1$$
+                    </div>
+                </div>
+
+                <div
+                    style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                    <div style="text-align: center;"><span class="highlight-g">\(W_1 / H_1\)</span>: حجم المدخل</div>
+                    <div style="text-align: center;"><span class="highlight-b">\(F\)</span>: حجم الفلتر</div>
+                    <div style="text-align: center;"><span class="highlight-y">\(P\)</span>: الـ <span
+                            class="eng-term">Padding</span></div>
+                    <div style="text-align: center;"><span class="highlight-r">\(S\)</span>: الـ <span
+                            class="eng-term">Stride</span></div>
+                </div>
+            </div>
+
+            <div class="explanation-box" style="margin-top: 30px; border: none; background: rgba(234, 179, 8, 0.1);">
+                <div style="color: var(--highlight-y); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">⚠️
+                    ملاحظة للمستقبل:</div>
+                <p style="margin: 0; line-height: 1.6;">
+                    إذا النتيجة طلعت مكسورة (مش عدد صحيح)، غالباً بنستخدم <span class="eng-term">Floor</span> (تقريب
+                    للأقل).
+                    تذكر دايماً إن عمق المخرجات <span dir="ltr">\(D_2\)</span> بساوي عدد الفلاتر <span
+                        dir="ltr">\(K\)</span> اللي استخدمتها.
+                </p>
+            </div>
+        </div>
+
+        <!-- Act 4: Depth & Volume (Slides 117-120) -->
+        <div class="slide-section" style="border-right: 5px solid var(--accent);">
+            <div class="slide-title-bar" style="background: rgba(250, 204, 21, 0.1);">
+                <span style="font-weight: 700; color: var(--accent);">القاعدة النهائية: الـ Depth</span>
+                <span class="slide-number">Slides 117-120</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff; padding: 20px; border-radius: 12px;">
+                <img src="cv_4/Convolution_page-0120.jpg" alt="Output Depth Rule" style="max-width: 70%;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش المخرجات "مُكعب"؟</div>
+                <div class="explanation-content">
+                    تذكرنا السلايدات بآخر قطعة في الأحجية:
+                    <br><br>
+                    - كل فلتر بيطلع لنا <span class="highlight-y">2D Feature Map</span>.
+                    <br>
+                    - إذا استخدمنا <span dir="ltr">\(K\)</span> من الفلاتر، رح نلاقي عندنا <span dir="ltr">\(K\)</span>
+                    من الطبقات فوق بعض.
+                    <br><br>
+                    ✨ <span class="highlight-g">النتيجة:</span> المخرج النهائي هو عبارة عن "حجم" (<span
+                        class="eng-term">Volume</span>) أبعاده هي <span dir="ltr">\(W_2 \times H_2 \times K\)</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- The Exercise Lab (Slides 121-129) -->
+        <div class="slide-section" style="background: #020617; border: 2px solid var(--primary); padding: 40px;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <div
+                    style="display: inline-block; background: var(--primary); color: #000; padding: 5px 20px; border-radius: 50px; font-weight: 900; margin-bottom: 15px;">
+                    PRACTICE LAB</div>
+                <h2 style="color: #fff; font-size: 2.2rem; font-weight: 800;"> تطبيق اللي تعلمته</h2>
+            </div>
+
+            <!-- Case 1 Detailed -->
+            <div
+                style="margin-bottom: 60px; background: var(--card-dark); padding: 30px; border-radius: 24px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: start;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 20px;">أولاً: مثال الـ
+                            AlexNet</h3>
+                        <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.1rem;">
+                            في هاذ المثال، بدنا نحسب حجم مخرجات أول طبقة في شبكة مشهورة جداً.
+                            لاحظ إنه الصورة كبيرة والفلتر كمان حجمه كبير.
+                        </p>
+                        <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                            <ul style="list-style: none; padding: 0; margin: 0; font-family: 'Courier New', monospace;">
+                                <li style="margin-bottom: 10px;">📐 حجم الصورة: <span
+                                        class="highlight-g">227x227x3</span></li>
+                                <li style="margin-bottom: 10px;">📐 حجم الفلتر: <span class="highlight-b">11x11</span>
+                                </li>
+                                <li style="margin-bottom: 10px;">🚀 القفزة (Stride): <span class="highlight-r"
+                                        dir="ltr">4</span></li>
+                                <li style="margin-bottom: 10px;">📦 عدد الفلاتر (K): <span class="highlight-b"
+                                        dir="ltr">96</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="cv_4/Convolution_page-0123.jpg"
+                            style="max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    </div>
+                </div>
+                <div
+                    style="margin-top: 30px; padding: 25px; background: rgba(34, 197, 94, 0.05); border-radius: 15px; border-right: 4px solid var(--success);">
+                    <div style="font-weight: 800; color: var(--success); margin-bottom: 15px; font-size: 1.2rem;">طريقة
+                        الحساب:</div>
+                    <div style="font-size: 1.3rem; line-height: 2;">
+                        1. بنحسب العرض والارتفاع للمخرج: <span dir="ltr">\(W_2 = (227 - 11 + 0) / 4 + 1 = 55\)</span>
+                        <br>
+                        2. العمق النهائي بساوي عدد الفلاتر اللي استخدمناها (<span dir="ltr">\(K = 96\)</span>)
+                        <br>
+                        🎯 <span class="highlight-g">المخرج النهائي:</span> <b style="color:#fff;">55x55x96</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 2 Detailed -->
+            <div
+                style="margin-bottom: 60px; background: var(--card-dark); padding: 30px; border-radius: 24px; border: 1px solid rgba(250, 204, 21, 0.2);">
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: start;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="color: var(--accent); font-size: 1.8rem; margin-bottom: 20px;">ثانياً: مثال الـ Toy
+                            Example</h3>
+                        <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.1rem;">
+                            هاذ المثال أبسط عشان نفهم المبدأ بدون أرقام كبيرة. هون الصورة (Grayscale) وعمقها واحد بس.
+                        </p>
+                        <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                            <ul style="list-style: none; padding: 0; margin: 0; font-family: 'Courier New', monospace;">
+                                <li style="margin-bottom: 10px;">📐 حجم الصورة: <span class="highlight-g">32x32x1</span>
+                                </li>
+                                <li style="margin-bottom: 10px;">📐 حجم الفلتر: <span class="highlight-b">5x5</span>
+                                </li>
+                                <li style="margin-bottom: 10px;">🚀 القفزة (Stride): <span class="highlight-r"
+                                        dir="ltr">1</span></li>
+                                <li style="margin-bottom: 10px;">📦 عدد الفلاتر (K): <span class="highlight-b"
+                                        dir="ltr">6</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <img src="cv_4/Convolution_page-0125.jpg"
+                            style="max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    </div>
+                </div>
+                <div
+                    style="margin-top: 30px; padding: 25px; background: rgba(34, 197, 94, 0.05); border-radius: 15px; border-right: 4px solid var(--success);">
+                    <div style="font-weight: 800; color: var(--success); margin-bottom: 15px; font-size: 1.2rem;">طريقة
+                        الحساب:</div>
+                    <div style="font-size: 1.3rem; line-height: 2;">
+                        1. بنحسب المخرج: <span dir="ltr">\(W_2 = (32 - 5 + 0) / 1 + 1 = 28\)</span>
+                        <br>
+                        2. العمق هو دايماً الـ <span dir="ltr">\(K\)</span>، يعني <span dir="ltr">\(6\)</span>
+                        <br>
+                        🎯 <span class="highlight-g">المخرج النهائي:</span> <b style="color:#fff;">28x28x6</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div
+                style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 50px; border-radius: 30px; border: 2px dashed var(--primary); text-align: center; margin-top: 40px;">
+                <h3 style="color: var(--primary); font-size: 2.2rem; font-weight: 800; margin-bottom: 20px;">✏️ إختبر
+                    حالك: جرب تحلها!</h3>
+                <p style="font-size: 1.3rem; color: #cbd5e1; margin-bottom: 40px;">لو عندنا صورة ومدخلات زي هيك.. شو
+                    بطلع حجم المخرج؟</p>
+
+                <div
+                    style="display: inline-block; text-align: left; background: rgba(255,255,255,0.05); padding: 35px; border-radius: 20px; font-family: 'Courier New', monospace; font-size: 1.3rem; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px;">
+                    🔹 Input: <span class="highlight-g">7x7x3</span> <br>
+                    🔹 Filter: <span class="highlight-b">3x3</span> <br>
+                    🔹 Stride: <span class="highlight-r">1</span> <br>
+                    🔹 Padding: <span class="highlight-y">0</span> <br>
+                    🔹 Filters (K): <span class="highlight-b">2</span>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button
+                        onclick="const ans = document.getElementById('quiz-ans'); ans.style.display = ans.style.display === 'none' ? 'block' : 'none';"
+                        style="background: var(--primary); color: #000; border: none; padding: 18px 45px; border-radius: 12px; font-weight: 900; font-size: 1.3rem; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);">
+                        إظهار/إخفاء الحل 🎲
+                    </button>
+                    <div id="quiz-ans" style="display: none; margin-top: 40px; animation: fadeIn 0.4s ease;">
+                        <div style="font-size: 2.8rem; color: var(--success); font-weight: 900; margin-bottom: 10px;"
+                            dir="ltr">5 x 5 x 2</div>
+                        <p style="color: var(--text-muted); font-size: 1.2rem;">لأن العملية هي: <span dir="ltr"
+                                style="color:#fff;">\((7 - 3 + 0) / 1 + 1 = 5\)</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../nav.js"></script>
+</body>
+
+</html>

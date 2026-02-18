@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="cv-introduction.html" class="nav-link">👁️ 01. CV Introduction</a>
             <a href="overview-image-processing.html" class="nav-link">🖼️ 02. Image Processing</a>
             <a href="intro-video-processing.html" class="nav-link">🎬 03. Video Processing</a>
+            <a href="convolution.html" class="nav-link">🌀 04. Convolution</a>
         `;
     }
 
