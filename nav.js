@@ -212,6 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="intro-video-processing.html" class="nav-link">🎬 03. Video Processing</a>
             <a href="convolution.html" class="nav-link">🌀 04. Convolution</a>
             <a href="Semantic_Segmentation.html" class="nav-link">🎭 05. Semantic Segmentation</a>
+            <a href="Vision_Transformer.html" class="nav-link">🤖 06. Vision Transformer</a>
         `;
     }
 

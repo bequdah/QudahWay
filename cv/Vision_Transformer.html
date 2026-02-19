@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Vision Transformer</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <!-- MathJax for Formula Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            /* Light Blue */
+            --accent: #facc15;
+            /* Yellow */
+            --success: #34d399;
+            /* Green */
+            --danger: #fb7185;
+            /* Red */
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        /* Slide Card System */
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-r {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-g {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Quiz & Lab Styles */
+        .quiz-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .answer-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(56, 189, 248, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(56, 189, 248, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(56, 189, 248, 0.08)'; this.style.transform='translateY(0)'">
+                    🏠 العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.9rem;">
+                    QudahWay / CV / Vision Transformer
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> CV</h1>
+            <p class="subtitle">Vision Transformer (ViT) | محولات الرؤية</p>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-title"> القصة: لما الكمبيوتر بطل يشوف الصورة بكسلات، وصار يقرأها قراءة!</div>
+            <div class="story-content">
+                تذكروا لما كنا نحكي عن الـ <span class="eng-term">CNN</span> وكيف كانت بتمشي بفلتر صغير على الصورة؟ هاي
+                الطريقة كانت الملكة لسنين طويلة. بس في سنة 2020، إجا حدا وحكا: ليش ما نعامل الصورة كأنها نص؟
+                <br><br>
+                في هاض الشابتر، رح نشوف كيف بنقطع الصورة لقطع (<span class="eng-term">Patches</span>)، وبنعطي كل قطعة
+                هويتها، وبنخليها "تسولف" مع باقي القطع عشان تفهم الصورة الكبيرة. هاض التحول هو اللي خلى الذكاء الاصطناعي
+                يوصل لمستويات خرافية اليوم.
+                <br><br>
+                <span class="highlight-y"> هاض الشابتر هو "الموضة" الحالية في عالم الـ AI!</span>
+            </div>
+        </div>
+
+        <!-- Slide 01: Title -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 01</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Vision Transformer (ViT)</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0001.jpg" alt="Title Slide">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">بداية الرحلة</div>
+                <div class="explanation-content">
+                    اليوم بدنا نحكي عن الـ <span class="eng-term">Vision Transformer</span>، أو اختصاراً <span
+                        class="highlight-b">ViT</span>. هاض المودل هو اللي قلب الموازين وخلى تقنيات معالجة اللغات (زي
+                    GPT) تدخل بقوة في معالجة الصور.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 02: What is ViT? -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 02</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">What is Vision Transformer (ViT)?</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0002.jpg" alt="What is ViT">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو هو الـ ViT اصلاً؟</div>
+                <div class="explanation-content">
+                    ببساطة، الـ <span class="eng-term">ViT</span> هو تطبيق لمعمارية الـ <span
+                        class="eng-term">Transformer</span> على تصنيف الصور. عشان يشتغل، لازم نعرف أربع نقاط رئيسية:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">تقطيع الصورة:</span> بنقص الصورة لمربعات صغيرة بنسميها <span
+                                class="eng-term">Patches</span>.</li>
+                        <li><span class="highlight-b">التمثيل الرقمي (Embedding):</span> بنحول كل مربع لمجموعة أرقام
+                            (Vector) يفهمها الكمبيوتر.</li>
+                        <li><span class="highlight-y">المعلومات المكانية:</span> بنضيف أرقام بتعرف الكمبيوتر "وين هاض
+                            المربع مكانه بالصورة" (<span class="eng-term">Positional Information</span>).</li>
+                        <li><span class="highlight-b">الـ Self-Attention:</span> الميكانيكية السحرية اللي بتخلي كل قطعة
+                            "تركز" على القطع الثانية المهمة عشان تفهم شو بالصورة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 03: Architecture Diagram -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 03</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Architecture of ViT Diagram</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_6/Vision Transformer _page-0003.jpg" alt="ViT Architecture Diagram">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">نظرة على "الهيكل" العظمي للمودل</div>
+                <div class="explanation-content">
+                    شوف هالصورة معي، هاي بتلخص كل العملية:
+                    <ol dir="rtl" style="margin-top: 15px;">
+                        <li>بتبلش الصورة تنقسم لـ <span class="highlight-b">Patches</span>.</li>
+                        <li>بتحولوا لـ <span class="eng-term">Linear Projection</span> (يعني بنمط مطهم لخط واحد).</li>
+                        <li>بنضيف عليهم <span class="highlight-y">[class] token</span> (هاض أهم واحد، هو اللي بجمع
+                            الخلاصة).</li>
+                        <li>بيدخلوا كلهم على الـ <span class="eng-term">Transformer Encoder</span> اللي فيه <span
+                                class="highlight-g">Multi-Head Attention</span> وطبقات <span
+                                class="eng-term">MLP</span>.</li>
+                        <li>بالآخر، الـ <span class="eng-term">MLP Head</span> بحكيلك الصورة شو فيها (سيارة، عصفور،
+                            إلخ).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 04: Architecture Steps -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 04</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Architecture of ViT Steps</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0004.jpg" alt="ViT Architecture Steps">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">خطوات العمل بالترتيب</div>
+                <div class="explanation-content">
+                    عشان ما نضيع، هاي هي الخطوات الخمسة اللي بتصير جوا:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">1. التقطيع:</span> بنقص الصورة لقطع، مثلاً كل قطعة $16 \times 16$
+                            بكسل.</li>
+                        <li><span class="highlight-b">2. التسطيح (Flatten):</span> بنحول المربع الصغير لخط واحد من
+                            الأرقام وبنعمله <span class="eng-term">Embedding</span>.</li>
+                        <li><span class="highlight-y">3. الترقيم:</span> بنضيف الـ <span class="eng-term">Positional
+                                Encoding</span> عشان نعرف مين جنب مين.</li>
+                        <li><span class="highlight-b">4. التغذية:</span> بندخل هالتسلسل من القطع على الـ <span
+                                class="eng-term">Transformer Encoder</span>.</li>
+                        <li><span class="highlight-g">5. التصنيف:</span> بناخد المخرج تبع الـ <span
+                                class="highlight-y">[CLS] token</span> بس، وهو اللي بحكم على الصورة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 05: Q, K, V -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 05</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Internal Mechanics: Q, K, V</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0005.jpg" alt="Q, K, V">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الثلاثي المرح: Q، K، و V</div>
+                <div class="explanation-content">
+                    ركز معي هون لأن هاض هو "مخ" الـ Transformer. كل قطعة بالصورة بتتحول لـ 3 شغلات:
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">Q (Query):</span> "السؤال" اللي القطعة بتسأله لغيرها (مثلاً: "في
+                            حدا فيكم بشبه عين القطة؟").</li>
+                        <li><span class="highlight-b">K (Key):</span> "المفتاح" أو الهوية تبعت القطعة (مثلاً: "أنا
+                            بكسلات بمثل فرو رمادي").</li>
+                        <li><span class="highlight-g">V (Value):</span> "المعلومة" الحقيقية اللي رح تتمرر لو السؤال
+                            جاوبه صح.</li>
+                    </ul>
+                    <br>
+                    <span class="highlight-r">ملاحظة:</span> هاي الـ $Q, K, V$ بنطلعهم من خلال طبقات قابلة للتعلم
+                    بنسميها <span class="eng-term">Linear Projections</span> ($W_q, W_k, W_v$).
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 06: Why V? -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 06</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Why Multiply with V?</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0006.jpg" alt="Multiply with V">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش بنضرب في V بالآخر؟</div>
+                <div class="explanation-content">
+                    العملية بسيطة بس ذكية:
+                    <ol dir="rtl" style="margin-top: 15px;">
+                        <li>بنضرب الـ $Q$ في الـ $K$ عشان نطلع "علامات التشابه" (<span class="eng-term">Attention
+                                Scores</span>).</li>
+                        <li>بنستخدم الـ <span class="eng-term">Softmax</span> عشان نخلي مجموعهم 1 (يعني بنوزع الاهتمام
+                            كنسب مئوية).</li>
+                        <li><span class="highlight-y">الضرب في V:</span> هاي هي الخطوة اللي بتجمع "الفائدة". إحنا بنضرب
+                            النسبة اللي طلعناها في محتوى القطعة ($V$)، هيك بنكون أخدنا الخلاصة من كل القطع المهمة.</li>
+                    </ol>
+                    هاض بساعدنا نجمع المعلومات اللي بتهمنا بس من كل الصورة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 07: Example Setup -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 07</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Example Setup: The Cat Image</span>
+            </div>
+            <div class="slide-image-box" style="background: #fff;">
+                <img src="cv_6/Vision Transformer _page-0007.jpg" alt="Cat Example Setup">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مثال عملي: القطة والسجادة</div>
+                <div class="explanation-content">
+                    تعال نطبق المثال اللي بالصورة:
+                    <br>
+                    عندنا 4 قطع (<span class="eng-term">Patches</span>):
+                    <ul dir="rtl">
+                        <li><span class="highlight-b">Patch 1:</span> رأس القطة.</li>
+                        <li><span class="highlight-b">Patch 2:</span> جسم القطة.</li>
+                        <li><span class="highlight-b">Patch 3:</span> السجادة.</li>
+                        <li><span class="highlight-b">Patch 4:</span> الحيط.</li>
+                    </ul>
+                    كل وحدة منهم رح تروح تولد الـ $Q, K, V$ تبعونها عشان تبدأ "حفلة التعارف" بينهم.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 08: Step 1 & 2 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 08</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Step 1 & 2: Score Computation</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0008.jpg" alt="Step 1 and 2">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة الأولى والثانية: حساب النتائج</div>
+                <div class="explanation-content">
+                    تخيل إن "رأس القطة" (Patch 1) هو اللي قاعد بسأل بقية القطع:
+                    <ol dir="rtl" style="margin-top: 15px;">
+                        <li>بناخد الـ $Q_1$ تبعه وبنعملها <span class="eng-term">Dot Product</span> مع كل الـ $K$ للقطع
+                            الباقية ($K_1, K_2, K_3, K_4$).</li>
+                        <li>رح يطلع عندنا نتائج ($S_1, S_2, S_3, S_4$).</li>
+                    </ol>
+                    <span class="highlight-y">القاعدة:</span> كل ما كان الرقم أكبر، يعني القطعة هاي "بتهم" رأس القطة
+                    أكثر. أكيد جسم القطة رح ياخد علامة (Score) أعلى من الحيط أو السجادة في هالمرحلة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 09: Step 3 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 09</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Step 3: Weighted Sum</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0009.jpg" alt="Step 3: Weighted Sum">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة الثالثة: الخلاصة الموزونة</div>
+                <div class="explanation-content">
+                    هون بنحسب الـ <span class="eng-term">Output</span> النهائي لرأس القطة كـ "سؤال":
+                    <div dir="ltr"
+                        style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; text-align: center; margin: 20px 0;">
+                        $$Output_1 = S_1 \cdot V_1 + S_2 \cdot V_2 + S_3 \cdot V_3 + S_4 \cdot V_4$$
+                    </div>
+                    إحنا فعلياً "جمعنا" معلومات من كل القطع، بس أعطينا وزن ثقيل للقطع اللي بتخص القطة، وأهملنا تقريباً
+                    القطع اللي ما الها دخل.
+                    <br><br>
+                    <span class="highlight-g">تذكر:</span> هاي العملية بتنعاد لكل بكسل (أو قطعة) في الصورة، يعني كل قطعة
+                    بتعرف كل اللي حولها.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Deep Dive: Why V? -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 10</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Revisiting: Why Multiply by V?</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0010.jpg" alt="Why V insight">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش الـ V بالذات؟ (تعميق)</div>
+                <div class="explanation-content">
+                    لأن الـ $V$ هو اللي فيه "العفش" أو المحتوى الحقيقي للقطعة.
+                    <br><br>
+                    الـ $Q$ والـ $K$ شغلهم بس "دلالين"؛ بحكولك وين تطلع ومين مهم. بس لما تقرر وين تطلع، بدك تاخد
+                    المعلومة، وهي هاي الـ <span class="highlight-y">V vectors</span>. إحنا بنجمع المعلومات وبنعملها
+                    <span class="eng-term">Summarize</span> بذكاء.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: [CLS] Token -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 11</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">The Role of [CLS] Token</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0011.jpg" alt="CLS Token Role">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">البطل الخفي: الـ [CLS] Token</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">[CLS] Token</span> هو قطعة "إضافية" زيادة عن قطع الصورة، بنحطها أول
+                    التسلسل.
+                    <ul dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">جمع المعلومات:</span> هو ملوش صورة، بس وظيفته إنه يسأل كل القطع
+                            الثانية وياخد منهم الخلاصة.</li>
+                        <li><span class="highlight-b">الهوية الشاملة:</span> بنهاية الطبقات، هاض الـ Token بصير يمثل
+                            "الصورة ككل" مش بس قطعة منها.</li>
+                        <li><span class="highlight-g">التصنيف:</span> إحنا بنكب كل مخرجات القطع الثانية، وبناخد بس الـ
+                            <span class="eng-term">Output</span> تبع هاض الـ Token عشان ندخله على المصنف النهائي.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Final Steps -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span class="slide-number">Slide 12</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Final Processing Steps</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="cv_6/Vision Transformer _page-0012.jpg" alt="Final Steps">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">اللمسات الأخيرة</div>
+                <div class="explanation-content">
+                    بعد الـ <span class="eng-term">Attention</span>، بتمر المعلومات بخطوات روتينية بس ضرورية:
+                    <ol dir="rtl" style="margin-top: 15px;">
+                        <li><span class="highlight-y">Multi-head Attention Layer:</span> عشان نشوف الصورة من أكثر من
+                            زاوية (مش بس زاوية وحدة).</li>
+                        <li><span class="highlight-b">Add & Norm:</span> بنضيف القيم الأصلية (Residual) وبنعملها تنظيف
+                            (Normalization) عشان الشبكة ما تضيع.</li>
+                        <li><span class="highlight-y">Feed-forward MLP:</span> طبقة عصبية عادية عشان تعالج البيانات اللي
+                            طلعت.</li>
+                        <li><span class="highlight-g">Class Prediction:</span> بناخد مخرج الـ [CLS] وبنوديه للـ <span
+                                class="eng-term">MLP Head</span> اللي بحكيلنا النتيجة النهائية.</li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+</body>
+
+</html>
+
+</html>
