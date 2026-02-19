@@ -183,36 +183,36 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="nav-header">
             <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> Map
         </div>
-        <a href="../index.html" class="nav-link" style="color: #facc15; background: rgba(250, 204, 21, 0.05); border-color: rgba(250, 204, 21, 0.2); justify-content: center; text-align: center;">🏠 الرئيسية (الأكاديمية)</a>
-        <a href="index.html" class="nav-link" style="color: #38bdf8; background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.2); justify-content: center; text-align: center;">📋 لوحة التحكم</a>
+        <a href="../index.html" class="nav-link" style="color: #facc15; background: rgba(250, 204, 21, 0.05); border-color: rgba(250, 204, 21, 0.2); justify-content: center; text-align: center;"> الرئيسية (الأكاديمية)</a>
+        <a href="index.html" class="nav-link" style="color: #38bdf8; background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.2); justify-content: center; text-align: center;"> لوحة التحكم</a>
         <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
     `;
 
     if (isIR) {
         menuHTML += `
             <div class="nav-header" style="font-size: 1rem; color: #38bdf8;">Information Retrieval</div>
-            <a href="intro.html" class="nav-link">📂 00. Intro & Definitions</a>
-            <a href="text-retrieval.html" class="nav-link">📚 01. Text Retrieval Basics</a>
-            <a href="boolean-retrieval.html" class="nav-link">🔍 02. Boolean Retrieval</a>
-            <a href="text-operations.html" class="nav-link">📝 03. Text Operations</a>
-            <a href="phrase-queries.html" class="nav-link">💬 04. Phrase Queries</a>
-            <a href="skiplist.html" class="nav-link">⏭️ 05. Skip Lists</a>
-            <a href="vector_space_model.html" class="nav-link">🚀 06. Vector Space Model</a>
-            <a href="Probabilistic_Model.html" class="nav-link">🎲 07. Probabilistic Model</a>
+            <a href="intro.html" class="nav-link"> 00. Intro & Definitions</a>
+            <a href="text-retrieval.html" class="nav-link"> 01. Text Retrieval Basics</a>
+            <a href="boolean-retrieval.html" class="nav-link"> 02. Boolean Retrieval</a>
+            <a href="text-operations.html" class="nav-link"> 03. Text Operations</a>
+            <a href="phrase-queries.html" class="nav-link"> 04. Phrase Queries</a>
+            <a href="skiplist.html" class="nav-link"> 05. Skip Lists</a>
+            <a href="vector_space_model.html" class="nav-link"> 06. Vector Space Model</a>
+            <a href="Probabilistic_Model.html" class="nav-link"> 07. Probabilistic Model</a>
             <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
             <a href="exam.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05); justify-content: center;">
-                🎯 IR Exams Bank
+                 IR Exams Bank
             </a>
         `;
     } else if (isCV) {
         menuHTML += `
             <div class="nav-header" style="font-size: 1.1rem; color: #34d399;">Computer Vision</div>
-            <a href="cv-introduction.html" class="nav-link">👁️ 01. CV Introduction</a>
-            <a href="overview-image-processing.html" class="nav-link">🖼️ 02. Image Processing</a>
-            <a href="intro-video-processing.html" class="nav-link">🎬 03. Video Processing</a>
-            <a href="convolution.html" class="nav-link">🌀 04. Convolution</a>
-            <a href="Semantic_Segmentation.html" class="nav-link">🎭 05. Semantic Segmentation</a>
-            <a href="Vision_Transformer.html" class="nav-link">🤖 06. Vision Transformer</a>
+            <a href="cv-introduction.html" class="nav-link"> 01. CV Introduction</a>
+            <a href="overview-image-processing.html" class="nav-link"> 02. Image Processing</a>
+            <a href="intro-video-processing.html" class="nav-link"> 03. Video Processing</a>
+            <a href="convolution.html" class="nav-link"> 04. Convolution</a>
+            <a href="Semantic_Segmentation.html" class="nav-link"> 05. Semantic Segmentation</a>
+            <a href="Vision_Transformer.html" class="nav-link"> 06. Vision Transformer</a>
         `;
     }
 
