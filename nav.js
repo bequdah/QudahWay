@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Identify Subject
     const isIR = currentPath.includes('/ir/');
     const isCV = currentPath.includes('/cv/');
+    const isDS = currentPath.includes('/DS/');
 
     // 1. Create the styles
     const style = document.createElement('style');
@@ -176,9 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
     oldBtns.forEach(btn => btn.remove());
 
     // 2. Build the dynamic menu content
-    // ... (rest of the code below in nav.js)
-
-    // 2. Build the dynamic menu content
     let menuHTML = `
         <div class="nav-header">
             <span style="color: #38bdf8">Qudah</span><span style="color: #facc15">Way</span> Map
@@ -213,6 +211,12 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="convolution.html" class="nav-link"> 04. Convolution</a>
             <a href="Semantic_Segmentation.html" class="nav-link"> 05. Semantic Segmentation</a>
             <a href="Vision_Transformer.html" class="nav-link"> 06. Vision Transformer</a>
+        `;
+    } else if (isDS) {
+        menuHTML += `
+            <div class="nav-header" style="font-size: 1.1rem; color: #facc15;">Data Science</div>
+            <a href="intro-to-ds.html" class="nav-link"> 01. Intro to Data Science</a>
+            <a href="Machine_and_Deap Learning.html" class="nav-link"> 02. Machine & Deep Learning</a>
         `;
     }
 

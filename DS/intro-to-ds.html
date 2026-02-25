@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Intro to Data Science</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slide-image-placeholder {
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.9rem;">
+                    QudahWay / DS / Intro
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> DS</h1>
+            <p class="subtitle">Data Science | علم البيانات بلهجة أردنية فخمة</p>
+        </div>
+
+        <div class="story-section">
+            <div class="story-title">ليش داتا سينس؟ وكيف بلشت الحكاية؟</div>
+            <div class="story-content">
+                تخيل حالك قاعد بمحل قهوة، وصاحب المحل بده يعرف ليش الناس بتطلب "سبانش لاتيه" الصبح أكثر من
+                "الأمريكانو".. هو هون عنده <span class="highlight-y">بيانات</span> (طلبات الزبائن)، بس مش عارف شو يعمل
+                فيها.
+                <br><br>
+                زمان كان الموضوع يعتمد على "الحدس" أو الخبرة.. بس اليوم، كمية البيانات اللي بنشرها بالعالم صارت مهولة
+                جداً. الـ <span class="eng-term">Data Science</span> هو السحر اللي بمسك هاي البيانات "الفوضوية" وبحولها
+                لـ <span class="highlight-b">معلومات ذهبية</span> بتساعدنا نتخذ قرارات صح.
+            </div>
+        </div>
+
+        <!-- Slide 1 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Introduction to Data Science & the Data Science Workflow</span>
+                <span class="slide-number">Slide 01</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0001.jpg" alt="Slide 1" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أهلاً بك في عالم البيانات ! </div>
+                <div class="explanation-content">
+                    شوف هاي الصورة اللي بالسلايد، بتلخص لك "الفوضى" اللي بتعيشها لما تبلش رحلتك.. من الـ <span
+                        class="highlight-y">Cleaning Data</span> والتخلص من الـ <span class="highlight-b">Nulls</span>،
+                    لغاية ما توصل للـ <span class="highlight-y">Analysis Time</span> وتطلع بالنتائج.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Course Description</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0002.jpg" alt="Slide 2" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header"> شو ناويين ندرس؟</div>
+                <div class="explanation-content">
+                    ركز معي بالنقاط هون:
+                    <ul>
+                        <li><span class="highlight-b">End-to-End Lifecycle:</span> يعني رح نتعلم القصة من "طقطق للسلام
+                            عليكم"، من فهم المشكلة لغاية ما نشغل الموديل.</li>
+                        <li><span class="highlight-y">Preprocessing & Feature Engineering:</span> هاذ "مطبخ" البيانات،
+                            هون بننظف وبنجهز المقادير الصح.</li>
+                        <li><span class="highlight-b">Data Driven Storytelling:</span> وهذا أهم إشي؛ إنك تحكي "قصة" من
+                            ورا الأرقام، مش بس ترمي جداول وجرافات!</li>
+                    </ul>
+                    <span class="highlight-y">الفرق عن كورسات الـ ML الثانية:</span> هون التركيز على "مشاكل العالم
+                    الحقيقي" واتخاذ القرارات، مش بس خوارزميات ناشفة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Science Life Cycle</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0003.jpg" alt="Slide 3" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الدائرة السحرية (Life Cycle) بالتفصيل:</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="highlight-y">1. Business Problem Understanding:</span>
+                        أهم خطوة! هون بنقعد مع صاحب الشغل ونفهم شو المشكلة اللي بتوجعه.. هل بده يزيد مبيعات؟ ولا بده
+                        يعرف ليش الزبائن بيتركوه؟ بدون فهم المشكلة، كل الشغل بكون عالفاضي.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. Data Collection:</span>
+                        مرحلة "اللم".. هون بنجمع البيانات من كل مكان؛ من قواعد بيانات الشركة، من النت، أو حتى من ملفات
+                        اكسل قديمة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">3. Data Cleaning and Preparation:</span>
+                        بتاخذ 80% من وقتنا! هون بنشيل البيانات الغلط، وبنرتب الداتا عشان تكون جاهزة للتحليل. زي اللي
+                        بنقي العدس قبل ما يطبخه!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">4. Exploratory Data Analysis (EDA):</span>
+                        مرحلة الاستكشاف.. بنرسم جرافات وبنشوف العلاقات بين المتغيرات. هون بنبلش نلمح "القصة" اللي
+                        مخبيتها الأرقام.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">5. Feature Engineering:</span>
+                        هون "الفن".. بنبتكر متغيرات جديدة من البيانات الموجودة عنا عشان نساعد الموديل يفهم أحسن (مثلاً:
+                        نحسب العمر من تاريخ الميلاد).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">6. Machine Learning:</span>
+                        هون "المختبر".. بنختار الخوارزمية الصح، وبندربها على البيانات عشان تتعلم وتصير تقدر تتوقع
+                        المستقبل.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">7. Model Evaluation:</span>
+                        بدنا نتأكد من شغلنا.. بنختبر الموديل ببيانات جديدة عشان نعرف كم نسبة الدقة وهل فعلاً بحل
+                        المشكلة؟
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">8. Data Visualization:</span>
+                        النهاية السعيدة.. بنحول كل هاي التعقيدات لصور وجرافات سهلة ومفهومة للمدراء، عشان يتخذوا القرار
+                        الصح.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Data Science?</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0004.jpg" alt="Slide 4" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخلاصة.. شو هو هالعلم؟</div>
+                <div class="explanation-content">
+                    هو مجال "عابر للقارات" (<span class="eng-term">Interdisciplinary</span>) هدفه استخراج "الرؤى" (<span
+                        class="eng-term">Insights</span>) من قلب الداتا.
+                    <br><br>
+                    بيعتمد على 3 أعمدة أساسية (شوف الرموز بالسلايد):
+                    <ul>
+                        <li>📉 <span class="highlight-b">Statistics:</span> عشان نفهم التوزيع والاحتمالات.</li>
+                        <li>🤖 <span class="highlight-y">Machine Learning:</span> عشان نخلي الكمبيوتر "يتحزر" بذكاء.
+                        </li>
+                        <li>🧠 <span class="highlight-b">Domain Expertise:</span> تكون فاهم بالمجال اللي بتطبق فيه (طب،
+                            بنوك، تسويق).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Science Pipeline</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0005.jpg" alt="Slide 5" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ Pipeline (الماسورة الذكية):</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Pipeline</span> هو "خط الإنتاج" اللي بيمشي فيه الشغل.. هو نظام مرتب
+                    ومؤتمت (<span class="eng-term">Automated</span>) ببلش بجمع البيانات وبنتهي بموديلات جاهزة للتشغيل.
+                    <br><br>
+                    <span class="highlight-y">ليش مهم؟</span> عشان يضمن لنا 3 شغلات :
+                    <ul>
+                        <li>✅ <span class="highlight-b">Data Quality:</span> دايماً نضمن نظافة الداتا.</li>
+                        <li>✅ <span class="highlight-y">Reproducibility:</span> إذا رجعت شغلت الخط كمان مرة، تطلع نفس
+                            النتائج.</li>
+                        <li>✅ <span class="highlight-b">Scalability:</span> يقدر يتحمل بيانات ضخمة بدون ما ينهار!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Key Components of Data Science</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0006.jpg" alt="Slide 6" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المكونات الأساسية للعبة:</div>
+                <div class="explanation-content">
+                    هاي هي "العدة" اللي لازم تكون معك دايماً:
+                    <ul>
+                        <li><span class="highlight-y">Data Collection:</span> كيف تلم الداتا صح.</li>
+                        <li><span class="highlight-b">Data Wrangling:</span> تنظيف "المصايب" الموجودة بالبيانات.</li>
+                        <li><span class="highlight-y">EDA:</span> تحليل استكشافي عشان تفهم شو القصة.</li>
+                        <li><span class="highlight-b">Feature Engineering:</span> تجهيز "الميزات" القوية للموديل.</li>
+                        <li><span class="highlight-y">Model Building:</span> بناء وتدريب الموديل الذكي.</li>
+                        <li><span class="highlight-b">Deployment:</span> تشغيل الموديل في العالم الحقيقي وتفسير نتايجه.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why is Data Science Important?</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0007.jpg" alt="Slide 7" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش وجع الراس هاد كله؟ ليش علم البيانات مهم؟</div>
+                <div class="explanation-content">
+                    شوف يغالي، الموضوع مش بس كود وأرقام، الموضوع هو "قوة":
+                    <div class="detail-item">
+                        <span class="highlight-y">⚖️ Helps in decision-making:</span>
+                        بدل ما المدير يقرر "بناءً على إحساسه"، بقرر بناءً على <span class="highlight-b">حقائق</span>.
+                        الأرقام ما بتكذب!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">🧠 Automates tasks:</span>
+                        ليش نخلي موظف يسوي شغلة مكررة؟ بنخلي الـ <span class="eng-term">AI</span> يسويها عنه بلمح البصر
+                        وبدقة أعلى.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">📈 Improves efficiency:</span>
+                        بنفهم الزبون شو بده بالظبط، وبنحسن تجربته، وبنقلل الهدر بالوقت والمصادر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">💰 Generates business value:</span>
+                        بالآخر، الشركات بدها تزيد أرباحها. علم البيانات هو اللي بكشف "فرص ذهبية" ما حدا شايفها غير
+                        الموديل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Importance of Data Science Pipeline (1/2)</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0008.jpg" alt="Slide 8" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش لازم يكون عنا "Pipeline" مرتب؟ (النصف الأول)</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="highlight-y">a) Efficiency:</span>
+                        أتمتة العمليات بتوفر وقت وجهد خرافي. بدل ما تقعد إنت تنظف الداتا بإيدك كل يوم، الخطوة هاي بتصير
+                        تلقائية.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">b) Consistency:</span>
+                        الخطوات ثابتة، والنتائج دايماً موثوقة. مش اليوم يطلع معك شكل وبكرة شكل!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">c) Reproducibility:</span>
+                        هاذ حجر الأساس بالعلم. لو أي حدا ثاني أخذ نفس الداتا والبايب لاين تبعك، لازم يطلع معه نفس نتيجتك
+                        بالظبط.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">d) Scalability:</span>
+                        لو صار عندك بدل مليون سجل، مليار سجل.. البايب لاين الصح بتحمل الضغط وما بنفجر بوجهك! 🚀
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Importance of Data Science Pipeline (2/2)</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0009.jpg" alt="Slide 9" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تكملة فوائد البايب لاين.. ركز هون!</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="highlight-y">e) Error Reduction:</span>
+                        البشر بغلطوا، بس الكود (إذا انكتب صح) ما بغلط. الأتمتة بتقلل فرص الأخطاء اليدوية "البايخة".
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">f) Flexibility:</span>
+                        الدنيا بتتغير، وبدك تغير مصدر البيانات؟ عادي، بتعدل جزء صغير بالبايب لاين بدون ما تهدم كل اللي
+                        بنيته.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">g) Resource Optimization:</span>
+                        البايب لاين بيعرف كيف يستغل "قوة الكمبيوتر" صح بالسحب والتدريب، خصوصاً بالـ <span
+                            class="eng-term">Hyperparameter tuning</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">h) Effective Collaboration:</span>
+                        لما التيم كله يشتغل على نفس البايب لاين، بصير الكل فاهم شو بصير، وبقدروا يطوروا على شغل بعض
+                        بسهولة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Stages in Data Science Pipeline</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0010.jpg" alt="Slide 10" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مراحل الشغل (الجد بلش هون)</div>
+                <div class="explanation-content">
+                    هون السلايد بقلك إنه البايب لاين بيتكون من عدة مراحل محورية، وكل مرحلة لها دورها "البطولي" في تحويل
+                    الداتا الخام لذهب.
+                    <br><br>
+                    <span class="highlight-y">ملاحظة:</span> الـ <span class="eng-term">Architecture</span> ممكن يختلف
+                    من مشروع لثاني، بس المراحل اللي رح نشوفها بالسلايدات الجاية هي "أبجدية" علم البيانات اللي ما بحيد
+                    عنها حدا.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Stages in Data Science Pipeline (1/3)</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0011.jpg" alt="Slide 11" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مراحل البايب لاين (الجزء الأول):</div>
+                <div class="explanation-content">
+                    هون بنبلش بالتفاصيل المهمة جداً:
+                    <div class="detail-item">
+                        <span class="highlight-y">a) Data Collection:</span>
+                        البداية من جمع البيانات.. ممكن نستخدم <span class="eng-term">Kaggle</span> أو نسحب من <span
+                            class="eng-term">APIs</span>. المهم نجمع "المواد الخام" صح.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">b) Data Preprocessing:</span>
+                        شغل "المطبخ".. بنعالج القيم المفقودة (<span class="eng-term">Missing data</span>) وبنعمل <span
+                            class="eng-term">Normalization</span> للداتا.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">c) Data Exploration (EDA):</span>
+                        مرحلة "السونار".. بنفهم العلاقات بين الأرقام ونطلع رؤى أولية قبل التدريب الثقيل.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">d) Feature Engineering:</span>
+                        صناعة "الميزات".. بنختار أنسب المتغيرات اللي بتخلي الموديل تبعنا أذكى ما يمكن.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Stages in Data Science Pipeline (2/3)</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0012.jpg" alt="Slide 12" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مراحل البايب لاين (الجزء الثاني):</div>
+                <div class="explanation-content">
+                    بنكمل المراحل باتجاه "التشغيل" الفعلي:
+                    <div class="detail-item">
+                        <span class="highlight-y">f) Model Optimization:</span>
+                        تحسين الموديل.. بنلعب بالـ <span class="eng-term">Hyperparameters</span> عشان نوصل لأعلى دقة
+                        ممكنة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">g) Model Deployment:</span>
+                        تجهيز الموديل "للواقع".. بنشغله في بيئة العمل الحقيقية وبنبدأ نراقبه.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">h) Automation & Orchestration:</span>
+                        "المايسترو".. بنخلي كل العمليات المكررة تمشي لحالها وبسهولة وبدون تدخل يدوي دائم.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">i) Tools & Frameworks:</span>
+                        اختيار "العدة".. بنستخدم المكتبات اللي بتناسب مشروعنا (زي بايثون، سكاي ليرن، إلخ).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Stages in Data Science Pipeline (3/3)</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0013.jpg" alt="Slide 13" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">اللمسات النهائية (الجودة):</div>
+                <div class="explanation-content">
+                    عشان شغلك يكون "بروفيشنال" وما يضيع عالفاضي:
+                    <div class="detail-item">
+                        <span class="highlight-y">j) Best practices & Documentation:</span>
+                        التوثيق هو "كاتالوج" شغلك.. لازم توثق كل خطوة عشان غيرك يعرف شو سويت وكيف يكمل.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">k) Testing & Validation:</span>
+                        الاختبار الصارم.. لازم نتأكد إن الموديل دايماً بيعطي نتائج صحيحة وموثوقة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">l) Scalability & Performance:</span>
+                        القدرة على النمو.. لازم البايب لاين يتحمل ضغط البيانات الكبيرة ويتطور معها.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Real-World Applications</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0014.jpg" alt="Slide 14" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وين بنشوف علم البيانات في حياتنا؟</div>
+                <div class="explanation-content">
+                    التطبيقات الحقيقية بتسمع فيها كل يوم:
+                    <ul>
+                        <li><span class="highlight-y">🏥 Healthcare:</span> توقع الأمراض وتشخيصها بدقة وصناعة دواء مخصص.
+                        </li>
+                        <li><span class="highlight-b">💰 Finance:</span> كشف الاحتيال المالي وتقييم مخاطر القروض
+                            بالبنوك.</li>
+                        <li><span class="highlight-y">🎯 Marketing:</span> تقسيم الزبائن وفهم شو بدهم قبل ما يطلبوا هم!
+                        </li>
+                        <li><span class="highlight-b">🛒 E-commerce:</span> اقتراح المنتجات (زي نون وأمازون) وتوقع
+                            الطلب.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Science Career Paths</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0015.jpg" alt="Slide 15" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وين ممكن تشتغل بهذا المجال؟ 💼</div>
+                <div class="explanation-content">
+                    عالم البيانات كبير، وفي كثير "تخصصات" ممكن تختارها حسب ميولك:
+                    <div class="detail-item">
+                        <span class="highlight-y">Data Scientist:</span> "الكل في واحد".. بيحلل، بيبني موديلات، وبطلع
+                        بحلول للمشاكل.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Data Analyst:</span> "صائد الرؤى".. بيركز أكثر على تحليل الـ <span
+                            class="eng-term">Historical data</span> وطلع تقارير.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">ML Engineer:</span> "المهندس الميكانيكي للموديلات".. بيركز على هندسة
+                        الموديلات وتطويرها بشكل تقني بحت.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Data Engineer:</span> "السباك".. هو اللي بيبني المواسير والـ <span
+                            class="eng-term">Pipelines</span> اللي بتمشي فيها الداتا.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Science Workflow: Overview</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0016.jpg" alt="Slide 16" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">خارطة طريق أي مشروع ناجح 🗺️</div>
+                <div class="explanation-content">
+                    عشان ما تضيع، لازم تمشي على <span class="eng-term">Workflow</span> واضح ببلش من جمع البيانات وبخلص
+                    بالـ <span class="eng-term">Deployment</span>.
+                    في السلايدات الجاية رح نفكك هاي المراحل السبعة وحدة وحدة بالتفصيل.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 1 - Problem Definition</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0017.jpg" alt="Slide 17" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 1: شو المشكلة أصلاً؟ 🤔</div>
+                <div class="explanation-content">
+                    قبل ما تكتب ولا سطر كود، لازم تفهم "البزنس" شو بده.
+                    <div class="detail-item">
+                        <span class="highlight-y">Understand Business Problem:</span> ليش أصلاً بدنا نعمل هذا المشروع؟
+                        شو المشكلة اللي بنحلها؟
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Success Metrics:</span> كيف رح نعرف إننا نجحنا؟ لازم نحدد أرقام وأهداف
+                        واضحة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 2 - Data Collection</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0018.jpg" alt="Slide 18" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 2: تجميع "العدة" (البيانات) 📥</div>
+                <div class="explanation-content">
+                    هون بنبلش نجمع الداتا من كل مكان ممكن:
+                    <div class="detail-item">
+                        <span class="highlight-y">Sources:</span> قواعد بيانات (<span class="eng-term">SQL</span>)،
+                        <span class="eng-term">APIs</span>، أو حتى "قحط" بيانات من المواقع (<span class="eng-term">Web
+                            Scraping</span>).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Tools:</span> استخدام مكتبات فخمة زي <span
+                            class="eng-term">Pandas</span> و <span class="eng-term">BeautifulSoup</span> عشان نسحب
+                        الداتا.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 3 - Data Cleaning & Wrangling</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0019.jpg" alt="Slide 19" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 3: التنظيف والترتيب 🧹</div>
+                <div class="explanation-content">
+                    أكثر خطوة بتاخد وقت (حوالي 80% من وقت المشروع!).
+                    <div class="detail-item">
+                        <span class="highlight-y">Cleaning:</span> معالجة القيم الناقصة (<span
+                            class="eng-term">Nulls</span>)، شطب التكرار، وتعديل الأرقام الشاذة (<span
+                            class="eng-term">Outliers</span>).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Feature Scaling:</span> توحيد مقاييس الداتا عشان الموديل ما يتخربط (زي
+                        تحويل الطول من سم لمتر).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 4 - Exploratory Data Analysis (EDA)</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0020.jpg" alt="Slide 20" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 4: مرحلة الاستكشاف (EDA) 🔍</div>
+                <div class="explanation-content">
+                    هون كأننا بنصور الداتا "أشعة".. بدنا نفهم خباياها:
+                    <div class="detail-item">
+                        <span class="highlight-y">Patterns & Correlations:</span> شو المتغيرات اللي بتأثر على بعض؟ ومين
+                        أهم شي بالداتا؟
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Visualization:</span> استخدام الرسومات البيانية عشان نوضّح الصورة
+                        للعيون.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 5 - Model Building</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0021.jpg" alt="Slide 21" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 5: بناء الموديل 🤖</div>
+                <div class="explanation-content">
+                    الآن بنعطي الداتا "للعقل الإلكتروني" عشان يقدر "يتعلم":
+                    <div class="detail-item">
+                        <span class="highlight-y">Selecting the Model:</span> بنختار الخوارزمية المناسبة (تصنيف، تنبؤ
+                        بأرقام، أو تجميع).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Training & Optimizing:</span> بنبلش ندرب الموديل ونعدل فيه لغاية ما
+                        يصير أداؤه ممتاز.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 6 - Model Evaluation</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0022.jpg" alt="Slide 22" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 6: كيف أداء الموديل؟ 📈</div>
+                <div class="explanation-content">
+                    مش بس إننا عملنا موديل خلصنا.. لازم نعرف هو قديش "شاطر":
+                    <div class="detail-item">
+                        <span class="highlight-y">Performance Metrics:</span> بنقيس الدقة (<span
+                            class="eng-term">Accuracy</span>)، والـ <span class="eng-term">Precision</span> والـ <span
+                            class="eng-term">Recall</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Hyperparameter Tuning:</span> "تغيير عيارات" الموديل عشان نحصل على
+                        أحسن نسخة منه.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Step 7 - Model Deployment</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0023.jpg" alt="Slide 23" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخطوة 7: الموديل صار جاهز للشغل 🚀</div>
+                <div class="explanation-content">
+                    آخر خطوة هي إننا نطلع بالموديل للعلن:
+                    <div class="detail-item">
+                        <span class="highlight-y">Deployment:</span> تشغيل الموديل باستخدام <span
+                            class="eng-term">Flask</span> أو <span class="eng-term">FastAPI</span> عشان الناس تستخدمه.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Monitoring:</span> مراقبة أداء الموديل وتحديثه باستمرار لأنه الداتا
+                        بتتغير مع الوقت.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Required Skills for a Data Scientist</span>
+                <span class="slide-number">Slide 24</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0024.jpg" alt="Slide 24" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو لازم تتعلم عشان تكون "سفاح" بالمجال؟ 💪</div>
+                <div class="explanation-content">
+                    الخلطة السحرية لـ <span class="eng-term">Data Scientist</span> ناجح هي:
+                    <ul style="list-style: none; padding-right: 0;">
+                        <li>🐍 <span class="highlight-y">Programming:</span> بايثون بالدرجة الأولى، و SQL.</li>
+                        <li>📊 <span class="highlight-b">Statistics:</span> عشان تفهم الأرقام وتعرف إذا كانت النتائج
+                            "صدفة" ولا حقيقة.</li>
+                        <li>🧠 <span class="highlight-y">ML & DL:</span> قلب التخصص النابض.</li>
+                        <li>🎨 <span class="highlight-b">Data Viz:</span> القدرة على عرض النتائج بشكل "فنان".</li>
+                        <li>🗣️ <span class="highlight-y">Communication:</span> لأنك لازم تشرح نتائجك لناس مش تقنيين.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Workflow Summary Diagram</span>
+                <span class="slide-number">Slide 25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0025.jpg" alt="Slide 25" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ملخص الرحلة كاملة 🔄</div>
+                <div class="explanation-content">
+                    شايف الرسمة؟ هاي هي الدائرة اللي رح تلف فيها.. من العلم بالتحدي لغاية الوصول لحل مبني على بيانات
+                    حقيقية وبدقة عالية. تذكر دايماً إنها رحلة مستمرة مش مجرد خط مستقيم.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Summary Points</span>
+                <span class="slide-number">Slide 26</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0026.jpg" alt="Slide 26" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو اتعلمنا لغاية هسا؟ 📋</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        ✅ علم البيانات هو تخصص بيجمع مجالات كثيرة والهدف منه حل المشاكل.
+                    </div>
+                    <div class="detail-item">
+                        ✅ لازم يكون عندك مهارات تقنية (برمجة) ومهارات تحليلية (إحصاء).
+                    </div>
+                    <div class="detail-item">
+                        ✅ في أكثر من وظيفة وشغل ممكن تدخل فيه بهذا المجال.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Tools & Libraries Overview</span>
+                <span class="slide-number">Slide 27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0027.jpg" alt="Slide 27" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">العدة والمكتبات: نظرة عامة 🛠️</div>
+                <div class="explanation-content">
+                    هون مبلشين قسم جديد وجامد.. بدنا نحكي عن "الأسلحة" اللي رح نستخدمها في معركة البيانات.
+                    مش بس إنك تعرف شو هي، المهم تعرف متى تستخدم كل وحدة فيها. السلايد هاذ هو "الفهرس" لكل الأدوات اللي
+                    رح نمر عليها.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Python for Data Science</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0028.jpg" alt="Slide 28" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش بايثون بالذات؟ 🐍</div>
+                <div class="explanation-content">
+                    بايثون هي "اللغة الأم" لعلم البيانات اليوم.
+                    <div class="detail-item">
+                        <span class="highlight-y">Most widely used:</span> لأنها سهلة التعلم، وقريبة من لغة البشر، والكل
+                        بستخدمها.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Rich ecosystem:</span> عندها كمية مكتبات (Libraries) خرافية، شو ما خطر
+                        ببالك بدك تعمل بالداتا، بتلاقي له "مكتبة" جاهزة بتساعدك.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Essential Python Libraries</span>
+                <span class="slide-number">Slide 29</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0029.jpg" alt="Slide 29" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شلة المكتبات الأساسية (القمة) �</div>
+                <div class="explanation-content">
+                    شوف هاي "الخلطة" اللي ما بكمل أي مشروع بدونها:
+                    <ul>
+                        <li><span class="highlight-y">Pandas:</span> هاي الكل بالكل للجداول والبيانات (DataFrames).</li>
+                        <li><span class="highlight-b">NumPy:</span> ملك الأرقام والمصفوفات الحسابية الثقيلة.</li>
+                        <li><span class="highlight-y">Matplotlib & Seaborn:</span> الفنانين اللي برسموا لنا الداتا
+                            ونشوفها بعيونا.</li>
+                        <li><span class="highlight-b">Scikit-learn:</span> المختبر اللي فيه كل خوارزميات الـ Machine
+                            Learning.</li>
+                        <li><span class="highlight-y">TensorFlow & PyTorch:</span> الوحوش بتوع الـ Deep Learning والذكاء
+                            الاصطناعي العميق.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Manipulation with Pandas</span>
+                <span class="slide-number">Slide 30</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0030.jpg" alt="Slide 30" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">لعبة الجداول مع Pandas 🐼</div>
+                <div class="explanation-content">
+                    بانداس هي اللي بتخليك تتعامل مع الداتا كأنك شغال على "إكسل" بس بقوة برمجة جبارة:
+                    <div class="detail-item">
+                        <span class="highlight-y">DataFrames & Series:</span> هي الهياكل الأساسية (زي الجداول والأعمدة).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Reading & Writing:</span> بتقدر تقرأ من CSV، Excel، وحتى SQL بلمح
+                        البصر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Filtering & Transforming:</span> قص، لزق، فلتر، وغير شكل الداتا زي ما
+                        بدك.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 31 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Numerical Computing with NumPy</span>
+                <span class="slide-number">Slide 31</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0031.jpg" alt="Slide 31" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الرياضيات السريعة مع NumPy 🔢</div>
+                <div class="explanation-content">
+                    لما يكون عندك ملايين الأرقام، ما بينفع تستخدم "ليستات" بايثون العادية، لازمك <span
+                        class="eng-term">NumPy</span>:
+                    <ul>
+                        <li><span class="highlight-b">Arrays & Matrices:</span> بتتعامل مع البيانات كمصفوفات منظمة جداً
+                            وسريعة.</li>
+                        <li><span class="highlight-y">Vectorized operations:</span> بتعمل عمليات حسابية على ملايين
+                            الأرقام مرة وحدة بدون ما تضيع وقت بالـ <span class="eng-term">Loops</span>.</li>
+                        <li><span class="highlight-b">Random numbers:</span> توليد أرقام عشوائية لإجراء التجارب.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Visualization Tools</span>
+                <span class="slide-number">Slide 32</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0032.jpg" alt="Slide 32" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">حوّل الأرقام لصور فنية 📊</div>
+                <div class="explanation-content">
+                    الداتا بدون رسم بتضيع.. هون الأدوات اللي بتخلينا نفهم شو بصير:
+                    <div class="detail-item">
+                        <span class="highlight-y">Matplotlib:</span> هي الأساس، بتعمل منها كل أنواع الرسومات (Line, Bar,
+                        Pie).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Seaborn:</span> مبنية فوق ماتبلوتليب بس بتطلع رسومات "شيك" واحترافية
+                        أكثر وبسهولة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Plotly:</span> لو بدك جرافات "تفاعلية" (Interactive) بتقدر تحرك الماوس
+                        فوقها وتشوف تفاصيل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 33 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Machine Learning with Scikit-learn</span>
+                <span class="slide-number">Slide 33</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0033.jpg" alt="Slide 33" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مختبر تعلم الآلة: Scikit-learn 🤖</div>
+                <div class="explanation-content">
+                    هاي هي المكتبة "المقدسة" لأي <span class="eng-term">Data Scientist</span>:
+                    <ul>
+                        <li><span class="highlight-b">Classification & Regression:</span> فيها كل الموديلات الجاهزة
+                            للتصنيف والتنبؤ.</li>
+                        <li><span class="highlight-y">Model selection & evaluation:</span> بتساعدك تختار أحسن موديل
+                            وتقيس دقته.</li>
+                        <li><span class="highlight-b">Preprocessing:</span> فيها أدوات لتجهيز الداتا (نورمالايزيشن،
+                            تنظيف) قبل ما تدخل الموديل.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Deep Learning with TensorFlow & PyTorch</span>
+                <span class="slide-number">Slide 34</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0034.jpg" alt="Slide 34" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الذكاء العميق للبيانات المعقدة 🧠</div>
+                <div class="explanation-content">
+                    لما الموضوع يوصل لصور، صوت، أو داتا ضخمة جداً، بنروح للـ <span class="eng-term">Deep
+                        Learning</span>:
+                    <div class="detail-item">
+                        <span class="highlight-y">Neural networks:</span> بناء شبكات عصبية بتحاكي دماغ الإنسان.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Transfer learning:</span> استخدام موديلات "عبقرية" حدا غيرنا دربها،
+                        وبنعدل عليها لتناسبنا (زي موديلات جوجل وفيسبوك).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Summary</span>
+                <span class="slide-number">Slide 35</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/1-Data Science_page-0035.jpg" alt="Slide 35" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">خلاصة قسم الأدوات 🏁</div>
+                <div class="explanation-content">
+                    تذكر دوماً:
+                    <ul>
+                        <li>بايثون هي الأساس القوي.</li>
+                        <li>المكتبات اللي حكيناهم هم "صندوق العدة" تبعك.</li>
+                        <li>بدون "ممارسة" (Hands-on practice) كل هاذ بضل كلام نظري عالفاضي.. لازم تشمر عن إيديك وتبلش
+                            تكود!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Navigation Script -->
+        <script src="../nav.js"></script>
+</body>
+
+</html>

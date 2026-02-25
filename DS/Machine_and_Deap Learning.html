@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Machine & Deep Learning</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.8rem;">
+                    QudahWay / DS / ML & DL
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> DS</h1>
+            <p class="subtitle">Machine & Deep Learning | تعلم الآلة والتعلم العميق </p>
+        </div>
+
+
+
+        <!-- Slide 2 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Learning?</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0002.jpg" alt="Slide 2"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني "تعلم" أصلاً؟ 🤔</div>
+                <div class="explanation-content">
+                    قبل ما نحكي عن الماكينة، خلينا نفهم شو يعني تعلم للبشر:
+                    <div class="detail-item">
+                        <span class="highlight-y">تعريف "هربرت سيمون":</span> التعلم هو التغيرات اللي بتصير بالنظام
+                        وبتخليه يقدر يعمل نفس المهمة <span class="highlight-b">بكفاءة أعلى</span> في المرات الجاية. يعني
+                        مش بكرر وبس، بل بتحسن!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">أما بالماكينة (ML):</span> هو قدرة النظام على "الاكتساب التلقائي" و
+                        "دمج المعرفة" بدون تدخل بشري في كل خطوة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Machine Learning</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0003.jpg" alt="Slide 3"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تعلم الآلة بالمعنى الحرفي</div>
+                <div class="explanation-content">
+                    ببساطة، هي تكنولوجيا بتعلم الكمبيوتر كيف ينفذ مهام عن طريق <span class="highlight-y">التعلم من
+                        البيانات</span> بدل ما نبرمجه كود كود (<span class="eng-term">Explicitly programmed</span>).
+                    <br><br>
+                    الهدف النهائي؟ إننا نخلي النظام "يتوقع" (<span class="eng-term">Predictions</span>) بدقة لما نعطيه
+                    بيانات جديدة ما شافها من قبل. 🎯
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Examples of Predictions</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0004.jpg" alt="Slide 4"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">يا ترى شو الأشياء اللي العلم بيتوقعها؟</div>
+                <div class="explanation-content">
+                    شوف هاي الأمثلة اللي بالسلايد، هي حرفياً حياتنا اليومية:
+                    <ul>
+                        <li>🍏 <span class="highlight-b">تمييز الأشياء:</span> هاي صورة تفاحة ولا موزة؟</li>
+                        <li>🚗 <span class="highlight-y">سيارات ذاتية القيادة:</span> تمييز الناس اللي بتقطع الشارع عشان
+                            توقف.</li>
+                        <li>📖 <span class="highlight-b">فهم الكلام:</span> هل كلمة <span class="eng-term">book</span>
+                            هون معناها كتاب ولا "حجز" فندق؟</li>
+                        <li>📧 <span class="highlight-y">البريد المزعج:</span> هل هذا الإيميل <span
+                                class="eng-term">Spam</span> ولا إيميل شغل مهم؟</li>
+                        <li>🗣️ <span class="highlight-b">كلام ليوتيوب:</span> تحويل الكلام اللي بنحكيه لترجمة مكتوبة
+                            بدقة عالية.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is the difference between AI and ML?</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0005.jpg" alt="Slide 5"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ AI ولا الـ ML؟ شو الفرق؟ 🤔</div>
+                <div class="explanation-content">
+                    ركز بالرسمة (Venn Diagram)، هي بتشرح لك كل القصة:
+                    <div class="detail-item">
+                        <span class="highlight-y">Artificial Intelligence (AI):</span> هو العلم الكبير "المظلة" اللي
+                        هدفه محاكاة ذكاء البشر. أي إشي بخلي الكمبيوتر يبين ذكي هو AI.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Machine Learning (ML):</span> هو "جزء" من الـ AI، هو الطريقة اللي
+                        بنعلم فيها الكمبيوتر كيف يتعلم لحاله من البيانات بدل ما نعطيه قوانين ثابتة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Deep Learning (DL):</span> (اللون الغامق بالنص) هو "جزء" من الـ ML،
+                        بستخدم طبقات معقدة (شبكات عصبية) عشان يتعلم من كميات ضخمة من البيانات.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ML Workflow</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0006.jpg" alt="Slide 6"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بيمشي الشغل فعلياً؟ (Workflow) ⚙️</div>
+                <div class="explanation-content">
+                    العملية عبارة عن 5 خطوات أساسية ومرتبة:
+                    <div class="detail-item">
+                        <span class="highlight-y">1. Get Data:</span> نلم البيانات من المصادر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. Clean, Prepare & Manipulate:</span> ننظف الداتا ونرتبها (أصعب
+                        مرحلة!).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">3. Train Model:</span> ندرب الخوارزمية على البيانات.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">4. Test Data:</span> نختبر الموديل ببيانات جديدة عشان نتأكد من شطارته.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">5. Improve:</span> نعدل ونحسن لنوصل لأفضل نتيجة ممكنة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ML Algorithms Categories</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0007.jpg" alt="Slide 7"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أنواع خوارزميات الـ ML 📂</div>
+                <div class="explanation-content">
+                    خوارزميات تعلم الآلة بنقسمها لـ 4 عائلات أساسية:
+                    <div class="detail-item">
+                        <span class="highlight-y">Supervised Learning:</span> بنعطي الجهاز بيانات "معنونة" (<span
+                            class="eng-term">Labeled</span>).. يعني بنقوله هاي صورة بسة وهاي صورة كلب، وهو بتعلم يفرق
+                        بينهم.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Unsupervised Learning:</span> هون بنرمي له البيانات وبنقوله "دبّر
+                        حالك" استكشف الأنماط لحالك! وغالباً بكون البيانات مش معلومة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Semi-supervised:</span> خليط بينهم، شوية داتا معها ليبلات وباقي الداتا
+                        "قرعة" بدون أسماء.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Reinforcement Learning:</span> نظام "الثواب والعقاب".. الموديل بستكشف
+                        البيئة وإذا عمل صح بنعطيه "جائزة" وإذا غلط بنعطيه "مخالفة" ليتعلم.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Machine Learning Phases</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0008.jpg" alt="Slide 8"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مراحل الـ ML (تدريب وتوقع) 🔄</div>
+                <div class="explanation-content">
+                    الشغل بنقسم لمرحلتين كبار:
+                    <div class="detail-item">
+                        <span class="highlight-y">Training Phase:</span> هون الموديل "بدرس".. بنعطيه الصور والـ <span
+                            class="eng-term">Labels</span>، وبنطلع منه "ميزات" (<span class="eng-term">Features</span>)
+                        عشان يبني الخوارزمية تبعته.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Prediction Phase:</span> هون فحص "يوم الامتحان".. بنعطيه صورة جديدة ما
+                        شافها، وهو بستخدم اللي تعلمه (الـ <span class="eng-term">Trained Classifier</span>) عشان يطلع
+                        "توقيع" أو <span class="eng-term">Label</span> صح.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Classification vs Regression</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0009.jpg" alt="Slide 9"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">يا تصنيف.. يا رقم! (Classification vs Regression) ⚖️</div>
+                <div class="explanation-content">
+                    في الـ <span class="eng-term">Supervised Learning</span>، عنا نوعين من المشاكل:
+                    <div class="detail-item">
+                        <span class="highlight-y">Regression (الانحدار):</span> لما يكون الجواب "رقم".. مثلاً قديش درجة
+                        الحرارة بكرة؟ 84؟ 20؟ رقم مستمر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Classification (التصنيف):</span> لما يكون الجواب "فئة" (<span
+                            class="eng-term">Category</span>).. الجو بكرة "برد" ولا "شوب"؟ في سرطان ولا ما في؟ أبيض ولا
+                        أسود؟
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Objectives of Machine Learning</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0010.jpg" alt="Slide 10"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش بنعمل كل هاض؟ (الأهداف) 🥅</div>
+                <div class="explanation-content">
+                    بناءً ع المعلومات اللي عنا، هدفنا نوصل لـ:
+                    <ul>
+                        <li>توقع دقيق للحالات اللي <span class="highlight-y">ما شفناها</span> من قبل (<span
+                                class="eng-term">Unseen cases</span>).</li>
+                        <li>نفهم "شو" المدخلات اللي بتأثر ع النتيجة وكيف بتأثر.</li>
+                        <li>نقيم جودة التوقعات تبعتنا ونحسنها.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Classification Definition</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0011.jpg" alt="Slide 11"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تعريف التصنيف (Classification) بدقة 🎯</div>
+                <div class="explanation-content">
+                    التصنيف هو إننا نعطي الموديل مجموعة عينات (<span class="eng-term">Training set</span>)، كل عينة فيها
+                    "خصائص" (<span class="eng-term">Attributes</span>) و "فئة" (<span class="eng-term">Class
+                        label</span>).
+                    <br><br>
+                    الهدف: نبني موديل يقدر يحزر الـ <span class="eng-term">Class label</span> لأي عينة جديدة. وعشان
+                    نختبره، بنقسم بياناتنا لـ <span class="highlight-b">Training set</span> للتعلم و <span
+                        class="highlight-y">Test set</span> للتقييم.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Stages in a classification task</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0012.jpg" alt="Slide 12"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">خطوات عملية التصنيف 🪜</div>
+                <div class="explanation-content">
+                    العملية بتمشي في مسارين أساسيين زي ما إنت شايف بالرسمة:
+                    <div class="detail-item">
+                        <span class="highlight-y">Induction (الاستنتاج):</span> بنجيب الـ <span
+                            class="eng-term">Training Set</span> (البيانات اللي فيها الحل)، وبندخلها ع الـ <span
+                            class="eng-term">Learning Algorithm</span> عشان نبني الموديل. هاي مرحلة "بناء المعرفة".
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Deduction (الاستنباط):</span> بنجيب الـ <span class="eng-term">Test
+                            Set</span> (البيانات اللي ما بنعرف حلها)، وبنطبق عليها الموديل اللي بنيناه (<span
+                            class="eng-term">Apply Model</span>) عشان نطلع النتائج المتوقعة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Examples of classification tasks</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0013.jpg" alt="Slide 13"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أشكال التصنيف المختلفة 🎭</div>
+                <div class="explanation-content">
+                    مش كل التصنيف زي بعضه، عنا 3 أنواع رئيسية:
+                    <div class="detail-item">
+                        <span class="highlight-y">Binary Classification:</span> جوابين بس! (آه أو لأ).. زي إيميل مزعج أو
+                        لأ، ورم حميد أو خبيث.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Multiclass Classification:</span> لما يكون عنا أكثر من خيار، بس بنختار
+                        واحد بس! زي تصنيف صورة حيوان (كلب، قطة، حصان، عصفور).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Multi-label Classification:</span> هون الصورة ممكن تاخذ أكثر من تصنيف
+                        بنفس الوقت! زي صورة فيها Alice و Charlie مع بعض، الموديل لازم يطلع الإثنين.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Generalization</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0014.jpg" alt="Slide 14"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التعميم (Generalization) 🧩</div>
+                <div class="explanation-content">
+                    الهدف مش إن الموديل "يبصم" الداتا اللي أعطيناه إياها، الهدف إنه "يفهمها" عشان يقدر يحل داتا جديدة!
+                    <div class="detail-item">
+                        <span class="highlight-y">التعريف:</span> هو قدرة الموديل على توقع الـ <span
+                            class="eng-term">Class labels</span> لبيانات <span class="highlight-b">ما شافها من
+                            قبل</span> (<span class="eng-term">previously unseen</span>).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">كيف بنقيسه؟</span> بنستخدم الـ <span class="eng-term">Test set</span>
+                        اللي الموديل ما لمسها خلال التدريب، وبنشوف دقة توقعاته.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Generalization: Underfitting & Overfitting</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0015.jpg" alt="Slide 15"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مشاكل التعميم (الأوفر والآندر فت) 🚩</div>
+                <div class="explanation-content">
+                    لما الموديل يفشل في التعميم، بكون وقع في وحدة من هالمشكلتين:
+                    <div class="detail-item">
+                        <span class="highlight-y">Underfitting:</span> الموديل "كثير بسيط" ومش فاهم إشي، زي طالب ما درس
+                        بالمرة ودخل الامتحان. ما بقدر يمثل خصائص الداتا صح.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Overfitting:</span> الموديل "بصيم" بزيادة! حفظ الداتا بالأخطاء اللي
+                        فيها (الـ <span class="eng-term">Noise</span>)، فما بعرف يحل أي إشي بختلف شوي عن اللي حفظه.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Optimum (الأفضل):</span> هو التوازن بالنص، موديل فاهم الأنماط الأساسية
+                        وبقدر يعمم على داتا جديدة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Metrics for classifier performance</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0016.jpg" alt="Slide 16"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مصفوفة الارتباك (Confusion Matrix) 📉</div>
+                <div class="explanation-content">
+                    عشان نعرف الموديل شاطر ولا "هبّاد"، بنستخدم مصفوفة الارتباك، وهي بتعطينا 4 حالات:
+                    <div class="detail-item">
+                        <span class="highlight-y">True Positive (TP):</span> الموديل قال "صح" وهي فعلاً "صح". (بطل!).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">True Negative (TN):</span> الموديل قال "لأ" وهي فعلاً "لأ". (كمان
+                        بطل!).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">False Positive (FP):</span> الموديل قال "صح" بس هي طلعت "لأ" (بنسميها
+                        <span class="eng-term">Type 1 error</span>). زي جهاز الإنذار اللي برن وما في سرقة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">False Negative (FN):</span> الموديل قال "لأ" بس هي طلعت "صح" (بنسميها
+                        <span class="eng-term">Type 2 error</span>). وهي الأخطر! زي مريض سرطان والموديل يقوله "إنت
+                        سليم".
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">How to evaluate your model (Accuracy)</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0017.jpg" alt="Slide 17"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مقياس الدقة (Accuracy) 🎯</div>
+                <div class="explanation-content">
+                    أبسط مقياس في العالم: كم وحدة حزرنا صح من الكل؟
+                    <br><br>
+                    <span class="highlight-y">مشكلة الـ Accuracy:</span> أحياناً بتكون <span
+                        class="highlight-b">كذابة!</span> لو عنا 100 مريض، 5 منهم معهم سرطان و 95 سليمين.. لو الموديل
+                    "هبيد" وبحكي للكل "إنت سليم"، رح تكون دقته 95%! بس هو فعلياً فشل في مهمته الأساسية (كشف الـ 5 مرضى).
+                    عشان هيك الـ Accuracy لحالها ما بتكفي.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">How to evaluate your model (Precision, Recall & F1)</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0018.jpg" alt="Slide 18"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المقاييس الأكثر ذكاءً 🧠</div>
+                <div class="explanation-content">
+                    عشان نحل مشكلة الـ Accuracy، بنستخدم:
+                    <div class="detail-item">
+                        <span class="highlight-y">Precision (الدقة):</span> من كل الأشياء اللي الموديل حكى عنها "صح"، كم
+                        وحدة طلعت فعلاً "صح"؟ (بركز ع الصدق).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Recall (الاسترجاع):</span> من كل الـ "صح" الحقيقي الموجود، كم وحدة
+                        الموديل قدر يلقطها؟ (بركز ع الشمولية).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">F1 Score:</span> هو "الوسط" بينهم.. إذا كان عالي، معناه الموديل شاطر
+                        بالـ Precision والـ Recall مع بعض.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+</body>
+
+</html>
