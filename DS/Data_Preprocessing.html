@@ -17,8 +17,9 @@
             --text-muted: #94a3b8;
             --primary: #38bdf8;
             --accent: #facc15;
-            --danger: #fb7185;
             --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
         }
 
         body {
@@ -26,77 +27,98 @@
             color: var(--text-light);
             font-family: 'Cairo', sans-serif;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .main-container {
+        .container {
             max-width: 1000px;
-            margin: 0 auto;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
 
         .slide-section {
-            background-color: var(--card-dark);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 50px;
+            background: var(--card-dark);
+            border-radius: 24px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .slide-title-bar {
-            background: linear-gradient(90deg, var(--primary), #0ea5e9);
+            background: rgba(15, 23, 42, 0.6);
             padding: 15px 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #fff;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
         }
 
         .slide-image-box {
-            text-align: center;
+            width: 100%;
             background: #000;
             padding: 10px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
         }
 
         .explanation-box {
-            background: rgba(15, 23, 42, 0.6);
-            border-right: 5px solid var(--accent);
-            padding: 25px;
-            border-radius: 0 15px 15px 0;
-            font-size: 1.15rem;
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
         }
 
         .explanation-header {
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
         }
 
         .explanation-content {
-            color: var(--text-light);
-            text-align: justify;
-        }
-
-        .eng-term {
-            font-family: 'Inter', sans-serif;
-            color: var(--primary);
-            font-weight: 600;
-            direction: ltr;
-            display: inline-block;
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
         }
 
         .highlight-y {
@@ -109,43 +131,44 @@
             font-weight: 700;
         }
 
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
         .detail-item {
-            margin-top: 15px;
-            padding: 10px 15px;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            border-left: 2px solid var(--primary);
-        }
-
-        ul {
-            padding-right: 20px;
-            margin-top: 10px;
-        }
-
-        li {
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
             margin-bottom: 10px;
         }
 
-        /* Mobile adjustments */
+        ul {
+            padding-right: 25px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
+            .container {
+                padding: 20px 15px;
             }
 
-            .slide-section {
-                padding: 15px;
-            }
-
-            .slide-title-bar {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
+            h1 {
+                font-size: 2.5rem;
             }
 
             .explanation-box {
-                border-right: none;
-                border-top: 5px solid var(--accent);
-                border-radius: 15px;
+                padding: 20px;
             }
         }
     </style>
@@ -153,13 +176,903 @@
 
 <body>
 
-    <div class="main-container">
-        <!-- Start Slides Here -->
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.8rem;">
+                    QudahWay / DS / DP
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> DS</h1>
+            <p class="subtitle">Data Preprocessing & Cleaning | معالجة وتنظيف البيانات</p>
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Data Preprocessing?</span>
+                <span class="slide-number">Slide 2</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0002.jpg" alt="Slide 2" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني معالجة البيانات؟ 🤔🧹</div>
+                <div class="explanation-content">
+                    الداتا اللي بتيجينا من "الواقع" عمرها ما بتكون نظيفة أو جاهزة للاستخدام فوراً.
+                    <ul>
+                        <li><span class="highlight-y">التعريف:</span> هي مجموعة تقنيات بنستخدمها عشان ننظف، نحول، ونجهز
+                            "الداتا الخام" (<span class="eng-term">Raw Data</span>) لتصير صالحة للتحليل والذكاء
+                            الاصطناعي.</li>
+                        <li><span class="highlight-b">ليش ضرورية؟</span> لأن الداتا اللي بنجمعها غالباً بتكون ناقصة،
+                            فيها أخطاء، أو مش منسقة. خوارزميات الـ ML بتفترض إن الداتا نظيفة وموزعة صح، وأي خلل بالداتا
+                            رح يضرب دقة الموديل.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    </div>
+        <!-- Slide 3 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Where Data Preprocessing Fits</span>
+                <span class="slide-number">Slide 3</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0003.jpg" alt="Slide 3" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">موقعها في خط الإنتاج 🏭📍</div>
+                <div class="explanation-content">
+                    معالجة البيانات هي الجسر بين جمع الداتا وبين بناء الموديل.
+                    <div class="detail-item">
+                        أي مشروع ذكاء اصطناعي بمر بهي الخطوات:
+                        <br>جمع الداتا ⬅️ <span class="highlight-y">المعالجة (Preprocessing)</span> ⬅️ هندسة الميزات ⬅️
+                        التدريب ⬅️ التقييم.
+                    </div>
+                    تذكر دائماً: المعالجة هي الأساس، إذا الأساس خربان، الموديل كله رح يكون فاشل.
+                </div>
+            </div>
+        </div>
 
-    <!-- Navigation Script -->
-    <script src="../nav.js"></script>
+        <!-- Slide 4 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Goals of Data Preprocessing</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0004.jpg" alt="Slide 4" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو بدنا نحقق من كل هالتعب؟ 🎯✨</div>
+                <div class="explanation-content">
+                    إحنا مش بس "بنسلي حالنا" وبنغير بالداتا، إحنا عندنا أهداف استراتيجية:
+                    <ul>
+                        <li><span class="highlight-y">تحسين الجودة (Quality):</span> يعني الداتا تكون دقيقة وموثوقة، مش
+                            أرقام عشوائية بتطلع موديل "أهبل".</li>
+                        <li><span class="highlight-b">التعامل مع النقص (Missing values):</span> الخانات الفاضية هي أكبر
+                            عدو للموديل، لازم نعرف كيف نعبيها أو نتصرف معها بدون ما نخرب النتائج.</li>
+                        <li><span class="highlight-y">التحويل الرقمي (Conversion):</span> الموديل "ما بعرف يقرأ"، هو بس
+                            بحسب. فلازم نحول النصوص والرموز لأرقام يفهمها الخلاط تبعنا.</li>
+                        <li><span class="highlight-b">المساواة (Scaling):</span> تخيل ميزة قيمها بالآلاف وميزة قيمها من
+                            0 لـ 1، الموديل رح "ينعجق" ويفكر الأولى أهم بس لأن أرقامها كبيرة. إحنا بنوحد المقاييس عشان
+                            تكون المنافسة شريفة (<span class="eng-term">Fair Learning</span>).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Main Steps in Data Preprocessing</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0005.jpg" alt="Slide 5" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ 8 خطوات الأساسية بالترتيب 🗺️�</div>
+                <div class="explanation-content">
+                    عشان نطلع داتا "بتشرح الصدر"، لازم نمر بهي الخطوات الثمانية:
+                    <div class="detail-item">
+                        <span class="highlight-y">1. Data Cleaning:</span> تنظيف "الضجيج" والأخطاء الواضحة من الداتا ست.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. Handling Missing Values:</span> شو نعمل بالخانات الفاضية؟ نعبيها
+                        ولا نحذفها؟
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">3. Handling Outliers:</span> التعامل مع "القيم الشاذة" (زي واحد عمره
+                        200 سنة) اللي بتخرب الحسابات.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">4. Data Transformation:</span> تحويل شكل الداتا (زي الـ Log transform)
+                        لتناسب الموديل أكثر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">5. Data Encoding:</span> تحويل النصوص (Categorical Data) لأرقام
+                        بيفهمها الكمبيوتر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">6. Feature Scaling:</span> توحيد المقاييس عشان ما في ميزة "تفرعن" على
+                        الثانية بس لأن أرقامها كبيرة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">7. Data Reduction:</span> إذا الداتا ضخمة بزيادة، بنحاول نختصرها بدون
+                        ما نفقد المعلومات المهمة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">8. Train-Test Split:</span> التقسيم الأخير، جزء للتدريب وجزء عشان
+                        نمتحن الموديل فيه.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Cleaning</span>
+                <span class="slide-number">Slide 6</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0006.jpg" alt="Slide 6" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أولاً: تنظيف البيانات (Cleaning) 🧼🚿</div>
+                <div class="explanation-content">
+                    هي عملية اكتشاف وتصحيح (أو حذف) البيانات الفاسدة، غير الدقيقة، أو غير المكتملة.
+                    <div class="detail-item">
+                        <span class="highlight-b">الهدف:</span> نضمن إن الداتا متسقة (<span
+                            class="eng-term">Consistent</span>)، خالية من "الضجيج" (<span
+                            class="eng-term">Noise</span>)، وصحيحة مية بالمية قبل ما تدخل عالخلاط.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Cleaning (continue)</span>
+                <span class="slide-number">Slide 7</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0007.jpg" alt="Slide 7" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مشاكل شائعة وحلولها 🛠️🚑</div>
+                <div class="explanation-content">
+                    شو هي الأشياء اللي بنظفها؟
+                    <ul>
+                        <li><span class="highlight-y">Duplicate records:</span> سجلات مكررة (نفس الشخص مسجل مرتين).</li>
+                        <li><span class="highlight-b">Invalid values:</span> قيم مستحيلة (زي العمر يكون -5).</li>
+                        <li><span class="highlight-y">Inconsistent units:</span> وحدات مختلفة (ناس مسجلة وزنها بالكيلو
+                            وناس بالباوند).</li>
+                    </ul>
+                    الحل بكون بتوحيد الصيغ، حذف المكرر، وتصحيح الأخطاء الواضحة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Cleaning (Deletion)</span>
+                <span class="slide-number">Slide 8</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0008.jpg" alt="Slide 8" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الحل الجذري: الحذف (Deletion) ✂️🗑️</div>
+                <div class="explanation-content">
+                    أسهل طريقة (بس مش دايماً أحسن طريقة) هي الحذف:
+                    <ul>
+                        <li><span class="highlight-y">Listwise Deletion:</span> بنحذف "السطر" كله إذا فيه ميزة وحدة
+                            ناقصة. (سهل بس بضيع داتا كثير).</li>
+                        <li><span class="highlight-b">Pairwise Deletion:</span> بنحذف القيمة الناقصة بس في التحليلات
+                            اللي بتحتاجها، وبنخلي باقي السطر.</li>
+                        <li><span class="highlight-y">Column Deletion:</span> إذا فيه "عمود" (ميزة) أغلبه فاضي، بنحذف
+                            العمود كامل من الداتا ست.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Handling Missing Values</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0009.jpg" alt="Slide 9" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">معالجة القيم المفقودة (Missing Values) 🕳️🔍</div>
+                <div class="explanation-content">
+                    القيم المفقودة هي ببساطة "خانات فاضية" في الداتا ست، وهي من أكبر المشاكل اللي بتواجهنا.
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش النقص مشكلة بوجع الرأس؟</span>
+                        <ul>
+                            <li>معظم خوارزميات الـ ML "بتصفن" وما بتعرف تتعامل مع القيم الفاضية وبتعطيك Error.</li>
+                            <li>بتخرب التحليل الإحصائي وبتعطي نتائج مائلة (<span class="eng-term">Biased</span>).</li>
+                            <li>بتقلل من الحجم الفعلي للداتا اللي بنقدر نعتمد عليها.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">أنواع النقص (عشان نعرف كيف نعالجها):</span>
+                        <ul>
+                            <li><span class="eng-term">MCAR (Completely at Random)</span>: النقص "صدفة محضة"، ماله علاقة
+                                بأي معلومة ثانية (مثلاً ورقة ضاعت هباءً).</li>
+                            <li><span class="eng-term">MAR (At Random)</span>: النقص اله علاقة بداتا ثانية إحنا شايفينها
+                                (مثلاً: الشباب غالباً ما بجاوبوا على أسئلة المشاعر بس بجاوبوا على غيرها).</li>
+                            <li><span class="eng-term">MNAR (Not at Random)</span>: النقص اله علاقة بنفس المعلومة اللي
+                                ناقصة (مثلاً: اللي راتبه فوق الـ 5000 ما بحب يسجل راتبه).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Handling Missing Values – Techniques</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0010.jpg" alt="Slide 10"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تقنية التعويض (Imputation) 💉🩹</div>
+                <div class="explanation-content">
+                    بدل ما نرمي السجل كامل في الزبالة ونخسر معلومات الطلاب الثانية، بنستخدم الـ <span
+                        class="eng-term">Imputation</span> وهي عملية استبدال الفراغ بقيم "تقديرية" ذكية.
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش هاي الطريقة بطلة؟</span>
+                        <ul>
+                            <li>بتخلي حجم الداتا ست زي ما هو وما بنخسر عدد السجلات.</li>
+                            <li>بتمنع ضياع المعلومات المفيدة اللي موجودة في باقي الأعمدة لنفس السجل.</li>
+                            <li>بتقلل الانحياز (<span class="eng-term">Bias</span>) اللي ممكن يصير لو حذفنا
+                                الداتا عشوائياً.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Imputation - Continue</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0011.jpg" alt="Slide 11"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">طرق عبي الفراغ: من البسيط للمتقدم 🧠🛠️</div>
+                <div class="explanation-content">
+                    التعويض اله أكثر من مدرسة، وحسب نوع الداتا بنختار:
+                    <div class="detail-item">
+                        <span class="highlight-y">الطرق الشائعة (Common):</span>
+                        <ul>
+                            <li><span class="eng-term">Mean Imputation</span>: بنحط المتوسط الحسابي (للداتا
+                                الرقمية).</li>
+                            <li><span class="eng-term">Median Imputation</span>: بنستخدم الوسيط (ممتاز لما يكون
+                                فيه قيم شاذة "شاطحة").</li>
+                            <li><span class="eng-term">Mode Imputation</span>: بنستخدم الأكثر تكراراً (للأشياء
+                                النصية أو التصنيفات).</li>
+                            <li><span class="eng-term">Constant Value</span>: بنحط قيمة ثابتة من عندنا (زي 0 أو
+                                "Unknown").</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">الطرق المتقدمة (Advanced):</span>
+                        <ul>
+                            <li><span class="eng-term">KNN Imputation</span>: بنشوف أقرب سجلات مشابهة وبناخذ
+                                متوسطهم.</li>
+                            <li><span class="eng-term">Regression Imputation</span>: بنستخدم موديل يتوقع القيمة
+                                بناءً على الميزات الثانية.</li>
+                            <li><span class="eng-term">Multiple Imputation</span>: بنعمل أكثر من نسخة للداتا
+                                عشان نضمن الدقة واليقين.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Example on K-NN Imputation</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0012.jpg" alt="Slide 12"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مثال عملي: كيف الـ KNN بيحل الأزمة؟ 🤝👬</div>
+                <div class="explanation-content">
+                    تخيل عندنا الطالب (C) مش معروفة علامته بالـ CS، بس بنعرف علاماته بالماث والفيزياء.
+                    <div class="detail-item">
+                        <span class="highlight-y">خطوات الحل ببساطة:</span>
+                        <ol>
+                            <li>بنحدد عدد الجيران <span class="highlight-b">K</span> (مثلاً K=2)، يعني بدنا نشوف
+                                أقرب طالبين للشب C.</li>
+                            <li>بنحسب المسافة (<span class="eng-term">Distance</span>) بين C وباقي الطلاب بناءً
+                                على المادتين المعروفات.</li>
+                            <li>بطلع معنا إن (A و B) هم الأقرب اله (جيرانه).</li>
+                            <li>بناخذ علاماتهم بالـ CS وبنطلع المتوسط: <span class="highlight-b">(90 + 88) / 2 =
+                                    89</span>.</li>
+                            <li>هيك عبينا الفراغ بـ 89 بناءً على "صحابه" الشاطرين بالموالين.</li>
+                        </ol>
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        ⚠️ <span class="highlight-y">تنبيه هام:</span> لازم تعمل <span class="eng-term">Feature
+                            Scaling</span> قبل ما تستخدم KNN، وإلا الميزة اللي أرقامها كبيرة رح تسحب الحسابات
+                        لعندها وتخرب المسافة!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Handling Outliers</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0013.jpg" alt="Slide 13"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">القيم الشاذة (Outliers) 🪐🚀</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Outliers</span> هي داتا "شاطحة" بعيد جداً عن أغلبية الناس في
+                    الداتا ست.
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش لازم "نصيدهم" ونعالجهم؟</span>
+                        <ul>
+                            <li>بأثروا بقوة على المتوسط (<span class="eng-term">Mean</span>) وبخلوه مضلل.</li>
+                            <li>بشوشوا القواعد اللي بحاول الموديل يتعلمها فبتقل دقته.</li>
+                            <li>مرات بكونوا "غلطة" (زي راتب 50000 بدل 500)، ومرات بكونوا "فرصة" (زي كشف عملية
+                                نصب).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">كيف بنكشفهم؟</span>
+                        <ul>
+                            <li>بطرق إحصائية زي <span class="eng-term">Z-score</span> أو الـ <span
+                                    class="eng-term">IQR</span> (مربع الربيعات).</li>
+                            <li>بالرسم البياني زي الـ <span class="eng-term">Box plots</span> والـ <span
+                                    class="eng-term">Scatter plots</span>، بطلعوا كنقطة بعيدة عن "العجقة".</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Outlier Treatment</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0014.jpg" alt="Slide 14"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف نتعامل مع "المتمردين" (Outliers)؟ 🤠 Lasso</div>
+                <div class="explanation-content">
+                    بعد ما كشفناهم، لازم نقرر شو نعمل فيهم. عندنا 4 استراتيجيات أساسية:
+                    <div class="detail-item">
+                        <span class="highlight-y">1. Removal (الحذف):</span> بنحذفهم بس إذا كنا متأكدين إنهم "غلطة"
+                        (Data Entry Error).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. Capping (Winsorization):</span> بدل ما نحذف القيمة، بنخليها "على
+                        الحفة"، يعني أي شي فوق الـ 95% بنثبته عند قيمة الـ 95%. (زي اللي بضرب "بريك" عند حد معين).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">3. Transformation:</span> بنغير شكل الداتا (زي الـ Log) عشان نلم القيم
+                        البعيدة ونقربها من المركز.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">4. Robust Models:</span> بنستخدم موديلات "عندها مناعة" ضد القيم الشاذة
+                        وما بتأثر فيها كثير، زي الـ <span class="eng-term">Random Forest</span>.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        ⚠️ <span class="highlight-y">قاعدة ذهبية:</span> إياك تحذف Outlier بدون ما تفهم مصدره، ممكن يكون
+                        هو أهم معلومة بالداتا!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Transformation</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0015.jpg" alt="Slide 15"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تحويل الداتا (Data Transformation) 🧬🌀</div>
+                <div class="explanation-content">
+                    هون إحنا بنطبق عمليات رياضية عشان نخلي الداتا "أسهل للهضم" بالنسبة للموديل.
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش بنعمل هيك؟</span>
+                        <ul>
+                            <li>الموديلات بتحب التوزيع الطبيعي (<span class="eng-term">Normal Distribution</span>).</li>
+                            <li>بقلل الـ <span class="eng-term">Skewness</span> (لما تكون الداتا "مايلة" لجهة واحدة).
+                            </li>
+                            <li>بثبت التباين (<span class="eng-term">Variance</span>) عشان ما تضيع الدقة.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">أشهر العمليات:</span>
+                        <ul>
+                            <li><span class="eng-term">Log Transformation</span>: سحري في تقليل انحراف الداتا الضخمة (زي
+                                الرواتب).</li>
+                            <li><span class="eng-term">Square Root</span>: بنستخدمه للداتا اللي بتعبر عن "عد" (Counts).
+                            </li>
+                            <li><span class="eng-term">Power Transform</span>: زي طريقة <span
+                                    class="eng-term">Box-Cox</span> اللي بتدور على أحسن تحويل رياضي ممكن.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Categorical Data Encoding</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0016.jpg" alt="Slide 16"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تحويل النصوص لأرقام (Encoding) 🔡➡️🔢</div>
+                <div class="explanation-content">
+                    الخوارزميات ما بتفهم يعني "سيارة" أو "بيت"، لازم نحول كل شي لأرقام.
+                    <div class="detail-item">
+                        <span class="highlight-y">أنواع الميزات النصية:</span>
+                        <ul>
+                            <li><span class="eng-term">Nominal</span>: ما فيها ترتيب (زي اللون: أحمر، أخضر.. ما في لون
+                                "أكبر" من لون).</li>
+                            <li><span class="eng-term">Ordinal</span>: فيها ترتيب واضح (زي المستوى الدراسي: بكالوريوس <
+                                    ماستر < دكتوراه).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">طرق التحويل الأساسية:</span>
+                        <ul>
+                            <li><span class="eng-term">Label Encoding</span></li>
+                            <li><span class="eng-term">One-Hot Encoding</span></li>
+                            <li><span class="eng-term">Ordinal Encoding</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Label Encoding vs One-Hot Encoding</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0017.jpg" alt="Slide 17"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المواجهة الكبرى: Label vs One-Hot ⚔️</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="highlight-y">Label Encoding:</span> بنعطي كل اسم رقم (0, 1, 2...).
+                        <br>مثلاً: الأيام (أحد=0، اثنين=1...).
+                        <br>⚠️ <span style="color: var(--danger);">خطر:</span> الموديل ممكن يفهم إن الاثنين (1) "أكبر"
+                        من الأحد (0)، وهذا غلط في ميزات زي "المدينة".
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">One-Hot Encoding:</span> بنعمل عمود جديد لكل قيمة، وبنحط (1) عند
+                        القيمة الصحيحة و (0) عند الباقي.
+                        <br>مثلاً: الطقس بصير (مشمس [1,0,0]، غائم [0,1,0]...).
+                        <br>✅ <span style="color: var(--secondary);">ميزة:</span> هيك الموديل ما بيفترض وجود ترتيب وهمي.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Encoding – Examples</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0018.jpg" alt="Slide 18"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أمثلة تطبيقية: شو أختار؟ 🤔💡</div>
+                <div class="explanation-content">
+                    عشان نثبت المعلومة، شوف هاي الأمثلة:
+                    <div class="detail-item">
+                        <span class="highlight-y">الجنس (Male, Female):</span> بنستخدم <span class="eng-term">Label
+                            Encoding</span> (0 أو 1) لأنها بس قيمتين.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">المدينة (عمان، إربد، الزرقاء):</span> بنستخدم <span
+                            class="eng-term">One-Hot Encoding</span> عشان ما نحسس الموديل إن عمان "أحسن" من إربد
+                        حسابياً.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">المستوى التعليمي:</span> بنستخدم <span class="eng-term">Ordinal
+                            Encoding</span> (توجيهي=1، بكالوريوس=2...) عشان نحافظ على "رتبة" الترتيب لأنها مهمة هون.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Scaling – Why?</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0019.jpg" alt="Slide 19"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">توحيد المقاييس (Feature Scaling) 📏⚖️</div>
+                <div class="explanation-content">
+                    تخيل عندك "العمر" (بين 0-100) و "الراتب" (بين 500-5000). الموديل رح ينعجق ويفكر إن الراتب أهم بمية
+                    مرة بس لأن أرقامه أكبر!
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش الـ Scaling ضروري؟</span>
+                        <ul>
+                            <li><span class="eng-term">Distance models</span> (زي KNN): حساب المسافة بين النقط رح يعتمد
+                                عالراتب وينسى العمر تماماً.</li>
+                            <li><span class="eng-term">Gradient Descent</span>: الموديل بوصل للحل أسرع بكثير لما تكون كل
+                                القيم في نفس المدى.</li>
+                            <li>بيمنع سيطرة الميزات اللي أرقامها كبيرة على الميزات اللي أرقامها صغيرة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Scaling Methods</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0020.jpg" alt="Slide 20"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أهم 3 طرق للتوحيد 🛠️📊</div>
+                <div class="explanation-content">
+                    عشان نوحد المقاييس، عنا 3 مدارس أساسية:
+                    <div class="detail-item">
+                        <span class="highlight-y">1. Min-Max Scaling (Normalization):</span>
+                        بنخلي كل القيم تنحصر بين (0 و 1).
+                        <br>صيغتها: <span class="eng-term">(X - X_min) / (X_max - X_min)</span>.
+                        <br>ممتازة للـ <span class="eng-term">Neural Networks</span> بس بتتأثر بالقيم الشاذة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. Standardization (Z-score):</span>
+                        بنخلي المتوسط (<span class="eng-term">Mean</span>) 0، والتباين 1.
+                        <br>صيغتها: <span class="eng-term">(X - mean) / std</span>.
+                        <br>الأكثر استخداماً وبتنفع مع معظم الخوارزميات.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">3. Robust Scaling:</span>
+                        هاي الطريقة هي "البطلة" لما يكون عنا <span class="eng-term">Outliers</span> كثيرة.
+                        <br>بتعتمد على الـ <span class="eng-term">Median</span> والـ <span class="eng-term">IQR</span>
+                        بدل المتوسط، فعشان هيك ما بتتأثر بالمتمردين.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Normalization vs Standardization</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0021.jpg" alt="Slide 21"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">زبدة الموضوع: متى أختار شو؟ 🥣🆚</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        <span class="highlight-y">Normalization:</span>
+                        استخدمها لما ما يكون عندك <span class="eng-term">Outliers</span>، ولما بدك الداتا تكون محصورة
+                        بدقة بين 0 و 1 (مفيدة جداً بالـ <span class="eng-term">Neural Networks</span>).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Standardization:</span>
+                        هي "الخيار الآمن". بنستخدمها لما يكون فيه شوية <span class="eng-term">Outliers</span>،
+                        وللخوارزميات زي <span class="eng-term">SVM</span> و <span class="eng-term">Linear
+                            Regression</span> لأنها بتفترض داتا متوزعة حول الصفر.
+                    </div>
+                    <div class="detail-item">
+                        ✅ <span class="highlight-y">نصيحة:</span> إذا مش عارف شو تختار، ابدأ بالـ <span
+                            class="eng-term">Standardization</span>، غالباً رح تعطيك نتائج ممتازة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Reduction</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0022.jpg" alt="Slide 22"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">اختصار الداتا (Data Reduction) 📉📦</div>
+                <div class="explanation-content">
+                    لو عندك داتا عملاقة بزيادة، مش دائماً كثرتها "هيبة". الهدف هون نصغر حجم الداتا بدون ما نفقد جوهرها.
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش نختصر؟</span>
+                        <ul>
+                            <li><span class="eng-term">Dimensionality Reduction</span>: كثرة الميزات (Features) بتخلي
+                                الموديل يوقع بالـ <span class="eng-term">Overfitting</span> (يحفظ مش يفهم).</li>
+                            <li>بقلل الوقت والجهد اللي بياخذه الكمبيوتر في الحسابات.</li>
+                            <li>بيخلي الموديل أسهل في الفهم والتفسير.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">كيف بنعمل هيك؟</span>
+                        <ul>
+                            <li><span class="eng-term">Feature Selection</span>: نختار بس أهم الميزات.</li>
+                            <li><span class="eng-term">PCA</span>: ندمج الميزات مع بعض بطريقة ذكية.</li>
+                            <li><span class="eng-term">Sampling</span>: ناخذ عينة ممثلة بدل ما ناخذ كل الداتا.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Selection</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0023.jpg" alt="Slide 23"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">اختيار الميزات (Feature Selection) 💎🔍</div>
+                <div class="explanation-content">
+                    مش كل معلومة بالداتا "إلها وزنها". لازم نختار بس اللي بيفيدنا في التوقع.
+                    <div class="detail-item">
+                        <span class="highlight-y">طرق الاختيار:</span>
+                        <ul>
+                            <li><span class="eng-term">Filter Methods</span>: بنستخدم إحصائيات (زي الـ Correlation) عشان
+                                نشوف مين أقوى ميزة بتأثر عالهدف.</li>
+                            <li><span class="eng-term">Wrapper Methods</span>: بنجرب الموديل على مجموعات مختلفة من
+                                الميزات ونشوف أنو وحدة بتعطي أعلى دقة.</li>
+                            <li><span class="eng-term">Embedded Methods</span>: الموديل نفسه وهو بيتدرب "بينقي" أحسن
+                                الميزات (زي الـ <span class="eng-term">Lasso</span> و الـ <span
+                                    class="eng-term">Decision Trees</span>).</li>
+                        </ul>
+                    </div>
+                    ✅ <span class="highlight-b">النتيجة:</span> موديل أسرع، أدق، وبعيد عن العجقة الزايدة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Train–Test Split</span>
+                <span class="slide-number">Slide 24</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0024.jpg" alt="Slide 24"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تقسيم الداتا (Train-Test Split) 🍰🔪</div>
+                <div class="explanation-content">
+                    أكبر غلط إنك تمتحن الموديل بنفس الداتا اللي درسته عليها (هيك بكون "بصيم"). لازم نقسم الداتا لجزئين:
+                    <div class="detail-item">
+                        <span class="highlight-y">1. Training Set:</span> الجزء الأكبر (غالباً 70% أو 80%)، بنستخدمه
+                        عشان الموديل يتعلم القواعد.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. Testing Set:</span> الجزء البرا (20% أو 30%)، بنستخدمه عشان نمتحن
+                        الموديل ونشوف كيف رح يتصرف مع داتا "عمره ما شافها".
+                    </div>
+                    ⚖️ <span class="highlight-y">النسب المشهورة:</span> (80/20) أو (70/30) هي الرائدة في هذا المجال عشان
+                    نضمن تقييم عادل.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Data Leakage</span>
+                <span class="slide-number">Slide 25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0025.jpg" alt="Slide 25"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تسريب الداتا (Data Leakage) 🚿⚠️</div>
+                <div class="explanation-content">
+                    هاض هو "السم القاتل" لأي موديل. بصير لما الموديل يشوف معلومات من الـ <span class="eng-term">Test
+                        set</span> وهو لسا في مرحلة الـ <span class="eng-term">Training</span>.
+                    <div class="detail-item">
+                        <span class="highlight-y">ليش بخوف؟</span>
+                        بخلي الموديل يعطيك "دقة وهمية" عالية جداً، بس لما تجربه بالواقع بيفشل فشل ذريع.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">أسبابه وطرق الوقاية:</span>
+                        <ul>
+                            <li><span class="eng-term">Preprocessing Leakage</span>: إنك تعمل Scaling للداتا كاملة قبل
+                                ما تقسمها. <br>✅ <span class="highlight-y">الحل:</span> اقسم أولاً، بعدين طبّق الـ
+                                Preprocessing على جزء التدريب فقط.</li>
+                            <li>استخدام ميزات بتعتمد عالمستقبل اللي الموديل المفروض يتوقعه.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Tools for Data Preprocessing</span>
+                <span class="slide-number">Slide 26</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0026.jpg" alt="Slide 26"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أدوات الحرب (Tools) 🛠️💻</div>
+                <div class="explanation-content">
+                    طيب كل هالحكي وين بنطبقه؟ عندنا عمالقة في البرمجة بيسهلوا علينا كل شي:
+                    <div class="detail-item">
+                        <ul>
+                            <li><span class="highlight-y">Python (Pandas & NumPy):</span> الملوك في تنظيف وترتيب الجداول
+                                والعمليات الرياضية.</li>
+                            <li><span class="highlight-b">Scikit-learn:</span> المكتبة اللي فيها كل خوارزميات الـ
+                                Preprocessing جاهزة.</li>
+                            <li><span class="highlight-y">SQL:</span> ضروري جداً لسحب الداتا وتنظيفها من قواعد البيانات
+                                مباشرة.</li>
+                            <li><span class="highlight-b">Spark/Airflow:</span> للداتا الضخمة بزيادة واللي بتحتاج
+                                "مواسير" (Pipelines) معقدة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Real-World Example</span>
+                <span class="slide-number">Slide 27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0027.jpg" alt="Slide 27"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مثال واقعي: أداء الطلاب 🎓📊</div>
+                <div class="explanation-content">
+                    لو بدنا نتوقع أداء الطلاب في الامتحان، هيك رح يمشي شغلنا:
+                    <ol>
+                        <li><span class="highlight-y">Remove duplicates:</span> نحذف إذا نفس الطالب تسجل مرتين.</li>
+                        <li><span class="highlight-b">Fill missing grades:</span> إذا فيه علامة ناقصة، بنعبيها بالمتوسط
+                            مثلاً.</li>
+                        <li><span class="highlight-y">Encode gender:</span> نحول (ذكر/أنثى) لـ (0/1).</li>
+                        <li><span class="highlight-b">Scale exam scores:</span> نوحد علامات المواد (مثلاً علامة من 100
+                            وعلامة من 20).</li>
+                        <li><span class="highlight-y">Split data:</span> بنقسمهم 80% دراسة و 20% امتحان للموديل.</li>
+                    </ol>
+                    وهيك صار عنا "طبخة" داتا جاهزة للموديل! 👨‍🍳
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Common Mistakes</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0028.jpg" alt="Slide 28"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أخطاء القاتلة 🚫💀</div>
+                <div class="explanation-content">
+                    تجنب هاي الأشياء عشان ما يضيع تعبك:
+                    <ul>
+                        <li><span class="highlight-y">تجاهل الداتا الناقصة:</span> لا تفترض إنها مش مهمة، فراغ واحد ممكن
+                            يخرب موديل كامل.</li>
+                        <li><span class="highlight-b">المبالغة بحذف الـ Outliers:</span> مش كل قيمة بعيدة غلط، ممكن تكون
+                            هي "الكنز" اللي بيكشف حالات الاحتيال.</li>
+                        <li><span class="highlight-y">الـ Encoding الغلط:</span> تستخدم Label Encoding لميزة ما فيها
+                            ترتيب (زي أنواع السيارات).</li>
+                        <li><span class="highlight-b">Data Leakage:</span> نسيان تقسيم الداتا قبل البدء بالمعالجة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Key Takeaways</span>
+                <span class="slide-number">Slide 29</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch_3/3-Data Preprocessing_page-0029.jpg" alt="Slide 29"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخلاصة (زبدة الشابتر) 🍯📝</div>
+                <div class="explanation-content">
+                    <ul>
+                        <li><span class="highlight-y">Data Preprocessing</span> هو حجر الأساس لأي مشروع ذكاء اصطناعي
+                            ناجح.</li>
+                        <li>داتا تعبانة = موديل تعبان (<span class="eng-term">Garbage In, Garbage Out</span>).</li>
+                        <li>لازم تفهم الداتا وتشوفها بعينك قبل ما تبلش تطبق عليها أي خوارزمية.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Navigation Script -->
+        <script src="../nav.js"></script>
 </body>
 
 </html>
