@@ -4,8 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentPage = pathParts.pop();
     const folder = pathParts.pop();
 
-    // 0. EXTRA BULLETPROOF EXIT for index.html
-    const isHomePage = !currentPage || (currentPage === 'index.html' && folder === 'QudahWay') || currentPath.endsWith('/') || currentPath.endsWith('/QudahWay');
+    // 0. EXTRA BULLETPROOF EXIT for root index.html
+    const isHomePage = !currentPage ||
+        (currentPage === 'index.html' && (!folder || folder === 'QudahWay' || folder === 'qudahway.vercel.app')) ||
+        currentPath === '/' ||
+        currentPath.endsWith('/QudahWay') ||
+        currentPath.endsWith('/QudahWay/');
 
     if (isHomePage) {
         return;
