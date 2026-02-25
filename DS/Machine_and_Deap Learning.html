@@ -697,6 +697,663 @@
             </div>
         </div>
 
+        <!-- Slide 19 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Bias vs Variance (Introduction)</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0019.jpg" alt="Slide 19"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">قصة الـ Bias والـ Variance ⚔️</div>
+                <div class="explanation-content">
+                    تخيل عنا بيانات لمجموعة فيران (وزن وطول). بدنا نعمل موديل يتوقع الطول بناءً ع الوزن:
+                    <div class="detail-item">
+                        <span class="highlight-y">Straight Line (خط مستقيم):</span> هاض موديل "بسيط" (Linear
+                        Regression). بحاول يمشي بين النقاط بس مش قادر يلقط كل التفاصيل.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">Squiggly Line (خط متعرج):</span> هاض موديل "معقد" ومرن زيادة. مرق في
+                        كل نقطة بالـ Training set بالضبط. بالبداية بتبين إنه هو الفائز لأنه جاب صفر أخطاء بالتدريب.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Bias vs Variance (Testing)</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0020.jpg" alt="Slide 20"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">يوم الامتحان يُكرم الموديل أو يُهان! 🏁</div>
+                <div class="explanation-content">
+                    لما جربنا الموديلات ع الـ <span class="highlight-y">Testing Set</span> (النقاط الخضراء)، انصدمنا
+                    بالنتائج:
+                    <div class="detail-item">
+                        <span class="highlight-b">Bias (التحيز):</span> هو فشل الموديل (زي الخط المستقيم) إنه يلقط
+                        العلاقة الحقيقية أصلاً. الخط المستقيم "عنيد" ومش راضي ينحني مع البيانات، فدائماً عنده غلط ثابت.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">Variance (التباين):</span> الخط المتعرج لما دخل الامتحان فشل فشل ذريع!
+                        الفرق بين أداءه في التدريب (كان بطل) وأداءه في التست (صار سيء) هو الـ Variance. هو "تأثر زيادة"
+                        بتفاصيل داتا التدريب.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">The Ideal Model</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0021.jpg" alt="Slide 21"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الموديل المثالي (The Sweet Spot) 🎯</div>
+                <div class="explanation-content">
+                    الموديل اللي بنحلم فيه هو اللي بجمع بين صفتين:
+                    <ul>
+                        <li><span class="highlight-y">Low Bias:</span> يعني فاهم العلاقة الحقيقية بين البيانات ومش
+                            "عنيد".</li>
+                        <li><span class="highlight-b">Low Variance:</span> يعني نتائجه "مستقرة" وما بتتغير بشكل جنوني
+                            لما نغير الداتا.</li>
+                    </ul>
+                    دائماً في ML بنحاول نلاقي "التوازن" بين البساطة والتعقيد.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Selection: Why?</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0022.jpg" alt="Slide 22"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش لازم ننقي ميزاتنا؟ (Feature Selection) 💎</div>
+                <div class="explanation-content">
+                    لما نتعامل مع نصوص، ممكن يكون عنا مليون كلمة (ميزة). ليش ما نستخدمهم كلهم؟
+                    <ul>
+                        <li><span class="highlight-y">الوقت:</span> تدريب مليون ميزة بياخذ وقت طويل جداً.</li>
+                        <li><span class="highlight-b">الحجم:</span> الموديل بصير حجمه ضخم وبطيء.</li>
+                        <li><span class="highlight-y">دقة التعميم:</span> في ميزات عبارة عن "شوشرة" (<span
+                                class="eng-term">Noise</span>) بتخرب ع الموديل وبتوقعه بالـ <span
+                                class="highlight-b">Overfitting</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Selection: Frequency</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0023.jpg" alt="Slide 23"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أبسط طريقة للتنقية: التكرار 📈</div>
+                <div class="explanation-content">
+                    أسهل إشي ممكن تعمله هو إنك تختار الكلمات الأكثر تكراراً (<span class="eng-term">Commonest
+                        terms</span>):
+                    <div class="detail-item">
+                        الكلمات اللي بتتكرر كثير غالباً هي اللي بتعطينا "دليل" قوي ومستقر نقدر نبني عليه توقعاتنا. هاي
+                        الطريقة البسيطة أحياناً بتعطي نتائج خرافية (بتوصل لـ 90% من جودة الطرق المعقدة).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Remember: Vector Space Representation</span>
+                <span class="slide-number">Slide 24</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0024.jpg" alt="Slide 24"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تذكر: الداتا عبارة عن متجهات (Vectors) 📏</div>
+                <div class="explanation-content">
+                    عشان الكمبيوتر يفهم النصوص، لازم نحولها لـ <span class="eng-term">Vector Space</span>:
+                    <ul>
+                        <li>كل وثيقة هي عبارة عن "سهم" (Vector) في فضاء كبير.</li>
+                        <li>كل كلمة في قاموسنا هي عبارة عن "محور" (Axis).</li>
+                        <li>الفضاء بكون عالي الأبعاد جداً (High-dimensional).</li>
+                    </ul>
+                    السؤال القوي: كيف رح نعمل "تصنيف" في هاد الفضاء المليان أبعاد؟
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Split the data</span>
+                <span class="slide-number">Slide 25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0025.jpg" alt="Slide 25"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تقسيم الكيكة.. عفواً، البيانات! 🍰📂</div>
+                <div class="explanation-content">
+                    قبل ما نبدأ أي إشي، لازم نقسم الداتا لجزئين (أو ثلاثة):
+                    <ul>
+                        <li><span class="highlight-y">Training Set:</span> الجزء اللي الموديل رح يدرس منه ويحضر حاله.
+                        </li>
+                        <li><span class="highlight-b">Test Set:</span> هاذ هو "الامتحان النهائي". لازم الموديل ما يشوفه
+                            أبداً وقت التدريب عشان نتأكد إنه فهم مش بس بصم.</li>
+                    </ul>
+                    بالكود بنستخدم <span class="eng-term">train_test_split</span> من مكتبة <span
+                        class="eng-term">sklearn</span>، وغالباً بنخلي 20% للتست.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Coding... Evaluation</span>
+                <span class="slide-number">Slide 26</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0026.jpg" alt="Slide 26"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف نكود التقييم؟ 💻🧪</div>
+                <div class="explanation-content">
+                    مكتبة <span class="eng-term">sklearn.metrics</span> فيها كل الأدوات اللي بنحتاجها عشان نعرف شو صار
+                    بالامتحان:
+                    <div class="detail-item">
+                        <span class="highlight-y">accuracy_score:</span> بحسب الدقة الكلية.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">f1_score:</span> الميزان اللي بوازن بين الـ Precision والـ Recall.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">roc_auc_score:</span> مقياس متطور بعطيك فكرة عن جودة الموديل في
+                        التمييز بين الفئات.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Many classifiers to choose from</span>
+                <span class="slide-number">Slide 27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0027.jpg" alt="Slide 27"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">بحر من المصنفات (Classifiers) 🌊🤖</div>
+                <div class="explanation-content">
+                    عنا خيارات كثيرة جداً، وكل واحد إله ميزاته:
+                    <ul>
+                        <li><span class="highlight-y">SVM & Neural Networks:</span> موديلات قوية ومعقدة.</li>
+                        <li><span class="highlight-b">Decision Tree (شجرة القرار):</span> بتشتغل زي خوارزمية "نعم أو
+                            لا". زي لما تقرر تقبل وظيفة بناءً ع الراتب والمسافة.</li>
+                        <li><span class="highlight-y">Naïve Bayes:</span> مشهور جداً بتصنيف النصوص (زي كشف الإيميلات
+                            السبام).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Classifiers Visualized</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0028.jpg" alt="Slide 28"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف الموديلات بتشوف العالم؟ 👀🗺️</div>
+                <div class="explanation-content">
+                    الصورة بتورجينا كيف كل موديل بفصل بين النقاط الحمراء والزرقاء:
+                    <ul>
+                        <li><span class="highlight-y">Decision Tree:</span> بقسم الفضاء لـ "مربعات" وخطوط مستقيمة زاوية.
+                        </li>
+                        <li><span class="highlight-b">SVM & Neural Network:</span> بقدروا يعملوا حدود "منحنية" وناعمة
+                            ليفصلوا بين النقاط بشكل أدق.</li>
+                        <li><span class="highlight-y">Random Forest:</span> بحاول يجمع بين كذا شجرة قرار ليعطيك تقسيم
+                            منطقي أكثر.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Issues to Understand</span>
+                <span class="slide-number">Slide 29</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0029.jpg" alt="Slide 29"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أسئلة لازم نسألها حالنا 🧐❓</div>
+                <div class="explanation-content">
+                    لما نختار موديل، في أسئلة جوهرية:
+                    <ul>
+                        <li><span class="highlight-y">مين الأفضل؟</span> هل اللي بجيب دقة عالية بالتدريب هو الأفضل؟
+                            (تذكر الـ Overfitting!).</li>
+                        <li><span class="highlight-b">التعقيد:</span> هل الموديل المعقد دائماً أحسن، ولا البساطة مطلوبة
+                            أحياناً؟</li>
+                        <li><span class="highlight-y">المستقبل:</span> شو بصير بالموديل لما نزيد الداتا؟ هل بصير أشطر
+                            ولا ببطئ؟</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Slide 33 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Timeline of AI/DL</span>
+                <span class="slide-number">Slide 33</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0033.jpg" alt="Slide 33"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تاريخ الذكاء الاصطناعي (أيام زمان وهسا) ⏳📜</div>
+                <div class="explanation-content">
+                    تاريخ الـ AI مليان مطبات وحماس:
+                    <div class="detail-item">
+                        <span class="highlight-y">العصر الذهبي (1950s - 1960s):</span> وقت تورينج وأول محاولات لمحاكاة
+                        العقل.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">شتاء الذكاء الاصطناعي (AI Winter):</span> صار مرتين (السبعينات
+                        والتمينات) لما الناس فقدت الأمل وتوقف الدعم.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">انفجار الـ Deep Learning (2010 - اليوم):</span> بفضل الـ ReLU والـ
+                        AlexNet والـ Transformers، صرنا في العصر الذهبي الحقيقي.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Brief History of AI</span>
+                <span class="slide-number">Slide 34</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0034.jpg" alt="Slide 34"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">محطات غيرت مجرى التاريخ 🚉🏆</div>
+                <div class="explanation-content">
+                    خلينا نشوف اللحظات الفاصلة:
+                    <ul>
+                        <li><span class="highlight-y">1943:</span> أول موديل رياضي للخلية العصبية.</li>
+                        <li><span class="highlight-b">1989:</span> أول نظام بيعرف يقرأ خط اليد.</li>
+                        <li><span class="highlight-y">2012:</span> تجربة "القطة" من جوجل، و 2014 تجربة الـ DeepFace من
+                            فيسبوك.</li>
+                    </ul>
+                    كل خطوة كانت بتقربنا من ذكاء يشبه ذكاء الإنسان.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Neural Network again!</span>
+                <span class="slide-number">Slide 35</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0035.jpg" alt="Slide 35"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش الـ Neural Networks رجعت وبقوة؟ 🔄🔥</div>
+                <div class="explanation-content">
+                    الفكرة قديمة من الأربعينات، بس في التسعينات خسروا قدام الـ SVM (الـ Kernel Trick كان مسيطر).
+                    <div class="detail-item">
+                        لكن من بعد الـ 2011، الشبكات العصبية العميقة اكتسحت كل إشي. ليش؟ لأن الحواسيب صارت مرعبة والداتا
+                        صارت متوفرة بكل مكان، والـ SVM ما قدر يواكب هاض الحجم الهائل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 36 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why NNs are getting powerful now!?</span>
+                <span class="slide-number">Slide 36</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0036.jpg" alt="Slide 36"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">السر في قوة الـ NN هسا ⚡🔌</div>
+                <div class="explanation-content">
+                    في 4 أسباب خلت الـ Deep Learning ينفجر:
+                    <ul>
+                        <li><span class="highlight-y">داتا عملاقة:</span> التدريب بطل ع عينات صغيرة، صار ع تريليونات
+                            البيانات.</li>
+                        <li><span class="highlight-b">قوة الحوسبة (GPUs):</span> كروت الشاشة خلت التدريب أسرع بآلاف
+                            المرات.</li>
+                        <li><span class="highlight-y">خوارزميات أذكى:</span> تحسينات بسيطة في الرياضيات (زي الـ ReLU)
+                            عملت فرق جبار.</li>
+                        <li><span class="highlight-b">الدعم المادي:</span> الشركات الكبيرة صارت تضخ مليارات بالبحث
+                            والتطوير.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 37 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Biological Neurons</span>
+                <span class="slide-number">Slide 37</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0037.jpg" alt="Slide 37"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الإلهام من الطبيعة (مخ الإنسان) 🧬🧠</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Artificial Neural Network</span> مستوحاة من عصبونات مخنا:
+                    <ul>
+                        <li><span class="highlight-y">Dendrites (المدخلات):</span> بتستقبل الإشارات من برا.</li>
+                        <li><span class="highlight-b">Cell Body/Nucleus:</span> هون بتم معالجة الإشارة.</li>
+                        <li><span class="highlight-y">Axon (المخرجات):</span> بتنقل النتيجة للعصبونات الثانية.</li>
+                    </ul>
+                    إحنا بنقلد "آلية العمل" هاي بمعادلات رياضية بسيطة (جمع وضرب).
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 38 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Neural Network Structure</span>
+                <span class="slide-number">Slide 38</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0038.jpg" alt="Slide 38"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التشابك والطبقات (The Network) 🕸️🏗️</div>
+                <div class="explanation-content">
+                    العظمة بتيجي لما نربط هاي العصبونات ببعض:
+                    <div class="detail-item">
+                        الشبكة بتتكون من <span class="eng-term">Input layer</span>، و <span class="eng-term">Hidden
+                            layers</span>، و <span class="eng-term">Output layer</span>. المعلومات بتمر عبر "أوزان"
+                        (<span class="eng-term">Weights</span>) بتتغير وقت التدريب عشان الموديل يتعلم الصح من الخطأ.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 39 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Neural Network?</span>
+                <span class="slide-number">Slide 39</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0039.jpg" alt="Slide 39"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني شبكة عصبية أصلاً؟ 🤔🧠</div>
+                <div class="explanation-content">
+                    عقل الإنسان فيه حوالي 100 مليار عصبونة بتعالج المعلومات بسرعة خيالية.
+                    <ul>
+                        <li><span class="highlight-y">التعريف:</span> هي مجموعة عصبونات مرتبطة ببعضها عن طريق "تشابكات"
+                            (<span class="eng-term">Synapses</span>).</li>
+                        <li><span class="highlight-b">الطبقات:</span> بتتقسم لـ <span class="eng-term">Input</span>، و
+                            <span class="eng-term">Hidden</span>، و <span class="eng-term">Output</span>.
+                        </li>
+                        <li><span class="highlight-y">التسلسل:</span> مخرجات كل طبقة بتصير هي المدخلات للطبقة اللي
+                            بعدها.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 40 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Deep Learning Architecture</span>
+                <span class="slide-number">Slide 40</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0040.jpg" alt="Slide 40"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش سمه "عميق" (Deep)؟ 🧱🌊</div>
+                <div class="explanation-content">
+                    كلمة "عميق" بتيجي من كثرة الـ <span class="eng-term">Hidden Layers</span>.
+                    <div class="detail-item">
+                        لما يكون عندنا طبقات مخفية كثيرة، الموديل بصير عنده قدرة جبارة على استخراج أنماط معقدة جداً من
+                        الداتا. المدخلات بنسميها <span class="highlight-y">Features</span>، والنتيجة النهائية هي الـ
+                        <span class="highlight-b">Label</span> أو التوقع.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 41 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Deep Learning (continue)</span>
+                <span class="slide-number">Slide 41</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0041.jpg" alt="Slide 41"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التعلم بالمثال (Learning by Example) 🎓📖</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Deep Learning</span> بخلي الكمبيوتر يتعلم زي البشر: بالممارسة والأمثلة.
+                    <ul>
+                        <li>عنده دقة بتنافس (وأحياناً بتغلب) دقة الإنسان.</li>
+                        <li>بقدر يتعامل مع الصور، النصوص، والأصوات مباشرة.</li>
+                        <li>هو المحرك الأساسي لتقنيات المستقبل زي السيارات ذاتية القيادة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 42 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">How it functions!?</span>
+                <span class="slide-number">Slide 42</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0042.jpg" alt="Slide 42"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">آلية العمل الذاتية ⚙️🤖</div>
+                <div class="explanation-content">
+                    أهم ميزة هون هي الـ <span class="eng-term">End-to-End learning</span>:
+                    <ul>
+                        <li><span class="highlight-y">بدون تدخل بشري:</span> الشبكة هي اللي بتطلع الـ <span
+                                class="eng-term">Features</span> لحالها من الداتا الخام.</li>
+                        <li><span class="highlight-b">المتطلبات:</span> عشان يشتغل صح، بدك <span
+                                class="eng-term">GPU</span> قوي وكميات داتا ضخمة جداً (آلاف الصور على الأقل).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 43 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Artificial Neural Network (ANN)</span>
+                <span class="slide-number">Slide 43</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0043.jpg" alt="Slide 43"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مكونات الـ ANN بالتفصيل 🧱🔍</div>
+                <div class="explanation-content">
+                    أي <span class="eng-term">Artificial Neural Network</span> بتتكون من:
+                    <ul>
+                        <li><span class="highlight-y">Input Layer:</span> بتستقبل الداتا (X).</li>
+                        <li><span class="highlight-b">Hidden Layers:</span> هون بتم الشغل والتعقيد.</li>
+                        <li><span class="highlight-y">Output Layer:</span> بتعطي النتيجة النهائية (Y).</li>
+                        <li><span class="highlight-b">Weights & Biases:</span> الأرقام اللي الموديل بضل يعدل فيها
+                            ليتعلم.
+                        </li>
+                        <li><span class="highlight-y">Activation Function:</span> اللي بتقرر هل العصبونة "تشتغل" ولا لأ.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 44 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ML vs DL</span>
+                <span class="slide-number">Slide 44</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0044.jpg" alt="Slide 44"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الفرق الجوهري بين الـ Machine والـ Deep ⚔️⚖️</div>
+                <div class="explanation-content">
+                    <div class="detail-item">
+                        في الـ <span class="highlight-y">Machine Learning</span> التقليدي، الإنسان لازم يختار المميزات
+                        (<span class="eng-term">Manual Feature Extraction</span>) والموديل بس بصنف.
+                    </div>
+                    <div class="detail-item">
+                        أما في الـ <span class="highlight-b">Deep Learning</span>، عملية استخراج المميزات والتصنيف كلها
+                        بتصير "أوتوماتيك" جوا الشبكة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 45 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">How to Create and Train DL Models</span>
+                <span class="slide-number">Slide 45</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0045.jpg" alt="Slide 45"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">طرق التدريب: من الصفر ولا "جاهز"؟ 🛠️🏗️</div>
+                <div class="explanation-content">
+                    عندك طريقتين للتدريب:
+                    <ul>
+                        <li><span class="highlight-y">Train from Scratch:</span> تبني كل إشي من الصفر، وهاض بده وقت
+                            كبيييير وداتا هائلة.</li>
+                        <li><span class="highlight-b">Transfer Learning:</span> تستخدم موديل ذكي أصلاً (زي <span
+                                class="eng-term">AlexNet</span>) وتعدل عليه شوي ليناسب شغلك. هاي الطريقة أسرع وبدها داتا
+                            أقل بكثير.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 46 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Activation Functions</span>
+                <span class="slide-number">Slide 46</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0046.jpg" alt="Slide 46"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">دوال التنشيط (Activation Functions) ⚡📈</div>
+                <div class="explanation-content">
+                    هي الدوال اللي بتعطي "الروح" للشبكة وبتحولها من مجرد ضرب مصفوفات لشي قادر يفهم العلاقات غير الخطية:
+                    <ul>
+                        <li><span class="highlight-y">Sigmoid / TanH:</span> مشهورين بس فيهم مشاكل بالتدريب العميق.</li>
+                        <li><span class="highlight-b">ReLU:</span> البطل الحالي، بسيط وسريع وبحل مشاكل كتير.</li>
+                        <li><span class="highlight-y">Step Function:</span> أبسط نوع (يا 0 يا 1).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 47 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">The End</span>
+                <span class="slide-number">Slide 47</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2- Machine and Deap Learning _page-0047.jpg" alt="Slide 47"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخلاصة الممتعة </div>
+                <div class="explanation-content">
+                    زي ما قال فورست غامب: "الحياة مثل صندوق من الشبكات العصبية، ما بتعرف شو رح يطلعلك!"
+                    <div class="detail-item" style="margin-top: 15px;">
+                        الـ <span class="eng-term">Deep Learning</span> بحر واسع، وكل يوم فيه إشي جديد. أهم إشي تضل فاهم
+                        الأساسيات صح عشان تقدر تواكب الجنون اللي بصير في هاض المجال.</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Navigation Script -->
