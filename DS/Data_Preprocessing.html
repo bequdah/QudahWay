@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Data Preprocessing</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .slide-section {
+            background-color: var(--card-dark);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .slide-title-bar {
+            background: linear-gradient(90deg, var(--primary), #0ea5e9);
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .slide-image-box {
+            text-align: center;
+            background: #000;
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .explanation-box {
+            background: rgba(15, 23, 42, 0.6);
+            border-right: 5px solid var(--accent);
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            font-size: 1.15rem;
+        }
+
+        .explanation-header {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .explanation-content {
+            color: var(--text-light);
+            text-align: justify;
+        }
+
+        .eng-term {
+            font-family: 'Inter', sans-serif;
+            color: var(--primary);
+            font-weight: 600;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .detail-item {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 2px solid var(--primary);
+        }
+
+        ul {
+            padding-right: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .slide-section {
+                padding: 15px;
+            }
+
+            .slide-title-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .explanation-box {
+                border-right: none;
+                border-top: 5px solid var(--accent);
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+        <!-- Start Slides Here -->
+
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+</body>
+
+</html>

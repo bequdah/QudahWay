@@ -221,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="nav-header" style="font-size: 1.1rem; color: #facc15;">Data Science</div>
             <a href="intro-to-ds.html" class="nav-link"> 01. Intro to Data Science</a>
             <a href="Machine_and_Deap Learning.html" class="nav-link"> 02. Machine & Deep Learning</a>
+            <a href="Data_Preprocessing.html" class="nav-link"> 03. Data Preprocessing</a>
         `;
     }
 
