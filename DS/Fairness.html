@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Fairness in AI</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-right: 25px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.8rem;">
+                    QudahWay / DS / Fairness
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> DS</h1>
+            <p class="subtitle">Fairness in AI Models | العدالة في نماذج الذكاء الاصطناعي</p>
+        </div>
+
+        <div id="slides-container">
+            <!-- Slide 02 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Ethical AI</span>
+                    <span class="slide-number">Slide 02</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0002.jpg" alt="Slide 2" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الذكاء الاصطناعي الأخلاقي (Ethical AI) 😇⚖️</div>
+                    <div class="explanation-content">
+                        مش بس بدنا موديل "شاطر" وبطلع نتائج دقيقة، بدنا موديل "متربي" وبمشي على مبادئ أخلاقية.
+                        <div class="detail-item">
+                            <span class="highlight-y">شو يعني Ethical AI؟</span>
+                            هو تصميم أنظمة ذكاء اصطناعي بتلتزم بمبادئ مثل:
+                            <ul>
+                                <li><span class="eng-term">Fairness</span> (العدالة): ما يظلم فئة على حساب ثانية.</li>
+                                <li><span class="eng-term">Transparency</span> (الشفافية): نفهم كيف الموديل باخذ
+                                    قراراته.</li>
+                                <li><span class="eng-term">Accountability</span> (المسؤولية): مين المسؤول لو الموديل
+                                    غلط؟</li>
+                            </ul>
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">الأخلاقي vs التقليدي:</span>
+                            الذكاء الاصطناعي التقليدي كان كل همه الـ <span class="eng-term">Performance</span> (الدقة
+                            والسرعة)، أما الأخلاقي بضيف عليهم "المسؤولية الاجتماعية" (<span class="eng-term">Social
+                                Responsibility</span>).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 03 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">What is Bias in AI?</span>
+                    <span class="slide-number">Slide 03</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0003.jpg" alt="Slide 3" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو يعني انحياز (Bias) في الـ AI؟ 🚨🎯</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">Bias</span> هو "غلطة سيستماتيكية" بالسيستم بتخلي النتائج دائماً مايلة
+                        لجهة معينة وغير عادلة.
+                        <div class="detail-item">
+                            <span class="highlight-y">أنواع الانحياز:</span>
+                            <ul>
+                                <li><span class="eng-term">Data Bias</span>: لما الداتا اللي دربنا عليها الموديل تكون مش
+                                    متوازنة (مثلاً: صور قطط بيضا بس، فالموديل ببطل يعرف القطط السودا).</li>
+                                <li><span class="eng-term">Algorithmic Bias</span>: لما الخوارزمية نفسها تبرمجت بطريقة
+                                    فيها انحياز.</li>
+                                <li><span class="eng-term">Human Bias</span>: انحيازنا إحنا كبشر بننقله للموديل بدون ما
+                                    نحس (أثناء جمع الداتا أو تقييمها).</li>
+                            </ul>
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">أمثلة بتخوف:</span>
+                            انحياز في التوظيف (بفضل البنات عالرجال ) أو انحياز في التعرف على الوجوه (بفشل مع أصحاب
+                            البشرة
+                            السوداء).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 04 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Machine Bias Examples</span>
+                    <span class="slide-number">Slide 04</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0004.jpg" alt="Slide 4" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">فضائح عالمية للانحياز 📰⚠️</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">Bias</span> مش بس حكي نظري، هاي أمثلة حقيقية هزت العالم:
+                        <div class="detail-item">
+                            <span class="highlight-y">مسابقات جمال ظالمة:</span> ذكاء اصطناعي حكم في مسابقة جمال وكان
+                            "عنصري" ضد البشرة السوداء لأن الداتا اللي شافها أغلبها لأصحاب بشرة فاتحة.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">توقع الإجرام (Machine Bias):</span> برنامج مشهور بأمريكا كان يتوقع
+                            "مين رح يرجع يسجن" وكان دائماً بعطي تقييم خطر عالي للسود حتى لو سجلهم نظيف، وتقييم منخفض
+                            للبيض حتى لو سجلهم مليان!
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--danger);">
+                            👨‍🏫 <span class="highlight-y">الزبدة:</span> الموديل "ببغاء"، إذا الداتا فيها عنصرية رح
+                            يطلع موديل عنصري.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 05 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Real-world Bias Cases</span>
+                    <span class="slide-number">Slide 05</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0005.jpg" alt="Slide 5" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">بالأرقام والدلائل 📊📉</div>
+                    <div class="explanation-content">
+                        هون بنشوف دراسات حقيقية كشفت بلاوي:
+                        <div class="detail-item">
+                            ⚠️ <span class="highlight-y">للمطالعة:</span> بتقدروا تزيوروا الروابط الموجودة بالسلايد عشان
+                            تعرفوا القصة كاملة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 06 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Why Does Bias Matter?</span>
+                    <span class="slide-number">Slide 06</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0006.jpg" alt="Slide 6" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش لازم نهتم بالانحياز؟ 🧩🤔</div>
+                    <div class="explanation-content">
+                        الموضوع مش بس "مثالية"، الموضوع اله أبعاد خطيرة على المجتمع والشركات:
+                        <div class="detail-item">
+                            <span class="highlight-y">1. التأثير على المجتمع:</span>
+                            الـ <span class="eng-term">Bias</span> بعزز عدم المساواة الموجودة أصلاً، وبخلي فئات معينة
+                            تنظلم بشكل متكرر في التعليم، الصحة، أو حتى القضاء.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">2. التأثير على الشركات:</span>
+                            الشركات اللي بتستخدم موديلات منحازة بتخسر سمعتها وثقة الناس فيها، وممكن تتعرض لمساءلات
+                            قانونية وغرامات بالملايين.
+                        </div>
+                        ✅ <span class="highlight-y">أمثلة:</span> أداة التوظيف في <span class="eng-term">Amazon</span>
+                        اللي كانت ترفض النساء، وخوارزمية <span class="eng-term">COMPAS</span> في القضاء.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 07 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">COMPAS Algorithm</span>
+                    <span class="slide-number">Slide 07</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0007.jpg" alt="Slide 7" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">خوارزمية COMPAS: صرخة في وجه العدالة ⚖️📢</div>
+                    <div class="explanation-content">
+                        هاي الخوارزمية بتستخدمها السجون في أمريكا عشان تتوقع احتمال رجوع المجرم للجريمة (<span
+                            class="eng-term">Recidivism</span>).
+                        <div class="detail-item">
+                            <span class="highlight-y">شو اكتشفت ProPublica؟</span>
+                            بعد تحليل للأداة، طلع إنها بتظلم السود بشكل مضاعف:
+                            <ul>
+                                <li>المتهمين السود كان دائماً يتم تصنيفهم كـ "خطر عالي" بالخطأ.</li>
+                                <li>المتهمين البيض كان يتم تصنيفهم كـ "خطر منخفض" بالخطأ أكثر من السود.</li>
+                            </ul>
+                        </div>
+                        <div class="detail-item">
+                            هاد المثال بفرجينا كيف "الأرقام" ممكن تكون عنصرية لو الداتا اللي انبنت عليها كانت منحازة
+                            تاريخياً.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 08 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Detecting Bias in ML Models</span>
+                    <span class="slide-number">Slide 08</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0008.jpg" alt="Slide 8" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف نكشف الـ Bias؟ 🔍🕵️‍♂️</div>
+                    <div class="explanation-content">
+                        عشان نعرف إذا الموديل "بخبص" ولا لأ، لازم نستخدم تقنيات وأدوات مخصصة:
+                        <div class="detail-item">
+                            <span class="highlight-y">التقنيات (Techniques):</span>
+                            <ul>
+                                <li><span class="eng-term">Disparate Impact Analysis</span>: بنقارن نسبة النتائج
+                                    الإيجابية بين المجموعات المختلفة.</li>
+                                <li>مقاييس العدالة (<span class="eng-term">Fairness Metrics</span>): مثل <span
+                                        class="eng-term">Demographic Parity</span>.</li>
+                            </ul>
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">الأدوات (Tools):</span>
+                            الشركات الكبيرة عاملة مكتبات جاهزة لمساعدتنا، مثل:
+                            <ul>
+                                <li><span class="eng-term">AI Fairness 360</span> من IBM.</li>
+                                <li><span class="eng-term">Fairlearn</span> من Microsoft.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 09 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Mitigating Bias in ML</span>
+                    <span class="slide-number">Slide 09</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0009.jpg" alt="Slide 9" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف نعالج الـ Bias؟ (عمليات العلاج) 💉🩹</div>
+                    <div class="explanation-content">
+                        العلاج بصير على 3 مراحل حسب وين المشكلة:
+                        <div class="detail-item">
+                            <span class="highlight-y">1. Pre-Processing:</span> تنظيف الداتا قبل التدريب (مثلاً: نوازن
+                            عدد العينات لكل فئة).
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">2. In-Processing:</span> نعدل على الخوارزمية نفسها وهي بتتدرب عشان
+                            "نجبرها" تكون عادلة.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-y">3. Post-Processing:</span> بعد ما الموديل يطلع النتيجة، بنعدلها
+                            شوي عشان نضمن العدالة النهائية.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Protected Classes</span>
+                    <span class="slide-number">Slide 10</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0010.jpg" alt="Slide 10" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الفئات المحمية (Protected Classes) 🛡️👤</div>
+                    <div class="explanation-content">
+                        فيه ميزات (Features) "خط أحمر" ممنوع الموديل يستخدمها عشان يميّز بين الناس قانونياً:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="highlight-y">العرق (Race) والجنس (Sex).</span></li>
+                                <li><span class="highlight-b">الدين (Religion) والأصل القومي.</span></li>
+                                <li><span class="highlight-y">الحالة الصحية، الحمل، والمعلومات الجينية.</span></li>
+                            </ul>
+                        </div>
+                        ⚖️ <span class="highlight-b">المجالات المنظمة:</span> القروض، التعليم، التوظيف، والسكن. هون
+                        القانون بكون صارم جداً بمنع أي تمييز بناءً على هاي الفئات.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">How do we define bias?</span>
+                    <span class="slide-number">Slide 11</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0011.jpg" alt="Slide 11" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تعريفات العدالة (مش تعريف واحد!) 🤯📚</div>
+                    <div class="explanation-content">
+                        تخيل إنه فيه أكثر من 21 تعريف للعدالة في علم البيانات! كل واحد بشوف العدالة من زاوية:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="eng-term">Individual Fairness</span>: معاملة الأشخاص المتشابهين بشكل
+                                    متشابه.</li>
+                                <li><span class="eng-term">Group Fairness</span>: مجموعات الناس (ذكور/إناث مثلاً) ياخذوا
+                                    نفس نسبة النتائج.</li>
+                                <li><span class="eng-term">Representational Fairness</span>: هل الداتا بتمثل كل أطياف
+                                    المجتمع صح؟</li>
+                            </ul>
+                        </div>
+                        🤯 <span class="highlight-y">المشكلة:</span> مستحيل حسابياً تحقق كل هاي التعريفات مع بعض في نفس
+                        الموديل! لازم تضحي بوحدة عشان الثانية.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Fairness & Transparency</span>
+                    <span class="slide-number">Slide 12</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0012.jpg" alt="Slide 12" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">العدالة والشفافية (Fairness & Transparency) 🕯️⚖️</div>
+                    <div class="explanation-content">
+                        العدالة ما بتكمل بدون شفافية. لازم نعرف "ليش" الموديل قرر هيك.
+                        <div class="detail-item">
+                            <span class="highlight-y">الهدف:</span>
+                            <ul>
+                                <li>تقليل الانحياز في اتخاذ القرارات.</li>
+                                <li>تجنب التمييز المبني على العرق أو الجنس.</li>
+                                <li>ضمان المساءلة (<span class="eng-term">Accountability</span>).</li>
+                            </ul>
+                        </div>
+                        👨‍⚖️ <span class="highlight-b">السؤال الجوهري:</span> لو الموديل رفض قرض لشخص، هل بنقدر نبرر
+                        السبب بشكل منطقي بعيد عن الانحياز?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Fairness through unawareness</span>
+                    <span class="slide-number">Slide 13</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0013.jpg" alt="Slide 13" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">العدالة عبر "التعامي" (Unawareness) 🙈⚖️</div>
+                    <div class="explanation-content">
+                        هاي أبسط فكرة (وأخطرها بنفس الوقت): "لو شلنا العرق والجنس من الداتا، الموديل رح يصير عادل غصب
+                        عنه".
+                        <div class="detail-item">
+                            <span class="highlight-y">الإيجابيات:</span> بنضمن 100% إنه الموديل ما شاف الميزة المحمية
+                            بشكل مباشر.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">السلبيات (المصيبة):</span> فيه شي اسمه <span
+                                class="eng-term">Proxies</span>. مثلاً, الـ <span class="eng-term">Zip Code</span>
+                            (الرمز البريدي) في بعض البلدان ممكن يدل بقوة على العرق، فإنت كأنك دخلت العرق من "الباب
+                            الخلفي".
+                        </div>
+                        ⚠️ <span class="highlight-y">الخلاصة:</span> مجرد حذف الميزة مش كافي أبداً لتحقيق العدالة.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Group Fairness</span>
+                    <span class="slide-number">Slide 14</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0014.jpg" alt="Slide 14" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">عدالة المجموعات (Group Fairness) 🤝📊</div>
+                    <div class="explanation-content">
+                        الفكرة هون إنه "النتائج" لازم تتوزع على المجموعات بنسب متساوية بناءً على تمثيلهم في المجتمع.
+                        <div class="detail-item">
+                            <span class="highlight-y">المبدأ:</span> لو فئة معينة بتشكل 20% من السكان، لازم تاخذ 20% من
+                            الفرص (قروض، وظائف، إلخ).
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">الإيجابيات والسلبيات:</span>
+                            <ul>
+                                <li><span class="highlight-y">ممتاز:</span> لأنه بضمن مساواة حقيقية في النتائج النهائية.
+                                </li>
+                                <li><span class="highlight-b">مشكلته:</span> ممكن يكون "قوي زيادة"، لأنه أحياناً
+                                    المجموعات بكون إلها نسب أساسية مختلفة (<span class="eng-term">Base Rates</span>)،
+                                    فالموديل بضطر يظلم ناس شاطرة عشان يوازن الأرقام.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Fairness Metrics in ML</span>
+                    <span class="slide-number">Slide 15</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0015.jpg" alt="Slide 15" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مقاييس العدالة (Metrics) 📏⚖️</div>
+                    <div class="explanation-content">
+                        كيف "نحسب" إذا الموديل عادل؟ فيه 3 مقاييس رئيسية بنستخدمها:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="eng-term">Demographic Parity</span>: المجموعات تاخذ نتائج إيجابية بنفس
+                                    النسبة بغض النظر عن مؤهلاتهم.</li>
+                                <li><span class="eng-term">Equal Opportunity</span>: المجموعات تاخذ نفس نسبة "النتائج
+                                    الصح" (يعني لو فيه ناس بتستحق القرض، لازم نسبة المقبولين تكون متساوية بين
+                                    المجموعات).</li>
+                                <li><span class="eng-term">Equalized Odds</span>: بنوازن بين الـ <span
+                                        class="eng-term">True Positive</span> والـ <span class="eng-term">False
+                                        Positive</span> لكل المجموعات.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Methods for Ensuring Fairness</span>
+                    <span class="slide-number">Slide 16</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0016.jpg" alt="Slide 16" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">طرق ضمان العدالة 🛠️✅</div>
+                    <div class="explanation-content">
+                        عشان نضمن عدالة الموديل، التدخل بصير في 3 محطات رئيسية:
+                        <div class="detail-item">
+                            <span class="highlight-y">1. معالجة الداتا (Pre-processing):</span> بنعدل الداتا قبل ما
+                            الموديل يشوفها عشان نشيل أي انحياز تاريخي.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">2. تعديل الخوارزمية (Algorithmic adjustments):</span> بنضيف "شروط
+                            عدالة" داخل الموديل وأنا بدربه (In-processing).
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-y">3. تصحيح النتائج (Post-processing):</span> بعد ما الموديل يطلع
+                            قراره، بنعمل تعديل بسيط عشان نحقق أهداف العدالة المطلوبة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 17 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Importance of Transparency</span>
+                    <span class="slide-number">Slide 17</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0017.jpg" alt="Slide 17" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">أهمية الشفافية (Transparency) 🕯️🔍</div>
+                    <div class="explanation-content">
+                        الشفافية مش "رفاهية"، هي أساس الثقة بين الموديل والمستخدم.
+                        <div class="detail-item">
+                            <span class="highlight-y">ليش الشفافية مهمة؟</span>
+                            <ul>
+                                <li>بتسمح للمستخدمين يفهموا "ليش" الموديل اتخذ قرار معين.</li>
+                                <li>بتقلل من سوء الفهم ونشر المعلومات الغلط.</li>
+                                <li>بتزيد الثقة في أنظمة الذكاء الاصطناعي.</li>
+                            </ul>
+                        </div>
+                        👨‍🏫 <span class="highlight-b">الزبدة:</span> الموديل اللي بشتغل كـ "صندوق أسود" (<span
+                            class="eng-term">Black Box</span>) ما حدا برتاح اله، لازم نضوّي الضو على كيف بفكر.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 18 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Explainable AI (XAI)</span>
+                    <span class="slide-number">Slide 18</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0018.jpg" alt="Slide 18" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الذكاء الاصطناعي القابل للتفسير (XAI) 🔎💡</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">Explainable AI</span> هو العلم اللي بحول الموديلات المعقدة لأشياء
+                        بنقدر نفهمها كبشر.
+                        <div class="detail-item">
+                            <span class="highlight-y">أهم الأدوات العالمية:</span>
+                            <ul>
+                                <li><span class="eng-term">SHAP</span>: بفرجينا وزن كل ميزة (Feature) في القرار النهائي.
+                                </li>
+                                <li><span class="eng-term">LIME</span>: بيشرح قرارات الموديل "محلياً" لكل حالة لحالها.
+                                </li>
+                            </ul>
+                        </div>
+                        🎯 <span class="highlight-b">الهدف:</span> تحويل الـ <span class="eng-term">Black Box</span> لـ
+                        <span class="eng-term">Glass Box</span> (صندوق زجاجي) بنشوف كل اللي جواته.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 19 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Ethical AI Regulations</span>
+                    <span class="slide-number">Slide 19</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0019.jpg" alt="Slide 19" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">القوانين والتشريعات الأخلاقية 📜⚖️</div>
+                    <div class="explanation-content">
+                        العالم انتبه لخطورة الـ AI وبدأ يحط قوانين صارمة لحماية الناس:
+                        <div class="detail-item">
+                            <span class="highlight-y">أهم التشريعات العالمية:</span>
+                            <ul>
+                                <li><span class="eng-term">GDPR</span>: قانون حماية البيانات الأوروبي (بأثر على كل
+                                    العالم).</li>
+                                <li><span class="eng-term">EU AI Act</span>: أول قانون شامل في العالم لتنظيم الذكاء
+                                    الاصطناعي حسب درجة خطورته.</li>
+                                <li><span class="eng-term">U.S. AI Bill of Rights</span>: مبادئ أمريكية لحماية الحقوق
+                                    المدنية من تغول الـ AI.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 20 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Role of Governments</span>
+                    <span class="slide-number">Slide 20</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0020.jpg" alt="Slide 20" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">دور الحكومات في أخلاقيات الـ AI 🏛️🛂</div>
+                    <div class="explanation-content">
+                        الحكومات مش بس "متفرج"، إلها دور تنفيذي ورقابي كبير:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="highlight-y">وضع القوانين:</span> تشريع قوانين بتجبر الشركات تكون
+                                    عادلة.</li>
+                                <li><span class="highlight-b">المساءلة (Accountability):</span> محاسبة الشركات اللي
+                                    بتستخدم موديلات بتسبب ضرر أو تمييز.</li>
+                                <li><span class="highlight-y">مراقبة الاستخدام:</span> منع استخدام الـ AI في مجالات بتمس
+                                    كرامة الإنسان بدون رقابة.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 21 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Ethical Frameworks for AI</span>
+                    <span class="slide-number">Slide 21</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0021.jpg" alt="Slide 21" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">أطر العمل الأخلاقية (Frameworks) 🧱🧠</div>
+                    <div class="explanation-content">
+                        عشان نطبق الأخلاقيات صح، فيه أطر عمل عالمية بتوجهنا:
+                        <div class="detail-item">
+                            <span class="highlight-y">المبادئ الأساسية:</span> العدالة، المسؤولية، الشفافية، والخصوصية.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">أمثلة وتحديات:</span>
+                            <ul>
+                                <li><span class="highlight-y">أمثلة:</span> دليل IEEE للتصميم الأخلاقي، وإرشادات الاتحاد
+                                    الأوروبي للذكاء الاصطناعي الموثوق.</li>
+                                <li><span class="highlight-b">التحديات:</span> أصعب شي هو "الموازنة" بين المبادئ (مثلاً:
+                                    أحياناً الدقة بتتعارض مع الخصوصية)، وكيف نحول هاي النظريات لأكواد برمجية حقيقية.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 22 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">GDPR (General Data Protection Regulation)</span>
+                    <span class="slide-number">Slide 22</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0022.jpg" alt="Slide 22" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">قانون حماية البيانات الأوروبي (GDPR) 🇪🇺🔐</div>
+                    <div class="explanation-content">
+                        هاذ "البعبع" تبع شركات التكنولوجيا في أوروبا، وهو أقوى قانون حماية بيانات في العالم.
+                        <div class="detail-item">
+                            <span class="highlight-y">المبادئ الأساسية:</span>
+                            تقليل الداتا (ما نجمع شي زيادة)، الموافقة الصريحة، وحق "النسيان" (من حقك تطلب حذف بياناتك).
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">أثره على الـ AI:</span>
+                            بجبر الشركات تكون شفافة وتحكي للناس كيف بتستخدم بياناتهم في تدريب الموديلات، وبتعطيهم الحق
+                            يعترضوا على القرارات المؤتمتة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 23 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">CCPA (California Consumer Privacy Act)</span>
+                    <span class="slide-number">Slide 23</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0023.jpg" alt="Slide 23" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">قانون خصوصية المستهلك في كاليفورنيا (CCPA) 🇺🇸🏙️</div>
+                    <div class="explanation-content">
+                        كاليفورنيا عملت قانونها الخاص، وبشبه الـ GDPR لدرجة كبيرة، وبأثر على أي شركة بتتعامل مع سكان
+                        الولاية.
+                        <div class="detail-item">
+                            <span class="highlight-y">الحقوق الممنوحة:</span>
+                            حق المعرفة (شو بتعرفوا عني؟)، حق الحذف، وحق الاعتراض على "بيع" البيانات الشخصية.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">أهميته العالمية:</span>
+                            بما إنه أغلب شركات التكنولوجيا العملاقة (Google, Apple, Meta)مقرها في كاليفورنيا، فهاض
+                            القانون بيأثر على سياساتهم اللي بتطبق علينا كلنا.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 24 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Ethical Dilemmas in AI</span>
+                    <span class="slide-number">Slide 24</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0024.jpg" alt="Slide 24" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">المعضلات الأخلاقية (Ethical Dilemmas) 🤯🛤️</div>
+                    <div class="explanation-content">
+                        هون بندخل في "الحيط" فلسفياً؛ الـ AI بواجِه مواقف ما إلها جواب واحد صح، والقرار فيها اله تبعات
+                        أخلاقية.
+                        <div class="detail-item">
+                            <span class="highlight-y">أمثلة صعبة:</span>
+                            <ul>
+                                <li><span class="highlight-y">معضلة العربة (Trolley Problem):</span> السيارات ذاتية
+                                    القيادة لو صار حادث محتوم، تضحي بمين؟ السائق ولا المشاة؟ وهل حياة طفل أهم من حياة
+                                    شخص مسن؟</li>
+                                <li><span class="highlight-b">المراقبة (Surveillance):</span> هل مسموح نستخدم الـ AI في
+                                    التعرف على الوجوه في كل مكان بحجة "الأمن"؟ وين بتخلص حريتنا وبتبدأ الرقابة؟</li>
+                            </ul>
+                        </div>
+                        🎯 <span class="highlight-b">السؤال الجوهري:</span> مين المسؤول لو الموديل اتخذ قرار "أخلاقي"
+                        غلط؟ المبرمج ولا الشركة ولا السيستم نفسه؟
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 25 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Privacy-Preserving Techniques</span>
+                    <span class="slide-number">Slide 25</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0025.jpg" alt="Slide 25" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مخاطر انتهاك الخصوصية 🛑👤</div>
+                    <div class="explanation-content">
+                        لو الداتا وقعت في الإيد الغلط، العواقب بتبطل مجرد أرقام، بتصير كارثية على أرض الواقع.
+                        <div class="detail-item">
+                            <span class="highlight-y">المخاطر المحتملة:</span> سرقة الهوية، الخسائر المالية، وحتى تدمير
+                            السمعة الاجتماعية.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">تذكروا فضيحة Cambridge Analytica:</span> كيف تم استخدام داتا
+                            ملايين المستخدمين بدون علمهم عشان يحللوا شخصياتهم ويأثروا على قراراتهم السياسية.
+                        </div>
+                        🔐 <span class="highlight-y">الحل:</span> صار لازم نستخدم تقنيات بتسمح للموديل يتدرب "بدون ما
+                        يشوف" الداتا الحساسة بشكل مباشر.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 26 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Differential Privacy</span>
+                    <span class="slide-number">Slide 26</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0026.jpg" alt="Slide 26" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الخصوصية التفاضلية (Differential Privacy) 📉🎭</div>
+                    <div class="explanation-content">
+                        كيف نطلع إحصائيات مفيدة من مجموعة ناس بدون ما نقدر نعرف "مين" عمل "شو"؟
+                        <div class="detail-item">
+                            <span class="highlight-y">الفكرة:</span> بنضيف "نويز" (Noise) أو ضوضاء رياضية مدروسة للداتا.
+                            النتيجة العامة بتضل صحيحة، بس مستحيل تقدر ترجع لبيانات أي شخص لوحده.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">وين بنشوفها؟</span>
+                            بتستخدمها (Apple) عشان تعرف شو أكثر "إيموجي" الناس بتستخدمه بدون ما تقرأ مسجاتهم، وجوجل في
+                            تحليل حركة السير في الخرائط.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 27 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Federated Learning</span>
+                    <span class="slide-number">Slide 27</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0027.jpg" alt="Slide 27" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">التعلم الاتحادي (Federated Learning) 📱🤝</div>
+                    <div class="explanation-content">
+                        بدل ما نبعث الداتا للسيرفر عشان ندرّب الموديل، بنبعث الموديل هو اللي يروح عند الداتا!
+                        <div class="detail-item">
+                            <span class="highlight-y">الآلية:</span> موبايلك بيتدرب على صورك أو كتاباتك "محلياً"، وبعدين
+                            ببعث بس "شو تعلم" (Weights) للسيرفر. صورك ومسجاتك عمرها ما بتطلع من جهازك.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">المميزات:</span> حماية قصوى للخصوصية، توفير في استهلاك الإنترنت،
+                            وسرعة في التحديث.
+                        </div>
+                        🧤 <span class="highlight-y">مثال:</span> ميزة التصحيح التلقائي في الكيبورد بتتعلم كلماتك الخاصة
+                        بهي الطريقة.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 28 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Fair ML for Health</span>
+                    <span class="slide-number">Slide 28</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0028.jpg" alt="Slide 28" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">رحلة الـ Fairness عبر الزمن 📈⏳</div>
+                    <div class="explanation-content">
+                        موضوع العدالة مش مجرد "تريند" عابر، هو علم قاعد بيكبر بسرعة الصاروخ.
+                        <div class="detail-item">
+                            <span class="highlight-y">انفجار الأبحاث:</span> زي ما فرجانا السلايد، من سنة 2011 لسنة
+                            2017، عدد الأبحاث اللي بتحكي عن الـ Fairness زاد بشكل خيالي (من "ضحك ومزح" لـ "يا
+                            مصيبتنا!").
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">العدالة في الصحة (ML for Health):</span> واحد من أخطر المجالات،
+                            لأنه لو الموديل كان منحاز في تشخيص الأمراض، هاض معناه "حياة أو موت" لفئات معينة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 29 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">No TECH for APARTHEID</span>
+                    <span class="slide-number">Slide 29</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0029.jpg" alt="Slide 29" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">التكنولوجيا والنشاط الاجتماعي 🚫✊</div>
+                    <div class="explanation-content">
+                        المهندسين والمبرمجين مش "آلات"، صار عندهم وعي أخلاقي ورفضوا إن شغلهم يستخدم في القمع أو الفصل
+                        العنصري.
+                        <div class="detail-item">
+                            <span class="highlight-y">حملات عالمية:</span> مثل حملة "No Tech for Apartheid" اللي قادوها
+                            موظفي جوجل وأمازون احتجاجاً على مشروع (Nimbus).
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">الرسالة:</span> العلم والتقنية لازم يكونوا في خدمة الإنسانية، مش
+                            أداة للمراقبة والسيطرة على الشعوب المظلومة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 30 -->
+            <div class="slide-section">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Please Don't Include Us Workshop</span>
+                    <span class="slide-number">Slide 30</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="cv_4/4-Fairness_page-0030.jpg" alt="Slide 30" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">نداء للمشاركة: لا تشملونا! ⚠️🚫</div>
+                    <div class="explanation-content">
+                        أحياناً "الشمولية" (Inclusion) اللي بننادي فيها بتكون هي المشكلة مش الحل.
+                        <div class="detail-item">
+                            <span class="highlight-y">ليش "لا تشملونا"؟</span>
+                            بعض الفئات المهمشة بتفضل إنها ما تنشمل في خوارزميات الـ AI عشان ما يتم استهدافها أو مضايقتها
+                            بشكل أدق وأكثر ذكاءً.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">الخلاصة:</span> بناء AI عادل مش بس "كود"، هو فهم عميق للسياسة
+                            والمجتمع وحقوق الإنسان. لازم نعرف متى "نضم" الناس ومتى "نتركهم بحالهم".
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+</body>
+
+</html>
