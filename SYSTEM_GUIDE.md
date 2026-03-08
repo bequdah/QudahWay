@@ -63,13 +63,17 @@ To respect project ownership, deployment is **Action-Based**.
 
 ### Steps for Uploading:
 1.  **NO AUTO-PULL/PUSH:** Never upload without explicit user permission.
-2.  **Git Commands:**
+2.  **Git & Cloudflare Deployment:**
     ```bash
+    # Step 1: Push to GitHub
     git add .
     git commit -m "Descriptive message using QudahWay tags"
     git push origin main
+
+    # Step 2: Deploy to Cloudflare Pages
+    npx wrangler pages deploy . --branch main --project-name qudahway
     ```
-3.  **Cloud Sync:** Pushing to `GitHub` automatically triggers the cloud deployment (e.g., Vercel/Netlify) to make the changes live.
+3.  **Final Check:** Ensure both GitHub is updated and the Cloudflare link (qudahway.pages.dev) is active.
 
 ---
 
