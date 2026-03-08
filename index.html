@@ -158,30 +158,89 @@
             color: var(--accent);
             margin-bottom: 20px;
             font-size: 1.5rem;
+            width: 100%;
         }
 
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .link-card {
             background: var(--card-dark);
-            padding: 20px;
+            padding: 30px 20px;
             border-radius: 12px;
             text-decoration: none;
             color: var(--text-light);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            border: 1px solid #334155;
-            transition: transform 0.2s, border-color 0.2s;
+            justify-content: center;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            position: relative;
         }
 
         .link-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary);
+            border-color: var(--card-accent-color, var(--primary));
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-title {
+            display: block;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary);
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .soon-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #a855f7, #c084fc);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
+            transform: rotate(-10deg);
+            z-index: 20;
+            font-family: 'Inter', sans-serif;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0% {
+                transform: scale(1) rotate(-10deg);
+                box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05) rotate(-10deg);
+                box-shadow: 0 4px 15px rgba(168, 85, 247, 0.6);
+            }
+
+            100% {
+                transform: scale(1) rotate(-10deg);
+                box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
+            }
         }
 
         @media(max-width:600px) {
@@ -194,6 +253,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./gooey.css">
 </head>
 
 <body>
@@ -219,36 +279,38 @@
             </div>
         </div>
 
-        <h2 class="section-title">المساقات:</h2>
+        <h2 class="section-title">:المساقات</h2>
         <div class="links-grid">
-            <a href="ir/index.html" class="link-card" style="border-left:4px solid var(--primary)">
-                <div style="text-align:right">
+            <a href="ir/index.html" class="link-card" style="--card-accent-color: var(--primary)">
+                <div class="card-content">
                     <span class="card-title">Information Retrieval (IR)</span>
-                    <p style="margin:5px 0 0;font-size:.85rem;color:var(--text-muted)">استرجاع المعلومات والبحث الذكي
-                    </p>
-                </div><span class="card-icon"></span>
+                    <p class="card-desc">استرجاع المعلومات </p>
+                </div>
             </a>
-            <a href="cv/index.html" class="link-card"
-                style="border-left:4px solid var(--success);background:rgba(52,211,153,0.05)">
-                <div style="text-align:right">
+            <a href="cv/index.html" class="link-card" style="--card-accent-color: var(--success)">
+                <div class="card-content">
                     <span class="card-title">Computer Vision (CV)</span>
-                    <p style="margin:5px 0 0;font-size:.85rem;color:var(--text-muted)">تحليل الصور والرؤية الحاسوبية</p>
-                </div><span class="card-icon"></span>
+                    <p class="card-desc"> الرؤية الحاسوبية</p>
+                </div>
             </a>
-            <a href="DS/index.html" class="link-card"
-                style="border-left:4px solid var(--accent);background:rgba(250,204,21,0.05)">
-                <div style="text-align:right">
+            <a href="DS/index.html" class="link-card" style="--card-accent-color: var(--accent)">
+                <div class="card-content">
                     <span class="card-title">Data Science (DS)</span>
-                    <p style="margin:5px 0 0;font-size:.85rem;color:var(--text-muted)">تحليل البيانات والذكاء الاصطناعي
-                    </p>
-                </div><span class="card-icon"></span>
+                    <p class="card-desc">تحليل البيانات </p>
+                </div>
+            </a>
+            <a href="ss/index.html" class="link-card" style="--card-accent-color: #a855f7">
+                <span class="soon-badge">!Soon</span>
+                <div class="card-content">
+                    <span class="card-title">Smart Systems (SS)</span>
+                    <p class="card-desc">الأنظمة الذكية</p>
+                </div>
             </a>
         </div>
     </div>
 
-    <script>
-
-    </script>
+    <!-- Navigation JS (Gooey effect) -->
+    <script src="./gooey.js"></script>
 </body>
 
 </html>
