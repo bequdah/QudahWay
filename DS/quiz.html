@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | DS Quiz Bank</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: rgba(30, 41, 59, 0.7);
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --danger: #fb7185;
+            --success: #34d399;
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(56, 189, 248, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(250, 204, 21, 0.05) 0, transparent 50%);
+            color: var(--text-light);
+            font-family: 'Inter', 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* --- Selection Screen --- */
+        #selection-screen {
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .chapter-card {
+            background: var(--card-dark);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: right;
+            border-right: 4px solid var(--primary);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.9);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .chapter-number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            color: var(--primary);
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .chapter-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* --- Quiz Interface (Hidden by default) --- */
+        #quiz-interface {
+            display: none;
+            width: 100%;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            width: 0%;
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .quiz-card {
+            background: var(--card-dark);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .question-label {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #fff;
+            margin-bottom: 30px;
+            text-align: left;
+            direction: ltr;
+            /* English questions */
+        }
+
+        .options-list {
+            display: grid;
+            gap: 12px;
+            direction: ltr;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 100%;
+            outline: none;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--primary);
+        }
+
+        .option-btn.correct {
+            border-color: var(--success) !important;
+            background: rgba(52, 211, 153, 0.15) !important;
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            border-color: var(--danger) !important;
+            background: rgba(251, 113, 133, 0.15) !important;
+            color: var(--danger);
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .explanation-box {
+            display: none;
+            background: rgba(251, 113, 133, 0.05);
+            border-left: 4px solid var(--danger);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 25px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Results Screen */
+        .results-card {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .results-score {
+            font-size: 6rem;
+            font-weight: 950;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
+        }
+
+        .restart-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 35px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, var(--primary), #0ea5e9);
+            color: var(--bg-dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            cursor: pointer;
+            visibility: hidden;
+        }
+
+        .next-btn.visible {
+            visibility: visible;
+        }
+
+        .logo {
+            font-family: 'Satisfy', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Back Button */
+        .back-nav {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <!-- Logo Section -->
+        <header style="text-align: center; margin-bottom: 40px;">
+            <div class="logo">Qudah<span>Way</span></div>
+            <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 700; letter-spacing: 2px;">DS
+                KNOWLEDGE CHALLENGES</div>
+        </header>
+
+        <!-- Chapter Selection -->
+        <div id="selection-screen">
+            <h2 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 10px;">اختار أي مرحلة من مراحل علم البيانات
+                وابدأ الاختبار الآن
+            </h2>
+            <div class="chapters-grid">
+                <div class="chapter-card" onclick="startQuiz('ch1', 'Introduction to Data Science')">
+                    <span class="chapter-number">CHAPTER 01</span>
+                    <h3 class="chapter-title">Intro to Data Science</h3>
+                    <p class="chapter-desc">المفاهيم الأساسية، الـ Lifecycle، والفرق بين الـ DS ومجالات الذكاء الاصطناعي
+                        الثانية.</p>
+                </div>
+
+                <div class="chapter-card" onclick="startQuiz('ch2', 'Data Preprocessing')"
+                    style="border-right-color: var(--success);">
+                    <span class="chapter-number">CHAPTER 02</span>
+                    <h3 class="chapter-title">Data Preprocessing</h3>
+                    <p class="chapter-desc">تنظيف البيانات، التعامل مع القيم المفقودة، الـ Encoding والـ Scaling.</p>
+                </div>
+
+                <div class="chapter-card" onclick="startQuiz('ch3', 'Exploratory Data Analysis')"
+                    style="border-right-color: var(--accent);">
+                    <span class="chapter-number">CHAPTER 03</span>
+                    <h3 class="chapter-title">EDA (Analysis)</h3>
+                    <p class="chapter-desc">فهم الأنماط في البيانات، الرسم البياني، وكيف بنطلع بالرؤى الأولى.</p>
+                </div>
+
+                <div class="chapter-card" onclick="startQuiz('ch4', 'Feature Engineering')"
+                    style="border-right-color: var(--primary);">
+                    <span class="chapter-number">CHAPTER 04</span>
+                    <h3 class="chapter-title">Feature Engineering</h3>
+                    <p class="chapter-desc">تحويل البيانات الخام لميزات تساعد الموديل يفهم العلاقات المعقدة.</p>
+                </div>
+
+                <div class="chapter-card" onclick="startQuiz('ch5', 'Machine & Deep Learning')"
+                    style="border-right-color: var(--primary);">
+                    <span class="chapter-number">CHAPTER 05</span>
+                    <h3 class="chapter-title">Machine & Deep Learning</h3>
+                    <p class="chapter-desc">رحلة في عالم تعلم الآلة والشبكات العصبية والذكاء الاصطناعي.</p>
+                </div>
+
+                <div class="chapter-card" onclick="startQuiz('ch6', 'Fairness in AI')"
+                    style="border-right-color: var(--danger);">
+                    <span class="chapter-number">CHAPTER 06</span>
+                    <h3 class="chapter-title">Fairness in AI</h3>
+                    <p class="chapter-desc">العدالة في الذكاء الاصطناعي وكيف نتجنب الانحياز في النماذج.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-weight: 700;">رجوع
+                    للقائمة الرئيسية</a>
+            </div>
+        </div>
+
+        <!-- Quiz Interface -->
+        <div id="quiz-interface">
+            <div class="back-nav">
+                <span class="back-link" onclick="location.reload()">← اختر شابتر ثاني</span>
+            </div>
+
+            <div class="stats-bar">
+                <div id="chapter-label" style="color: var(--primary);">Chapter 1 Quiz</div>
+                <div id="question-count">Question 1 / 15</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <main class="quiz-card">
+                <div id="quiz-content">
+                    <span class="question-label" id="q-label">QUESTION #01</span>
+                    <h2 class="question-text" id="question-text">Loading...</h2>
+
+                    <div class="options-list" id="options-list"></div>
+
+                    <div class="explanation-box" id="explanation-box">
+                        <span
+                            style="color: var(--danger); font-weight: 800; font-size: 0.9rem; display: block; margin-bottom: 8px;">Explanation
+                            💡</span>
+                        <p id="explanation-text" style="color: var(--text-muted); margin: 0; line-height: 1.5;"></p>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="next-btn" id="next-btn">Next Question ➔</button>
+                    </div>
+                </div>
+
+                <div class="results-card" id="results-card">
+                    <h2 style="font-size: 2rem; margin-bottom: 15px;">Quiz Completed! 🎉</h2>
+                    <div style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 10px;">Your Final Score:
+                    </div>
+                    <div class="results-score" id="final-score">0%</div>
+                    <button class="restart-btn" onclick="location.reload()">Home Challenge 🔄</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Data Bank (Users can update each chapter as they get questions)
+        const quizBank = {
+            ch1: [
+                {
+                    question: "Which description best captures the core definition of Data Science?",
+                    options: [
+                        "The process of storing large datasets using distributed computing systems",
+                        "An interdisciplinary field focused on extracting insights and knowledge from data using statistics, machine learning, and domain expertise",
+                        "A subset of software engineering focused on database system design and optimization",
+                        "A branch of artificial intelligence that focuses exclusively on neural networks and deep learning"
+                    ],
+                    correct: 1,
+                    explanation: "Data Science is fundamentally interdisciplinary, combining statistics, machine learning, and domain expertise to extract insights. The other options describe related fields such as data engineering or specific AI subfields."
+                },
+                {
+                    question: "What is the primary role of Exploratory Data Analysis (EDA) in the data science workflow?",
+                    options: [
+                        "Automatically training machine learning models to discover optimal hyperparameters",
+                        "Understanding data distributions, relationships, and patterns before model development",
+                        "Transforming raw data into structured relational database tables",
+                        "Deploying trained models into production systems for inference"
+                    ],
+                    correct: 1,
+                    explanation: "EDA focuses on understanding patterns, correlations, and distributions in data before modeling. The other options correspond to model training, database design, or deployment rather than exploratory analysis."
+                },
+                {
+                    question: "Which stage of the Data Science Pipeline typically involves handling missing values, encoding variables, and scaling features?",
+                    options: [
+                        "Data Preprocessing",
+                        "Model Evaluation",
+                        "Problem Definition",
+                        "Model Deployment"
+                    ],
+                    correct: 0,
+                    explanation: "Data preprocessing prepares raw data for analysis by handling missing values, scaling, and encoding features. The other stages focus on defining problems, evaluating models, or deploying them."
+                },
+                {
+                    question: "Which Python library is most directly associated with tabular data manipulation and DataFrame structures?",
+                    options: [
+                        "NumPy",
+                        "Pandas",
+                        "TensorFlow",
+                        "Matplotlib"
+                    ],
+                    correct: 1,
+                    explanation: "Pandas provides DataFrames and Series specifically designed for structured data manipulation. NumPy focuses on numerical arrays, TensorFlow on deep learning, and Matplotlib on visualization."
+                },
+                {
+                    question: "Which statement best explains why Data Science pipelines improve reproducibility?",
+                    options: [
+                        "They ensure that experiments use identical hardware configurations",
+                        "They allow the same automated sequence of steps to be executed on the same data and code",
+                        "They prevent models from overfitting by enforcing cross-validation",
+                        "They replace statistical analysis with deterministic algorithms"
+                    ],
+                    correct: 1,
+                    explanation: "Pipelines standardize workflows so the same code and data produce the same results, enabling reproducibility. The other options describe unrelated or incomplete interpretations."
+                },
+                {
+                    question: "Why is feature engineering often considered critical for improving model performance?",
+                    options: [
+                        "Because it replaces the need for training data with synthetic examples",
+                        "Because transforming or selecting features can improve how algorithms learn patterns in the data",
+                        "Because it automatically optimizes model hyperparameters during training",
+                        "Because it guarantees higher accuracy regardless of algorithm choice"
+                    ],
+                    correct: 1,
+                    explanation: "Feature engineering improves how models represent information, which can significantly enhance learning. It does not replace data, tune hyperparameters automatically, or guarantee performance."
+                },
+                {
+                    question: "Which scenario best illustrates the purpose of splitting data into training and testing sets?",
+                    options: [
+                        "To reduce the computational cost of running machine learning algorithms",
+                        "To compare multiple feature engineering techniques simultaneously",
+                        "To evaluate how well a trained model generalizes to unseen data",
+                        "To ensure that all records contribute equally to model training"
+                    ],
+                    correct: 2,
+                    explanation: "Training/testing splits allow evaluation of a model's ability to generalize to unseen data. The other options do not capture the main purpose of the split."
+                },
+                {
+                    question: "In a Data Science pipeline, what is the main benefit of automation and orchestration?",
+                    options: [
+                        "They replace statistical reasoning with deterministic rule-based processes",
+                        "They coordinate and streamline pipeline tasks while minimizing manual intervention",
+                        "They eliminate the need for model monitoring in production environments",
+                        "They convert machine learning workflows into database transactions"
+                    ],
+                    correct: 1,
+                    explanation: "Automation executes repetitive tasks while orchestration manages dependencies and execution order across pipeline stages. The other statements misrepresent their function."
+                },
+                {
+                    question: "Which situation best demonstrates the concept of scalability in data science pipelines?",
+                    options: [
+                        "A pipeline that automatically selects the best algorithm for each dataset",
+                        "A workflow that can process increasingly large datasets without fundamental redesign",
+                        "A system that allows only one user to access the pipeline at a time",
+                        "A model that performs well on training data regardless of dataset size"
+                    ],
+                    correct: 1,
+                    explanation: "Scalability refers to the ability to handle growing data volumes efficiently. The other options relate to algorithm selection, system access, or model performance rather than scalability."
+                },
+                {
+                    question: "Why are performance metrics such as accuracy, precision, recall, and RMSE used during model evaluation?",
+                    options: [
+                        "To measure the computational cost of running machine learning algorithms",
+                        "To quantify how well a model performs relative to the prediction task",
+                        "To determine whether feature engineering should be applied",
+                        "To automatically determine the deployment infrastructure for the model"
+                    ],
+                    correct: 1,
+                    explanation: "Evaluation metrics quantify predictive performance relative to the task. They do not directly measure computational cost, feature engineering needs, or deployment decisions."
+                },
+                {
+                    question: "Suppose a pipeline processes raw datasets manually without standardized steps. Which pipeline property is most likely compromised?",
+                    options: [
+                        "Reproducibility",
+                        "Model interpretability",
+                        "Algorithm convergence",
+                        "Hyperparameter sensitivity"
+                    ],
+                    correct: 0,
+                    explanation: "Without standardized automated steps, results may not be repeatable, compromising reproducibility. The other properties relate to different modeling concerns."
+                },
+                {
+                    question: "Which choice best distinguishes Data Science from a traditional Machine Learning course focus?",
+                    options: [
+                        "Data Science emphasizes end-to-end problem solving and decision-making around data",
+                        "Machine learning focuses primarily on collecting data from multiple databases",
+                        "Data Science excludes statistical analysis and focuses solely on programming",
+                        "Machine learning focuses only on deployment rather than model training"
+                    ],
+                    correct: 0,
+                    explanation: "Data Science emphasizes the full lifecycle including problem definition, data preparation, and storytelling. Machine learning courses usually focus more narrowly on algorithm design and training."
+                },
+                {
+                    question: "A team repeatedly retrains models but rarely documents preprocessing steps or assumptions. Which long-term problem is most likely to occur?",
+                    options: [
+                        "The models will become computationally inefficient",
+                        "Future team members will struggle to replicate or understand previous results",
+                        "The dataset will gradually lose statistical significance",
+                        "Hyperparameters will automatically converge to local minima"
+                    ],
+                    correct: 1,
+                    explanation: "Lack of documentation reduces transparency and reproducibility, making future replication difficult. The other outcomes are unrelated to documentation practices."
+                },
+                {
+                    question: "Consider a pipeline where preprocessing, feature engineering, and training occur automatically whenever new data arrives. Which concept does this design most strongly represent?",
+                    options: [
+                        "Pipeline orchestration and automation",
+                        "Exploratory data analysis",
+                        "Manual model validation",
+                        "Static model evaluation"
+                    ],
+                    correct: 0,
+                    explanation: "Automated pipelines triggered by new data represent orchestration and automation of workflow stages. EDA and manual validation involve interactive analysis rather than automated execution."
+                },
+                {
+                    question: "Why is it problematic to perform feature scaling after splitting data but fitting the scaler using the entire dataset?",
+                    options: [
+                        "Because it reduces training speed significantly",
+                        "Because it introduces data leakage from the test set into the training process",
+                        "Because scaling removes statistical correlations between variables",
+                        "Because machine learning algorithms require unscaled inputs"
+                    ],
+                    correct: 1,
+                    explanation: "Fitting preprocessing transformations on the entire dataset leaks information from the test set, biasing evaluation results. Proper practice fits preprocessing only on training data."
+                }
+            ],
+            ch2: [
+                {
+                    question: "Which description most accurately reflects the purpose of data preprocessing in a machine learning pipeline?",
+                    options: [
+                        "Transforming raw and potentially noisy data into a structured form suitable for analysis and modeling",
+                        "Automatically generating machine learning models directly from unprocessed datasets",
+                        "Storing large-scale datasets in distributed storage systems for efficient access",
+                        "Replacing statistical analysis with deterministic computational rules"
+                    ],
+                    correct: 0,
+                    explanation: "Data preprocessing prepares raw, inconsistent, or noisy data for analysis and modeling. The other options describe model generation or data storage rather than preprocessing. "
+                },
+                {
+                    question: "Which objective is most directly associated with the data cleaning stage of preprocessing?",
+                    options: [
+                        "Reducing dimensionality through feature selection techniques",
+                        "Detecting and correcting inaccurate, incomplete, or inconsistent data entries",
+                        "Optimizing hyperparameters during model training",
+                        "Balancing class distributions in supervised learning tasks"
+                    ],
+                    correct: 1,
+                    explanation: "Data cleaning focuses on identifying and correcting errors, duplicates, or inconsistencies to improve data quality. The other options relate to feature engineering, model training, or dataset balancing. "
+                },
+                {
+                    question: "Which type of missing data occurs when the probability of a value being missing is unrelated to any observed or unobserved variables?",
+                    options: [
+                        "Missing Completely at Random (MCAR)",
+                        "Missing at Random (MAR)",
+                        "Missing Not at Random (MNAR)",
+                        "Systematically Missing Data (SMD)"
+                    ],
+                    correct: 0,
+                    explanation: "MCAR means the missingness is completely independent of any variables in the dataset. MAR depends on observed variables, while MNAR depends on unobserved variables. "
+                },
+                {
+                    question: "Why must categorical variables typically be encoded before being used in most machine learning models?",
+                    options: [
+                        "Because categorical values must be converted into numerical representations that algorithms can process",
+                        "Because encoding reduces the number of categories present in the dataset",
+                        "Because machine learning models require categories to be ordered numerically",
+                        "Because encoding eliminates missing values in categorical features"
+                    ],
+                    correct: 0,
+                    explanation: "Most machine learning algorithms operate on numerical data, so categorical variables must be encoded. Encoding does not necessarily reduce categories, impose order, or remove missing values. "
+                },
+                {
+                    question: "Which feature scaling technique rescales values to a fixed range, typically between 0 and 1?",
+                    options: [
+                        "Standardization (Z-score scaling)",
+                        "Min-Max Normalization",
+                        "Robust Scaling",
+                        "Logarithmic Transformation"
+                    ],
+                    correct: 1,
+                    explanation: "Min-Max scaling rescales features to a specific range such as [0,1]. Standardization centers values around mean 0 and standard deviation 1. "
+                },
+                {
+                    question: "In the context of handling missing data, why might median imputation be preferred over mean imputation?",
+                    options: [
+                        "Because the median is less sensitive to extreme values and outliers",
+                        "Because median imputation requires fewer computational resources",
+                        "Because the median always preserves the original distribution shape",
+                        "Because the median prevents any bias in the dataset"
+                    ],
+                    correct: 0,
+                    explanation: "Median imputation is more robust to outliers than mean imputation, which can be strongly influenced by extreme values. "
+                },
+                {
+                    question: "Which preprocessing technique would most directly address highly skewed data distributions?",
+                    options: [
+                        "Logarithmic transformation",
+                        "One-hot encoding",
+                        "Train–test splitting",
+                        "Feature selection"
+                    ],
+                    correct: 0,
+                    explanation: "Transformations such as logarithmic or power transforms reduce skewness and stabilize variance, improving model compatibility with distribution assumptions. "
+                },
+                {
+                    question: "Why are distance-based algorithms such as KNN particularly sensitive to feature scaling?",
+                    options: [
+                        "Because they rely on distance calculations where large-scale features can dominate smaller ones",
+                        "Because they require all variables to follow a normal distribution",
+                        "Because they cannot handle categorical features after encoding",
+                        "Because they assume the dataset contains no outliers"
+                    ],
+                    correct: 0,
+                    explanation: "Distance-based models compute similarity using feature distances, so features with larger numeric ranges can disproportionately influence results without scaling. "
+                },
+                {
+                    question: "Which scenario best illustrates the concept of data reduction?",
+                    options: [
+                        "Removing irrelevant features or applying dimensionality reduction techniques such as PCA",
+                        "Replacing missing values using regression-based imputation",
+                        "Encoding categorical variables using one-hot encoding",
+                        "Normalizing features to the range [0,1]"
+                    ],
+                    correct: 0,
+                    explanation: "Data reduction focuses on decreasing dataset size or dimensionality while retaining important information, often using feature selection or PCA. "
+                },
+                {
+                    question: "Why is the train–test split performed before most preprocessing steps such as scaling or imputation?",
+                    options: [
+                        "To prevent information from the test data influencing the training process",
+                        "To reduce the computational cost of preprocessing algorithms",
+                        "To ensure all classes are equally represented in both sets",
+                        "To guarantee that models converge during training"
+                    ],
+                    correct: 0,
+                    explanation: "Splitting first prevents data leakage, where information from the test set influences model training or preprocessing steps. "
+                },
+                {
+                    question: "Which preprocessing mistake can cause a model to perform unrealistically well during evaluation but fail in real-world deployment?",
+                    options: [
+                        "Performing feature scaling using both training and testing data together",
+                        "Removing duplicate records before training",
+                        "Applying logarithmic transformation to skewed variables",
+                        "Using median imputation instead of mean imputation"
+                    ],
+                    correct: 0,
+                    explanation: "Using both training and test data for preprocessing introduces data leakage, which leads to overly optimistic evaluation results. "
+                },
+                {
+                    question: "Why might tree-based models be less sensitive to outliers compared to linear models?",
+                    options: [
+                        "Because tree models split data based on thresholds rather than relying on mean-based statistics",
+                        "Because tree models automatically remove extreme values during training",
+                        "Because tree models normalize feature ranges internally",
+                        "Because tree models require fewer input features"
+                    ],
+                    correct: 0,
+                    explanation: "Decision trees rely on threshold splits rather than distance or mean-based metrics, making them more robust to extreme values. "
+                },
+                {
+                    question: "In KNN imputation, how is a missing value typically estimated for a numerical feature?",
+                    options: [
+                        "By calculating the mean value among the K most similar observations",
+                        "By randomly selecting a value from the nearest neighbor",
+                        "By replacing it with the dataset median regardless of similarity",
+                        "By predicting it using a regression model trained on the entire dataset"
+                    ],
+                    correct: 0,
+                    explanation: "KNN imputation estimates missing values using the mean (or mode for categorical features) of the K nearest neighbors based on similarity. "
+                },
+                {
+                    question: "Which risk arises if nominal categorical variables are encoded using label encoding instead of one-hot encoding?",
+                    options: [
+                        "The model may incorrectly assume an ordinal relationship between categories",
+                        "The model will automatically ignore the encoded feature",
+                        "The dataset will lose all categorical information",
+                        "The encoded variables will introduce missing values"
+                    ],
+                    correct: 0,
+                    explanation: "Label encoding assigns numeric values that may imply artificial ordering, which can mislead models when the categories are purely nominal. "
+                },
+                {
+                    question: "Why does high dimensionality often increase the risk of overfitting in machine learning models?",
+                    options: [
+                        "Because models may capture noise instead of meaningful patterns when too many features are present",
+                        "Because large numbers of features prevent algorithms from converging",
+                        "Because datasets automatically become imbalanced as dimensionality increases",
+                        "Because feature scaling cannot be applied when many features exist"
+                    ],
+                    correct: 0,
+                    explanation: "High dimensional datasets allow models to fit noise rather than generalizable patterns, increasing the risk of overfitting. Data reduction techniques help mitigate this issue. "
+                }
+            ],
+            ch3: [
+                {
+                    question: "Which description best defines Exploratory Data Analysis (EDA) in the context of the data science workflow?",
+                    options: [
+                        "A method used to automatically select the best machine learning model before preprocessing",
+                        "A process of summarizing and investigating datasets using statistical methods and visualizations to understand their structure",
+                        "A technique for optimizing model hyperparameters using automated algorithms",
+                        "A method used to convert raw datasets into distributed database storage formats"
+                    ],
+                    correct: 1,
+                    explanation: "EDA focuses on examining datasets using statistics and visualizations to understand structure, patterns, and anomalies before modeling. The other options refer to modeling, optimization, or storage tasks rather than exploratory analysis. "
+                },
+                {
+                    question: "Which primary objective of EDA directly supports later feature engineering decisions?",
+                    options: [
+                        "Automatically generating synthetic training samples",
+                        "Identifying patterns, relationships, and anomalies within the dataset",
+                        "Reducing dataset size through dimensionality reduction",
+                        "Performing model evaluation using accuracy metrics"
+                    ],
+                    correct: 1,
+                    explanation: "EDA reveals relationships, distributions, and anomalies that guide feature engineering and modeling decisions. The other options describe later steps in the pipeline. "
+                },
+                {
+                    question: "Which visualization technique is most appropriate for showing the frequency distribution of a single numerical variable?",
+                    options: [
+                        "Histogram",
+                        "Scatter Plot",
+                        "Bar Chart",
+                        "Line Chart"
+                    ],
+                    correct: 0,
+                    explanation: "Histograms display the distribution of numerical variables by grouping data into bins. Scatter plots show relationships between variables, while bar and line charts are used for categorical counts and time trends. "
+                },
+                {
+                    question: "Which plot type is specifically designed to show the relationship between two numerical variables?",
+                    options: [
+                        "Boxplot",
+                        "Scatter Plot",
+                        "Pie Chart",
+                        "Bar Chart"
+                    ],
+                    correct: 1,
+                    explanation: "Scatter plots visualize relationships between two numerical variables and help detect trends, correlations, or clusters. The other plots serve different purposes. "
+                },
+                {
+                    question: "What key statistical insight can be obtained from summary statistics such as mean, median, and standard deviation?",
+                    options: [
+                        "The algorithm that best fits the dataset",
+                        "The central tendency and spread of the data distribution",
+                        "The optimal hyperparameters for a machine learning model",
+                        "The classification boundaries between data points"
+                    ],
+                    correct: 1,
+                    explanation: "Summary statistics describe central tendency and variability of data, helping analysts understand distribution characteristics before modeling. "
+                },
+                {
+                    question: "Why are boxplots particularly useful during exploratory data analysis?",
+                    options: [
+                        "They display relationships between multiple categorical variables",
+                        "They visualize quartiles and help detect potential outliers",
+                        "They estimate probability distributions using kernel functions",
+                        "They show time-series trends across sequential observations"
+                    ],
+                    correct: 1,
+                    explanation: "Boxplots summarize distributions using quartiles and clearly highlight potential outliers. Other plots serve different analytical purposes. "
+                },
+                {
+                    question: "What information does a correlation matrix primarily provide during EDA?",
+                    options: [
+                        "The causal relationships between independent variables",
+                        "The strength and direction of relationships between numerical variables",
+                        "The probability distribution of each individual variable",
+                        "The ranking of features by predictive importance"
+                    ],
+                    correct: 1,
+                    explanation: "A correlation matrix quantifies relationships between variables, typically ranging from −1 to +1. It indicates association, not causation. "
+                },
+                {
+                    question: "Which visualization method is most suitable for identifying trends in time-series data?",
+                    options: [
+                        "Line Chart",
+                        "Histogram",
+                        "Scatter Plot",
+                        "Pie Chart"
+                    ],
+                    correct: 0,
+                    explanation: "Line charts connect sequential observations and highlight temporal trends or seasonality in time-series datasets. "
+                },
+                {
+                    question: "Which visualization combines aspects of boxplots and density plots to show both distribution shape and summary statistics?",
+                    options: [
+                        "Violin Plot",
+                        "Scatter Plot",
+                        "Bar Chart",
+                        "Heat Map"
+                    ],
+                    correct: 0,
+                    explanation: "Violin plots integrate boxplot statistics with density estimates, providing both summary statistics and distribution shape information. "
+                },
+                {
+                    question: "Why are pair plots particularly useful when analyzing datasets with multiple numerical variables?",
+                    options: [
+                        "They automatically detect causal relationships between variables",
+                        "They display scatter plots for every pair of variables to reveal correlations and clusters",
+                        "They convert categorical variables into numerical representations",
+                        "They calculate feature importance scores for machine learning models"
+                    ],
+                    correct: 1,
+                    explanation: "Pair plots visualize relationships between all variable pairs, helping detect correlations and clusters in multidimensional data. "
+                },
+                {
+                    question: "Which situation best illustrates how EDA helps detect data quality issues?",
+                    options: [
+                        "Discovering that a model has low accuracy during evaluation",
+                        "Identifying impossible values such as negative ages during visualization",
+                        "Selecting the most appropriate machine learning algorithm",
+                        "Automatically generating new features using neural networks"
+                    ],
+                    correct: 1,
+                    explanation: "EDA often reveals anomalies or invalid data values such as impossible measurements, helping analysts detect data quality problems early. "
+                },
+                {
+                    question: "Why might a density plot sometimes provide more insight than a histogram?",
+                    options: [
+                        "Because it smooths the distribution and better highlights underlying patterns",
+                        "Because it removes all statistical noise from the dataset",
+                        "Because it always provides exact probabilities for each observation",
+                        "Because it automatically identifies correlations between variables"
+                    ],
+                    correct: 0,
+                    explanation: "Density plots estimate probability distributions with smooth curves, making distribution shapes easier to interpret compared to discrete histogram bins. "
+                },
+                {
+                    question: "Which interpretation of a correlation coefficient near +1 in a correlation matrix is most accurate?",
+                    options: [
+                        "The variables have a strong positive linear relationship",
+                        "The variables are statistically independent",
+                        "One variable causes the other to increase",
+                        "The variables share identical distributions"
+                    ],
+                    correct: 0,
+                    explanation: "A correlation close to +1 indicates strong positive linear association, not causation or identical distributions. "
+                },
+                {
+                    question: "Which scenario demonstrates the role of EDA in guiding feature engineering?",
+                    options: [
+                        "Observing that two variables are highly correlated and considering removing one to reduce redundancy",
+                        "Automatically tuning hyperparameters to improve model performance",
+                        "Splitting the dataset into training and testing subsets",
+                        "Deploying the trained model into a cloud environment"
+                    ],
+                    correct: 0,
+                    explanation: "EDA often reveals strong correlations or redundant variables, informing feature engineering decisions such as feature removal or transformation. "
+                },
+                {
+                    question: "What is the primary difference between EDA and data storytelling in the data science lifecycle?",
+                    options: [
+                        "EDA discovers insights in data, while storytelling communicates those insights to stakeholders",
+                        "EDA focuses on visualization while storytelling focuses only on statistical testing",
+                        "EDA is used after deployment whereas storytelling is used during model training",
+                        "EDA generates machine learning models while storytelling validates them"
+                    ],
+                    correct: 0,
+                    explanation: "EDA is used to discover patterns and insights in the data, while data storytelling communicates those findings to decision-makers using narrative and context. "
+                }
+            ],
+            ch4: [
+                {
+                    question: "Which description most accurately captures the purpose of feature engineering in machine learning?",
+                    options: [
+                        "Transforming and creating variables that improve a model’s ability to detect patterns and generalize",
+                        "Cleaning datasets by removing duplicate records and correcting formatting errors",
+                        "Selecting the best machine learning algorithm based on dataset size",
+                        "Reducing dataset storage requirements through compression techniques"
+                    ],
+                    correct: 0,
+                    explanation: "Feature engineering focuses on designing or transforming features to improve how models learn patterns. Cleaning data and storage optimization belong to preprocessing and data management tasks. "
+                },
+                {
+                    question: "Why is feature engineering considered crucial for many machine learning models?",
+                    options: [
+                        "Because models rely on the numerical representations of features rather than contextual understanding",
+                        "Because it eliminates the need for preprocessing steps such as handling missing values",
+                        "Because it ensures that models automatically achieve optimal accuracy",
+                        "Because it replaces the need for training data by generating synthetic observations"
+                    ],
+                    correct: 0,
+                    explanation: "Machine learning models learn patterns from numerical representations of data, so well-designed features significantly influence performance. Feature engineering does not replace preprocessing or training data. "
+                },
+                {
+                    question: "Which activity best represents feature creation?",
+                    options: [
+                        "Deriving Body Mass Index (BMI) from weight and height measurements",
+                        "Replacing missing salary values using median imputation",
+                        "Splitting a dataset into training and testing subsets",
+                        "Normalizing numerical features using Z-score scaling"
+                    ],
+                    correct: 0,
+                    explanation: "Feature creation involves deriving new variables from existing ones, such as BMI from weight and height. The other options correspond to preprocessing or dataset splitting. "
+                },
+                {
+                    question: "Which transformation is commonly used to reduce strong right-skewness in numerical data?",
+                    options: [
+                        "Logarithmic transformation",
+                        "One-hot encoding",
+                        "Min-max normalization",
+                        "Recursive feature elimination"
+                    ],
+                    correct: 0,
+                    explanation: "Log transformations are commonly applied to right-skewed variables like income or prices to stabilize variance and improve distribution symmetry. "
+                },
+                {
+                    question: "What is the main objective of feature selection?",
+                    options: [
+                        "Reducing the dataset to the most relevant features to improve model performance and interpretability",
+                        "Transforming categorical variables into numerical representations",
+                        "Automatically generating polynomial interactions between variables",
+                        "Scaling variables to a common numerical range"
+                    ],
+                    correct: 0,
+                    explanation: "Feature selection identifies the most relevant variables to reduce overfitting, improve interpretability, and decrease computational complexity. "
+                },
+                {
+                    question: "Which situation best illustrates feature interaction in feature engineering?",
+                    options: [
+                        "Creating a new variable by multiplying income and education level to capture their combined effect",
+                        "Removing duplicate records that appear multiple times in a dataset",
+                        "Replacing missing values using KNN imputation",
+                        "Encoding categorical variables using one-hot encoding"
+                    ],
+                    correct: 0,
+                    explanation: "Feature interaction captures relationships between variables by combining them, enabling models—especially linear ones—to represent nonlinear effects. "
+                },
+                {
+                    question: "Why is feature extraction particularly useful when working with high-dimensional datasets?",
+                    options: [
+                        "It reduces dimensionality while retaining informative representations of the data",
+                        "It eliminates the need for model training entirely",
+                        "It converts categorical features into numerical features automatically",
+                        "It ensures that all features follow a normal distribution"
+                    ],
+                    correct: 0,
+                    explanation: "Feature extraction techniques like PCA reduce dimensionality while preserving informative structure in the data, which improves computational efficiency and generalization. "
+                },
+                {
+                    question: "Which feature engineering technique is particularly important in time-series forecasting problems?",
+                    options: [
+                        "Lag features that incorporate previous time-step values",
+                        "Polynomial transformations of categorical variables",
+                        "Standardization of categorical features",
+                        "Recursive feature elimination on numerical features"
+                    ],
+                    correct: 0,
+                    explanation: "Lag features capture temporal dependencies by including previous observations, making them critical for time-series forecasting models. "
+                },
+                {
+                    question: "Which statement best explains the curse of dimensionality?",
+                    options: [
+                        "As the number of features increases, distance measures become less meaningful and model variance can increase",
+                        "Increasing feature count always improves model performance due to more information",
+                        "Models cannot train when the dataset contains more than 100 features",
+                        "Feature scaling becomes impossible when datasets contain many variables"
+                    ],
+                    correct: 0,
+                    explanation: "High-dimensional spaces reduce the effectiveness of distance metrics and increase overfitting risk, which is known as the curse of dimensionality. "
+                },
+                {
+                    question: "Which encoding technique replaces each category with the average value of the target variable?",
+                    options: [
+                        "Target encoding",
+                        "Binary encoding",
+                        "One-hot encoding",
+                        "Ordinal encoding"
+                    ],
+                    correct: 0,
+                    explanation: "Target encoding replaces categorical values with the mean of the target variable for that category, but must be used carefully to avoid leakage. "
+                },
+                {
+                    question: "Why might tree-based models require less feature engineering compared to linear models?",
+                    options: [
+                        "Because decision trees can capture nonlinear relationships without explicit feature transformations",
+                        "Because tree models automatically normalize feature distributions",
+                        "Because tree models cannot process transformed features",
+                        "Because tree models rely only on categorical variables"
+                    ],
+                    correct: 0,
+                    explanation: "Decision trees inherently model nonlinear relationships through recursive splits, reducing reliance on engineered nonlinear transformations. "
+                },
+                {
+                    question: "What is a major risk when performing target encoding before splitting the dataset into training and testing sets?",
+                    options: [
+                        "Feature leakage caused by using target information from the entire dataset",
+                        "Loss of categorical information during encoding",
+                        "Increased computational complexity during training",
+                        "Reduced interpretability of the resulting model"
+                    ],
+                    correct: 0,
+                    explanation: "Using target information from the entire dataset during encoding leaks information from the test set, leading to overly optimistic evaluation results. "
+                },
+                {
+                    question: "Which scenario best illustrates the concept of domain-driven feature engineering?",
+                    options: [
+                        "Creating financial indicators such as moving averages for stock price prediction",
+                        "Randomly generating new numerical variables to increase feature count",
+                        "Removing all categorical variables before training a model",
+                        "Scaling all variables to a standard range regardless of distribution"
+                    ],
+                    correct: 0,
+                    explanation: "Domain-driven feature engineering incorporates domain knowledge—such as financial indicators—to design meaningful features for models. "
+                },
+                {
+                    question: "Why should feature engineering generally be performed after the train–test split?",
+                    options: [
+                        "To prevent engineered features from incorporating information from the test set",
+                        "To ensure that models receive identical features in both training and testing",
+                        "To simplify the process of hyperparameter optimization",
+                        "To guarantee that the dataset remains balanced across classes"
+                    ],
+                    correct: 0,
+                    explanation: "Engineering features before splitting can introduce leakage if features depend on global dataset statistics or future values. "
+                },
+                {
+                    question: "Which approach is commonly used to evaluate whether engineered features genuinely improve model performance?",
+                    options: [
+                        "Comparing cross-validation performance before and after adding new features",
+                        "Increasing the number of polynomial features until training accuracy reaches 100%",
+                        "Removing all correlated features regardless of predictive importance",
+                        "Scaling features multiple times using different normalization methods"
+                    ],
+                    correct: 0,
+                    explanation: "Cross-validation provides an objective measure of whether engineered features improve generalization performance rather than just fitting training data. "
+                }
+            ],
+            ch5: [
+                {
+                    question: "Which statement best describes the fundamental idea behind machine learning?",
+                    options: [
+                        "A technique that allows computers to learn patterns from data rather than being explicitly programmed for every rule",
+                        "A method for converting raw data into structured database tables for analysis",
+                        "A programming paradigm where algorithms automatically generate hardware instructions",
+                        "A statistical approach used only for estimating probability distributions"
+                    ],
+                    correct: 0,
+                    explanation: "Machine learning enables systems to learn patterns from data instead of relying on explicitly programmed rules. The other options describe unrelated data management or statistical processes. "
+                },
+                {
+                    question: "What distinguishes machine learning from the broader concept of artificial intelligence?",
+                    options: [
+                        "Machine learning focuses on training systems using data, while artificial intelligence refers to the broader goal of mimicking intelligent behavior",
+                        "Artificial intelligence only uses neural networks, while machine learning uses traditional statistical methods",
+                        "Machine learning refers only to classification problems, while artificial intelligence includes regression tasks",
+                        "Artificial intelligence focuses on robotics while machine learning focuses exclusively on image recognition"
+                    ],
+                    correct: 0,
+                    explanation: "Artificial intelligence is the broader field concerned with intelligent behavior, while machine learning is a subset that focuses on learning from data. "
+                },
+                {
+                    question: "Which learning paradigm uses labeled training examples to predict outcomes for new data?",
+                    options: [
+                        "Supervised learning",
+                        "Unsupervised learning",
+                        "Reinforcement learning",
+                        "Self-organized learning"
+                    ],
+                    correct: 0,
+                    explanation: "Supervised learning relies on labeled examples to train models that can predict outcomes for unseen data. The other paradigms operate with unlabeled data or reward feedback. "
+                },
+                {
+                    question: "Which type of machine learning attempts to discover hidden patterns in unlabeled datasets?",
+                    options: [
+                        "Unsupervised learning",
+                        "Supervised learning",
+                        "Reinforcement learning",
+                        "Transfer learning"
+                    ],
+                    correct: 0,
+                    explanation: "Unsupervised learning identifies hidden structures or patterns in datasets where labels are not provided. "
+                },
+                {
+                    question: "Which machine learning task involves predicting discrete class labels for data samples?",
+                    options: [
+                        "Classification",
+                        "Regression",
+                        "Clustering",
+                        "Dimensionality reduction"
+                    ],
+                    correct: 0,
+                    explanation: "Classification assigns samples to discrete categories, while regression predicts continuous values and clustering groups unlabeled data. "
+                },
+                {
+                    question: "Why is accuracy sometimes a misleading evaluation metric in classification problems?",
+                    options: [
+                        "Because high accuracy can occur when a model predicts the majority class while ignoring minority classes",
+                        "Because accuracy cannot be computed for binary classification problems",
+                        "Because accuracy is only applicable to regression models",
+                        "Because accuracy measures only false positive predictions"
+                    ],
+                    correct: 0,
+                    explanation: "Accuracy can be misleading in imbalanced datasets where predicting the majority class yields high accuracy but poor predictive usefulness. "
+                },
+                {
+                    question: "Which metric measures the proportion of correctly predicted positive instances among all predicted positives?",
+                    options: [
+                        "Precision",
+                        "Recall",
+                        "Accuracy",
+                        "Specificity"
+                    ],
+                    correct: 0,
+                    explanation: "Precision equals TP / (TP + FP) and evaluates how many predicted positives are actually correct. "
+                },
+                {
+                    question: "Which evaluation metric measures the proportion of actual positive cases that were correctly identified?",
+                    options: [
+                        "Recall",
+                        "Precision",
+                        "Accuracy",
+                        "Mean Squared Error"
+                    ],
+                    correct: 0,
+                    explanation: "Recall equals TP / (TP + FN) and measures how effectively the model identifies true positive cases. "
+                },
+                {
+                    question: "What is the primary purpose of splitting a dataset into training and testing sets?",
+                    options: [
+                        "To evaluate how well a model generalizes to unseen data",
+                        "To reduce the computational complexity of training algorithms",
+                        "To ensure that all features are normalized before training",
+                        "To balance class distributions in classification problems"
+                    ],
+                    correct: 0,
+                    explanation: "Splitting the dataset ensures that the model is evaluated on unseen data, providing an estimate of its generalization ability. "
+                },
+                {
+                    question: "What does the concept of generalization in machine learning refer to?",
+                    options: [
+                        "The ability of a model to perform well on previously unseen data",
+                        "The ability of a model to perfectly memorize the training dataset",
+                        "The ability of a model to minimize computational complexity",
+                        "The ability of a model to automatically engineer new features"
+                    ],
+                    correct: 0,
+                    explanation: "Generalization refers to a model’s capability to correctly predict outcomes for new, unseen samples rather than memorizing training data. "
+                },
+                {
+                    question: "Which scenario best represents overfitting in machine learning?",
+                    options: [
+                        "A model learns noise and irrelevant patterns in the training data, leading to poor performance on new data",
+                        "A model fails to capture important relationships because it is too simple",
+                        "A model predicts the majority class for every example",
+                        "A model performs equally well on training and testing data"
+                    ],
+                    correct: 0,
+                    explanation: "Overfitting occurs when a model is overly complex and captures noise instead of general patterns, resulting in poor performance on unseen data. "
+                },
+                {
+                    question: "Which situation best illustrates underfitting?",
+                    options: [
+                        "A model is too simple to capture meaningful patterns in the training data",
+                        "A model performs perfectly on the training data but poorly on test data",
+                        "A model memorizes all training samples exactly",
+                        "A model requires excessive training time due to many parameters"
+                    ],
+                    correct: 0,
+                    explanation: "Underfitting occurs when a model is too simple to represent the underlying patterns in the data. "
+                },
+                {
+                    question: "Why have deep neural networks become significantly more powerful in recent years?",
+                    options: [
+                        "Because of larger datasets, improved training algorithms, and increased computational power such as GPUs",
+                        "Because they eliminate the need for labeled training data",
+                        "Because neural networks require fewer parameters than traditional models",
+                        "Because they operate without the need for optimization algorithms"
+                    ],
+                    correct: 0,
+                    explanation: "Modern deep learning success is largely due to increased data availability, improved algorithms, and powerful computing resources like GPUs. "
+                },
+                {
+                    question: "What is the main difference between traditional machine learning and deep learning regarding feature extraction?",
+                    options: [
+                        "Traditional machine learning requires manual feature design, while deep learning learns features automatically from data",
+                        "Deep learning cannot process raw data and requires engineered features",
+                        "Traditional machine learning automatically generates hierarchical features",
+                        "Deep learning uses only linear models for prediction"
+                    ],
+                    correct: 0,
+                    explanation: "Deep learning performs end-to-end learning where feature extraction and modeling occur automatically, unlike traditional ML which relies heavily on manual feature engineering. "
+                },
+                {
+                    question: "Why is transfer learning commonly used in deep learning applications?",
+                    options: [
+                        "Because it allows models pretrained on large datasets to be adapted to new tasks with less data and training time",
+                        "Because it eliminates the need for neural network architectures",
+                        "Because it guarantees perfect accuracy on any dataset",
+                        "Because it converts supervised problems into unsupervised problems"
+                    ],
+                    correct: 0,
+                    explanation: "Transfer learning reuses knowledge from pretrained models to solve related tasks, significantly reducing data requirements and training time. "
+                }
+            ],
+            ch6: [
+                {
+                    question: "Which definition best describes bias in machine learning systems?",
+                    options: [
+                        "Systematic errors in a model that lead to unfair or discriminatory outcomes",
+                        "Random fluctuations in predictions caused by insufficient training data",
+                        "Noise introduced during feature scaling and preprocessing",
+                        "Errors caused exclusively by incorrect model hyperparameters"
+                    ],
+                    correct: 0,
+                    explanation: "Bias in AI refers to systematic errors that result in unfair outcomes for certain groups. The other options describe random error or modeling issues rather than bias-driven unfairness. "
+                },
+                {
+                    question: "Which of the following is an example of data bias in machine learning?",
+                    options: [
+                        "Training a hiring model using historical data that contains gender imbalance",
+                        "Using gradient descent to optimize neural network weights",
+                        "Scaling features using min–max normalization",
+                        "Applying dimensionality reduction before model training"
+                    ],
+                    correct: 0,
+                    explanation: "Data bias arises when training datasets contain imbalanced or historically biased data, which can lead models to replicate those biases. "
+                },
+                {
+                    question: "What is the primary goal of fairness in artificial intelligence systems?",
+                    options: [
+                        "Ensuring that model decisions do not discriminate against individuals or protected groups",
+                        "Maximizing prediction accuracy across all datasets",
+                        "Reducing computational complexity during model training",
+                        "Increasing the speed of model deployment"
+                    ],
+                    correct: 0,
+                    explanation: "Fairness in AI focuses on ensuring equitable treatment of individuals and groups, avoiding discrimination in automated decision-making. "
+                },
+                {
+                    question: "Which fairness metric aims to ensure that different demographic groups receive positive predictions at similar rates?",
+                    options: [
+                        "Demographic parity",
+                        "Precision",
+                        "Recall",
+                        "Mean squared error"
+                    ],
+                    correct: 0,
+                    explanation: "Demographic parity measures whether positive outcomes are distributed equally across demographic groups, helping detect discrimination. "
+                },
+                {
+                    question: "What is a protected class in the context of ethical AI and fairness regulation?",
+                    options: [
+                        "A group legally protected from discrimination based on characteristics such as race or gender",
+                        "A set of features used exclusively for training machine learning models",
+                        "A class label reserved for rare observations in a dataset",
+                        "A group of algorithms designed for privacy-preserving computation"
+                    ],
+                    correct: 0,
+                    explanation: "Protected classes include legally safeguarded attributes such as race, gender, religion, and disability status to prevent discriminatory practices. "
+                },
+                {
+                    question: "Which real-world example illustrates algorithmic bias in machine learning?",
+                    options: [
+                        "A facial recognition system performing significantly worse on darker skin tones",
+                        "A regression model predicting housing prices using historical data",
+                        "A clustering algorithm grouping customers by purchasing behavior",
+                        "A recommendation system suggesting products based on purchase history"
+                    ],
+                    correct: 0,
+                    explanation: "Algorithmic bias occurs when models systematically perform worse for certain groups, such as facial recognition systems with racial accuracy disparities. "
+                },
+                {
+                    question: "Which technique aims to reduce bias before model training begins?",
+                    options: [
+                        "Re-sampling or re-weighting the dataset during preprocessing",
+                        "Applying dropout regularization during neural network training",
+                        "Increasing model depth to improve predictive accuracy",
+                        "Expanding feature space using polynomial transformations"
+                    ],
+                    correct: 0,
+                    explanation: "Preprocessing techniques such as re-sampling and re-weighting aim to balance representation and reduce bias before model training. "
+                },
+                {
+                    question: "Which fairness concept focuses on ensuring that prediction errors are balanced across groups?",
+                    options: [
+                        "Equalized odds",
+                        "Dimensional consistency",
+                        "Feature normalization",
+                        "Gradient regularization"
+                    ],
+                    correct: 0,
+                    explanation: "Equalized odds ensures that error rates such as false positives and false negatives are balanced across demographic groups. "
+                },
+                {
+                    question: "Why is transparency considered an important principle in ethical AI?",
+                    options: [
+                        "It enables users and stakeholders to understand how AI systems make decisions",
+                        "It increases the computational efficiency of machine learning algorithms",
+                        "It ensures that datasets remain completely anonymous",
+                        "It eliminates the need for regulatory oversight"
+                    ],
+                    correct: 0,
+                    explanation: "Transparency allows stakeholders to understand and evaluate AI decisions, helping build trust and accountability in automated systems. "
+                },
+                {
+                    question: "Which technique helps make complex machine learning models easier to interpret?",
+                    options: [
+                        "Explainable AI methods such as SHAP or LIME",
+                        "Feature scaling using min–max normalization",
+                        "Increasing the number of hidden layers in neural networks",
+                        "Using unsupervised learning instead of supervised learning"
+                    ],
+                    correct: 0,
+                    explanation: "Explainable AI methods such as SHAP and LIME help interpret complex model decisions by estimating feature contributions. "
+                },
+                {
+                    question: "Why might fairness through unawareness fail to eliminate bias in machine learning systems?",
+                    options: [
+                        "Because other correlated variables can indirectly encode protected attributes",
+                        "Because machine learning models cannot process categorical features",
+                        "Because removing sensitive attributes reduces dataset size",
+                        "Because fairness metrics cannot be computed without those attributes"
+                    ],
+                    correct: 0,
+                    explanation: "Even if sensitive variables are removed, correlated features can still encode similar information, allowing bias to persist. "
+                },
+                {
+                    question: "Which scenario best illustrates an ethical dilemma in AI deployment?",
+                    options: [
+                        "A self-driving car needing to make decisions in unavoidable accident scenarios",
+                        "A model achieving high accuracy on a balanced dataset",
+                        "A regression algorithm predicting continuous numerical values",
+                        "A clustering algorithm identifying customer segments"
+                    ],
+                    correct: 0,
+                    explanation: "Ethical dilemmas arise when AI systems must make difficult decisions with moral implications, such as autonomous vehicle decision-making. "
+                },
+                {
+                    question: "What is the primary goal of differential privacy in machine learning systems?",
+                    options: [
+                        "Ensuring that the presence or absence of a single individual does not significantly affect analytical results",
+                        "Preventing machine learning models from overfitting training data",
+                        "Reducing dataset dimensionality during preprocessing",
+                        "Balancing class distributions in classification datasets"
+                    ],
+                    correct: 0,
+                    explanation: "Differential privacy protects individuals by ensuring that model outputs remain statistically similar regardless of whether any single person's data is included. "
+                },
+                {
+                    question: "Which characteristic best distinguishes federated learning from traditional centralized machine learning?",
+                    options: [
+                        "Models are trained across multiple devices without sharing raw data",
+                        "Training occurs only on labeled datasets",
+                        "All data must be transferred to a central server before training",
+                        "The model architecture is automatically optimized during training"
+                    ],
+                    correct: 0,
+                    explanation: "Federated learning trains models across decentralized devices while keeping raw data local, improving privacy and reducing data transfer. "
+                },
+                {
+                    question: "Why are regulatory frameworks such as GDPR important in the context of AI systems?",
+                    options: [
+                        "They establish legal standards for data privacy, transparency, and responsible AI use",
+                        "They guarantee that machine learning models achieve high predictive accuracy",
+                        "They eliminate algorithmic bias entirely",
+                        "They standardize neural network architectures across industries"
+                    ],
+                    correct: 0,
+                    explanation: "Regulations like GDPR establish legal guidelines for protecting personal data and ensuring accountability in AI systems. "
+                }
+            ],
+        };
+
+        let activeQuiz = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startQuiz(chId, chTitle) {
+            if (!quizBank[chId] || quizBank[chId].length === 0) {
+                alert("Coming soon! هذا الشابتر جاري العمل عليه.");
+                return;
+            }
+
+            document.getElementById('selection-screen').style.display = 'none';
+            document.getElementById('quiz-interface').style.display = 'block';
+            document.getElementById('chapter-label').innerText = chTitle;
+
+            // Deep clone and randomize
+            activeQuiz = JSON.parse(JSON.stringify(quizBank[chId]));
+            shuffleArray(activeQuiz);
+            activeQuiz.forEach(q => {
+                let opts = q.options.map((text, i) => ({ text, isCorrect: i === q.correct }));
+                shuffleArray(opts);
+                q.options = opts.map(o => o.text);
+                q.correct = opts.findIndex(o => o.isCorrect);
+            });
+
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const data = activeQuiz[currentQuestion];
+            document.getElementById('q-label').innerText = `QUESTION #${String(currentQuestion + 1).padStart(2, '0')}`;
+            document.getElementById('question-text').innerText = data.question;
+            document.getElementById('explanation-box').style.display = 'none';
+            document.getElementById('next-btn').classList.remove('visible');
+
+            const optionsList = document.getElementById('options-list');
+            optionsList.innerHTML = '';
+
+            data.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = option;
+                btn.onclick = () => handleSelection(btn, index);
+                optionsList.appendChild(btn);
+            });
+
+            document.getElementById('question-count').innerText = `Question ${currentQuestion + 1} / ${activeQuiz.length}`;
+            const progress = (currentQuestion / activeQuiz.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+        }
+
+        function handleSelection(btn, index) {
+            if (answered) return;
+            answered = true;
+
+            const correct = activeQuiz[currentQuestion].correct;
+            const btns = document.querySelectorAll('.option-btn');
+
+            if (index === correct) {
+                btn.classList.add('correct');
+                score++;
+                setTimeout(() => { document.getElementById('next-btn').classList.add('visible'); }, 300);
+            } else {
+                btn.classList.add('wrong');
+                btns[correct].classList.add('correct');
+                document.getElementById('explanation-text').innerText = activeQuiz[currentQuestion].explanation;
+                document.getElementById('explanation-box').style.display = 'block';
+                document.getElementById('next-btn').classList.add('visible');
+            }
+
+            if (currentQuestion === activeQuiz.length - 1) {
+                document.getElementById('next-btn').innerText = "Finish Quiz ➔";
+            } else {
+                document.getElementById('next-btn').innerText = "Next Question ➔";
+            }
+        }
+
+        document.getElementById('next-btn').onclick = () => {
+            currentQuestion++;
+            if (currentQuestion < activeQuiz.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        };
+
+        function showResults() {
+            document.getElementById('progress-bar').style.width = '100%';
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('results-card').style.display = 'block';
+
+            const perc = Math.round((score / activeQuiz.length) * 100);
+            document.getElementById('final-score').innerText = perc + '%';
+        }
+    </script>
+</body>
+
+</html>
