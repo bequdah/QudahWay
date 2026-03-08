@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Feature Engineering</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .slide-section:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            display: block;
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .grid-item {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 16px;
+            border-right: 3px solid var(--primary);
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .step-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--primary);
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: var(--bg-dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .step-text h4 {
+            margin: 0 0 8px 0;
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .step-text p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .explanation-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+                <div
+                    style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text-muted); font-size: 0.8rem;">
+                    QudahWay / DS / FE
+                </div>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> DS</h1>
+            <p class="subtitle">Feature Engineering | هندسة الميزات واستخراجها </p>
+        </div>
+
+
+        <!-- Slide 02 -->
+        <div class="slide-section" id="slide-2">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What is Feature Engineering?</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0002.jpg" alt="Slide 2">
+            </div>
+            <div class="explanation-box" id="ex-2">
+                <div class="explanation-header">شو يعني هندسة متغيرات؟ 🤔</div>
+                <div class="explanation-content">
+                    بكل بساطة، هي عملية تصميم وتحويل واستخراج المتغيرات اللي بتساعد الموديل إنه يتعلم الأنماط بشكل أفضل.
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--primary);">التعريف البسيط:</strong>
+                            هي العملية الممنهجة لتصميم وتحويل واختيار المتغيرات (Inputs) عشان نحسن أداء الموديل وقدرته
+                            على التعميم.
+                        </div>
+                        <div class="grid-item" style="border-right-color: var(--success);">
+                            <strong style="color: var(--success);">التعريف الأكاديمي:</strong>
+                            تحويل البيانات الخام لتمثيلات بتسهل فهمها وبتحسن الاستقرار والدقة للموديل.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 03 -->
+        <div class="slide-section" id="slide-3">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why Feature Engineering Matters</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0003.jpg" alt="Slide 3">
+            </div>
+            <div class="explanation-box" id="ex-3" style="display: block;">
+                <div class="explanation-header">ليش الـ FE هو "الملك"؟ 👑</div>
+                <div class="explanation-content">
+                    الموديلات الذكية ما بتفهم "سياق" الكلام أو الصور، هي بس بتفهم أرقام وتمثيلات رياضية.
+
+                    <div class="step-card" style="margin-top: 15px; border-left: 4px solid var(--accent);">
+                        <div class="step-text">
+                            <strong>قاعدة ذهبية:</strong> أداء الموديل بعتمد 100% على جودة المتغيرات اللي بتعطيه إياها.
+                            "داتا تعبانة = موديل تعبان" حتى لو كان أقوى خوارزمية بالعالم.
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="grid-item">بقلل الـ <span class="eng-term">Noise</span> وبقوي الإشارة الحقيقية
+                            بالداتا.</div>
+                        <div class="grid-item">بزيد من سهولة الفصل بين الفئات (<span
+                                class="eng-term">Separability</span>).</div>
+                        <div class="grid-item">بسرّع عملية تدريب الموديل وبخليه يفهم أسرع.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 04 -->
+        <div class="slide-section" id="slide-4">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">FE vs Data Preprocessing</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0004.jpg" alt="Slide 4">
+            </div>
+            <div class="explanation-box" id="ex-4" style="display: block;">
+                <div class="explanation-header">الفرق بين التحضير والهندسة 🛠️</div>
+                <div class="explanation-content">
+                    كثير ناس بخربطوا بينهم، بس الفرق جوهري:
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--danger);">Data Preprocessing:</strong>
+                            هدفه "تنظيف" الداتا وتصليح الأغلاط (زي التعامل مع القيم المفقودة). هاض إشي إلزامي وما بضبط
+                            بدونه.
+                        </div>
+                        <div class="grid-item" style="border-right-color: var(--primary);">
+                            <strong style="color: var(--primary);">Feature Engineering:</strong>
+                            هدفه "تحسين" تمثيل الداتا واستخراج أنماط جديدة. هاض إشي استراتيجي وبدك فيه "فن" وشطارة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 05 -->
+        <div class="slide-section" id="slide-5">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Types of Feature Engineering</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0005.jpg" alt="Slide 5">
+            </div>
+            <div class="explanation-box" id="ex-5" style="display: block;">
+                <div class="explanation-header">أنواع هندسة المتغيرات 📂</div>
+                <div class="explanation-content">
+                    الموضوع مش بس استخراج متغيرات، هو بحر كبير بضم:
+
+                    <div class="info-grid">
+                        <div class="grid-item"><strong>Creation:</strong> صنع متغيرات جديدة.</div>
+                        <div class="grid-item"><strong>Transformation:</strong> تحويل الأرقام (Log, Sqrt).</div>
+                        <div class="grid-item"><strong>Encoding:</strong> تحويل الكلام لأرقام.</div>
+                        <div class="grid-item"><strong>Selection:</strong> اختيار أهم المتغيرات.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 06 -->
+        <div class="slide-section" id="slide-6">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Creation</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0006.jpg" alt="Slide 6">
+            </div>
+            <div class="explanation-box" id="ex-6" style="display: block;">
+                <div class="explanation-header">صناعة المتغيرات: الإبداع من الموجود 💡</div>
+                <div class="explanation-content">
+                    هون بنطلع متغيرات جديدة من القديمة عشان نكشف علاقات خفية.
+
+                    <p>مثلاً: <span class="highlight-y">العمر = السنة الحالية - سنة الميلاد</span>. أو <span
+                            class="highlight-b">BMI = الوزن / مربع الطول</span>.</p>
+
+                    <div
+                        style="background: #000; padding: 15px; border-radius: 12px; font-family: 'Inter', monospace; font-size: 0.9rem; color: #34d399; direction: ltr;">
+                        # Feature creation<br>
+                        df["age"] = df["current_year"] - df["birth_year"]<br>
+                        df["total_price"] = df["quantity"] * df["unit_price"]
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 07 -->
+        <div class="slide-section" id="slide-7">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Transformation</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0007.jpg" alt="Slide 7">
+            </div>
+            <div class="explanation-box" id="ex-7" style="display: block;">
+                <div class="explanation-header">تحويل البيانات: تعديل المنحنيات 📏</div>
+                <div class="explanation-content">
+                    كثير موديلات بتفترض إن الداتا "طبيعية" (<span class="eng-term">Normal Distribution</span>). إذا
+                    الداتا مشحوطة لجهة، بنحولها:
+
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Log Transformation:</strong> للداتا اللي فيها شحطة قوية لليمين (زي الرواتب).</li>
+                        <li><strong>Square Root:</strong> للداتا المتوسطة الشحطة.</li>
+                    </ul>
+
+                    <div
+                        style="background: #000; padding: 15px; border-radius: 12px; font-family: 'Inter', monospace; font-size: 0.9rem; color: #34d399; direction: ltr;">
+                        # Log transform<br>
+                        df["salary_log"] = np.log(df["salary"])
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 08 -->
+        <div class="slide-section" id="slide-8">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transformation Details</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0008.jpg" alt="Slide 8">
+            </div>
+            <div class="explanation-box" id="ex-8" style="display: block;">
+                <div class="explanation-header">متى نستخدم كل تحويل؟ 🔍</div>
+                <div class="explanation-content">
+                    كل تحويل له "مهمة" خاصة فيه حسب طبيعة الداتا:
+
+                    <div class="info-grid">
+                        <div class="grid-item"><strong>Log:</strong> بقلل الـ <span class="eng-term">Right Skew</span>
+                            القوي (مفيد للأسعار).</div>
+                        <div class="grid-item"><strong>Box-Cox:</strong> للمساعدة في جعل الداتا <span
+                                class="eng-term">Normalize</span>.</div>
+                        <div class="grid-item"><strong>Polynomial:</strong> بضيف "لفّات" للداتا عشان الموديل الخطي يشوف
+                            العلاقات غير الخطية.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 09 -->
+        <div class="slide-section" id="slide-9">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Extraction</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0009.jpg" alt="Slide 9">
+            </div>
+            <div class="explanation-box" id="ex-9" style="display: block;">
+                <div class="explanation-header">استخراج المتغيرات: ضغط المعلومات 📦</div>
+                <div class="explanation-content">
+                    لما يكون عندك داتا كثيرة ومعقدة، بنحاول نضغطها في "أبعاد" أقل بس بتعطينا كل المعنى المهم.
+
+                    <div class="info-grid">
+                        <div class="grid-item"><strong>PCA:</strong> أشهر طريقة لتقليل الأبعاد مع الحفاظ على التباين.
+                        </div>
+                        <div class="grid-item"><strong>Embeddings:</strong> تحويل النصوص لمتجهات رقمية "ذكية" (BERT,
+                            WordVec).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section" id="slide-10">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Time-Based Feature Engineering</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0010.jpg" alt="Slide 10">
+            </div>
+            <div class="explanation-box" id="ex-10" style="display: block;">
+                <div class="explanation-header">الزمن سرّ الداتا ⏳</div>
+                <div class="explanation-content">
+                    داتا الوقت والمكان هي من أقوى أنواع الداتا إذا عرفت "تهندسها" صح.
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--accent);">استخرج العبر:</strong>
+                            اليوم، الشهر، الربع، يوم الأسبوع، وهل هو عطلة ولا لأ؟
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--primary);">Lag Features:</strong>
+                            بنشوف مبيعات اليوم مقارنة بمبيعات "مبارح" (X t-1) أو الأسبوع الماضي.
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px;">مهم جداً في <span class="eng-term">Forecasting</span> والأنظمة المالية.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section" id="slide-11">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Interaction & Non-Linearity</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0011.jpg" alt="Slide 11">
+            </div>
+            <div class="explanation-box" id="ex-11" style="display: block;">
+                <div class="explanation-header">التفاعل بين المتغيرات: لمّا 1+1 يساوي 3! 🤝</div>
+                <div class="explanation-content">
+                    أحياناً المتغير لحاله ما بفيد كثير، بس لما "تخبطه" بمتغير ثاني بتطلع المعلومة الصح.
+
+                    <div class="step-card" style="margin-top: 15px;">
+                        <div class="step-text">
+                            <strong>مثال:</strong> الدخل لحاله ما بحكيلك عن الرفاهية، والتعليم لحاله مش كافي. بس <span
+                                class="highlight-y">الدخل × سنوات التعليم</span> ممكن يعطيك مؤشر أقوى بكثير.
+                        </div>
+                    </div>
+
+                    <p>هاض الإشي بساعد الموديلات البسيطة (زي الخطي) إنها تفهم علاقات معقدة وغير خطية.</p>
+
+                    <div
+                        style="background: #000; padding: 15px; border-radius: 12px; font-family: 'Inter', monospace; font-size: 0.9rem; color: #34d399; direction: ltr;">
+                        # Creating interaction feature<br>
+                        df["income_edu"] = df["income"] * df["education_years"]
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section" id="slide-12">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Encoding</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0012.jpg" alt="Slide 12">
+            </div>
+            <div class="explanation-box" id="ex-12" style="display: block;">
+                <div class="explanation-header">التشفير الذكي: ما وراء الـ One-Hot 🔢</div>
+                <div class="explanation-content">
+                    لما يكون عندك متغيرات كلامية (Categorical) فيها خيارات كثيرة، الـ <span class="eng-term">One-Hot
+                        Encoding</span> ممكن ينفخ الداتا عالفاضي.
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--accent);">Target Encoding:</strong>
+                            بتبدل الكلمة بمتوسط الـ <span class="eng-term">Target</span> لهي الفئة. (قوي جداً بس بدو حذر
+                            من الـ Leakage).
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--primary);">Frequency Encoding:</strong>
+                            بتبدل الكلمة بعدد مرات تكرارها.
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--success);">Binary Encoding:</strong>
+                            حل وسط وممتاز لما يكون عندك آلاف الأصناف.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section" id="slide-13">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Scaling in FE Context</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0013.jpg" alt="Slide 13">
+            </div>
+            <div class="explanation-box" id="ex-13" style="display: block;">
+                <div class="explanation-header">الميزان: ليش لازم توحد المقاييس؟ ⚖️</div>
+                <div class="explanation-content">
+                    تخيل موديل عنده "الطول بالسنتيمتر" و "الراتب بالدينار". الراتب أرقامه بالآلاف والطول بالعشرات..
+                    الموديل رح يفكّر الراتب أهم لأنه "أكبر".
+
+                    <div class="info-grid">
+                        <div class="grid-item"><strong>Gradient-based models:</strong> (زي الـ NN والـ Logistic) بحتاجوا
+                            سكيلنج عشان يوصلوا للحل بسرعة.</div>
+                        <div class="grid-item"><strong>Distance-based:</strong> (زي KNN و SVM) بضيعوا بدونه تماماً.
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px; color: var(--text-muted);">* ملاحظة: الموديلات الشجرية (Random Forest)
+                        ما بفرق معها السكيلنج.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section" id="slide-14">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Selection</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0014.jpg" alt="Slide 14">
+            </div>
+            <div class="explanation-box" id="ex-14" style="display: block;">
+                <div class="explanation-header">عملية الاختيار: مش كل اللي بتعرفه "لازم" تحكيه 🎯</div>
+                <div class="explanation-content">
+                    مش كثرة المتغيرات هي اللي بتعمل موديل قوي، أحياناً "الزائد أخو الناقص".
+
+                    <div class="step-container">
+                        <div class="step-card">
+                            <div class="step-num">1</div>
+                            <div class="step-text">
+                                <h4>Filter Methods</h4>
+                                <p>بنشوف الارتباط (<span class="eng-term">Correlation</span>) بين المتغيرات والهدف.
+                                    سريعة ومفيدة بالبداية.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">2</div>
+                            <div class="step-text">
+                                <h4>Wrapper Methods</h4>
+                                <p>بنجرب الموديل على مجموعات مختلفة من المتغيرات وبنشوف مين أحسن (زي RFE). دقيقة بس بدها
+                                    وقت.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">3</div>
+                            <div class="step-text">
+                                <h4>Embedded Methods</h4>
+                                <p>الموديل نفسه وهو بيتدرب بقرر مين المهم (زي Lasso أو Tree Importance).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section" id="slide-15">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Curse of Dimensionality</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0015.jpg" alt="Slide 15">
+            </div>
+            <div class="explanation-box" id="ex-15" style="display: block;">
+                <div class="explanation-header">لعنة الأبعاد: لمّا الداتا تضيع في الفضاء! 🌌</div>
+                <div class="explanation-content">
+                    كل ما زدت عدد المتغيرات، الداتا بتصير "بعيدة" عن بعضها بالفراغ، وبصير الموديل صعب يلاقي أنماط
+                    حقيقية:
+
+                    <div class="info-grid">
+                        <div class="grid-item">بزيد الـ <span class="eng-term">Overfitting</span> (الموديل ببلش يبصم
+                            بصم).</div>
+                        <div class="grid-item">وقت التدريب بطول كثير.</div>
+                        <div class="grid-item">المسافات بين النقاط بتصير مش مفهومة للموديل.</div>
+                    </div>
+
+                    <p style="margin-top: 15px;">عشان هيك الـ <span class="highlight-y">Feature Engineering</span> هو
+                        المنقذ من هاي اللعنة.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section" id="slide-16">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Domain-Driven Feature Engineering</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0016.jpg" alt="Slide 16">
+            </div>
+            <div class="explanation-box" id="ex-16" style="display: block;">
+                <div class="explanation-header">خبرة المجال: السر اللي ما بعرفه الكود 🧠</div>
+                <div class="explanation-content">
+                    هندسة المتغيرات مش بس رياضيات، هي "فهم" للبزنس اللي بتشتغل فيه.
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--primary);">في المالية:</strong> بنطلع المتوسطات المتحركة (<span
+                                class="eng-term">Moving Averages</span>).
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--success);">في الصحة:</strong> بنطلع مؤشرات حيوية ونسب طبية
+                            معروفة (Ratios).
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--accent);">في الـ NLP:</strong> بنشوف مشاعر الكلام (<span
+                                class="eng-term">Sentiment Polarity</span>).
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px;">الداتا ساينست "البروفيسور" هو اللي بقعد مع أهل الخبرة بالمجال عشان يفهم
+                        شو لازم يستخرج.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section" id="slide-17">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Engineering & Model Type</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0017.jpg" alt="Slide 17">
+            </div>
+            <div class="explanation-box" id="ex-17" style="display: block;">
+                <div class="explanation-header">كل موديل إله "مزاج" خاص 🎭</div>
+                <div class="explanation-content">
+                    حاجة الموديل لهندسة المتغيرات بتختلف حسب تعقيده ووظيفته:
+
+                    <table
+                        style="width: 100%; border-collapse: collapse; margin-top: 20px; text-align: right; background: rgba(255,255,255,0.02); border-radius: 12px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: var(--primary); color: var(--bg-dark);">
+                                <th style="padding: 12px;">الموديل</th>
+                                <th style="padding: 12px;">مدى الحاجة للـ FE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 12px;">Linear & Logistic Regression</td>
+                                <td style="padding: 12px; color: var(--danger);">عالية جداً (بدو كل إشي جاهز)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 12px;">KNN & SVM</td>
+                                <td style="padding: 12px; color: var(--accent);">عالية (بهمهم السكيلنج والتحويل)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 12px;">Random Forest & Trees</td>
+                                <td style="padding: 12px; color: var(--success);">متوسطة (بفهموا لحالهم بس بساعدهم)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px;">Deep Learning / NN</td>
+                                <td style="padding: 12px; color: var(--primary);">أقل (هم أصلاً بستخرجوا ميزات)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide-section" id="slide-18">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Leakage</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0018.jpg" alt="Slide 18">
+            </div>
+            <div class="explanation-box" id="ex-18" style="display: block;">
+                <div class="explanation-header">تسريب المتغيرات: لمّا الموديل "يغش"! 🚫</div>
+                <div class="explanation-content">
+                    أكبر غلطة ممكن تعملها! الـ <span class="eng-term">Leakage</span> هو إنك تعطي الموديل معلومة ما رح
+                    تكون موجودة وقت الاستخدام الحقيقي.
+
+                    <div class="step-card" style="margin-top: 15px; border-right: 4px solid var(--danger);">
+                        <div class="step-text">
+                            <strong>مثال:</strong> بدك تتوقع مبيعات بكرة، وتقوم تعطي الموديل معلومة "عدد الزباين ببكرة"!
+                            هيك الموديل رح يعطيك دقة 100% وهو "غاش".
+                        </div>
+                    </div>
+
+                    <p style="font-weight: 700; color: var(--primary); margin-top: 10px;">الحل؟ دائماً اعمل Split للداتا
+                        وبعدين اعمل FE على الـ Train فقط!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide-section" id="slide-19">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Feature Engineering Workflow</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0019.jpg" alt="Slide 19">
+            </div>
+            <div class="explanation-box" id="ex-19" style="display: block;">
+                <div class="explanation-header">خارطة الطريق لهندسة الميزات (الـ Workflow الصح) 🗺️</div>
+                <div class="explanation-content">
+                    عشان شغلك يكون "تكتيك" وما تضيع، هاي هي الخطوات الـ 8 اللي بالصورة بالتفصيل:
+
+                    <div class="step-container">
+                        <div class="step-card">
+                            <div class="step-num">1</div>
+                            <div class="step-text">
+                                <h4>Data Understanding</h4>
+                                <p>افهم الداتا والبزنس صح قبل ما تلمس الكود. قعدة مع أهل الخبرة بتوفر عليك تعب أيام.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">2</div>
+                            <div class="step-text">
+                                <h4>Data Preprocessing</h4>
+                                <p>نظف الداتا، عالج القيم المفقودة، وظبط الـ Outliers. هاي مرحلة "تجهيز الأرضية".</p>
+                            </div>
+                        </div>
+                        <div class="step-card" style="border-right: 4px solid var(--danger);">
+                            <div class="step-num" style="background: var(--danger);">3</div>
+                            <div class="step-text">
+                                <h4>Train-Test Split</h4>
+                                <p>افصل داتا الاختبار (Test) وحطها في "خزنة". هاي أهم خطوة عشان تمنع الغش (Leakage).</p>
+                            </div>
+                        </div>
+                        <div class="step-card" style="border-right: 4px solid var(--accent);">
+                            <div class="step-num" style="background: var(--accent);">4</div>
+                            <div class="step-text">
+                                <h4>Feature Engineering (train only)</h4>
+                                <p>هون الشغل الثقيل (Encoding, Scaling). لازم تتعلم هاض الإشي <b>بس من داتا التدريب</b>
+                                    وتطبقه عمياني عالباقي.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">5</div>
+                            <div class="step-text">
+                                <h4>Feature Selection</h4>
+                                <p>مش كل إشي طلعته مفيد. نقي أحسن الميزات اللي بتعطي "أثر" حقيقي للموديل وشيل الـ Noise.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">6</div>
+                            <div class="step-text">
+                                <h4>Model Training</h4>
+                                <p>هسا الموديل ببلش يتعلم من الأنماط اللي جهزناها بكل الخطوات اللي قبل.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">7</div>
+                            <div class="step-text">
+                                <h4>Cross-Validation</h4>
+                                <p>امتحن الموديل امتحان تجريبي متكرر عشان تتأكد إنه "فهمان" مش بس "باصم" داتا التدريب.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="step-card" style="border-right: 4px solid var(--success);">
+                            <div class="step-num" style="background: var(--success);">8</div>
+                            <div class="step-text">
+                                <h4>Final Evaluation</h4>
+                                <p>آخر خطوة: بنطلع الداتا اللي بالخزنة (Test) وبنشوف الموديل كيف بشتغل على داتا حقيقية
+                                    عمره ما شافها.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide-section" id="slide-20">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Evaluation of Engineered Features</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0020.jpg" alt="Slide 20">
+            </div>
+            <div class="explanation-box" id="ex-20" style="display: block;">
+                <div class="explanation-header">التقييم: كيف بنعرف إنه تعبنا جاب نتيجة؟ 📈</div>
+                <div class="explanation-content">
+                    مش كل ميزة عملتها هي ميزة "كويسة". لازم نتأكد:
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--success);">Cross-validation:</strong> بنشوف هل الدقة زادت
+                            فعلياً؟
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--primary);">Feature Importance:</strong> بنشوف شو وزن هاي الميزة
+                            عند الموديل.
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--accent);">SHAP Values:</strong> لتعمق أكثر في فهم تأثير كل
+                            متغير.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section" id="slide-21">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Common Mistakes</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0021.jpg" alt="Slide 21">
+            </div>
+            <div class="explanation-box" id="ex-21" style="display: block;">
+                <div class="explanation-header">أغلاط بنقع فيها كلنا! ⚠️</div>
+                <div class="explanation-content">
+                    عشان تكون "محترف"، انتبه من هاي الفخاخ:
+
+                    <div class="info-grid">
+                        <div class="grid-item">
+                            <strong style="color: var(--danger);">Over-engineering:</strong>
+                            تعمل مية ميزة ومعادلة معقدة عالفاضي وتخلي الموديل يضيع.
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--accent);">Multicollinearity:</strong>
+                            تخلي متغيرين بحكوا نفس الإشي بالضبط موجودين (زي الطول بالمتر والسم).
+                        </div>
+                        <div class="grid-item">
+                            <strong style="color: var(--primary);">Ignoring Impact:</strong>
+                            تضيف ميزات بدون ما تقيس هل فعلاً حسنت الموديل ولا بس زادت حجم الداتا.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section" id="slide-22">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Coding the Pipeline</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0022.jpg" alt="Slide 22">
+            </div>
+            <div class="explanation-box" id="ex-22" style="display: block;">
+                <div class="explanation-header">التطبيق العملي: الـ Pipeline هو الحل! 💻</div>
+                <div class="explanation-content">
+                    عشان شغلك يكون منظم وما تقع بغلط الـ Leakage، أحسن طريقة هي الـ <span
+                        class="eng-term">Pipeline</span> في Scikit-Learn.
+
+                    <div
+                        style="background: #000; padding: 25px; border-radius: 16px; font-family: 'Inter', monospace; font-size: 0.85rem; color: #34d399; direction: ltr; margin-top: 20px; overflow-x: auto; border: 1px solid var(--border);">
+                        <pre style="margin: 0;">
+# إعداد خطة المعالجة للمتغيرات الرقمية
+numeric_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler())
+])
+
+# إعداد خطة المعالجة للمتغيرات الكلامية
+categorical_transformer = Pipeline(steps=[
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
+
+# دمج العمليات في محول واحد
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+# بناء الموديل النهائي
+model = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('regressor', LinearRegression())
+])</pre>
+                    </div>
+                    <p style="margin-top: 15px;">هيك بتضمن إن كل الـ FE والـ Scaling بصير "صح" ومعموله Clean code.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section" id="slide-23">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Key Takeaways</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4444/4-Feature Engineering_page-0023.jpg" alt="Slide 23">
+            </div>
+            <div class="explanation-box" id="ex-23" style="display: block;">
+                <div class="explanation-header">الخلاصة: شو تعلمنا؟ 🎓</div>
+                <div class="explanation-content">
+                    هندسة المتغيرات هي قلب الداتا ساينس:
+
+                    <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: var(--success); font-size: 1.5rem;">✔</span> هي عملية تكرارية (<span
+                                class="eng-term">Iterative</span>).
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: var(--success); font-size: 1.5rem;">✔</span> تعتمد 100% على فهمك للمجال
+                            (<span class="eng-term">Domain-driven</span>).
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: var(--success); font-size: 1.5rem;">✔</span> الموديلات العظيمة بتنبني
+                            على ميزات عظيمة، مش بس خوارزميات معقدة.
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+</body>
+
+</html>

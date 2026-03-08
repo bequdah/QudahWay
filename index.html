@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QudahWay</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="icon" type="image/png" href="QudahWay.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
         :root {
             --bg-dark: #0f172a;
@@ -17,20 +17,25 @@
             --text-muted: #94a3b8;
             --primary: #38bdf8;
             --accent: #facc15;
-            --danger: #fb7185;
             --success: #34d399;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-light);
             font-family: 'Cairo', sans-serif;
-            margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -46,10 +51,140 @@
             margin-bottom: 0.5rem;
         }
 
-        .subtitle {
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            font-size: 1.2rem;
+        .mantra-wrapper {
+            margin: 40px 0 80px 0;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .mantra-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 75%);
+            filter: blur(20px);
+            z-index: 0;
+        }
+
+        .mantra-clip {
+            position: relative;
+            display: inline-block;
+            overflow: visible;
+            /* سمحنا للقطة تطلع فوق وتحت */
+        }
+
+        .mantra-inner {
+            position: relative;
+            z-index: 10;
+            /* فوق القطة */
+            display: inline-block;
+            background: var(--bg-dark);
+            /* عشان القطة تختفي وراه */
+            padding: 15px 45px;
+            border-top: 1px solid rgba(56, 189, 248, 0.15);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        .q-mark {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .q-right {
+            top: -20px;
+            right: -25px;
+        }
+
+        .q-left {
+            bottom: -40px;
+            left: -25px;
+        }
+
+        .mantra-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin: 0;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        @keyframes desertFlow {
+            0% {
+                background-position: -150% 0%;
+            }
+
+            100% {
+                background-position: 150% 0%;
+            }
+        }
+
+        .animated-mantra {
+            background: linear-gradient(-90deg,
+                    var(--text-light) 0%,
+                    var(--text-light) 40%,
+                    #d97706 50%,
+                    var(--text-light) 60%,
+                    var(--text-light) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            animation: desertFlow 15s linear infinite;
+        }
+
+        /* القطة */
+        .cat-gate {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 350px;
+            /* مساحة واسعة للتحرك براحتها */
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+            /* تحت النص */
+        }
+
+        #cat-peep {
+            position: absolute;
+            top: 35px;
+            /* رفعناه شوي لفوق عشان نضمن اختفاءه */
+            left: 50%;
+            width: 110px;
+            height: 110px;
+            /* rotate(180deg) لقلبها، و translateY(80px) لإخفائها بعمق ورا النص */
+            transform: translate(-50%, -50%) rotate(180deg) translateY(80px);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #cat-peep.peeping {
+            /* تنزل لتحت أكتر عشان يبين الوجه كامل */
+            transform: translate(-50%, -50%) rotate(180deg) translateY(-100px);
+        }
+
+        #lottie-cat {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* الكروت */
+        .section-title {
+            text-align: right;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
         .links-grid {
@@ -76,86 +211,113 @@
             border-color: var(--primary);
         }
 
-        .card-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .card-icon {
-            font-size: 1.5rem;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
+        @media(max-width:600px) {
             h1 {
                 font-size: 2.5rem;
             }
 
-            h2 {
-                font-size: 1.25rem !important;
-            }
-
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .link-card {
-                padding: 15px;
+            .mantra-text {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 
 <body>
-
     <div class="container">
-        <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> <span
-                style="color: var(--text-muted); font-family: 'Cairo'; font-size: 1.5rem; font-weight: 400;">Academy</span>
+        <h1>
+            <span style="color:var(--primary)">Qudah</span><span style="color:var(--accent)">Way</span>
+            <span style="color:var(--text-muted);font-family:'Cairo';font-size:1.5rem;font-weight:400"> Method</span>
         </h1>
 
-        <h2 style="text-align: right; color: var(--accent); margin-bottom: 20px; font-size: 1.5rem;">المساقات:
-        </h2>
+        <div class="mantra-wrapper">
+            <div class="mantra-glow"></div>
 
+            <div class="mantra-clip" id="mantra-clip">
+                <!-- القطة داخل حاوية بتقص أي إشي بيطلع لفوق -->
+                <div class="cat-gate">
+                    <div id="cat-peep">
+                        <div id="lottie-cat"></div>
+                    </div>
+                </div>
+
+                <div class="mantra-inner">
+                    <span class="q-mark q-right">”</span>
+                    <p class="mantra-text">
+                        <span class="animated-mantra">خَيْرُ العِلْمِ مَا نَفَعَ، وَأَصْدَقُهُ مَا بُسِّطَ
+                            وَوَصَلَ.</span>
+                    </p>
+                    <span class="q-mark q-left">“</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">المساقات:</h2>
         <div class="links-grid">
-            <!-- Course 1: IR -->
-            <a href="ir/index.html" class="link-card" style="border-left: 4px solid var(--primary);">
-                <div style="text-align: right;">
+            <a href="ir/index.html" class="link-card" style="border-left:4px solid var(--primary)">
+                <div style="text-align:right">
                     <span class="card-title">Information Retrieval (IR)</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-muted);">استرجاع المعلومات والبحث
-                        الذكي</p>
-                </div>
-                <span class="card-icon"></span>
+                    <p style="margin:5px 0 0;font-size:.85rem;color:var(--text-muted)">استرجاع المعلومات والبحث الذكي
+                    </p>
+                </div><span class="card-icon">🔍</span>
             </a>
-
-            <!-- Course Course 2: CV -->
             <a href="cv/index.html" class="link-card"
-                style="border-left: 4px solid var(--success); background: rgba(52, 211, 153, 0.05);">
-                <div style="text-align: right;">
+                style="border-left:4px solid var(--success);background:rgba(52,211,153,0.05)">
+                <div style="text-align:right">
                     <span class="card-title">Computer Vision (CV)</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-muted);">تحليل الصور والرؤية
-                        الحاسوبية</p>
-                </div>
-                <span class="card-icon"></span>
+                    <p style="margin:5px 0 0;font-size:.85rem;color:var(--text-muted)">تحليل الصور والرؤية الحاسوبية</p>
+                </div><span class="card-icon">👁️</span>
             </a>
-
-            <!-- Course 3: DS -->
             <a href="DS/index.html" class="link-card"
-                style="border-left: 4px solid var(--accent); background: rgba(250, 204, 21, 0.05);">
-                <div style="text-align: right;">
+                style="border-left:4px solid var(--accent);background:rgba(250,204,21,0.05)">
+                <div style="text-align:right">
                     <span class="card-title">Data Science (DS)</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-muted);">تحليل البيانات والذكاء
-                        الاصطناعي</p>
-                </div>
-                <span class="card-icon"></span>
+                    <p style="margin:5px 0 0;font-size:.85rem;color:var(--text-muted)">تحليل البيانات والذكاء الاصطناعي
+                    </p>
+                </div><span class="card-icon">📊</span>
             </a>
-
-
         </div>
     </div>
 
+    <script>
+        // داتا القطة (Lottie JSON)
+        const catData = { "v": "5.1.13", "fr": 25, "ip": 0, "op": 77, "w": 1440, "h": 2560, "nm": "appy_present", "ddd": 0, "assets": [], "layers": [{ "ddd": 0, "ind": 2, "ty": 3, "nm": "Nul 1", "sr": 1, "ks": { "o": { "a": 0, "k": 0, "ix": 11 }, "r": { "a": 0, "k": 0, "ix": 10 }, "p": { "a": 1, "k": [{ "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 11, "s": [578, 3266, 0], "e": [578, 2556, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "t": 24 }], "ix": 2 }, "a": { "a": 0, "k": [0, 0, 0], "ix": 1 }, "s": { "a": 0, "k": [183, 183, 100], "ix": 6 } }, "ao": 0, "ip": 11, "op": 386, "st": 11, "bm": 0 }, { "ddd": 0, "ind": 5, "ty": 4, "nm": "ojo izq Silhouettes", "parent": 2, "sr": 1, "ks": { "o": { "a": 0, "k": 100, "ix": 11 }, "r": { "a": 0, "k": 0, "ix": 10 }, "p": { "a": 1, "k": [{ "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 30, "s": [-26.17, -70.771, 0], "e": [-49.121, -84.978, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 35, "s": [-49.121, -84.978, 0], "e": [-22.891, -84.978, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 62, "s": [-22.891, -84.978, 0], "e": [-26.17, -70.771, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "t": 67 }], "ix": 2 }, "a": { "a": 0, "k": [48.044, 48.045, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100, 100], "ix": 6 } }, "ao": 0, "shapes": [{ "ty": "gr", "it": [{ "ind": 0, "ty": "sh", "ix": 1, "ks": { "a": 0, "k": { "i": [[0, -26.397], [-26.396, 0], [0, 26.396], [26.396, 0]], "o": [[0, 26.396], [26.396, -0.001], [0, -26.396], [-26.397, 0]], "v": [[-47.794, 0], [-0.001, 47.794], [47.794, -0.001], [0, -47.794]], "c": true }, "ix": 2 }, "nm": "TracÃ© 1", "mn": "ADBE Vector Shape - Group", "hd": false }, { "ty": "fl", "c": { "a": 0, "k": [0.128999986836, 0.128999986836, 0.128999986836, 1], "ix": 4 }, "o": { "a": 0, "k": 100, "ix": 5 }, "r": 1, "nm": "Fond 1", "mn": "ADBE Vector Graphic - Fill", "hd": false }, { "ty": "tr", "p": { "a": 0, "k": [48.044, 48.045], "ix": 2 }, "a": { "a": 0, "k": [0, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100], "ix": 3 }, "r": { "a": 0, "k": 0, "ix": 6 }, "o": { "a": 0, "k": 100, "ix": 7 }, "sk": { "a": 0, "k": 0, "ix": 4 }, "sa": { "a": 0, "k": 0, "ix": 5 }, "nm": "Transformer " }], "nm": "Groupe 1", "np": 2, "cix": 2, "ix": 1, "mn": "ADBE Vector Group", "hd": false }], "ip": 0, "op": 375, "st": 0, "bm": 0 }, { "ddd": 0, "ind": 6, "ty": 4, "nm": "ojo der Silhouettes", "parent": 2, "sr": 1, "ks": { "o": { "a": 0, "k": 100, "ix": 11 }, "r": { "a": 0, "k": 0, "ix": 10 }, "p": { "a": 1, "k": [{ "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 30, "s": [172.758, -68.586, 0], "e": [166.201, -82.794, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 35, "s": [166.201, -82.794, 0], "e": [194.616, -83.887, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "i": { "x": 0.833, "y": 0.833 }, "o": { "x": 0.167, "y": 0.167 }, "n": "0p833_0p833_0p167_0p167", "t": 62, "s": [194.616, -83.887, 0], "e": [172.758, -68.586, 0], "to": [0, 0, 0], "ti": [0, 0, 0] }, { "t": 67 }], "ix": 2 }, "a": { "a": 0, "k": [48.045, 48.044, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100, 100], "ix": 6 } }, "ao": 0, "shapes": [{ "ty": "gr", "it": [{ "ind": 0, "ty": "sh", "ix": 1, "ks": { "a": 0, "k": { "i": [[0, -26.397], [-26.396, 0], [0, 26.396], [26.396, 0]], "o": [[0, 26.396], [26.396, -0.001], [0, -26.396], [-26.396, 0]], "v": [[-47.794, 0], [-0.001, 47.794], [47.794, -0.001], [-0.001, -47.794]], "c": true }, "ix": 2 }, "nm": "TracÃ© 1", "mn": "ADBE Vector Shape - Group", "hd": false }, { "ty": "fl", "c": { "a": 0, "k": [0.128999986836, 0.128999986836, 0.128999986836, 1], "ix": 4 }, "o": { "a": 0, "k": 100, "ix": 5 }, "r": 1, "nm": "Fond 1", "mn": "ADBE Vector Graphic - Fill", "hd": false }, { "ty": "tr", "p": { "a": 0, "k": [48.045, 48.045], "ix": 2 }, "a": { "a": 0, "k": [0, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100], "ix": 3 }, "r": { "a": 0, "k": 0, "ix": 6 }, "o": { "a": 0, "k": 100, "ix": 7 }, "sk": { "a": 0, "k": 0, "ix": 4 }, "sa": { "a": 0, "k": 0, "ix": 5 }, "nm": "Transformer " }], "nm": "Groupe 1", "np": 2, "cix": 2, "ix": 1, "mn": "ADBE Vector Group", "hd": false }], "ip": 0, "op": 375, "st": 0, "bm": 0 }, { "ddd": 0, "ind": 7, "ty": 4, "nm": "Calque 1 Silhouettes", "parent": 2, "sr": 1, "ks": { "o": { "a": 0, "k": 100, "ix": 11 }, "r": { "a": 0, "k": 0, "ix": 10 }, "p": { "a": 0, "k": [-0.076, 109.585, 0], "ix": 2 }, "a": { "a": 0, "k": [335.986, 508.493, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100, 100], "ix": 6 } }, "ao": 0, "shapes": [{ "ty": "gr", "it": [{ "ind": 0, "ty": "sh", "ix": 1, "ks": { "a": 0, "k": { "i": [[-6.088, 0], [0, -6.092], [-10.139, 0], [0, 10.136], [-0.003, 0.101], [0, 0.101], [0, 0], [0, 6.128], [-15.059, 0], [0, -8.292], [9.56, -4.428], [0, 0], [0.003, -0.1], [0, -0.101], [-10.139, 0], [0, 10.136], [-6.088, 0], [0, -6.093], [22.296, 0], [7.381, 7.842], [11.591, 0], [0, 22.3]], "o": [[6.09, 0], [0, 10.137], [10.14, 0], [0, -0.101], [-0.003, -0.1], [0, 0], [-9.56, -4.429], [0, -8.291], [15.06, 0], [0, 6.128], [0, 0], [0, 0.101], [0.003, 0.101], [0, 10.136], [10.14, 0], [0, -6.093], [6.089, 0], [0, 22.3], [-11.59, 0.001], [-7.381, 7.842], [-22.296, 0], [0, -6.093]], "v": [[-58.824, -3.369], [-47.795, 7.659], [-29.412, 26.043], [-11.029, 7.659], [-10.999, 7.363], [-11.029, 7.068], [-11.029, -13.26], [-27.266, -33.089], [0, -48.102], [27.268, -33.089], [11.03, -13.26], [11.03, 7.068], [10.999, 7.363], [11.03, 7.659], [29.412, 26.042], [47.794, 7.659], [58.824, -3.37], [69.853, 7.659], [29.412, 48.101], [0, 35.329], [-29.412, 48.102], [-69.853, 7.66]], "c": true }, "ix": 2 }, "nm": "TracÃ© 1", "mn": "ADBE Vector Shape - Group", "hd": false }, { "ty": "fl", "c": { "a": 0, "k": [0.426999978458, 0.426999978458, 0.426999978458, 1], "ix": 4 }, "o": { "a": 0, "k": 100, "ix": 5 }, "r": 1, "nm": "Fond 1", "mn": "ADBE Vector Graphic - Fill", "hd": false }, { "ty": "tr", "p": { "a": 0, "k": [407.717, 410.813], "ix": 2 }, "a": { "a": 0, "k": [0, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100], "ix": 3 }, "r": { "a": 0, "k": 0, "ix": 6 }, "o": { "a": 0, "k": 100, "ix": 7 }, "sk": { "a": 0, "k": 0, "ix": 4 }, "sa": { "a": 0, "k": 0, "ix": 5 }, "nm": "Transformer " }], "nm": "Groupe 1", "np": 2, "cix": 2, "ix": 1, "mn": "ADBE Vector Group", "hd": false }, { "ty": "gr", "it": [{ "ind": 0, "ty": "sh", "ix": 1, "ks": { "a": 0, "k": { "i": [[0, -37.008], [-37.009, 0.001], [0, 37.008], [37.008, 0]], "o": [[0, 37.008], [37.007, 0], [0, -37.008], [-37.008, 0]], "v": [[-67.008, 0], [0, 67.008], [67.008, -0.001], [0, -67.009]], "c": true }, "ix": 2 }, "nm": "TracÃ© 1", "mn": "ADBE Vector Shape - Group", "hd": false }, { "ty": "fl", "c": { "a": 0, "k": [1, 0.823999980852, 0.081999999402, 1], "ix": 4 }, "o": { "a": 0, "k": 100, "ix": 5 }, "r": 1, "nm": "Fond 1", "mn": "ADBE Vector Graphic - Fill", "hd": false }, { "ty": "tr", "p": { "a": 0, "k": [299.261, 329.23], "ix": 2 }, "a": { "a": 0, "k": [0, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100], "ix": 3 }, "r": { "a": 0, "k": 0, "ix": 6 }, "o": { "a": 0, "k": 100, "ix": 7 }, "sk": { "a": 0, "k": 0, "ix": 4 }, "sa": { "a": 0, "k": 0, "ix": 5 }, "nm": "Transformer " }], "nm": "Groupe 2", "np": 2, "cix": 2, "ix": 2, "mn": "ADBE Vector Group", "hd": false }, { "ty": "gr", "it": [{ "ind": 0, "ty": "sh", "ix": 1, "ks": { "a": 0, "k": { "i": [[0, -37.008], [-37.008, 0.001], [0, 37.008], [37.008, 0]], "o": [[0, 37.008], [37.008, 0], [0, -37.008], [-37.008, 0]], "v": [[-67.009, 0], [0, 67.008], [67.009, -0.001], [0, -67.009]], "c": true }, "ix": 2 }, "nm": "TracÃ© 1", "mn": "ADBE Vector Shape - Group", "hd": false }, { "ty": "fl", "c": { "a": 0, "k": [1, 0.823999980852, 0.081999999402, 1], "ix": 4 }, "o": { "a": 0, "k": 100, "ix": 5 }, "r": 1, "nm": "Fond 1", "mn": "ADBE Vector Graphic - Fill", "hd": false }, { "ty": "tr", "p": { "a": 0, "k": [516.174, 329.229], "ix": 2 }, "a": { "a": 0, "k": [0, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100], "ix": 3 }, "r": { "a": 0, "k": 0, "ix": 6 }, "o": { "a": 0, "k": 100, "ix": 7 }, "sk": { "a": 0, "k": 0, "ix": 4 }, "sa": { "a": 0, "k": 0, "ix": 5 }, "nm": "Transformer " }], "nm": "Groupe 3", "np": 2, "cix": 2, "ix": 3, "mn": "ADBE Vector Group", "hd": false }, { "ty": "gr", "it": [{ "ind": 0, "ty": "sh", "ix": 1, "ks": { "a": 0, "k": { "i": [[0, 0], [25.902, -23.233], [0, 0], [0, 0], [0, 0], [0.05, -34.794], [0, 0], [0.392, 62.222], [31.775, 0.045], [0.153, -0.002], [-0.203, -31.985], [-65.704, -8.654], [-2.494, -0.004], [-1.219, 0.076], [0, 0], [-22.658, 50.5], [0, 41.875], [0, 0], [0, 0], [0, 0]], "o": [[0.05, -34.794], [0, 0], [0, 0], [0, 0], [-25.836, -23.307], [0, 0], [-19.955, -21.872], [-0.202, -31.831], [-0.155, 0], [-31.984, 0.202], [1.205, 190.77], [2.539, 0.336], [1.233, 0.002], [0, 0], [58.93, 0.084], [13.454, -23.624], [0, 0], [0, 0], [0, 0], [0, 0]], "v": [[335.687, -454.416], [268.651, -484.394], [156.972, -384.219], [-1.722, -384.443], [-113.113, -484.937], [-180.235, -455.147], [-181.228, 361.501], [-219.71, 240.436], [-277.529, 182.891], [-277.988, 182.891], [-335.533, 241.171], [-144.049, 507.373], [-136.498, 507.877], [-132.831, 507.714], [181.211, 508.159], [313.547, 422.599], [334.642, 325.355], [334.996, 26.531], [334.974, 26.531], [335, 26.531]], "c": true }, "ix": 2 }, "nm": "TracÃ© 1", "mn": "ADBE Vector Shape - Group", "hd": false }, { "ty": "fl", "c": { "a": 0, "k": [0.128999986836, 0.128999986836, 0.128999986836, 1], "ix": 4 }, "o": { "a": 0, "k": 100, "ix": 5 }, "r": 1, "nm": "Fond 1", "mn": "ADBE Vector Graphic - Fill", "hd": false }, { "ty": "tr", "p": { "a": 0, "k": [335.986, 508.494], "ix": 2 }, "a": { "a": 0, "k": [0, 0], "ix": 1 }, "s": { "a": 0, "k": [100, 100], "ix": 3 }, "r": { "a": 0, "k": 0, "ix": 6 }, "o": { "a": 0, "k": 100, "ix": 7 }, "sk": { "a": 0, "k": 0, "ix": 4 }, "sa": { "a": 0, "k": 0, "ix": 5 }, "nm": "Transformer " }], "nm": "Groupe 4", "np": 2, "cix": 2, "ix": 4, "mn": "ADBE Vector Group", "hd": false }], "ip": 0, "op": 375, "st": 0, "bm": 0 }], "markers": [] };
 
-    <!-- Navigation Script -->
-    <script src="nav.js"></script>
+        const anim = lottie.loadAnimation({
+            container: document.getElementById('lottie-cat'),
+            renderer: 'svg',
+            loop: false, // لغينا التكرار التلقائي
+            autoplay: false, // لغينا التشغيل التلقائي
+            animationData: catData,
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMax slice'
+            }
+        });
+
+        const catEl = document.getElementById('cat-peep');
+
+        function runCatCycle() {
+            // 1. تطلع القطة
+            catEl.classList.add('peeping');
+
+            // 2. نستنى شوي لتخلص حركة الـ CSS وبعدين نشغل الانيميشن (الـ 77 فريم)
+            setTimeout(() => {
+                anim.goToAndPlay(0);
+            }, 400);
+        }
+
+        // لما يخلصوا الـ 77 فريم بالزبط
+        anim.addEventListener('complete', () => {
+            // 3. نرجع نخفي القطة
+            catEl.classList.remove('peeping');
+
+            // 4. نستنى وقت (مثلاً 4 ثواني) ونعيد الدورة
+            setTimeout(runCatCycle, 4000);
+        });
+
+        // تشغيل أول مرة بعد ثانيتين من دخول الموقع
+        setTimeout(runCatCycle, 2000);
+    </script>
 </body>
 
 </html>
