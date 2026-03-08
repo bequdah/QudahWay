@@ -149,29 +149,31 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 350px;
-            /* مساحة واسعة للتحرك براحتها */
-            overflow: hidden;
+            height: 100%;
+            /* تتبع طول الحاوية */
+            overflow: visible;
+            /* عشان البسة تطلع لبرة تحت */
             pointer-events: none;
             z-index: 1;
-            /* تحت النص */
         }
 
         #cat-peep {
             position: absolute;
-            top: 35px;
-            /* رفعناه شوي لفوق عشان نضمن اختفاءه */
+            top: 100%;
+            /* الارتكاز دائماً على الخط السفلي */
             left: 50%;
             width: 110px;
             height: 110px;
-            /* rotate(180deg) لقلبها، و translateY(80px) لإخفائها بعمق ورا النص */
-            transform: translate(-50%, -50%) rotate(180deg) translateY(80px);
+            /* الوضع الافتراضي: مخفية للأعلى (داخل الحاوية) */
+            /* translateY(60px) بيرفعها لفوق الشاشة لأنها مقلوبة 180 درجة */
+            transform: translate(-50%, -50%) rotate(180deg) translateY(65px);
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #cat-peep.peeping {
-            /* تنزل لتحت أكتر عشان يبين الوجه كامل */
-            transform: translate(-50%, -50%) rotate(180deg) translateY(-100px);
+            /* تنزل لتحت (بالنسبة للشاشة) لتظهر الرأس المقلوب */
+            /* الشاشة تحت يعني translateY سالب بوضع الـ 180 درجة */
+            transform: translate(-50%, -50%) rotate(180deg) translateY(-80px);
         }
 
         #lottie-cat {
