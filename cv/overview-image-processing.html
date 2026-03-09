@@ -216,7 +216,7 @@
                     onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
                     العودة للوحة التحكم
                 </a>
-                
+
             </div>
             <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> CV</h1>
             <p class="subtitle">Overview of Image Processing | معالجة الصور الرقمية</p>
@@ -235,6 +235,27 @@
             </div>
         </div>
 
+        <!-- Missing Slides Notice -->
+        <div class="detail-item"
+            style="border-right-color: var(--danger); background: rgba(251, 113, 133, 0.05); margin-bottom: 50px; padding: 25px; border-radius: 20px; border: 1px solid rgba(251, 113, 133, 0.2); border-right-width: 5px;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div
+                    style="background: var(--danger); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 0 15px rgba(251, 113, 133, 0.4);">
+                    ⚠️
+                </div>
+                <div>
+                    <div style="color: var(--danger); font-weight: 900; font-size: 1.3rem; margin-bottom: 5px;">تنبيه
+                    </div>
+                    <div style="color: var(--text-light); font-size: 1.1rem; line-height: 1.7;">
+                        بس حاب انبهكم إنه <span class="highlight-y">سلايدات
+                            الدكتور من رقم 2 لحد 6</span> مش موجودة هون بالترتيب (موجود فيها شوية تعاريف ).
+                        يفضل تطلعوا عليهم سريعاً من ملف الدكتور الأصلي عشان تكتمل الصورة عندكم، وبعدين ارجعوا كملوا هون
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Slide 01 -->
         <div class="slide-section">
             <div class="slide-title-bar">
@@ -249,14 +270,18 @@
                 <div class="explanation-content">
                     <div class="detail-item">
                         <span class="detail-title">📍 صورة الـ (8) شو قصتها؟</span>
-                        هاي الصورة بتورجيك كيف الدماغ الرقمي بيشتغل.. إنت شايف رقم ثمانية، بس الكمبيوتر شايف جدول أرقام
-                        (زي ما إنت شايف بالنص). اللون الأبيض هو أرقام عالية (قريبة من 255)، والأسود أرقام واطية (قريبة
+                        هاي الصورة بتورجيك كيف الدماغ الرقمي بيشتغل.. إنت شايف رقم ثمانية، بس الكمبيوتر شايف جدول
+                        أرقام
+                        (زي ما إنت شايف بالنص). اللون الأبيض هو أرقام عالية (قريبة من 255)، والأسود أرقام واطية
+                        (قريبة
                         من 0).
                     </div>
                     <div class="detail-item">
                         <span class="detail-title">📍 الفراشة (التحويل السحري):</span>
-                        شوف صورة الفراشة على اليمين.. الجزء الأول هو الصورة الحقيقية، والجزء الثاني هو نسخة "مفلترة".
-                        المعالجة هون استخلصت <span class="highlight-y">الحواف (Edges)</span> بس. هااض هو السحر اللي رح
+                        شوف صورة الفراشة على اليمين.. الجزء الأول هو الصورة الحقيقية، والجزء الثاني هو نسخة
+                        "مفلترة".
+                        المعالجة هون استخلصت <span class="highlight-y">الحواف (Edges)</span> بس. هااض هو السحر اللي
+                        رح
                         نتعلمه: كيف "نشيل" كل شي مش مهم ونخلي "الهيكل" اللي بيفهمنا شو هاي الحشرة.
                     </div>
                 </div>
@@ -307,16 +332,19 @@
             <div class="explanation-box">
                 <div class="explanation-header">عصر "الفلاتر اليدوية" (Handcrafted):</div>
                 <div class="explanation-content">
-                    قبل ما يطلع الـ <span class="eng-term">Deep Learning</span> والجنان تاعه، كان العلماء يمسكوا الورقة
+                    قبل ما يطلع الـ <span class="eng-term">Deep Learning</span> والجنان تاعه، كان العلماء يمسكوا
+                    الورقة
                     والقلم ويقعدوا يصمموا أرقام الـ <span class="eng-term">Kernel</span> بإيدهم عشان يكتشفوا ميزات
                     الصورة.
                     <br><br>
                     <div style="border-right: 3px solid var(--accent); padding-right: 15px;">
                         <span style="color: var(--accent); font-weight: 800;">💡 ليش لسا بندرسه؟</span><br>
-                        إذا الـ <span class="eng-term">Deep Learning</span> صار يعمل كل شي لحاله، ليش وجع الراس هااض؟
+                        إذا الـ <span class="eng-term">Deep Learning</span> صار يعمل كل شي لحاله، ليش وجع الراس
+                        هااض؟
                         <br>الجواب: لأن الـ <span class="eng-term">CNN</span> (الشبكات العصبونية) أصلاً <span
                             class="highlight-y">بتتعلم</span> هاي الفلاتر!
-                        يعني لو فهمت كيف "الفلتر اليدوي" بشتغل، رح تفهم "الذكاء الاصطناعي" شو قاعد بيتعلم جوا الطبقات
+                        يعني لو فهمت كيف "الفلتر اليدوي" بشتغل، رح تفهم "الذكاء الاصطناعي" شو قاعد بيتعلم جوا
+                        الطبقات
                         تاعته.
                     </div>
                 </div>
@@ -369,7 +397,8 @@
                 <div class="explanation-content">
                     إحنا بنستخدم الفلاتر لأربع أهداف أساسية:
                     <ul>
-                        <li><span class="highlight-b">Feature Extraction:</span> استخراج ميزات زي الحواف والزوايا (عشان
+                        <li><span class="highlight-b">Feature Extraction:</span> استخراج ميزات زي الحواف والزوايا
+                            (عشان
                             نعرف وين "حدود" السيارة بالصورة).</li>
                         <li><span class="highlight-y">Noise Reduction:</span> تنظيف الصورة من "النمش" أو التشويش
                             (Blurring).</li>
@@ -466,9 +495,11 @@
                         <br><br>
                         الحقيقة إنها رياضيات بحتة! شوف الصورتين على الشمال:
                         <ul>
-                            <li><span class="highlight-b">X-Direction Kernel:</span> مصمم عشان يشوف التغيير بالعرض (حواف
+                            <li><span class="highlight-b">X-Direction Kernel:</span> مصمم عشان يشوف التغيير بالعرض
+                                (حواف
                                 عمودية).</li>
-                            <li><span class="highlight-y">Y-Direction Kernel:</span> مصمم عشان يشوف التغيير بالطول (حواف
+                            <li><span class="highlight-y">Y-Direction Kernel:</span> مصمم عشان يشوف التغيير بالطول
+                                (حواف
                                 أفقية).</li>
                         </ul>
                         لما ندمجهم مع بعض، بنطلع صورة الفراشة الكاملة اللي شفتها أول الدرس.
@@ -568,7 +599,8 @@
                         <ol>
                             <li>عندنا صورة (بكسلات 10 على الشمال، و0 على اليمين).. يعني في "حافة" عمودية بالنص.</li>
                             <li>استخدمنا فلتر عمودي <span class="eng-term">[1 0 -1]</span>.</li>
-                            <li><span class="highlight-y">النتيجة:</span> الأماكن اللي ما فيها تغيير (كلها 10 أو كلها 0)
+                            <li><span class="highlight-y">النتيجة:</span> الأماكن اللي ما فيها تغيير (كلها 10 أو
+                                كلها 0)
                                 طلعت أصفار.</li>
                             <li>بالنص، وين ما في "قفزة" من 10 لـ 0، طلع عندنا رقم <span class="highlight-b">(30)</span>.
                             </li>
@@ -602,15 +634,18 @@
                             لما نطبق الفلتر على الصورة:
                             <ul>
                                 <li><span class="highlight-y">المناطق السادة</span> (ما في تغيير): النتيجة = <span
-                                        class="eng-term">0</span> → بتظهر <span class="highlight-r">أسود</span>.</li>
-                                <li><span class="highlight-y">منطقة الحافة</span> (في تغيير حاد): النتيجة = قيمة موجبة
+                                        class="eng-term">0</span> → بتظهر <span class="highlight-r">أسود</span>.
+                                </li>
+                                <li><span class="highlight-y">منطقة الحافة</span> (في تغيير حاد): النتيجة = قيمة
+                                    موجبة
                                     عالية → بتظهر <span class="highlight-b">رمادي فاتح أو أبيض</span>.</li>
                             </ul>
                             يعني الجهاز بحول الأرقام لألوان: الصفر = أسود، والأرقام الكبيرة = فاتح.
                             وهيك بنشوف الحواف "بتضوي" على خلفية سوداء!
                         </div>
                         <br>
-                        المهم تفهم إنه الحافة هي "منطقة انتقال".. والفلتر وظيفته يمسك هاي المنطقة ويحولها لبيانات الجهاز
+                        المهم تفهم إنه الحافة هي "منطقة انتقال".. والفلتر وظيفته يمسك هاي المنطقة ويحولها لبيانات
+                        الجهاز
                         يقدر يحللها.
                     </div>
                 </div>
@@ -630,7 +665,8 @@
                     <div class="explanation-content">
                         ليش بنعتبر <span class="eng-term">Canny</span> هو التوب؟
                         <br><br>
-                        لأنه مش مجرد فلتر واحد وبخلص، هو عبارة عن "سلسلة خطوات" ذكية بتضمن إنه يطلع أكبر عدد من الحواف
+                        لأنه مش مجرد فلتر واحد وبخلص، هو عبارة عن "سلسلة خطوات" ذكية بتضمن إنه يطلع أكبر عدد من
+                        الحواف
                         الحقيقية ويطنش الأشياء الغلط (False Edges).
                         زي ما بحكوا: "شغل متعوب عليه".
                     </div>
@@ -652,7 +688,8 @@
                         قبل ما ندور على الحواف، لازم ننظف "النويز".
                         <br><br>
                         بنستخدم <span class="eng-term">Gaussian Filter</span> (غالباً بحجم 5x5).
-                        الفكرة إنه النويز ممكن يعمل "حواف وهمية" تخدع الكمبيوتر، فإحنا بنعمل شوية بلور (Blur) خفيف عشان
+                        الفكرة إنه النويز ممكن يعمل "حواف وهمية" تخدع الكمبيوتر، فإحنا بنعمل شوية بلور (Blur) خفيف
+                        عشان
                         نضمن إنه اللي ضل هو الحواف "الأصلية" بس.
                     </div>
                 </div>
@@ -674,7 +711,8 @@
                         <br><br>
                         <ul>
                             <li><span class="highlight-y">Magnitude (Gi):</span> قوة الحافة (كم هي واضحة؟).</li>
-                            <li><span class="highlight-b">Direction (θi):</span> اتجاه الحافة (بأي زاوية ماشية؟).</li>
+                            <li><span class="highlight-b">Direction (θi):</span> اتجاه الحافة (بأي زاوية ماشية؟).
+                            </li>
                         </ul>
                         الرياضيات هون هي (فيثاغورس) للـ Magnitude، و (tan inverse) للـ Direction.
                     </div>
@@ -723,8 +761,10 @@
                         <br><br>
                         بنحدد قيمتين (High & Low Threshold):
                         <ul>
-                            <li><span class="highlight-y">أعلى من الـ High:</span> حافة قوية أكيدة (تعتمد فوراً).</li>
-                            <li><span class="highlight-b">بين الـ High والـ Low:</span> حافة ضعيفة (بنطلع عليها.. إذا
+                            <li><span class="highlight-y">أعلى من الـ High:</span> حافة قوية أكيدة (تعتمد فوراً).
+                            </li>
+                            <li><span class="highlight-b">بين الـ High والـ Low:</span> حافة ضعيفة (بنطلع عليها..
+                                إذا
                                 موصلة بحافة قوية بنعتمدها، إذا لحالها بنكبها).</li>
                             <li><span class="highlight-r">أقل من الـ Low:</span> نويز (بنكبها فوراً).</li>
                         </ul>
@@ -770,12 +810,14 @@
                         شوف هاذ الكيرنل العجيب: <span class="highlight-b">[0 -1 0; -1 5 -1; 0 -1 0]</span>.
                         <br><br>
                         <ul>
-                            <li><span class="highlight-y">رقم 5 بالنص:</span> بيحافظ على قيمة البكسل الأصلية وزيادة شوي.
+                            <li><span class="highlight-y">رقم 5 بالنص:</span> بيحافظ على قيمة البكسل الأصلية وزيادة
+                                شوي.
                             </li>
                             <li><span class="highlight-r">الأرقام (-1) بالجوانب:</span> بتطرح معدل الجيران من البكسل
                                 اللي بالنص.</li>
                         </ul>
-                        النتيجة؟ إذا كان البكسل أصلاً مختلف عن جيرانه، رح يصير الاختلاف "فاجع" أكثر، وهيك بتطلع الحواف
+                        النتيجة؟ إذا كان البكسل أصلاً مختلف عن جيرانه، رح يصير الاختلاف "فاجع" أكثر، وهيك بتطلع
+                        الحواف
                         حادة.
                     </div>
                 </div>
@@ -887,7 +929,7 @@
         </div>
 
         <script src="../nav.js"></script>
-    <script src="../gooey.js"></script>
+        <script src="../gooey.js"></script>
 </body>
 
 </html>
