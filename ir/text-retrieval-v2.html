@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Text Retrieval Problem</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">Information Retrieval | استرجاع المعلومات</p>
+        </div>
+
+        <!-- Story Intro -->
+        <div class="story-section">
+            <div class="story-title">عالم البحث.. الفوضى المنظمة! 🔍</div>
+            <div class="story-content">
+                تخيل حالك بتدور على ورقة وحدة ضايعة بمكتبة فيها مليون كتاب.. لو بدك تفتشهم كتاب كتاب رح تعجز!
+                الـ <span class="eng-term">Text Retrieval</span> هو السحر اللي بمسك هاي الملايين وبرتبلك إياهم بحيث
+                تلاقي اللي بدك إياه بلمح البصر.
+                <br><br>
+                اليوم رح نفهم "اللعبة" من جوا.. كيف بنحول الكلمات لمعادلات، وليش البحث عن النصوص أصعب بمليون مرة من
+                البحث بقواعد البيانات التقليدية.
+            </div>
+        </div>
+
+
+
+        <!-- Slide 2 -->
+        <div class="slide-section" id="slide-2">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What Is Text Retrieval (TR)?</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0002.jpg" alt="Slide 2">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو المكونات اللي بنحتاجها؟ 🧩</div>
+                <div class="explanation-content">
+                    عشان النظام يشتغل، لازم يتوفر عندنا أربعة أشياء:
+                    <div class="detail-item" style="margin-top: 15px;">
+                        <span class="highlight-y">1. الـ Collection:</span> وهي "الكنز" أو مجموعة المستندات النصية اللي
+                        بنبحث فيها.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. الـ User Query:</span> سؤال المستخدم اللي بيعبر فيه عن حاجته
+                        للمعلومة (<span class="eng-term">Information Need</span>).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">3. الـ Relevant Documents:</span> وهي المستندات اللي فعلاً بتفيد
+                        المستخدم واللي النظام لازم يرجعها.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">معلومة:</span> في الصناعة بيسموه <span class="eng-term">Search
+                            Technology</span>، وهو تخصص فرعي من الـ <span class="eng-term">Information Retrieval</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-section" id="slide-3">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">TR vs. Database Retrieval</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0003.jpg" alt="Slide 3">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المواجهة الكبرى! ⚔️</div>
+                <div class="explanation-content">
+                    ليش البحث بالنصوص أصعب من الـ <span class="eng-term">Database</span>؟
+                    <div class="detail-item" style="margin-top: 15px;">
+                        <span class="highlight-y">المعلومات (Information):</span> بالـ DB البيانات مهيكلة وواضحة، بالـ
+                        TR بنتعامل مع <span class="highlight-danger">نصوص فوضوية وغامضة (Ambiguous)</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">الاستعلام (Query):</span> بالـ DB السؤال بكون كامل ودقيق، بالـ TR بكون
+                        دايماً <span class="highlight-danger">ناقص وغير محدد (Incomplete)</span>.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success">الزبدة:</span> الـ TR "مشكلة تجريبية" (<span
+                            class="eng-term">Empirically defined</span>). المعيار الوحيد هو <span
+                            class="highlight-success">رأي المستخدم</span> وتجربته الفعلية.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-section" id="slide-4">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Formal Formulation of TR</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0004.jpg" alt="Slide 4">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الصياغة الرياضية للمشكلة 🧠</div>
+                <div class="explanation-content">
+                    عشان نخلي الكمبيوتر يفهمنا، لازم نترجم القصة لرموز:
+                    <div class="detail-item" style="margin-top: 15px;">
+                        <span class="highlight-y">القاموس (V):</span> هو كل الكلمات الموجودة باللغة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">المستند (d) والبحث (q):</span> الإثنين عبارة عن "صف من الكلمات" من
+                        القاموس.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">المستندات ذات الصلة (R(q)):</span> هي المستندات اللي بتفيد المستخدم،
+                        بس المشكلة إنها <span class="highlight-danger">مجهولة (Unknown)</span> وبتعتمد على الشخص.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-primary">مهمتنا:</span> نحسب <span class="eng-term">R'(q)</span>؛ وهي
+                        أفضل تقريب للمجموعة اللي ببال المستخدم. الـ Query هو مجرد <span class="highlight-accent">تلميح
+                            (Hint)</span> مش أمر دقيق!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section" id="slide-5">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">How to Compute R'(q)</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0005.jpg" alt="Slide 5">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بنحزر النتيجة؟ 🧪</div>
+                <div class="explanation-content">
+                    عنا طريقتين عشان السيستم يطلع الـ <span class="eng-term">R'(q)</span>:
+                    <div class="detail-item" style="margin-top: 15px;">
+                        <span class="highlight-y">1. اختيار المستندات (Selection):</span> النظام بيقرر لكل ملف "صح (1)
+                        أو غلط (0)". هاض بيسموه <span class="highlight-danger">Absolute Relevance</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">2. ترتيب المستندات (Ranking):</span> النظام بيعطي "علامة" لكل ملف
+                        وبيرتبهم. الصلة هون <span class="highlight-success">نسبية (Relative)</span> مش أبيض وأسود.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section" id="slide-6">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Document Selection vs. Ranking</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0006.jpg" alt="Slide 6">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المقارنة البصرية: مين الأفخم؟ 📊</div>
+                <div class="explanation-content">
+                    شوف الرسمة بالسلايد:
+                    <div class="detail-item" style="margin-top: 15px;">
+                        بالـ <span class="highlight-y">Selection</span> السيستم بيحاول "يقفل" على مجموعة معينة، يا إنك
+                        جوه يا بره.
+                    </div>
+                    <div class="detail-item">
+                        بالـ <span class="highlight-b">Ranking</span> السيستم بيعطيك درجات (Scores) وبيرتبهم، هيك
+                        "الأهم" بكون دايماً قدامك.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section" id="slide-7">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Problems of Document Selection</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0007.jpg" alt="Slide 7">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش نظام "الاختيار" (Selection) ما بنفعنا؟ ❌</div>
+                <div class="explanation-content">
+                    نظام الـ Selection بيتعامل مع البحث كأنه "بواب"؛ يا بخليك تدخل يا بطلعك بره. وهاض التفكير فيه مشاكل
+                    قاتلة:
+                    <div class="detail-item" style="margin-top: 15px;">
+                        <span class="highlight-y">1. دقة التصنيف (Accuracy):</span> خوارزميات الكمبيوتر صعب جداً
+                        تكون دقيقة 100% في الحكم على نص بشري معقد. كلمة "صح" أو "خطأ" هون فيها ظلم كبير!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">2. معضلة القيود (The Query Extremes):</span>
+                        لو كنت متشدد بسؤالك (<span class="eng-term">Over-constrained</span>)، السيستم رح يحكيلك "ما
+                        لقيتلك ولا إشي!" (0 نتائج).
+                        ولو كنت متساهل بكلمات البحث (<span class="eng-term">Under-constrained</span>)، رح يغرقك بملايين
+                        النتائج اللي مالها داعي (<span class="eng-term">Over delivery</span>).
+                        وصعب جداً تلاقي "المنطقة الوسط" اللي بترضي الطرفين.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">3. الصلة ليست "أبيض وأسود":</span> حتى لو النظام اشتغل صح، المستندات
+                        مش كلها بنفس درجة الفائدة. في مستند بكون "كنز"، وفي مستند بكون "مفيد نوعاً ما". الـ Selection
+                        بعتبرهم كلهم واحد!
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-primary">خلاصة الكلام:</span> إحنا محتاجين "ترتيب أولويات" (<span
+                            class="eng-term">Prioritization</span>)، وعشان هيك العالم كله فضل الـ <span
+                            class="highlight-success">Ranking</span> على الـ Selection.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section" id="slide-8">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Theoretical Justification for Ranking</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0008.jpg" alt="Slide 8">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المبدأ العلمي: ليش الـ Ranking هو الحل الأمثل؟ ✅</div>
+                <div class="explanation-content">
+                    عشان ما نحكي إنه الـ Ranking مجرد "رأي"، في عالم اسمه <span class="highlight-accent">روبرتسون
+                        (Robertson)</span> حط لنا في سنة 1977 مبدأ مشهور جداً اسمه:
+                    <br>
+                    <span class="eng-term">Probability Ranking Principle (PRP)</span>
+                    <br><br>
+                    المبدأ هاد بيثبت إنه لو السيستم رتب المستندات تنازلياً حسب **"احتمالية"** صلتها بالموضوع، فهاض هو
+                    أفضل وضع ممكن توصله. بس عشان هالقانون يشتغل صح، لازم نصدق افتراضين:
+                    <div class="detail-item" style="margin-top: 15px;">
+                        <span class="highlight-y">أ) الاستقلال (Independence):</span> بفترض المبدأ إنه فايدة المستند
+                        <span class="eng-term">d<sub>1</sub></span> إلك ما بتعتمد أبداً على المستند <span
+                            class="eng-term">d<sub>2</sub></span>. (يعني لو المعلومة مكررة، رح يضل يعتبر الثاني مفيد
+                        جداً!).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">ب) الترتيب التسلسلي (Sequential Browsing):</span> بفترض إنك رح تقرأ
+                        النتائج بالترتيب؛ من الأول للثاني للثالث.. بدون ما تنط عن أي واحد.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-accent">سؤال للتفكير 🤔:</span> هل فعلاً هاي الافتراضات بتنطبق علينا
+                        كبشر؟ هل لو شفت معلومة مكررة بتعتبر المستند الثاني "مفيد"؟ طبعاً لا! وهاض هو اللي بخلي علم الـ
+                        IR مستمر بالتطور لليوم.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section" id="slide-9">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Summary</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/2-Text_Retrieval_Problem_page-0009.jpg" alt="Slide 9">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخلاصة 🏆</div>
+                <div class="explanation-content">
+                    <div class="detail-item"> الـ TR مشكلة تجريبية بتعتمد على نية المستخدم.</div>
+                    <div class="detail-item"> الـ <span class="highlight-success">Ranking</span> دايماً أفضل من الـ
+                        Selection.</div>
+                    <div class="detail-item" style="border-right-color: var(--primary);"> التحدي الحقيقي هو تصميم الـ
+                        <span class="eng-term">f(q,d)</span> اللي بتحسب الترتيب بدقة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../nav.js"></script>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>

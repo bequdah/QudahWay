@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
         menuHTML += `
             <div class="nav-header" style="font-size: 1rem; color: #38bdf8;">Information Retrieval</div>
             <a href="intro.html" class="nav-link"> 00. Intro & Definitions</a>
-            <a href="text-retrieval.html" class="nav-link"> 01. Text Retrieval Basics</a>
+            <a href="text-retrieval-v2.html" class="nav-link"> 01. Text Retrieval Basics</a>
             <a href="boolean-retrieval.html" class="nav-link"> 02. Boolean Retrieval</a>
             <a href="text-operations.html" class="nav-link"> 03. Text Operations</a>
             <a href="phrase-queries.html" class="nav-link"> 04. Phrase Queries</a>

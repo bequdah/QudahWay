@@ -19,9 +19,34 @@ The core of QudahWay is its **premium, modern, and high-impact design**. We aim 
     - **Success:** Emerald/Mint (`#34d399`) - For correct answers and stable progress.
     - **Danger:** Rose/Red (`#fb7185`) - For errors, warnings, and fairness issues.
 
+### 1.1 Content Presentation Patterns: The "Narration" Style 🎤
+We don't just "present" data; we tell a story. Every module should follow the **Narrative-First** structure:
+
+1.  **The Story Opener (`.story-section`):**
+    - Always start with a relatable scenario in Arabic (e.g., "Imagine you're in a coffee shop...").
+    - Use a large, bold title (`.story-title`) and a well-spaced content area (`.story-content`).
+    - This sets the "Why" before getting into the "What".
+
+2.  **The Slide-Explanation Pair:**
+    - **Visual:** The slide image is kept in a dark container (`.slide-image-box`) with subtle padding.
+    - **Narration:** Below each slide, an `.explanation-box` provides the "QudahWay" take.
+    - **Structure:** Use `.explanation-header` for a catchy Arabic title and `.explanation-content` for the deep dive.
+
+3.  **Data Highlighting & Terms:**
+    - **English Terms:** Use the `.eng-term` class for technical words. This wraps the text in a stylized box that handles direction (`ltr`) automatically.
+    - **Color Coding:** 
+        - `<span class="highlight-y">` for core concepts.
+        - `<span class="highlight-b">` for technical sub-points.
+        - `<span class="highlight-success">` for the "Correct/Best" way.
+        - `<span class="highlight-danger">` for pitfalls or critical warnings.
+
+4.  **Detail Items (`.detail-item`):**
+    - For lists and detailed breakdowns, use the glass-styled `.detail-item` class. It provides a subtle background and a colored right-border (`border-right`) to keep points distinct and readable.
+
 ### CSS Classes & Standards:
 - All new files must link to `../gooey.css` for standardized glass/glow effects.
 - Unified font hierarchy: `Cairo` for Arabic text, `Inter` for English/Technical text, and `Satisfy` for the brand logo.
+- **Language Direction:** Lecture files should be `lang="ar"` and `dir="rtl"`.
 
 ---
 
