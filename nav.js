@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isIR = currentPath.includes('/ir/');
     const isCV = currentPath.includes('/cv/');
     const isDS = currentPath.includes('/DS/');
+    const isSS = currentPath.includes('/ss/');
 
     // 1. Create the styles
     const style = document.createElement('style');
@@ -225,6 +226,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="Feature_Engineering.html" class="nav-link"> 04. Feature Engineering</a>
             <a href="Machine_and_Deap Learning.html" class="nav-link"> 05. Machine & Deep Learning</a>
             <a href="Fairness.html" class="nav-link"> 06. Fairness in AI</a>
+        `;
+    } else if (isSS) {
+        menuHTML += `
+            <div class="nav-header" style="font-size: 1.1rem; color: #38bdf8;">Smart Systems</div>
+            <a href="Introduction to Foundation.html" class="nav-link"> 01. Intro to Foundation Models</a>
         `;
     }
 

@@ -20,7 +20,6 @@
             --accent: #facc15;
             --danger: #fb7185;
             --success: #34d399;
-            --purple: #a855f7;
             --border: #334155;
         }
 
@@ -54,47 +53,63 @@
             margin: 0;
         }
 
-        .coming-soon-box {
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
             background: var(--card-dark);
-            padding: 60px 30px;
+            padding: 25px;
             border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-top: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coming-soon-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--purple), transparent);
-        }
-
-        .coming-soon-text {
-            font-size: 2rem;
+            text-decoration: none;
             color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-content {
+            text-align: right;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            display: block;
             font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
         }
 
-        .coming-soon-sub {
-            font-size: 1.1rem;
+        .card-desc {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.6;
         }
 
-        .icon-box {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--purple);
-            opacity: 0.8;
+        .card-icon {
+            font-size: 2rem;
+            margin-left: 20px;
+        }
+
+        .section-tag {
+            grid-column: 1 / -1;
+            text-align: right;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.2);
+            padding-bottom: 5px;
         }
 
         /* Mobile Responsiveness */
@@ -107,12 +122,16 @@
                 font-size: 2.2rem;
             }
 
-            .header p {
-                font-size: 1.1rem !important;
+            .links-grid {
+                grid-template-columns: 1fr;
             }
 
-            .coming-soon-text {
-                font-size: 1.5rem;
+            .link-card {
+                padding: 18px;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -140,19 +159,30 @@
                 <span
                     style="color: var(--accent); font-family: 'Satisfy', cursive; font-size: 1.6rem; font-weight: normal;">Qudah</span>
             </p>
+            <!-- Credits Box -->
+
         </div>
 
-        <div class="coming-soon-box">
-            <div class="icon-box">⏳</div>
-            <div class="coming-soon-text">لما تتوفر السلايدات قريباً!</div>
+        <div class="links-grid">
+            <div class="section-tag">الانظمة الذكية | Smart Systems</div>
+
+            <a href="Introduction to Foundation.html" class="link-card" style="border-right: 4px solid var(--primary);">
+                <div class="card-content">
+                    <span class="card-title">01. Intro to Foundation Models</span>
+                    <span class="card-desc">مقدمة شاملة في النماذج التأسيسية وتطور الذكاء الاصطناعي</span>
+                </div>
+                <span class="card-icon"></span>
+            </a>
+
         </div>
 
     </div>
 
     <!-- Navigation JS (Gooey effect) -->
+    <script src="../nav.js"></script>
     <script src="../gooey.js"></script>
-    
-    
+
+
 </body>
 
 </html>
