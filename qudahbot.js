@@ -37,7 +37,7 @@ const QudahBot = {
         container.innerHTML = `
             <div class="bot-header">
                 <div class="bot-info">
-                    <div class="bot-avatar"><img src="http://localhost:8080/QudahWay.png" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="bot-avatar"><img src="/QudahWay.png" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <div class="bot-title">
                         <span class="bot-name"><span style="color:#38bdf8;">Qudah</span><span style="color:#facc15;">Bot</span></span>
                     </div>
