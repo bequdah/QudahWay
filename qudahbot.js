@@ -45,7 +45,7 @@ const QudahBot = {
                 <button id="qudahbot-close" style="background:none; border:none; color:white; cursor:pointer; font-size:1.5rem;">&times;</button>
             </div>
             <div id="qudahbot-messages">
-                <div class="q-message q-bot">أهلاً فيك! أنا QudahBot من منصة QudahWay. بساعدك بـ 4 مواد: DS, IR, CV, و Smart Systems. حابب تسأل عن شي أو محتاج مساعدة؟</div>
+                <div class="q-message q-bot">أهلاً فيك! أنا <span style="color:#38bdf8; font-weight:800;">Qudah</span><span style="color:#facc15; font-weight:800;">Bot</span> من منصة <span style="color:#38bdf8; font-weight:800;">Qudah</span><span style="color:#facc15; font-weight:800;">Way</span>. بساعدك بـ 4 مواد: DS, IR, CV, و Smart Systems. حابب تسأل عن شي أو محتاج مساعدة؟</div>
             </div>
             <div class="bot-footer">
                 <input type="text" id="qudahbot-input" placeholder="اكتب سؤالك هون...">
