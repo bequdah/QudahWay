@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Foundation Models</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-right: 25px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> SS</h1>
+            <p class="subtitle">Introduction to Foundation Models | مقدمة في النماذج التأسيسية</p>
+        </div>
+
+        <div class="story-section">
+            <div class="story-title">🤖 بداية القصة... هل الذكاء الاصطناعي رح يوخذ مكاننا؟</div>
+            <div class="story-content">
+                تخيل إنك في كافيه، وقاعد بتشرب قهوتك، وفجأة بتسمع الناس حواليك بيحكوا عن ChatGPT وكيف إنه بيقدر يكتب
+                كود، يلخص مقالات، وحتى يكتب نكت!<br>
+                قبل كم سنة كانت كل خوارزمية ذكاء اصطناعي محبوسة بصندوقها الخاص (خوارزمية بتفهم صور بس، وثانية بتفهم نصوص
+                بس).<br><br>
+                بس فجأة... ظهر مصطلح قلب الموازين: الـ <span class="eng-term">Foundation Models</span>.<br>
+                هاي مش مجرد موديلات عادية؛ هاي "موسوعات" ضخمة تدربت على كميات مرعبة من الداتا، وصارت هي الأساس اللي
+                بنقدر نبني عليه أي تطبيق ذكاء اصطناعي بخطر على بالك، من غير ما نرجع لنقطة الصفر! ✨<br>
+                رح نشوف كيف هاي النماذج بتشتغل، وكيف غيرت شكل الـ AI للأبد.
+            </div>
+        </div>
+
+
+
+        <!-- Slide 2 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Machine Learning vs Deep Learning (Background)</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0002.jpg" alt="Slide 2"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الفرق بين الـ Machine Learning والـ Deep Learning 🧠⚔️</div>
+                <div class="explanation-content">
+                    عشان نفهم من وين إجت الـ Foundation Models، لازم نرجع خطوة لورا ونشوف كيف تطور الذكاء الاصطناعي:
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">Machine Learning (الماضي القريب):</span> تخيل إنك بدك تعلم خوارزمية
+                        كيف تميز شو اللي بالصورة (سيارة ولا مش سيارة). في الـ ML، لازم إنت (كإنسان) تقعد وتحدد "الميزات"
+                        (<span class="eng-term">Feature Extraction</span>) يدوياً. مثلاً، تحكيلها "السيارة إلها عجلات
+                        والباقي لأ". هذا كان بوخذ وقت وجهد كبير!
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">Deep Learning (النقلة النوعية بالـ 2010s):</span> هون الموديل صار
+                        "يعتمد على حاله". إنت بس بتعطيه الصورة خام (<span class="eng-term">Input</span>)
+                        ، وهو بشبك طبقات
+                        عصبية معمارية عشان يستخرج الميزات لحاله ويصنفها بتخبطة وحدة
+                        (<span class="eng-term">Feature
+                            Extraction + Classification</span>).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">History of Deep Learning</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0003.jpg" alt="Slide 3"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مراحل تطور الـ Deep Learning 📈⏳</div>
+                <div class="explanation-content">
+                    عشان نوصل للـ Foundation Models اللي بنشوفها اليوم، الـ AI مر بـ 3 مراحل أساسية:
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">1. الـ Specialized DL (قبل 2018):</span> كنا نبني معمارية كاملة لمهمة
+                        معينة، وندربها على <span class="highlight-y">داتا محدودة (Limited data)</span>. يعني موديل لحساب
+                        الأعمار ما بفهم إشي ثاني.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">2. الـ Transfer DL (بين 2018 و 2021):</span> بلشنا نفكر بـ "إعادة
+                        التدوير". ندرب موديل على <span class="highlight-y">كمية كبيرة من الداتا</span>، بعدين نوخذ
+                        "خبرته" (الميزات اللي تعلمها) ونبني فوقها موديل صغير لمهمتنا الخاصة.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">3. الـ Foundation Models (بعد 2021):</span> الخلطة السحرية 🪄! بندرب
+                        موديل واحد عملاق على <span class="highlight-y">كميات فلكية (Astronomical) من الداتا</span>. هذا
+                        الموديل صار لحاله جاهز يجاوبك على أي شي بس من خلال توجيه أمر (<span
+                            class="eng-term">Prompt</span>)!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Parameters of Specialized DL</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0004.jpg" alt="Slide 4"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تشريح الموديلات المتخصصة (Specialized DL) 🔬</div>
+                <div class="explanation-content">
+                    خلينا نفتح الـ <span class="eng-term">Specialized Models</span> ونشوف شو المواصفات التقنية تبعتها
+                    (بالزمنات):
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">1. المتغيرات (Parameters):</span> هي المتغيرات الداخلية اللي الموديل
+                        بتعلمها (زي الأوزان والانحيازات - <span class="eng-term">Weights and Biases</span>). بهذيك
+                        الفترة كان حجمها <span class="highlight-b">أقل من 100 مليون</span> متغير (يعتبر رقم صغير
+                        عالمياً).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">2. حجم الداتا (Data Size):</span> كنا ندربها على داتا حجمها بين <span
+                            class="highlight-b">10K لـ 1M Tokens</span>. بس شو هو الـ Token؟ هو أصغر وحدة داتا بعالجها
+                        الموديل (مثلاً حرف، أو كلمة بالـ NLP).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">3. المعمارية والتعميم (Architecture & Generalization):</span>
+                        المعمارية كانت <span class="highlight-danger">مخصصة جداً (Specialized)</span>، والنتيجة؟ الموديل
+                        "غبي" برا مجاله، وما بقدر يعمل <span class="eng-term">Generalization</span> لحالات جديدة أبداً!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Pros and Cons of Specialized DL</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0005.jpg" alt="Slide 5"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">إيجابيات وسلبيات الموديلات المتخصصة ⚖️</div>
+                <div class="explanation-content">
+                    مع إننا تركناها، بس الـ Specialized DL إلها ميزات وعيوب لازم نعرفها:
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success">الميزات (Pros):</span>
+                        <ul>
+                            <li>بتقدر تدربها بكفاءة حتى لو الداتا عندك قليلة (<span class="eng-term">Limited
+                                    data</span>).</li>
+                            <li>حجمها صغير ولطيف، يعني سهل جداً تشغلها وترفعها على سيرفرات وتطبيقات الموبايل.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-danger">العيوب (Cons):</span>
+                        <ul>
+                            <li>كل مهمة بدها "عبقري" يصمملها معمارية خاصة فيها!</li>
+                            <li>كل موديل بده تعب خرافي في وضع الداتا (<span class="eng-term">Annotating specialized
+                                    dataset</span>).</li>
+                            <li><span class="highlight-y">صفر استفادة!</span> الموديل ببدأ يتعلم من الصفر، وما بستفيد من
+                                تعب وميزات الموديلات الثانية.</li>
+                            <li>إذا عندك 10 مهام، بدك ترفع وتدفع تكاليف 10 موديلات على السيرفر، وهذا الإشي مكلف جداً 💸.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transfer Learning</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0006.jpg" alt="Slide 6"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">نقل المعرفة (Transfer Learning) 🔄🧠</div>
+                <div class="explanation-content">
+                    هاي كانت فكرة عبقرية للهروب من فخ "التعلم من الصفر" في الموديلات المتخصصة!
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">كيف بتشتغل؟</span>
+                        <br>بكل بساطة: بندرب موديل على <span class="highlight-b">كمية ضخمة جداً من الداتا</span>
+                        (Massive Data) عشان يتعلم "الأساسيات" ويمثلها بشكل برمجي (<span class="eng-term">Neural
+                            representation</span>) ويحدد أوزان الموديل.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">شو الفايدة؟</span>
+                        <br>بدل ما الموديل الثاني (تبع مهمتنا الخاصة) يبلش يتعلم وهو أعمى، بنوخذ الأوزان والأساسيات اللي
+                        تعلمها الموديل الأول، <span class="highlight-b">وبنضيف عليها طبقات (Layers) جديدة</span> بتخص
+                        مهمتنا.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">ليش اشتغلت هاي الفكرة؟</span>
+                        <br>لأنه في الإشي اسمه <span class="eng-term">Cross-task similarity</span> (تشابه بين المهام).
+                        يعني اللي تعلم يتعرف على خطوط وحواف الصور، بقدر يستخدم نفس هاي الخبرة عشان يميز صورة سيارة أو
+                        شجرة!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transfer Learning in BERT (1)</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0007.jpg" alt="Slide 7"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مثال على نقل المعرفة: الموديل الأسطوري BERT 📝</div>
+                <div class="explanation-content">
+                    موديل <span class="eng-term">BERT</span> من جوجل هو أشهر مثال على هاي المرحلة بالتعامل مع النصوص
+                    (NLP).
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">كيف تعلم؟</span>
+                        <br>طريقة تدريبه كانت تشبه لعبة "املأ الفراغ". كنا نعطيه جملة ونخفي منها كلمة (زي: "The movie is
+                        very <span class="highlight-danger">[MASK]</span>")، وهو لازم يحزر الشق الناقص بناءً على سياق
+                        الكلمات اللي حواليه.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        بهاي الطريقة البسيطة، BERT قدر يتعلم قواعد اللغة الإنجليزية، ومعاني الكلمات، والروابط بينهم من
+                        غير ما نبرمج إشي يدوياً.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transfer Learning in BERT (2)</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0008.jpg" alt="Slide 8"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف وفّر علينا BERT وقت ومصاري؟ 💸⏱️</div>
+                <div class="explanation-content">
+                    خلينا نقارن بين مرحلة التدريب الأساسي ومرحلة التعديل (Fine-Tuning) عشان نفهم قوة الـ Transfer
+                    Learning:
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-y">التدريب المسبق (Initial Pre-Training):</span>
+                        <br>جوجل جابت كل ويكيبيديا وكتب ضخمة، ودربت BERT عليها. هاي العملية أخذت <span
+                            class="highlight-danger">4 أيام</span> على <span class="highlight-danger">16 حبة TPU</span>
+                        (معالجات خارقة تكلفتها مرعبة).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-b">مرحلة التعديل الخاصة فينا (Fine-Tuning):</span>
+                        <br>إحنا بناخذ موديل BERT "الجاهز والفهمان"، وبندربه على داتا صغيرة بتخص مشروعنا (مثلاً: تصنيف
+                        إيميلات سبام). هاي العملية بتوخذ <span class="highlight-success">دقائق لساعات</span> على <span
+                            class="highlight-success">GPU واحد</span> بس!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transfer Learning in Vision</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0009.jpg" alt="Slide 9"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ Transfer Learning بالصور (Computer Vision) 🖼️</div>
+                <div class="explanation-content">
+                    نفس السحر اللي صار بالنصوص صار بالصور:
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">الموديل الأصلي:</span> بندرب موديل على داتا ضخمة جداً زي <span
+                            class="eng-term">ImageNet</span> (ملايين الصور العشوائية). وظيفة هذا الموديل إنه يتعلم
+                        يستخرج ميزات الصور (زي الحواف والدوائر) من خلال طبقات الفلترة (<span
+                            class="eng-term">Convolution Layers</span>).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">عملية النقل:</span> لو بدنا موديل يكتشف "السرطان" من صور طبية! بناخذ
+                        طبقات الفلترة (اللي تعلمت تطلع الميزات) زي ما هي من الموديل الأول، وبس بنرمي طبقة النتيجة
+                        النهائية (<span class="eng-term">Fully Connected Layers</span>) وبنبدلها بطبقة جديدة بتعطي
+                        نتيجتين: الطبيعي والخبيث.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transfer Learning in Vision (1) - Contrastive Learning</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0010.jpg" alt="Slide 10"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الجيل الجديد للصور: Contrastive Pre-training 📸+📝</div>
+                <div class="explanation-content">
+                    هون صرنا ندمج النص والصورة مع بعض (زي موديل CLIP من OpenAI):
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">كيف بتدرب؟</span>
+                        بنمرر صورة لكلب، وبنفس الوقت بنمرر النص اللي بوصفها. الموديل بحاول يخلي تمثيل الصورة والنص
+                        قريبين من بعض في "فضاء المعاني".
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">سحر الـ Zero-shot Prediction:</span>
+                        الموديل بيقدر يتعرف على صور عمره ما شافها بس لأنه فاهم "الوصف اللغوي" المرتبط بخصائص الصور.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Parameters of Transfer DL</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0011.jpg" alt="Slide 11"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف تغيرت الأرقام؟ (Transfer DL Specs) 📈</div>
+                <div class="explanation-content">
+                    خلينا نقارن الجيل القديم بالجيل الثاني (الـ Transfer DL):
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">حجم الموديل والداتا ضاعف!:</span> المتغيرات (<span
+                            class="eng-term">Parameters</span>) قفزت من الملايين لـ <span class="highlight-b">1
+                            مليار</span>. وحجم الداتا صار بالـ <span class="highlight-b">مليارات Tokens</span>!
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success" style="font-weight:700;">تطور بالمعمارية والـ
+                            Generalization:</span>
+                        بطلنا نشتغل معمارية مفصلة لكل مهمة، صارت معمارية <span class="highlight-success">عامة
+                            (General)</span>، وقدرة الموديل على التعميم وحل مهام جديدة صارت <span
+                            class="highlight-success">منطقية ومقبولة (Reasonable)</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Pros and Cons of Transfer DL</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0012.jpg" alt="Slide 12"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">إيجابيات وسلبيات الجيل الثاني (Transfer DL) ⚖️</div>
+                <div class="explanation-content">
+                    مع كل التطور، لسا في مكان للتحسين (عشان هيك إجت الـ Foundation Models لاحقاً):
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success">الميزات (Pros):</span>
+                        <ul>
+                            <li>قدرة خرافية أقوى بكثير من الموديلات المتخصصة القديمة.</li>
+                            <li><span class="highlight-y">صاحبة فضل وموقف:</span> بتقدر تعمم معرفتها على مهام ما شافتها
+                                من قبل.</li>
+                            <li>ما بتحتاج غير شوية تعديل بسيط جداً (<span class="eng-term">very few fine-tuning</span>)
+                                عشان تشتغل ع مهامك.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-danger">العيوب (Cons):</span>
+                        <ul>
+                            <li>أداؤها ممتاز، بس لسا مش "مثالي" (<span class="eng-term">Not perfect</span>).</li>
+                            <li><span class="highlight-y">لسا بدها شغل يدوي:</span> بالرغم من ذكائها، لسا مجبورين نعمل
+                                <span class="eng-term">Fine-Tuning</span> لكل مهمة جديدة (<span
+                                    class="eng-term">Downstream
+                                    tasks</span>). يعني لسا بدك شوية داتا وبدك مهندس صغنون
+                                يزبط القصة!
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Transformers: The Game Changer</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0013.jpg" alt="Slide 13"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ Transformer: اللحظة اللي غيّرت التاريخ ⚡🤖</div>
+                <div class="explanation-content">
+                    كل اللي بنشوفه اليوم من ذكاء اصطناعي بدأ فعلياً في 2017 بسبب ورقة بحثية واحدة:
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">Attention Is All You Need:</span> هاي الورقة قدمت معمارية الـ <span
+                            class="eng-term">Transformer</span>. الموديل اللي قدامنا بالرسمة هو الأساس لكل شي، وبكل
+                        بساطة بيتكون من <span class="eng-term">Encoder</span> و <span class="eng-term">Decoder</span>.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary); opacity: 0.8;">
+                        <span class="highlight-b">ملاحظة:</span> حالياً رح نعتبر هذا الموديل "صندوق أسود" (<span
+                            class="eng-term">Black Box</span>) لحد ما نفصص كل قطعة فيه لقدام بالمادة. المهم تعرف إنه هو
+                        المحرك الأساسي!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">GPT: Generative Pre-Trained Transformers</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0014.jpg" alt="Slide 14"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">عيلة الـ GPT وكيف بدأت الحكاية 📑🚀</div>
+                <div class="explanation-content">
+                    كلمة <span class="eng-term">GPT</span> هي اختصار لـ Generative Pre-trained Transformer، وهون بلشنا
+                    نركز على الـ <span class="eng-term">Decoder-Only</span>.
+                    <div class="detail-item">
+                        <span class="highlight-b">التدريب غير الموجّه (Unlabeled Training):</span> الموديل اتدرب على
+                        داتا ضخمة جداً من غير ما حدا يحكيله "هاي صح وهاي خطأ" (<span class="eng-term">Unlabeled
+                            Corpus</span>)، مثل أرشفة الإنترنت كاملة (<span class="eng-term">Common Crawl</span>)
+                        وويكيبيديا.
+                    </div>
+                    <div class="detail-item">
+                        الفكرة كانت بسيطة: "يا موديل، خذ هالداتا وتعلم لحالك كيف الكلمات بتيجي ورا بعضها".
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">GPT-2: Language Modeling</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0015.jpg" alt="Slide 15"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مهمة الـ GPT-2 الوحيدة: توقع الكلمة الجاية! 🔮</div>
+                <div class="explanation-content">
+                    في GPT-2، الهدف الأساسي للتدريب (<span class="eng-term">Training Objective</span>) كان واضح ومحدد.
+                    <div class="detail-item">
+                        <span class="highlight-y">توقع الكلمة التالية (Next Word Prediction):</span> الموديل بيتعامل مع
+                        اللغة كنموذج إحصائي، بيحاول يحسب احتمال ظهور الكلمة الجاية بناءً على كل الكلمات اللي سبقتها.
+                    </div>
+                    <div class="detail-item">
+                        هاي العملية البسيطة هي اللي بتخلي الـ AI يبدو وكأنه "بفكر"، بس هو فعلياً عبارة عن <span
+                            class="highlight-b">توقعات إحصائية دقيقة جداً</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">GPT-3: Massive Scale Evolution</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0016.jpg" alt="Slide 16"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">القفزة المرعبة في حجم الداتا! 📉💥</div>
+                <div class="explanation-content">
+                    عشان تفهم ليش GPT-3 كان "صدمة" للعالم، شوف الفرق في حجم الداتا اللي اتدرب عليها:
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <ul>
+                            <li><span class="highlight-b">GPT-1:</span> كان عنده <span class="highlight-y">4.8GB</span>
+                                بس.</li>
+                            <li><span class="highlight-b">GPT-2:</span> ارتفع لـ <span class="highlight-y">40GB</span>
+                                داتا مفلترة.</li>
+                            <li><span class="highlight-b">GPT-3:</span> انفجار داتا! <span
+                                    class="highlight-danger">570GB</span> مفلترة بعناية من أصل 45TB داتا خام.</li>
+                            <li><span class="highlight-b">GPT-4:</span> صرنا نحكي عن تدخل بشري مباشر (<span
+                                    class="eng-term">Human demonstrations</span>).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        النتيجة واضحة: <span class="highlight-success" style="font-weight:700;">Data size ↑ & Data
+                            quality ↑ = Super Intelligent
+                            Model!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">In-context Learning Paradigms</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0017.jpg" alt="Slide 17"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التعلم من السياق (In-context Learning) 🧠💡</div>
+                <div class="explanation-content">
+                    هاض هو السر اللي بخلي ChatGPT يفهمك من غير ما تعيد تدريبه. فيه 3 أنواع أساسية:
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">1. Zero-Shot (ZSL):</span> الموديل بيقدر يحل المهمة من غير ما يشوف ولا
+                        مثال! بس بتعطيه الأمر ("ترجم هاي الجملة") وبترجمها فوراً.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">2. One-Shot (OSL):</span> بتعطيه مثال واحد عشان يفهم النمط اللي بدك
+                        إياه، وهو بكمل لحاله.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success" style="font-weight: 700;">3. Few-Shot (FSL):</span> بتعطيه شوية
+                        أمثلة (مثلاً 5 أمثلة) وهيك
+                        الموديل بصير دقيق جداً في المهمة المطلوبة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Emergent Ability (175B Parameters)</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0018.jpg" alt="Slide 18"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">القدرات الناشئة: ليش الحجم بيفرق؟</div>
+                <div class="explanation-content">
+                    في علم الـ AI، فيه إشي غريب بصير لما تكبر الموديل لدرجة معينة:
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-danger" style="font-weight: 700;">حد الـ 175 مليار:</span> الموديلات
+                        الصغيرة (زي الـ 1.3B) أدائها
+                        في الـ Few-shot بكون ضعيف. بس لما الموديل يوصل لـ <span class="highlight-danger">175 مليار
+                            Parameter</span> (زي GPT-3)، دقته بتقفز قفزة مش طبيعية!
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        هاي بنسميها <span class="eng-term">Emergent abilities</span>. يعني الموديل "فجأة" صار يعرف يحل
+                        مسائل رياضية أو يبرمج بس لأنه صار حجمه عملاق، مع إنه ما اتدرب عليها بشكل خاص! الحجم حرفياً هو
+                        اللي ولّد الذكاء.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Diffusion Models (Images) & unCLIP</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0019.jpg" alt="Slide 19"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">خوارزمية الانتشار (unCLIP): كيف بتخلق الصور من العدم؟ 🎨✨</div>
+                <div class="explanation-content">
+                    الرسمة اللي بالسلايد بتشرح معمارية الـ <span class="eng-term">unCLIP</span> (المستعملة في DALL-E
+                    2). ركز معي بالخطوات لأنها هي "مربط الفرس":
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">1. تحويل النص لتمثيل (Frozen Text Encoder):</span>
+                        أول شي النص اللي بتكتبه بيتحول لأرقام (<span class="eng-term">Text Embedding</span>) عن طريق
+                        موديل CLIP متجمد (ما بتغير تدريبه).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">2. محرك التوقع (Prior):</span>
+                        هاض الجزء "بتوقع" كيف لازم يكون تمثيل الصورة (<span class="eng-term">Image Embedding</span>)
+                        اللي بطابق نصك. هاض هو العقل المفكر اللي بربط الكلام بالخيال البصري.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success" style="font-weight: 700;">3. فك التشفير (Diffusion
+                            Decoder):</span>
+                        هون ببلش السحر! الموديل ببدأ بصورة كلها تشويش (<span class="eng-term">Noise</span>) وبستعمل
+                        الـ <span class="eng-term">Image Embedding</span> كدليل أو "خريطة" عشان يشيل التشويش خطوة
+                        بخطوة لحد ما تطلع صورة الكلب اللي لابس "قبعة زرقاء".
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">4. التدرج (Super-Resolution Steps):</span>
+                        العملية بتمر بمراحل:
+                        <ul>
+                            <li>بطلع صورة صغيرة <span class="highlight-y">64x64</span> (خام).</li>
+                            <li>بفوت ع موديل ثانية بكبرها لـ <span class="highlight-y">256x256</span>.</li>
+                            <li>وبعدين لموديل أخير بخليها بجودة سينمائية <span class="highlight-y">1024x1024</span>.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-danger" style="font-weight: 700;">زبدة الكلام:</span> الموديل ما "برسم"
+                        رسم، هو "بنظف" تشويش بناءً
+                        على أوامر النص! 🧠
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Diffusion Models (Videos)</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0020.jpg" alt="Slide 20"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">توليد الفيديوهات
+                </div>
+                <div class="explanation-content">
+                    توليد الفيديو أصعب بكثير من الصور لأنه فيه بُعد ثالث وهو <span class="highlight-y">الزمن
+                        (Temporal
+                        Axis)</span>.
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">كيف بشتغل؟</span> الموديل بولد مجموعة صور (Frames) مع بعض، ولازم
+                        يتأكد
+                        إنه "التغيير" بين الصورة الأولى والثانية منطقي وسلس عشان ما يطلع الفيديو بقطع أو فيه حركات
+                        غريبة.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        هاض اللي بنسميه <span class="eng-term">Temporal fine-tuning</span>، يعني بنعلم الموديل كيف
+                        يربط
+                        الصور ببعض عبر الزمن ليطلع فيديو سينمائي.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Diffusion Models (Applications)</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0021.jpg" alt="Slide 21"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <!-- شاشة سوداء بمحتوى فيديو غير متاح -->
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Gemini: Multimodal Power</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0022.jpg" alt="Slide 22"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">جيميني (Gemini): العملاق الشامل 🌌🤖</div>
+                <div class="explanation-content">
+                    ليش Gemini من جوجل كان نقلة نوعية؟ لأنه <span class="highlight-y">متعدد الوسائط
+                        (Multimodal)</span>.
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        الموديلات القديمة كانت تتعامل مع نص بس، أو صور بس. لكن Gemini بيقدر يعالج <span
+                            class="highlight-b">نصوص، أصوات، صور، وفيديو</span> كأنهم لغة واحدة!
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        زي ما بنشوف بالرسمة، المدخلات (<span class="eng-term">Input Sequence</span>) بتنزت كلها جوا
+                        ترانسفورمر ضخم، وهو بيعرف يفهم العلاقات بينهم ليعطيك النتيجة اللي بدك إياها بأي شكل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">What can Gemini do?</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0023.jpg" alt="Slide 23"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <!-- شاشة سوداء بمحتوى فيديو غير متاح -->
+            </div>
+        </div>
+
+        <!-- Slide 24 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Parameters of Foundation DL</span>
+                <span class="slide-number">Slide 24</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0024.jpg" alt="Slide 24"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مقارنة العمالقة: من الميجا للتيرا! 📊🐉</div>
+                <div class="explanation-content">
+                    وصلنا لآخر مرحلة، خلينا نشوف كيف الـ <span class="eng-term">Foundation DL</span> مسحت الأرض
+                    باللي
+                    قبلها:
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">1. حجم الموديل:</span> قفزنا من المليار
+                        لـ <span class="highlight-b">1000 مليار (1 Trillion)</span> باراميتر!
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">2. حجم الداتا:</span> صرنا نحكي عن <span class="highlight-y">30
+                            تريليون Token</span>! (يعني حرفياً أرشفنا كل شي كتبه البشر).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        <span class="highlight-success" style="font-weight:700;">3. النتيجة:</span> قدرة على التعميم
+                        (<span class="eng-term">Generalization</span>) <span class="highlight-success">قوية جداً
+                            (Strong)</span> وشاملة لكل أنواع المهام.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 25 Concepts</span>
+                <span class="slide-number">Slide 25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0025.jpg" alt="Slide 25"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">سلايدات إضافية (للمطالعة فقط) 📖✅</div>
+                <div class="explanation-content">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 26 Concepts</span>
+                <span class="slide-number">Slide 26</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0026.jpg" alt="Slide 26"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الترجمة الآلية المتخصصة (Specialized MT) 🌍🗣️</div>
+                <div class="explanation-content">
+                    مثال على كيف كانت أنظمة الترجمة الآلية تشتغل قبل ثورة الـ <span class="eng-term">Foundation
+                        Models</span>:
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        الأنظمة كانت <span class="highlight-b">معقدة جداً</span>، بتعتمد على قوائم كلمات (<span
+                            class="eng-term">Phrase table</span>) وربط يدوي بين الجمل (<span class="eng-term">Word
+                            Alignment</span>). كل لغتين كان بدهم نظام خاص وتدريب وتصميم مختلف تماماً عن غيرهم!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 27 Concepts</span>
+                <span class="slide-number">Slide 27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0027.jpg" alt="Slide 27"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أنظمة الحوار المتخصصة (Specialized Dialog) 💬🤖</div>
+                <div class="explanation-content">
+                    الرسمة بتوضح معمارية الـ <span class="eng-term">Dialog Systems</span> القديمة:
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        كان النظام مقسم لعدة "صناديق" منفصلة: صندوق لتحويل الصوت (<span class="eng-term">ASR</span>)،
+                        وصندوق لفهم المعنى (<span class="eng-term">Semantic Decoder</span>)، وصندوق لإدارة الحوار (<span
+                            class="eng-term">Dialog Policy</span>). أي فشل في أي صندوق كان بخلي النظام كامل ينهار!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 28 Concepts</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/L1-Introduction to Foundation Models_page-0028.jpg" alt="Slide 28"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أنظمة الإجابة عن الأسئلة المتخصصة (Specialized QA) 🔍📝</div>
+                <div class="explanation-content">
+                    آخر مثال هو الـ <span class="eng-term">Question Answering</span> المتخصص:
+                    <div class="detail-item" style="border-right-color: var(--success);">
+                        شوفو كمية الطبقات (<span class="eng-term">Embedding, Attention, Modeling</span>) عشان بس يقدر
+                        الموديل يقرأ نص ويلاقي "بداية ونهاية" الإجابة. هاي الموديلات كانت عبقرية في مكانها، بس "غبية"
+                        جداً لو سألتها سؤال خارج النص المكتوب قدامها.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>
