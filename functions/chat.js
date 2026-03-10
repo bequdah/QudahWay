@@ -4,7 +4,7 @@
  * The API KEY lives ONLY in Cloudflare Environment Variables
  */
 
-const MODEL = "gemini-2.0-flash-lite";
+const MODEL = "gemini-3.1-flash-lite-preview";
 
 // === SMART CONTEXT FILTER ===
 // Inline corpus data strategy: we load from the embedded corpus
@@ -69,8 +69,8 @@ export async function onRequestPost({ request, env }) {
         // Get API Key from Cloudflare Environment (NEVER exposed to frontend)
         const API_KEY = env.GEMINI_API_KEY;
         if (!API_KEY) {
-            return new Response(JSON.stringify({ error: "API key not configured" }), {
-                status: 500,
+            return new Response(JSON.stringify({ answer: "API key مش متوفرة! ضيفها بـ Cloudflare Secrets." }), {
+                status: 200,
                 headers: corsHeaders
             });
         }
@@ -112,7 +112,7 @@ export async function onRequestPost({ request, env }) {
             const errorText = await geminiResponse.text();
             console.error("Gemini API error:", errorText);
             return new Response(JSON.stringify({
-                answer: "حدث خطأ في الاتصال بالذكاء الاصطناعي. حاول مرة ثانية."
+                answer: "حدث خطأ في الاتصال بالذكاء الاصطناعي: " + errorText
             }), { status: 200, headers: corsHeaders });
         }
 
