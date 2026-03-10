@@ -1,0 +1,23 @@
+# Python / local dev files
+tmp/
+*.py
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Wrangler / Cloudflare local
+.wrangler/
+
+# Environment / Secrets — NEVER commit these
+.env
+.env.local
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.log
