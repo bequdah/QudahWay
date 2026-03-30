@@ -197,8 +197,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="intro.html" class="nav-link"> 00. Intro & Definitions</a>
             <a href="text-retrieval-v2.html" class="nav-link"> 01. Text Retrieval Basics</a>
             <a href="boolean-retrieval.html" class="nav-link"> 02. Boolean Retrieval</a>
-            <a href="text-operations.html" class="nav-link"> 03. Text Operations</a>
-            <a href="phrase-queries.html" class="nav-link"> 04. Phrase Queries</a>
+            <a href="phrase-queries.html" class="nav-link"> 03. Phrase Queries</a>
+            <a href="text-operations.html" class="nav-link"> 04. Text Operations</a>
             <a href="skiplist.html" class="nav-link"> 05. Skip Lists</a>
             <a href="vector_space_model.html" class="nav-link"> 06. Vector Space Model</a>
             <a href="Probabilistic_Model.html" class="nav-link"> 07. Probabilistic Model</a>

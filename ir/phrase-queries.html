@@ -4,15 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phrase Queries | Print Version</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>QudahWay | Phrase Queries & Positional Indexes</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Satisfy&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="../QudahWay.png">
-
 
     <style>
         :root {
@@ -22,1086 +18,744 @@
             --text-muted: #94a3b8;
             --primary: #38bdf8;
             --accent: #facc15;
-            --danger: #fb7185;
             --success: #34d399;
-            --border: #334155;
-            --brand-red: #f97316;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-light);
             font-family: 'Cairo', sans-serif;
-            font-size: 10.5pt;
-            line-height: 1.6;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-
-        /* A4 Page Container */
-        .page {
-            width: 210mm;
-            min-height: 380mm;
-            margin: 20px auto;
-            background: var(--bg-dark);
-            padding: 15mm;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid #334155;
-            position: relative;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            overflow: hidden;
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: 'Inter', 'Cairo', sans-serif;
-            font-weight: 800;
-        }
-
-        .page-header {
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            min-height: 100vh;
         }
 
-        .header-title {
-            font-size: 19pt;
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
             color: var(--primary);
             margin: 0;
-            letter-spacing: -0.5px;
         }
 
-
-
-        /* Section Cards */
-        .section-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-            page-break-inside: avoid;
-        }
-
-        .section-title {
-            color: var(--accent);
-            font-size: 13pt;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pair-box {
-            margin-bottom: 15px;
-        }
-
-        .en-text {
-            display: block;
-            color: var(--accent);
-            font-family: 'Inter', sans-serif;
-            font-size: 10pt;
-            font-weight: 700;
-            margin-bottom: 6px;
-            text-align: left;
-            direction: ltr;
-            background: rgba(250, 204, 21, 0.05);
-            padding: 8px 12px;
-            border-left: 4px solid var(--accent);
-            border-radius: 6px;
-        }
-
-        .ar-text {
-            display: block;
-            color: #f1f5f9;
-            font-size: 10.5pt;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .highlight-span {
-            color: var(--brand-red);
-            font-weight: 800;
-        }
-
-        .example-box {
-            background: rgba(15, 23, 42, 0.4);
-            padding: 15px;
-            border-radius: 10px;
-            border-right: 4px solid var(--accent);
-            margin: 12px 0;
-            font-family: 'Inter', sans-serif;
-            font-size: 10pt;
-            text-align: center;
-            direction: ltr;
-        }
-
-        .code-block {
-            background: #0f172a;
-            color: #f1f5f9;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9pt;
-            direction: ltr;
-            line-height: 1.5;
-            border: 1px solid var(--border);
-            position: relative;
-        }
-
-        .code-tag {
-            position: absolute;
-            top: -10px;
-            right: 15px;
-            background: var(--brand-red);
-            color: white;
-            padding: 2px 10px;
-            font-size: 7.5pt;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-
-        /* Test Section */
-        .test-container {
-            border: 2px dashed var(--primary);
-            background: rgba(56, 189, 248, 0.05);
-            padding: 20px;
-            border-radius: 14px;
-        }
-
-        .test-q {
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-        }
-
-        .test-q:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .q-header {
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 11pt;
-        }
-
-        .answer-box {
-            width: 100%;
-            height: 60px;
-            border: 1px solid var(--border);
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 8px;
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
             margin-top: 10px;
         }
 
-        .page-footer {
-            margin-top: auto;
-            border-top: 1px solid var(--border);
-            padding-top: 10px;
+        /* Story Section */
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        /* Slide Section */
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--text-muted);
-            font-size: 9pt;
         }
 
-        .signature-brand {
-            font-family: 'Satisfy', cursive;
-            font-size: 16pt;
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
         }
 
-        .sig-name {
-            color: var(--primary);
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .sig-way {
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
             color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
         }
 
-        @media print {
-            body {
-                background: var(--bg-dark) !important;
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .highlight-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
             }
 
-            .page {
-                box-shadow: none;
-                margin: 0;
-                border: none;
-                min-height: 380mm;
-                height: auto;
-                width: 210mm;
-                page-break-after: always;
+            h1 {
+                font-size: 2.5rem;
             }
 
-            @page {
-                margin: 0;
-                size: A4;
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
             }
         }
     </style>
     <link rel="stylesheet" href="../gooey.css">
+
 </head>
 
 <body>
 
-    <div
-        style="max-width: 210mm; margin: 20px auto 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border); border-radius: 15px; backdrop-filter: blur(10px);">
-        <a href="index.html"
-            style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
-            onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
-            onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
-            العودة للوحة التحكم
-        </a>
-        
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">Phrase Queries & Positional Indexes | استعلامات العبارات والفهرسة الموقعية</p>
+        </div>
+
+
+
+        <!-- Slide 01 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 01</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0001.jpg" alt="Slide 01"
+                    style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+
+        <!-- Slide 02 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0002.jpg" alt="Slide 02"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">🎯 الهدف من استعلامات العبارات (Phrase Queries)</div>
+                <div class="explanation-content">
+                    تخيل إنك بتبحث عن كلمة <span class="eng-term">"stanford university"</span> كـ جملة وحدة (Phrase).
+                    السيستم العادي رح يجيبلك أي ملف فيه هالكلمتين بغض النظر عن ترتيبهم، وهاض بيعملنا مشكلة كالتالي:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-danger">❌ مثال يخفق فيه السيستم العادي (No Match):</span><br>
+                        جملة: <span class="eng-term">"I went to university at Stanford"</span> (الكلمات متباعدة عن بعضها
+                        ومش جاية كعبارة وحدة). الفهارس البدائية بتعتبره ماتش!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">✅ مثال صحيح (Match):</span><br>
+                        جملة: <span class="eng-term">"The stanford university research..."</span> (الكلمات متتالية
+                        تماماً وهاض اللي بنبحث عنه).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">الخلاصة:</span> المستند لم يعد يُعامل كأنه "كيس كلمات" (Bag of Words)
+                        مبعثر ومجرد من أي ترتيب، لازم السيستم يبدأ يفهم "أماكن" وتجاور الكلمات مع بعضها!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 03 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0003.jpg" alt="Slide 03"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">📚 المحاولة الأولى: Biword Indexes</div>
+                <div class="explanation-content">
+                    كيف ممكن نبحث عن عبارة كاملة (Phrase)؟ أول فكرة خطرت للعلماء هي <span class="highlight-y">Biword
+                        Indexes</span> (فهرس الكلمتين).
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">الفكرة ببساطة:</span> بدل ما نفهرس كل كلمة لحال، بندمج <span
+                            class="highlight-success">كل كلمتين متتاليتين</span> وبنعتبرهم "مُصطلح واحد" جديد.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">مثال:</span> نص مثل <span class="eng-term">Friends, Romans,
+                            Countrymen</span> بتكوّن منه أزواج: <span class="eng-term">friends romans</span> و <span
+                            class="eng-term">romans countrymen</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">النتيجة:</span> لو بحثت عن عبارة من كلمتين بالضبط، السيستم رح
+                        يطابقها فوراً كأنها كلمة وحدة ويجيبلك النتيجة سريعاً بدون أي حسابات.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 04 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0004.jpg" alt="Slide 04"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">🔗 كيف بنبحث عن جملة أطول من كلمتين؟ (Longer Phrases)</div>
+                <div class="explanation-content">
+                    بما إننا شغالين على نظام الثنائيات الـ <span class="eng-term">Biword</span>، شو بصير لو المستخدم بحث
+                    عن جملة طويلة فيها 4 كلمات؟ لأنه النظام ما بيفهم إلا كل "مسارين" مع بعض!
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">الحل البرمجي (التقطيع):</span> بنقوم بتقسيم الجملة الطويلة لأزواج
+                        (ثنائيات متداخلة)، وبنربط بينهم بعملية الإضافة المنطقية <span
+                            class="highlight-success">AND</span>. وهيك بنجبر السيستم يدور على كل هاي الأزواج مع بعض في
+                        نفس المستند.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">مثال السلايد:</span> طلب منا جملة من 4 كلمات: <span
+                            class="eng-term">stanford university palo alto</span>.
+                        <br>عشان تتوافق مع نظام الـ Biword، بنفككها كالتالي:
+                        <ul style="margin: 5px 20px; color: var(--text-light); line-height: 1.8;">
+                            <li>الزوج الأول: <span class="eng-term">"stanford university"</span></li>
+                            <li><span class="highlight-danger">AND</span> الزوج الثاني: <span
+                                    class="eng-term">"university palo"</span></li>
+                            <li><span class="highlight-danger">AND</span> الزوج الثالث: <span class="eng-term">"palo
+                                    alto"</span></li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">نتيجة التنفيذ:</span> السيستم رح يروح يجيب المستندات اللي بيتحقق
+                        فيها وجود هاي الأزواج الثلاثة معاً. وهذه المحاولة رح تسببلنا كوارث تقنية !
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 05 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0005.jpg" alt="Slide 05"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⚠️ مشاكل قاتلة في الـ Biword!</div>
+                <div class="explanation-content">
+                    للأسف، طريقة دمج الكلمات سببت كارثتين تقنيات للمحرك:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-danger">1. مشكلة False Positives:</span> لما قسمنا جملة لـ 3 أزواج، ممكن
+                        السيستم يجيبلك ملف فيه هالأزواج بس مبعثرة! يعني بيحتوي أزواجك بس الجملة الأصلية مش موجودة متصلة
+                        كقطعة واحدة، وهاض بعطيك "نتائج خاطئة".
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">2. تضخم الفهرس (Index Blowup):</span> لأنّ كل "كلمتين" صاروا
+                        "مُصطلح جديد" بالقاموس، عدد المصطلحات الممكنة صار فظيع، وحجم الفهرس اتضخم بشكل غير منطقي إطلاقاً
+                        لتخزينه.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 06 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0006.jpg" alt="Slide 06"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">� الحل السحري: Positional Indexes</div>
+                <div class="explanation-content">
+                    بسبب فشل الـ Biword، انتقلنا للحل المنطقي والمُعتمد عالمياً: <span class="highlight-y">الفهرسة
+                        المكانية (Positional Indexes)</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">الفكرة الذهبية:</span> بنرجع لفهرسة كل كلمة بشكل منفصل بالمستند، ولكن
+                        هالمرة، <span class="highlight-success">بنسجل "المكان"</span> (Position) اللي ظهرت فيه الكلمة
+                        جوا المستند!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">شكل الفهرس الجديد:</span><br>
+                        <span class="eng-term">&lt;term, num_docs; doc1: pos1, pos2...&gt;</span><br>
+                        يعني الكلمة، ثم عدد الملفات، ثم رقم الملف ومعه كل الأرقام اللي بتمثل مواقع الكلمة داخل هاض الملف
+                        بالذات.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 07 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0007.jpg" alt="Slide 07"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">� مثال على الفهرس المكاني (Positional Index)</div>
+                <div class="explanation-content">
+                    لنفصل شكل الفهرس من الداخل من خلال هالمثال لكلمة <span class="eng-term">be</span>:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-y">بنية السطر:</span> <span class="eng-term">&lt;be: 993427; 1: 7, 18,
+                            33, 72, 86, 231; ...&gt;</span><br>
+                        هاض السطر بيحكيلنا قصة كاملة عن مسار الكلمة!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">تفكيك الأرقام:</span><br>
+                        - <span class="eng-term">993427</span>: تدل على عدد المستندات الكلي اللي بتحتوي هالكلمة.<br>
+                        - <span class="eng-term">1: 7, 18, 33...</span>: المستند رقم (1) بيحتوي هالكلمة في المواقع 7،
+                        18، 33، وهكذا.<br>
+                        وهاد النمط بيتكرر لكل مستند جديد بتظهر فيه الكلمة (<span class="eng-term">2: 3, 149...</span> و
+                        <span class="eng-term">4: 17...</span>).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 08 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0008.jpg" alt="Slide 08"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⚙️ كيف بنبحث عن الجملة برمجياً؟ (Processing)</div>
+                <div class="explanation-content">
+                    عشان السيستم يطابق عبارة مثل <span class="eng-term">to be or not to be</span>، بيعمل الآتي:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-y">الشرط الرياضي:</span> عشان نثبت إن كلمة "be" إجت بالضبط ورا كلمة "to"،
+                        لازم موقع "be" يكون أكبر من موقع "to" بـ 1.
+                        يعني: <span class="eng-term">pos(be) = pos(to) + 1</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">شرح المثال:</span> إذا سحبنا كلمة "to" من المستند ولقيناها بموقع [7]،
+                        لازم كلمة "be" تكون بموقع [8] عشان تقبل كـ Match صحيح.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 09 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0009.jpg" alt="Slide 09"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">🏗️ مثال عملي: بناء الفهرس (جزء 1)</div>
+                <div class="explanation-content">
+                    كيف السيستم بيبني الـ Positional Index من الصفر استناداً لـ 3 ملفات صغيرة كمثال:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">خطوة 1 - الفهرسة:</span> بنمسك كل كلمة بكل ملف، وبنحدد رقم الملف
+                        (<span class="eng-term">DocID</span>) وموقع الكلمة (تبدأ من 0).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">مثال كلمة machine:</span> ظهرت بالملف 1 بموقع صفر <span
+                            class="eng-term">{1: [0]}</span>، وبالملف 2 بموقع اثنين <span class="eng-term">{2:
+                            [2]}</span>، وبالملف 3 بموقع صفر <span class="eng-term">{3: [0]}</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">القاموس الناتج:</span> الجدول اللي بالسلايد بمثل الذاكرة
+                        النهائية اللي رح نستخدمها عشان ندور على أي جملة لاحقاً.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0010.jpg" alt="Slide 10"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⚙️ مثال عملي: خوارزمية البحث (جزء 2)</div>
+                <div class="explanation-content">
+                    الآن اجا أحدهم يبحث عن العبارة <span class="eng-term">"machine learning"</span> كجملة وحدة.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">الهدف (Goal):</span> بدنا الملفات اللي بتيجي فيها كلمة <span
+                            class="eng-term">learning</span> <span class="highlight-y">مباشرةً</span> بعد كلمة <span
+                            class="eng-term">machine</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">الخطوات:</span><br>
+                        1. بنسحب قائمة كلمة machine وقائمة كلمة learning من الفهرس اللي عملناه بالسلايد السابق.<br>
+                        2. بنروح لكل ملف مشترك بيناتهم (مثلاً الملف 1، 2، 3) وبنفحص شرط التجاور.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">شرط التجاور:</span> لازم موقع learning يساوي موقع machine زائد 1.
+                        <span class="eng-term">pos(learning) = pos(machine) + 1</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0011.jpg" alt="Slide 11"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">� خوارزمية دمج المواقع (Positional Intersect)</div>
+                <div class="explanation-content">
+                    كيف بشتغل الكود البرمجي لهالعملية الخرافية؟
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">السحر في الـ Pointers:</span> الخوارزمية بتوقف عند أول موقع للكلمة
+                        الأولى وأول موقع للثانية.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">شرط المسافة المسموحة (k):</span> بنحسب الفرق. إذا كان <span
+                            class="eng-term">|pos(word2) - pos(word1)| <= k</span>، معناها لاقينا تطابق وبنسجله في
+                                القائمة!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">سرعة الاستجابة:</span> بمجرد ما تصير المسافة كبيرة، بنمشي
+                        بالمؤشر الأصغر للأمام. هالشي بيضمن إنه نقرأ الكلمات بسرعة البرق.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0012.jpg" alt="Slide 12"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">📏 استعلامات التقارب (Proximity queries)</div>
+                <div class="explanation-content">
+                    هون بنشرح قدرة الفهرس الموقعي على تلبية الاستعلامات المعقدة اللي بتطلب كلمات ضمن مسافة محددة من
+                    بعضها:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-success">شرح الاستعلام (LIMIT!):</span> استعلام مثل <span
+                            class="eng-term">/3 STATUTE /3 FEDERAL /2 TORT</span> (وهو استعلام قانوني معقد)، بيطلب كلمات
+                        محددة تكون قريبة من بعضها بمسافات معينة لا يتجاوزها.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">معنى المعامل (/k):</span> ببساطة، الرمز <span
+                            class="eng-term">/k</span> بيحكيلنا "ضمن مسافة مقدارها k كلمة من..." (within k words of).
+                        فمثلاً <span class="eng-term">/3</span> معناها الكلمتين مسموح يبعدوا عن بعض أقصى شيء 3 مواقع.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">الخلاصة والقوة:</span> السلايد بيأكد بشكل واضح (Clearly) إن فهارس
+                        المواقع <span class="eng-term">Positional indexes</span> هي الوحيدة اللي بتُستخدم بفاعلية لهيك
+                        نوع من الاستعلامات الدقيقة المعتمدة على المسافة، بينما استخدام فهارس <span
+                            class="eng-term">Biword indexes</span> مستحيل يزبط هون لأنها بس بتخزن ثنائيات متلاصقة بدون
+                        أي إحداثيات مرنة!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0013.jpg" alt="Slide 13"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">📈 حجم الفهرس المكاني (Positional index size)</div>
+                <div class="explanation-content">
+                    مع كل قوة الفهرس الموقعي، بييجي تحدي المساحة المزعج اللي بيحتاج نعالجه:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-danger">توسع هائل في التخزين:</span> الفهرس المكاني بزيد مساحة تخزين
+                        القوائم (postings) بشكل ملحوظ وكبير جداً (Substantially). ورغم إنه احنا بنقدر نضغط (Compress)
+                        هالمساحة بخوارزميات رح ناخذها بعدين، إلا إنو بيضل أضخم من الفهرس العادي.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">المعيار المعتمد (Standardly used):</span> بالرغم من استهلاكه
+                        الكبير للمساحة، الفهرس المكاني صار المعيار الأساسي والمُستخدم حالياً في كل أنظمة البحث ومستحيل
+                        نستغني عنه!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">ليش لا غنى عنه؟</span> لأنه بعطينا قوة (Power) وفائدة عظيمة مستحيلة في
+                        الفهارس السابقة؛ وهي البحث عن "العبارات المتلاصقة" (Phrase) و"التقارب" (Proximity)، سواء بطريقة
+                        مباشرة أو ضمنية بأنظمة ترتيب النتائج (Ranking).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0014.jpg" alt="Slide 14"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">� تأثير حجم المستند على الـ Positional Index</div>
+                <div class="explanation-content">
+                    كيف حجم المستند الواحد بيلعب دور جوهري بتضخيم المشكلة؟
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">تعدد الإدخالات:</span> بالنظام المكاني بنحتاج مدخل (Entry) لكل ظُهور
+                        حرفي للكلمة بالمستند، مش بس مجرد مرة وحدة للقول إنها موجودة بالملف! وهذا بيعني إن الحجم بيعتمد
+                        عالـ "متوسط لحجم المستندات".
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">مقارنة بين المستندات:</span> صفحات الويب العادية غالباً فيها أقل من
+                        1000 كلمة مابتخوف. لكن لو مسكنا مستندات ضخمة زي (الكتب، القصائد الملحمية، ملفات SEC)، رح نلاقي
+                        فيها بسهولة 100,000 كلمة!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">شرح لجدول التكرار (Why?):</span> السلايد بيفترض كلمة تكرارها
+                        0.1%:
+                        <ul style="margin: 5px 20px; line-height: 1.8;">
+                            <li><span class="eng-term">بملف 1000 كلمة:</span> الفهرس العادي بسجل 1 Posting، والمكاني
+                                بسجل 1 Positional Posting (ما في فرق).</li>
+                            <li><span class="eng-term">بملف 100,000 كلمة:</span> العادي بسجل إنها موجودة مرة وحدة (1
+                                Posting)، بينما المكاني رح يلاقيها انذكرت 100 مرة ورح يضطر يسجل الـ 100 موقع تبعها
+                                بالذاكرة (<span class="highlight-y">وهون الكارثة! زاد 100 ضعف!</span>).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0015.jpg" alt="Slide 15"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">� قواعد عامة للفهرس (Rules of Thumb)</div>
+                <div class="explanation-content">
+                    مقاييس معروفة بعالم الـ IR بتعطينا تصور سريع عن التكلفة مقابل الأداء:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-danger">مقارنة بالحجم العادي:</span> الفهرس المكاني (Positional Index)
+                        بيكون حجمه مقدر بـ <span class="highlight-b">2 إلى 4 أضعاف (2-4x)</span> مساحة الفهرس التقليدي
+                        Non-positional.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">النسبة المئوية من النص:</span> بيستهلك الفهرس المكاني مساحة تعادل ما
+                        بين <span class="highlight-b">35% إلى 50%</span> من الحجم الأصلي للنص اللي قاعد بتفهرسه!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">ملاحظة هامة (Note):</span> السلايد بيأكد إنو هاي الأرقام
+                        والقواعد بتنطبق بشكل أساسي فقط على <span class="eng-term">اللغات المشابهة للإنجليزية
+                            (English-like languages)</span>. اللغات اللي تركبيتها غير، ممكن تأدي لأرقام أضخم.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch4/4- Phrase queries and positional indexes_page-0016.jpg" alt="Slide 16"
+                    style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">� استراتيجية المزيج المهجن (Combination schemes)</div>
+                <div class="explanation-content">
+                    ليش ما ندمج الخصائص الحلوة بكل الفهارس مع بعض؟ دمج الـ (Biword) مع الـ (Positional) بيولد نتائج
+                    سريعة جداً:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-success">سرعة الأسماء المشهورة:</span> في عبارات شائعة الها طلب بشكل كثيف
+                        جداً مثل <span class="eng-term">"Michael Jackson"</span> أو <span class="eng-term">"Britney
+                            Spears"</span>. رح يكون "غير فعال ومُتعب" (Inefficient) إنه السيستم يعمللهم حسابات ومقاطعة
+                        مواقع (Merge) كل مرة! <br>الحل: بنفهرسهم بنظام الـ Biword لحالهم ليتم استرجاعهم فوراً بدون تعب.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">معضلة فرقة (The Who):</span> هاي فرقة غنائية اسمها مكون من كلمتين
+                        (Stop words) بسيطات جداً. حساب أماكن الكلمتين ودمجهم راح يعلق محرك البحث من كثر ما هم مكررين في
+                        الإنترنت! وهون استخدام الـ Biword لدمجهم مع بعض يعتبر <span class="highlight-b">منقذ
+                            للسيستم</span> وبيخلي استرجاع معلومات هالفرقة سريع وبدون ضغط كبير.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-
-    <!-- ================= PAGE 01 ================= -->
-    <div class="page">
-        <header class="page-header">
-            <h1 class="header-title">Phrase Queries & Positional Indexes</h1>
-        </header>
-
-        <!-- Goal Section -->
-        <div class="section-card" style="border-right: 6px solid var(--accent);">
-            <div class="pair-box">
-                <h2 class="section-title"
-                    style="color: var(--accent); border: none; font-size: 12pt; margin: 0; direction: ltr; text-align: left;">
-                    We
-                    want to be able to answer queries such as "stanford university" – as a phrase</h2>
-                <div class="ar-text" style="margin-top: 8px;">
-                    بدنا السيستم يكون قادر يجاوب على جمل كاملة زي <span
-                        style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono'; font-weight: bold;">"stanford
-                        university"</span> كـ عبارة وحدة (Phrase).
-                </div>
-            </div>
-        </div>
-
-        <!-- Comparison Boxes -->
-        <div style="display: flex; gap: 15px; margin: 15px 0;">
-            <!-- No Match -->
-            <div class="section-card"
-                style="flex: 1; background: rgba(35, 20, 30, 0.6); border: 1px solid rgba(251, 113, 133, 0.2);">
-                <div
-                    style="color: var(--danger); font-weight: 900; margin-bottom: 10px; font-family: 'Inter', sans-serif;">
-                    NO MATCH ❌</div>
-                <div
-                    style="color: var(--accent); font-weight: 600; font-size: 10pt; margin-bottom: 15px; font-family: 'Inter', sans-serif;">
-                    "I went to <span style="text-decoration: underline;">university</span> at <span
-                        style="text-decoration: underline;">Stanford</span>"</div>
-                <div class="ar-text" style="text-align: right; font-size: 9pt;">الكلمات مبعثرة ومش ورا بعض.</div>
-            </div>
-
-            <!-- Match -->
-            <div class="section-card"
-                style="flex: 1; background: rgba(20, 35, 30, 0.6); border: 1px solid rgba(52, 211, 153, 0.2);">
-                <div
-                    style="color: var(--success); font-weight: 900; margin-bottom: 10px; font-family: 'Inter', sans-serif;">
-                    MATCH ✅</div>
-                <div
-                    style="color: var(--accent); font-weight: 600; font-size: 10pt; margin-bottom: 15px; font-family: 'Inter', sans-serif;">
-                    "The <span style="text-decoration: underline;">stanford university</span> research..."</div>
-                <div class="ar-text" style="text-align: right; font-size: 9pt;">الكلمات ورا بعض تماماً.</div>
-            </div>
-        </div>
-
-        <!-- Concept Section -->
-        <div class="section-card" style="border-right: 6px solid var(--accent);">
-            <h2 class="section-title" style="color: var(--accent); direction: ltr; text-align: left;">
-                <span>Concept:</span> One of the few "advanced
-                search" ideas that works
-            </h2>
-            <div class="ar-text">
-                هذه الميزة من "البحث المتقدم" هي الأكثر فهماً واستخداماً من قبل الناس؛ لأنها منطقية جداً.
-            </div>
-        </div>
-
-        <!-- Problem Section -->
-        <div class="section-card"
-            style="margin-top: 15px; border: 2px solid var(--accent); background: rgba(30, 41, 59, 0.5);">
-            <h2 class="section-title" style="color: var(--accent); border: none; direction: ltr; text-align: left;">The
-                Problem:</h2>
-            <div class="ar-text" style="font-size: 11pt; text-align: center;">
-                لتحقيق هذا، ما عاد يكفي نخزن بس <span
-                    style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono'; font-weight: bold;">&lt;term
-                    : docs&gt;</span> (الكلمة ورقم الملف)؛ نحتاج "معلومات مكانية" أكثر.
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
-            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 01</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 02: BIWORD & ISSUES ================= -->
-    <div class="page">
-        <header class="page-header">
-            <h1 class="header-title" style="direction: ltr; text-align: left;">Biword Indexes</h1>
-        </header>
-
-        <!-- Attempt 1 -->
-        <div class="section-card">
-            <h2 class="section-title"
-                style="color: var(--primary); border: none; font-size: 16pt; margin-bottom: 10px; direction: ltr; text-align: left;">
-                Attempt 1: Biword indexes</h2>
-            <div style="border-left: 4px solid var(--accent); padding-left: 10px; margin-bottom: 20px;">
-                <div class="en-text" style="color: var(--accent); font-size: 11pt;">Index every consecutive pair of
-                    terms in the text as a phrase</div>
-                <div class="ar-text">أول محاولة للحل: نفهرس "كل كلمتين ورا بعض" (Consecutive pair) كأنهم وحدة واحدة
-                    مستقلة.</div>
-            </div>
-
-            <!-- Visual Box -->
-            <div
-                style="border: 2px dashed #38bdf8; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; background: rgba(15, 23, 42, 0.5); direction: ltr;">
-                <div style="color: var(--text-muted); font-size: 9pt; margin-bottom: 15px;">"Text: "Friends, Romans,
-                    Countrymen"</div>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                    <span
-                        style="background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; padding: 8px 15px; color: #38bdf8; border-radius: 6px; font-family: 'JetBrains Mono';">friends
-                        romans</span>
-                    <span style="color: #38bdf8; font-weight: bold;">+</span>
-                    <span
-                        style="background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; padding: 8px 15px; color: #38bdf8; border-radius: 6px; font-family: 'JetBrains Mono';">romans
-                        countrymen</span>
-                </div>
-            </div>
-
-            <div
-                style="background: rgba(34, 197, 94, 0.1); border-left: 5px solid var(--success); padding: 15px; border-radius: 8px;">
-                <div
-                    style="color: var(--success); font-weight: bold; font-size: 11pt; margin-bottom: 8px; direction: ltr; text-align: left;">
-                    Two-word phrase processing is now immediate!</div>
-                <div class="ar-text">البحث عن أي عبارة من كلمتين صار فوري؛ السيستم بيتعامل معها ككلمة واحدة وبيسحب
-                    ملفاتها فوراً.</div>
-            </div>
-        </div>
-
-        <!-- Longer Phrase Queries -->
-        <div class="section-card" style="margin-top: 15px;">
-            <div
-                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
-                <h2 style="color: var(--primary); font-size: 14pt; margin: 0; direction: ltr; text-align: left;">Longer
-                    phrase queries</h2>
-            </div>
-
-            <div style="border-left: 4px solid var(--accent); padding-left: 10px; margin-bottom: 20px;">
-                <div class="en-text" style="color: var(--accent); font-size: 11pt;">Can be processed by breaking them
-                    into biwords</div>
-                <div class="ar-text">طيب لو الجملة طويلة (أكثر من كلمتين)؟ بنقسمها لأزواج ونطبق قاعدة الـ AND.</div>
-            </div>
-
-            <!-- Blue Box -->
-            <div
-                style="background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border); padding: 15px; border-radius: 8px; font-family: 'JetBrains Mono'; color: var(--accent); font-size: 9.5pt; margin-bottom: 20px;">
-                <div style="color: #38bdf8; margin-bottom: 10px; font-weight: bold; direction: ltr; text-align: left;">
-                    "stanford university palo alto" ➔</div>
-                <div style="direction: ltr; text-align: left;">(stanford university) <span
-                        style="color: var(--accent);">AND</span> (university palo) <span
-                        style="color: var(--accent);">AND</span> (palo alto)</div>
-            </div>
-
-            <!-- Red Warning Box -->
-            <div
-                style="background: rgba(251, 113, 133, 0.1); border: 1px solid rgba(251, 113, 133, 0.3); padding: 15px; border-radius: 12px;">
-                <div
-                    style="color: var(--danger); font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; direction: ltr; text-align: left;">
-                    <span>⚠️</span> False Positives (مشكلة النتائج الخاطئة)
-                </div>
-                <div class="ar-text" style="margin-bottom: 15px; font-size: 10pt;">السيستم ممكن يعطيك ملف فيه كل
-                    "الأزواج" بس مش بالترتيب واللي بدك اياه!</div>
-
-                <div
-                    style="background: black; padding: 12px; border-radius: 6px; border-left: 3px solid var(--danger); margin-bottom: 10px;">
-                    <div
-                        style="color: var(--text-muted); font-size: 8pt; margin-bottom: 5px; direction: ltr; text-align: left;">
-                        Example of a "Wrong"
-                        Document:</div>
-                    <div style="color: var(--accent); font-size: 9pt; direction: ltr; text-align: left;">"The student at
-                        <span style="color: var(--danger);">stanford university</span> spoke about <span
-                            style="color: var(--danger);">university palo</span> problems during his visit to <span
-                            style="color: var(--danger);">palo alto</span>."
-                    </div>
-                </div>
-
-                <div class="ar-text" style="font-size: 9pt; color: var(--danger);">هذا الملف حقق شرط الـ AND (فيه كل
-                    الأزواج)، بس الجملة الأصلية "stanford university palo alto" مش موجودة كـ قطعة واحدة!</div>
-            </div>
-        </div>
-
-        <!-- Critical Issues Title -->
-        <h2
-            style="color: var(--danger); border-bottom: 1px solid var(--danger); padding-bottom: 5px; margin: 25px 0 15px 0; font-size: 14pt; direction: ltr; text-align: left;">
-            Other Critical Issues</h2>
-
-        <!-- Combined Issues -->
-        <div style="display: flex; gap: 15px;">
-            <!-- Index Blowup -->
-            <div
-                style="flex: 1; border: 1px solid rgba(250, 204, 21, 0.4); background: rgba(30, 30, 20, 0.6); padding: 15px; border-radius: 12px;">
-                <div
-                    style="color: var(--accent); font-weight: bold; font-size: 11pt; margin-bottom: 10px; direction: ltr; text-align: left;">
-                    Index Blowup</div>
-                <div class="ar-text" style="font-size: 9pt;">حجم القاموس يتضخم بشكل هائل لأن كل زوج كلمات جديد في اللغة
-                    يحتاج مكاناً مستقلاً. <span style="font-size: 14pt;">💥</span></div>
-            </div>
-
-            <!-- Infeasible -->
-            <div
-                style="flex: 1; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(20, 30, 40, 0.6); padding: 15px; border-radius: 12px;">
-                <div
-                    style="color: var(--primary); font-weight: bold; font-size: 11pt; margin-bottom: 10px; direction: ltr; text-align: left;">
-                    Infeasible for Longer Phrases</div>
-                <div class="ar-text" style="font-size: 9pt;">من المستحيل عملياً تخزين 3 كلمات أو أكثر؛ لأن عدد
-                    الاحتمالات يصبح فلكياً. <span style="font-size: 14pt;">🚫</span></div>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
-            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 02</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 03: POSITIONAL & EXAMPLES ================= -->
-    <div class="page">
-        <header class="page-header">
-            <h1 class="header-title" style="direction: ltr; text-align: left;">Positional Indexes</h1>
-        </header>
-
-        <!-- Solution 2 -->
-        <div class="section-card">
-            <h2 class="section-title"
-                style="color: var(--accent); border: none; font-size: 14pt; margin-bottom: 10px; direction: ltr; text-align: left;">
-                Solution 2: Positional indexes</h2>
-
-            <div class="pair-box">
-                <span class="en-text">Store the position(s) of each term in the postings.</span>
-                <span class="ar-text">الحل الأذكى: لكل كلمة، بنخزن <span class="highlight-span">مواقع ظهورها</span>
-                    (Positions) داخل الملف.</span>
-            </div>
-
-            <!-- Code Structure Box -->
-            <div
-                style="border: 1px solid #38bdf8; padding: 20px; border-radius: 15px; background: rgba(15, 23, 42, 0.8); position: relative; margin-top: 15px;">
-                <div
-                    style="position: absolute; top: 10px; right: 15px; color: #38bdf8; font-family: 'JetBrains Mono'; font-size: 10pt;">
-                    :Structure</div>
-                <div
-                    style="font-family: 'JetBrains Mono', monospace; font-size: 11pt; color: #e2e8f0; direction: ltr; line-height: 2;">
-                    <span style="color: var(--accent);">&lt;term, num_docs;</span><br>
-                    &nbsp;&nbsp;doc1: pos1, pos2, ...;<br>
-                    &nbsp;&nbsp;doc2: pos1, ...;<br>
-                    <span style="color: var(--accent);">&gt;</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Example & Question -->
-        <div class="section-card" style="margin-top: 15px;">
-            <h2 class="section-title" style="direction: ltr; text-align: left;"><span>⚙️</span> Example & Strategy</h2>
-
-            <!-- Example Code -->
-            <div
-                style="font-family: 'JetBrains Mono', monospace; font-size: 10pt; color: #cbd5e1; direction: ltr; line-height: 1.6; border-left: 3px solid var(--primary); padding-left: 10px; margin-bottom: 15px;">
-                <span style="color: var(--accent); font-weight: bold;">&lt;be: 993427;</span><br>
-                <span style="color: var(--danger);">ID 1:</span> 7, 18, 33, 72, 86, 231<br>
-                <span style="color: var(--danger);">ID 2:</span> 3, 149<br>
-                <span style="color: var(--danger);">ID 4:</span> 17, 191, 291...<br>
-                <span style="color: var(--accent);">&gt;</span>
-            </div>
-
-            <!-- Question Box -->
-            <div
-                style="border: 2px dashed var(--accent); padding: 15px; border-radius: 12px; margin-bottom: 20px; background: rgba(250, 204, 21, 0.05);">
-                <div
-                    style="color: var(--accent); font-weight: 900; font-size: 12pt; margin-bottom: 5px; font-family: 'Inter'; direction: ltr; text-align: left;">
-                    "to be or not to be"</div>
-                <div class="ar-text" style="font-weight: bold; text-align: center; font-size: 10pt;">
-                    <span style="color: var(--primary);">لازم ندور على كلمات ورا بعض بالترتيب!</span>
-                </div>
-            </div>
-
-            <!-- Strategy Boxes -->
-            <div style="display: flex; gap: 10px;">
-                <div
-                    style="flex: 1; background: rgba(30, 41, 59, 0.7); padding: 10px; border-radius: 8px; border: 1px solid #334155;">
-                    <h3
-                        style="color: var(--primary); font-size: 10pt; margin-bottom: 5px; direction: ltr; text-align: left;">
-                        Proximity Strategy</h3>
-                    <div class="ar-text" style="font-size: 9pt;">نهتم بـ "مدى قرب الكلمات" (Proximity).</div>
-                </div>
-                <div
-                    style="flex: 1; background: rgba(40, 20, 30, 0.7); padding: 10px; border-radius: 8px; border: 1px solid #334155;">
-                    <h3
-                        style="color: var(--danger); font-size: 10pt; margin-bottom: 5px; direction: ltr; text-align: left;">
-                        The Challenge</h3>
-                    <div class="ar-text" style="font-size: 9pt;">نبحث عن علاقة مكانية مش بس وجود.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Workflow Section -->
-        <div class="section-card" style="margin-top: 15px;">
-            <h2 class="section-title" style="direction: ltr; text-align: left; color: #38bdf8;">Workflow: Processing a
-                Phrase Query</h2>
-
-            <!-- Step 1 -->
-            <div style="margin-bottom: 20px; text-align: right;">
-                <div
-                    style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-bottom: 5px;">
-                    <span
-                        style="color: var(--accent); font-weight: bold; font-size: 11pt; font-family: 'Inter';">Extract
-                        Posting Lists</span>
-                    <span
-                        style="background: #38bdf8; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Inter';">1</span>
-                </div>
-                <div class="ar-text">بنسحب القوائم لكل كلمة (to, be, or, not) بشكل مستقل من الفهرس الموقعي.</div>
-            </div>
-
-            <!-- Step 2 -->
-            <div style="margin-bottom: 20px; border-right: 3px solid #38bdf8; padding-right: 15px;">
-                <div
-                    style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-bottom: 5px;">
-                    <span
-                        style="color: var(--accent); font-weight: bold; font-size: 11pt; font-family: 'Inter';">Positional
-                        Intersection Merge</span>
-                    <span
-                        style="background: #38bdf8; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Inter';">2</span>
-                </div>
-                <div class="ar-text" style="text-align: right; margin-bottom: 15px;">
-                    نبحث عن الملفات المشتركة، وبداخل كل ملف، نفحص شرط التجاور: <span
-                        style="direction: ltr; display: inline-block; font-family: 'JetBrains Mono'; color: #38bdf8;">pos2
-                        = pos1 + 1</span>.
-                </div>
-
-                <!-- Code Block -->
-                <div
-                    style="background: black; padding: 20px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 9.5pt; color: #a5b3ce; direction: ltr; text-align: left; border: 1px solid #1e293b;">
-                    <div style="color: #64748b; margin-bottom: 15px; font-size: 8.5pt;">...EXECUTING POSITIONAL MERGE
-                        &lt;</div>
-
-                    <div style="color: #38bdf8; margin-bottom: 8px; font-weight: bold;">[ MATCH FOUND ] Document ID: 2
-                    </div>
-                    <div style="margin-bottom: 20px; background: #0f172a; padding: 8px; border-radius: 6px;">
-                        <span style="color: var(--accent);">to: [17]</span> &nbsp; <span
-                            style="color: var(--accent);">be: [18]</span> &nbsp; <span
-                            style="color: var(--success); font-weight: bold;">(18 = 17 + 1) ✅</span>
-                    </div>
-
-                    <div style="color: #38bdf8; margin-bottom: 8px; font-weight: bold;">[ SEARCHING ] Document ID: 4
-                    </div>
-                    <div style="margin-bottom: 5px;">to positions: [8, 16, 190]</div>
-                    <div style="margin-bottom: 10px;">be positions: [17, 191]</div>
-                    <div
-                        style="background: rgba(34, 197, 94, 0.1); padding: 8px; border-radius: 6px; display: inline-block;">
-                        Matches: <span style="color: var(--success); font-weight: bold;">(16, 17) & (190, 191) ✅✅</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div
-                style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: right;">
-                <div
-                    style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-bottom: 5px;">
-                    <span
-                        style="color: var(--success); font-weight: bold; font-size: 11pt; font-family: 'Inter';">Recursive
-                        Full-Phrase Match</span>
-                    <span
-                        style="background: var(--success); color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Inter';">3</span>
-                </div>
-                <div class="ar-text">بنكرر نفس العملية لكل كلمات الجملة (to be ➔ be or ➔ or not) لضمان اتصال السلسلة
-                    كاملة.</div>
-            </div>
-
-            <!-- Note -->
-            <div style="border: 1px dashed #38bdf8; padding: 10px; border-radius: 8px; text-align: center;">
-                <div class="ar-text" style="font-size: 9pt;">
-                    <span style="font-size: 12pt;">💡</span> ملاحظة: نفس هذه الطريقة تُستخدم لبحث "التقارب" (Proximity)
-                    ولكن بمسافات أكبر من 1.
-                </div>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
-            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 03</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 04: DEEP DIVE EXAMPLE ================= -->
-    <div class="page">
-        <header class="page-header">
-            <h1 class="header-title" style="direction: ltr; text-align: left;">Deep Dive: Positional Index Example</h1>
-        </header>
-
-        <!-- Construction -->
-        <h2 class="section-title" style="direction: ltr; text-align: left; margin-bottom: 20px;">Example: Positional
-            Index Construction</h2>
-
-        <div class="section-card">
-            <h3 style="color: var(--accent); font-size: 11pt; margin-bottom: 15px; direction: ltr; text-align: left;">
-                The Corpus (3 Documents):</h3>
-
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <!-- Doc 1 -->
-                <div
-                    style="background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 8px; border-left: 4px solid #38bdf8; position: relative;">
-                    <div
-                        style="position: absolute; top: 10px; right: 10px; font-size: 8pt; color: #38bdf8; font-weight: bold;">
-                        :DOC 1</div>
-                    <div
-                        style="font-family: 'JetBrains Mono'; font-size: 10pt; color: #e2e8f0; direction: ltr; text-align: left;">
-                        "machine <span style="color: var(--success);">learning</span> is powerful"
-                    </div>
-                </div>
-                <!-- Doc 2 -->
-                <div
-                    style="background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 8px; border-left: 4px solid #38bdf8; position: relative;">
-                    <div
-                        style="position: absolute; top: 10px; right: 10px; font-size: 8pt; color: #38bdf8; font-weight: bold;">
-                        :DOC 2</div>
-                    <div
-                        style="font-family: 'JetBrains Mono'; font-size: 10pt; color: #e2e8f0; direction: ltr; text-align: left;">
-                        "deep <span style="color: var(--success);">learning</span> powers machine intelligence"
-                    </div>
-                </div>
-                <!-- Doc 3 -->
-                <div
-                    style="background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 8px; border-left: 4px solid #38bdf8; position: relative;">
-                    <div
-                        style="position: absolute; top: 10px; right: 10px; font-size: 8pt; color: #38bdf8; font-weight: bold;">
-                        :DOC 3</div>
-                    <div
-                        style="font-family: 'JetBrains Mono'; font-size: 10pt; color: #e2e8f0; direction: ltr; text-align: left;">
-                        "machine intelligence and <span style="color: var(--success);">learning</span>"
-                    </div>
-                </div>
-            </div>
-
-            <h3
-                style="color: var(--accent); font-size: 11pt; margin-top: 25px; margin-bottom: 10px; direction: ltr; text-align: left;">
-                The Resulting Index (Step 1):</h3>
-            <div style="background: black; padding: 20px; border-radius: 12px; border: 1px solid var(--accent);">
-                <div class="ar-text" style="color: #cbd5e1; font-size: 9pt; margin-bottom: 10px; text-align: right;">
-                    تخزين رقم الملف ومواقع الظهور (0-indexed).</div>
-                <div
-                    style="font-family: 'JetBrains Mono'; font-size: 10pt; color: #e2e8f0; direction: ltr; text-align: left;">
-                    <span style="color: var(--accent);">machine:</span> {1: [0], 2: [3], 3: [0]}<br><br>
-                    <span style="color: var(--success);">learning:</span> {1: [1], 2: [1], 3: [3]}
-                </div>
-            </div>
-        </div>
-
-        <!-- Algorithm Section -->
-        <h2 class="section-title" style="direction: ltr; text-align: left; margin: 30px 0 20px 0; color: #38bdf8;">Step
-            2: Intersection Algorithm</h2>
-        <div class="section-card">
-            <!-- Query -->
-            <div style="border: 2px solid var(--accent); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-                <div
-                    style="color: var(--accent); font-weight: bold; font-size: 11pt; direction: ltr; text-align: left; margin-bottom: 5px;">
-                    Query: "machine learning"</div>
-                <div class="ar-text" style="font-size: 10pt;">الهدف: نلاقي الملفات اللي فيها كلمة <span
-                        class="code-tag">learning</span> وكلمة <span class="code-tag">machine</span> مباشرة ورا بعض.
-                </div>
-            </div>
-
-            <h3 style="color: #38bdf8; font-size: 11pt; margin-bottom: 10px; direction: ltr; text-align: left;">The
-                Mathematical Rule:</h3>
-            <div
-                style="background: rgba(15, 23, 42, 0.8); border-left: 4px solid #38bdf8; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 20px;">
-                <div
-                    style="font-family: 'JetBrains Mono'; color: white; direction: ltr; text-align: left; font-size: 10pt;">
-                    <span style="font-weight: bold;">For each docID:</span><br><br>
-                    <span style="color: #38bdf8;">Is position(learning) == position(machine) + 1 ?</span>
-                </div>
-            </div>
-
-            <h3 style="color: var(--accent); font-size: 11pt; margin-bottom: 10px; direction: ltr; text-align: left;">
-                The Data to Check:</h3>
-            <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px;">
-                <div
-                    style="font-family: 'JetBrains Mono'; font-size: 10pt; color: #e2e8f0; direction: ltr; text-align: left;">
-                    "machine" ➔ {1: [0], 2: [3], 3: [0]}<br>
-                    "learning" ➔ {1: [1], 2: [1], 3: [3]}
-                </div>
-            </div>
-        </div>
-
-        <!-- Execution & Results -->
-        <h2 class="section-title" style="direction: ltr; text-align: left; margin: 30px 0 20px 0; color: #38bdf8;">
-            Execution & Results</h2>
-        <div class="section-card">
-            <style>
-                .res-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    font-family: 'Inter';
-                    font-size: 10pt;
-                }
-
-                .res-table th {
-                    text-align: center;
-                    color: #38bdf8;
-                    padding: 10px;
-                    border-bottom: 2px solid #1e293b;
-                    font-weight: 800;
-                    font-size: 9pt;
-                }
-
-                .res-table td {
-                    text-align: center;
-                    color: white;
-                    padding: 15px;
-                    border-bottom: 1px solid #1e293b;
-                }
-            </style>
-            <table class="res-table" style="direction: ltr;">
-                <thead>
-                    <tr>
-                        <th>DOCID</th>
-                        <th>MACHINE [POS]</th>
-                        <th>LEARNING [POS]</th>
-                        <th>RULE CHECK</th>
-                        <th>MATCH?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>[0]</td>
-                        <td>[1]</td>
-                        <td style="font-family: 'JetBrains Mono';">1 == 0 + 1</td>
-                        <td><span
-                                style="background: var(--success); color: black; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 9pt;">✅
-                                YES</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>[3]</td>
-                        <td>[1]</td>
-                        <td style="font-family: 'JetBrains Mono';">1 != 3 + 1</td>
-                        <td><span style="color: var(--danger); font-weight: bold;">❌ NO</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>[0]</td>
-                        <td>[3]</td>
-                        <td style="font-family: 'JetBrains Mono';">3 != 0 + 1</td>
-                        <td><span style="color: var(--danger); font-weight: bold;">❌ NO</span></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div
-                style="background: rgba(56, 189, 248, 0.1); border-left: 5px solid #38bdf8; padding: 20px; border-radius: 0 0 12px 12px; margin-top: 25px;">
-                <div class="ar-text" style="font-size: 11pt; text-align: center; font-weight: bold;">
-                    الخلاصة: فقط الملف رقم <span
-                        style="background: #38bdf8; color: black; padding: 1px 6px; border-radius: 4px;">1</span> يحتوي
-                    على العبارة المطلوبة بالترتيب الصحيح.
-                </div>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
-            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 04</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 05: PROXIMITY & TRADE-OFFS ================= -->
-    <div class="page">
-        <header class="page-header">
-            <h1 class="header-title" style="direction: ltr; text-align: left;">Proximity & Trade-offs</h1>
-        </header>
-
-        <!-- Proximity Queries -->
-        <div class="section-card">
-            <h2 class="section-title" style="direction: ltr; text-align: left; color: #38bdf8;">Proximity queries</h2>
-
-            <div
-                style="background: rgba(15, 23, 42, 0.8); border: 1px solid #fed7aa; padding: 20px; border-radius: 12px; margin-bottom: 20px; position: relative;">
-                <div
-                    style="font-family: 'JetBrains Mono'; font-weight: bold; color: #fbbf24; font-size: 11pt; direction: ltr; text-align: left;">
-                    LIMIT! /3 STATUTE /3 FEDERAL /2 TORT
-                </div>
-                <div class="ar-text" style="color: #cbd5e1; margin-top: 10px; text-align: right; font-size: 10pt;">مثال
-                    لاستعلام متقدم يستخدم بحث "التقارب" (Proximity).</div>
-                <div
-                    style="position: absolute; right: -2px; top: 15px; height: 30px; width: 4px; background: #fbbf24; border-radius: 2px;">
-                </div>
-            </div>
-
-            <!-- Meaning of /k -->
-            <div style="position: relative; margin-bottom: 25px; padding-top: 10px;">
-                <h3
-                    style="color: #38bdf8; margin: 0 0 15px 0; font-size: 13pt; font-weight: bold; direction: ltr; text-align: left;">
-                    Meaning of /k:</h3>
-
-                <div style="position: absolute; top: 10px; right: 10px; font-size: 35pt; transform: rotate(-45deg);">📏
-                </div>
-
-                <div class="ar-text" style="text-align: right; line-height: 2;">
-                    الرمز <span
-                        style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-family: 'JetBrains Mono'; font-weight: bold;">/k</span>
-                    يعني "ضمن مجال k من الكلمات".
-                    <br>
-                    مثلاً <span
-                        style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-family: 'JetBrains Mono'; font-weight: bold;">A
-                        /3 B</span> يعني أن B يجب أن تظهر في غضون 3 كلمات قبل أو بعد A.
-                </div>
-            </div>
-
-            <div
-                style="border: 2px dashed #10b981; background: rgba(16, 185, 129, 0.05); padding: 15px; border-radius: 12px;">
-                <h3 style="color: #10b981; margin: 0 0 5px 0; font-size: 11pt; direction: ltr; text-align: left;">
-                    Positional Indexes are MUST:</h3>
-                <div class="ar-text" style="font-weight: bold;">
-                    هنا تظهر القوة الحقيقية للـ Positional Indexes؛ مستحيل نقدر نعمل هالحكي بالـ Biword index لأنه لا
-                    يعرف المسافات، فقط التلاصق.
-                </div>
-            </div>
-        </div>
-
-        <!-- Why it Grows -->
-        <div class="section-card" style="margin-top: 25px;">
-            <h2 class="section-title" style="direction: ltr; text-align: left; color: #38bdf8;">Why it Grows: Impact of
-                Document Length</h2>
-
-            <div class="ar-text" style="margin-bottom: 15px; border-right: 4px solid #fbbf24; padding-right: 10px;">
-                <div style="color: #fbbf24; font-weight: bold; margin-bottom: 5px; direction: ltr; text-align: left;">
-                    Need an entry for EACH occurrence</div>
-                في الفهرس العادي، بنسجل `docID` <span style="color: var(--success); font-weight: bold;">مرة وحدة</span>
-                للملف. بس في الموقعي، لازم نسجل <span style="color: var(--danger); font-weight: bold;">كل مكان</span>
-                ظهرت فيه الكلمة جوا هاض الملف.
-            </div>
-
-            <div style="display: flex; gap: 15px;">
-                <!-- Table -->
-                <div
-                    style="flex: 1.5; background: black; border-radius: 10px; padding: 15px; border: 1px solid #334155;">
-                    <div style="color: #94a3b8; font-size: 8pt; margin-bottom: 10px;">TERM FREQ: 0.1% EXAMPLE</div>
-                    <table
-                        style="width: 100%; border-collapse: collapse; font-family: 'Inter'; font-size: 9pt; direction: ltr;">
-                        <tr style="border-bottom: 1px solid #334155; color: #38bdf8;">
-                            <th style="text-align: left; padding: 5px;">Doc Size</th>
-                            <th style="padding: 5px;">Normal</th>
-                            <th style="padding: 5px; color: #38bdf8;">Positional</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #1e293b; color: white;">
-                            <td style="padding: 8px 5px;">1,000</td>
-                            <td style="padding: 8px 5px; text-align: center;">1</td>
-                            <td style="padding: 8px 5px; text-align: center; color: #fbbf24; font-weight: bold;">1</td>
-                        </tr>
-                        <tr style="color: white;">
-                            <td style="padding: 8px 5px;">100,000</td>
-                            <td style="padding: 8px 5px; text-align: center;">1</td>
-                            <td style="padding: 8px 5px; text-align: center; color: #fbbf24; font-weight: bold;">100
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- Info Side -->
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="border: 1px solid #fbbf24; border-radius: 8px; padding: 10px; text-align: right;">
-                        <div style="color: #fbbf24; font-size: 8pt; font-weight: bold;">WEB PAGE</div>
-                        <div style="color: white; font-size: 9pt;">terms (Short) 1,000~</div>
-                    </div>
-                    <div style="border: 1px solid #38bdf8; border-radius: 8px; padding: 10px; text-align: right;">
-                        <div style="color: #38bdf8; font-size: 8pt; font-weight: bold;">BOOKS / FILINGS</div>
-                        <div style="color: white; font-size: 9pt;">terms (Massive) +100,000</div>
-                    </div>
-                </div>
-            </div>
-            <div
-                style="text-align: center; color: #94a3b8; font-style: italic; font-size: 8pt; margin-top: 10px; direction: ltr;">
-                "The longer the document, the larger the gap between normal and positional indexes"
-            </div>
-        </div>
-
-        <!-- Trade-offs -->
-        <div class="section-card" style="margin-top: 25px;">
-            <h2 class="section-title" style="direction: ltr; text-align: left; color: #38bdf8;">The Storage Trade-offs
-            </h2>
-
-            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-                <!-- Expansion (Red) -->
-                <div
-                    style="flex: 1; border: 1px solid #f43f5e; background: rgba(244, 63, 94, 0.05); border-radius: 12px; padding: 15px;">
-                    <h3 style="color: #f43f5e; font-size: 11pt; margin: 0 0 10px 0; direction: ltr; text-align: left;">
-                        Significant Expansion</h3>
-                    <div class="ar-text" style="font-size: 9.5pt;">
-                        الفهرس الموقعي بياخد مساحة تخزين <span style="color: #f43f5e; font-weight: bold;">ضخمة
-                            جداً</span>؛ لأنه بيخزن كل "موضع" (رقم مكان) بتظهر فيه الكلمة.
-                    </div>
-                    <div
-                        style="color: #f43f5e; font-size: 8pt; margin-top: 10px; font-style: italic; direction: ltr; text-align: left;">
-                        * Even though indices can be compressed, the growth remains "Substantial".
-                    </div>
-                </div>
-
-                <!-- Industry Standard (Green) -->
-                <div
-                    style="flex: 1; border: 1px solid #10b981; background: rgba(16, 185, 129, 0.05); border-radius: 12px; padding: 15px;">
-                    <h3 style="color: #10b981; font-size: 11pt; margin: 0 0 10px 0; direction: ltr; text-align: left;">
-                        Industry Standard</h3>
-                    <div class="ar-text" style="font-size: 9.5pt;">
-                        بالرغم من التكلفة العالية للمساحة، بضل هو <span
-                            style="color: #10b981; font-weight: bold;">المعيار الأساسي</span>؛ لأنه بدونه مستحيل نعمل
-                        جمل بحث (Phrase queries) دقيقة.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Conclusion -->
-            <div
-                style="background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; border-radius: 10px; padding: 15px;">
-                <div class="ar-text" style="text-align: center; color: white;">
-                    <span style="color: #fbbf24;">💡 الخلاصة:</span> احنا بنضحي بـ "المساحة" عشان نكسب "القوة والدقة".
-                    أغلب محركات البحث اليوم بتستخدم الـ Positional Index كجزء أساسي في ترتيب النتائج (Ranking).
-                </div>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
-            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 05</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 06: RULES OF THUMB & HYBRID ================= -->
-    <div class="page">
-        <header class="page-header">
-            <h1 class="header-title" style="direction: ltr; text-align: left;">Rules of Thumb & Hybrid</h1>
-        </header>
-
-        <!-- Rules of Thumb -->
-        <h2 class="section-title" style="direction: ltr; text-align: left; color: #38bdf8;">Positional Index: Rules of
-            Thumb</h2>
-        <div class="section-card" style="margin-bottom: 25px;">
-            <!-- Size Expansion -->
-            <div
-                style="background: rgba(56, 189, 248, 0.05); border-right: 4px solid #38bdf8; border-radius: 12px; padding: 20px; margin-bottom: 15px; position: relative;">
-                <h3 style="color: #38bdf8; font-size: 11pt; margin: 0 0 10px 0; direction: ltr; text-align: left;">2x to
-                    4x Size Expansion</h3>
-                <div class="ar-text" style="font-size: 10pt; text-align: right; padding-right: 40px;">
-                    الفهرس الموقعي عادة بكون حجمه من <span style="color: #38bdf8; font-weight: bold;">ضعفين لـ 4
-                        أضعاف</span> حجم الفهرس العادي (Non-positional).
-                </div>
-                <div style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 24pt;">📦
-                </div>
-            </div>
-
-            <!-- Total Corpus -->
-            <div
-                style="background: rgba(251, 191, 36, 0.05); border-right: 4px solid #fbbf24; border-radius: 12px; padding: 20px; margin-bottom: 15px;">
-                <h3 style="color: #fbbf24; font-size: 11pt; margin: 0 0 10px 0; direction: ltr; text-align: left;">35%
-                    to 50% of Total Corpus</h3>
-                <div class="ar-text" style="font-size: 10pt; text-align: right;">
-                    مقارنة بحجم البيانات الأصلية ككل، الفهرس بياخد مساحة ضخمة بتوصل لـ <span
-                        style="color: #fbbf24; font-weight: bold;">نصف حجم البيانات</span> الأصلية!
-                </div>
-            </div>
-
-            <!-- Context -->
-            <div
-                style="background: rgba(34, 197, 94, 0.05); border-right: 4px solid #22c55e; border-radius: 12px; padding: 20px; margin-bottom: 20px; position: relative;">
-                <h3 style="color: #22c55e; font-size: 11pt; margin: 0 0 10px 0; direction: ltr; text-align: left;">
-                    Context: English-like Languages</h3>
-                <div class="ar-text" style="font-size: 10pt; text-align: right; padding-right: 40px;">
-                    هذه النسب هي "المتوقع" في اللغات الشبيهة بالإنجليزية؛ قد تختلف في لغات أخرى حسب طبيعة تركيب الكلمات.
-                </div>
-                <div style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 24pt;">🌐
-                </div>
-            </div>
-
-            <!-- Warning Footer -->
-            <div
-                style="border: 2px dashed rgba(251, 191, 36, 0.5); border-radius: 8px; padding: 10px; background: rgba(30, 41, 59, 0.5);">
-                <div class="ar-text" style="font-size: 9pt; text-align: center; color: #fbbf24;">
-                    ⚠️ <span style="color: #fbbf24; font-weight: bold;">تذكر:</span> الفهرس العادي كان بياخد بس <span
-                        style="color: white; font-weight: bold;">10%</span> من المساحة. هاد التضخم هو "الثمن" اللي بنقصه
-                    عشان نحصل على بحث ذكي ودقيق!
-                </div>
-            </div>
-        </div>
-
-        <!-- Hybrid Solution -->
-        <h2 class="section-title" style="direction: ltr; text-align: left; color: #38bdf8; margin-top: 30px;">
-            Combination Schemes (The Hybrid Solution)</h2>
-        <div class="section-card">
-            <div style="border: 1px solid #fbbf24; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <div class="ar-text" style="text-align: center;">
-                    يمكن دمج الحلين معاً (Biword + Positional) لتحقيق أفضل توازن بين السرعة والحجم.
-                </div>
-            </div>
-
-            <div style="display: flex; gap: 15px;">
-                <!-- Fast Track -->
-                <div
-                    style="flex: 1; background: rgba(30, 58, 138, 0.2); padding: 15px; border-radius: 10px; border: 1px solid #3b82f6;">
-                    <div
-                        style="display: flex; justify-content: flex-end; align-items: center; gap: 5px; margin-bottom: 10px;">
-                        <div style="color: #60a5fa; font-size: 10pt; font-weight: bold; font-family: 'Inter';">Fast
-                            Track (Biword) ⚡</div>
-                    </div>
-                    <div class="ar-text" style="text-align: right; font-size: 9pt;">
-                        نستخدم الـ <span style="color: #60a5fa; font-weight: bold;">Biword</span> للعبارات المشهورة جداً
-                        (مثل "Michael Jackson") والكلمات الشائعة (مثل "The Who") لتجنب الـ Merge المكلف.
-                    </div>
-                </div>
-
-                <!-- Precision Track -->
-                <div
-                    style="flex: 1; background: rgba(20, 83, 45, 0.2); padding: 15px; border-radius: 10px; border: 1px solid #22c55e;">
-                    <div
-                        style="display: flex; justify-content: flex-end; align-items: center; gap: 5px; margin-bottom: 10px;">
-                        <div style="color: #fbbf24; font-size: 10pt; font-weight: bold; font-family: 'Inter';">Precision
-                            Track (Positional) 🎯</div>
-                    </div>
-                    <div class="ar-text" style="text-align: right; font-size: 9pt;">
-                        نستخدم الـ <span style="color: #fbbf24; font-weight: bold;">Positional Index</span> لبقية
-                        العبارات النادرة لضمان الدقة وتوفير المساحة.
-                    </div>
-                </div>
-            </div>
-            <div
-                style="text-align: center; color: #fbbf24; font-style: italic; font-size: 9pt; margin-top: 15px; direction: ltr;">
-                "Best of both worlds: Speed for common phrases, flexibility for everything else"
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div class="signature-brand"><span class="sig-name">Qudah</span><span class="sig-way">Way</span></div>
-            <div style="font-family: 'Inter', sans-serif; font-weight: 800;">PAGE 06</div>
-        </div>
-    </div>
-
 
     <!-- Navigation Script -->
     <script src="../nav.js"></script>
     <script src="../gooey.js"></script>
-    
-    
 </body>
 
 </html>

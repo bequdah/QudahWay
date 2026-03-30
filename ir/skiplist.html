@@ -4,15 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skip Lists - Full Study Guide</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>QudahWay | Skip Lists</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Satisfy&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="../QudahWay.png">
-
 
     <style>
         :root {
@@ -22,683 +18,418 @@
             --text-muted: #94a3b8;
             --primary: #38bdf8;
             --accent: #facc15;
-            --danger: #fb7185;
             --success: #34d399;
-            --border: #334155;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-light);
             font-family: 'Cairo', sans-serif;
-            font-size: 11pt;
-            line-height: 1.6;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-
-        /* A4 Page Container */
-        .page {
-            width: 210mm;
-            min-height: 297mm;
-            margin: 20px auto;
-            background: var(--bg-dark);
-            padding: 15mm;
-            /* Comfortable padding */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid #333;
-            position: relative;
-            overflow: hidden;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: 'Inter', 'Cairo', sans-serif;
-            font-weight: 800;
-        }
-
-        /* Header */
-        .header-section {
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            min-height: 100vh;
         }
 
-        .header-title {
-            font-size: 22pt;
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
             color: var(--primary);
             margin: 0;
         }
 
-        .header-subtitle {
-            font-size: 10pt;
+        .subtitle {
             color: var(--text-muted);
-            margin-top: 5px;
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
 
-        /* Content Cards */
-        .card {
+        /* Slide Section */
+        .slide-section {
             background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            page-break-inside: avoid;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .card-title {
-            color: var(--accent);
-            font-size: 14pt;
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Text Styles */
-        .pair-box {
-            margin-bottom: 15px;
-        }
-
-        .en-text {
-            display: block;
-            color: var(--accent);
-            /* Gold/Yellow for English */
-            font-family: 'Inter', sans-serif;
-            font-size: 10.5pt;
-            font-weight: 700;
-            margin-bottom: 4px;
-            text-align: left;
-            direction: ltr;
-            background: rgba(250, 204, 21, 0.1);
-            /* Subtle Gold background */
-            padding: 6px 10px;
-            border-left: 3px solid var(--accent);
-            /* Gold border */
-            border-radius: 4px;
-        }
-
-        .ar-text {
-            display: block;
-            color: #f8fafc;
-            /* Softer white */
-            font-size: 11pt;
-            line-height: 1.7;
-            margin-right: 5px;
-        }
-
-        /* Highlight Important Arabic Text */
-        b,
-        strong {
-            color: #f97316;
-            /* Vibrant Orange/Red for emphasis */
-            font-weight: 800;
-        }
-
-        .highlight {
-            color: var(--danger);
-            font-weight: bold;
-        }
-
-        /* Images */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            display: block;
-            margin: 10px auto;
-        }
-
-        /* Code Block */
-        pre {
-            background: #0d1117;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10pt;
-            overflow-x: auto;
-            direction: ltr;
-            text-align: left;
-            line-height: 1.5;
-            color: #e6edf3;
-        }
-
-        /* Page Footer */
-        .page-footer {
-            margin-top: auto;
-            border-top: 1px solid var(--border);
-            padding-top: 10px;
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* Center signature with page num */
-            color: var(--text-muted);
-            font-size: 9pt;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
             font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
         }
 
-        .signature-brand {
-            font-family: 'Satisfy', cursive;
-            font-size: 20pt;
-            margin-bottom: -8px;
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .sig-name {
-            color: #38bdf8;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
         }
 
-        .sig-way {
-            color: #facc15;
-            text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
-            margin-left: -2px;
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
         }
 
-        @media print {
-            body {
-                background: var(--bg-dark) !important;
-                margin: 0;
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .highlight-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
             }
 
-            .page {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                border: none;
-                page-break-after: always;
-                min-height: 297mm;
-                height: 297mm;
+            h1 {
+                font-size: 2.5rem;
             }
 
-            @page {
-                margin: 0;
-                size: A4;
+            .explanation-box {
+                padding: 20px;
             }
         }
     </style>
     <link rel="stylesheet" href="../gooey.css">
+
 </head>
 
 <body>
 
-    <div
-        style="max-width: 210mm; margin: 20px auto 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border); border-radius: 15px; backdrop-filter: blur(10px);">
-        <a href="index.html"
-            style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
-            onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
-            onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
-            العودة للوحة التحكم
-        </a>
-        
-    </div>
-
-    <!-- ================= PAGE 1: INTRO ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 1: The Concept</div>
-            </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">STUDY GUIDE</div>
-            </div>
-        </header>
-
-        <!-- Intro Story -->
-        <div class="card"
-            style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(250, 204, 21, 0.02));">
-            <h2 class="card-title"><span>🎮</span> قصة "سلم وحيّة"</h2>
-            <div class="ar-text">
-                تخيل إنك بتلعب <b>"سلم وحيّة"</b> مع أصحابك.. 🎲
-                <br>
-                في الطريقة العادية (Basic Merge)، إنت بتمشي المربعات واحد ورا الثاني (1، 2، 3...). هاض بطيء جداً.
-                <br><br>
-                لكن.. شو بصير أول ما توقف عند <b>"السلم"</b>؟ 🪜
-                <br>
-                فجأة، بتعمل "قفزة" خرافية من المربع 10 للمربع 50 بلمحة بصر! هاض "السلم" هو بالظبط الـ <b>Skip
-                    Pointer</b>. هو اختصار ذكي بيخليك تتعدى "مربعات" (بيانات) مش محتاجها.
-                <br><br>
-                ✨ <b>باختصار:</b> الـ Skip Lists هي الداتا وهي راكبة "سلالم" عشان تهرب من بطء المشي العادي!
-            </div>
-        </div>
-
-        <!-- Basic Merge Recall -->
-        <div class="card">
-            <h2 class="card-title"><span>⏪</span> Recall: Basic Merge</h2>
-            <div class="pair-box">
-                <span class="en-text">Walk through the two postings simultaneously, in time linear in the total number
-                    of postings entries.</span>
-                <span class="ar-text">
-                    تخيلوا معنا القائمتين (Brutus و Caesar):
-                    <br><br>
-                    🦶 <b>حبة حبة.. كيف العملية بتم؟</b>
-                    <br>
-                    1️⃣ بنبدأ بالمؤشر عند أول رقم في Brutus وهو (2) وأول رقم في Caesar وهو (1).
-                    <br>
-                    2️⃣ الـ (1) أصغر، فبنحرك مؤشر Caesar للرقم اللي بعده وهو (2).
-                    <br>
-                    3️⃣ صرنا عند (2) و (2) والنتيجة: <b>MATCH!</b> بنسجل الرقم 2 عنا وبنحرك الاثنين للرقم اللي بعده.
-                    <br>
-                    4️⃣ الآن إحنا عند (4) و (3) والـ (3) أصغر، فبنحرك Caesar للرقم (8).
-                    <br>
-                    5️⃣ صرنا عند (4) و (8) والـ (4) أصغر، فبنحرك Brutus للرقم (8).
-                    <br>
-                    6️⃣ صرنا عند (8) و (8) والنتيجة: <b>MATCH!</b> بنسجل الرقم 8 وبنحرك الاثنين.
-                    <br><br>
-                    ⏳ <b>إيش المشكلة؟</b>
-                    العملية هاي بتأخذ وقت <b>O(m+n)</b>، يعني لو القائمة فيها مليون عنصر، بدك تمشي مليون خطوة "حبة حبة"
-                    عشان توصل للآخر!
-                    <br><br>
-                    ❓ <b>هل بنقدر نعمل إشي أسرع؟</b> الجواب: نعم، وهاض هو دور الـ <b>Skip Lists</b>.
-                </span>
-            </div>
-            <img src="img/1.png" alt="Basic Merge Diagram" style="height: 120px; object-fit: contain;">
-        </div>
-
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 01</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 2: SKIP POINTERS ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 2: Why & How?</div>
-            </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">page 02</div>
-            </div>
-        </header>
-
-        <div class="card">
-            <h2 class="card-title"><span>⏭️</span> Augmenting Index with Skips</h2>
-            <div class="ar-text" style="margin-bottom: 10px;">
-                هنا نجاوب على الأسئلة الثلاثة المهمة (ليش، كيف، وين):
-            </div>
-            <img src="img/2.png" alt="Skip Diagram" style="height: 150px; object-fit: contain;">
-
-            <div class="pair-box">
-                <span class="en-text">Why? To skip postings that will not figure in the search results.</span>
-                <span class="ar-text">
-                    🤔 <b>ليش؟</b> <br>
-                    ببساطة، عشان "نقفز" فوق الأرقام اللي مش رح تدخل في النتيجة (Intersection). إذا إحنا عند رقم
-                    صغير وبندور على رقم كبير موجود في القائمة الثانية، الـ Skip بيخلينا نتعدى كل الأرقام "اللي
-                    بالنص" اللي أصغر منه، وهيك بنقلل عدد العمليات وبنسرع البحث.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">How? (at indexing time)</span>
-                <span class="ar-text">
-                    🛠️ <b>كيف؟</b> <br>
-                    هاض الإجراء بتم في <b>وقت الفهرسة</b> (Indexing Time). وإحنا بنبني الـ Index وبنكتب الـ
-                    Postings Lists، بنضيف مؤشر إضافي (Pointer) بياخدنا لمكان أبعد في القائمة. يعني التجهيز بتم
-                    مسبقاً مش وإحنا بنبحث.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">Where do we place skip pointers?</span>
-                <span class="ar-text">
-                    📍 <b>وين بنحطهم؟</b> <br>
-                    في قاعدة بنمشي عليها عشان نوازن بين "سرعة البحث" وبين "حجم التخزين": بنحط قفزة كل
-                    <b><span dir="ltr">&radic;L</span></b>
-                    (حيث L هو طول القائمة). <br>
-                    يعني لو القائمة فيها 100 عنصر، بنحط قفزة كل 10 نودات. هيك بنحصل على أفضل أداء للبحث بدون ما
-                    نكبر حجم الملف بشكل كبير.
-                </span>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 02</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 3: THE ALGORITHM ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 3: The Algorithm</div>
-            </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">page 03</div>
-            </div>
-        </header>
-
-        <div class="card">
-            <h2 class="card-title"><span>💻</span> Algorithm: Intersection with Skips</h2>
-            <div class="ar-text">
-                هاد هو الكود البرمجي (Pseudo-code) الرسمي لعملية الدمج باستخدام الـ <b>Skip Pointers</b>. ركز في
-                التفاصيل لأنها بتوضح كيف الـ "قفز" بصير بالظبط:
-            </div>
-
+    <div class="container">
+        <div class="header">
             <div
-                style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; direction: ltr; border: 1px solid rgba(56, 189, 248, 0.3); margin: 15px 0;">
-                <div
-                    style="color: #38bdf8; font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
-                    INTERSECTWITHSKIPS(p1, p2)</div>
-                <div style="color: #e2e8f0; line-height: 1.6; font-size: 9.5pt;">
-                    1. &nbsp;<b>answer</b> &larr; &lang; &rang;<br>
-                    2. &nbsp;<b>while</b> p1 &ne; NIL <b>and</b> p2 &ne; NIL<br>
-                    3. &nbsp;<b>do if</b> docID(p1) = docID(p2)<br>
-                    4. &nbsp;&nbsp;&nbsp;<b>then</b> ADD(answer, docID(p1))<br>
-                    5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p1 &larr; next(p1)<br>
-                    6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p2 &larr; next(p2)<br>
-                    7. &nbsp;<b>else if</b> docID(p1) &lt; docID(p2)<br>
-                    8. &nbsp;&nbsp;&nbsp;<b>then if</b> hasSkip(p1) <b>and</b> (docID(skip(p1)) &le; docID(p2))<br>
-                    <span style="color: #38bdf8;">9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>then while</b> hasSkip(p1)
-                        <b>and</b> (docID(skip(p1)) &le; docID(p2))</span><br>
-                    <span style="color: #38bdf8;">10. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>do</b> p1 &larr;
-                        skip(p1)</span><br>
-                    11. &nbsp;&nbsp;&nbsp;&nbsp;<b>else</b> p1 &larr; next(p1)<br>
-                    12. &nbsp;<b>else if</b> hasSkip(p2) <b>and</b> (docID(skip(p2)) &le; docID(p1))<br>
-                    13. &nbsp;&nbsp;&nbsp;<b>then while</b> hasSkip(p2) <b>and</b> (docID(skip(p2)) &le; docID(p1))<br>
-                    14. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>do</b> p2 &larr; skip(p2)<br>
-                    15. &nbsp;&nbsp;&nbsp;<b>else</b> p2 &larr; next(p2)<br>
-                    16. <b>return</b> answer
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">Skip Pointers & Skip Lists | تسريع الدمج بالقفزات</p>
+        </div>
+
+        <!-- Slide 01 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 01</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0001.jpg" alt="Slide 01" style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+
+        <!-- Slide 02 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0002.jpg" alt="Slide 02" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⏪ التذكير بالدمج العادي (Basic Merge)</div>
+                <div class="explanation-content">
+                    في الطريقة العادية بـ <span class="eng-term">simultaneously</span>نمشي على القائمتين مع بعض. هاض
+                    باخد وقت خطي <span class="eng-term">Linear Time</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">التكلفة (Cost):</span> إذا القائمة الأولى طولها <span
+                            class="eng-term">m</span> والثانية <span class="eng-term">n</span>، رح نحتاج عمليات بالأقصى
+                        <span class="eng-term">O(m+n)</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">السؤال:</span> Can we do better? <br><span
+                            class="highlight-b">الجواب:</span> Yes!
+                    </div>
                 </div>
             </div>
-
-            <div class="ar-text">
-                <b>💡 شرح الكود "حبة حبة":</b>
-                <br>
-                <b>الأسطر 4-6:</b> إذا لقينا الرقمين متساويين، هاد يعني إنه رقم الملف (DocID) موجود في الكلمتين، بنضيفه
-                للنتيجة وبنحرك القائمتين.
-                <br><br>
-                <b>الأسطر 8-10 (السرّ هون):</b> إذا كان الرقم في القائمة الأولى أصغر، بدل ما نحرك خطوة غبية لـ (Next)،
-                بنعمل فحص ذكي:
-                <br>
-                - هل الـ <b>Skip Pointer</b> لـ p1 رح يوديني لمكان لسه أصغر من أو يساوي p2؟
-                <br>
-                - إذا "نعم"، ليش أمشي خطوة خطوة؟ بضل أقفز (<b>while</b>) لحد ما أوصل لأبعد نقطة ممكنة قبل ما أتعدى p2.
-                <br><br>
-                <b>الأسطر 12-15:</b> نفس المنطق بنطبقه على القائمة الثانية إذا كان p2 هو الأصغر.
-                <br><br>
-                ✅ <b>النتيجة:</b> بنخلص البحث بسرعة صاروخية لأننا ما مرينا على كل عنصر بالنص!
-            </div>
         </div>
 
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 03</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 4: EXAMPLE WALKTHROUGH ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 4: Example Walkthrough</div>
+        <!-- Slide 03 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 03</span>
             </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">page 04</div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0003.jpg" alt="Slide 03" style="max-width: 100%; height: auto;">
             </div>
-        </header>
-
-        <div class="card">
-            <h2 class="card-title"><span>🔎</span> Query Processing Example</h2>
-            <img src="img/3.png" alt="Query Walkthrough" style="height: 150px; object-fit: contain;">
-            <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 15px;">Visualizing
-                the Skip: Moving from 11 directly to 31</p>
-
-            <div class="pair-box">
-                <span class="en-text">Suppose we've stepped through the lists until we process 8 on each list. We match
-                    it and advance.</span>
-                <span class="ar-text">
-                    تخيلوا إننا مشينا في القوائم ووصلنا لعند الرقم <b>8</b> ولقيناه مشترك في الكلمتين (Match).
-                    الآن بدنا نكمل ونشوف شو الرقم اللي بعده.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">We then have 41 and 11 on the lower. 11 is smaller.</span>
-                <span class="ar-text">
-                    الآن، المؤشر في القائمة العلوية واقف عند <b>41</b>، وفي القائمة السفلية واقف عند <b>11</b>.
-                    بما إن الـ 11 أصغر، لازم نحرك مؤشر القائمة السفلية عشان ندور على الـ 41.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">But the skip successor of 11 on the lower list is 31, so we can skip ahead past
-                    the intervening postings.</span>
-                <span class="ar-text">
-                    هون بيجي دور <b>ذكاء البحث</b>:
-                    <br>
-                    1️⃣ السيستم بيشوف إنه الـ 11 عندها <b>Skip Pointer</b> بيوصلنا للـ <b>31</b>.
-                    <br>
-                    2️⃣ بيسأل سؤال ذهبي لنفسه: هل الـ 31 لسه أصغر من أو يساوي الـ 41 اللي فوق؟ الجواب <b>نعم</b>.
-                    <br>
-                    3️⃣ 🚀 <b>قفزة!</b> بننتقل من 11 إلى 31 مباشرة، وبنتعدى (Skip) كل الأرقام اللي كانت بالنص (17، 21،
-                    28) بلمحة بصر.
+            <div class="explanation-box">
+                <div class="explanation-header">⏭️ تعزيز القوائم بإضافة قفزات (Skip Pointers)</div>
+                <div class="explanation-content">
+                    كيف رح نسرع البحث؟ التفاصيل كالتالي:
                     <br><br>
-                    ✅ هيك وفرنا مجهود كبير كان رح يضيع في مقارنات ما لها داعي!
-                </span>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 04</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 5: TRADE-OFFS ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 5: Placement & Trade-offs</div>
-            </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">page 05</div>
-            </div>
-        </header>
-
-        <div class="card">
-            <h2 class="card-title"><span>⚖️</span> Where do we place skips?</h2>
-            <div class="ar-text" style="margin-bottom: 10px;">
-                وصلنا لسؤال المليون: وين لازم نحط القفزات؟ هل نحط كثير ولا قليل؟ السلايد هاض بيشرح لنا <b>الموازنة</b>
-                (Trade-off) الدقيقة اللي بتحدد أداء النظام.
-            </div>
-            <img src="img/5.png" alt="Trade-offs" style="height: 120px; object-fit: contain;">
-            <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 15px;">Trade-off
-                Visualization: Frequent vs. Rare Skips</p>
-
-            <div class="pair-box">
-                <span class="en-text">More skips &rarr; shorter skip spans &rArr; more likely to skip. But lots of
-                    comparisons to skip pointers.</span>
-                <span class="ar-text">
-                    🔝 <b>السيناريو الأول: قفزات كثيرة (مسافات قصيرة)</b>
-                    <br>
-                    - <b>الميزة:</b> بصير "احتمال" إننا نلاقي فرصة للقفز كبيرة جداً، لأن المسافات قصيرة.
-                    <br>
-                    - <b>العيب:</b> السيستم رح يضيع وقت وهو بيعمل "مقارنات" (Comparisons) كثير مع الـ Skip Pointers
-                    نفسها. يعني بدل ما نوفر وقت، بنضيعه في "التفتيش" عن القفزات.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">Fewer skips &rarr; few pointer comparison, but then long skip spans &rArr; few
-                    successful skips.</span>
-                <span class="ar-text">
-                    🔻 <b>السيناريو الثاني: قفزات قليلة (مسافات طويلة)</b>
-                    <br>
-                    - <b>الميزة:</b> ما بنعمل مقارنات كثير مع الـ Pointers، فـ "تكلفة" الفحص قليلة.
-                    <br>
-                    - <b>العيب:</b> القفزات بتصير "نادرة". غالباً القفزة رح توديك لمكان أبعد بكثير من اللي بتدور عليه،
-                    فبضطر السيستم يرفض القفزة ويمشي عادي (Linear Scan). هيك ما بنكون استفدنا من الـ Skip أصلاً!
-                </span>
-            </div>
-        </div>
-
-        <div class="card" style="border: 2px dashed var(--accent); background: rgba(250, 204, 21, 0.05);">
-            <h2 class="card-title" style="color: var(--accent);"><span>🏆</span> الحل المثالي | The Golden Rule</h2>
-            <div class="ar-text" style="font-size: 1.2rem; text-align: center;">
-                أفضل موازنة هي وضع قفزة كل <b><span dir="ltr">&radic;L</span></b> نود.
-            </div>
-            <div class="ar-text" style="text-align: center; margin-top: 5px; font-size: 0.9rem; opacity: 0.8;">
-                هيك بنضمن أسرع وقت بحث ممكن مع أقل استهلاك للمساحة والمقارنات!
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 05</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 6: TECHNICAL NOTES ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 6: Technical Considerations</div>
-            </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">page 06</div>
-            </div>
-        </header>
-
-        <div class="card">
-            <h2 class="card-title"><span>⚙️</span> اعتبارات تقنية إضافية</h2>
-
-            <div class="pair-box">
-                <span class="en-text">Simple heuristic: for postings of length L, use &radic;L evenly-spaced skip
-                    pointers</span>
-                <span class="ar-text">
-                    <b>التوزيع المتساوي:</b> في أبسط حالتها، الخوارزمية بتقسم القائمة لمسافات متساوية بناءً على جذر
-                    الطول. يعني لو عندك 100 عنصر، بنحط قفزة كل 10.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">This ignores the distribution of query terms.</span>
-                <span class="ar-text">
-                    <b>مشكلة التوزيع:</b> الطريقة هاي "غبية" شوي لأنها بتفترض إن كل الكلمات بنبحث عنها بنفس الطريقة،
-                    بينما الحقيقة إن فيه كلمات عليها ضغط بحث أكتر ولازم تقسيم القفزات فيها يكون أذكى.
-                </span>
-            </div>
-
-            <div class="pair-box">
-                <span class="en-text">Easy if the index is relatively static; harder if L keeps changing because of
-                    updates.</span>
-                <span class="ar-text">
-                    <b>تحدي التحديثات:</b> الموضوع سهل لما يكون الـ Index ثابت وما بيتغير (Static). لكن لو الـ Index
-                    بيتحدث باستمرار وبنزيد عليه ملفات جديدة، طول القائمة <b>L</b> رح يضل يتغير، وهون بصير إعادة حساب
-                    أماكن القفزات عملية "صعبة" وبتحتاج مجهود إضافي.
-                </span>
-            </div>
-        </div>
-
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 06</div>
-        </div>
-    </div>
-
-    <!-- ================= PAGE 7: EXERCISE ================= -->
-    <div class="page">
-        <header class="header-section">
-            <div>
-                <h1 class="header-title">Skip Lists</h1>
-                <div class="header-subtitle">Part 7: Challenge</div>
-            </div>
-            <div>
-                <div style="font-weight: bold; color: var(--accent);">page 07</div>
-            </div>
-        </header>
-
-        <div class="card">
-            <h2 class="card-title"><span>💪</span> Exercise: Apply the Algorithm</h2>
-            <div class="ar-text" style="margin-bottom: 10px;">
-                وصلنا لأهم جزء! هاض التمرين من السلايدات وبدنا نحله مع بعض عشان نتأكد إننا فاهمين كيف الـ <b>Skip
-                    Pointers</b> بتشتغل فعلياً.
-            </div>
-            <img src="img/4.png" alt="Exercise" style="height: 120px; object-fit: contain;">
-            <p style="color: var(--primary); font-size: 0.9rem; text-align: center; margin-bottom: 15px;">Exercise: Find
-                the intersection of Brutus and Caesar using skips.</p>
-
-            <div
-                style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary); margin-top: 10px;">
-                <h3 style="color: var(--primary); margin-bottom: 10px;">🎯 الحل خطوة بخطوة:</h3>
-                <div class="ar-text">
-                    <b>1️⃣ البداية ومطابقة (2):</b>
-                    <br>
-                    بنمشي خطوة بخطوة في الأول، وبنلاحظ إن الرقم <b>2</b> موجود في القائمتين. هاض أول <b>Match</b>!
-                    <br><br>
-                    <b>2️⃣ مطابقة (8):</b>
-                    <br>
-                    بنمشي خطوة بخطوة في الأول، وبرضه بنلاحظ إن الرقم <b>8</b> موجود في القائمتين. هاض ثانٍٍ
-                    <b>Match</b>!
-                    <br><br>
-                    <b>3️⃣ اللحظة الحاسمة (القفزة):</b>
-                    <br>
-                    - الآن إحنا عند <b>41</b> (فوق) و <b>11</b> (تحت). الرقم 11 أصغر، فبدنا نحرك القائمة اللي تحت.
-                    <br>
-                    - بنفحص الـ Skip Pointer تبع الـ 11 وبنلاقيه بيودينا للـ <b>31</b>.
-                    <br>
-                    - هل الـ 31 &le; 41؟ <b>نعم أكيد!</b>
-                    <br>
-                    - 🚀 <b>Skip!</b> بنقفز فوراً للـ 31 وبنتجاوز الأعداد (17، 21، 28).
-                    <br><br>
-                    <b>4️⃣ النتيجة النهائية:</b>
-                    <br>
-                    الأرقام المشتركة اللي لقيناها هي: <b>{2, 8}</b>. والـ 31 ما لقينا إلها مثيل فوق فبنوقف لأننا وصلنا
-                    لآخر القوائم.
+                    <div class="detail-item">
+                        <span class="highlight-b">ليش؟ (Why?):</span> عشان نعمل تخطي (Skip) للملفات اللي أصلاً ما رح
+                        تكون ضمن نتيجة البحث النهائية.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">كيف؟ (How?):</span> هاض الإشي بنجهزه وإحنا بنبني الفهرس أصلاً <span
+                            class="eng-term">at indexing time</span>. القفزات بتكون جاهزة قبل البحث ومزروعة في القوائم.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">وين بنحطهم؟ (Where?):</span> رح نجاوب عليه في السلايدات القادمة
+                        بناءً على مقاييس أداء ومعادلة حسابية.
+                    </div>
                 </div>
             </div>
-            <div
-                style="margin-top: 15px; padding: 10px; background: rgba(52, 211, 153, 0.1); border-radius: 8px; border: 1px solid rgba(52, 211, 153, 0.2); text-align: center;">
-                <span style="color: #34d399; font-weight: 800;">🚀 تحدي تم اجتيازه!</span>
-                <p class="ar-text" style="font-size: 0.9rem; margin-top: 5px;">إنت الآن فاهم كيف السيستم بيوفر وقت
-                    "الملايين" من عمليات البحث!</p>
+        </div>
+
+        <!-- Slide 04 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0004.jpg" alt="Slide 04" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">💻 كيف الخوارزمية بتشتغل برمجياً؟</div>
+                <div class="explanation-content">
+                    هاض الـ <span class="eng-term">Pseudo-code</span> بيشرح خوارزمية الـ <span
+                        class="eng-term">Intersection</span> للقفزات بشكل متسلسل:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-success">1. التطابق:</span> إذا الرقمين متساويين، بنخزنه بالنتيجة وبنحرك
+                        الاثنين.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">2. المقارنة:</span> إذا رقم <span class="eng-term">p1</span> أصغر،
+                        بنسأل: هل في قفزة عن طريق <span class="eng-term">hasSkip(p1)</span> توديني لرقم أصغر أو يساوي
+                        <span class="eng-term">p2</span>؟
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">3. القفز (Skip):</span> طالما الجواب "نعم صحيح"، بنضل نقفز باستخدام
+                        <span class="eng-term">skip(p1)</span>. وإلا بنمشي خطوة واحدة العادية <span
+                            class="eng-term">next(p1)</span>. والمنطق بينطبق عالجهتين!
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="page-footer">
-            <div><span class="signature-brand"><span class="sig-name">Qudah</span><span
-                        class="sig-way">Way</span></span></div>
-            <div>Page 07</div>
+        <!-- Slide 05 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0005.jpg" alt="Slide 05" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">🔎 مثال عملي على معالجة الاستعلام</div>
+                <div class="explanation-content">
+                    نشوف مع بعض بالمثال كيف الخوارزمية قللت العمليات:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">الخطوة السابقة:</span> لنفرض إننا وصلنا عند الرقم <span
+                            class="eng-term">8</span> ولقيناه متطابق، فبنسجله وبنتقدم للي بعده.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">الوضع الحالي:</span> الرقم اللي فوق <span class="eng-term">41</span>
+                        واللي تحت <span class="eng-term">11</span>. الـ 11 أصغر بالمقارنة فبدنا نحركه.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-success">القفزة (Skip!):</span> الـ 11 عنده قفزة للـ <span
+                            class="eng-term">31</span>. والـ 31 أقل من الـ 41 اللي بندور عليه فوق.
+                        إذن ليش نمشي حبة حبة على الأرقام بالنص <span class="eng-term">intervening postings</span>؟ بنعمل
+                        قفزة مباشرة للـ 31 🚀.
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <!-- Slide 06 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0006.jpg" alt="Slide 06" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header"> تمرين </div>
+                <div class="explanation-content">
+                    هاض التمرين بورينا إن القفزات بتنعمل في القائمتين حسب الحاجة لتسريع الوصول:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">السيناريو لتكملة الحل:</span> عنا حالياً <span
+                            class="eng-term">31</span> و <span class="eng-term">41</span>، الـ 31 لسه أصغر من 41 فبنمشي
+                        للـ <span class="eng-term">41</span> تحت لأنها النقطة التالية.
+                        <br>أخيراً بنوصل وتطابق الـ <span class="eng-term">41</span> فوق وتحت. تخيل المجهود الكبير
+                        والوقت الضائع للكمبيوتر لو قارنا الأرقام بيناتهم بدون الـ Skip Pointer!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 07 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0007.jpg" alt="Slide 07" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⚖️ الموازنة: وين نحط القفزات؟</div>
+                <div class="explanation-content">
+                    سؤال المليون: شو الطول المناسب للقفزة؟ عنا حالتين:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-success">قفزات كثيرة (بطول قصير):</span> فرصة القفز بتكون كبيرة، <span
+                            class="highlight-danger">لكن</span> رح نضيع وقت وإحنا بنقارن المؤشرات نفسها مع الرقم اللي
+                        بندور عليه وبصير الكود مكلف حسابياً بدون فايدة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">قفزات قليلة (بطول كبير):</span> ما في مقارنات كثيرة للمؤشرات،
+                        <span class="highlight-danger">لكن</span> مسافات القفز بتصير طويلة جداً، وفرصة إن القفزة تنجح
+                        بالعبور بتصير نادرة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 08 -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;"></span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch6/6- Skip_lists_page-0008.jpg" alt="Slide 08" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⚙️ الحل النهائي (Heuristic)</div>
+                <div class="explanation-content">
+                    عشان نحل مشكلة الفجوة بالمقارنة، استخدمنا معادلة رياضية استدلالية:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-success">القاعدة الذهبية الاستدلالية:</span> إذا كان طول القائمة <span
+                            class="eng-term">L</span>، بنحط قفزة كل <span class="eng-term">&radic;L</span>. (مثلاً:
+                        قائمة طولها 100، بنحط قفزة كل 10 أرقام بانتظام).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">المشكلة 1:</span> هاض بيطنش كلياً "توزيع" كلمات البحث <span
+                            class="eng-term">distribution of query terms</span>. بعض الكلمات بينبحث عنها أكثر من غيرها.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-danger">المشكلة 2:</span> هاض الحل سهل لو كان الفهرس ثابت <span
+                            class="eng-term">Static</span> وحجمه ما بتغير من البداية. لكن لو بيتحدث باستمرار (الـ L
+                        بيتغير)، رح نضطر نعيد حساب وتعديل وتوزيع أماكن القفزات وهاض بياخد مجهود وتكلفة كبيرة جداً <span
+                            class="eng-term">harder if L keeps changing</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!-- Navigation Script -->
     <script src="../nav.js"></script>
     <script src="../gooey.js"></script>
-    
-    
 </body>
 
 </html>
