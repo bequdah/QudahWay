@@ -231,6 +231,8 @@ document.addEventListener("DOMContentLoaded", function () {
         menuHTML += `
             <div class="nav-header" style="font-size: 1.1rem; color: #38bdf8;">Smart Systems</div>
             <a href="Introduction to Foundation.html" class="nav-link"> 01. Intro to Foundation Models</a>
+            <a href="NLP_CV.html" class="nav-link"> 02. NLP & Computer Vision</a>
+            <a href="CNN_RNN.html" class="nav-link"> 03. CNN & RNN Architectures</a>
         `;
     }
 

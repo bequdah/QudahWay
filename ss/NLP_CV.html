@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | NLP & Computer Vision</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .slide-section:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 30px 60px -12px rgba(56, 189, 248, 0.15);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> SS</h1>
+            <p class="subtitle">NLP and Computer Vision | معالجة اللغات والرؤية الحاسوبية</p>
+        </div>
+
+
+
+        <!-- Slide 1 -->
+        <div class="slide-section" id="slide1">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Introduction to NLP & CV</span>
+                <span class="slide-number">Slide 01</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0001.jpg" alt="Slide 1" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">البداية.. نظرة عامة 🌟</div>
+                <div class="explanation-content">
+                    هون مبلشين نعرف شو يعني <span class="eng-term">NLP</span> و <span class="eng-term">Computer
+                        Vision</span> وكيف بيكملوا بعض في الأنظمة الذكية.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide-section" id="slide2">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Yann LeCun's Vision (Nvidia GTC 2025)</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0002.jpg" alt="Slide 2" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">يانو ليكون فجرها بوجه الـ LLMs! </div>
+                <div class="explanation-content">
+                    الأب الروحي للذكاء الاصطناعي <span class="highlight-y">Yann
+                        LeCun</span> بطلع بمؤتمر <span class="eng-term">Nvidia GTC2025</span> وبقولك "أنا بطلت مهتم بالـ
+                    LLMs"! ليش يا يانو؟
+                    <div class="detail-item">
+                        <span class="highlight-b">طواحين Tokens:</span> بقولك الـ <span class="eng-term">LLMs</span>
+                        الحالية مجرد مولدات لرموز (<span class="eng-term">Token generators</span>) ومحصورة في "فضاء
+                        محدد" (<span class="eng-term">discrete space</span>).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">الجيل الجاي لازم يعمل 3 شغلات:</span>
+                        <ul>
+                            <li>يفهم العالم الفيزيائي (<span class="eng-term">understand physical world</span>).</li>
+                            <li>يكون عنده ذاكرة دائمة (<span class="eng-term">persistent memory</span>).</li>
+                            <li>والأهم: يكون عنده قدرة على التخطيط والمنطق (<span class="eng-term">plan and
+                                    reason</span>).</li>
+                        </ul>
+                    </div>
+                    يعني بالعربي، إنتو بتلعبوا بالكلمات، بس إحنا بدنا ذكاء حقيقي بفهم كيف الدنيا ماشية! 🧠🌍
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-section" id="slide3">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Background in NLP</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0003.jpg" alt="Slide 3" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تاريخ وماهية الـ NLP 📖⏳</div>
+                <div class="explanation-content">
+                    شو يعني <span class="eng-term">NLP</span> أصلاً؟ هو فرع من فروع الـ AI واللغويات اللي بخلي الكمبيوتر
+                    "يفهم" و "يفسر" لغة البشر (نصوص أو كلام) زينا تماماً.
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-b">ليش طلع الـ NLP؟</span> عشان يحل مشاكل التفاعل بين الإنسان والآلة.
+                        السلايد بيعرض أهم المهام اللي بنشوفها اليوم مثل:
+                        <br>
+                        <span class="highlight-y">Machine Translation</span> (الترجمة)، <span
+                            class="highlight-y">Sentiment Analysis</span> (تحليل المشاعر)، وحتى الـ <span
+                            class="highlight-y">Speech Recognition</span> (تحويل الكلام لنص).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-section" id="slide4">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Machine Translation</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0004.jpg" alt="Slide 4" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 1: الترجمة الآلية (Machine Translation) 🌐🔠</div>
+                <div class="explanation-content">
+                    ببساطة هي عملية "نقل" المعنى من لغة للغة ثانية بدون تدخل بشري.
+                    <div class="detail-item">
+                        <span class="highlight-y">الهدف:</span> الكمبيوتر بياخد الـ <span class="eng-term">Input
+                            Text</span> بلغة معينة، وبطلعه باللغة الهدف (<span class="eng-term">Target Language</span>).
+                        زي ما بنشوف بـ Google Translate والمترجمات القوية.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-section" id="slide5">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Sentiment Analysis</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0005.jpg" alt="Slide 5" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 2: تحليل المشاعر (Sentiment Analysis) </div>
+                <div class="explanation-content">
+                    هون بنخلي الموديل يقدر "يحس" بالكلام!
+                    <div class="detail-item">
+                        مهمة الـ <span class="eng-term">Sentiment Analysis</span> إنها تحدد "النبرة" أو الشعور المكتوب
+                        في النص بـ 3 حالات رئيسية:
+                        <ul>
+                            <li><span class="highlight-success">إيجابي (Positive):</span> زي " الأكل كان فخم!".
+                            </li>
+                            <li><span class="highlight-danger">سلبي (Negative):</span> "الأكل بارد وما بنوكل".</li>
+                            <li><span class="highlight-y">محايد (Neutral):</span> "طلبت الأكل ووصلني".</li>
+                        </ul>
+                    </div>
+                    مفيدة جداً للشركات عشان تشوف آراء الناس بمنتجاتها.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-section" id="slide6">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Text Generation</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0006.jpg" alt="Slide 6" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 3: توليد النصوص (Text Generation) ✍️🤖</div>
+                <div class="explanation-content">
+                    هون بنلعب لعبة الـ ChatGPT! إنتاج نص يشبه كتابة البشر بناءً على مدخلات معينة.
+                    <div class="detail-item">
+                        <span class="highlight-b">أمثلة:</span> ردود الـ <span class="eng-term">Chatbots</span>، كتابة
+                        محتوى جديد، وحتى التلخيص (<span class="eng-term">Summarization</span>).
+                    </div>
+                    زي ما إحنا شايفين بالمثال عن <span class="highlight-y">Michelle Obama</span>، الموديل بياخد معلومات
+                    مفككة وبحولها لقصة متكاملة ومترابطة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-section" id="slide7">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Text Classification</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0007.jpg" alt="Slide 7" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 4: تصنيف النصوص (Text Classification) 📁🏷️</div>
+                <div class="explanation-content">
+                    بدنا نرتب "كركبة" الداتا! الموديل بوخد النص وبحطه في "خزانة" أو فئة معينة مسبقاً.
+                    <div class="detail-item">
+                        ضروري جداً عشان ننظم كميات الداتا العظيمة. بالسلايد معطينا أمثلة زي تصنيف المقالات لـ: <span
+                            class="highlight-b">Art</span> (فنون)، <span class="highlight-b">Business</span> (بيزنس)،
+                        <span class="highlight-b">Culture</span> (ثقافة)، أو <span
+                            class="highlight-b">Entertainment</span> (ترفيه).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide-section" id="slide8">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Named Entity Recognition (NER)</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0008.jpg" alt="Slide 8" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 5: التعرف على الكيانات المسماة (NER) </div>
+                <div class="explanation-content">
+                    تخيل الموديل معه "هاي لايتر" وبنقي الكلمات المهمة! مهمته يحدد ويصنف الكلمات اللي بتمثل أسماء أشخاص،
+                    أماكن، أو منظمات.
+                    <div class="detail-item">
+                        <span class="highlight-y">أشهر الكيانات:</span> <br>
+                        - <span class="eng-term">PER</span>: شخص (زي محمد القضاه). <br>
+                        - <span class="eng-term">LOC</span>: مكان (زي عمان). <br>
+                        - <span class="eng-term">ORG</span>: منظمة (زي Nvidia).
+                    </div>
+                    بالمثال: نص الوظيفة بـ <span class="highlight-b">Atlanta GA</span> الموديل لقطها فوراً إنها <span
+                        class="eng-term">Location</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide-section" id="slide9">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Question Answering</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0009.jpg" alt="Slide 9" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 6: الإجابة على الأسئلة (Question Answering) ❓💡</div>
+                <div class="explanation-content">
+                    هون بنحكي عن بناء أنظمة بتقدر "تجاوب" على أسئلة البشر بلغة طبيعية.
+                    <div class="detail-item">
+                        الموديل بيقرأ النص (<span class="eng-term">Context</span>)، وبستخرج منه الإجابة المناسبة.
+                        بالمثال مفرجينا سؤال "شو عاصمة ألمانيا؟" (Question)، والموديل بطلع الإجابة <span
+                            class="highlight-success" style="font-weight: 800;">"Berlin"</span> من النص الموجود.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide-section" id="slide10">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">NLP Task: Speech Recognition</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0010.jpg" alt="Slide 10" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 7: التعرف على الكلام (Speech Recognition) 🎤➡️📝</div>
+                <div class="explanation-content">
+                    تحويل "الصوت" لـ "نص". هاي بنسميها <span class="eng-term">Speech-to-text</span>.
+                    <div class="detail-item">
+                        العملية بتمر بخطوات فنية: <br>
+                        تعديل وتحسين الصوت (<span class="eng-term">Speech Enhancement</span>) ⬅️ استخراج الميزات (<span
+                            class="eng-term">Feature Extraction</span>) ⬅️ والـ <span class="eng-term">Phonetic unit
+                            recognition</span> (التعرف على الوحدات الصوتية) عشان بالنهاية تطلع كلمة "Hello" مكتوبة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide-section" id="slide11">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Why NLP Matters?</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0011.jpg" alt="Slide 11" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش الـ NLP بغير حياتنا؟ (Why NLP Matters) 🌟📈</div>
+                <div class="explanation-content">
+                    الـ NLP هو "الجسر" اللي بشبك بين تواصلنا كبشر وفهم الآلات إلنا.
+                    <div class="detail-item">
+                        <span class="highlight-y">تطبيقات عملية:</span>
+                        <ul>
+                            <li><span class="highlight-b">Customer Support:</span> بالـ <span class="eng-term">Automated
+                                    chatbots</span> اللي بتجاوب علينا دايماً.</li>
+                            <li><span class="highlight-b">Healthcare:</span> تحليل السجلات الطبية بكبسة زر.</li>
+                            <li><span class="highlight-b">Finance:</span> فحص التقارير المالية وتحليلها.</li>
+                            <li><span class="highlight-b">Social Media Monitoring:</span> تحليل مشاعر الناس على السوشيال
+                                ميديا وتلخيص آرائهم.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide-section" id="slide12">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Intro to Computer Vision</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0012.jpg" alt="Slide 12" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">فتحنا عيون الكمبيوتر (Computer Vision)! 👀🤖</div>
+                <div class="explanation-content">
+                    خلصنا من الكلمات والنصوص، هسا ننتقل لعالم الصور والفيديوهات. الـ <span class="eng-term">Computer
+                        Vision</span> هو اللي بخلي الآلة "تشوف" وتفهم المحتوى البصري زينا.
+                    <div class="detail-item">
+                        <span class="highlight-b">ليش مهم؟</span> تخيل السيارات ذاتية القيادة، أو أنظمة المراقبة الذكية،
+                        وحتى الفلاتر تاعت السناب شات.. كلها بتعتمد على هاض العلم. هون بنحاول نحاكي "العين البشرية" بس
+                        ببرمجة ورياضيات.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide-section" id="slide13">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Computer Vision Tasks</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0013.jpg" alt="Slide 13" style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide-section" id="slide14">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CV Task: Classification</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0014.jpg" alt="Slide 14" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 1: تصنيف الصور (Classification) 🐈🐕</div>
+                <div class="explanation-content">
+                    هاي أبسط مهمة: "شو في بالصورة؟". بنعطي الموديل صورة <span class="eng-term">Input</span>، وبقولنا هاي
+                    "بس" أو "كلب".
+                    <div class="detail-item">
+                        <span class="highlight-b">كيف بشتغل؟</span> الصورة بتدخل على طبقات من الشبكات العصبية (<span
+                            class="eng-term">Neural Networks</span>) اللي بتتعرف على الأنماط (زي شكل الأذان، العيون،
+                        الفرو) عشان بالنهاية تطلع <span class="eng-term">Output</span> تصنيف نهائي.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide-section" id="slide15">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CV Task: Detection</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0015.jpg" alt="Slide 15" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 2: الكشف عن الأشياء (Object Detection) 📦🚲</div>
+                <div class="explanation-content">
+                    هون الكمبيوتر مش بس بحكي شو شايف، لا.. وبقلك "وين" مكانه بالزبط!
+                    <div class="detail-item">
+                        الموديل برسم مربع (<span class="eng-term">Bounding Box</span>) حول كل إشي لقطه. شايفين بالمثال؟
+                        لقط البسكليت (<span class="highlight-danger">bicycle</span>)، والكلب (<span
+                            class="highlight-y">dog</span>)، والسيارة (<span class="highlight-success">car</span>).
+                    </div>
+                    هاي المهمة أساسية للسيارات اللي بتمشي لحالها عشان تعرف وين المشاة ووين السيارات الثانية.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide-section" id="slide16">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CV Task: Segmentation</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0016.jpg" alt="Slide 16" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 3: التجزئة (Segmentation) 🎨🧩</div>
+                <div class="explanation-content">
+                    هاي ليفل "الوحش"! مش بس مربعات، هون بنحدد حدود كل إشي "بالبكسل".
+                    <div class="detail-item">
+                        بصير الكمبيوتر يلون كل منطقة لحال: <br>
+                        - السما بلون أزرق (<span class="highlight-b">Sky</span>). <br>
+                        - الشجر بلون بنفسجي (<span class="highlight-danger">Trees</span>). <br>
+                        - البس بلون أصفر (<span class="highlight-y">Cat</span>). <br>
+                        - العشب بلون أخضر (<span class="highlight-success">Grass</span>).
+                    </div>
+                    هاض النوع من الدقة مطلوب جداً في الصور الطبية (تحديد الأورام مثلاً) عشان نعرف حجمها ومكانها بالملي.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide-section" id="slide17">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CV Task: Visual Question Answering (VQA)</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0017.jpg" alt="Slide 17" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 4: الإجابة البصرية (VQA) 🖼️💬❓</div>
+                <div class="explanation-content">
+                    هون دمجنا الـ <span class="eng-term">NLP</span> مع الـ <span class="eng-term">CV</span>. بنسأل
+                    الكمبيوتر سؤال عن صورة قدامه وهو بجاوب.
+                    <div class="detail-item">
+                        <span class="highlight-y">أمثلة من السلايد:</span> <br>
+                        - "مين لابس نظارات؟" 🕵️ ⬅️ بجاوبك الزلمة ولا المرة. <br>
+                        - "وين الولد قاعد؟" 👶 ⬅️ بقلك بالثلاجة (<span class="eng-term">fridge</span>). <br>
+                        - "هل المظلية مقلوبة؟" 🌂 ⬅️ بقلك نعم أو لأ.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide-section" id="slide18">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CV Task: Captioning</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch2/L2 -NLP and CV_page-0018.jpg" alt="Slide 18" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المهمة 5: وصف الصور (Captioning) 📝🌉</div>
+                <div class="explanation-content">
+                    هون بدنا الكمبيوتر يكتب "قصة" قصيرة توصف اللي شايفه.
+                    <div class="detail-item">
+                        الموديل لازم يربط بين الأشياء اللي لقطها ويوصف علاقتهم ببعض. <br>
+                        - "كمنجة معروضة بصندوق زجاجي" (<span class="eng-term">a cello is on display</span>). <br>
+                        - "عنكبوت قاعد على الأرض جنب قطعة عملة" (<span class="eng-term">a spider sitting next to a
+                            coin</span>). <br>
+                        - "همبرغر وبطاطا بصحن" (<span class="eng-term">A hamburger and fries on a plate</span>).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation JS (Gooey effect) -->
+    <script src="../nav.js"></script>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>

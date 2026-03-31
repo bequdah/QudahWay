@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | CNN & RNN Architectures</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #34d399;
+            /* Green accent for CNN/RNN */
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .slide-section:hover {
+            border-color: rgba(52, 211, 153, 0.2);
+            box-shadow: 0 30px 60px -12px rgba(52, 211, 153, 0.15);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s; font-size: 0.9rem;">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> SS</h1>
+            <p class="subtitle">CNN and RNN Architectures | معماريات الشبكات التلافيفية والمتكررة</p>
+        </div>
+
+        <!-- Slides List -->
+        <div id="slides-container">
+            <!-- Slide 1 -->
+            <div class="slide-section" id="slide1">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">CNN & RNN Overview</span>
+                    <span class="slide-number">Slide 01</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0001.jpg" alt="Slide 1" style="max-width: 100%; height: auto;">
+                </div>
+
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide-section" id="slide2">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Chapter Outline: What we will cover</span>
+                    <span class="slide-number">Slide 02</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0002.jpg" alt="Slide 2" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو رح نغطي في هاض الشابتر؟ 🗺️🧭</div>
+                    <div class="explanation-content">
+                        في هاض الجزء رح نغوص في عالم الشبكات العصبية العميقة المتخصصة. الشابتر مقسوم لجزئين أساسيين:
+                        <div class="detail-item">
+                            <span class="highlight-b">1. الـ RNN:</span> رح نفهم أساسيات الشبكات المتكررة، ونشوف وحوش زي
+                            الـ <span class="eng-term">LSTM</span> والـ <span class="eng-term">GRU</span> وكيف بنستخدمهم
+                            في تطبيقات الداتا المتسلسلة.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-y">2. الـ CNN:</span> رح نحكي عن أساسيات شبكات الرؤية، ونمر على
+                            معمارياتها الأسطورية زي <span class="eng-term">ResNet</span> و <span
+                                class="eng-term">UNet</span> و <span class="eng-term">MobileNet</span>، ونشوف وين
+                            بنستعملهم في حياتنا.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide-section" id="slide3">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Training: Forward & Backward Pass</span>
+                    <span class="slide-number">Slide 03</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0003.jpg" alt="Slide 3" style="max-width: 100%; height: auto;">
+                </div>
+
+            </div>
+            <!-- Slide 4 -->
+            <div class="slide-section" id="slide4">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Introduction to Recurrent Neural Networks (RNN)</span>
+                    <span class="slide-number">Slide 04</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0004.jpg" alt="Slide 4" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مقدمة في الـ RNN.. مش زي الشبكات العادية! �🧠</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">Recurrent Neural Networks (RNNs)</span> بتشتغل بطريقة مختلفة عن
+                        الشبكات اللي تعودنا عليها.
+                        <div class="detail-item">
+                            الشبكات العادية بتاخد كل المدخلات مرة وحدة وبتمشي باتجاه واحد (<span class="eng-term">One
+                                Direction</span>). بس في الـ <span class="eng-term">RNN</span>، المعلومات "بتلف وبترجع"
+                            للنظام بعد كل خطوة. تخيلها زي قراءة جملة؛ عشان تتوقع الكلمة الجاية، لازم تتذكر الكلمات اللي
+                            مرت عليك قبل، مش بس الكلمة الحالية.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="slide-section" id="slide5">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RNNs: The Power of Memory</span>
+                    <span class="slide-number">Slide 05</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0005.jpg" alt="Slide 5" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">قوة الذاكرة في الـ RNN 💾�</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">RNNs</span> بتسمح للشبكة إنها "تتذكر" المعلومات السابقة عن طريق تمرير
+                        مخرجات خطوة معينة للخطوة اللي بعدها.
+                        <div class="detail-item">
+                            عشان تتذكر، بنحتاج "ذاكرة" (<span class="eng-term">Memory</span>). هاض الإشي بيساعد الشبكة
+                            تفهم "السياق" (<span class="eng-term">Context</span>) للي صار قبل، وبالتالي بطلع توقعات أدق
+                            بكثير، زي لما نقرر شو الكلمة الأنسب لتكملة جملة معينة بناءً على تاريخ الجملة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 6 -->
+            <div class="slide-section" id="slide6">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RNN vs Feedforward: Key Differences</span>
+                    <span class="slide-number">Slide 06</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0006.jpg" alt="Slide 6" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو الفرق بين الـ RNN والشبكات العادية (FNN)؟ ⚖️🛠️</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">Feedforward Neural Networks (FNNs)</span> بتعالج البيانات في اتجاه
+                        واحد من المدخلات للمخرجات، وبدون ما تحتفظ بأي معلومة من المدخلات القديمة.
+                        <div class="detail-item">
+                            <span class="highlight-danger">المشكلة:</span> الـ <span class="eng-term">FNN</span> بتعاني
+                            مع البيانات المتسلسلة لأنها "بدون ذاكرة". الـ <span class="eng-term">RNN</span> بتحل هاي
+                            المشكلة عن طريق إضافة حلقات (<span class="eng-term">Loops</span>) بتسمح للمعلومات ترجع وتغذي
+                            الشبكة، وهيك بصير عندها قدرة على فهم السياق.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 7 -->
+            <div class="slide-section" id="slide7">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Visual Comparison: RNN vs Feedforward</span>
+                    <span class="slide-number">Slide 07</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0007.jpg" alt="Slide 7" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مقارنة بصرية بالرسم 🎨🖌️</div>
+                    <div class="explanation-content">
+                        الرسمة بوضوح بكتير الفرق:
+                        <div class="detail-item">
+                            - <span class="highlight-b">(b) Feed-Forward:</span> خطوط مستقيمة من الشمال لليمين. كل مدخل
+                            بطلع مخرج وانتهى. <br>
+                            - <span class="highlight-y">(a) Recurrent:</span> بنشوف "حلقات" دائرية فوق النيورونات. هاي
+                            الحلقات هي اللي بتخلي المعلومة "تكرر" نفسها وتدخل في الحسبة الجاية. !
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 8 -->
+            <div class="slide-section" id="slide8">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RNN vs FNN: Data & Applications</span>
+                    <span class="slide-number">Slide 08</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0008.jpg" alt="Slide 8" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مين بنستخدم ومتى؟ (البيانات والتطبيقات) 📊🚀</div>
+                    <div class="explanation-content">
+                        مقارنة في نوع الداتا والتطبيق:
+                        <div class="detail-item">
+                            - <span class="highlight-b">FNN:</span> بتنفع للداتا الثابتة الطول (<span
+                                class="eng-term">Fixed-length</span>) زي تصنيف الصور. <br>
+                            - <span class="highlight-y">RNN:</span> بتلمع في الداتا المتسلسلة (<span
+                                class="eng-term">Sequential</span>) زي الكلام، الترجمة، وتوقع أسعار الأسهم. السياق
+                            والترتيب هون هم كل إشي.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 9 -->
+            <div class="slide-section" id="slide9">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RNN Unrolling (Unfolding through Time)</span>
+                    <span class="slide-number">Slide 09</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0009.jpg" alt="Slide 9" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">فك اللغز: عملية الـ Unrolling 🌀➡️📏</div>
+                    <div class="explanation-content">
+                        الـ RNN في الحقيقة هي "لوب" (حلقة)، بس عشان نقدر نحسبها رياضياً، لازم "نفكها" (<span
+                            class="eng-term">Unfold</span>).
+                        <div class="detail-item">
+                            <span class="highlight-b">الفكرة:</span> السلايد بفرجينا كيف الـ <span
+                                class="eng-term">Rolled RNN</span> بتتحول لـ <span class="eng-term">Unrolled RNN</span>.
+                            كل مربع بيمثل خطوة زمنية (<span class="highlight-b">t-1, t, t+1</span>).
+                            بنشوف الأوزان: <br>
+                            - <span class="highlight-y">U:</span> وزن المدخلات (<span class="eng-term">x</span>). <br>
+                            - <span class="highlight-success">W:</span> وزن المخرجات (<span class="eng-term">o</span>).
+                            <br>
+                            - <span class="highlight-danger">V:</span> وزن الحالة المخفية السابقة (الذاكرة اللي بتنتقل
+                            عبر الزمن).
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 10 -->
+            <div class="slide-section" id="slide10">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Backpropagation Through Time (BPTT)</span>
+                    <span class="slide-number">Slide 10</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0010.jpg" alt="Slide 10" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الـ BPTT: كيف بنعدل أخطاء الماضي؟ ⏪🛠️</div>
+                    <div class="explanation-content">
+                        عشان الشبكة تتعلم، لازم ترجع بالعكس وتصلح الأوزان بناءً على الخطأ (<span class="eng-term">Loss
+                            L</span>). في الـ RNN الموضوع أصعب لأن الخطأ مربوط بالزمن.
+                        <div class="detail-item">
+                            <span class="highlight-b">العملية:</span> بنحسب الـ <span class="eng-term">Loss</span>
+                            الإجمالي اللي هو مجموع الأخطاء عند كل خطوة زمنية (<span class="highlight-b">L = Σ
+                                L<sub>i</sub></span>). بعدين الـ <span class="eng-term">Backpropagation Through
+                                Time</span> بتمشي بالعكس عبر كل الخطوات السابقة عشان تعدل الأوزان (<span
+                                class="eng-term">U, V, W</span>). هاي هي الطريقة اللي الشبكة بتفهم فيها إن "غلطي هسا"
+                            يمكن كان سببه "إشي صار قبل ٥ خطوات".
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 11 -->
+            <div class="slide-section" id="slide11">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Gradient Vanishing & Explosion</span>
+                    <span class="slide-number">Slide 11</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0011.jpg" alt="Slide 11" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كابوس الـ Gradient: التلاشي والانفجار �️💨</div>
+                    <div class="explanation-content">
+                        لما نكون عنا تسسلسلات طويلة، عملية الـ <span class="eng-term">Backpropagation</span> بتواجه
+                        مشكلتين "قاتلات":
+                        <div class="detail-item">
+                            1. <span class="highlight-danger">Gradient Vanishing (التلاشي):</span> قيمة التعديل بتصغر
+                            بشكل مرعب لحد ما تصير صفر. هون الشبكة "بتنسى" تماماً المعلومات البعيدة وبتبطل تتعلم منها.
+                            <br>
+                            2. <span class="highlight-y">Gradient Explosion (الانفجار):</span> قيمة التعديل بتكبر بشكل
+                            جنوني لحد ما توصل لـ <span class="eng-term">NaN</span> (غير معرف)، وهاض بيخلي الموديل غير
+                            مستقر ويخرب التدريب كله.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 12 -->
+            <div class="slide-section" id="slide12">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Problems of Vanilla (Original) RNNs</span>
+                    <span class="slide-number">Slide 12</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch3/L3-CNN  RNN_page-0012.jpg" alt="Slide 12" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش الـ Vanilla RNN "محدودة"؟ 🍦🥀</div>
+                    <div class="explanation-content">
+                        الـ RNN الأصلية (الـ Vanilla) عندها مشاكل بتمنعها من أداء المهام المعقدة:
+                        <div class="detail-item">
+                            - <span class="highlight-danger">صعوبة التعلم:</span> بسبب الـ <span
+                                class="eng-term">Vanishing Gradient</span>، التحديثات بتصير صغيرة جداً وما بتأثر
+                            بالأوزان. <br>
+                            - <span class="highlight-y">عدم الاستقرار:</span> الـ <span class="eng-term">Exploding
+                                Gradient</span> بيخلي الأوزان تتذبذب بشكل عشوائي. <br>
+                            - <span class="highlight-b">Long Range Memory:</span> هي "ذاكرتها قصيرة". المفروض تتذكر
+                            معلومات من أول الجملة لعشان تستخدمها في آخرها، بس عملياً بتفشل في هاض الإشي. هاض هو السبب
+                            اللي خلانا نخترع الـ <span class="eng-term">LSTM</span> لاحقاً.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 13 -->
+        <div class="slide-section" id="slide13">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 13 Title</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0013.jpg" alt="Slide 13" style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+        <!-- Slide 14 -->
+        <div class="slide-section" id="slide14">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Long Short-Term Memory (LSTM)</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0014.jpg" alt="Slide 14" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ LSTM: الذاكرة "الحديدية" 🦾🧠</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">LSTM</span> هي نوع خاص من الـ RNN تم اختراعه عشان يحل مشكلة الـ <span
+                        class="eng-term">Gradient Vanishing</span>.
+                    <div class="detail-item">
+                        <span class="highlight-success">السر:</span> استخدام نظام بوابات (<span class="eng-term">Gated
+                            Structure</span>) بتقدر تتحكم شو "تحفظ" وشو "تنسى". هاي البوابات هي عبارة عن شبكات عصبية
+                        صغيرة بتستخدم دالة الـ <span class="eng-term">Sigmoid</span> (اللي بتعطي قيم بين ٠ و ١) عشان
+                        تقرر هل تمرر المعلومة أو تمنعها.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 15 -->
+        <div class="slide-section" id="slide15">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">LSTM: Practical Implementation</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0015.jpg" alt="Slide 15" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تشريح خلية الـ LSTM 🧪🛠️</div>
+                <div class="explanation-content">
+                    هاي الرسمة هي "العمود الفقري" للـ LSTM. بنشوف فيها:
+                    <div class="detail-item">
+                        - <span class="highlight-b">Cell State (C<sub>t</sub>):</span> هاذ هو الطريق السريع اللي بتمشي
+                        عليه المعلومات عبر الزمن مع تعديلات بسيطة. <br>
+                        - <span class="highlight-y">Forget Gate (f<sub>t</sub>):</span> المحبس اللي بقرر شو المعلومات
+                        القديمة اللي ما عاد نحتاجها. <br>
+                        - <span class="highlight-success">Input Gate (i<sub>t</sub>):</span> المحبس اللي بقرر شو
+                        المعلومات الجديدة اللي رح ندخلها على الذاكرة. <br>
+                        - <span class="highlight-danger">Output Gate (o<sub>t</sub>):</span> المحبس اللي بقرر شو نطلّع
+                        مخرجات للخطوة الجاية.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 16 -->
+        <div class="slide-section" id="slide16">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Mathematical Formulations</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0016.jpg" alt="Slide 16" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">لغة الرياضيات: معادلات التحديث 🧮🔢</div>
+                <div class="explanation-content">
+                    خلينا "نترجم" الرسمة لمعادلات:
+                    <div class="detail-item" style="font-family: monospace; font-size: 0.95rem;">
+                        1. <span class="highlight-y">Input Gate:</span> i<sub>t</sub> = σ(W<sub>i</sub>[x<sub>t</sub>,
+                        h<sub>t-1</sub>] + b<sub>i</sub>) <br>
+                        2. <span class="highlight-danger">Forget Gate:</span> f<sub>t</sub> =
+                        σ(W<sub>f</sub>[x<sub>t</sub>, h<sub>t-1</sub>] + b<sub>f</sub>) <br>
+                        3. <span class="highlight-success">Output Gate:</span> o<sub>t</sub> =
+                        σ(W<sub>o</sub>[x<sub>t</sub>, h<sub>t-1</sub>] + b<sub>o</sub>) <br>
+                        4. <span class="highlight-b">Cell Update:</span> C<sub>t</sub> = f<sub>t</sub> ⊙ C<sub>t-1</sub>
+                        + i<sub>t</sub> ⊙ ~C<sub>t</sub>
+                    </div>
+                    <div class="detail-item">
+                        المعادلة الأخيرة (Cell Update) هي السحر؛ لأنها بتجمع بين "المعلومات المحفوظة" من الماضي والـ
+                        "معلومات الجديدة" اللي دخلت هسا.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 17 -->
+        <div class="slide-section" id="slide17">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Roles of Different Gates in LSTM</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0017.jpg" alt="Slide 17" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وظيفة كل بوابة (الجزء الأول) 🚦🛂</div>
+                <div class="explanation-content">
+                    كل بوابة إلها مهمة محددة:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Input Gate (i<sub>t</sub>):</span> بتتحكم بكمية "المعلومات
+                        الجديدة" اللي رح تتدفق جوا الـ <span class="eng-term">Cell State</span>. <br>
+                        - <span class="highlight-danger">Forget Gate (f<sub>t</sub>):</span> هي اللي بتحدد شو المعلومات
+                        اللي لازم "نرميها" من الـ <span class="eng-term">Cell State</span> لأنها بطلت مفيدة. <br>
+                        - <span class="highlight-y">Process Input (~C<sub>t</sub>):</span> بتجهز "قيم مرشحة" جديدة
+                        (<span class="eng-term">Candidate Values</span>) عشان تنضاف للذاكرة.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 18 -->
+        <div class="slide-section" id="slide18">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Roles of Different Gates in LSTM (Cont.)</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0018.jpg" alt="Slide 18" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وظيفة كل بوابة (تكملة) 🔄🏁</div>
+                <div class="explanation-content">
+                    بنكمل مع باقي العمليات:
+                    <div class="detail-item">
+                        - <span class="highlight-b">Cell Update (C<sub>t</sub>):</span> هي عملية "دمج" بين القديم
+                        والجديد. بنضرب القديم بالـ <span class="eng-term">Forget Gate</span> وبنجمعله الجديد مضروب بالـ
+                        <span class="eng-term">Input Gate</span>. <br>
+                        - <span class="highlight-success">Output (h<sub>t</sub>):</span> بقرر شو المخرج النهائي (<span
+                            class="eng-term">Hidden State</span>) بناءً على حالة الخلية الحالية وبوابة المخرجات. <br>
+                        <span class="highlight-success">الخلاصة:</span> الـ LSTM بخليك تتذكر المعلومات المهمة لفترات
+                        طويلة جداً وتنسى "الحشو" اللي ما إله داعي.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 19 -->
+        <div class="slide-section" id="slide19">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 19 Title</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0019.jpg" alt="Slide 19" style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+        <!-- Slide 20 -->
+        <div class="slide-section" id="slide20">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Gated Recurrent Unit (GRU)</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0020.jpg" alt="Slide 20" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ GRU: الذكاء في البساطة 🧠⚡</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Gated Recurrent Unit (GRU)</span> هي نسخة مطورة ومبسطة من الـ LSTM.
+                    <div class="detail-item">
+                        <span class="highlight-b">الفرق الجوهري:</span> ما فيها <span class="eng-term">Cell State</span>
+                        منفصل؛ بتعتمد بس على <span class="eng-term">Hidden State</span> واحد. كمان فيها بوابتين بس بدل
+                        ٣، وهاض بيخليها أقل تعقيداً وأسرع في التدريب.
+                        بنشوف المعادلات: <br>
+                        - <span class="highlight-danger">Reset Gate (r<sub>t</sub>):</span> بقرر شو "يمسح" من الماضي.
+                        <br>
+                        - <span class="highlight-success">Update Gate (z<sub>t</sub>):</span> بقرر شو "يحدث" من الذاكرة
+                        الحالية. <br>
+                        - <span class="highlight-y">Hidden State (h<sub>t</sub>):</span> هو الخليط النهائي بين الماضي
+                        والحاضر.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide-section" id="slide21">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Roles of Gates in GRU</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0021.jpg" alt="Slide 21" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وظيفة البوابات في الـ GRU 🚦🚥</div>
+                <div class="explanation-content">
+                    كيف بتشتغل بوابات الـ GRU؟
+                    <div class="detail-item">
+                        - <span class="highlight-danger">Reset Gate (r<sub>t</sub>):</span> وظيفته يحدد كمية "المعلومات
+                        القديمة" اللي لازم ننساها. هاذ بيسمح للموديل إنه يرمي أي معلومة مالها داعي من الماضي عشان يركز
+                        على المهم. <br>
+                        - <span class="highlight-success">Update Gate (z<sub>t</sub>):</span> بيعمل توازن (<span
+                            class="eng-term">Balance</span>) بين المدخلات الجديدة وبين الذاكرة القديمة، وبقرر كم لازم
+                        يضل من الحالة القديمة مقابل المدخل الجديد.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 -->
+        <div class="slide-section" id="slide22">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Roles of GRU (Cont.)</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0022.jpg" alt="Slide 22" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف المخرج بيتكون؟ 🔄🏁</div>
+                <div class="explanation-content">
+                    تكملة لعمليات الـ GRU:
+                    <div class="detail-item">
+                        - <span class="highlight-y">Process Input (~h<sub>t</sub>):</span> بيجهز قيم "مرشحة" لتمثيل
+                        الحالة المخفية الجديدة، وبتكون متأثرة بـ <span class="eng-term">Reset Gate</span>. <br>
+                        - <span class="highlight-b">Hidden State Update:</span> هون السحر؛ بنجمع الحالة القديمة (مضروبة
+                        بـ 1-z) مع الحالة الجديدة المرشحة (مضروبة بـ z). <br>
+                        - <span class="highlight-success">Output (h<sub>t</sub>):</span> الحالة المخفية المحدثة هي نفسها
+                        المخرج، وهي بتمثل الذاكرة الحالية للشبكة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide-section" id="slide23">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Compare LSTM with GRU (Part 1)</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0023.jpg" alt="Slide 23" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المواجهة: LSTM vs GRU (التعقيد والوقت) ⚖️🥊</div>
+                <div class="explanation-content">
+                    مين أحسن؟ المقارنة بتبلش هون:
+                    <div class="detail-item">
+                        - <span class="highlight-danger">Complexity (التعقيد):</span> الـ LSTM أعقد بكتير (٣ بوابات)،
+                        بينما الـ GRU أبسط (بوابتين). <br>
+                        - <span class="highlight-y">Memory (الذاكرة):</span> الـ LSTM بحتاج ذاكرة أكبر بسبب كثرة الأوزان
+                        والتعقيد. <br>
+                        - <span class="highlight-success">Training Time (وقت التدريب):</span> الـ GRU أسرع في التدريب
+                        لأن هيكله أبسط ومعادلاته أقل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24 -->
+        <div class="slide-section" id="slide24">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Compare LSTM with GRU (Part 2)</span>
+                <span class="slide-number">Slide 24</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0024.jpg" alt="Slide 24" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مين نختار؟ (الأداء والمتطلبات) 🛰️🎯</div>
+                <div class="explanation-content">
+                    بقية المقارنة:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Performance:</span> الـ GRU ممكن تعطي أداء أحسن على الداتا
+                        الصغيرة، بس الـ LSTM بتلمع في المهمات الصعبة والتسلسلات الطويلة جداً. <br>
+                        - <span class="highlight-y">Overfitting:</span> الـ LSTM معرضة أكتر للـ <span
+                            class="eng-term">Overfitting</span> على الداتا الصغيرة لأن فيها أوزان كثير. <br>
+                        - <span class="highlight-b">Mechanism:</span> الـ LSTM عندها <span class="eng-term">Cell
+                            State</span> و <span class="eng-term">Hidden State</span> منفصلين، بينما الـ GRU عندها حالة
+                        مخفية وحدة بس. <br>
+                        <span class="highlight-success">القرار:</span> الاختيار بعتمد على نوع الداتا وحجمها والتطبيق
+                        اللي بتشتغل عليه!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 25 -->
+        <div class="slide-section" id="slide25">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Advantages of GRU</span>
+                <span class="slide-number">Slide 25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0025.jpg" alt="Slide 25" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مميزات الـ GRU: ليش بنحبها؟ 🚀💡</div>
+                <div class="explanation-content">
+                    الـ GRU إلها نقاط قوة بتخليها خيار ممتاز في حالات معينة:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Faster Training (تدريب أسرع):</span> لأن عدد الـ <span
+                            class="eng-term">Parameters</span> فيها أقل، هاض بيخلي تدريبها أسرع وبتحتاج موارد حاسوبية
+                        أقل. <br>
+                        - <span class="highlight-b">Efficient on Smaller Datasets:</span> الـ GRU بتقدر تلقط العلاقات
+                        بين البيانات حتى لو حجم الداتا مش ضخم جداً، عكس الـ LSTM اللي "بتجوع" للداتا الكثير. <br>
+                        - <span class="highlight-y">Flexibility:</span> بفضل نظام البوابات المبسط، عندها مرونة عالية في
+                        إدارة الذاكرة قصيرة المدى وتوزيع المعلومات عبر الخطوات الزمنية بكفاءة.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 26 -->
+        <div class="slide-section" id="slide26">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 26 Title</span>
+                <span class="slide-number">Slide 26</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0026.jpg" alt="Slide 26" style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+        <!-- Slide 27 -->
+        <div class="slide-section" id="slide27">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Slide 27 Title</span>
+                <span class="slide-number">Slide 27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0027.jpg" alt="Slide 27" style="max-width: 100%; height: auto;">
+            </div>
+
+        </div>
+        <!-- Slide 28 -->
+        <div class="slide-section" id="slide28">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Basics of CNN</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0028.jpg" alt="Slide 28" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مقدمة في الـ CNN: كيف "بتشوف" الشبكة؟ 👁️🖼️</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Convolutional Neural Network (CNN)</span> هي النوع الأساسي اللي بنستخدمه
+                    في الـ <span class="eng-term">Computer Vision</span>.
+                    <div class="detail-item">
+                        - <span class="highlight-b">الفكرة:</span> هي تطوير للـ ANN العادية، بس بدل ما تتعامل مع
+                        البيانات كخيوط، بتتعامل معها كـ <span class="eng-term">Grid-like matrix</span> (زي بكسلات
+                        الصور). <br>
+                        - <span class="highlight-success">المُرشحات (Filters):</span> الشبكة بتتعلم "فلاتر" معينة
+                        (مصفوفات أوزان صغيرة) بتمشي على الصورة عشان تلقط ملامح معينة مثل الزوايا، الألوان، أو الأشكال
+                        المعقدة. <br>
+                        - <span class="highlight-y">Feature maps:</span> نواتج هاي الفلاتر بنسميها "خرائط الميزات" وهي
+                        اللي بتمثل "فهم" الشبكة للصورة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29 -->
+        <div class="slide-section" id="slide29">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Layers Used to Build CNN</span>
+                <span class="slide-number">Slide 29</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0029.jpg" alt="Slide 29" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">هيكل الـ CNN: من البكسل للتصنيف 🏗️🧱</div>
+                <div class="explanation-content">
+                    عشان تبني CNN، الصورة بتمر برحلة عبر طبقات مخصصة:
+                    <div class="detail-item">
+                        1. <span class="highlight-danger">Conv Layer:</span> لاستخلاص الميزات. <br>
+                        2. <span class="highlight-success">ReLU:</span> دالة تفعيل بتخلي الـ <span
+                            class="eng-term">Negative values</span> تصير صفر عشان نضيف "غير خطية". <br>
+                        3. <span class="highlight-b">Pooling:</span> تقليل أبعاد الصورة (تصغيرها) مع الحفاظ على أهم
+                        المعلومات. <br>
+                        4. <span class="highlight-y">FC Layer (Fully Connected):</span> هي الطبقة النهائية اللي "بتقرر"
+                        شو نوع الصورة (سيارة، طيارة، حصان.. إلخ).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30 -->
+        <div class="slide-section" id="slide30">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Basics of CNN: Operations</span>
+                <span class="slide-number">Slide 30</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0030.jpg" alt="Slide 30" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">العمليات الأساسية: الضرب والتقليص 🧮📉</div>
+                <div class="explanation-content">
+                    في عمليتين بتموا جوا الـ CNN:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Convolution Operation:</span> عملية ضرب (Dot Product) بين
+                        الصورة والـ <span class="eng-term">Filter</span>. بنمشي الفلتر خطوة بخطوة وبنجمع النواتج عشان
+                        نطلع الـ <span class="eng-term">Feature Map</span>. <br>
+                        - <span class="highlight-danger">Pooling Operation:</span> مثل الـ <span
+                            class="eng-term">MaxPooling</span>؛ بنختار أكبر قيمة في منطقة معينة بالصورة. ليش؟ عشان نصغر
+                        حجم الحسابات ونركز على "أقوى" إشارة موجودة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 31 -->
+        <div class="slide-section" id="slide31">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Variants of CNN</span>
+                <span class="slide-number">Slide 31</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0031.jpg" alt="Slide 31" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">سلالات الـ CNN: من LeNet لـ MobileNet 👪🛰️</div>
+                <div class="explanation-content">
+                    العلماء طوروا نسخ كثير من الـ CNN، وكل وحدة إلها ميزة:
+                    <div class="detail-item">
+                        - <span class="highlight-b">AlexNet/LeNet:</span> البدايات الكلاسيكية. <br>
+                        - <span class="highlight-success">ResNet:</span> اللي حلت مشكلة العمق باستخدام الـ <span
+                            class="eng-term">Residual Connections</span>. <br>
+                        - <span class="highlight-danger">MobileNet:</span> مصممة تكون خفيفة للموبايلات. <br>
+                        - <span class="highlight-y">U-Net:</span> متخصصة في الـ <span class="eng-term">Image
+                            Segmentation</span>. <br>
+                        <span class="highlight-success">قاعدة عامة:</span> الموديلات العميقة (<span
+                            class="eng-term">Deep</span>) بتتذكر ميزات أعقد، والموديلات العريضة (<span
+                            class="eng-term">Wide</span>) بتتذكر ميزات أكثر.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32 -->
+        <div class="slide-section" id="slide32">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Is Deeper Network always better?</span>
+                <span class="slide-number">Slide 32</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0032.jpg" alt="Slide 32" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">هل "الأعمق" دايماً "أحسن"؟ لا! ⚠️🛑</div>
+                <div class="explanation-content">
+                    المفروض كل ما زدنا طبقات تزيد الدقة، بس الواقع بيحكي غير هيك لسببين:
+                    <div class="detail-item">
+                        1. <span class="highlight-danger">Overfitting:</span> لما الموديل يصير "ببصم" البيانات بدل ما
+                        يفهمها، فبفشل في التعميم على داتا جديدة. <br>
+                        2. <span class="highlight-y">Vanishing/Exploding Gradients:</span> في الموديلات العميقة جداً،
+                        قيم التحديث بتصير صفر أو بتنفجر، وهاض بيخرب التدريب. <br>
+                        <span class="highlight-b">الحل:</span> بنستخدم تقنيات مثل <span class="eng-term">Batch
+                            Normalization</span> والـ <span class="eng-term">ReLU</span> عشان نخفف من هاي المشاكل.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 33 -->
+        <div class="slide-section" id="slide33">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Is deeper Network always better? (Cont.)</span>
+                <span class="slide-number">Slide 33</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0033.jpg" alt="Slide 33" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ليش العمق الزيادة بوجع الراس؟ 🤕📉</div>
+                <div class="explanation-content">
+                    تكملة لمشاكل الموديلات العميقة (Deeper Networks):
+                    <div class="detail-item">
+                        - <span class="highlight-danger">Complexity:</span> زيادة الطبقات بتعني تعقيد أكبر، وهاذ بيصعّب
+                        عملية ضبط الـ <span class="eng-term">Hyperparameters</span> وبطوّل وقت التدريب. <br>
+                        - <span class="highlight-y">Diminishing Returns:</span> بعد نقطة معينة، إضافة طبقات جديدة ما رح
+                        تحسن الأداء بشكل ملحوظ، بالعكس ممكن تضيّع وقت وموارد عبث. <br>
+                        - <span class="highlight-b">Data Requirements:</span> الموديلات العميقة "جوّاعة" داتا. إذا ما
+                        عندك داتا كافية وبجودة عالية، الشبكة الضخمة رح تعمل <span class="eng-term">Overfitting</span>
+                        وتفشل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34 -->
+        <div class="slide-section" id="slide34">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Summary of CNN Variants and Apps</span>
+                <span class="slide-number">Slide 34</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0034.jpg" alt="Slide 34" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ملخص السلالات والتطبيقات 🛰️🗺️</div>
+                <div class="explanation-content">
+                    بنشوف هون خريطة الطريق للـ CNN وكيف تطورت عبر السنين:
+                    <div class="detail-item">
+                        - <span class="highlight-success">التطور الزمني:</span> بلشنا بـ <span
+                            class="eng-term">LeNet-5</span> (قبل ٢٠١٢)، بعدين القفزة التاريخية بـ <span
+                            class="eng-term">AlexNet</span> (٢٠١٢)، ووصولاً لموديلات ذكية مثل <span
+                            class="eng-term">ConvNeXt</span> (٢٠٢٠). <br>
+                        - <span class="highlight-b">تطبيقات متخصصة:</span> <br>
+                        * <span class="highlight-danger">U-Net:</span> لتقسيم الصور (Segmentation). <br>
+                        * <span class="highlight-y">YOLO:</span> اللي الكل بعرفه لتحديد الأجسام (Object Detection). <br>
+                        * <span class="highlight-success">MobileNet:</span> للموبايلات والأجهزة الضعيفة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35 -->
+        <div class="slide-section" id="slide35">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">LeNet-5: 1988 to 1998</span>
+                <span class="slide-number">Slide 35</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0035.jpg" alt="Slide 35" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الجد الأكبر: LeNet-5 👴🏛️</div>
+                <div class="explanation-content">
+                    هاض الموديل هو اللي بدأ كل شي، صممه العبقري <span class="eng-term">Yann LeCun</span>.
+                    <div class="detail-item">
+                        <span class="highlight-b">المواصفات القديمة:</span> <br>
+                        - كان يستخدم <span class="eng-term">Sigmoid</span> كدالة تفعيل (قبل ما نكتشف الـ ReLU). <br>
+                        - كان يستخدم <span class="eng-term">Average Pooling</span> بدل الـ Max Pooling المشهور هسا. <br>
+                        - صُمم بالأصل عشان يقرأ الأرقام المكتوبة بالإيد (مثل الرموز البريدية).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 36 -->
+        <div class="slide-section" id="slide36">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ImageNet Dataset</span>
+                <span class="slide-number">Slide 36</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0036.jpg" alt="Slide 36" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">المحيط: ImageNet 🌊📸</div>
+                <div class="explanation-content">
+                    عشان تدرب وحوش، لازمك داتا وحش!
+                    <div class="detail-item">
+                        <span class="highlight-success">شو هو؟</span> هو أضخم قاعدة بيانات صور في العالم (في وقتها).
+                        <br>
+                        - فيه أكثر من <span class="highlight-danger">15 مليون</span> صورة مصنفة بدقة عالية. <br>
+                        - الصور موزعة على <span class="highlight-y">22,000</span> تصنيف (من الكلاب والقطط للسيارات
+                        والطيارات). هاض "البحر" هو اللي خلى موديلات الـ Deep Learning تنجح.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 37 -->
+        <div class="slide-section" id="slide37">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">AlexNet (2012): GPUs are Here</span>
+                <span class="slide-number">Slide 37</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0037.jpg" alt="Slide 37" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">عصر الـ GPUs: الثورة بتبلش من هون 🎮🔥</div>
+                <div class="explanation-content">
+                    في ٢٠١٢، الـ <span class="eng-term">AlexNet</span> قلب الموازين في مسابقة ImageNet:
+                    <div class="detail-item">
+                        - <span class="highlight-success">GPU Power:</span> كان أول موديل ضخم يتم تدريبه باستخدام كروت
+                        الشاشة (GPUs)، وهاذ اللي سمح بتدريب شبكات عميقة جداً بوقت قياسي. <br>
+                        - <span class="highlight-danger">الأرقام:</span> الموديل كان فيه <span class="highlight-b">60
+                            مليون</span> وزن (Parameter) و <span class="highlight-y">650,000</span> عصبون. <br>
+                        <span class="highlight-danger">تنبيه:</span> الشبكة هاي ضخمة لدرجة إنها ممكن تحفظ الداتا
+                        (Overfitting)، فعشان هيك لازم تكون حذر وتستخدم تقنيات تنظيم.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 38 -->
+        <div class="slide-section" id="slide38">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">AlexNet: Technical Details</span>
+                <span class="slide-number">Slide 38</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0038.jpg" alt="Slide 38" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">جهاز الـ AlexNet من جوا 🔍⚙️</div>
+                <div class="explanation-content">
+                    خلينا نشوف كيف بُنيت هاي الأسطورة:
+                    <div class="detail-item">
+                        - <span class="highlight-success">المكونات:</span> بتتكون من ٥ طبقات <span
+                            class="eng-term">Convolutional</span> و٣ طبقات <span class="eng-term">Fully
+                            Connected</span>. <br>
+                        - <span class="highlight-b">السرعة:</span> كانت تستخدم الـ <span class="eng-term">ReLU</span>
+                        بعد كل طبقة كونفولوشن، وهاذ سرع التدريب بـ ٦ أضعاف مقارنة بالـ Tanh. <br>
+                        - <span class="highlight-danger">Pooling:</span> فيها ٣ طبقات <span class="eng-term">Max
+                            Pooling</span> عشان تصغر أبعاد المعلومات وتركز على المهم.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 39 -->
+        <div class="slide-section" id="slide39">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">VGGNet (2014): Deeper is Better</span>
+                <span class="slide-number">Slide 39</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0039.jpg" alt="Slide 39" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ VGG: سحر الطبقات المتكررة 🏗️🧱</div>
+                <div class="explanation-content">
+                    في ٢٠١٤، جماعة VGG قرروا يرفعوا شعار "كل ما زاد العمق، زاد الأداء":
+                    <div class="detail-item">
+                        - <span class="highlight-success">VGG Block:</span> ميزتها إنها استخدمت بلوكات ثابتة وسهلة، كل
+                        بلوك فيه فلاتر صغيرة (3x3). <br>
+                        - <span class="highlight-y">الخلاصة:</span> من خلال "تصفيف" هاي البلوكات فوق بعض، قدروا يوصلوا
+                        لأعماق كبيرة (مثل VGG-16 و VGG-19) وطلعوا بنتيجة إن <span class="highlight-danger">Deeper is
+                            Better</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 40 -->
+        <div class="slide-section" id="slide40">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ResNet (2015): Residual Neural Network</span>
+                <span class="slide-number">Slide 40</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0040.jpg" alt="Slide 40" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مشكلة العمق وحلها الثوري 🧗‍♂️💡</div>
+                <div class="explanation-content">
+                    لما الموديلات صارت عميقة جداً (مئات الطبقات)، ظهرت مشكلة إن الأداء ببدأ "يخرب" مش بس يثبت.
+                    <div class="detail-item">
+                        - <span class="highlight-danger">المشكلة:</span> <span class="eng-term">Vanishing
+                            Gradients</span> وتدهور الأداء في الشبكات العميقة جداً. <br>
+                        - <span class="highlight-success">الحل (Residual Connection):</span> بدل ما نخلي المعلومات تمر
+                        بسلاسل معقدة، بنعمل "طريق مختصر" (<span class="eng-term">Skip Connection</span>). <br>
+                        - <span class="highlight-b">النتيجة:</span> المشاكل اختفت، وصار بإمكاننا نبني شبكات فيها ١٥٠
+                        طبقة وأكثر وأداؤها خرافي.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 41 -->
+        <div class="slide-section" id="slide41">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ResNet: Skip Connections</span>
+                <span class="slide-number">Slide 41</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0041.jpg" alt="Slide 41" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الرياضيات وراء الـ Residual 🧮🛣️</div>
+                <div class="explanation-content">
+                    كيف بتشتغل الـ <span class="eng-term">Residual Connection</span> رياضياً؟
+                    <div class="detail-item">
+                        - <span class="highlight-b">Plain Network (العادية):</span> x<sub>l</sub> = f(x<sub>l-1</sub>)
+                        <br>
+                        - <span class="highlight-success">ResNet (المطورة):</span> x<sub>l</sub> = f(x<sub>l-1</sub>) +
+                        <span class="highlight-success">x<sub>l-1</sub></span> <br>
+                        <br>
+                        إضافة <span class="highlight-success">x<sub>l-1</sub></span> (المدخل الأصلي) للمخرج بيخلي الشبكة
+                        تتعلم "الباقي" (<span class="eng-term">Residual</span>) بس، وهاض بيسهل عملية التدريب بشكل مرعب.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 42 -->
+        <div class="slide-section" id="slide42">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">DenseNet (2016)</span>
+                <span class="slide-number">Slide 42</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0042.jpg" alt="Slide 42" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ DenseNet: الكل بحكي مع الكل! 🕸️🗣️</div>
+                <div class="explanation-content">
+                    هاي هي التطوير المنطقي للـ ResNet.
+                    <div class="detail-item">
+                        - <span class="highlight-success">الفكرة:</span> بدل ما نوصل الطبقة باللي قبلها مباشرة بس، بنوصل
+                        كل طبقة <span class="highlight-b">بكل الطبقات اللي سبقتها</span>. <br>
+                        - <span class="highlight-y">المعادلة:</span> x<sub>l</sub> = f([x<sub>0</sub>, x<sub>1</sub>,
+                        ..., x<sub>l-1</sub>]) <br>
+                        - <span class="highlight-success">الميزات:</span> هاض الإشي بيقوي تدفق المعلومات والـ <span
+                            class="eng-term">Gradient</span> عبر الشبكة، وبيخلي الموديل يستفيد من ميزات الطبقات الأولى
+                        حتى في آخر الموديل.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 43 -->
+        <div class="slide-section" id="slide43">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">DenseNet: Efficiency & Bottlenecks</span>
+                <span class="slide-number">Slide 43</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0043.jpg" alt="Slide 43" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ DenseNet الشاطرة: ذكاء في التوفير 🧠💰</div>
+                <div class="explanation-content">
+                    بالرغم من إنها بتشبك كل شي ببعضه، بس الـ <span class="eng-term">DenseNet</span> ذكية جداً في إدارة
+                    الموارد:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Bottleneck Layer:</span> بستخدموا فلاتر (1x1) قبل الفلاتر
+                        الكبيرة عشان يقللوا عدد المدخلات والحسابات. <br>
+                        - <span class="highlight-b">الأداء:</span> بتعطي دقة زي الـ ResNet أو أحسن، بس بمواصفات "أخف":
+                        <br>
+                        * <span class="highlight-y">Fewer Parameters:</span> أوزان أقل بالنموذج. <br>
+                        * <span class="highlight-success">Less Computation (FLOPs):</span> حسابات أقل، يعني أسرع في
+                        التنفيذ.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 44 -->
+        <div class="slide-section" id="slide44">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">GoogLeNet/Inception (2014): Wider is Better</span>
+                <span class="slide-number">Slide 44</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0044.jpg" alt="Slide 44" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">جوجل قررت "تعرّض" الموديلات ↔️🏢</div>
+                <div class="explanation-content">
+                    جماعة جوجل سألوا حالهم: بدل ما نطوّل الموديل بزيادة، ليش ما نعرّضه؟
+                    <div class="detail-item">
+                        - <span class="highlight-b">الفكرة:</span> بدل ما نختار حجم فلتر واحد (مثلاً 3x3)، بنستخدم كذا
+                        حجم <span class="highlight-success">بنفس الوقت وبشكل متوازي</span>. <br>
+                        - <span class="highlight-y">Inception Block:</span> هاي الوحدة بتعمل 1x1 و 3x3 و 5x5 و pooling
+                        كلهم مع بعض، وبعدين بتجمع النتائج. هاد بخلي الموديل يتعرف على الميزات بأحجام مختلفة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 45 -->
+        <div class="slide-section" id="slide45">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Inception: Reducing Cost with 1x1 Conv</span>
+                <span class="slide-number">Slide 45</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0045.jpg" alt="Slide 45" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">توفير التكاليف بذكاء 💳📉</div>
+                <div class="explanation-content">
+                    عشان الـ <span class="eng-term">Inception</span> ما يصير وزنه ثقيل جداً بسبب التشعبات:
+                    <div class="detail-item">
+                        - <span class="highlight-danger">التحدي:</span> استخدام فلاتر 5x5 مباشرة مكلف جداً حسابياً. <br>
+                        - <span class="highlight-success">الحل:</span> حطوا طبقة (1x1) قبل الفلاتر الكبيرة عشان "تضغط"
+                        المعلومات وتقلل العمق قبل الانتقال للحسابات الثقيلة. <br>
+                        - <span class="highlight-b">الاستراتيجية:</span> سموها <span
+                            class="eng-term">split-transformation-merge</span> (افلق، حوّل، ادمج).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 46 -->
+        <div class="slide-section" id="slide46">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ResNeXt (2016): Wider ResNet</span>
+                <span class="slide-number">Slide 46</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0046.jpg" alt="Slide 46" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ ResNext: دمج القوة بالعرض 🧬⛓️</div>
+                <div class="explanation-content">
+                    هاذ الموديل هو هجين بين قوة الـ **ResNet** وتشعب الـ **Inception**:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Cardinality:</span> هون الكلمة السرية. بدل ما نزيد العمق
+                        (Depth) أو العرض (Width)، بنزيد الـ <span class="eng-term">Cardinality</span> (عدد المسارات
+                        المتوازية داخل البلوك الواحد). <br>
+                        - <span class="highlight-b">النتيجة:</span> أداء أقوى بكتير من الـ ResNet العادية مع الحفاظ على
+                        نفس مستوى التعقيد الحسابي تقريباً.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 47 -->
+        <div class="slide-section" id="slide47">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ConvNeXt (2022): The Return of CNNs</span>
+                <span class="slide-number">Slide 47</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0047.jpg" alt="Slide 47" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">رجعة الـ CNN بقوة للساحة! 🥊🔥</div>
+                <div class="explanation-content">
+                    بعد ما طلعت الـ <span class="eng-term">Vision Transformers (ViT)</span> وصارت الكل يحكي فيها، رجعوا
+                    جماعة الـ CNN بـ <span class="eng-term">ConvNeXt</span>:
+                    <div class="detail-item">
+                        - <span class="highlight-success">تحديث التصميم:</span> أخدوا الـ ResNet-50 القديمة وحدثوا
+                        تصميمها بأفكار مستوحاة من الـ Transformers (مثل الـ Layer Normalization والـ Large Kernels).
+                        <br>
+                        - <span class="highlight-danger">الضربة القاضية:</span> أثبتت الدراسات إن الـ <span
+                            class="highlight-b">ConvNeXt</span> بتقدر تهزم الـ ViT وتتفوق عليها بالأداء، وعلمت الجميع إن
+                        الـ CNN لسا الها هيبتها.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 48 -->
+        <div class="slide-section" id="slide48">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ConvNeXt: Micro & Training Design</span>
+                <span class="slide-number">Slide 48</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0048.jpg" alt="Slide 48" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">سر الخلطة في الـ ConvNeXt 🥗🧪</div>
+                <div class="explanation-content">
+                    مش بس التصميم اللي فرق، حتّى طريقة التدريب تطورت:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Training Strategy:</span> زودوا عدد الـ <span
+                            class="eng-term">Epochs</span> لـ ٣٠٠، واستخدموا الـ <span class="eng-term">AdamW</span>
+                        كمحسن (Optimizer). <br>
+                        - <span class="highlight-y">Data Augmentation:</span> استخدموا تقنيات خرافية مثل <span
+                            class="eng-term">Mixup</span> و <span class="eng-term">CutMix</span> اللي بتخلط الصور ببعض
+                        عشان الموديل يصير أقوى. <br>
+                        - <span class="highlight-b">Inverted Bottleneck:</span> فكرة ذكية بتخلي الشبكة تركز على الميزات
+                        في مساحة أوسع، وهاذ اللي خلى أداءها يكتسح الـ Transformers.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 49 -->
+        <div class="slide-section" id="slide49">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">ConvNeXt: Macro vs Micro Design</span>
+                <span class="slide-number">Slide 49</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0049.jpg" alt="Slide 49" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التفاصيل الصغيرة بتعمل فرق كبير 🤏✨</div>
+                <div class="explanation-content">
+                    هون بنشوف كيف "نظّفوا" التصميم من جوا:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Macro Design:</span> غيروا طريقة توزيع الحسابات واستخدموا الـ
+                        <span class="eng-term">Patchify</span> (تقطيع الصورة لمربعات) زي الـ ViT. <br>
+                        - <span class="highlight-b">Micro Design:</span> <br>
+                        * بدل الـ ReLU استخدموا الـ <span class="highlight-y">GELU</span>. <br>
+                        * قللوا عدد الـ Norms والـ Activations عشان الشبكة تكون أنحف وأسرع. <br>
+                        * بدل الـ BatchNorm استخدموا الـ <span class="highlight-danger">LayerNorm</span>، وهاذ إشي كان
+                        مستحيل زمان في الـ CNN.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 50 -->
+        <div class="slide-section" id="slide50">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">CNN for Downstream Applications</span>
+                <span class="slide-number">Slide 50</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0050.jpg" alt="Slide 50" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">وين بنستخدم كل هالعضلات؟ 🏋️‍♂️🏙️</div>
+                <div class="explanation-content">
+                    بعد ما خلصنا من المعماريات، خلينا نشوف التطبيقات الواقعية:
+                    <div class="detail-item">
+                        - <span class="highlight-danger">Image Segmentation (U-Net):</span> لتقسيم الصور (مثلاً تحديد
+                        الأورام في صور الأشعة). <br>
+                        - <span class="highlight-y">Object Detection (YOLO):</span> عشان تحديد الأجسام وحساب عددها وتتبع
+                        حركتها. <br>
+                        - <span class="highlight-success">Mobile Efficiency:</span> موديلات مثل <span
+                            class="eng-term">MobileNet</span> و <span class="eng-term">SqueezeNet</span> بتخلينا نشغل
+                        الـ AI على الموبايل بسهولة وبدون ما يعلق.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 51 -->
+        <div class="slide-section" id="slide51">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">U-Net (2015): Image Segmentation</span>
+                <span class="slide-number">Slide 51</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0051.jpg" alt="Slide 51" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ U-Net: ملكة التفاصيل 👑📐</div>
+                <div class="explanation-content">
+                    في الـ <span class="eng-term">Semantic Segmentation</span>، إحنا بدنا نعرف "كل بكسل" لمين برجع:
+                    <div class="detail-item">
+                        - <span class="highlight-b">الفكرة:</span> الموديل بياخد الصورة، "بصغرها" عشان يفهم السياق،
+                        وبعدين "برجع بكبرها" عشان يرجع الدقة العالية للبكسلات. <br>
+                        - <span class="highlight-success">الشكل:</span> الموديل جاي على شكل حرف <span
+                            class="highlight-danger">U</span>، والنصين مشبوكين ببعض بـ <span class="eng-term">Skip
+                            Connections</span> عشان المعلومات ما تضيع في النص.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 52 -->
+        <div class="slide-section" id="slide52">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">U-Net: Up-convolution & Metrics</span>
+                <span class="slide-number">Slide 52</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0052.jpg" alt="Slide 52" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف بنقيس شطارة الـ U-Net؟ 📏🤔</div>
+                <div class="explanation-content">
+                    الـ U-Net بتستخدم حركتين فنيات:
+                    <div class="detail-item">
+                        - <span class="highlight-success">Up-convolution:</span> عكس الكونفولوشن العادي، هاض بكبر الصورة
+                        وبرجع تفاصيلها. <br>
+                        - <span class="highlight-danger">Metric (IOU):</span> عشان نعرف الموديل صح، بنستخدم الـ <span
+                            class="eng-term">Intersection over Union</span>: <br>
+                        <div style="text-align: center; font-weight: bold; margin: 10px 0;">
+                            IOU = (Area of Interaction) / (Area of Union)
+                        </div>
+                        ببساطة: التقاطع بين توقع الموديل والصح مقسوم على مجموع مساحتهم. كل ما قرب الرقم لـ ١، كل ما كان
+                        الموديل شاطر (وU-Net جابت أرقام خرافية!).
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 53 -->
+        <div class="slide-section" id="slide53">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">MobileNet: Depth-wise Separate Convolution</span>
+                <span class="slide-number">Slide 53</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0053.jpg" alt="Slide 53" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">سرعة البرق على الموبايل 📱⚡</div>
+                <div class="explanation-content">
+                    عشان تشغل CNN على الموبايل، لازم توفر في الحسابات. الـ <span class="eng-term">MobileNet</span> عملت
+                    ثورة بحركة ذكية:
+                    <div class="detail-item">
+                        - <span class="highlight-danger">Vanilla Conv Cost:</span> الطريقة التقليدية مكلفة جداً، كل فلتر
+                        بضرب كل القنوات (Channels) مرة وحدة. <br>
+                        - <span class="highlight-success">الحل (Depth-wise Separate):</span> قسموا العملية لخطوتين: <br>
+                        * <span class="highlight-b">Depth-wise:</span> كل فلتر بمسك قناة وحدة بس. <br>
+                        * <span class="highlight-y">Point-wise:</span> بنستخدم فلتر 1x1 عشان نجمع النتائج ونغير عدد
+                        القنوات. <br>
+                        - <span class="highlight-success">Speed Up:</span> الحسبة الرياضية بتقول إن الموديل صار أسرع
+                        بمقدار (1/C<sub>out</sub> + 1/W<sub>K</sub>·H<sub>K</sub>). يعني توفير مرعب في الوقت والطاقة!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 54 -->
+        <div class="slide-section" id="slide54">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">MobileNet: Building Blocks Comparison</span>
+                <span class="slide-number">Slide 54</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch3/L3-CNN  RNN_page-0054.jpg" alt="Slide 54" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الـ Block العادي vs الـ Mobile Block 🏗️⚙️</div>
+                <div class="explanation-content">
+                    خلينا نشوف الفرق في التصميم المعماري:
+                    <div class="detail-item">
+                        - <span class="highlight-danger">Standard Block:</span> عبارة عن Conv 3x3 متبوع بـ BN و ReLU.
+                        بلوك واحد ثقيل. <br>
+                        - <span class="highlight-success">MobileNet Block:</span> جزؤوا البلوك لجزئين: <br>
+                        ١. بلوك للـ <span class="highlight-b">Depthwise Conv</span> مع الـ BN و الـ ReLU تبعونه. <br>
+                        ٢. متبوع مباشرة ببلوك <span class="highlight-y">1x1 Conv</span> (Pointwise) وبرضه معاه BN و
+                        ReLU. <br>
+                        - <span class="highlight-success">النتيجة:</span> نفس جودة النتائج تقريباً، بس بكسر من التكلفة
+                        الحسابية. هاذ اللي بخلي الـ AI يشتغل بسلاسة على موبايلك.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Navigation JS (Gooey effect) -->
+    <script src="../nav.js"></script>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>
