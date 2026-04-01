@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Intro to Gaming</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --gaming-primary: #ec4899;
+            --success: #34d399;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--gaming-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .detail-item {
+            margin-bottom: 20px;
+            padding-right: 15px;
+            border-right: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-title {
+            color: var(--gaming-primary);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .eng-term {
+            direction: ltr;
+            unicode-bidi: isolate;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0 2px;
+            vertical-align: middle;
+        }
+
+        .info-grid .grid-item {
+            text-align: right;
+        }
+
+        .info-grid .grid-item.ltr-item {
+            text-align: left;
+            direction: ltr;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> Gaming
+            </h1>
+            <p class="subtitle">Intro to Gaming | مقدمة في تطوير الألعاب</p>
+        </div>
+
+        <div id="slides-container">
+            <!-- Slides will be injected here if we were using JS, but we'll do literal HTML for SEO and consistency -->
+
+            <div class="slide-section" id="slide-1">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Chapter 01: Introduction</span>
+                    <span class="slide-number">Slide 01</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0001.jpg"
+                        alt="Slide 1">
+                </div>
+
+            </div>
+
+            <div class="slide-section" id="slide-2">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Slide 02</span><span
+                        class="slide-number">Slide 02</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0002.jpg"
+                        alt="Slide 2"></div>
+            </div>
+
+            <div class="slide-section" id="slide-3">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Chapter Outlines - محاور
+                        الشابتر</span><span class="slide-number">Slide 03</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0003.jpg"
+                        alt="Slide 3"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">خارطة الطريق 🗺️</div>
+                    <div class="explanation-content" id="explanation-3">
+                        بهذا الشابتر رح نمر برحلة كاملة، من "شو يعني ألعاب" لغاية ما نصير نفهم المراحل التقنية المعقدة.
+                        هاي هي النقاط الأساسية اللي رح نغطيها:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">الأساسيات (Fundamentals)</strong>
+                                رح نعرف شو هو تطوير الألعاب أصلاً، ومين هم الناس اللي بشتغلوا ورا الكواليس (<span
+                                    class="eng-term">The Team</span>).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">التاريخ والأنواع (History & Genres)</strong>
+                                رح نرجع بالزمن ونشوف كيف بلشت الألعاب، وشو الأنواع اللي موجودة بالسوق حالياً (<span
+                                    class="eng-term">AAA vs Indie</span>).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">مراحل الإنتاج (Production)</strong>
+                                رح نفهم الـ <span class="eng-term">Workflow</span> الحقيقي، من أول فكرة لغاية ما اللعبة
+                                تنزل عند اللاعبين وتشتغل 24/7.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-4">
+                <div class="slide-title-bar"><span style="font-weight: 700;">What is Game Development?</span><span
+                        class="slide-number">Slide 04</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0004.jpg"
+                        alt="Slide 4"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">شو يعني تطوير ألعاب بجد؟ 🤔</div>
+                    <div class="explanation-content" id="explanation-4">
+                        ببساطة، تطوير الألعاب هو "فن صناعة التجارب التفاعلية". الموضوع مش بس كود وبرمجة، هو خلطة سحرية
+                        بتجمع بين العلم والفن.
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">1</div>
+                                <div class="step-text">
+                                    <h4>الجانب الإبداعي (Artistic)</h4>
+                                    <p>إنك تبني قصة، شخصيات، وعوالم تخلي اللاعبين يندمجوا فيها وينسوا حالهم.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">2</div>
+                                <div class="step-text">
+                                    <h4>الجانب التقني (Technical)</h4>
+                                    <p>كود شغال، فيزياء واقعية، وسيرفرات بتتحمل آلاف اللاعبين بلمحة عين (<span
+                                            class="eng-term">Performance</span>).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="text-align: center; margin-top: 30px; padding: 15px; background: rgba(15, 23, 42, 0.6); border-radius: 12px; border: 1px dashed var(--primary);">
+                            <span class="highlight-b">الهدف النهائي:</span> خلق تجربة ممتعة (<span class="eng-term">Fun
+                                Factor</span>) ومستمرة بدون أي مشاكل.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-5">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Key Components of Game Dev</span><span
+                        class="slide-number">Slide 05</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0005.jpg"
+                        alt="Slide 5"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الأعمدة الأربعة لأي لعبة ناجحة 🏗️</div>
+                    <div class="explanation-content" id="explanation-5">
+                        عشان نبني لعبة "صح"، لازم نهتم بـ 4 تخصصات أساسية بتشتغل مع بعض زي الساعة:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">1. التصميم (Design)</strong>
+                                هو "مخ" اللعبة؛ القواعد، المراحل، وكيف اللاعب رح يتفاعل مع كل إشي (<span
+                                    class="eng-term">Game Mechanics</span>).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">2. الفن (Art)</strong>
+                                هو "عيون" اللعبة؛ الشخصيات، البيئات والرسومات سواء كانت <span class="eng-term">2D</span>
+                                أو <span class="eng-term">3D</span>.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">3. البرمجة (Programming)</strong>
+                                هي "عضلات" اللعبة؛ الكود اللي بيخلي الشخصية تقفز، الوحش يهاجم، والمرحلة تنتهي.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--accent);">
+                                <strong style="color: var(--accent);">4. الصوتيات (Sound)</strong>
+                                هي "روح" اللعبة؛ الموسيقى والمؤثرات اللي بتبني الجو العام (<span
+                                    class="eng-term">Atmosphere</span>) وبتزيد الحماس.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">5. الفحص (Testing)</strong>
+                                مرحلة "صيد الحشرات" (<span class="eng-term">Debugging</span>)؛ بنتأكد إنه اللعبة شغالة
+                                صح وما بتهنّج بوجه اللاعب.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--danger);">
+                                <strong style="color: var(--danger);">6. النشر (Releasing)</strong>
+                                اللحظة الحاسمة؛ لما اللعبة تطلع للنور وتصير متاحة للناس يشتروها أو ينزلوها ويلعبوها.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-6">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Aspect Comparison - مقارنة
+                        الأوجُه</span><span class="slide-number">Slide 06</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0006.jpg"
+                        alt="Slide 6"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">لعبة ولا فيلم ولا لغز؟ 🧐</div>
+                    <div class="explanation-content" id="explanation-6">
+                        عشان نفهم شو يعني "لعبة كمبيوتر"، لازم نقارنها بالأشياء اللي بتشبهها بس بتختلف عنها في جوهرها:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">الفيلم (Movie)</strong>
+                                قصة بنشوفها وبنسمعها بس (<span class="eng-term">Passive</span>)، ما بنقدر نغير الأحداث.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">اللعبة العادية (Game)</strong>
+                                نشاط فيه قوانين وأهداف ومتعة، ممكن تكون جسدية أو ذهنية (زي ورق اللعب أو الرياضة).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">لعبة الكمبيوتر (Computer Game)</strong>
+                                تجربة رقمية تفاعلية بالكامل، إنت بتتحكم بكل إشي فيها (<span class="eng-term">User
+                                    Controls Experience</span>).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--accent);">
+                                <strong style="color: var(--accent);">اللعبة (Toy)</strong>
+                                أداة مادية للعب الحر (زي الليغو)، ما فيها قوانين صارمة أو أهداف محددة زي اللعبة.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">اللغز (Puzzle)</strong>
+                                مادة لحل المشكلات، بتتطلب تفكير عميق ومنطق عشان توصل للحل النهائي.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-7">
+                <div class="slide-title-bar"><span style="font-weight: 700;">A Brief History - تاريخ موجز</span><span
+                        class="slide-number">Slide 07</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0007.jpg"
+                        alt="Slide 7"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الرحلة من الـ 50 لليوم ⏳</div>
+                    <div class="explanation-content" id="explanation-7">
+                        تطور الألعاب مر بمحطات تاريخية غيرت وجه التكنولوجيا في العالم:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">1</div>
+                                <div class="step-text"><strong>1950s-1960s:</strong> بدايات التجارب الأولى في ألعاب
+                                    الكمبيوتر المخبرية.</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">2</div>
+                                <div class="step-text"><strong>1970s:</strong> ولادة قطاع صناعة ألعاب الفيديو بشكل رسمي
+                                    وتجاري.</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">3</div>
+                                <div class="step-text"><strong>1980s:</strong> العصر الذهبي لأجهزة الـ <span
+                                        class="eng-term">Arcade</span> والكونسول المنزلي.</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">4</div>
+                                <div class="step-text"><strong>1990s:</strong> الثورة الكبيرة بدخول الـ <span
+                                        class="eng-term">3D Graphics</span> وألعاب الـ <span class="eng-term">PC</span>
+                                    المتطورة.</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">5</div>
+                                <div class="step-text"><strong>2000s:</strong> عصر الألعاب الجماعية عبر الإنترنت (<span
+                                        class="eng-term">Online Multiplayer</span>) وألعاب الموبايل.</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">6</div>
+                                <div class="step-text"><strong>2010s-2020s:</strong> دخول تقنيات الـ <span
+                                        class="eng-term">VR/AR</span> وقوة الألعاب المستقلة (<span
+                                        class="eng-term">Indie</span>).</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">7</div>
+                                <div class="step-text"><strong>2020s-Present:</strong> عصر الذكاء الاصطناعي (<span
+                                        class="eng-term">AI</span>) والألعاب الجادة (<span class="eng-term">Serious
+                                        Games</span>).</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-8">
+                <div class="slide-title-bar"><span style="font-weight: 700;">1950s-1960s: The Pioneers</span><span
+                        class="slide-number">Slide 08</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0008.jpg"
+                        alt="Slide 8"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">أجداد الألعاب اللي بنلعبها اليوم 🕹️</div>
+                    <div class="explanation-content" id="explanation-8">
+                        في هذيك الفترة، الأجهزة كانت بحجم غرف، والهدف منها كان "تجارب علمية" مش أكثر:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Tennis for Two (1958)</strong>
+                                من أوائل الألعاب، كانت تشتغل على جهاز الـ <span class="eng-term">Oscilloscope</span>!
+                                تخيل تلعب تنس ع شاشة فحص ذبذبات.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Spacewar! (1962)</strong>
+                                أول لعبة بتسمح لثنين يتواجهوا بسفن فضائية، طورتها مجموعة بمعهد الـ <span
+                                    class="eng-term">MIT</span> وهي اللي حطت أساس ألعاب المنافسة.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-9">
+                <div class="slide-title-bar"><span style="font-weight: 700;">1970s: The Birth of Industry</span><span
+                        class="slide-number">Slide 09</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0009.jpg"
+                        alt="Slide 9"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">السبعينات: اللعبة صارت مصلحة وشغل 🏭</div>
+                    <div class="explanation-content" id="explanation-9">
+                        هون بلش الناس يشتروا أجهزة عشان يلعبوا بالبيت، وبلشت تطلع شركات متخصصة:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Magnavox Odyssey (1972)</strong>
+                                أول جهاز ألعاب منزلي تجاري في التاريخ! كان بسيط لدرجة إنه ما فيه صوت، بس نقل المتعة
+                                للبيوت.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Pong (1972)</strong>
+                                اللعبة اللي عملت ثورة من شركة <span class="eng-term">Atari</span>؛ كانت بسيطة جداً
+                                (مضربين وطابة) بس خلت كل العالم يحكي عن "ألعاب الفيديو".
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-10">
+                <div class="slide-title-bar"><span style="font-weight: 700;">1980s - 2020s Evolution</span><span
+                        class="slide-number">Slide 10</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0010.jpg"
+                        alt="Slide 10"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">العصر الذهبي وما بعده 🎢</div>
+                    <div class="explanation-content" id="explanation-10">
+                        من الثمانينات لليوم، الألعاب انتقلت من مجرد "نقاط" لـ "عوالم واقعية":
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">1980s: Golden Age</strong>
+                                <span class="eng-term">Pac-Man (1980)</span> و <span class="eng-term">Super Mario Bros
+                                    (1985)</span>. هون انولدت الأساطير اللي لسا بنلعب أجزاء منها لليوم وحطت حجر الأساس
+                                لألعاب الـ <span class="eng-term">Platformers</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">1990s: 3D Revolution</strong>
+                                <span class="eng-term">Doom (1993)</span> و <span class="eng-term">Quake (1996)</span>.
+                                الألعاب صارت "ثلاثية الأبعاد" ودخلنا في عالم منظور الشخص الأول (<span
+                                    class="eng-term">FPS</span>) اللي غير شكل الأكشن للأبد.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">2000s: Connected World</strong>
+                                <span class="eng-term">World of Warcraft (2004)</span> و <span class="eng-term">Angry
+                                    Birds (2009)</span>. بلش زمن الموبايل والأونلاين يسيطر، وصار اللعب متاح للجميع في أي
+                                مكان.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">2010s-2020s: Reality & Indie</strong>
+                                <span class="eng-term">Minecraft (2011)</span> و <span class="eng-term">Pokémon GO
+                                    (2016)</span>. الألعاب صارت "واقع معزز" والحرية صارت للجميع يبنوا عوالمهم الخاصة
+                                بذكاء.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-11">
+                <div class="slide-title-bar"><span style="font-weight: 700;">2020s-Present: Modern Trends</span><span
+                        class="slide-number">Slide 11</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0011.jpg"
+                        alt="Slide 11"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الواقع الحالي والتوجهات الجديدة 🌐</div>
+                    <div class="explanation-content" id="explanation-11">
+                        وصلنا لمرحلة بطلت فيها الألعاب بس للتسلية، صارت جزء من نسيج حياتنا اليومي:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">الذكاء الاصطناعي (AI)</strong>
+                                صار الذكاء الاصطناعي بساعد في تصميم العوالم، وبرمجة الأعداء اللي بفهموا حركاتك وبردوا
+                                عليها بذكاء.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">الألعاب الجادة (Serious Games)</strong>
+                                بنستخدم عناصر اللعب في التعليم، التدريبات العسكرية، وحتى العمليات الجراحية (<span
+                                    class="eng-term">Gamification</span>).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">محاكاة الواقع (Simulations)</strong>
+                                ألعاب زي <span class="eng-term">NYT Simulator Game</span> بتخليك "تعيش" التجربة وتفهم
+                                تعقيدات المهن والقرارات الحقيقية.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-12">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Why Study Game Development?</span><span
+                        class="slide-number">Slide 12</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0012.jpg"
+                        alt="Slide 12"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ليش ندرس تطوير ألعاب؟ 🚀</div>
+                    <div class="explanation-content" id="explanation-12">
+                        الموضوع مش بس "تسلية"، هو استثمار في مهارات فظيعة بتفتحلك أبواب عالمية. الصناعة اليوم أضخم من
+                        مجموع صناعة الأفلام والموسيقى مع بعض!
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">1. تعبير إبداعي (Creative Expression)</strong>
+                                الألعاب هي مزيج فريد من الفن، التكنولوجيا، والقصص التفاعلية اللي بتخليك تعبر عن خيالك
+                                بأفضل صورة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">2. فرص وظيفية (Career Progress)</strong>
+                                سواء كنت مبرمج، رسام، مصمم أصوات، أو حتى مختبر جودة (<span class="eng-term">QA</span>)،
+                                السوق متعطش لمواهب حقيقية بمرتبات خيالية.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">3. صناعة بمليارات الدولارات</strong>
+                                الصناعة قيمتها تجاوزت الـ 200 مليار دولار سنة 2023، وهي في نمو مستمر أسرع من الأفلام
+                                والموسيقى.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">4. مهارات قابلة للنقل</strong>
+                                اللي بتتعلمه بالقيمنق (زي الـ <span class="eng-term">Math</span> والـ <span
+                                    class="eng-term">Algorithms</span>) بتقدر تستخدمه بأي تكنولوجيا ثانية أو تطبيقات
+                                برمجية ضخمة.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--accent);">
+                                <strong style="color: var(--accent);">5. مجال متعدد التخصصات</strong>
+                                اللعبة محتاجة تعاون بين عالم الرياضيات، المختص النفسي، الرسام، والمبرمج؛ يعني رح تتعلم
+                                كيف تتعامل مع كل العقول (<span class="eng-term">Multidisciplinary</span>).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-13">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Types of Games - أنواع الألعاب</span><span
+                        class="slide-number">Slide 13</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0013.jpg"
+                        alt="Slide 13"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">كيف بنصنف الألعاب؟ 🎮</div>
+                    <div class="explanation-content" id="explanation-13">
+                        عشان نفهم اللعبة صح، لازم نصنفها من كذا زاوية:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">النوع (Genres)</strong>
+                                ألعاب الأكشن، المغامرات، الـ <span class="eng-term">RPG</span>، الاستراتيجية، الألغاز،
+                                والرياضة (<span class="eng-term">Sports</span>). كل نوع وله جمهوره وقواعده الخاصة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">المنصات (Platforms)</strong>
+                                وين بنلعب؟ <span class="eng-term">PC</span>، أجهزة الكونسول (<span
+                                    class="eng-term">PlayStation, Xbox, Nintendo</span>)، الموبايل، أو حتى الـ <span
+                                    class="eng-term">VR/AR</span>.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">الجمهور (Audience)</strong>
+                                من اللاعب الهاوي (<span class="eng-term">Casual</span>) للي بقضي يومه باللعب (<span
+                                    class="eng-term">Hardcore</span>)، للأطفال والطلاب اللي بدوروا ع تجارب تعليمية.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-14">
+                <div class="slide-title-bar"><span style="font-weight: 700;">AAA vs. Indie Games</span><span
+                        class="slide-number">Slide 14</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0014.jpg"
+                        alt="Slide 14"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الشركات العملاقة vs المطور المستقل 🏢👨‍💻</div>
+                    <div class="explanation-content" id="explanation-14">
+                        هاض التمييز هو أهم إشي بالسوق حالياً؛ مين اللي بصرف الملايين ومين اللي بشتغل بذكاء؟
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">AAA</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">ألعاب الـ Triple-A</h4>
+                                    <p>ميزانيات خرافية، مئات الموظفين، ودعم من شركات نشر عالمية. الهدف هو التميز البصري
+                                        والتقني المطلق (زي <span class="eng-term">Journey</span>).</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">Indie</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--accent);">الألعاب المستقلة (Independent)</h4>
+                                    <p>فرق صغيرة أو حتى شخص واحد. التميز هون بكون بالإبداع والأفكار الجديدة اللي الشركات
+                                        الكبيرة بتخاف تجربها (زي <span class="eng-term">Hollow Knight</span>).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-15">
+                <div class="slide-title-bar"><span style="font-weight: 700;">The Game Development Team</span><span
+                        class="slide-number">Slide 15</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0015.jpg"
+                        alt="Slide 15"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">مين ببني اللعبة؟ (الهيكل الإداري) 👥</div>
+                    <div class="explanation-content" id="explanation-15">
+                        الفريق الكبير بتم تقسيمه لأربع عائلات تقنية أساسية، كل وحدة لها قائد وشغل خاص:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">1. الإدارة (Management)</strong>
+                                مسؤولين عن ترتيب الأوراق، الوقت، والميزانية عشان اللعبة ما تفشل مالياً.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">2. الفن (Art & Animation)</strong>
+                                هم اللي بعطوا الشكل النهائي والجمال للأصول وحركة الشخصيات.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">3. التصميم (Design)</strong>
+                                مسؤولين عن التجربة، القوانين، المستويات، وحتى الأصوات اللي بتسمعها.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">4. التقني (Technical)</strong>
+                                هم اللي بحولوا كل الحكي لكود شغال ومنطق برمجي معقد ونظام خالي من الـ <span
+                                    class="eng-term">Bugs</span>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-16">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Management Team - مهندسين
+                        الإدارة</span><span class="slide-number">Slide 16</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0016.jpg"
+                        alt="Slide 16"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تيم الإدارة (The Bosses) ⚖️</div>
+                    <div class="explanation-content" id="explanation-16">
+                        عشان الفريق ما يضيع بالعجقة، لازم يكون في إدارة حازمة بتعرف شو بدها:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Project Manager</strong>
+                                "المايسترو" اللي بتابع الـ <span class="eng-term">Timelines</span> والـ <span
+                                    class="eng-term">Budgets</span> وصرف الموارد.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Technical Manager</strong>
+                                بتابع الكود هل هو من ضمن الـ <span class="eng-term">Best Practices</span> وماشي مع
+                                المتطلبات التقنية للمنصات.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Delivery Manager</strong>
+                                بهتم إنه المنتج النهائي يطلع بجودة (<span class="eng-term">Quality</span>) خرافية
+                                وبالموعد المحدد.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-17">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Art and Animation Team</span><span
+                        class="slide-number">Slide 17</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0017.jpg"
+                        alt="Slide 17"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الجمال والحركة (The Creative Souls) 🎨</div>
+                    <div class="explanation-content" id="explanation-17">
+                        أي إشي بتشوفه بعيونك ورا كبسة الزر، هو شغل هذول الناس:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Art Lead</strong>
+                                بحدد الـ <span class="eng-term">Art Style</span> وبدير تيم الرسامين عشان تكون اللعبة
+                                متناسقة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">2D Artist</strong>
+                                متخصص بالشخصيات ثنائية الأبعاد (<span class="eng-term">Sprites</span>) والـ <span
+                                    class="eng-term">Textures</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">3D Artist</strong>
+                                ببني الموديلات والبيئات ثلاثية الأبعاد اللي بنقدر نمشي فيها.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Animator</strong>
+                                المتخصص بالحركة؛ هو اللي بيخلي اللاعب يركض ويحس بوزن الشخصية.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-18">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Visual Comparison - مقارنة بصرية
+                        للمحتوى</span><span class="slide-number">Slide 18</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0018.jpg"
+                        alt="Slide 18"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الفرق بين الـ 2D والـ 3D والـ Animation 👁️</div>
+                    <div class="explanation-content" id="explanation-18">
+                        هون بنقدر نشوف بوضوح كيف كل تخصص بطلع منتج مختلف تماماً بس بكملوا بعض:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">2D Sprite</strong>
+                                صورة مسطحة (زي ماريو القديم) بنستخدم فيها رسم الـ <span class="eng-term">Pixels</span>
+                                أو <span class="eng-term">Vector</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">3D Model</strong>
+                                مجسم له أبعاد وطول وعرض وعمق في الفراغ، محتاج عمليات <span
+                                    class="eng-term">Rendering</span> معقدة.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Animation</strong>
+                                السحر اللي بخلي الصور تتحرك وتعيش، من خلال تسلسل زمني دقيق للمشاهد.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-19">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Design Team - المهندسين
+                        المبدعين</span><span class="slide-number">Slide 19</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0019.jpg"
+                        alt="Slide 19"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">العقل المدبر للعبة (The Minds) 🧠</div>
+                    <div class="explanation-content" id="explanation-19">
+                        التيم هاض هو اللي بقرر إذا كنت رح تنبسط باللعبة ولا لا، لأنه بهتم بمشاعر اللاعب وتفاعله:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">UX/UI Designer</strong>
+                                بصمم الواجهات وكيف رح تتنقل بين القوائم والـ <span class="eng-term">HUD</span> خلال
+                                اللعب.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Game Designer</strong>
+                                بحط القوانين الصعبة والميكانيكيات اللي بتخلي اللعبة "لعبة" مش بس رسمة جافة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Level Designer</strong>
+                                ببني عوالم اللعبة والمسارات اللي لازم تمشي فيها عشان تخلص المهمات.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Sound Designer</strong>
+                                مسؤول عن كل رنة وجرس وتأثير صوتي بطلع مع خبطة السيف أو الريح.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-20">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Technical Team - المحاربين
+                        البرمجيين</span><span class="slide-number">Slide 20</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0020.jpg"
+                        alt="Slide 20"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الممرمجين والمختبرين (The Builders) 💻</div>
+                    <div class="explanation-content" id="explanation-20">
+                        التيم التقني هو اللي "بشغّل" المصلحة وبكتب السطور اللي بتحرك العالم كله:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Technical Lead</strong>
+                                المشرف العام على المبرمجين عشان ما حدا يعجن الكود ويروح التعب عالفاضي.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Frontend Developer</strong>
+                                بهتم بالأشياء اللي بشوفها اللاعب وبتفاعل معها بشكل مباشر (زي المنيوز).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Backend Developer</strong>
+                                مسؤول عن الذكاء الاصطناعي، السيرفرات، والمنطق اللي بشتغل بالخلفية.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--danger);">
+                                <strong style="color: var(--danger);">QA Engineer</strong>
+                                "صياد العيوب"؛ بضل يلعب باللعبة وبجرب يكسرها عشان يلاقي الـ <span
+                                    class="eng-term">Bugs</span>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-21">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Phases of Production - مراحل
+                        الإنتاج</span><span class="slide-number">Slide 21</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0021.jpg"
+                        alt="Slide 21"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">رحلة اللعبة من الصفر للقمة ⚡</div>
+                    <div class="explanation-content" id="explanation-21">
+                        عشان المشروع ما يطلع فاشل ومخربط، Professionals بتقسم الشغل لأربع مراحل ذهبية:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">1</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--accent);">Pre-production (ما قبل الإنتاج)</h4>
+                                    <p>مرحلة التخطيط، الـ <span class="eng-term">Prototyping</span>، رسم الفن المبدئي
+                                        وتحديد شو بدنا نعمل بالضبط.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">2</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">Production (الإنتاج الفعلي)</h4>
+                                    <p>هون بنبلش العصر الحقيقي؛ بناء الـ <span class="eng-term">Assets</span>، كتابة
+                                        الكود، تسجيل الأصوات، والعمل الميداني.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">3</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--success);">Post-production (ما بعد الإنتاج)</h4>
+                                    <p>مرحلة التلميع (<span class="eng-term">Polishing</span>)، فحص الجودة الـ <span
+                                            class="eng-term">QA</span>، وتصليح آخر الأخطاء قبل النشر.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">4</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">Operations (العمليات)</h4>
+                                    <p>بعد ما اللعبة نزلت؛ صيانة السيرفرات، التحديثات المباشرة (<span
+                                            class="eng-term">Patches</span>)، وحتى المبيعات والميزانية.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-22">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Pre-production - مرحلة التخطيط</span><span
+                        class="slide-number">Slide 22</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0022.jpg"
+                        alt="Slide 22"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الأساس المتين (The Foundation) 🏗️</div>
+                    <div class="explanation-content" id="explanation-22">
+                        بهاي المرحلة، الهدف هو إننا "نثبت ملامح اللعبة" عشان لما نبلش إنتاج حقيقي نكون عارفين وين
+                        رايحين.
+                        بطلع عندنا إشي بنسميه الـ <span class="eng-term">Design Document</span>:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">المصدر الوحيد للحقيقة</strong>
+                                وثيقة الـ <span class="eng-term">Game Design Document (GDD)</span> فيها كل تفاصيل القصة،
+                                الميكانيكيات، الجمهور المستهدف، وحتى الـ <span class="eng-term">Accessibility</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Script & Storyboards</strong>
+                                زي الأفلام، بنرسم المشاهد (<span class="eng-term">Visual Flow</span>) وبنكتب الحوارات
+                                عشان الكل يتخيل التجربة قبل ما نبرمجها.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-23">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Pre-production Visuals - تدفق
+                        اللعبة</span><span class="slide-number">Slide 23</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0023.jpg"
+                        alt="Slide 23"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">التصور البصري والواجهات (UI & Flow) 📐</div>
+                    <div class="explanation-content" id="explanation-23">
+                        هون بنبلش نشوف "خريطة" اللعبة وشاشاتها. من الـ <span class="eng-term">Main Menu</span> للـ <span
+                            class="eng-term">Gameplay</span>:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Gameflow</strong>
+                                كيف اللاعب بنتقل بين الشاشات (مثلاً: خسرت؟ ارجع للمنيو، أو اعمل <span
+                                    class="eng-term">Restart</span>).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">UI Layouts</strong>
+                                أماكن الصحة (<span class="eng-term">HP</span>)، عداد الطلقات، والـ <span
+                                    class="eng-term">Inventory</span>. كل إشي لازم يكون مرسوم "على الورق" أولاً.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Prototype Scenes</strong>
+                                بنبلش نحدد زوايا الكاميرا (<span class="eng-term">Camera Rigs</span>) وكيف رح يحس اللاعب
+                                بالمكان.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-24">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Pre-production Goal - الإنارة
+                        الخضراء</span><span class="slide-number">Slide 24</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0024.jpg"
+                        alt="Slide 24"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">التكرار والقرار (Iteration & Green-light) ✅</div>
+                    <div class="explanation-content" id="explanation-24">
+                        أهم هدف بهاي المرحلة هو إننا نجرب أفكارنا "برخيص". تغيير الاتجاه بالأول سهل، بس بعدين بكلف
+                        ملايين:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">!</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">Real-time Editing</h4>
+                                    <p>يونيتي (<span class="eng-term">Unity</span>) ممتاز هون لأنه بخليك تعدل وتجرب الـ
+                                        <span class="eng-term">Prototypes</span> فوراً وبسرعة.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">🏆</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--success);">Green-lit</h4>
+                                    <p>نهاية المرحلة هي لما نعرض "الطبخة" على المستثمرين ويوافقوا عليها؛ وقتها بناخذ
+                                        الضوء الأخضر للإنتاج الضخم.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-25">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Production Phase - مرحلة
+                        الإنتاج</span><span class="slide-number">Slide 25</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0025.jpg"
+                        alt="Slide 25"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">العصر المجهد (The Gritty Work) 🛠️</div>
+                    <div class="explanation-content" id="explanation-25">
+                        هاي أطول وأغلى مرحلة. هون بطلع "المنتج" للوجود وبنبلش نحول الورق لواقع:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Churning Assets</strong>
+                                الرسامين والمبرمجين والموسيقيين كلهم بشتغلوا مع بعض عشان يطلّعوا الـ <span
+                                    class="eng-term">Models</span> والـ <span class="eng-term">Animated
+                                    Sequences</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Functional App</strong>
+                                هون الـ <span class="eng-term">Feature List</span> بتتحول لتجربة قابلة للعب (<span
+                                    class="eng-term">Playable Experience</span>). كل موظف بحط بصمته.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-26">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Production Management - إدارة
+                        الإنتاج</span><span class="slide-number">Slide 26</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0026.jpg"
+                        alt="Slide 26"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">المنتج وصياد الميزات (The Producer & Feature Creep) 🛡️</div>
+                    <div class="explanation-content" id="explanation-26">
+                        لأنه الشغل بهاي المرحلة ضخم، محتاجين شخص "ماسك العصا من النص" وهو الـ <span
+                            class="eng-term">Producer</span>:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Deadlines</strong>
+                                المنتج بهمه إنه التيم يخلص بالوقت المتفق عليه وما نأخر موعد النشر.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--danger);">
+                                <strong style="color: var(--danger);">Feature Creep</strong>
+                                هاي هي "المصيبة"؛ لما نبلش نضيف ميزات جديدة ونغير باللعبة بنص الطريق، المنتج لازم يوقفها
+                                عشان ما يفشل المشروع من التوسيع الزايد.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-27">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Production Roles - جيش التطوير</span><span
+                        class="slide-number">Slide 27</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0027.jpg"
+                        alt="Slide 27"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">التخصصات الدقيقة (The Specialist Map) 🗺️</div>
+                    <div class="explanation-content" id="explanation-27">
+                        بمرحلة الإنتاج، التيم بتوسع بشكل مرعب وبتظهر أدوار محددة جداً:
+
+                        <div class="info-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Programming</strong>
+                                <small>Software, Mobile, VR/AR, AI, Graphics, Network, Gameplay, QA.</small>
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Art</strong>
+                                <small>3D, 2D, Lighting, Character, Technical, VFX, Animators, UI Designer.</small>
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--success);">System Design</strong>
+                                <small>Game, Level, Systems Architect, Script Writer, Narrative, UX Designer.</small>
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Audio</strong>
+                                <small>Audio Designer, Sound Engineer, Composer.</small>
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Management</strong>
+                                <small>Producers, Product Owners, Creative Directors, QA Managers.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-28">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Version Control - التحكم
+                        بالإصدارات</span><span class="slide-number">Slide 28</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0028.jpg"
+                        alt="Slide 28"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">آلة الزمن البرمجية (The Time Machine) 🔄</div>
+                    <div class="explanation-content" id="explanation-28">
+                        لما يكون عندك جيش من الموظفين بشتغلوا على نفس الملفات، محتاج نظام يديرهم عشان ما حدا يمسح شغل
+                        الثاني:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Version Control</strong>
+                                عملية تتبع وتخزين كل تعديل بصير، بحيث نقدر نرجع لأي نسخة قديمة لو صار "مصيبة".
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">GitHub & Unity VCS</strong>
+                                أشهر الأدوار عالمياً هو <span class="eng-term">GitHub</span>، ويونيتي كمان بوفر نظامه
+                                الخاص المدمج بالـ <span class="eng-term">Editor</span>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-29">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Why Version Control? - أهمية
+                        النظام</span><span class="slide-number">Slide 29</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0029.jpg"
+                        alt="Slide 29"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ليش الـ VCS ضروري؟ 🧐</div>
+                    <div class="explanation-content" id="explanation-29">
+                        الفرق بتستخدم هاي الأنظمة لثلاث أهداف ذهبية:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">1</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">Track Changes</h4>
+                                    <p>نعرف مين عدّل إيش ومتى بالظبط.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">2</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--accent);">Revert if Necessary</h4>
+                                    <p>إذا الكود خرب، بنرجع كبسة زر للحظة اللي كان فيها شغال.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">3</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--success);">Manage Contributions</h4>
+                                    <p>دمج شغل الرسام مع المبرمج بدون ما يضربوا ببعض.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-30">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Post-production - ما بعد
+                        الإنتاج</span><span class="slide-number">Slide 30</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0030.jpg"
+                        alt="Slide 30"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">التلميع والاختبار (Polishing & Testing) ✨</div>
+                    <div class="explanation-content" id="explanation-30">
+                        اللعبة خلصت تقنياً، بس لسا "مش جاهزة" للناس. هون بنعمل الـ <span
+                            class="eng-term">Polishing</span>:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Alpha Testing</strong>
+                                اختبار داخلي (بين موظفين الشركة) عشان نلاقي المشاكل الكبيرة بالبداية.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Beta Testing</strong>
+                                بنعطي اللعبة لمجموعة من اللاعبين الحقيقيين عشان يجربوها في "بيئتهم الطبيعية".
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Bug Lists</strong>
+                                بنطلع قائمة طويلة بالأخطاء وبنقعد نصلحها قبل ما نسمي اللعبة <span
+                                    class="eng-term">Released</span>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-31">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Operations Phase - العمليات</span><span
+                        class="slide-number">Slide 31</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0031.jpg"
+                        alt="Slide 31"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ما بعد الإطلاق (The Living Product) 🚀</div>
+                    <div class="explanation-content" id="explanation-31">
+                        اللعبة نزلت، بس حياتها لسا بلشت. الـ <span class="eng-term">Operations</span> هي اللي بتخلي
+                        اللعبة تستمر:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Maintenance</strong>
+                                الحفاظ على السيرفرات شغالة، وتحليل البيانات (<span class="eng-term">Analytics</span>)
+                                لنعرف شو بحب اللاعبين.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Monetization</strong>
+                                كيف اللعبة رح تجيب فلوس؟ (بيع نسخ، اشتراكات، أو إعلانات).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--danger);">
+                                <strong style="color: var(--danger);">Sunsetted</strong>
+                                لما اللعبة توقف تجيب مبيعات أو تصير قديمة، بنوصل لمرحلة "الغروب" ونوقف دعمها رسمياً.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-32">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Operations Activities - أنشطة
+                        العمليات</span><span class="slide-number">Slide 32</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0032.jpg"
+                        alt="Slide 32"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تفاصيل إدارة المنتج المستمر ⚙️</div>
+                    <div class="explanation-content" id="explanation-32">
+                        بهاي المرحلة، الأدوار بتصير إدارية وتقنية أكثر منها إبداعية:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Support</strong>
+                                الرد على مشاكل اللاعبين والـ <span class="eng-term">Partners</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Analytics</strong>
+                                تتبع سلوك اللاعبين عشان نحسن باللعبة مستقبلاً.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--success);">Server & Web</strong>
+                                صيانة المواقع والسيرفرات اللي بتدعم الألعاب الجماعية.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Business & Sales</strong>
+                                التسويق المستمر والـ <span class="eng-term">PR</span> عشان نجذب لاعبين جدد.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-33">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Unity Throughout Production - دور
+                        يونيتي</span><span class="slide-number">Slide 33</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0033.jpg"
+                        alt="Slide 33"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">يونيتي في كل مرحلة 🛠️</div>
+                    <div class="explanation-content" id="explanation-33">
+                        يونيتي مش بس للكود، هو شريك في كل المراحل:
+
+                        <ul class="standard-list">
+                            <li><span class="eng-term">Pre-production</span>: رسم المفاهيم والـ <span
+                                    class="eng-term">Visualization</span>.</li>
+                            <li><span class="eng-term">Production</span>: بناء المشروع الفعلي ودمج الفن مع الصوت.</li>
+                            <li><span class="eng-term">Post-production</span>: فحص الجودة والـ <span
+                                    class="eng-term">Performance Optimization</span>.</li>
+                            <li><span class="eng-term">Operations</span>: الإعلانات، الـ <span class="eng-term">In-app
+                                    purchases</span>، والـ <span class="eng-term">Updates</span>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-34">
+                <div class="slide-title-bar"><span style="font-weight: 700;">The Unreal Power - كسر الحواجز</span><span
+                        class="slide-number">Slide 34</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0034.jpg"
+                        alt="Slide 34"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">سر الـ Real-time Engine ⚡</div>
+                    <div class="explanation-content" id="explanation-34">
+                        أكبر ميزة بالمحركات الحديثة زي يونيتي إنها "بتمحي الحدود" بين مراحل الإنتاج:
+
+                        <blockquote class="explanation-quote">
+                            "The advantage of using a real-time engine like Unity is that it blurs the lines between
+                            phases..."
+                        </blockquote>
+
+                        بمعنى إنك ما بتستنى شهور عشان تشوف النتيجة؛ تقدر تعدل الإضاءة، التجربة، الكاميرا وتشوف التعديل
+                        فوراً (<span class="eng-term">Immediate Feedback</span>). هاض الإشي بخلي الإنتاج أسرع بمليون مرة
+                        من الطرق التقليدية.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-35">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Unity Across Industries - يونيتي في كل
+                        مكان</span><span class="slide-number">Slide 35</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0035.jpg"
+                        alt="Slide 35"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">مش بس للألعاب! (Beyond Gaming) 🌍</div>
+                    <div class="explanation-content" id="explanation-35">
+                        يونيتي محرك جبار دخل في مجالات ما كانت تخطر على البال، والسبب هو قوته في الـ <span
+                            class="eng-term">Real-time Rendering</span>:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Animation & Film</strong>
+                                بنستخدمه لبناء عوالم الأفلام والرسوم المتحركة وتجربة الزوايا والسينمائيات فوراً بدون
+                                انتظار ساعات للرندرة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">AEC (Architecture)</strong>
+                                في العمارة والهندسة، بنعمل فيه جولات افتراضية (<span class="eng-term">VR/AR
+                                    Walkthroughs</span>) بتخلي المستثمر يشوف البناية قبل ما تنبني.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">ATM (Automotive)</strong>
+                                في صناعة السيارات، بنستخدمه لتصميم الواجهات وتجربة السيارة في بيئة افتراضية كاملة.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-36">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Industry Lifecycles - دورات حياة
+                        الصناعة</span><span class="slide-number">Slide 36</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0036.jpg"
+                        alt="Slide 36"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الخريطة البصرية لدور يونيتي 🗺️</div>
+                    <div class="explanation-content" id="explanation-36">
+                        هون بنقدر نشوف كيف يونيتي "بشبك" المراحل ببعض حسب الصناعة:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Games</strong>
+                                ممتد من الـ <span class="eng-term">Pre-production</span> لغاية الـ <span
+                                    class="eng-term">Operations</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Film</strong>
+                                بركز أكثر على الـ <span class="eng-term">Planning</span> والإنتاج الفعلي للمشاهد.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Industrial</strong>
+                                ببدأ من الفكرة وبخلص عند "تلميع" المنتج النهائي للعرض.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-37">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Storytelling in Games - القصص في
+                        الألعاب</span><span class="slide-number">Slide 37</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0037.jpg"
+                        alt="Slide 37"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ليش القصة مهمة؟ (The Soul of the Game) 🎭</div>
+                    <div class="explanation-content" id="explanation-37">
+                        القصة هي اللي بتعمل "رابط عاطفي" بين اللاعب واللعبة. وبنقسمها لثلاث أنواع رئيسية:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Linear Story</strong>
+                                مسار واحد ثابت (زي <span class="eng-term">The Last of Us</span>)، اللاعب بمشي حسب ما
+                                الكاتب قرر.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Branching Story</strong>
+                                قراراتك بتغير القصة (زي <span class="eng-term">The Witcher 3</span>)، كل خيار له تبعات.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Emergent Story</strong>
+                                القصة بتطلع من اللعب نفسه (زي <span class="eng-term">Minecraft</span>)، أنت بتصنع قصتك
+                                الخاصة.
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <strong>عناصر القصة الناجحة:</strong> الشخصيات القريبة للقلب، الصراع (<span
+                                class="eng-term">Conflict</span>)، وبناء العالم (<span
+                                class="eng-term">World-Building</span>).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-38">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Storyboard - مسودة القصص
+                        المصورة</span><span class="slide-number">Slide 38</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0038.jpg"
+                        alt="Slide 38"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">رسم الأفكار (Sketching the Vision) 🖍️</div>
+                    <div class="explanation-content" id="explanation-38">
+                        الـ <span class="eng-term">Storyboard</span> هو عبارة عن رسم مبدئي للمشاهد على لوحات (<span
+                            class="eng-term">Panels</span>). هاض الإشي بساعد:
+
+                        <ul class="standard-list">
+                            <li><strong>الرسامين:</strong> ليتخيلوا البيئة والزوايا.</li>
+                            <li><strong>مصممي الألعاب:</strong> ليتأكدوا إن المكونات بتركب على بعض صح.</li>
+                        </ul>
+
+                        <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; margin-top: 10px;">
+                            <strong>مثال حي:</strong> في الصورة بنشوف الـ Storyboard الخاص بلعبة <span
+                                class="eng-term">Hollow Knight</span> الأسطورية، وكيف رسموا حركات الشخصية قبل البرمجة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-39">
+                <div class="slide-title-bar"><span style="font-weight: 700;">The MDA Framework - هيكل MDA</span><span
+                        class="slide-number">Slide 39</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0039.jpg"
+                        alt="Slide 39"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">كيف بنصنع "المتعة"؟ (Science of Fun) 🧪</div>
+                    <div class="explanation-content" id="explanation-39">
+                        الـ <span class="eng-term">MDA</span> هو إطار عمل عالمي بفهمنا اللعبة من وجهة نظر المطور
+                        واللاعب:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">M</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">Mechanics (القوانين)</h4>
+                                    <p>القواعد الأساسية؛ زي كيف بمشي اللاعب، وكيف بحسب النقاط.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">D</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--accent);">Dynamics (التفاعل)</h4>
+                                    <p>التفاعل اللي بصير لما اللاعب يلعب؛ الخطط، المنافسة، والـ <span
+                                            class="eng-term">Emergent Gameplay</span>.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">A</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--success);">Aesthetics (الأحاسيس)</h4>
+                                    <p>مشاعر اللاعب؛ الفرح، التوتر، الفضول، والـ "متعة" النهائية.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-style: italic; margin-top: 10px; color: var(--accent);">
+                            ملاحظة: المطور ببدأ من الـ Mechanics، بس اللاعب ببدأ يحس بالـ Aesthetics أولاً!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-40">
+                <div class="slide-title-bar"><span style="font-weight: 700;">MDA Example: Pac-Man - مثال
+                        باكمان</span><span class="slide-number">Slide 40</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0040.jpg"
+                        alt="Slide 40"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تحليل أسطورة باكمان 🍒</div>
+                    <div class="explanation-content" id="explanation-40">
+                        خلينا نطبق الـ MDA على لعبة بسيطة وعميقة زي باكمان:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Mechanics</strong>
+                                الحركة في 4 اتجاهات، أكل النقاط، الوحوش بتلحقك، والـ <span class="eng-term">Power
+                                    Pellets</span> بتخليك تأكلهم.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Dynamics</strong>
+                                اللاعب لازم يوازن بين "الخطر" و"الجائزة"، ويستخدم الـ Power Pellets بتوقيت ذكي للهجوم.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Aesthetics</strong>
+                                <span class="eng-term">Challenge</span> (الهروب)، <span
+                                    class="eng-term">Sensation</span> (الصوت والحركة)، والـ <span
+                                    class="eng-term">Tension</span> (الخوف من الوحوش).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-41">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Game Design Document (GDD) - وثيقة
+                        التصميم</span><span class="slide-number">Slide 41</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0041.jpg"
+                        alt="Slide 41"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">خريطة الطريق التقنية (The Blueprint) 🗺️</div>
+                    <div class="explanation-content" id="explanation-41">
+                        الـ <span class="eng-term">GDD</span> هو الدليل اللي بمشي عليه كل التيم عشان ما حدا يضيع. أهم
+                        أقسامه:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Game Overview</strong>
+                                الفكرة العامة للاعب، والـ <span class="eng-term">Target Audience</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Core Mechanics</strong>
+                                كيف اللعبة بتشتغل، التحكم، والأهداف المطلوبة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--success);">Art Style</strong>
+                                الاتجاه البصري (2D، 3D، أو بكسل آرت).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Technical Req.</strong>
+                                المنصات اللي رح ننشر عليها، والأدوات والمحرك المستخدم.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-42">
+                <div class="slide-title-bar"><span style="font-weight: 700;">GDD Practical Links - روابط
+                        وتطبيقات</span><span class="slide-number">Slide 42</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0042.jpg"
+                        alt="Slide 42"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">نماذج جاهزة للشغل (Ready to Use) 🔗</div>
+                    <div class="explanation-content" id="explanation-42">
+                        عشان ما تبدأ من الصفر، فيه قوالب (<span class="eng-term">Templates</span>) جاهزة بتقدر تستخدمها
+                        عشان تبني وثيقتك الخاصة:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">📄</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">One-page Design Document</h4>
+                                    <p>نموذج سريع بختصر اللعبة كلياتها في صفحة واحدة للمستثمرين أو لعرض الفكرة بسرعة.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">📚</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--accent);">Project Design Document (PDD)</h4>
+                                    <p>النسخة العميقة اللي بتشمل كل التفاصيل الدقيقة للمشروع.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-43">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Tools & Technologies - الأدوات
+                        والتقنيات</span><span class="slide-number">Slide 43</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0043.jpg"
+                        alt="Slide 43"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">عدة الشغل (The Toolbox) 🛠️</div>
+                    <div class="explanation-content" id="explanation-43">
+                        تطوير الألعاب بجمع تقنيات من عوالم مختلفة. هي قائمة بأهم الأدوات اللي لازم تعرفها:
+
+                        <div class="info-grid">
+                            <div class="grid-item ltr-item">
+                                <strong style="color: var(--primary);">Game Engines:</strong>
+                                <span class="eng-term">Unity 3D</span>, <span class="eng-term">Unreal Engine</span>,
+                                <span class="eng-term">Godot</span>.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">اللغات (Languages):</strong>
+                                <span class="eng-term">C#</span> (لليونيتي)، <span class="eng-term">C++</span> (لأنريل)،
+                                <span class="eng-term">GD-Script</span> (لغودو).
+                            </div>
+                            <div class="grid-item ltr-item">
+                                <strong style="color: var(--success);">Art & Animation:</strong>
+                                <span class="eng-term">Blender</span>, <span class="eng-term">Maya</span>, <span
+                                    class="eng-term">Photoshop</span>, <span class="eng-term">Krita</span>.
+                            </div>
+                            <div class="grid-item ltr-item">
+                                <strong style="color: var(--primary);">Sound Tools:</strong>
+                                <span class="eng-term">Audacity</span>, <span class="eng-term">FMOD</span>, <span
+                                    class="eng-term">Wwise</span>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-44">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Our Stack in this Course - تقنيات
+                        المساق</span><span class="slide-number">Slide 44</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0044.jpg"
+                        alt="Slide 44"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">شو رح نستخدم إحنا؟ 🤔</div>
+                    <div class="explanation-content" id="explanation-44">
+                        عشان ما تتشتت، هي الأدوات اللي رح نركز عليها في رحلتنا:
+
+                        <ul class="standard-list">
+                            <li><span class="eng-term">Unity 3D Engine</span>: المحرك الأساسي.</li>
+                            <li><span class="eng-term" dir="ltr" style="unicode-bidi: isolate;">C# (Visual
+                                    Studio)</span>: لغة البرمجة اللي رح نكتب فيها المنطق.</li>
+                            <li><span class="eng-term">Blender / Maya</span>: لبناء المجسمات ثلاثية الأبعاد.</li>
+                            <li><span class="eng-term">Photopea / Krita</span>: للتصميم ثنائي الأبعاد والـ <span
+                                    class="eng-term">Textures</span> (بدائل مجانية وقوية).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-45">
+                <div class="slide-title-bar"><span style="font-weight: 700;">What is a Game Engine? - ماهو محرك
+                        الألعاب؟</span><span class="slide-number">Slide 45</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0045.jpg"
+                        alt="Slide 45"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">نقطة الالتقاء (Point of Convergence) ✨</div>
+                    <div class="explanation-content" id="explanation-45">
+                        تخيل إنك بدك تطبخ طبخة معقدة؛ عندك المكونات (موديلات، كود، صوت)، المحرك هو الـ <span
+                            class="eng-term">Stockpot</span> (الطنجرة) اللي بتجمع كل هاي الأشياء مع بعض لتطلع بمنتج
+                        نهائي.
+
+                        <div class="explanation-quote">
+                            محرك الألعاب هو بمثابة نظام التشغيل (<span class="eng-term">Operating System</span>) للعبتك؛
+                            هو المسؤول عن عرض الصور، تفاعل الأشياء مع بعض، وتصدير اللعبة لتعمل على الموبايل أو الـ PC.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-46">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Engine Components - مكونات
+                        المحرك</span><span class="slide-number">Slide 46</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0046.jpg"
+                        alt="Slide 46"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">شو بدخل جوا المحرك؟ 🌪️</div>
+                    <div class="explanation-content" id="explanation-46">
+                        المحرك بشتغل كـ "خلاط" عملاق للمدخلات التالية:
+
+                        <div class="info-grid">
+                            <div class="grid-item ltr-item">
+                                <strong style="color: var(--primary);">Visuals:</strong>
+                                3D Models, Textures, 2D Sprites, Animations.
+                            </div>
+                            <div class="grid-item">
+                                <span class="eng-term">Logic</span>:
+                                <span dir="ltr" style="unicode-bidi: isolate;">Scripts (Code)</span> اللي بتحكم بكل برغي
+                                في اللعبة.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <span class="eng-term">Audio</span>:
+                                المؤثرات الصوتية والموسيقى التصويرية.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-47">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Key Terms: IDE & DCC - مصطلحات
+                        أساسية</span><span class="slide-number">Slide 47</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0047.jpg"
+                        alt="Slide 47"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">لغة المطورين (Developer Slang) 💬</div>
+                    <div class="explanation-content" id="explanation-47">
+                        لازم نفرق بين نوعين من الأدوار والأدوات:
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">💻</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--primary);">IDE (البرمجة)</h4>
+                                    <p><span class="eng-term">Integrated Development Environment</span>: زي <span
+                                            class="eng-term">Visual Studio</span>، المكان اللي بنكتب فيه الكود وبنصلح
+                                        الأخطاء.</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">🎨</div>
+                                <div class="step-text">
+                                    <h4 style="color: var(--accent);">DCC (المحتوى)</h4>
+                                    <p><span class="eng-term">Digital Content Creation</span>: زي <span
+                                            class="eng-term">Blender</span> أو <span class="eng-term">Photoshop</span>،
+                                        المكان اللي بنصنع فيه الأصول (Assets).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-48">
+                <div class="slide-title-bar"><span style="font-weight: 700;">The "R" Family: AR/VR/MR/XR - عائلة الواقع
+                        المختلط</span><span class="slide-number">Slide 48</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0048.jpg"
+                        alt="Slide 48"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">شو الفرق بين كل هالـ "Rs"؟ 🕶️</div>
+                    <div class="explanation-content" id="explanation-48">
+                        دائماً بنسمع هاي المصطلحات، وهي الفرق بينهم ببساطة:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">AR <span dir="ltr"
+                                        style="unicode-bidi: isolate;">(Augmented)</span>:</strong>
+                                إضافة عناصر رقمية لعالمك الحقيقي (زي بوكيمون غو).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">VR <span dir="ltr"
+                                        style="unicode-bidi: isolate;">(Virtual)</span>:</strong>
+                                انغماس كامل في عالم رقمي (بتلبس نظارة وبتنفصل عن الواقع).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--success);">MR <span dir="ltr"
+                                        style="unicode-bidi: isolate;">(Mixed)</span>:</strong>
+                                دمج واقعي بين الرقمي والحقيقي بحيث يتفاعلوا مع بعض (زي الهولو-لينس).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">XR <span dir="ltr"
+                                        style="unicode-bidi: isolate;">(Extended)</span>:</strong>
+                                المصطلح الشامل لكل ما سبق (<span class="eng-term">Umbrella term</span>).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-49">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Challenges in Development - تحديات
+                        التطوير</span><span class="slide-number">Slide 49</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0049.jpg"
+                        alt="Slide 49"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ليش الموضوع مش سهل؟ (The Hard Truth) 🏔️</div>
+                    <div class="explanation-content" id="explanation-49">
+                        تطوير الألعاب فيه تحديات في 3 مستويات:
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Technical</strong>
+                                موازنة الأداء مع الجودة، وإصلاح الكود المعقد (<span class="eng-term">Debugging</span>).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Creative</strong>
+                                موازنة صعوبة اللعبة وتصميم شخصيات بتشد اللاعب.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Business</strong>
+                                موازنة الميزانية والالتزام بالوقت (<span class="eng-term">Deadlines</span>) والمنافسة
+                                الشرسة.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-50">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Chapter 1 Summary - ملخص الفصل
+                        الأول</span><span class="slide-number">Slide 50</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0050.jpg"
+                        alt="Slide 50"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">شو اتعلمنا لحد الآن؟ 🏁</div>
+                    <div class="explanation-content" id="explanation-50">
+                        خلصنا الأساسيات! هي جرد سريع:
+
+                        <ul class="standard-list">
+                            <li>تطوير الألعاب علم متعدد التخصصات (<span class="eng-term">Multidisciplinary</span>).</li>
+                            <li>تاريخ الصناعة حافل بالتطور من بكسل بسيط لواقع مذهل.</li>
+                            <li>فهمنا مراحل الإنتاج من الفكرة الـ <span class="eng-term">Concept</span> لغاية ما بعد
+                                الإطلاق.</li>
+                            <li>تعرفنا على يونيتي وأهم المحركات والأدوات <span class="eng-term">Blender, Unity,
+                                    VS</span>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-51">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Homework - الواجب العملي</span><span
+                        class="slide-number">Slide 51</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0051.jpg"
+                        alt="Slide 51"></div>
+
+            </div>
+
+            <div class="slide-section" id="slide-52">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Additional Resources - مصادر
+                        إضافية</span><span class="slide-number">Slide 52</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0052.jpg"
+                        alt="Slide 52"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ليتطور مستواك أكثر 📚</div>
+                    <div class="explanation-content" id="explanation-52">
+                        هي قائمة بمراجع عالمية بنصحك فيها:
+
+                        <div class="info-grid">
+                            <div class="grid-item ltr-item">
+                                <strong style="color: var(--primary);">Books:</strong><br>
+                                - <span class="eng-term">The Art of Game Design</span><br>
+                                - <span class="eng-term">Game Programming Patterns</span>
+                            </div>
+                            <div class="grid-item ltr-item">
+                                <strong style="color: var(--accent);">Websites:</strong><br>
+                                - <a href="https://learn.unity.com/" target="_blank" class="eng-term">Unity Learn</a>
+                                (المكان الرسمي للتعلم)<br>
+                                - <span class="eng-term">GameDev.net</span>
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Videos:</strong>
+                                قناتي <span class="eng-term">Brackeys</span> و <span class="eng-term">Extra
+                                    Credits</span> على يوتيوب.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-53">
+                <div class="slide-title-bar"><span style="font-weight: 700;">End of Chapter 1 - نهاية الفصل
+                        الأول</span><span class="slide-number">Slide 53</span></div>
+                <div class="slide-image-box"><img
+                        src="ch1/Introduction to Game Development Using Unity 3D Chapter 01_page-0053.jpg"
+                        alt="Slide 53"></div>
+
+
+            </div>
+        </div>
+
+        <!-- Navigation Script -->
+        <script src="../nav.js"></script>
+        <script src="../gooey.js"></script>
+</body>
+
+</html>

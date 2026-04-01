@@ -4,14 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentPage = pathParts.pop();
     const folder = pathParts.pop();
 
-    // 0. EXTRA BULLETPROOF EXIT for root index.html
-    const isHomePage = !currentPage ||
-        (currentPage === 'index.html' && (!folder || folder === 'QudahWay' || folder === 'qudahway.vercel.app')) ||
-        currentPath === '/' ||
-        currentPath.endsWith('/QudahWay') ||
-        currentPath.endsWith('/QudahWay/');
+    // 0. EXIT for all index pages / dashboards (to avoid redundant menus)
+    const isDashboard = !currentPage || currentPage === 'index.html';
+    const isHomePage = isDashboard && (!folder || folder === 'QudahWay' || folder === 'qudahway.vercel.app');
 
-    if (isHomePage) {
+    if (isDashboard) {
         return;
     }
 
@@ -20,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isCV = currentPath.includes('/cv/');
     const isDS = currentPath.includes('/DS/');
     const isSS = currentPath.includes('/ss/');
+    const isGaming = currentPath.includes('/gaming/');
 
     // 1. Create the styles
     const style = document.createElement('style');
@@ -233,6 +231,12 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="Introduction to Foundation.html" class="nav-link"> 01. Intro to Foundation Models</a>
             <a href="NLP_CV.html" class="nav-link"> 02. NLP & Computer Vision</a>
             <a href="CNN_RNN.html" class="nav-link"> 03. CNN & RNN Architectures</a>
+        `;
+    } else if (isGaming) {
+        menuHTML += `
+            <div class="nav-header" style="font-size: 1.1rem; color: #ec4899;">Gaming Course</div>
+            <a href="intro.html" class="nav-link"> 01. Intro to Gaming</a>
+            <a href="Design Elements.html" class="nav-link"> 02. Design Elements</a>
         `;
     }
 

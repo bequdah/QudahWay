@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QudahWay | Data Science</title>
+    <title>QudahWay | Gaming</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
         rel="stylesheet">
@@ -18,9 +18,9 @@
             --text-muted: #94a3b8;
             --primary: #38bdf8;
             --accent: #facc15;
+            --gaming-primary: #ec4899;
             --danger: #fb7185;
             --success: #34d399;
-            --border: #334155;
         }
 
         body {
@@ -53,6 +53,12 @@
             margin: 0;
         }
 
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -61,43 +67,42 @@
 
         .link-card {
             background: var(--card-dark);
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             text-decoration: none;
             color: var(--text-light);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid var(--border);
+            border: 1px solid #334155;
             transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
 
         .link-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent);
+            border-color: var(--primary);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .card-content {
             text-align: right;
-            flex-grow: 1;
         }
 
         .card-title {
             display: block;
             font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 6px;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
         }
 
         .card-desc {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         .card-icon {
-            font-size: 2rem;
-            margin-left: 20px;
+            font-size: 1.8rem;
+            margin-left: 15px;
         }
 
         .section-tag {
@@ -105,7 +110,7 @@
             text-align: right;
             color: var(--accent);
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-top: 30px;
             margin-bottom: 10px;
             border-bottom: 2px solid rgba(250, 204, 21, 0.2);
@@ -127,16 +132,15 @@
             }
 
             .link-card {
-                padding: 18px;
+                padding: 16px;
             }
 
             .card-title {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
         }
     </style>
     <link rel="stylesheet" href="../gooey.css">
-    
 </head>
 
 <body>
@@ -144,7 +148,7 @@
     <div class="container">
         <div class="header">
             <div
-                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid rgba(56, 189, 248, 0.1); padding-bottom: 15px;">
                 <a href="../index.html"
                     style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
                     onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
@@ -156,7 +160,7 @@
             <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span></h1>
             <p
                 style="font-family: 'Cairo', sans-serif; font-size: 1.35rem; color: var(--text-light); margin: 15px 0; font-weight: 600;">
-                Data Science <span style="font-size: 1.1rem; opacity: 0.7; margin: 0 5px; font-weight: 400;">By</span>
+                Gaming Course <span style="font-size: 1.1rem; opacity: 0.7; margin: 0 5px; font-weight: 400;">By</span>
                 <span
                     style="color: var(--primary); font-family: 'Satisfy', cursive; font-size: 1.6rem; font-weight: normal;">Mohammad</span>
                 <span
@@ -172,71 +176,25 @@
                 <span style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: var(--text-light);">
                     Academic Content by <span
                         style="color: var(--primary); font-weight: 800; border-bottom: 2px solid rgba(56, 189, 248, 0.2);">Dr.
-                        Malak Abdullah</span>
+                        Mohammad O Wedyan</span>
                 </span>
             </div>
         </div>
 
         <div class="links-grid">
-            <div class="section-tag">علم البيانات والذكاء الاصطناعي</div>
 
-            <a href="intro-to-ds.html" class="link-card" style="border-right: 4px solid var(--accent);">
+            <a href="intro.html" class="link-card" style="border-right: 4px solid var(--gaming-primary);">
                 <div class="card-content">
-                    <span class="card-title">01. Intro to Data Science</span>
-                    <span class="card-desc">مقدمة شاملة لعالم البيانات وكيف بنحول الأرقام لقرارات</span>
+                    <span class="card-title">01. Intro to Gaming</span>
+                    <span class="card-desc">مقدمة في عالم تطوير الألعاب</span>
                 </div>
-                <span class="card-icon"></span>
             </a>
 
-            <a href="Data_Preprocessing.html" class="link-card" style="border-right: 4px solid var(--success);">
+            <a href="Design Elements.html" class="link-card" style="border-right: 4px solid var(--accent);">
                 <div class="card-content">
-                    <span class="card-title">02. Data Preprocessing</span>
-                    <span class="card-desc">خطوات تنظيف وتجهيز البيانات قبل ما نعطيها للموديل</span>
+                    <span class="card-title">02. Design Elements</span>
+                    <span class="card-desc">عناصر التصميم في الألعاب</span>
                 </div>
-                <span class="card-icon"></span>
-            </a>
-
-            <a href="EDA.html" class="link-card" style="border-right: 4px solid var(--accent);">
-                <div class="card-content">
-                    <span class="card-title">03. Exploratory Data Analysis (EDA)</span>
-                    <span class="card-desc">فهم القصة وراء الأرقام واستكشاف الأنماط في البيانات</span>
-                </div>
-                <span class="card-icon"></span>
-            </a>
-
-            <a href="Feature_Engineering.html" class="link-card" style="border-right: 4px solid var(--primary);">
-                <div class="card-content">
-                    <span class="card-title">04. Feature Engineering</span>
-                    <span class="card-desc">استخراج الميزات وبناء المتغيرات لتقوية ذكاء الموديل</span>
-                </div>
-                <span class="card-icon"></span>
-            </a>
-
-            <a href="Machine_and_Deap Learning.html" class="link-card" style="border-right: 4px solid var(--primary);">
-                <div class="card-content">
-                    <span class="card-title">05. Machine & Deep Learning</span>
-                    <span class="card-desc">رحلة في عالم تعلم الآلة والشبكات العصبية والذكاء الاصطناعي</span>
-                </div>
-                <span class="card-icon"></span>
-            </a>
-
-            <a href="Fairness.html" class="link-card" style="border-right: 4px solid var(--danger);">
-                <div class="card-content">
-                    <span class="card-title">06. Fairness in AI</span>
-                    <span class="card-desc">العدالة في الذكاء الاصطناعي وكيف نتجنب الانحياز في النماذج</span>
-                </div>
-                <span class="card-icon"></span>
-            </a>
-
-            <div class="section-tag"
-                style="background: rgba(250, 204, 21, 0.1); color: var(--accent); margin-top: 30px;">تحديات واختبارات 🎯
-            </div>
-
-            <a href="quiz.html" class="link-card" style="border-right: 4px solid var(--accent);">
-                <div class="card-content">
-                    <span class="card-title" style="color: var(--accent);">Data Science Quiz Challenge</span>
-                </div>
-                <span class="card-icon"></span>
             </a>
 
         </div>
@@ -245,7 +203,7 @@
     <!-- Navigation Script -->
     <script src="../nav.js"></script>
     <script src="../gooey.js"></script>
-    
+
 </body>
 
 </html>

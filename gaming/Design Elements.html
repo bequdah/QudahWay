@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Design Elements</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --gaming-primary: #ec4899;
+            --success: #34d399;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--gaming-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+            display: none;
+            /* Hidden by default until populated */
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .eng-term {
+            direction: ltr;
+            unicode-bidi: isolate;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0 2px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;">
+                    العودة للوحة التحكم 🎮
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> Gaming
+            </h1>
+            <p class="subtitle">Design Elements | عناصر التصميم وقواعد اللعب</p>
+        </div>
+
+        <div id="slides-container">
+            <!-- Slide 01 -->
+            <div class="slide-section" id="slide-1">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Chapter 02: Design Elements</span><span
+                        class="slide-number">Slide 01</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0001.jpg" alt="Slide 1"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">أهلاً في رحلة التصميم! 🏗️</div>
+                    <div class="explanation-content" id="explanation-1">
+                        <span class="highlight-y"> </span> هاذ الشابتر هو اللي بخليك تفكر كـ <span class="eng-term"
+                            dir="ltr">Game Designer</span> حقيقي مش بس كمبرمج.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slides 02 -->
+            <div class="slide-section" id="slide-2">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Chapter Overview</span><span
+                        class="slide-number">Slide 02</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0002.jpg" alt="Slide 2"></div>
+
+            </div>
+
+            <!-- Slides 03 -->
+            <div class="slide-section" id="slide-3">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Reminder: Aspects of a Game</span><span
+                        class="slide-number">Slide 03</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0003.jpg" alt="Slide 3"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تذكير: شو هي أركان اللعبة؟ 🧱</div>
+                    <div class="explanation-content" id="explanation-3">
+                        عشان نقدر نصمم، لازم نتذكر الأركان اللي بدونها ما بنسمي الإشي "لعبة":
+
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Players:</strong>
+                                العنصر البشري؛ مين اللي رح يلعب؟ وكيف رح يتأثر باللعبة؟
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Goals:</strong>
+                                الهدف النهائي؛ شو بده يحقق اللاعب عشان يحس بالانجاز؟
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Rules:</strong>
+                                القوانين؛ الطريقة العملية اللي بنمشي فيها عشان نوصل للهدف.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--danger);">
+                                <strong style="color: var(--danger);">Challenges:</strong>
+                                العقبات؛ إيش اللي بمنع اللاعب إنه يوصل للهدف بسهولة؟ (بدونهم اللعبة مملة).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 04 -->
+            <div class="slide-section" id="slide-4">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Formal Design Elements</span><span
+                        class="slide-number">Slide 04</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0004.jpg" alt="Slide 4"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">من الفكرة للتصميم الفعلي 📊</div>
+                    <div class="explanation-content" id="explanation-4">
+                        هسا بدنا نحول الأركان الأربعة لمهمات تصميمية حقيقية (<span class="eng-term" dir="ltr">Design
+                            Tasks</span>):
+
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">1</div>
+                                <div class="step-text">
+                                    <strong style="color: var(--primary);">اللاعبين → Player Mode Sketches</strong>
+                                    كيف رح نرسم شكل تفاعل اللاعب مع الشاشة في كل وضع.
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">2</div>
+                                <div class="step-text">
+                                    <strong style="color: var(--accent);">الأهداف → Objectives</strong>
+                                    تحديد المهمات المطلوبة بشكل دقيق وواضح.
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">3</div>
+                                <div class="step-text">
+                                    <strong style="color: var(--success);">القواعد → Actions & Interactions</strong>
+                                    تحديد الكبسات والحركات اللي مسموحة في كل لحظة.
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">4</div>
+                                <div class="step-text">
+                                    <strong style="color: var(--danger);">التحديات → Obstacles & Opponents</strong>
+                                    تصميم الأعداء والعوائق اللي رح توقف بوجه اللاعب.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 05 -->
+            <div class="slide-section" id="slide-5">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Player Mode Sketches</span><span
+                        class="slide-number">Slide 05</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0005.jpg" alt="Slide 5"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">سكتشات وضعية اللاعب (Player Mode) ✍️</div>
+                    <div class="explanation-content" id="explanation-5">
+                        اللعبة مش بس "شاشة وحدة"، هي مجموعة أوضاع (<span class="eng-term" dir="ltr">Modes</span>)
+                        مختلفة:
+                        <br><br>
+                        <ul class="standard-list">
+                            <li>لازم المصمم يرسم <span class="highlight-y">Storyboard</span> لكل وضع أساسي (زي شاشة
+                                اللعب، شاشة المخزن <span class="eng-term" dir="ltr">Inventory</span>، شاشة الحوارات).
+                            </li>
+                            <li>السكتشات لازم توضح كيف رح يتفاعل اللاعب مع العناصر (<span class="eng-term"
+                                    dir="ltr">UI/World Interaction</span>).</li>
+                            <li>تحديد تسلسل الحركات (<span class="eng-term" dir="ltr">Action Sequences</span>) عشان
+                                المبرمج يعرف شو يكتب.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 06 -->
+            <div class="slide-section" id="slide-6">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Help the Hero: Inventory
+                        System</span><span class="slide-number">Slide 06</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0006.jpg" alt="Slide 6"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">مثال: نظام الحقيبة (Inventory) 🎒</div>
+                    <div class="explanation-content" id="explanation-6">
+                        واحدة من أهم الـ <span class="eng-term" dir="ltr">Player Modes</span> هي شاشة الـ <span
+                            class="eng-term" dir="ltr">Inventory</span>.
+                        <br><br>
+                        <div class="detail-item">
+                            <span class="highlight-y">الهدف التصميمي:</span> مش بس صف أغراض، هون اللعبة بتستخدم نظام
+                            <span class="eng-term" dir="ltr">Tetris-style</span>. يعني اللاعب لازم "يدبّر حاله" ويرتب
+                            الأغراض
+                            عشان تكفي الحقيبة.
+                        </div>
+                        <ul class="standard-list">
+                            <li>مسموح للاعب عمل <span class="eng-term" dir="ltr">Rotation</span> (تدوير) للأدوات
+                                بالأسهم.</li>
+                            <li>ممكن تعمل <span class="eng-term" dir="ltr">Combine</span> (دمج) لأشياء معينة عشان توفر
+                                مساحة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 07 -->
+            <div class="slide-section" id="slide-7">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Player Mode Sketch: HUD Layout</span><span
+                        class="slide-number">Slide 07</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0007.jpg" alt="Slide 7"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">سكتش واجهة المستخدم (HUD) 📟</div>
+                    <div class="explanation-content" id="explanation-7">
+                        الـ <span class="eng-term" dir="ltr">HUD</span> (Heads-Up Display) هي الواجهة اللي بتضل قدام
+                        اللاعب
+                        وهو بيلعب.
+                        <br><br>
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Visual Cues:</strong>
+                                المصمم هون حدد في السكتش الـ <span class="highlight-b">نجوم</span> اللي بتطلع فوق والـ
+                                <span class="highlight-y">Zs</span> لتمثيل حالة النوم.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Meters:</strong>
+                                تحديد مكان عداد النوم (<span class="eng-term" dir="ltr">Sleep Meter</span>) ومستوى
+                                اللاعب
+                                (<span class="eng-term" dir="ltr">Level</span>).
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px;">لاحظ كيف استعملنا أيقونات أزرار البلايستيشن المشهورة (X, O, ☐, △)
+                            لتحديد
+                            الأوامر.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 08 -->
+            <div class="slide-section" id="slide-8">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Diagramming Action</h2><span
+                            class="slide-number">Slide 08</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0008.jpg" alt="Slide 8"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تخطيط وتحليل الحركة (Level Logic) 🗺️</div>
+                    <div class="explanation-content" id="explanation-8">
+                        هيك بصمموا مراحل "ماريو" وألعاب المنصات (<span class="eng-term" dir="ltr">Platformers</span>).
+                        الفكرة
+                        هي توزيع <span class="highlight-danger">المخاطر</span> و <span
+                            class="highlight-success">المكافآت</span>:
+                        <br><br>
+                        <div class="info-grid">
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <span style="color: var(--success); font-weight: bold;">Yellow Path (High
+                                    Reward):</span>
+                                طريق صعب (قفزات دقيقة) بس بعطيك جوائز قيمة.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <span style="color: var(--primary); font-weight: bold;">Green Path (Safe):</span>
+                                طريق سهل وآمن للاعبين اللي بدهم يتجنبوا الخطر بس ما فيه مكافآت.
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px;">بدون هاض التوازن، اللعبة يا بتكون مملة (سهلة زيادة) أو محبطة (صعبة
+                            زيادة).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 09 -->
+            <div class="slide-section" id="slide-9">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Objectives: Why are we playing?</span><span
+                        class="slide-number">Slide 09</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0009.jpg" alt="Slide 9"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الأهداف: ليش بنلعب أصلاً؟ 🎯</div>
+                    <div class="explanation-content" id="explanation-9">
+                        الأهداف هي اللي بتحرك اللاعب. وبنقسمها لثلاث أنواع أساسية:
+                        <br><br>
+                        <div class="detail-item">
+                            <span class="highlight-y">1. Primary Objectives:</span>
+                            المهمات الأساسية اللي بتختم فيها اللعبة أو بتقدم القصة.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-b">2. Auxiliary Objectives:</span>
+                            المهمات الجانبية (<span class="eng-term" dir="ltr">Side Quests</span>) اللي مش إجبارية بس
+                            بتعطي
+                            متعة إضافية وتحديات غريبة.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-success">3. Player-Directed:</span>
+                            الأهداف اللي اللاعب بحطها لحاله (زي ألعاب الـ <span class="eng-term"
+                                dir="ltr">Sandbox</span>)،
+                            زي "بدي أبني أكبر بيت في ماين كرافت".
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="slide-section" id="slide-10">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Objectives & Player Psychology</span><span
+                        class="slide-number">Slide 10</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0010.jpg" alt="Slide 10"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">سيكولوجية الأهداف وأنواع اللاعبين 🤔</div>
+                    <div class="explanation-content" id="explanation-10">
+                        تصميم الأهداف لازم يرضي شغف اللاعبين، لأن كل لاعب إله "تفكير" مختلف:
+                        <br><br>
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Achievers (المُنجزون):</strong>
+                                بحبوا الـ <span class="eng-term" dir="ltr">Achievements</span> والأوسمة عشان يحسوا
+                                بالقوة.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Explorers (المستكشفون):</strong>
+                                بحبوا يدوروا على الـ <span class="eng-term" dir="ltr">Easter Eggs</span> (الأسرار
+                                المخفية)
+                                في الخريطة.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Socializers (الاجتماعيون):</strong>
+                                بحبوا الأنشطة اللي فيها تفاعل ومشاركة مع لاعبين ثانيين أونلاين.
+                            </div>
+                        </div>
+                        <p style="margin-top: 20px;">تذكر: صمم الأهداف بحيث تساعد في تحقيق "الأمنيات" (<span
+                                class="highlight-y">Wish Fulfillment</span>) اللي اللاعب بتمناها في عالم اللعبة.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="slide-section" id="slide-11">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Objective Categories</span><span
+                        class="slide-number">Slide 11</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0011.jpg" alt="Slide 11"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تصنيفات الأهداف المشهورة 🏆</div>
+                    <div class="explanation-content" id="explanation-11">
+                        عشان نسهل عملية التصميم، بنقسم الأهداف لمجموعات متعارف عليها:
+                        <br><br>
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Capture:</strong>
+                                التدمير أو الاستيلاء على شيء (زي تدمير قاعدة العدو).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">Race:</strong>
+                                الوصول للهدف في وقت محدد (سباق زمن).
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--success);">
+                                <strong style="color: var(--success);">Chase:</strong>
+                                المطاردة أو الهروب من خصم.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--danger);">
+                                <strong style="color: var(--danger);">Rescue/Escape:</strong>
+                                إنقاذ رهينة أو الهروب لبر الأمان.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--primary);">
+                                <strong style="color: var(--primary);">Exploration:</strong>
+                                استكشاف الخريطة لإيجاد غرض مخفي.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="slide-section" id="slide-12">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Actions (Verbs): What can I do?</span><span
+                        class="slide-number">Slide 12</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0012.jpg" alt="Slide 12"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الأفعال (Verbs): إيش اللي بقدر أعمله؟ 🎮</div>
+                    <div class="explanation-content" id="explanation-12">
+                        في لغة مصممي الألعاب، بنسمي حركات اللاعب <span class="highlight-y">Verbs</span> (أفعال).
+                        <br><br>
+                        أمثلة مشهورة: <span class="eng-term">Walk</span>, <span class="eng-term">Run</span>, <span
+                            class="eng-term">Jump</span>, <span class="eng-term">Shoot</span>.
+                        <br><br>
+                        <p style="font-weight: bold; color: var(--accent);">ملاحظة ذكية:</p>
+                        مش كل الأفعال لازم يكون إلها شخصية بتتحرك! مثلاً في ألعاب الألغاز، الأفعال بتكون: <span
+                            class="eng-term">Swap</span> (تبديل)، <span class="eng-term">Rotate</span> (تدوير)، <span
+                            class="eng-term">Build</span> (بناء).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13 -->
+            <div class="slide-section" id="slide-13">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Actions: Detailed Breakdown</span><span
+                        class="slide-number">Slide 13</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0013.jpg" alt="Slide 13"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تفاصيل الأفعال (Precision) 🎯</div>
+                    <div class="explanation-content" id="explanation-13">
+                        لما تصمم فعل، لازم تكون دقيق جداً:
+                        <ul class="standard-list">
+                            <li><span class="highlight-b">Walk/Shoot:</span> بتحدد الإتجاه (يمين/يسار).</li>
+                            <li><span class="highlight-y">Run:</span> هو ببساطة مشي بس بسرعة أكبر (<span
+                                    class="eng-term">Modifier</span>).</li>
+                            <li><span class="highlight-success">Jump:</span> القفز للأعلى أو قفز بإتجاه معين.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14 & 15 (Combined explanation context) -->
+            <div class="slide-section" id="slide-14">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Genre Specific Actions</span><span
+                        class="slide-number">Slide 14</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0014.jpg" alt="Slide 14"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">مثال: ألعاب المنصات (Action Platformer) 🏃‍♂️</div>
+                    <div class="explanation-content" id="explanation-14">
+                        الأفعال اللي شفناها فوق (مشي، ركض، قفز) هي <span class="highlight-y">الخلطة الجينية</span> لأي
+                        لعبة <span class="eng-term">Platformer</span>. بدونهم ما بتقدر تصمم هاض النوع من الألعاب.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-15">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Action List Summary</span><span
+                        class="slide-number">Slide 15</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0015.jpg" alt="Slide 15"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">قائمة الأفعال الكاملة ✅</div>
+                    <div class="explanation-content" id="explanation-15">
+                        هيك بتصير عنا قائمة جاهزة للمبرمجين عشان يبدؤوا يبنوا الـ <span class="eng-term">Input
+                            System</span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16 -->
+            <div class="slide-section" id="slide-16">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Designing Actions: Rules to
+                        Follow</span><span class="slide-number">Slide 16</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0016.jpg" alt="Slide 16"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">كيف نصمم الأفعال صح؟ 🧠</div>
+                    <div class="explanation-content" id="explanation-16">
+                        تصميم الأفعال هو "فن الاختصار". انتبه لهدول النقطتين:
+                        <br><br>
+                        <div class="detail-item">
+                            <span class="highlight-danger">❌ تجنب الـ Verb Bloat:</span>
+                            لا تحط مليون كبسة ومليون حركة بتسوي نفس الإشي.. رح تضيع اللاعب.
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-success">✅ Mapping (الربط):</span>
+                            كل فعل لازم يتربط بكبسة أو حركة واضحة في الـ <span class="eng-term">Controller</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 17 -->
+            <div class="slide-section" id="slide-17">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Evaluating Actions</span><span
+                        class="slide-number">Slide 17</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0017.jpg" alt="Slide 17"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">هل الفعل مفيد للهدف؟ 🤔</div>
+                    <div class="explanation-content" id="explanation-17">
+                        مش كل فعل بتفكر فيه لازم يكون موجود. اسأل حالك: <span class="highlight-y">"هل هاذ الفعل بساعد في
+                            تحقيق الهدف؟"</span>
+                        <br><br>
+                        <div class="detail-item">
+                            <span style="font-weight: bold;">مثال ماريو:</span>
+                            الهدف هو الوصول لنهاية المرحلة. القفز (<span class="eng-term">Jump</span>) هو الفعل الأساسي
+                            للنجاح. قتل الأعداء هو فعل ثانوي (مش دايماً ضروري بس ممتع).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 18 -->
+            <div class="slide-section" id="slide-18">
+                <div class="slide-title-bar"><span style="font-weight: 700;">The Game State</span><span
+                        class="slide-number">Slide 18</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0018.jpg" alt="Slide 18"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">حالة اللعبة (Game State) 💾</div>
+                    <div class="explanation-content" id="explanation-18">
+                        الـ <span class="eng-term">Game State</span> هو عبارة عن "ذاكرة" اللعبة في لحظة معينة. هي مجموعة
+                        من الأرقام والقيم:
+                        <br><br>
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Data Values:</strong>
+                                موقع اللاعب (Coordinate)، عداد الصمود (Health)، السكور (Score).
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--accent);">World State:</strong>
+                                هل الباب مفتوح؟ هل العدو مات؟ كم الوقت متبقي؟
+                            </div>
+                        </div>
+                        <p
+                            style="margin-top: 15px; background: rgba(56, 189, 248, 0.1); padding: 10px; border-radius: 8px;">
+                            باختصار: <span class="highlight-y">الأفعال اللي بسويها اللاعب هي اللي بتغير الـ
+                                State.</span> (زي لما تركض بيتغير موقعك).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 19 -->
+            <div class="slide-section" id="slide-19">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Interactions</span><span
+                        class="slide-number">Slide 19</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0019.jpg" alt="Slide 19"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">التفاعلات (Interactions) 💥</div>
+                    <div class="explanation-content" id="explanation-19">
+                        الـ <span class="eng-term">Interactions</span> هي الأشياء اللي بتصير بدون ما اللاعب يضغط كبسة
+                        مباشرة، بل بتصير <span class="highlight-b">نتيجة وضع اللعبة</span> (State).
+                        <br><br>
+                        أهم مثال هو التصادم (<span class="eng-term">Collisions</span>):
+                        <ul class="standard-list">
+                            <li>ماريو "لمس" الفطر ← صار كبيراً.</li>
+                            <li>رصاصة "لمست" العدو ← العدو مات.</li>
+                            <li>اللاعب "مر" من فوق ذهب ← زاد السكور.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 20 -->
+            <div class="slide-section" id="slide-20">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Game Mechanics Defined</span><span
+                        class="slide-number">Slide 20</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0020.jpg" alt="Slide 20"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">قواعد اللعبة (Game Mechanics) ⚙️</div>
+                    <div class="explanation-content" id="explanation-20">
+                        الـ <span class="eng-term">Mechanic</span> هي "العلاقة" أو "المعادلة" اللي بتجمع كل اللي حكيناه:
+                        <br><br>
+                        <div
+                            style="text-align: center; font-size: 1.5rem; font-weight: 900; color: var(--accent); margin: 20px 0;">
+                            Verbs + Interactions + State = Mechanic
+                        </div>
+                        <div class="detail-item">
+                            <span style="font-weight: bold;">مثال من لعبة Joust:</span>
+                            الـ <span class="highlight-b">Verbs</span> (حركة/تخبيط جنحان) + <span
+                                class="highlight-y">Interaction</span> (تصادم مع عدو) + <span
+                                class="highlight-success">State Rule</span> (اللي مكانه أوطى بموت) = هاض هو الميكانيك
+                            تبع اللعبة!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 21 -->
+            <div class="slide-section" id="slide-21">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Gameplay Example: Joust</span><span
+                        class="slide-number">Slide 21</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0021.jpg" alt="Slide 21"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">تحليل مثال: لعبة Joust 🎮</div>
+                    <div class="explanation-content" id="explanation-21">
+                        هون بنشوف كيف <span class="highlight-y">الميكانيك</span> اللي حكينا عنه بتحول لتجربة فعلية.
+                        اللاعب بيتحكم بطير، والهدف يضرب العدو من فوق.
+                        <br><br>
+                        السر بكيفية ترجمة الـ <span class="eng-term">Verbs</span> (زي كبس الزر للطيران) لنتائج ملموسة
+                        بتفهمها "فيزياء" اللعبة.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 22 & 23 -->
+            <div class="slide-section" id="slide-22">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Minimalism: Verbs vs
+                        Interactions</span><span class="slide-number">Slide 22</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0022.jpg" alt="Slide 22"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">مبدأ التبسيط (Minimalism): أفعال أقل، متعة أكثر! 🧊</div>
+                    <div class="explanation-content" id="explanation-22">
+                        المصمم العبقري مش اللي بحط كبسات كثير، هو اللي بقدر يبني لعبة "عميقة" بـ <span
+                            class="highlight-b">عدد قليل جداً من الأفعال</span> (Verbs). هاد المبدأ بنسميه <span
+                            class="eng-term">Minimalism</span>.
+                        <br><br>
+                        <div class="detail-item">
+                            <span class="highlight-y">الفكرة في التصميم:</span> بدل ما نعتمد على مهارة اللاعب في ضغط
+                            الكبسات، بنهتم أكثر بـ <span class="highlight-success">التفاعلات (Interactions)</span>. هاد
+                            الأسلوب منتشر جداً في ألعاب الموبايل والتابلت لأن التحكم فيها محدود.
+                        </div>
+
+                        <div class="detail-item" style="border-right-color: var(--primary);">
+                            <span class="detail-title">مثال: لعبة Sneak Beat Bandit 🦝</span>
+                            هاي اللعبة فيها <span class="highlight-danger">فعل واحد فقط</span> وهو الحركة (<span
+                                class="eng-term">Move</span>):
+                            <ul class="standard-list">
+                                <li>اللاعب بتحرك على "سكّة" (<span class="eng-term">Rails</span>) مع إيقاع الموسيقى.
+                                </li>
+                                <li>إذا واجه اللاعب عائق، الشخصية بتلف لحالها (<span
+                                        class="eng-term">Interactions</span>).</li>
+                                <li>اللعبة بتعتمد على <span class="eng-term">Line-of-sight</span> (مدى الرؤية) عشان
+                                    تتخفى من الحراس.</li>
+                            </ul>
+                        </div>
+                        <p style="margin-top: 10px;">لاحظ إنه رغم وجود فعل واحد فقط، إلا إن اللعبة فيها استراتيجية وتحدي
+                            كبير!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-23">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Minimalism Example: Beat Sneak
+                        Bandit</span><span class="slide-number">Slide 23</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0023.jpg" alt="Slide 23"></div>
+
+            </div>
+
+            <!-- Slide 24 -->
+            <div class="slide-section" id="slide-24">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Avoid Verb Proxies</span><span
+                        class="slide-number">Slide 24</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0024.jpg" alt="Slide 24"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">نصيحة: ابعد عن "الأفعال الوسيطة" 🚫</div>
+                    <div class="explanation-content" id="explanation-24">
+                        الـ <span class="eng-term">Verb Proxy</span> هو فعل ما إله نتيجة فورية ومفهومة.
+                        <br><br>
+                        تأكد إن كل حركة بيعملها اللاعب يكون إلها <span class="highlight-success">رد فعل بصري أو صوتي
+                            فوري</span>. مثلاً لما يطخ، لازم يشوف الرصاصة ويسمع الصوت، مش بس رقم ينقص من بعيد.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 25 -->
+            <div class="slide-section" id="slide-25">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Challenges: The Roadblocks</span><span
+                        class="slide-number">Slide 25</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0025.jpg" alt="Slide 25"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">أنواع التحديات 🏔️</div>
+                    <div class="explanation-content" id="explanation-25">
+                        التحدي مش بس "عدو بضربك"، المصمم بقسمهم لثلاث فئات:
+                        <br><br>
+                        <div class="info-grid">
+                            <div class="grid-item">
+                                <strong style="color: var(--primary);">Obstacles (العقبات):</strong>
+                                أشياء ثابتة في البيئة (زي حفرة، جدار نار) لازم تعديها.
+                            </div>
+                            <div class="grid-item">
+                                <strong style="color: var(--danger);">Opponents (الخصوم):</strong>
+                                شخصيات ذكية أو مبرمجة هدفها توقفك.
+                            </div>
+                            <div class="grid-item" style="border-right-color: var(--accent);">
+                                <strong style="color: var(--accent);">Dilemmas (المعضلات):</strong>
+                                خيارات صعبة.. مثلاً: "هل أخذ الذهب هسا وأخاطر بحياتي، ولا أكمل بسلام؟"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 26 & 27 -->
+            <div class="slide-section" id="slide-26">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Limitations: Defining the
+                        Boundaries</span><span class="slide-number">Slide 26</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0026.jpg" alt="Slide 26"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">القيود (Limitations) 🚧</div>
+                    <div class="explanation-content" id="explanation-26">
+                        القيود هي اللي بتخلق "اللعبة". لو كنت بتقدر تعمل كل إشي، ما رح يكون في متعة.
+                        <br><br>
+                        القيود بتحدد <span class="highlight-y">شو المسموح وشو الممنوع</span>. مثلاً: "بتقدر تقفز، بس ما
+                        بتقدر تطير".
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-27">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Single Verb Limitations</span><span
+                        class="slide-number">Slide 27</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0027.jpg" alt="Slide 27"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">ربط القيد بالفعل 🔗</div>
+                    <div class="explanation-content" id="explanation-27">
+                        قاعدة ذهبية: <span class="highlight-b">كل قيد لازم يكون مربوط بفعل محدد.</span>
+                        <br><br>
+                        القيد "نفاذ الذخيرة" مربوط بفعل "إطلاق النار". القيد "السقوط" مربوط بفعل "القفز". هيك اللاعب
+                        بفهم المنطق ورا القوانين.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 28 & 29 -->
+            <div class="slide-section" id="slide-28">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Resources: The Non-Spatial
+                        State</span><span class="slide-number">Slide 28</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0028.jpg" alt="Slide 28"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الموارد (Resources) 💎</div>
+                    <div class="explanation-content" id="explanation-28">
+                        الموارد هي أرقام في حالة اللعبة (<span class="eng-term">State</span>) بس مش مكانية (يعني مش
+                        موقعك ع الخريطة).
+                        <br><br>
+                        أمثلة: <span class="highlight-success">الصحة (Health)</span>، <span class="highlight-b">الذخيرة
+                            (Ammo)</span>، <span class="highlight-y">الوقت (Time)</span>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-29">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Game Economy</span><span
+                        class="slide-number">Slide 29</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0029.jpg" alt="Slide 29"></div>
+
+            </div>
+
+            <!-- Slide 30 -->
+            <div class="slide-section" id="slide-30">
+                <div class="slide-title-bar"><span style="font-weight: 700;">Putting It All Together:
+                        Synthesis</span><span class="slide-number">Slide 30</span></div>
+                <div class="slide-image-box"><img src="ch2/Ch2_page-0030.jpg" alt="Slide 30"></div>
+                <div class="explanation-box" style="display: block;">
+                    <div class="explanation-header">الخلاصة: كيف بنصمم؟ 🏁</div>
+                    <div class="explanation-content" id="explanation-30">
+                        عشان تصمم لعبتك صح، اتبع هالمسار:
+                        <br><br>
+                        <div class="step-container">
+                            <div class="step-card">
+                                <div class="step-num">1</div>
+                                <div class="step-text">حدد الرؤية (<span class="eng-term">Vision</span>).</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">2</div>
+                                <div class="step-text">أدرج الأهداف والأفعال (<span class="eng-term">Verbs &
+                                        Objectives</span>).</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">3</div>
+                                <div class="step-text">صمم التحديات والموارد (<span class="eng-term">Challenges &
+                                        Resources</span>).</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">4</div>
+                                <div class="step-text">ارسم واجهات اللعب المختلفة (<span class="eng-term">Player Modes
+                                        Sketches</span>).</div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 40px;">
+                            <div
+                                style="color: var(--success); font-weight: 900; font-size: 1.5rem; margin-bottom: 20px;">
+                                هيك بنكون خلصنا أساسيات التصميم! 🚀🎯</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="../nav.js"></script>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>
