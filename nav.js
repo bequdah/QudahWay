@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isDS = currentPath.includes('/DS/');
     const isSS = currentPath.includes('/ss/');
     const isGaming = currentPath.includes('/gaming/');
+    const isCPP = currentPath.includes('/c++/');
 
     // 1. Create the styles
     const style = document.createElement('style');
@@ -199,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="text-operations.html" class="nav-link"> 04. Text Operations</a>
             <a href="skiplist.html" class="nav-link"> 05. Skip Lists</a>
             <a href="vector_space_model.html" class="nav-link"> 06. Vector Space Model</a>
-            <a href="Probabilistic_Model.html" class="nav-link"> 07. Probabilistic Model</a>
+            <a href="RAG.html" class="nav-link"> 07. RAG</a>
             <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
             <a href="exam.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05); justify-content: center;">
                  IR Exams Bank
@@ -237,6 +238,15 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="nav-header" style="font-size: 1.1rem; color: #ec4899;">Gaming Course</div>
             <a href="intro.html" class="nav-link"> 01. Intro to Gaming</a>
             <a href="Design Elements.html" class="nav-link"> 02. Design Elements</a>
+        `;
+    } else if (isCPP) {
+        menuHTML += `
+            <div class="nav-header" style="font-size: 1.1rem; color: #38bdf8;">C++ Programming</div>
+            <a href="ch1.html" class="nav-link"> 01. Introduction</a>
+            <a href="ch2.html" class="nav-link"> 02. Variables & Data Types</a>
+            <a href="ch3.html" class="nav-link"> 03. Control Structures</a>
+            <a href="ch4.html" class="nav-link"> 04. Loops</a>
+            <a href="ch5.html" class="nav-link"> 05. Functions</a>
         `;
     }
 

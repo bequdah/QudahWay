@@ -180,6 +180,7 @@
             border: 1px solid rgba(51, 65, 85, 0.5);
             transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
             position: relative;
+            overflow: hidden;
         }
 
         .link-card:hover {
@@ -209,38 +210,39 @@
             line-height: 1.6;
         }
 
-        .soon-badge {
+        /* === Shared ribbon base === */
+        .corner-ribbon-right,
+        .corner-ribbon-left {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            width: 140px;
             background: linear-gradient(135deg, #a855f7, #c084fc);
             color: white;
             font-size: 0.75rem;
             font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 6px 0;
             box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
-            transform: rotate(-10deg);
             z-index: 20;
-            font-family: 'Inter', sans-serif;
-            animation: pulse-badge 2s infinite;
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 1.3;
+            white-space: nowrap;
         }
 
-        @keyframes pulse-badge {
-            0% {
-                transform: scale(1) rotate(-10deg);
-                box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
-            }
+        /* Top-right corner (SOON) */
+        .corner-ribbon-right {
+            top: 22px;
+            right: -32px;
+            transform: rotate(45deg);
+            transform-origin: center center;
+        }
 
-            50% {
-                transform: scale(1.05) rotate(-10deg);
-                box-shadow: 0 4px 15px rgba(168, 85, 247, 0.6);
-            }
-
-            100% {
-                transform: scale(1) rotate(-10deg);
-                box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
-            }
+        /* Top-left corner (من قسم الالعاب) */
+        .corner-ribbon-left {
+            top: 22px;
+            left: -32px;
+            transform: rotate(-45deg);
+            transform-origin: center center;
         }
 
         @media(max-width:600px) {
@@ -306,9 +308,17 @@
                 </div>
             </a>
             <a href="gaming/index.html" class="link-card" style="--card-accent-color: #ec4899">
+                <div class="corner-ribbon-left">من قسم الالعاب</div>
                 <div class="card-content">
                     <span class="card-title">Gaming</span>
                     <p class="card-desc">تطوير الألعاب</p>
+                </div>
+            </a>
+            <a href="c++/index.html" class="link-card" style="--card-accent-color: var(--primary)">
+                <div class="corner-ribbon-right">قريباً</div>
+                <div class="card-content">
+                    <span class="card-title">C++ Programming</span>
+                    <p class="card-desc">برمجة ++C</p>
                 </div>
             </a>
         </div>

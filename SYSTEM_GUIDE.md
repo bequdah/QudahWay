@@ -92,7 +92,7 @@ To respect project ownership, deployment is **Action-Based**.
     ```bash
     # Step 1: Push to GitHub
     git add .
-    git commit -m "Descriptive message using QudahWay tags"
+    git commit -m "ss"
     git push origin main
 
     # Step 2: Deploy to Cloudflare Pages

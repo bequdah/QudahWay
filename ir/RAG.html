@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | RAG</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+            --brand-red: #f97316;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-title {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e2e8f0;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .highlight-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-span {
+            color: var(--brand-red);
+            font-weight: 800;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        ul {
+            padding-right: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .formula {
+            font-family: 'Inter', sans-serif;
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--success);
+            padding: 6px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            font-weight: 700;
+            display: inline-block;
+            margin: 5px 0;
+            direction: ltr;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                padding: 25px 20px;
+            }
+
+            .explanation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">Retrieval-Augmented Generation (RAG) | تعزيز التوليد بالاسترجاع</p>
+        </div>
+
+        <div class="story-section">
+            <div class="story-title">مستقبل الذكاء الاصطناعي: الـ RAG 🤖🔍</div>
+            <div class="story-content">
+                هون بنربط بين عالمين: عالم البحث (<span class="eng-term">Retrieval</span>) وعالم الذكاء الاصطناعي
+                التوليدي (<span class="eng-term">Generative AI</span>).<br><br>
+                تخيل إنك بتعطي الـ Chatbot كتاب كامل وبتحكيله "جاوبني بناءً على هاض الكتاب بس". هاي هي فكرة الـ <span
+                    class="highlight-y">RAG</span> ببساطة. رح نفهم كيف بنحول النصوص لـ <span
+                    class="highlight-b">Embeddings</span> وكيف بنستخدم الـ <span class="highlight-success">Vector
+                    Database</span> عشان نطلع أدق الإجابات.
+            </div>
+        </div>
+
+        <div id="slides-container">
+
+            <!-- Slide 01 -->
+            <div class="slide-section" id="slide-1">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Retrieval-Augmented Generation</span>
+                    <span class="slide-number">Slide 01</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0001.jpg" alt="Slide 1">
+                </div>
+                <!-- Empty as requested -->
+            </div>
+
+            <!-- Slide 02 -->
+            <div class="slide-section" id="slide-2">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Why RAG?</span>
+                    <span class="slide-number">Slide 02</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0002.jpg" alt="Slide 2">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش الـ RAG هو "المنقذ" في عصر الذكاء الاصطناعي؟ 🦸‍♂️✨</div>
+                    <div class="explanation-content">
+                        ركز معي , السلايد هاض هو "أساس اللعبة" وبوضح لنا ليش الدنيا كلها قالبة على الـ <span
+                            class="eng-term">RAG</span>:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="highlight-b">البحث الكلاسيكي (Classical IR):</span> زي أنظمة الـ <span
+                                        class="eng-term">TF-IDF</span>، هاي الأنظمة "شاطرة" في إنها تلاقي الملفات الصح،
+                                    بس
+                                    "فاشلة" في إنها تجاوبك على سؤالك مباشرة. هي بس بتعطيك روابط وبتحكيلك "تفضل اقرأ
+                                    وعرّب
+                                    لحالك".</li>
+                                <li><span class="highlight-r">النماذج اللغوية (LLMs):</span> زي <span
+                                        class="eng-term">GPT-4</span>، هاي "فنانة" في الحكي والجواب، بس عندها مشكلة
+                                    <span class="eng-term">Hallucination</span> (الهلوسة)؛ يعني ممكن تألف معلومات غلط بس
+                                    عشان
+                                    تعطيك جواب مقنع، لأن معلوماتها قديمة أو ناقصة.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="detail-item">
+                            <span class="highlight-success">الحل العبقري (RAG):</span> هو دمج القوتين مع بعض:
+                            <br>١. <span class="highlight-y">الـ Retriever:</span> بستخدم قوة الـ IR عشان يطول "الحقيقة"
+                            (<span class="eng-term">Ground Truth</span>) من ملفاتك الموثوقة.
+                            <br>٢. <span class="highlight-y">الـ Generator:</span> بستخدم لسان الـ LLM عشان يقرأ
+                            هالمعلومات ويصيغ لك جواب طبيعي <span class="highlight-span">بناءً عليها فقط</span>.
+                        </div>
+                        <span class="highlight-b">الخلاصة:</span> الـ RAG بضمن لك جواب "ذكي" و "صادق" في نفس الوقت!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 03 -->
+            <div class="slide-section" id="slide-3">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Introduction to RAG</span>
+                    <span class="slide-number">Slide 03</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0003.jpg" alt="Slide 3">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مكونات الـ RAG والهدف الأساسي 🤝🎯</div>
+                    <div class="explanation-content">
+                        في هاض السلايد بنشوف زبدة الموضوع، الـ <span class="eng-term">RAG</span> عبارة عن تحالف (شراكة)
+                        بين عالمين:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="highlight-b">Information Retrieval (IR):</span> عالم استرجاع المعلومات
+                                    اللي درسناه، وظيفته يجيب البيانات الصافية.</li>
+                                <li><span class="highlight-b">Language Models (LLMs):</span> النماذج اللغوية الضخمة،
+                                    وظيفتها تفهم وتصيغ الكلام طبيعياً.</li>
+                            </ul>
+                        </div>
+                        <span class="highlight-success">الهدف الأساسي (Goal):</span> الحصول على إجابات أفضل وأهم شي تكون
+                        مدعومة بالأدلة وموثوقة (<span class="eng-term">Grounded answers</span>). يعني الموديل ما بجاوب
+                        من راسه، بجاوب بناءً على مراجع ثابتة!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 04 -->
+            <div class="slide-section" id="slide-4">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Why RAG?</span>
+                    <span class="slide-number">Slide 04</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0004.jpg" alt="Slide 4">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش محتاجين الـ RAG؟ (المشكلة والحل) 🕳️💡</div>
+                    <div class="explanation-content">
+                        في عندنا مشكلتين أساسيات، وكل وحدة لحالها مش كافية:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="highlight-r">IR returns docs only:</span> محركات البحث التقليدية بتشوف
+                                    وظيفتها تلاقي الملف المتصل بالسؤال وبس، ما بتلخص ولا بتجاوب المكتوب.</li>
+                                <li><span class="highlight-r">LLMs may hallucinate:</span> الموديلات الذكية ممكن تنحط
+                                    بموقف محرج وتضطر "تهلوس" وتألف إجابات مقنعة لو انطلبت منها معلومة مش متدربة عليها.
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="highlight-success">الحل السحري (Solution):</span> الـ RAG بوخذ أحسن شي من الثنتين.
+                        بدمج دقة الاسترجاع (<span class="eng-term">Retrieval</span>) مع ذكاء التوليد والصياغة (<span
+                            class="eng-term">Generation</span>).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 05 -->
+            <div class="slide-section" id="slide-5">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RAG Pipeline</span>
+                    <span class="slide-number">Slide 05</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0005.jpg" alt="Slide 5">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">خطوات الـ Pipeline ومرحلة الاسترجاع 🔍⚙️</div>
+                    <div class="explanation-content">
+                        العملية الأساسية للـ RAG بتم كالتالي: <span class="eng-term">Query → Retriever → Top-k Docs →
+                            LLM → Answer</span>.
+                        <div class="detail-item">
+                            <span class="highlight-y">الخطوة الأولى (Step 1: Retrieve - The IR Part):</span> هاض هو
+                            الجزء الخاص بالبحث اللي تعلمناه:
+                            <ul>
+                                <li><span class="highlight-b">Input:</span> سؤال اليوزر (مثلاً: "كيف الطيارات بتوفر
+                                    وقود؟").</li>
+                                <li><span class="highlight-b">Action:</span> بنستخدم الخوارزميات اللي درسناها زي الـ
+                                    <span class="eng-term">TF-IDF</span> أو الـ <span class="eng-term">Cosine
+                                        Similarity</span> عشان نرتب كل الملفات.
+                                </li>
+                                <li><span class="highlight-b">Output:</span> بنطلع أهم الفقرات (عادة من 3 إلى 5 فقرات)
+                                    اللي إلها علاقة قوية بالسؤال (Top-k).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 06 -->
+            <div class="slide-section" id="slide-6">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RAG Pipeline</span>
+                    <span class="slide-number">Slide 06</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0006.jpg" alt="Slide 6">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مرحلة التعزيز (Augmentation) أو هندسة الأوامر 📝✨</div>
+                    <div class="explanation-content">
+                        بعد ما جبنا الملفات، هسا دور نعمل "القالب" للذكاء الاصطناعي:
+                        <div class="detail-item">
+                            <span class="highlight-y">الخطوة الثانية (Step 2: Augment - The Prompt Engineering
+                                Part):</span>
+                            بناخذ الملفات اللي استرجعناها وبنحطها جوا <span class="eng-term">Prompt</span> (أمر للـ
+                            LLM). هاي الخطوة هي "الجسر" بين الكود البرمجي تبعنا وبين الذكاء الاصطناعي.
+                        </div>
+                        <span class="highlight-b">شكل القالب (Prompt Structure):</span>
+                        بالعادة بنعطيه تعليمات واضحة: "أنت مساعد ذكي. جاوب على السؤال باستخدام النص المرفق فقط. إذا
+                        الجواب مش موجود، احكي ما بعرف". بعدين بنحط الـ <span class="eng-term">Context</span> (الفقرات
+                        اللي طلعت معنا) وتحتها الـ <span class="eng-term">Question</span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 07 -->
+            <div class="slide-section" id="slide-7">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">RAG Pipeline</span>
+                    <span class="slide-number">Slide 07</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0007.jpg" alt="Slide 7">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مرحلة التوليد والصياغة (Generation) ✍️🗣️</div>
+                    <div class="explanation-content">
+                        وصلنا للخطوة الأخيرة واللي بطلع فيها السحر:
+                        <div class="detail-item">
+                            <span class="highlight-y">الخطوة الثالثة (Step 3: Generate - The LLM Part):</span>
+                            <ul>
+                                <li><span class="highlight-b">Action:</span> بنمسك الـ <span
+                                        class="eng-term">Prompt</span> الجاهز (اللي فيه التعليمات + المراجع + السؤال)
+                                    وبنبعته كطلب لـ <span class="eng-term">LLM API</span> زي (OpenAI أو Claude أو بنشغل
+                                    موديل محلي زي Llama 3 عن طريق أداة Ollama).</li>
+                                <li><span class="highlight-b">Output:</span> الموديل بقرأ المراجع وبصيغ <span
+                                        class="eng-term">Grounded, human-like answer</span> (إجابة طبيعية وكأنها طالعة
+                                    من إنسان، والأهم إنها موثقة).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 08 -->
+            <div class="slide-section" id="slide-8">
+                <div class="slide-title-bar">
+                    <span style="font-weight: 700;">Key Concepts</span>
+                    <span class="slide-number">Slide 08</span>
+                </div>
+                <div class="slide-image-box">
+                    <img src="ch8/RAG_page-0008.jpg" alt="Slide 8">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مفاهيم ذهبية في عالم الـ RAG 👑💎</div>
+                    <div class="explanation-content">
+                        عشان نكون فاهمين الطبخة 100%، لازم نركز على أهم 3 مفاهيم:
+                        <div class="detail-item">
+                            <ul>
+                                <li><span class="highlight-success">الهلوسة (Hallucination):</span> لما الموديل يجاوب من
+                                    "ذاكرته" بدل النص المرفق. الـ RAG بمنع هاض الإشي لأنه بجبر الموديل يضل <span
+                                        class="eng-term">Grounded</span> بالملفات اللي أعطيناه إياها.</li>
+                                <li><span class="highlight-success">نافذة السياق (Context Window):</span> الموديلات إلها
+                                    "حد أقصى" لكمية النص اللي بتقدر تقرأه بالمرة الواحدة. عشان هيك ما بنقدر نبعت المكتبة
+                                    كلها وفقط بنبعت أهم (Top-k) ملفات.</li>
+                                <li><span class="highlight-success">التوثيق (Grounding):</span> التأكد من إن كل جزء من
+                                    الجواب بقدر أرجعه لمستند معين تم استرجاعه بواسطة الـ IR. هاض بيعطينا ثقة كاملة
+                                    بالجواب!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="../nav.js"></script>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>

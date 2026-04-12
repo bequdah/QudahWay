@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | C++ Chapter 1</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--primary);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-g {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 20px; border-radius: 15px; border: 1px solid rgba(250, 204, 21, 0.2); transition: all 0.3s;"
+                    onmouseover="this.style.background='rgba(250, 204, 21, 0.15)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='rgba(250, 204, 21, 0.08)'; this.style.transform='translateY(0)'">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> C++</h1>
+            <p class="subtitle">01. Introduction | مقدمة البرمجة</p>
+        </div>
+
+        <!-- Slides 1 & 2 (Titles Only) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Chapter 1: Intro to Programming</span>
+                <span class="slide-number">Slide 01</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0001.jpg" alt="Slide 01" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Connection with Real World</span>
+                <span class="slide-number">Slide 02</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0002.jpg" alt="Slide 02" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+
+        <!-- Slide 3 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Basic Input and Output</span>
+                <span class="slide-number">Slide 03</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0003.jpg" alt="Slide 03" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مفهوم الدخل والخرج (I/O) - حبة حبة!</div>
+                <div class="explanation-content">
+                    تخيل الكمبيوتر زي الصندوق المقفل، والبرمجة هي الطريقة اللي بنحكي فيها مع هالصندوق.
+                    <br><br>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.1); padding: 15px; border-radius: 12px; border-right: 4px solid var(--primary); margin-bottom: 20px;">
+                        <span class="highlight-g">📺 1. الشاشة (cout):</span>
+                        بدك تفرجي المستخدم "رسالة"؟ بنستخدم <span class="eng-term">cout</span>.
+                        ركز بالأسهم <span class="eng-term">
+                            <<< /span>، كأنهم بوز "مدفع" بوجه الشاشة، بيطلع المعلومة من الكود وبيرميها قدام اليوزر.
+                                <br><i>مثال:</i> تخيل حالك بتكبس "عرض" بالتلفزيون.
+                    </div>
+                    <div
+                        style="background: rgba(250, 204, 21, 0.1); padding: 15px; border-radius: 12px; border-right: 4px solid var(--accent); margin-bottom: 20px;">
+                        <span class="highlight-y">⌨️ 2. الكيبورد (cin):</span>
+                        بدك تشحد معلومة من اليوزر (زي اسمه أو عمره)؟ بنستخدم <span class="eng-term">cin</span>.
+                        الأسهم هون <span class="eng-term">>></span> بتدلك وين المعلومة رايحة، كأنها بتغرف المعلومة من
+                        المستخدم وبتحطها "جوا" المتغير بالذاكرة.
+                    </div>
+                    <div
+                        style="background: rgba(148, 163, 184, 0.1); padding: 15px; border-radius: 12px; border: 1px dashed var(--text-muted);">
+                        💡 <span class="highlight-b">نصيحة ذهبية:</span> دايماً تذكر "اتجاه السهم" وين بوجهه!
+                        <br><b>- صادر للشاشة؟</b> <span class="eng-term">
+                            <<< /span>
+                                <br><b>- وارد من المستخدم؟</b> <span class="eng-term">>></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Formatted Output</span>
+                <span class="slide-number">Slide 04</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0004.jpg" alt="Slide 04" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف نصمم جملة طباعة فخمة؟</div>
+                <div class="explanation-content">
+                    مش بس بنطبع كلمة وخلاص، بنقدر نجمع "مكونات" كتير بنفس السطر كأننا بنعمل "ساندويشة" طباعة!
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">🧪 دمج الأشياء:</span>
+                        بنقدر نحط نص بين دبل كوتيشن <span class="eng-term">" "</span>، وبعدين نحط سهمين <span
+                            class="eng-term">
+                            <<< /span> ونحط قيمة مخبية بمتغير، وبعدين سهمين ونحط عملية حسابية!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">⚡ مثال السلايد:</span>
+                        لاحظ بالأمثلة هون، مرة طبعنا <span class="eng-term">herd_size</span> ومرة طبعنا <span
+                            class="eng-term">4 * square_side</span>.
+                        <br>السيستم لحاله بيحسب العملية الحسابية "أول" وبعدين بيطبع النتيجة النهائية لليوزر.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        ⚠️ <span class="highlight-b">تذكر:</span> أي نص بدك ياه ينطبع "حرفياً" لازم يكون بين <span
+                            class="eng-term">" "</span>.
+                        أما المتغيرات فبنكتب اسمها زي ما هي بدون كوتيشن عشان السيستم يروح "يجيب قيمتها" من الذاكرة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Simple Program Structure</span>
+                <span class="slide-number">Slide 05</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0005.jpg" alt="Slide 05" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">هيكل الكود: كأنك بتعمل طبخة!</div>
+                <div class="explanation-content">
+                    الكود اللي قدامك هاض مش مجرد حكي، هاض "خطوات عمل" مترتبة سطر سطر:
+                    <br><br>
+                    1. <span class="highlight-g">📦 السطر 2 (#include):</span> كأنك بتفتح "حقيبة الأدوات" عشان تطلع منها
+                    مفك (الـ cin و الـ cout). بدون هالسطر، الكمبيوتر مش رح يعرف شو يعني جملة طباعة.
+                    <br><br>
+                    2. <span class="highlight-y">🏠 السطر 8 (int main):</span> هاي هي "البيت" اللي الكود بسكن فيه. الكود
+                    دايماً ببلش شغله من هون، وبنفتح "القوس" <span class="eng-term">{</span> عشان نبلش نكتب الأوامر،
+                    وبنسكره <span class="eng-term">}</span> بآخر الكود عشان نقوله "انتهى الدرس".
+                    <br><br>
+                    3. <span class="highlight-g">⚖️ السطر 10 (Defining Variables):</span> عرفنا <span
+                        class="eng-term">double</span>. كلمة <span class="eng-term">double</span> معناها "احجزلي مكان
+                    لرقم عشري بالذاكرة". كأنك حجزت "كاسة" فاضية وكتبت عليها اسم "length" عشان تعبيها ماء بعدين.
+                    <br><br>
+                    4. <span class="highlight-b">📝 السطر 11 و 13:</span> جملة طباعة عادية بتقول لليوزر "يا حبيب قلبي
+                    أعطيني قيم".
+                    <br><br>
+                    5. <span class="highlight-y">🧪 السطر 17 و 18:</span> هون السحر! الكمبيوتر حسب المساحة والمحيط بضرب
+                    الطول بالعرض.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Line Breaks and Formatting</span>
+                <span class="slide-number">Slide 06</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0006.jpg" alt="Slide 06" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تنسيق الشاشة: النزول لسطر جديد</div>
+                <div class="explanation-content">
+                    لو كتبت ألف جملة <span class="eng-term">cout</span>، الكمبيوتر غبي شوي! رح يحطهم كلهم بجنب بعض بصورة
+                    وحدة مكركبة. عشان نرتب مخرجاتنا بنستخدم:
+                    <br><br>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div
+                            style="background: rgba(52, 211, 153, 0.1); padding: 15px; border-radius: 12px; border: 1px solid var(--success);">
+                            <span class="highlight-g">🌟 endl (End Line):</span>
+                            هي كلمة "أنيقة". بنستخدمها بآخر المدفع <span class="eng-term">
+                                << endl;</span>. وظيفتها تنزل سطر و"تنظف" المجرى (يعني بتأكد إن الكلام انطبع فوراً).
+                        </div>
+                        <div
+                            style="background: rgba(251, 113, 133, 0.1); padding: 15px; border-radius: 12px; border: 1px solid var(--danger);">
+                            <span class="highlight-b">🚀 \n (Newline Char):</span>
+                            هي "الحارة" تبعتنا. بنحطها جوا الكوتيشن <span class="eng-term">"...\n"</span>. هي أسرع
+                            بالتعامل بس هي مجرد كركتر "بينزل سطر" وما بتنظف شي.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Input Stream Details</span>
+                <span class="slide-number">Slide 07</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0007.jpg" alt="Slide 07" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">كيف الكمبيوتر بياخد المعلومة (Input)؟</div>
+                <div class="explanation-content">
+                    لما اليوزر يكتب رقم ع الكيبورد، الكمبيوتر ما بياخذه كـ "رقم" فوراً، بياخذه كأنه "خط من الرموز" <span
+                        class="eng-term">(Character Stream)</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-y">🤖 عملية التحويل:</span>
+                        الـ <span class="eng-term">cin</span> شاطرة كثير، هي بتروح بتاخذ هالحروف وبتحاول تحولهم لنوع
+                        الداتا اللي بدك ياها.
+                        لو كنت معرف المتغير إنه <span class="eng-term">int</span> (صحيح)، رح تشيل الفواصل وتحوله لانتجر.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-g">🏃 تدفق البيانات:</span>
+                        تخيل البيانات زي "سيل" نازل من المستخدم ورايح باتجاه الذاكرة. الـ <span
+                            class="eng-term">>></span> هي عبارة عن "محول" بياخد هالسيل وبصبّه بالمتغير الصح.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Using cin Stream</span>
+                <span class="slide-number">Slide 08</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0008.jpg" alt="Slide 08" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">قوانين السير في عالم cin</div>
+                <div class="explanation-content">
+                    عشان الـ <span class="eng-term">cin</span> تشتغل معك وتسمع كلامك، لازم ترضيها بـ 3 شغلات:
+                    <br><br>
+                    <ul style="list-style: none; padding: 0;">
+                        <li
+                            style="margin-bottom: 12px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border-right: 3px solid var(--primary);">
+                            ✅ <span class="highlight-g">لازم تعطيها مكان فاضي:</span> يعني لازم تكتب اسم متغير <span
+                                class="eng-term">(Variable)</span> بعد السهمين.
+                        </li>
+                        <li
+                            style="margin-bottom: 12px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border-right: 3px solid var(--danger);">
+                            ❌ <span class="highlight-b">ممنوع تعطيها معادلات:</span> ما ينفع تحكيلها <span
+                                class="eng-term">cin >> x + y;</span>! هي وظيفتها "تحط" قيمة، مش "تحسب". احسب برة،
+                            وبعدين خزن.
+                        </li>
+                        <li
+                            style="margin-bottom: 12px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border-right: 3px solid var(--accent);">
+                            ⌨️ <span class="highlight-y">الانتظار:</span> الـ <span class="eng-term">cin</span> صبورة،
+                            بتضل معلقة البرنامج وما بتمشي للسطر اللي بعده إلا لما المستخدم يكبس "اينتر" <span
+                                class="eng-term">(Enter)</span>.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Full Code Example</span>
+                <span class="slide-number">Slide 09</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0009.jpg" alt="Slide 09" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تتبع كود (Trace): كيف التربيع بصير؟</div>
+                <div class="explanation-content">
+                    تخيل حالك أنت "المعالج" (CPU) وماسك ورقة وقلم، وامشي مع هالكود خطوة بخطوة:
+                    <br><br>
+                    1. <span class="eng-term">int value, square;</span> -> "أوكي، فتحت درجين جداد بالذاكرة وسجلت
+                    أسمائهم."
+                    <br>
+                    2. <span class="eng-term">cout << "Give me a number..." </span> -> "طبعت السؤال ع الشاشة."
+                            <br>
+                            3. <span class="eng-term">cin >> value;</span> -> "وقفت عن الشغل وهيني بستنى اليوزر يكتب..
+                            كتب رقم 5؟ أوكي سجلت الـ 5 بالذاكرة جوا value."
+                            <br>
+                            4. <span class="eng-term">square = value * value;</span> -> "مسكت الـ 5 وضربتها بنفسها وصار
+                            عندي 25، حطيت الـ 25 بالدرج الثاني."
+                            <br>
+                            5. <span class="eng-term">cout << "You've given " << value;</span> -> "هسا بدي أطلع النتيجة،
+                                    جبت قيمة value (اللي هي 5) وصورتها، وجبت الـ 25 وصورتها وطبعتهم."
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 (Super Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Common Syntax Errors</span>
+                <span class="slide-number">Slide 10</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0010.jpg" alt="Slide 10" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">إياك والكوارث! ليش البرنامج بضرب؟</div>
+                <div class="explanation-content">
+                    هون مجمعلك أكثر أغلاط بتخلي البرنامج "يزعل" منك وما يشتغل:
+                    <br><br>
+                    <div
+                        style="background: rgba(251, 113, 133, 0.05); border: 1px solid rgba(251, 113, 133, 0.2); padding: 20px; border-radius: 12px;">
+                        ⚠️ <span class="highlight-b">1. الغلط بالترتيب:</span> <span class="eng-term">cin >> x,
+                            y;</span> دير بالك! بـ C++ ممنوع الفاصلة جوا cin. لازم تكتب السهمين مرتين <span
+                            class="eng-term">>> x >> y;</span>.
+                        <br><br>
+                        ⚠️ <span class="highlight-b">2. خلط الحابل بالنابل:</span> <span class="eng-term">cin >> "Insert
+                            a number"</span> الكمبيوتر رح يفكرك بدك المستخدم "يغير" جملة "Insert a number" وهاض مستحيل!
+                        دايماً اطبع بـ <span class="eng-term">cout</span> اسأل اليوزر، وبعدين استقبل بـ <span
+                            class="eng-term">cin</span>.
+                        <br><br>
+                        ⚠️ <span class="highlight-b">3. اتجاه الإعصار:</span> <span class="eng-term">cin << x;</span>
+                                هاي أكبر جريمة بحق البرمجة! السهم بـ cin دايماً بوجهه "لليسار" <span
+                                    class="eng-term">>></span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 11 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Mathematical Operators</span>
+                <span class="slide-number">Slide 11</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0011.jpg" alt="Slide 11" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني "Operator"؟</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Operator</span> هو ببساطة "الأداة" اللي بنستخدمها عشان نغير قيم الداتا أو
+                    نحسبها.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">⚖️ أداة التعيين (=):</span>
+                        هاي أهم وحدة، اسمها <span class="eng-term">Assignment</span>. وظيفتها تاخد اللي على اليمين وتحطه
+                        بالدرج اللي على اليسار.
+                        لما نقول <span class="eng-term">x = 4</span>، إحنا بنقول للكمبيوتر "انسى شو كان بالدرج، وحط فيه
+                        رقم 4 هسا".
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">🧮 العمليات الحسابية:</span>
+                        الكمبيوتر بيعرف العمليات الأساسية اللي بنعرفها بالمدرسة (الجمع، الطرح، الضرب، القسمة، وباقي
+                        القسمة). بس ركز بالسلايد على شكل الضرب <span class="eng-term">*</span> والقسمة <span
+                            class="eng-term">/</span> لأنهم بيختلفوا عن الدفتر.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Multiplication ( * )</span>
+                <span class="slide-number">Slide 12</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0012.jpg" alt="Slide 12" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الضرب: النجمة السحرية</div>
+                <div class="explanation-content">
+                    بالبرمجة ما بنستخدم حرف الـ <span class="eng-term">x</span> للضرب، بنستخدم النجمة <span
+                        class="eng-term">*</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">💡 ليش لازم ننتبه؟</span>
+                        الكمبيوتر "ذكي" بنوع الأرقام. لو ضربت رقمين صحيحين <span class="eng-term">int</span> (زي 10 و
+                        12)، النتيجة بتكون رقم صحيح (120).
+                        بس لو ضربت أرقام فيها أعشار <span class="eng-term">float</span> (زي 1.25 و 0.5)، النتيجة أكيد رح
+                        تطلع بالفواصل (0.625).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        🔥 <span class="highlight-y">ملاحظة:</span> الذاكرة بتتعامل مع الـ <span
+                            class="eng-term">float</span> بدقة أكبر، فدايماً تأكد إنك معرف المتغير بالنوع الصح قبل ما
+                        تبلش ضرب!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Division ( / )</span>
+                <span class="slide-number">Slide 13</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0013.jpg" alt="Slide 13" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">القسمة: مين قدام السلاش؟</div>
+                <div class="explanation-content">
+                    القسمة بالبرمجة هي السلاش <span class="eng-term">/</span>. ولازم نعرف مصطلحين:
+                    <br><br>
+                    1. <span class="highlight-g">Dividend:</span> الرقم اللي "بدنا نقسمه" (بكون فوق أو بالبدابة
+                    باليسار).
+                    <br>
+                    2. <span class="highlight-y">Divisor:</span> الرقم اللي "بنقسم عليه" (بكون تحت أو باليمين).
+                    <br><br>
+                    بالأمثلة اللي بالسلايد:
+                    <br>- <span class="eng-term">10 / 5</span> بتعطينا <span class="highlight-g">2</span>. (سهلة
+                    وعادية).
+                    <br>- <span class="eng-term">1.0 / 2.0</span> بتعطينا <span class="highlight-y">0.5</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Integer vs Float Division</span>
+                <span class="slide-number">Slide 14</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0014.jpg" alt="Slide 14" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">⚠️ أهم فخ في الـ C++!</div>
+                <div class="explanation-content">
+                    ركز معي هون عشان ما تنجلط بالمستقبل! ليش <span class="eng-term">10 / 3</span> بتطلع <span
+                        class="highlight-danger">3</span> مش <span class="highlight-success">3.33</span>؟
+                    <br><br>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-g">🔢 1. قسمة الأنتجر (Integer Division):</span>
+                        لما تقسم رقم صحيح على رقم صحيح، الكمبيوتر "بيكب" الفواصل بالزبالة! هو بس بيعطيك "كم حبة كاملة"
+                        بالناتج. 10 كم 3 فيها؟ فيها <span class="highlight-g">3</span>، والفرطة بتروح.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">📈 2. كيف أجيب الفواصل؟</span>
+                        عشان الكمبيوتر يحترم الفواصل، لازم "واحد منهم على الأقل" يكون فيه نقطة <span
+                            class="eng-term">.0</span>.
+                        لو كتبت <span class="eng-term">10.0 / 3</span> فوراً بيعطيك <span
+                            class="highlight-y">3.3333</span>.
+                    </div>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 12px; margin-top: 15px; border: 1px solid var(--primary);">
+                        💡 <span class="highlight-b">الخلاصة:</span> صحيح ÷ صحيح = صحيح (بدون فواصل).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Division by Zero</span>
+                <span class="slide-number">Slide 15</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0015.jpg" alt="Slide 15" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">ممنوع الاقتراب: القسمة على صفر!</div>
+                <div class="explanation-content">
+                    بالرياضيات وبالبرمجة، القسمة على صفر هي "نهاية العالم".
+                    <br><br>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-danger">💥 شو بصير؟</span>
+                        لو البرنامج حاول يقسم رقم على صفر، رح يعطيك إشي اسمه <span class="eng-term">Exception</span>
+                        (استثناء أو خطأ فادح). البرنامج غالباً رح "يعلق" أو "يسكر" بوجهك.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">♾️ قيمة inf:</span>
+                        ببعض الحالات مع أرقام الـ <span class="eng-term">float</span>، ممكن البرنامج يفرجي كلمة <span
+                            class="eng-term">inf</span> (يعني Infinity أو ما لا نهاية)، وهاي معناها إنك وقعت بمشكلة
+                        حسابية لازم تحلها.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Addition ( + )</span>
+                <span class="slide-number">Slide 16</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0016.jpg" alt="Slide 16" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الجمع: أبسط ما يكون</div>
+                <div class="explanation-content">
+                    إشارة الزائد <span class="eng-term">+</span> بتشتغل زي ما تعودت بالمدرسة تماماً.
+                    <br><br>
+                    بتجمع أرقام صحيحة <span class="eng-term">int</span> مع بعض، أو <span class="eng-term">float</span>
+                    مع بعض.
+                    الجميل بالموضوع إنك بتقدر تجمع "صحيح" مع "عشري" والناتج بكون "عشري" عشان ما نخسر الدقة.
+                    <br><i>مثال:</i> <span class="eng-term">100 + 2 = 102</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Subtraction ( - )</span>
+                <span class="slide-number">Slide 17</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0017.jpg" alt="Slide 17" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الطرح: الهويتين المختلفتين</div>
+                <div class="explanation-content">
+                    إشارة الناقص <span class="eng-term">-</span> إلها طريقتين بالشغل:
+                    <br><br>
+                    1. <span class="highlight-g">Binary Operator:</span> لما تكون قاعدة بين رقمين عشان تطرحهم (زي <span
+                        class="eng-term">x - y</span>).
+                    <br>
+                    2. <span class="highlight-y">Unary Operator:</span> لما تقعد "قبل" الرقم عشان تقول إنه هاض الرقم
+                    "سالب" (زي <span class="eng-term">-5</span>).
+                    <br><br>
+                    السلايد بفرجيك إنه <span class="eng-term">100 - 200</span> بتعطي <span
+                        class="highlight-danger">-100</span>. يعني الكمبيوتر بيعرف الأرقام السالبة وما عنده مشكلة معها.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Unary Minus</span>
+                <span class="slide-number">Slide 18</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0018.jpg" alt="Slide 18" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الناقص كـ "تغيير إشارة"</div>
+                <div class="explanation-content">
+                    هون مسميها <span class="eng-term">Unary Minus</span>. وظيفتها إنها تقلب إشارة الرقم.
+                    <br><br>
+                    لو عندك متغير <span class="eng-term">i</span> قيمته <span class="eng-term">100</span>، وحكيت <span
+                        class="eng-term">j = -i</span>، الـ <span class="eng-term">j</span> رح تصير قيمتها <span
+                        class="eng-term">-100</span>.
+                    <br><br>
+                    <div
+                        style="background: rgba(250, 204, 21, 0.05); padding: 15px; border-radius: 12px; border-right: 4px solid var(--accent);">
+                        🤔 <b>سؤال ذكي:</b> لو كان الـ <span class="eng-term">i</span> أصلاً <span
+                            class="eng-term">-100</span>، وحطيت قبله ناقص ثانية، شو بصير؟
+                        <br><i>الجواب:</i> بصير موجب <span class="eng-term">+100</span> (ناقص الناقص موجب، زي ما
+                        بنعرف!).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Unary Plus</span>
+                <span class="slide-number">Slide 19</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0019.jpg" alt="Slide 19" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الزائد: "المسالمة"</div>
+                <div class="explanation-content">
+                    هاي الـ <span class="eng-term">Unary Plus</span> موجودة "إكمال ديكور" بالأغلب!
+                    <br><br>
+                    وظيفتها إنها تخلي إشارة الرقم زي ما هي. يعني لو حكيت <span class="eng-term">j = +i</span>، الـ <span
+                        class="eng-term">j</span> رح تاخد نفس قيمة <span class="eng-term">i</span> بالتمام والكمال ولا
+                    بتغير شي.
+                    بـ C++ مسموح تستخدمها بس نادراً ما حدا بيعمل هيك.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Remainder / Modulo ( % )</span>
+                <span class="slide-number">Slide 20</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0020.jpg" alt="Slide 20" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">السحر الحقيقي: باقي القسمة (Modulo)</div>
+                <div class="explanation-content">
+                    إشارة الـ <span class="eng-term">%</span> مش معناها نسبة مئوية بالبرمجة! معناها "شو بضل معي فرطة بعد
+                    القسمة؟".
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">🍎 مثال التفاح:</span>
+                        معك 13 تفاحة، وبدك توزعهم على 5 أشخاص بالتساوي.
+                        كل شخص رح ياخد <span class="highlight-g">2</span> تفاحة (هاي هي القسمة العادية).
+                        كم تفاحة بتضل معك بالمنسف ما توزعت؟ بضل <span class="highlight-y">3</span> تفاحات.
+                        إذن <span class="eng-term">13 % 5 = 3</span>.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        ⚠️ <span class="highlight-danger">شرط قاسي:</span> الموديلو <span class="eng-term">%</span>
+                        بيشتغل <span class="highlight-b">فقط</span> مع الأرقام الصحيحة <span
+                            class="eng-term">int</span>. ممنوع تستخدمه مع الفواصل!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Modulo Operations Master</span>
+                <span class="slide-number">Slide 21</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0021.jpg" alt="Slide 21" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">قواعد الموديلو الذهبية</div>
+                <div class="explanation-content">
+                    السلايد بفرجيك حالات غريبة بقع فيها الطلاب دايماً:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">📏 1. صغير % كبير = الصغير نفسه:</span>
+                        لما تقول <span class="eng-term">3 % 10</span>، الجواب دايماً الرقم الأول (3). ليش؟
+                        لأنه الـ 3 ما بتقدر تقسمها على 10 ولا حبة كاملة، فبتضل كلها "فرطة" بالجايبة!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">🔄 2. الدوران:</span>
+                        ناتج الموديلو دايماً بكون بين <span class="highlight-g">0</span> وبين <span
+                            class="highlight-g">المقسوم عليه - 1</span>.
+                        مستحيل <span class="eng-term">x % 5</span> تعطيك 5 أو أكثر.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--danger);">
+                        <span class="highlight-danger">➖ 3. السوالب:</span>
+                        لو الرقم الأول سالب، النتيجة بتكون سالبة غالباً. <span class="eng-term">-4 % 10 = -4</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Operator Priorities</span>
+                <span class="slide-number">Slide 22</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0022.jpg" alt="Slide 22" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">مين "كلمته بتمشي" أول؟ (Priorities)</div>
+                <div class="explanation-content">
+                    بالبرمجة مش كل الأدوات الها نفس القوة. فيه إشي اسمه <span class="eng-term">Priority</span>
+                    (الأولوية).
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">🥊 الضرب vs الجمع:</span>
+                        لو كتبت للكمبيوتر <span class="eng-term">2 + 3 * 5</span>، الكمبيوتر مش رح يحسب بالترتيب من
+                        اليسار!
+                        الضرب "أقوى" من الجمع، فبيروح بيحسب <span class="eng-term">3 * 5 = 15</span> أول، وبعدين بجمع
+                        الـ 2. عشان هيك الناتج طلع <span class="highlight-success">17</span>.
+                    </div>
+                    <div
+                        style="background: rgba(251, 113, 133, 0.05); padding: 15px; border-radius: 12px; margin-top: 15px; border: 1px solid var(--danger);">
+                        ⚠️ <span class="highlight-danger">انتبه:</span> لو كنت بدك تجمع أول، لازم تستخدم "الواسطة"
+                        (الأقواس)، ورح نحكي عنها كمان شوي.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Operator Bindings</span>
+                <span class="slide-number">Slide 23</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0023.jpg" alt="Slide 23" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">لما القوة تتساوى.. شو الحل؟ (Bindings)</div>
+                <div class="explanation-content">
+                    طيب لو عندي <span class="eng-term">2 + 3 + 5</span>؟ هون الجمع والجمع الهم نفس القوة تماماً.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-b">⬅️ من اليسار لليمين (Left-to-right):</span>
+                        أغلب العمليات بـ C++ بتمشي بالترتيب من اليسار لليمين لما تتساوى القوة.
+                        بجمع <span class="eng-term">2 + 3 = 5</span>، وبعدين بجمع الـ <span class="eng-term">5</span>
+                        الثانية للناتج.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        🔥 <span class="highlight-y">فائدة:</span> هاي القاعدة بنسميها <span class="eng-term">Left-sided
+                            binding</span>، وهي اللي بتضمن إنه الحسابات تطلع منطقية ومرتبة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Hierarchy of Priorities</span>
+                <span class="slide-number">Slide 24</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0024.jpg" alt="Slide 24" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">جدول "الاولولية" في البرمجة</div>
+                <div class="explanation-content">
+                    هاض الجدول لازم تحفظه زي اسمك، مرتب من الأقوى للأضعف:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-danger">🥇 المركز الأول (Unary):</span>
+                        العمليات اللي بتشتغل على رقم واحد بس (زي <span class="eng-term">++</span>، <span
+                            class="eng-term">--</span>، أو إشارة السالب <span class="eng-term">-</span> قبل الرقم). هذول
+                        ملوك الساحة!
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">🥈 المركز الثاني (Multiplicative):</span>
+                        الضرب <span class="eng-term">*</span>، القسمة <span class="eng-term">/</span>، وباقي القسمة
+                        <span class="eng-term">%</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-g">🥉 المركز الثالث (Additive):</span>
+                        الجمع <span class="eng-term">+</span> والطرح <span class="eng-term">-</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Priority Quiz</span>
+                <span class="slide-number">Slide 25</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0025.jpg" alt="Slide 25" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">اختبار ذكاء: ليش الناتج 1؟</div>
+                <div class="explanation-content">
+                    خلينا نحل اللغز اللي بالسلايد: <span class="eng-term">2 * 3 % 5</span>
+                    <br><br>
+                    1. الضرب والموديلو الهم نفس القوة (المركز الثاني).
+                    <br>
+                    2. بنمشي من اليسار: <span class="eng-term">2 * 3 = 6</span>.
+                    <br>
+                    3. هسا بنعمل الموديلو: <span class="eng-term">6 % 5</span>. الـ 6 كم 5 فيها؟ فيها وحدة وبضل <span
+                        class="highlight-success">1</span>.
+                    <br><br>
+                    <span class="highlight-b">شفت كيف؟</span> ترتيب بسيط بخليك تتحكم بكل أرقام البرنامج.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Using Parentheses</span>
+                <span class="slide-number">Slide 26</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0026.jpg" alt="Slide 26" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الأقواس: "بواسطة" المبرمج!</div>
+                <div class="explanation-content">
+                    لو بدك تكسر كل القوانين وتخلي الجمع يحسب قبل الضرب، الحل هو <span class="eng-term">Parentheses
+                        ()</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">🛡️ الحصانة:</span>
+                        أي إشي بين أقواس بتم حسابه أول إشي، مهما كانت العملية اللي جواته ضعيفة.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">🧩 القواعد المعقدة:</span>
+                        تقدر تمسك معادلة طويلة زي اللي بالسلايد وتتحكم بمين يبدأ ومين يخلص بس بالأقواس. ميزة إضافية
+                        للأقواس هي إنها بتخلي الكود تبعك "مقروء" وواضح لأي مبرمج ثاني بشوفه.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Arithmetic Expressions</span>
+                <span class="slide-number">Slide 27</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0027.jpg" alt="Slide 27" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أنواع التعبيرات الحسابية</div>
+                <div class="explanation-content">
+                    بالـ C++ عنا نوعين أساسيين للتعبيرات (Expressions):
+                    <br><br>
+                    1. <span class="highlight-g">Integral Expressions:</span> لما تكون كل الأرقام "صحيحة" (int). النتيجة
+                    دايماً رح تطلع رقم صحيح (حتى لو فيه قسمة، رح يكب الفواصل!).
+                    <br><i>مثال:</i> <span class="eng-term">2 + 3 * 5 = 17</span>.
+                    <br><br>
+                    2. <span class="highlight-y">Floating-point Expressions:</span> لما تكون كل الأرقام "عشرية"
+                    (float/double). النتيجة أكيد رح تطلع فيها فواصل دقيقة.
+                    <br><i>مثال:</i> <span class="eng-term">12.8 * 17.5 = 224.0</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Mixed Expressions</span>
+                <span class="slide-number">Slide 28</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0028.jpg" alt="Slide 28" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الخلاطة: لما تخلط الأنواع!</div>
+                <div class="explanation-content">
+                    شو بصير لو عندي رقم <span class="eng-term">int</span> ورقم <span class="eng-term">float</span> بنفس
+                    المعادلة؟
+                    <br><br>
+                    الكمبيوتر بشتغل بنظام <span class="highlight-b">"الأقوى بسحب الأضعف"</span>. الـ <span
+                        class="eng-term">float</span> أدق وأقوى من الـ <span class="eng-term">int</span>، فبيروح "يحول"
+                    الـ int لـ float مؤقتاً عشان يحسب بدقة.
+                    <br><br>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.05); padding: 15px; border-radius: 12px; border: 1px dashed var(--primary);">
+                        📉 <span class="highlight-g">القاعدة:</span> المدموج (Mixed) دايماً بطلع <span
+                            class="eng-term">Floating-point</span>.
+                        <br>لو جمعت <span class="eng-term">2 + 3.5</span>، الكمبيوتر بشوفها <span class="eng-term">2.0 +
+                            3.5</span> والناتج <span class="highlight-success">5.5</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Explicit Type Conversion</span>
+                <span class="slide-number">Slide 29</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0029.jpg" alt="Slide 29" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التحويل القسري (static_cast)</div>
+                <div class="explanation-content">
+                    أحياناً إنت كمبرمج بدك "تجبر" الكمبيوتر يغير نوع الداتا. بنستخدم أداة جبارة اسمها <span
+                        class="eng-term">static_cast</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">🛠️ كيف بنستخدمها؟</span>
+                        بتكتب <span class="eng-term">static_cast&lt;newType&gt;(expression)</span>.
+                        مثلاً لو عندك <span class="eng-term">7.9</span> وبدك إياه يصير <span
+                            class="eng-term">int</span>، بتحكي له: <span
+                            class="eng-term">static_cast&lt;int&gt;(7.9)</span>، النتيجة رح تطلع <span
+                            class="highlight-success">7</span> (كب الأعشار كب!).
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">💡 ليش مفيدة؟</span>
+                        عشان نصلح "فخ القسمة". لو قلت <span class="eng-term">static_cast&lt;double&gt;(15) / 2</span>،
+                        الـ 15 بتصير <span class="eng-term">15.0</span>، فبتطلع النتيجة <span
+                            class="highlight-y">7.5</span> بدل ما تطلع 7.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Static Cast Examples</span>
+                <span class="slide-number">Slide 30</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0030.jpg" alt="Slide 30" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تمارين على الـ Casting</div>
+                <div class="explanation-content">
+                    شوف الكود هاض وركز بالنتائج:
+                    <br><br>
+                    - <span class="eng-term">static_cast&lt;int&gt;('A')</span>: الحرف 'A' مخزن بالكمبيوتر كرقم. لما
+                    نحوله لـ int، بعطينا رقم <span class="highlight-g">65</span> (كود الـ ASCII تبعه).
+                    <br>
+                    - <span class="eng-term">static_cast&lt;float&gt;(x) / y</span>: هون جبرنا العملية تصير عشرية عشان
+                    تطلع الفواصل صح.
+                    <br><br>
+                    <div
+                        style="background: rgba(250, 204, 21, 0.05); padding: 15px; border-radius: 12px; border-right: 4px solid var(--accent);">
+                        🧩 <span class="highlight-y">لغز السلايد:</span> المعادلة الطويلة اللي تحت ناتجها <span
+                            class="highlight-success">23.3</span>. جرب تحلها بيدك (أقواس، ثم قسمة، ثم موديلو، ثم جمع)!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 31 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Division Techniques</span>
+                <span class="slide-number">Slide 31</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0031.jpg" alt="Slide 31" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">طرق مختلفة لطلب الفواصل</div>
+                <div class="explanation-content">
+                    السلايد بفرجيك 3 طرق لنفس الغرض:
+                    <br><br>
+                    1. <span class="highlight-g">static_cast:</span> الطريقة الحديثة والآمنة بـ C++.
+                    <br>
+                    2. <span class="highlight-y">C-Style cast:</span> تكتب <span class="eng-term">(float) 33</span>. هي
+                    طريقة قديمة بس لسا شغالة.
+                    <br><br>
+                    بالأمثلة: <span class="eng-term">33 / 2</span> بتعطي <span class="highlight-danger">16</span>، بس
+                    الـ casting بيخليها <span class="highlight-success">16.5</span>. دايماً تذكر هالموضوع بالامتحان!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Implicit Conversion</span>
+                <span class="slide-number">Slide 32</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0032.jpg" alt="Slide 32" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">التحويل التلقائي وأرقام الحروف</div>
+                <div class="explanation-content">
+                    الكمبيوتر ما بيعرف شو يعني حرف 'X'. هو بيعرف رقم الحرف في جدول الـ <span
+                        class="highlight-b">ASCII</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">🔄 التحويل الضمني:</span>
+                        لما تخزن حرف 'X' داخل متغير <span class="eng-term">int</span>، الـ C++ لحالها بتحول الحرف لرقمه
+                        (88).
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        💬 <span class="highlight-y">المثال:</span>
+                        لو طبعنا المتغير كـ <span class="eng-term">char</span> بطلع 'X'، ولو طبعناه كـ <span
+                            class="eng-term">int</span> بطلع 88.
+                        هاي بتسمح لنا نعمل عمليات حسابية على الحروف (زي تشفير الكلمات أو ترتيبها أبجدياً).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 33 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Increment Operator ( ++ )</span>
+                <span class="slide-number">Slide 33</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0033.jpg" alt="Slide 33" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الزيادة بحبة واحدة (Increment)</div>
+                <div class="explanation-content">
+                    بالبرمجة دايماً بنحتاج نعد، وأبسط عملية عد هي إنك تزيد 1.
+                    <br><br>
+                    بدل ما تكتب <span class="eng-term">Counter = Counter + 1</span> (جملة طويلة ومملة)، الـ C++ أعطتنا
+                    اختصار فخم هو <span class="eng-term">Counter++</span>.
+                    <br><br>
+                    <div
+                        style="background: rgba(34, 197, 94, 0.05); padding: 15px; border-radius: 12px; border-right: 4px solid var(--success);">
+                        ✅ <span class="highlight-g">النتيجة:</span> قيمة المتغير بتزيد 1 فوراً في الذاكرة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Decrement Operator ( -- )</span>
+                <span class="slide-number">Slide 34</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0034.jpg" alt="Slide 34" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">النقصان بحبة واحدة (Decrement)</div>
+                <div class="explanation-content">
+                    عكس الزيادة هو النقصان. لو بدك تنزل بالعد تنازلياً.
+                    <br><br>
+                    بدل <span class="eng-term">Counter = Counter - 1</span>، بنستخدم <span
+                        class="eng-term">Counter--</span>.
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-y">📌 ملاحظة:</span> هاض الاختصار بيوفر وقت وبخلي الكود شكله "أنظف" وأسهل
+                        للقراءة.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Inc/Dec Example</span>
+                <span class="slide-number">Slide 35</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0035.jpg" alt="Slide 35" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تطبيق عملي: الزيادة والنقصان</div>
+                <div class="explanation-content">
+                    شوف هاض الكود وحاول تتوقع النتيجة:
+                    <br><br>
+                    إذا كانت <span class="eng-term">x = 5</span>، ونفذنا جملة طباعة فيها <span
+                        class="eng-term">x++</span>، رح يطبع 5 وبعدين يزيدها (بتصير 6 بالذاكرة).
+                    بينما لو كانت <span class="eng-term">++x</span>، رح يزيدها أول (تصير 6) وبعدين يطبع الـ 6.
+                    <br><br>
+                    <span class="highlight-b">السلايد بفرجيك:</span> كيف العمليات الحسابية المعقدة بتعتمد على "متى" صارت
+                    الزيادة. ركز بالفرق بين ناتج <span class="eng-term">num3</span> و <span
+                        class="eng-term">num5</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 36 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Pre vs Post Operators</span>
+                <span class="slide-number">Slide 36</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0036.jpg" alt="Slide 36" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">القبلية (Prefix) والبعدية (Postfix)</div>
+                <div class="explanation-content">
+                    هاد الموضوع هو "حقل ألغام" للطلاب الجدد. الزيادة والنقصان إلهما مكانين:
+                    <br><br>
+                    1. <span class="highlight-g">Postfix (بعد):</span> زي <span class="eng-term">x++</span>. استخدم
+                    القيمة الحالية، "وبس تخلص الجملة" زيدها.
+                    <br>
+                    2. <span class="highlight-y">Prefix (قبل):</span> زي <span class="eng-term">++x</span>. زيد القيمة
+                    "فوراً"، وبعدين استخدم القيمة الجديدة بالجملة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 37 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Postfix Explanation</span>
+                <span class="slide-number">Slide 37</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0037.jpg" alt="Slide 37" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني "Postfix" بالتفصيل؟</div>
+                <div class="explanation-content">
+                    تخيل إنك بتوزع هدايا. الـ <span class="eng-term">Postfix</span> بقولك: "وزع الهدية اللي معك هسا،
+                    وبعد ما تخلص روح على المستودع جيب وحدة زيادة".
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">المثال:</span>
+                        <span class="eng-term">i = 1; j = i++;</span>
+                        <br>هون <span class="eng-term">j</span> رح تاخد قيمة <span class="eng-term">i</span> الأصلية
+                        (1). وبعد ما تخلص الجملة، <span class="eng-term">i</span> بتصير 2.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 38 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Prefix Explanation</span>
+                <span class="slide-number">Slide 38</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0038.jpg" alt="Slide 38" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">شو يعني "Prefix" بالتفصيل؟</div>
+                <div class="explanation-content">
+                    الـ <span class="eng-term">Prefix</span> بقولك: "وقف! روح جيب الهدية الجديدة من المستودع أول، وبعدين
+                    وزعها".
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-y">المثال:</span>
+                        <span class="eng-term">i = 1; j = ++i;</span>
+                        <br>هون <span class="eng-term">i</span> بتصير 2 "أول إشي"، وبعدين <span
+                            class="eng-term">j</span> بتاخد القيمة الجديدة (2). هيك الاثنين صاروا 2 بنفس الوقت.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 39 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Execution Step-by-Step</span>
+                <span class="slide-number">Slide 39</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0039.jpg" alt="Slide 39" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تتبع الكود (Tracing)</div>
+                <div class="explanation-content">
+                    هون السلايد بجمع لك كل اللي تعلمته بمعادلات معقدة شوي.
+                    <br><br>
+                    <div class="detail-item" style="border-right-color: var(--primary);">
+                        <span class="highlight-g">الجملة الأولى:</span> <span class="eng-term">j = 2 * i++</span>
+                        <br>إذا كانت i=4، رح نضرب 2 * 4 أول (النتيجة 8 لـ j)، وبعدين i تصير 5.
+                    </div>
+                    <div class="detail-item" style="border-right-color: var(--accent);">
+                        <span class="highlight-y">الجملة الثانية:</span> <span class="eng-term">i = 2 * --j</span>
+                        <br>هون بننقص j أول (بتصير 7)، وبعدين نضرب 2 * 7 (النتيجة 14 لـ i).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 40 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Final Priorities</span>
+                <span class="slide-number">Slide 40</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0040.jpg" alt="Slide 40" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">تحديث جدول الأولويات</div>
+                <div class="explanation-content">
+                    هسا ضفنا "ملوك جدد" على قمة الجدول:
+                    <br><br>
+                    🥇 <span class="highlight-danger">الأقوى دايماً:</span> الـ <span class="eng-term">++</span> والـ
+                    <span class="eng-term">--</span> (سواء قبل أو بعد) والـ Unary (+ و -).
+                    <br>
+                    🥈 <span class="highlight-y">بعدهم:</span> الضرب والقسمة والموديلو.
+                    <br>
+                    🥉 <span class="highlight-g">آخر إشي:</span> الجمع والطرح العاديين.
+                    <br>
+                    🏅 <span class="highlight-b">الأخير:</span> إشارة اليساوي <span class="eng-term">=</span> (هاي
+                    دايماً آخر وحدة بتنفذ).
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 41 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Shortcut Operators</span>
+                <span class="slide-number">Slide 41</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0041.jpg" alt="Slide 41" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الاختصارات البرمجية (Shortcuts)</div>
+                <div class="explanation-content">
+                    المبرمجين بحبوا يختصروا الوقت. لو بدك تزيد 10 على متغير، بدل ما تكتب:
+                    <br><span class="eng-term">counter = counter + 10</span>
+                    <br>بتقدر تكتب بكل بساطة:
+                    <br><span class="eng-term">counter += 10</span>
+                    <br><br>
+                    هاي القاعدة بتطبق على كل العمليات: <span class="eng-term">+=, -=, *=, /=, %=</span>.
+                    بتاخد الرقم اللي باليسار، بتعمل عليه العملية، وبترجع النتيجة لنفس المتغير.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 42 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Shortcut Examples</span>
+                <span class="slide-number">Slide 42</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0042.jpg" alt="Slide 42" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">أمثلة على الاختصارات</div>
+                <div class="explanation-content">
+                    شوف الجدول هاد لتفهم القوة:
+                    <br><br>
+                    - <span class="eng-term">i += 2 * j</span> هي أصلاً <span class="eng-term">i = i + (2 * j)</span>.
+                    <br>
+                    - <span class="eng-term">Var /= 2</span> هي أصلاً <span class="eng-term">Var = Var / 2</span>.
+                    <br>
+                    - <span class="eng-term">j -= (i + Var)</span> هي أصلاً <span class="eng-term">j = j - (i +
+                        Var)</span>.
+                    <br><br>
+                    <span class="highlight-b">تذكر:</span> الاختصار بيعمل العملية اللي على اليمين "كاملة" أول، وبعدين
+                    بطبقها على المتغير.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 43 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Combined Shortcut Quiz</span>
+                <span class="slide-number">Slide 43</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0043.jpg" alt="Slide 43" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">اللغز الأردني الأخير!</div>
+                <div class="explanation-content">
+                    معطى: <span class="eng-term">x=5, y=10, z=2</span>.
+                    <br>المطلوب: <span class="eng-term">z *= x++ + --y;</span>
+                    <br><br>
+                    1. <span class="highlight-y">أولاً:</span> نحسب الطرف اليمين. <span class="eng-term">--y</span>
+                    بتصير 9 فوراً. <span class="eng-term">x++</span> بنستخدمها كـ 5 هسا (وبعدين بتصير 6).
+                    <br>
+                    2. <span class="highlight-g">ثانياً:</span> <span class="eng-term">5 + 9 = 14</span>.
+                    <br>
+                    3. <span class="highlight-b">ثالثاً:</span> <span class="eng-term">z *= 14</span> (يعني 2 * 14) =
+                    <span class="highlight-success">28</span>.
+                    <br><br>
+                    *نتائج الطباعة النهائية:* <span class="highlight-g">x=6, y=9, z=28</span>. (هيك إنت صرت وحش
+                    برمجياً!).
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 44 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Characters and Literals</span>
+                <span class="slide-number">Slide 44</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0044.jpg" alt="Slide 44" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الحروف والقيم الثابتة (Literals)</div>
+                <div class="explanation-content">
+                    شو الفرق بين <span class="eng-term">Character</span> و <span class="eng-term">'A'</span>؟
+                    <br><br>
+                    - <span class="highlight-g">Literal:</span> هي القيمة الثابتة اللي بتشوفها بتعرفها فوراً (زي 'A' أو
+                    100).
+                    <br>
+                    - <span class="highlight-y">Variable Name:</span> هو الاسم المكتوب (زي اسم المتغير Character).
+                    <br><br>
+                    <div
+                        style="background: rgba(56, 189, 248, 0.05); padding: 10px; border-left: 4px solid var(--primary); border-radius: 8px;">
+                        ⚠️ دايماً الحروف بـ C++ بتكون بين سينجل كوت <span class="eng-term">' '</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 45 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Escape Characters ( \ )</span>
+                <span class="slide-number">Slide 45</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0045.jpg" alt="Slide 45" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">البحث عن الهروب! (Escape)</div>
+                <div class="explanation-content">
+                    أحياناً بدنا نطبع إشارات خاصة الكمبيوتر بفكرها "أوامر". كيف نخبره إنه هاي "نص عادي"؟
+                    <br><br>
+                    بنستخدم الـ <span class="eng-term">Backslash \</span>. هي بنسميها <span class="eng-term">Escape
+                        Character</span> لأنها بتخلينا "نهرب" من المعنى البرمجي للحرف ونرجعه لمعناه النصي.
+                    <br><i>مثال:</i> إذا بدك تطبع باك سلاش نفسها، لازم تكتب <span class="eng-term">'\\'</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 46 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Escape Sequences Table</span>
+                <span class="slide-number">Slide 46</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0046.jpg" alt="Slide 46" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">جدول الرموز السرية للطباعة</div>
+                <div class="explanation-content">
+                    هذول أهم رموز رح تستخدمهم في حياتك:
+                    <br><br>
+                    - <span class="highlight-b">\n</span>: سطر جديد (Newline).
+                    <br>
+                    - <span class="highlight-b">\t</span>: مسافة الأفقية (Tab) - بترك فراغ مرتب.
+                    <br>
+                    - <span class="highlight-b">\b</span>: مسح للي قبل (Backspace).
+                    <br>
+                    - <span class="highlight-b">\\</span>: طباعة إشارة الباك سلاش.
+                    <br>
+                    - <span class="highlight-b">\'</span> و <span class="highlight-b">\"</span>: عشان تطبع الكوتس داخل
+                    النص بدون ما تسكر جملة الطباعة.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 47 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Escape Sequences Example</span>
+                <span class="slide-number">Slide 47</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0047.jpg" alt="Slide 47" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">لعبة التنسيق</div>
+                <div class="explanation-content">
+                    شوف كيف جمل الـ <span class="eng-term">cout</span> بتستخدم الرموز عشان ترتب المخرج:
+                    <br><br>
+                    <div class="detail-item">
+                        <span class="highlight-g">📌 الهيدر:</span> طباعة أرقام للتوضيح.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-y">📌 الـ Tab (\t):</span> بتلاحظ إن كلمة "Hi" زاحت مسافة كبيرة لأننا
+                        حطينا <span class="eng-term">\t</span>.
+                    </div>
+                    <div class="detail-item">
+                        <span class="highlight-b">📌 الـ Newline (\n):</span> خلت الكلمات تنزل تحت بعض بدل ما تكون سطر
+                        واحد طويل وممل.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 48 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Advanced Formatting High-five</span>
+                <span class="slide-number">Slide 48</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0048.jpg" alt="Slide 48" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">إبداع الطباعة</div>
+                <div class="explanation-content">
+                    هون السلايد بفرجيك حركات قوية:
+                    <br><br>
+                    - <span class="highlight-g">الـ \r (Carriage Return):</span> بترجع المؤشر لبداية السطر "وتمسح" اللي
+                    كان موجود! شوف كيف كلمة "Marhaba" غطت على اللي قبلها.
+                    <br>
+                    - <span class="highlight-y">الـ \":</span> كيف طبعنا علامات التنصيص حولين كلمة "C++" داخل النص.
+                    <br><br>
+                    <span class="highlight-danger">❌ خطأ شائع:</span> إنك تنسى تحط باك سلاش قبل الكوت، وهيك البرنامج رح
+                    يعطيك "Error" فوراً.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 49 (Detailed) -->
+        <div class="slide-section">
+            <div class="slide-title-bar">
+                <span style="font-weight: 700;">Special Escape Codes</span>
+                <span class="slide-number">Slide 49</span>
+            </div>
+            <div class="slide-image-box">
+                <img src="ch1/2_page-0049.jpg" alt="Slide 49" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-header">الرموز "الشقيّة"</div>
+                <div class="explanation-content">
+                    وأخيراً، أغرب رمزين في الـ C++:
+                    <br><br>
+                    1. <span class="highlight-danger">📣 \a (Alarm):</span> لو طبعت هاد الحرف، الكمبيوتر رح يطلّع صوت
+                    "بيب!" (BEEP) من السماعة الداخلية. هاد بنستخدمه لتنبيه المستخدم.
+                    <br><br>
+                    2. <span class="highlight-b">🚫 \0 (Null):</span> هاد رمز "نهاية النص". الكمبيوتر بيفهم منه إنه
+                    الجملة خلصت هون. هو رمز "شفاف" ما بظهر على الشاشة بس هو أهم إشي للكمبيوتر عشان يعرف حدود الذاكرة.
+                    <br><br>
+                    <div
+                        style="text-align: center; margin-top: 20px; font-weight: 800; color: var(--success); font-size: 1.2rem;">
+                        🎉 مبروك! هيك ختمت الشابتر الأول بالكامل 🎉
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="navigation-menu">
+            <a href="index.html" class="nav-button">🏠 العودة للرئيسية</a>
+            <!-- <a href="ch2.html" class="nav-button">➡️ الشابتر التالي</a> -->
+        </div>
+    </div>
+
+    </div>
+
+    <script src="../nav.js"></script>
+    <script src="../gooey.js"></script>
+</body>
+
+</html>
