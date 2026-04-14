@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Evaluation of IR Systems</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+            --brand-red: #f97316;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* --- QudahWay Narration System Styles --- */
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .highlight-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-span {
+            color: var(--brand-red);
+            font-weight: 800;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../gooey.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); font-size: 0.9rem;">
+                    العودة للوحة التحكم
+                </a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">Evaluation of IR Systems | تقييم أنظمة استرجاع المعلومات</p>
+        </div>
+
+        <div id="slides-container">
+
+            <div class="slide-section">
+                <div class="slide-title-bar"><span class="slide-number">Slide 01</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0001.jpg">
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-2">
+                <div class="slide-title-bar"><span class="slide-number">Slide 02</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0002.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف نعرف إن المستخدم "راضي" عنّا؟ ❤️</div>
+                    <div class="explanation-content">
+                        تخيل يا كبير إنك فاتح محل أو عامل محرك بحث فخم، كيف بدك تعرف إذا الناس <span
+                            style="color: #ffd700; font-weight: 900; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">"راضيّة"</span>
+                        فعلاً عن اللي بتقدمه؟ مش بس إذا البرنامج شغال وموجود، لا!
+                        <br><br>
+                        بنقيس هاض الإشي بكم مؤشر أساسي:
+                        <div class="detail-item">
+                            1. <span class="highlight-y">الـ Relevance:</span> هل النتائج اللي بطلعلها السيستم <span
+                                class="highlight-y">مرتبطة وبتلبي حاجة</span> المستخدم؟ هاض هو التحدي الأول.
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">
+                            2. <span class="highlight-b">الـ Interaction:</span> هل الناس بتضغط <span
+                                class="eng-term">Click</span> كثير؟ بس انتبه! مرات العناوين بتخدع ونسب النقرات لحالها
+                            <span class="highlight-danger">مش دايماً دليل رضا</span>.
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--success);">
+                            3. <span class="highlight-success">السلوك النهائي:</span> هل المستخدم بشتري بعد ما يدور؟ هل
+                            برجع يزورنا <span class="eng-term">Repeat visitors</span>؟ هاض هو <span
+                                class="highlight-success">الاختبار الحقيقي للنجاح</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-3">
+                <div class="slide-title-bar"><span class="slide-number">Slide 03</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0003.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">شو "الميزان" اللي بنوزن فيه الـ <span
+                            class="eng-term">Relevance</span>؟ 🤔</div>
+                    <div class="explanation-content">
+                        عشان نقيس الـ <span class="eng-term">Relevance</span> صح، لازم يكون عندنا <span
+                            class="highlight-y">مختبر معياري ثابت</span> فيه 3 قطع ذهبية:
+                        <br><br>
+                        <div class="detail-item" style="border-right-color: var(--primary);">
+                            <span class="highlight-b">1. Document Collection:</span> مجموعة ملفات ثابتة الكل بجرب عليها
+                            عشان نكون عادلين.
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--accent);">
+                            <span class="highlight-y">2. Suite of Queries:</span> أسئلة محددة ومعروفة مسبقاً (ممنوع
+                            نغيرها!).
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--success);">
+                            <span class="highlight-success">3. Human Assessment:</span> تقييم بشري بكون عارف شو الأسئلة
+                            وشو <span class="highlight-success">الملفات المرتبطة فيها (Relevant)</span>.
+                        </div>
+                        <br>
+                        ⚠️ <span class="highlight-danger">ملاحظة للامتحان:</span> التقييم هون بكون <span
+                            class="highlight-span">Binary</span>؛ يعني يا إما الملف مفيد (1) أو زبالة (0)!
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-4">
+                <div class="slide-title-bar"><span class="slide-number">Slide 04</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0004.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الوحوش الاثنين: الـ <span class="eng-term">Precision</span> والـ
+                        <span class="eng-term">Recall</span> 🏹
+                    </div>
+                    <div class="explanation-content">
+                        هون وصلنا للزبدة، كيف نحسب قوة السيستم بالأرقام؟
+                        <br><br>
+                        <div class="detail-item">
+                            🎯 <span class="highlight-y">Precision (الدقة):</span> من بين كل الملفات اللي <span
+                                class="highlight-y">"رَجّعها"</span> السيستم، كم واحد فعلاً طلع مفيد؟
+                            <br><small>القانون: <span class="eng-term">P = tp / (tp + fp)</span></small>
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">
+                            🎣 <span class="highlight-b">Recall (الاسترجاع):</span> من بين ملفات العالم المفيدة <span
+                                class="highlight-b">"الموجودة"</span> أصلاً، السيستم كم واحد قدر يصيد؟
+                            <br><small>القانون: <span class="eng-term">R = tp / (tp + fn)</span></small>
+                        </div>
+                        <br>
+                        🏆 <span class="highlight-success">نصيحة قضاة:</span> احفظ الجدول هاض زي اسمك (<span
+                            class="eng-term">tp, fp, fn, tn</span>). الـ <span class="highlight-success">tp</span> يعني
+                        "جبت إشي صح وهو صح". الـ <span class="highlight-danger">fp</span> يعني "جبت إشي غلط". الـ <span
+                            class="highlight-span">fn</span> يعني "ضيعت إشي كان لازم تجيبه".
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-5">
+                <div class="slide-title-bar"><span class="slide-number">Slide 05</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0005.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنقارن بين المحركات؟ 🏎️ 🏁</div>
+                    <div class="explanation-content">
+                        تخيل عندك محركين بحث <span class="highlight-y">System A</span> و <span
+                            class="highlight-b">System B</span>. كيف نعرف مين "الأقوى" بالميدان؟
+                        <br><br>
+                        بنطبق نظام <span class="highlight-y">الاختبار المعياري</span>: بنجيب نفس الأسئلة ونفس الملفات
+                        وبنخليهم يشتغلوا. بعدها بنقارن النتائج بـ <span class="highlight-success">Relevance
+                            Judgments</span> (اللي فيه + يعني صح، و - يعني غلط).
+                        <br><br>
+                        <div class="detail-item" style="border-right-color: var(--primary);">
+                            <span class="highlight-b">الهدف من المقارنة:</span> نعرف مين جاب <span
+                                class="highlight-success">أعلى دقة</span> ومين كان ترتيبه <span
+                                class="highlight-y">أذكى</span>. هيك بنقدر نقول بالأرقام مين السيستم اللي بيبيض الوجه
+                            قدام المستخدمين.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-6">
+                <div class="slide-title-bar"><span class="slide-number">Slide 06</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0006.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">المنافسة بالأرقام: مين اللي فاز؟ 📊</div>
+                    <div class="explanation-content">
+                        خلينا نحلل المثال هاض . عندنا سؤال (<span class="eng-term">Q1</span>)
+                        بنعرف إنه اله <span class="highlight-y">10 ملفات مفيدة</span> بالداتا كلها.
+                        <br><br>
+                        <div class="detail-item">
+                            <span class="highlight-b">System A:</span> رجّع 3 ملفات، 2 منهم صح.
+                            <br>💡 <span class="highlight-y">Precision:</span> 2/3 (دقة عالية).
+                            <br>💡 <span class="highlight-b">Recall:</span> 2/10 (استرجاع ضعيف، ضيع 8 ملفات!).
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--success);">
+                            <span class="highlight-success">System B:</span> رجّع 5 ملفات، 3 منهم صح.
+                            <br>💡 <span class="highlight-success">Precision:</span> 3/5 (دقة أقل من A).
+                            <br>💡 <span class="highlight-success">Recall:</span> 3/10 (استرجاع أحسن من A).
+                        </div>
+                        <br>
+                        الخلاصة: <span class="highlight-span">B جاب نتائج أكثر بس "خبص" أكتر</span>، و <span
+                            class="highlight-y">A كان أدق بس "بخيل" بالنتائج</span>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-7">
+                <div class="slide-title-bar"><span class="slide-number">Slide 07</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0007.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">القاعدة الذهبية: كفتي الميزان ⚖️</div>
+                    <div class="explanation-content">
+                        في عالم الـ IR، مستحيل (إلا بالمعجزات) تجيب <span class="highlight-success">100% دقة</span> و
+                        <span class="highlight-success">100% استرجاع</span> مع بعض.
+                        <br><br>
+                        <div class="detail-item">
+                            💡 <span class="highlight-danger">Trade-off:</span> لما تحاول تزيد الـ <span
+                                class="eng-term">Recall</span> (يعني بدك تلم كل الملفات الصح)، غصب عنك رح تلم معهم "عفش"
+                            وغلط، فبينزل الـ <span class="eng-term">Precision</span>.
+                        </div>
+                        <br>
+                        <span class="highlight-y">الحالة المثالية:</span> إنك تكون <span class="highlight-y">Precision =
+                            Recall = 1.0</span>، بس بالحقيقة إحنا دايماً بنحاول نلاقي "نقطة توازن" تعجب المستخدم وتناسب
+                        نوع البحث تبعه.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-8">
+                <div class="slide-title-bar"><span class="slide-number">Slide 08</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0008.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الحل الوسط: الـ <span class="eng-term">F-Measure</span> 🔗</div>
+                    <div class="explanation-content">
+                        عشان ننهي الطوشة بين الدقة والاسترجاع، عملوا الـ <span class="eng-term">F-measure</span>.هاض
+                        الوحش بدمج <span class="highlight-y">P</span> و <span class="highlight-b">R</span> برقم واحد.
+                        <br><br>
+                        <div class="detail-item">
+                            🌟 <span class="highlight-success">F1 Measure (The Balanced):</span> هاض لما نعتبر إن الدقة
+                            والاسترجاع متساويين بالأهمية (<span class="highlight-y">beta = 1</span>).
+                        </div>
+                        <br>
+                        <span class="highlight-b">ليش بنستخدم الـ (Weighted Harmonic Mean) مش المتوسط العادي؟</span>
+                        لأن المتوسط العادي ممكن يخدعنا! الـ <span class="eng-term">Harmonic Mean</span> بكون قاسي، فإذا
+                        واحد من المعايير كان (صفر)، النتيجة النهائية بتنخسف للأرض، وهاذ هو الصح تقنياً.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-9">
+                <div class="slide-title-bar"><span class="slide-number">Slide 09</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0009.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">لعب بالأرقام: مين المهم عندك؟ 🎲</div>
+                    <div class="explanation-content">
+                        ركز هون لأنه هاذ السلايد "تكتيكي". لما نغير قيمة <span class="highlight-y">beta</span>، بنقدر
+                        نتحكم مين أهم:
+                        <br><br>
+                        <div class="detail-item">
+                            1️⃣ <span class="highlight-y">Beta = 2:</span> يعني إنت مهتم بالـ <span
+                                class="highlight-y">Recall</span> (الاسترجاع) أكثر. لاحظ كيف النتيجة نقصت (0.541) لأن
+                            الـ Recall كان واطي (0.5).
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">
+                            2️⃣ <span class="highlight-b">Beta = 0.5:</span> يعني إنت مهتم بالـ <span
+                                class="highlight-b">Precision</span> (الدقة) أكثر. النتيجة طلعت عالية (0.714) لأن الدقة
+                            كانت ممتازة (0.8).
+                        </div>
+                        <br>
+                        الخلاصة للطلاب: <span class="highlight-success">فيس بوك وجوجل دايماً بلعبوا بهي الأرقام</span>
+                        عشان يوازنوا بين إنهم يلموا كل شي وبين إنهم يعطوك نتائج نظيفة.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-10">
+                <div class="slide-title-bar"><span class="slide-number">Slide 10</span></div>
+                <div class="slide-image-box"><img src="ch9/9- Evaluation of IR Systems Basic-Measures_page-0010.jpg">
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الخلاصة الذهبية 🏆</div>
+                    <div class="explanation-content">
+                        <ul style="list-style: none; padding-right: 0;">
+                            <li>🎯 <span class="highlight-y">Precision:</span> هل كل اللي جبته فعلاً مفيد؟ (نظافة
+                                النتائج).</li>
+                            <li>🎣 <span class="highlight-b">Recall:</span> هل قدرت تلم كل المفيد اللي بالمكتبة؟ (تغطية
+                                المحتوى).</li>
+                            <li>🔗 <span class="highlight-success">F-measure:</span> الجسر اللي بربطهم ببعض عشان يعطيك
+                                حكم نهائي.</li>
+                        </ul>
+                        🖼️ <span class="highlight-span">تذكر دايماً:</span> التوازن بينهم بيعتمد على الوظيفة اللي
+                        بشتغلها محرك البحث تبعك.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <script src="../nav.js"></script>
+</body>
+
+</html>

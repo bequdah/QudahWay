@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | Evaluating Ranked Lists</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+            --brand-red: #f97316;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .highlight-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-span {
+            color: var(--brand-red);
+            font-weight: 800;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); font-size: 0.9rem;">العودة
+                    للوحة التحكم</a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">Evaluating Ranked Lists | تقييم القوائم المرتبة</p>
+        </div>
+
+        <div id="slides-container">
+
+            <div class="slide-section" id="slide-1">
+                <div class="slide-title-bar"><span class="slide-number">Slide 01</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0001.jpg"></div>
+
+            </div>
+
+            <div class="slide-section" id="slide-2">
+                <div class="slide-title-bar"><span class="slide-number">Slide 02</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0002.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">المقاييس المعتمدة على "الترتيب" 🏎️</div>
+                    <div class="explanation-content">
+                        شو يعني <span class="eng-term">Rank-Based Measures</span>؟ يعني هل السيستم حط الشغلات المهمة
+                        بالأول؟
+                        <br><br>
+                        عندنا 3 مقاييس رئيسية رح ندرسهم:
+                        <div class="detail-item">1. <span class="highlight-y">Precision@K:</span> الدقة عند نقطة معينة.
+                        </div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">2. <span
+                                class="highlight-b">MAP (Mean Average Precision):</span> الملك تبعهم، بحسب متوسط الدقة
+                            لكل النتائج.</div>
+                        <div class="detail-item" style="border-right-color: var(--success);">3. <span
+                                class="highlight-success">MRR (Mean Reciprocal Rank):</span> بهتم بس بأول نتيجة صحيحة
+                            وين مكانها.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-3">
+                <div class="slide-title-bar"><span class="slide-number">Slide 03</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0003.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الـ <span class="eng-term">Precision@K</span>.. بسيط بس فيه "علّة"!
+                        🎯</div>
+                    <div class="explanation-content">
+                        المبدأ بسيط جداً: بتحدد رقم <span class="highlight-y">K</span> (مثلاً 10)، وبتحسب كم ملف صح
+                        موجود في أول 10 ملفات رجعهم السيستم.
+                        <br><br>
+                        <span class="highlight-danger">ثغرة للمتحان:</span> الـ <span class="eng-term">P@K</span> ما
+                        بهتم بالترتيب داخل الـ K. يعني لو حطيت الملفات الصح بالمركز 9 و 10، أو بالمركز 1 و 2، النتيجة رح
+                        تضل نفسها (<span class="highlight-danger">2/10</span>). وهاض إشي مش دقيق واقعياً!
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-4">
+                <div class="slide-title-bar"><span class="slide-number">Slide 04</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0004.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الـ <span class="eng-term">Mean Average Precision (MAP)</span>:
+                        عدالة الترتيب ⚖️</div>
+                    <div class="explanation-content">
+                        هون دخلنا بالجد. الـ <span class="eng-term">MAP</span> هو المقياس اللي <span
+                            class="highlight-success">"بكافئ"</span> السيستم إذا جاب الملفات الصح بالأول.
+                        <br><br>
+                        بشتغل كالتالي: عند كل ملف <span class="highlight-y">مفيد (+)</span> بنلاقيه، بنحسب الدقة (<span
+                            class="eng-term">P@K</span>) عند هاذ الموقع، وبعدين بناخد المتوسط للكل.
+                        <br>
+                        <span class="highlight-b">قاعدة :</span> الـ AP (Average Precision) بكون لسؤال واحد، والـ
+                        MAP هو المتوسط لأسئلة كثير.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-5">
+                <div class="slide-title-bar"><span class="slide-number">Slide 05</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0005.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">المثال اللي بيفهمك كل القصة 📏</div>
+                    <div class="explanation-content">
+                        هون اللعبة كلها بالمخطط والجدول، ركز معي عشان تفهم كل "نقطة" شو قصتها:
+                        <br><br>
+                        - <span class="highlight-y">الرقم 10:</span> هاض هو الرقم السحري؛ هو عدد كل الملفات المفيدة في
+                        المجموعة، وعشانه ثابت، الـ <span class="eng-term">Recall</span> دائماً مقسوم عليه (1/10، 2/10..
+                        إلخ).
+                        <br><br>
+                        - <span class="highlight-success">الدوائر الزرقاء (المليانة):</span> هاي بتمثل الملفات الصح
+                        <span class="highlight-success">(+)</span>. لاحظ إنه الـ <span class="eng-term">Recall</span>
+                        بيقفز لليمين بس عند هاي الدوائر.
+                        <br><br>
+                        - <span class="highlight-danger">الدوائر البيضاء (الفاضية):</span> هاي بتمثل الملفات الغلط <span
+                            class="highlight-danger">(-)</span> زي <span class="eng-term">D3</span>. شوف المخطط؛ لما
+                        تطلع دائرة بيضاء، الخط بينزل لتحت (الدقة بتقل) والـ <span class="eng-term">Recall</span> بضل
+                        واقف مكانه ما بيتحرك لليمين.
+                        <br><br>
+                        - <span class="highlight-b">الزبدة:</span> الخط الأحمر بالمخطط بفرجينا "نزيف الدقة" كل ما
+                        السيستم يرجع ملفات غلط، وبفرجينا "قفزة الاسترجاع" كل ما يرجع ملف صح. وإذا السيستم ما لقى باقي
+                        الملفات المفيدة (لحد 10)، بنعتبر دقتها <span class="highlight-danger">صفر</span> عشان نعاقبه على
+                        تقصيره.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-6">
+                <div class="slide-title-bar"><span class="slide-number">Slide 06</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0006.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش بنوجع راسنا بالـ AP؟ 🤔</div>
+                    <div class="explanation-content">
+                        لأنه الـ <span class="eng-term">Average Precision</span> بيعطيك <span class="highlight-y">رقم
+                            واحد</span> بيوصف أداء السيستم كله.
+                        بدل ما نقعد نتخانق عالمخططات (Curves)، بنشوف الأرقام: السيستم اللي الكيرف تبعه "فوق وعلى اليمين"
+                        بكون هو البطل وصاحب الـ <span class="eng-term">AP</span> الأعلى.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-7">
+                <div class="slide-title-bar"><span class="slide-number">Slide 07</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0007.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تعريف الـ MAP الرسمي 📚</div>
+                    <div class="explanation-content">
+                        الـ <span class="eng-term">MAP</span> هو ببساطة المتوسط الحسابي للـ <span
+                            class="eng-term">Average Precision</span> على مستوى كل الأسئلة (<span
+                            class="eng-term">Queries</span>).
+                        <br><br>
+                        - حساس جداً لمكان كل ملف صح.
+                        - بعتبر المعيار الذهبي لمقارنة خوارزميات البحث.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-8">
+                <div class="slide-title-bar"><span class="slide-number">Slide 08</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0008.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مقارنة الترتيب: مين أحسن؟ 🥊</div>
+                    <div class="explanation-content">
+                        شوف السيستم الأول (<span class="eng-term">Ranking #1</span>) جاب 0.78، بينما الثاني جاب 0.52.
+                        مع إنهم رجعوا نفس عدد الملفات بالأخير، بس السيستم الأول جاب الملفات الصح <span
+                            class="highlight-success">أسرع وفي رانك أعلى</span>، وهاض هو الفرق الجوهري!
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-9">
+                <div class="slide-title-bar"><span class="slide-number">Slide 09</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0009.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مثال لحساب الـ MAP كامل 🧮</div>
+                    <div class="explanation-content">
+                        هاذ المثال هو "مربط الفرس" ولولاه ما بنفهم الـ <span class="eng-term">MAP</span> صح. ركز في
+                        الحسابات وكيف بنعامل كل سؤال لحاله:
+                        <br><br>
+                        - <span class="highlight-y">السؤال الأول (Query 1):</span> الداتا فيها أصلاً <span
+                            class="highlight-span">5 ملفات مفيدة</span>.
+                        السيستم جابهم في المراكز (1, 3, 6, 9, 10). عشان هيك لما حسبنا الـ <span class="eng-term">Average
+                            Precision</span>، جمعنا الدقة عند كل مركز فيهم وقسمنا على <span class="highlight-y">5</span>
+                        وطلع الجواب 0.62.
+                        <br><br>
+                        - <span class="highlight-y">السؤال الثاني (Query 2):</span> هون الداتا فيها بس <span
+                            class="highlight-span">3 ملفات مفيدة</span>.
+                        السيستم لقيهم في المراكز (2, 5, 7). لاحظ هون إنا قسمنا المجموع على <span
+                            class="highlight-y">3</span> وطلع الجواب 0.44.
+                        <br><br>
+                        - <span class="highlight-success">الأثر (Impact):</span> شوف الفرق! السؤال الأول السيستم جاب أول
+                        ملف في المركز الأول فوراً (+) فأخد دقة <span class="highlight-success">1.0</span>، وهاذ رفع الـ
+                        <span class="eng-term">AP</span> تبعه. بينما السؤال الثاني، السيستم "تأخر" وجاب أول ملف بالمركز
+                        الثاني (-) فبدأ بدقة <span class="highlight-danger">0.5</span>، وهاد نزل معدله.
+                        <br><br>
+                        - <span class="highlight-b">النتيجة النهائية (Mean):</span> الـ <span
+                            class="eng-term">MAP</span> هو متوسط السيستم لكل الأسئلة؛ يعني بنجمع (0.62 + 0.44) وبنقسم
+                        على <span class="highlight-span">2</span> (لأنه عندنا سؤالين) وبيطلع الجواب النهائي <span
+                            class="highlight-y">0.53</span>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-10">
+                <div class="slide-title-bar"><span class="slide-number">Slide 10</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0010.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">قوة الـ MAP الجبارة 💪</div>
+                    <div class="explanation-content">
+                        هون بدنا نفهم ليش الـ <span class="eng-term">MAP</span> هو "البعبع" تبع التقييم وليش الدكاترة
+                        والباحثين بحبوه كثير:
+                        <br><br>
+                        - <span class="highlight-danger">عقاب القسوة (Strictness):</span> تخيل لو عندك 5 ملفات مفيدة في
+                        الداتا والسيستم لقى منهم بس 3. هون الـ <span class="eng-term">MAP</span> ما رح يرحمه؛ رح يضل
+                        يقسم المجموع على <span class="highlight-y">5</span> (العدد الكلي) مش على 3 (اللي لقيهم).
+                        والملفين اللي ضاعوا بنعتبر دقهم <span class="highlight-danger">صفر</span>. هاض الإشي بجبر
+                        السيستم إنه يحاول يجيب كل إشي وما ‘يطنش’ أي ملف.
+                        <br><br>
+                        - <span class="highlight-b">الـ Macro-averaging:</span> هاي كلمة فخمة معناها إن كل سؤال (Query)
+                        إله نفس القيمة في المعدل النهائي. ما فيه سؤال أهم من سؤال، الكل بتعامل بالعدل.
+                        <br><br>
+                        - <span class="highlight-success">سر القوة:</span> الـ <span class="eng-term">MAP</span> بجاوب
+                        على سؤالين جوهريين بنفس الوقت: <span class="highlight-danger">"هل لقت النتائج؟"</span> و <span
+                            class="highlight-y">"هل رتبتهم بالأول؟"</span>. عشان هيك هو المقياس رقم 1 في الأوراق
+                        البحثية.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-11">
+                <div class="slide-title-bar"><span class="slide-number">Slide 11</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0011.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الـ <span class="eng-term">Mean Reciprocal Rank (MRR)</span> 🥇
+                    </div>
+                    <div class="explanation-content">
+                        هاذ المقياس "قنوع شوية". ما بهمه كل الملفات الصح، بهمه بس <span class="highlight-y">أول إجابة
+                            صحيحة</span> وين موقعها.
+                        <br><br>
+                        القانون: <span class="highlight-b">1 / K</span> (حيث K هي رتبة أول ملف صح).
+                        لو أول ملف صح كان في المركز الثالث، النتيجة بتصير <span class="highlight-success">1/3</span>.
+                        بنجمع النتائج لكل الأسئلة وبناخد المتوسط.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-12">
+                <div class="slide-title-bar"><span class="slide-number">Slide 12</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0012.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">حالة خاصة: MAP بصير MRR! 🤝</div>
+                    <div class="explanation-content">
+                        لما يكون السيستم بدور على "إبرة في كومة قش" (يعني بس فيه ملف واحد صح بالدنيا لكل سؤال)، هون
+                        الحسابات بتبسط لدرجة إنه الـ <span class="eng-term">MAP</span> بصير هو نفسه الـ <span
+                            class="eng-term">MRR</span>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-section" id="slide-13">
+                <div class="slide-title-bar"><span class="slide-number">Slide 13</span></div>
+                <div class="slide-image-box"><img
+                        src="ch10/10- Evaluation-of-TR-Systems-Evaluating-Ranked-Lists_page-0013.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الخلاصة (Summary) </div>
+                    <div class="explanation-content">
+                        <div class="detail-item">1. الـ <span class="eng-term">Precision-Recall curve</span> بوصف الدقة
+                            العامة للترتيب.</div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">2. فايدة الـ <span
+                                class="eng-term">Ranked list</span> بتعتمد على قديش اليوزر رح "يتكاسل" وينزل لتحت.</div>
+                        <div class="detail-item" style="border-right-color: var(--success);">3. الـ <span
+                                class="eng-term">Average Precision</span> هو المعيار الذهبي للمقارنة بين نظامين.</div>
+                        <div class="detail-item" style="border-right-color: var(--brand-red);">4. أهم شيء: الـ AP حساس
+                            لمكان <span class="highlight-y">كل ملف مفيد</span>، مش بس أول واحد.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="../nav.js"></script>
+</body>
+
+</html>

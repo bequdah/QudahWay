@@ -201,6 +201,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="skiplist.html" class="nav-link"> 05. Skip Lists</a>
             <a href="vector_space_model.html" class="nav-link"> 06. Vector Space Model</a>
             <a href="RAG.html" class="nav-link"> 07. RAG</a>
+            <a href="Evaluation-of-IR-Systems-Basic-Measures.html" class="nav-link"> 08. IR Evaluation - Basic</a>
+            <a href="Evaluation-of-TR-Systems-Evaluating-Ranked-Lists.html" class="nav-link"> 09. Ranked Lists Evaluation</a>
+            <a href="NDCG.html" class="nav-link"> 10. NDCG Evaluation</a>
             <div style="height: 1px; background: rgba(51, 65, 85, 0.5); margin: 5px 10px;"></div>
             <a href="exam.html" class="nav-link" style="color: #fb7185; border-color: rgba(251, 113, 133, 0.2); background: rgba(251, 113, 133, 0.05); justify-content: center;">
                  IR Exams Bank

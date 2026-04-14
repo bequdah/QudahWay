@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QudahWay | NDCG Evaluation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;800&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../QudahWay.png">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #facc15;
+            --success: #34d399;
+            --danger: #fb7185;
+            --border: rgba(255, 255, 255, 0.05);
+            --brand-red: #f97316;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Satisfy', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .slide-section {
+            background: var(--card-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-title-bar {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .slide-image-box {
+            width: 100%;
+            background: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .explanation-box {
+            padding: 35px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 15px;
+        }
+
+        .explanation-content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .highlight-y {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .highlight-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .highlight-span {
+            color: var(--brand-red);
+            font-weight: 800;
+        }
+
+        .eng-term {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .detail-item {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 4px solid var(--accent);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; background: rgba(250, 204, 21, 0.08); padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.2); font-size: 0.9rem;">العودة
+                    للوحة التحكم</a>
+            </div>
+            <h1><span style="color: var(--primary);">Qudah</span><span style="color: var(--accent);">Way</span> IR</h1>
+            <p class="subtitle">NDCG Evaluation | تقييم فضاء المتجهات المتعدد</p>
+        </div>
+
+        <div id="slides-container">
+
+            <!-- Slide 1 -->
+            <div class="slide-section" id="slide-1">
+                <div class="slide-title-bar"><span class="slide-number">Slide 01</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0001.jpg"></div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide-section" id="slide-2">
+                <div class="slide-title-bar"><span class="slide-number">Slide 02</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0002.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">قصة "ياهو" والدرجات 📖</div>
+                    <div class="explanation-content">
+                        تخيل حالك بتدور على موضوع زي <span class="eng-term">Toyota safety</span> على محرك البحث <span
+                            class="highlight-danger">"ياهو"</span>.
+                        هل منطقي نحكي إن كل النتائج يا <span class="highlight-danger">"صح"</span> يا <span
+                            class="highlight-danger">"غلط"</span> بس؟
+                        <br><br>
+                        أكيد لأ! شوف الصورة؛ فيه نتائج مكتوب عليها <span class="highlight-success">Good</span> (يعني هاي
+                        اللي بدور عليها بالظبط)، وفيه نتائج <span class="highlight-y">Fair</span> (يعني مفيدة بس مش
+                        توب)، وفيه نتائج مالها دخل.
+                        هون بنطلع من عالم الـ <span class="eng-term">Binary</span> (0 أو 1) لعالم الـ <span
+                            class="highlight-b">Multi-level</span>؛ يعني بنعطي درجات للصح، وهاذ هو أساس الـ <span
+                            class="eng-term">NDCG</span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide-section" id="slide-3">
+                <div class="slide-title-bar"><span class="slide-number">Slide 03</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0003.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الفرضيات الأساسية للـ DCG 🧠</div>
+                    <div class="explanation-content">
+                        قبل الفرضيات، لازم نفهم شو يعني أصلاً <span class="eng-term">Discounted Cumulative Gain
+                            (DCG)</span>؟ الاسم لحاله بشرح القصة كلها:
+                        <br><br>
+                        1. <span class="highlight-y">Gain (الربح):</span> هي القيمة أو "العلامة" اللي بنعطيها للملف
+                        بناءً على قديش هو مفيد.
+                        <br>
+                        2. <span class="highlight-b">Cumulative (تراكمي):</span> يعني بدنا نجمع علامات الملفات اللي
+                        السيستم رجعهم واحد ورا الثاني.
+                        <br>
+                        3. <span class="highlight-danger">Discounted (مخصوم):</span> هون الفكرة الذكية؛ بنخصم من علامة
+                        الملف إذا كان مكانه <span class="highlight-danger">"متأخر"</span> تحت بالترتيب، لأنه قيمته بتقل.
+                        <br><br>
+                        الفرضيتين اللي بالمخطط هم اللي بدعموا هاد الكلام:
+                        <div class="detail-item">1. <span class="highlight-success">قيمة الملف:</span> الملف الـ <span
+                                class="highlight-success">"توب"</span> بفيد اليوزر أكثر بكثير من الملف الـ <span
+                                class="highlight-span">"بمشي الحال"</span>.</div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">2. <span
+                                class="highlight-b">مكان الملف:</span> كل ما نزل ترتيب الملف (<span
+                                class="eng-term">Ranked position</span>)، بتقل فايدته لليوزر لأنه احتمالية إنه يشوفه
+                            بتصير أصغر.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide-section" id="slide-4">
+                <div class="slide-title-bar"><span class="slide-number">Slide 04</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0004.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">كيف بنحسبها؟ (الفكرة والخطوات) 🧮</div>
+                    <div class="explanation-content">
+                        الموضوع بمشي بـ 3 مراحل أساسية، وركز في الرابعة لأنها أهمهم:
+                        <br><br>
+                        1. <span class="highlight-y">Gain:</span> بنعطي كل ملف علامة (مثلاً 3 للممتاز، 0 للي ملوش دخل).
+                        <br>
+                        2. <span class="highlight-b">Cumulative Gain:</span> بنجمع العلامات وإحنا نازلين بالترتيب.
+                        <br>
+                        3. <span class="highlight-success">Discounted:</span> بنقسم العلامة على <span
+                            class="eng-term">log</span> الرانك عشان "نعاقب" الملفات المتأخرة تحت.
+                        <br><br>
+                        4. <span class="highlight-danger">الـ IDCG (الوضع المثالي):</span> هاض هو "ميزان العدل". الـ
+                        <span class="eng-term">Ideal DCG</span> هو الحسبة اللي بتصير لو السيستم رتب الملفات <span
+                            class="highlight-danger">"بالترتيب الصح"</span> (يعني جاب الملفات اللي علامتها 3 بالأول،
+                        بعدين اللي علامتها 2، وهكذا).
+                        <br><br>
+                        وآخر خطوة بنقسم الـ <span class="eng-term">DCG</span> (اللي جابه السيستم فعلاً) على الـ <span
+                            class="eng-term">IDCG</span> (الكامل المكمل) عشان نطلع نسبة بين الـ 0 والـ 1.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide-section" id="slide-5">
+                <div class="slide-title-bar"><span class="slide-number">Slide 05</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0005.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">مثال يوضح الفرق ⚖️</div>
+                    <div class="explanation-content">
+                        لاحظ في الجدول لمقارنة سؤالين (<span class="eng-term">Query 1 & 2</span>):
+                        <br><br>
+                        الـ <span class="eng-term">IDCG</span> (يعني أحسن نتيجة ممكنة) بتختلف من سؤال لسؤال لأنها بتعتمد
+                        على عدد الملفات المفيدة الموجودة أصلاً لكل سؤال.
+                        <br>
+                        - سؤال 1 جاب 0.75 من المثالي.
+                        <br>
+                        - سؤال 2 جاب 0.83 من المثالي.
+                        <br><br>
+                        هيك الـ <span class="eng-term">NDCG</span> بخلينا نقارن بين الأسئلة بـ <span
+                            class="highlight-span">"عدل"</span> بالرغم من اختلاف صعوبتهم، لأننا بنقسم كل سيستم على <span
+                            class="highlight-y">أقصى طاقة</span> ممكن يوصلها (الـ <span class="eng-term">IDCG</span>).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide-section" id="slide-6">
+                <div class="slide-title-bar"><span class="slide-number">Slide 06</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0006.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ليش الـ Normalization؟ ⚖️</div>
+                    <div class="explanation-content">
+                        ليش لازم نحول الـ <span class="eng-term">DCG</span> لـ <span class="eng-term">nDCG</span>؟
+                        ببساطة عشان نقدر نقارن بين الأسئلة بـ "إنصاف". فيه سؤال ممكن يكون إله 100 ملف صح وسؤال إله بس 2،
+                        الـ "طبيعي" إن السؤال الأول يجيب رقم أعلى، فإحنا بنقسم على الـ <span
+                            class="eng-term">Ideal</span> (أحسن ترتيب ممكن) عشان نخليهم كلهم في نفس الميزان بين 0 و 1.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="slide-section" id="slide-7">
+                <div class="slide-title-bar"><span class="slide-number">Slide 07</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0007.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ضريبة المكان (The Discount) 📉</div>
+                    <div class="explanation-content">
+                        شو هي نسبة الخصم (<span class="eng-term">Discount</span>)؟ أشهر وأهم وحدة هي <span
+                            class="highlight-y">1/log₂(rank)</span>.
+                        <br><br>
+                        تخيّل معي: الملف اللي في المركز الرابع بنقسم ربحه على <span class="highlight-y">2</span>، والملف
+                        اللي في المركز الثامن بنقسم على <span class="highlight-y">3</span>. هاض يعني إنه كل ما الملف
+                        "نزل تحت" في القائمة، "عقوبة" المكان بتزيد وقيمته بتقل بالنسبة لليوزر.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="slide-section" id="slide-8">
+                <div class="slide-title-bar"><span class="slide-number">Slide 08</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0008.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">ملخص القوانين 📝</div>
+                    <div class="explanation-content">
+                        القوانين باختصار عشان ما تضيع:
+                        <div class="detail-item">1. <span class="eng-term">Cumulative Gain (CG):</span> هاض <span
+                                class="highlight-span">"الطيب"</span>؛ بجمع علامات الملفات زي ما هي بدون أي خصم.</div>
+                        <div class="detail-item" style="border-right-color: var(--primary);">2. <span
+                                class="eng-term">Discounted Cumulative Gain (DCG):</span> هاض <span
+                                class="highlight-danger">"القاسي"</span>؛ بجمع العلامات بس بعد ما يطبق <span
+                                class="highlight-danger">"ضريبة المكان"</span> باستخدام الـ <span
+                                class="eng-term">log</span>.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9 -->
+            <div class="slide-section" id="slide-9">
+                <div class="slide-title-bar"><span class="slide-number">Slide 09</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0009.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">الصيغة الرياضية الرسمية 🏗️</div>
+                    <div class="explanation-content">
+                        هاي هي المعادلة اللي بشوفها السيستم. بنخلي أول ملف ربحه <span
+                            class="highlight-success">كامل</span> (لأنه في المركز الأول)، ومن ثاني ملف وطالع بنبدأ نقسم
+                        على <span class="eng-term">log₂ i</span> (حيث i هو ترتيب الملف). هاي المعادلة هي اللي بطلع منها
+                        الأرقام اللي بنشوفها في الجداول.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="slide-section" id="slide-10">
+                <div class="slide-title-bar"><span class="slide-number">Slide 10</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0010.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تطبيق عملي بالأرقام 🧪</div>
+                    <div class="explanation-content">
+                        تعال نشوف كيف الأرقام بتتغير! عندنا 10 ملفات بتقييمات بين (0-3).
+                        <br><br>
+                        شوف الملف اللي في المركز الثالث تقييمه <span class="highlight-danger">3</span>، بس لما انقسم على
+                        الـ <span class="eng-term">log</span> صار قيمته الفعالية <span class="highlight-y">1.89</span>.
+                        أما الملف اللي في المركز التاسع وتقييمه برضه <span class="highlight-danger">3</span>، نزلت قيمته
+                        لـ <span class="highlight-y">0.95</span>!
+                        هون بنفهم إنه <span class="highlight-success">"المركز إله هيبة"</span> والـ <span
+                            class="eng-term">DCG</span> بترجم هيبة المركز لأرقام حقيقية.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="slide-section" id="slide-11">
+                <div class="slide-title-bar"><span class="slide-number">Slide 11</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0011.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">خلاصة الـ NDCG وعظمة الـ Normalization 👑</div>
+                    <div class="explanation-content">
+                        الخلاصة : الـ <span class="eng-term">NDCG</span> هو اللي خلانا نقدر نعرف قديش السيستم
+                        قريب من "الكمال".
+                        أهم نقطة هي إن السيستم المثالي (<span class="eng-term">Ideal Ranking</span>) هو اللي بيرجع
+                        الملفات اللي إلها <span class="highlight-success">أعلى تقييم</span> في أول القائمة، وبعدين الأقل
+                        فالأقل.
+                        الهدف من الـ <span class="eng-term">Normalization</span> هو إننا نقدر نقارن أداء السيستم بين
+                        أسئلة مختلفة حتى لو كان عدد الملفات المفيدة مش متساوي، وعشان هيك الـ <span
+                            class="eng-term">NDCG</span> هو المقياس رقم 1 في تقييم محركات البحث العالمية اليوم.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="slide-section" id="slide-12">
+                <div class="slide-title-bar"><span class="slide-number">Slide 12</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0012.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تحليل أكاديمي للمثال (RF1 vs RF2) 🎓🥊</div>
+                    <div class="explanation-content">
+                        هاض المثال هو <span class="highlight-danger">"زبدة الشابتر"</span> ولازم نفهمه كأننا بنحل سؤال
+                        امتحان شامل. عندنا 4 ملفات وثلاث قوائم بدنا نقارن بينهم:
+                        <br><br>
+                        1. <span class="highlight-b">Ground Truth (GT):</span> هاض هو <span
+                            class="highlight-span">"النموذج المثالي"</span>. لاحظ الترتيب [2، 2، 1، 0]. الملفات الأكثر
+                        أهمية (وزنها 2) في أول مركزين. الحسبة طلعت <span class="highlight-success">4.6309</span>، وعشان
+                        هاض هو "الأفضل" بنعطيه <span class="eng-term">NDCG = 1.00</span>. هاض الرقم هو المرجع تبعنا.
+                        <br><br>
+                        2. <span class="highlight-success">Ranking Function 1 (RF1):</span> السيستم هون بدّل بين d3 و
+                        d4. بس ركز في علاماتهم؛ الاثنين إهميتهم <span class="highlight-success">2</span>. السيستم ما
+                        غلط، هو بدّل ملف ممتاز بملف ممتاز ثاني. الحسبة ضلت <span class="highlight-y">4.6309</span> والـ
+                        <span class="eng-term">NDCG</span> ضل <span class="highlight-success">1.00</span>. القاعدة:
+                        <span class="highlight-span">"لو بدلت ملفين الهم نفس الدرجة، علامتك ما بتنثر"</span>.
+                        <br><br>
+                        3. <span class="highlight-danger">Ranking Function 2 (RF2):</span> هون بلش <span
+                            class="highlight-danger">"التخبيص"</span>! السيستم حط d2 (علامتها 1) في المركز الثاني، ونزل
+                        d4 (علامتها 2) للمركز الثالث.
+                        شوف الحسبة تحت:
+                        <br>
+                        - في الـ <span class="eng-term">GT</span>: قسمنا الـ <span class="highlight-success">2</span>
+                        على <span class="eng-term">log₂(2)</span>.
+                        <br>
+                        - في الـ <span class="eng-term">RF2</span>: الـ <span class="highlight-danger">1</span> انقسمت
+                        على <span class="eng-term">log₂(2)</span>، والـ <span class="highlight-success">2</span> (اللي
+                        بتعطي علامة أكبر) انقسمت على <span class="eng-term">log₂(3)</span> يعني انخسفت قيمتها أكثر!
+                        <br>
+                        النتيجة طلعت <span class="highlight-y">4.2619</span>. لما قسمناها على المثالي (<span
+                            class="highlight-y">4.6309</span>)، طلع السيستم جايب <span
+                            class="highlight-b">0.9203</span>.
+                        هيك بنفهم إنه الـ <span class="eng-term">NDCG</span> <span class="highlight-danger">"بشم ريحة
+                            الغلط"</span> في الترتيب وبخصم فوراَ لو نزلت ملف ثقيل لمركز متأخر.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13 -->
+            <div class="slide-section" id="slide-13">
+                <div class="slide-title-bar"><span class="slide-number">Slide 13</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0013.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">تذكرة بالـ Average Precision (AP) 🔙</div>
+                    <div class="explanation-content">
+                        ليش حطينا هاض السلايد هون؟ عشان تتذكر الفرق!
+                        الـ <span class="eng-term">AP</span> بتعامل مع النتائج كـ <span class="highlight-danger">"صح أو
+                            غلط"</span> بس (أبيض وأسود). بنحسب الـ <span class="eng-term">Precision</span> فقط عند كل
+                        ملف صح.
+                        <br><br>
+                        الفرق الجوهري: الـ <span class="eng-term">AP</span> مقياس ممتاز للـ <span
+                            class="eng-term">Binary relevance</span>، بس الـ <span class="eng-term">NDCG</span> هو اللي
+                        "بفهم" درجات الصحة المختلفة (ممتاز، جيد، مقبول).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14 -->
+            <div class="slide-section" id="slide-14">
+                <div class="slide-title-bar"><span class="slide-number">Slide 14</span></div>
+                <div class="slide-image-box"><img
+                        src="ch11/11- Evaluation-of-TR-Systems Multi-Level-Judgements NDCG_page-0014.jpg"></div>
+                <div class="explanation-box">
+                    <div class="explanation-header">المثال الختامي الشامل 🎓</div>
+                    <div class="explanation-content">
+                        ركز في هالمثال لأخر مرة عشان تثبّت المعلومة:
+                        <br><br>
+                        1. عندنا ملفات بتقييمات (3، 2، 3، 0، 1). حسبنا الـ <span class="eng-term">DCG</span> وطلع <span
+                            class="highlight-y">7.33</span>.
+                        <br>
+                        2. عشان نطلع الـ <span class="eng-term">IDCG</span>، رتبناهم تنازلياً <span
+                            class="highlight-danger">"صح"</span> فصاروا [3، 3، 2، 1، 0]، والحسبة طلعت <span
+                            class="highlight-success">7.77</span>.
+                        <br>
+                        3. والنتيجة النهائية <span class="eng-term">NDCG = 7.33 / 7.77 = </span> <span
+                            class="highlight-b">0.94</span>.
+                        <br><br>
+                        هيك بنكون قيمنا السيستم بدقة وعرفنا إنه جاب 94% من أفضل نتيجة ممكنة! 🎉
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="../nav.js"></script>
+</body>
+
+</html>

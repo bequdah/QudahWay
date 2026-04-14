@@ -1,122 +1,80 @@
-# QudahWay System Architecture & Implementation Guide 🚀
+# QudahWay | AI Content Engineering Guide 🚀
 
-This document serves as the **Master Blueprint** for the QudahWay project. It outlines the design system, technical structure, and workflow patterns to ensure consistency across all present and future educational modules.
-
----
-
-## 1. Design Philosophy: The "QudahWay" Aesthetic ✨
-The core of QudahWay is its **premium, modern, and high-impact design**. We aim to WOW the students from the first click.
-
-### Core Visual Elements:
-- **Dark Mode First:** Deep backgrounds (e.g., `#0f172a`, `#1e293b`).
-- **Glassmorphism:** Use of `backdrop-filter: blur(x)` for cards and headers.
-- **The "Glow" Effect:**
-    - Cards must have localized box-shadows and border-taps in primary/accent colors.
-    - Interactive elements (links/buttons) should transition smoothly to a glowing state on hover.
-- **Vibrant UI Tokens:**
-    - **Primary:** Sky Blue (`#38bdf8`) - Represents logic and stability.
-    - **Accent:** Yellow/Gold (`#facc15`) - Represents highlights, tips, and the "Qudah" brand part.
-    - **Success:** Emerald/Mint (`#34d399`) - For correct answers and stable progress.
-    - **Danger:** Rose/Red (`#fb7185`) - For errors, warnings, and fairness issues.
-
-### 1.1 Content Presentation Patterns: The "Narration" Style 🎤
-We don't just "present" data; we tell a story. Every module should follow the **Narrative-First** structure:
-
-1.  **The Story Opener (`.story-section`):**
-    - Always start with a relatable scenario in Arabic (e.g., "Imagine you're in a coffee shop...").
-    - Use a large, bold title (`.story-title`) and a well-spaced content area (`.story-content`).
-    - This sets the "Why" before getting into the "What".
-
-2.  **The Slide-Explanation Pair:**
-    - **Visual:** The slide image is kept in a dark container (`.slide-image-box`) with subtle padding.
-    - **Narration:** Below each slide, an `.explanation-box` provides the "QudahWay" take.
-    - **Structure:** Use `.explanation-header` for a catchy Arabic title and `.explanation-content` for the deep dive.
-
-3.  **Data Highlighting & Terms:**
-    - **English Terms:** Use the `.eng-term` class for technical words. This wraps the text in a stylized box that handles direction (`ltr`) automatically.
-    - **Color Coding:** 
-        - `<span class="highlight-y">` for core concepts.
-        - `<span class="highlight-b">` for technical sub-points.
-        - `<span class="highlight-success">` for the "Correct/Best" way.
-        - `<span class="highlight-danger">` for pitfalls or critical warnings.
-
-4.  **Detail Items (`.detail-item`):**
-    - For lists and detailed breakdowns, use the glass-styled `.detail-item` class. It provides a subtle background and a colored right-border (`border-right`) to keep points distinct and readable.
-
-### CSS Classes & Standards:
-- All new files must link to `../gooey.css` for standardized glass/glow effects.
-- Unified font hierarchy: `Cairo` for Arabic text, `Inter` for English/Technical text, and `Satisfy` for the brand logo.
-- **Language Direction:** Lecture files should be `lang="ar"` and `dir="rtl"`.
+هذا الدليل مخصص لتوجيه أي ذكاء اصطناعي (AI) يعمل على مشروع **QudahWay** لضمان استمرارية الجودة، الأسلوب التعليمي، والهوية البصرية للمنصة.
 
 ---
 
-## 2. Infrastructure & Workspace 📂
-All work resides within the `QudahWay` repository.
-
-### Directory Structure:
-- `/` (Root): Main landing page and global assets (`index.html`, `gooey.css`, `nav.js`).
-- `/DS/`: Data Science module (Quizzes, Lectures, Sub-index).
-- `/ir/`: Information Retrieval module.
-- `/ss/`: System Security/Security Software module.
-- `/.agents/workflows/`: Automated task definitions.
-
-### Workflow for New Modules:
-1.  **Create Directory:** Always group related material (e.g., `/AI/` for Artificial Intelligence).
-2.  **Sub-Index Creation:** Build an `index.html` inside the module folder that mirrors the "Grid Card" layout.
-3.  **Topic Implementation:** Each topic/lecture gets its own descriptive HTML file (e.g., `Data_Preprocessing.html`).
+## 1. الفلسفة التعليمية (خلطة القضاة) 🧠
+مشروع QudahWay ليس مجرد عرض سلايدات، بل هو **سرد قصصي تعليمي**.
+- **Narration-First:** الشرح يجب أن يبدأ بأسلوب "الحكواتي" الذي يبسط المعلومة للطالب بلهجة أردنية بيضاء، قريبة للقلب، ومحفزة للفهم.
+- **Micro-Learning:** تقسيم المعلومة لقطع صغيرة داخل `detail-item`.
+- **Term Integration:** المصطلحات التقنية توضع بالإنجليزية داخل كلاس `.eng-term` لضمان الوضوح والاتجاه الصحيح للنص.
 
 ---
 
-## 3. Quiz & Interaction Logic 🧠
-Quizzes are high-stakes interactive challenges.
-
-### Rules for Quiz Construction:
-- **Language:** Technical content (Questions, Options, Explanations) must be in **English**.
-- **Randomization:** Use the `shuffleArray` function for both **Question Order** and **Option Order**.
-- **Immediate Feedback:** 
-    - Correct: Highlight Green.
-    - Wrong: Highlight Red + Show immediate, detailed `explanation-box`.
-- **Result Finality:** Show only the final percentage score (e.g., "Score: 85/100").
-
-### Data Bank Structure:
-Each quiz is powered by a JSON-style object called `quizBank` where each key represents a chapter (e.g., `ch1: [{...}, {...}]`).
+## 2. بروتوكول التعامل مع السلايدات (CRITICAL) 📸
+**لا تطلب من المستخدم إرسال سكرين شوت.**
+- **Access Protocol:** يجب على الـ AI الوصول لمجلد الشابتر المطلوب (مثلاً `/ir/ch9/`) وتحليل الصور الموجودة فيه مباشرة.
+- **Visual Analysis:** قم بوصف ما تراه في السلايد (أرقام، جداول، قوانين) ثم حوله إلى شرح نصي شامل داخل الـ `explanation-content`.
+- **Slide Mapping:** كل سلايد يوضع في `slide-section` مع `id` فريد (مثلاً `id="slide-5"`).
 
 ---
 
-## 4. Deployment & GitHub Protocol 🛠️
-To respect project ownership, deployment is **Action-Based**.
-
-### Steps for Uploading:
-1.  **NO AUTO-PULL/PUSH:** Never upload without explicit user permission.
-2.  **Git & Cloudflare Deployment:**
-    ```bash
-    # Step 1: Push to GitHub
-    git add .
-    git commit -m "ss"
-    git push origin main
-
-    # Step 2: Deploy to Cloudflare Pages
-    npx wrangler pages deploy . --branch main --project-name qudahway
-    ```
-3.  **Final Check:** Ensure both GitHub is updated and the Cloudflare link (qudahway.pages.dev) is active.
+## 3. لغة التصميم (Modern Glassmorphism) ✨
+يجب الالتزام بنظام الألوان والتنسيق التالي:
+- **Background:** `#0f172a` (Dark Slate).
+- **Glass Effect:** استخدام `backdrop-filter: blur(20px)` مع خلفيات شفافة قليلاً.
+- **Highlights (نظام التلوين الفلمي):**
+    - `.highlight-y` (الأصفر/الذهبي): للمفاتيح الأساسية والمعلومات اللي "لازم تندرس".
+    - `.highlight-b` (الأزرق): للمفاهيم الفرعية أو التوضيحات.
+    - `.highlight-success` (الأخضر): للنتائج الإيجابية أو القضايا المحلولة.
+    - `.highlight-danger` (الأحمر): للتحذيرات أو التنبيهات الامتحانية.
+    - `.highlight-span` (البرتقالي): للفت الانتباه الشديد.
 
 ---
 
-## 5. Examples & Snippets 📝
-
-### Example Hover Glow CSS:
-```css
-.link-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: 0 10px 40px -10px rgba(250, 204, 21, 0.3);
-}
-```
-
-### Example Markdown Task Summary:
-> [!IMPORTANT]
-> When building a new chapter, ensure the `card-title` is in English and matches the filename exactly for navigation consistency.
+## 4. الهيكل البرمجي للصفحة 🛠️
+يجب أن يحتوي كل ملف على العناصر التالية بالترتيب:
+1. **Header:** يحتوي على اسم المساق، شعار QudahWay، وزر العودة للوحة التحكم.
+2. **Slides Container:** يضم جميع الـ `slide-section`.
+3. **Narration System:** كل سلايد تحته `explanation-box` يحتوي على:
+    - `explanation-header`: عنوان جذاب مع إيموجي.
+    - `explanation-content`: الشرح السردي.
+    - `detail-item`: تفاصيل مكثفة وملونة.
+4. **Navigation:** استدعاء ملف `../nav.js` في نهاية الـ `body` لتفعيل المنيو الذكي.
 
 ---
 
-**Mohammad Qudah | QudahWay Architecture © 2026**
+## 5. قواعد الكتابة (The Voice) 🗣️
+- خاطب الطالب بـ "يا كبير"، "يا وحش"، "يا شنب".
+- استخدم أمثلة من الواقع (محل، سيارات، سوق).
+- ركز على "زبدة الامتحان" (هاد السلايد تكتيكي، هاد جاي بالامتحان).
+- كلمة **"راضيّة"** في سياق رضا المستخدم يجب أن تكون ذهبية متوهجة:
+  `style="color: #ffd700; font-weight: 900; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);"`
+
+---
+
+## 6. كيفية البدء بمهمة جديدة 🏁
+عندما يطلب المستخدم شرح سلايدات من (X إلى Y):
+1. اذهب لمجلد الصور.
+2. حلل المحتوى البصري حرفياً.
+3. ابدأ بكتابة الكود مع السرد التعليمي الملون.
+4. لا تستخدم Placeholders؛ إذا احتجت صورة تعبيرية استخدم `generate_image` أو ابحث عن أيقونات مناسبة.
+
+---
+---
+
+## 7. التحديث والنشر (Git & Cloudflare) 🚀
+لضمان وصول العلم للطلاب بأسرع وقت، نتبع بروتوكول النشر التالي:
+- **Version Control (GitHub):** كل تعديل لازم "ينختم" ويترفع على المستودع الخاص بالمنصة:
+    - `git add .`
+    - `git commit -m "إتمام شرح شابتر NDCG وتنسيق الواجهة"`
+    - `git push`
+- **Live Deployment (Cloudflare Pages):** الموقع مستضاف على **Cloudflare Pages** برابطه الرسمي: [qudahway.pages.dev](https://qudahway.pages.dev).
+    - **GitHub Sync:** بمجرد عمل `Push` لمستودع GitHub، سيقوم Cloudflare بتحديث الموقع تلقائياً.
+    - **Direct Deployment (Fast Path):** إذا بدك ترفع التعديلات "دغري" وبسرعة البرق من التيرمنال، استخدم هاد الكوماند:
+      `npx wrangler pages deploy . --project-name qudahway`
+    - **تنبيه:** تأكد دائماً من سلامة المسارات النسبية (Relative Paths) قبل الرفع لضمان ظهور الصور بشكل صحيح.
+
+---
+**تذكر:** هدفنا في QudahWay هو أن يدرس الطالب وهو مستمتع، لا نريد "نشفان ريق" السلايدات التقليدية! 🚀👑
